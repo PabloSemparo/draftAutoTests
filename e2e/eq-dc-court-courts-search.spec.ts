@@ -7,7 +7,7 @@ test('Поиск судов', async ({ request }) => {
       address: 'Ульяновск, проспект ульяновский 2',
     },
     headers: {
-      'X-API-KEY': '55298707-117c-44a5-8434-162fb9d2e4c5',
+      'X-API-KEY': 'Вставляем актуальный апи ключик',
       'Accept': 'application/json'
     }
   });
