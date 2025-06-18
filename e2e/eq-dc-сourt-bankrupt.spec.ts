@@ -9,7 +9,7 @@ test('Проверка на банкротство', async ({ request }) => {
       birthDate: '1996-11-26'
     },
     headers: {
-      'X-API-KEY': '55298707-117c-44a5-8434-162fb9d2e4c5',
+      'X-API-KEY': 'Вставляем актуальный апи ключик',
       'Accept': 'application/json'
     }
   });
