@@ -1,0 +1,23 @@
+{
+  "name": "eq-auto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --debug",
+    "test:head": "npx playwright test --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.1",
+    "allure-commandline": "^2.33.0",
+    "allure-playwright": "^3.2.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  }
+}
