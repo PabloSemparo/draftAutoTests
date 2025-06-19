@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Проверки банкротства', async ({ request }) => {
 
   headers: {
-    'X-API-KEY': '55298707-117c-44a5-8434-162fb9d2e4c5',
+    'X-API-KEY': 'Вставляем актуальный ключик',
       'Accept': 'application/json'};,
 
   const params = new URLSearchParams({
