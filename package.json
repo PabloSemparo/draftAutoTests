@@ -12,12 +12,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.50.1",
+    "@playwright/test": "^1.53.1",
     "@types/node": "^22.13.1",
     "allure-commandline": "^2.33.0",
     "allure-playwright": "^3.2.1"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.8.0",
     "dotenv": "^16.5.0"
   }
 }
