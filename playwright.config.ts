@@ -24,7 +24,6 @@ export default defineConfig({
   },
 
   // ✅ Запуск setup.ts один раз перед всеми тестами
-  globalSetup: require.resolve("./tests/setup.ts"),
 
   // ✅ Конфигурация браузеров
   projects: [

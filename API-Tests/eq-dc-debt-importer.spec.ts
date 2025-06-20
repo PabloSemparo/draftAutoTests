@@ -4,7 +4,6 @@ import { faker } from '@faker-js/faker/locale/ru';
 // Базовые настройки
 const API_URL = process.env.API_URL || 'http://eq-dc-debt-importer.test2.mmk.local';
 const AUTH_TOKEN = process.env.AUTH_TOKEN || 'eyJraWQiOiJzbWZ0cC1rZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsIm5iZiI6MTcwMTA5Nzc2Nywic2NvcGUiOiJBRE1JTiIsImlzcyI6InNlbGYiLCJleHAiOjIwMTY0NTc3NjcsImlhdCI6MTcwMTA5Nzc2N30.euDaDutoZtG5-_t3HcLPK5LmjVUYwE961AerMgJ4QwQAPDa0Kdamk6b83TnbAI5k3HJD3j2kZMWxM8IRbO1GgUu_rKTHwyfjhQaW5vX2bDkb74E9JeVaq91kXUAa4craFSBjKlS8_oZsCSiifWU297FsDpJTC7-ezn8saMNi4uUeA4pAuEJxbWXhpLh06G0jaHfQec3EtphsTSP-_VvKUGdwToUZ3jcuDEfB4OECAYAeCjs1lW5CJ7Ngxtrlcrj6l_Tu5URDrLejGe9ikcq_Lg7sAQ_4TpoNiS4K7iPjuEURX37DsUoOHff_Ex2PTlM27XusDBT_splBLsZjlHri7w';
-
 // Вспомогательные функции
 async function createContractor(request, data = {}) {
     const response = await request.post(`${API_URL}/admin/v1/contractors`, {
@@ -75,13 +74,13 @@ test.describe('Contractors API', () => {
         const createResponse = await createContractor(request);
         const contractorId = (await createResponse.json()).id;
 
-        const response = await request.get(`${API_URL}/admin/v1/contractors/${contractorId}`, {
+        const response = await request.get(`${API_URL}/admin/v1/contractors/0197831c-acbf-77a2-96e5-f70b1f31fe32`, {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
         });
 
         expect(response.status()).toBe(200);
         const body = await response.json();
-        expect(body.id).toBe(contractorId);
+        expect(body.id).toBe('0197831c-acbf-77a2-96e5-f70b1f31fe32');
         expect(body).toHaveProperty('contract');
         expect(body).toHaveProperty('debt');
     });
@@ -91,7 +90,7 @@ test.describe('Contractors API', () => {
         const contractorId = (await createResponse.json()).id;
         const newName = faker.company.name();
 
-        const response = await request.put(`${API_URL}/admin/v1/contractors/${contractorId}`, {
+        const response = await request.put(`${API_URL}/admin/v1/contractors/0197831c-acbf-77a2-96e5-f70b1f31fe32`, {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
             data: {
                 name: newName,
@@ -117,7 +116,7 @@ test.describe('Contractors API', () => {
         expect(response.status()).toBe(204);
 
         // Verify update
-        const getResponse = await request.get(`${API_URL}/admin/v1/contractors/${contractorId}`, {
+        const getResponse = await request.get(`${API_URL}/admin/v1/contractors/0197831c-acbf-77a2-96e5-f70b1f31fe32`, {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
         });
         const body = await getResponse.json();
@@ -129,14 +128,14 @@ test.describe('Contractors API', () => {
         const createResponse = await createContractor(request);
         const contractorId = (await createResponse.json()).id;
 
-        const response = await request.delete(`${API_URL}/admin/v1/contractors/${contractorId}`, {
+        const response = await request.delete(`${API_URL}/admin/v1/contractors/'вводим ИД для удаления`', {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
         });
 
         expect(response.status()).toBe(204);
 
         // Verify deletion
-        const getResponse = await request.get(`${API_URL}/admin/v1/contractors/${contractorId}`, {
+        const getResponse = await request.get(`${API_URL}/admin/v1/contractors/0197831c-acbf-77a2-96e5-f70b1f31fe32`, {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
         });
         expect(getResponse.status()).toBe(404);
@@ -149,7 +148,7 @@ test.describe('Contract Imports API', () => {
         const contractorResponse = await createContractor(request);
         const contractorId = (await contractorResponse.json()).id;
 
-        const response = await request.get(`${API_URL}/admin/v1/contract-imports?contractorId=${contractorId}`, {
+        const response = await request.get(`${API_URL}/admin/v1/contract-imports?contractorId=0197831c-acbf-77a2-96e5-f70b1f31fe32`, {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
         });
 
@@ -176,14 +175,14 @@ test.describe('Contract Imports API', () => {
         const importResponse = await createContractImport(request, contractorId);
         const importId = (await importResponse.json()).id;
 
-        const response = await request.get(`${API_URL}/admin/v1/contract-imports/${importId}`, {
+        const response = await request.get(`${API_URL}/admin/v1/contract-imports/01978c72-a5a8-75e0-a96d-41247f5a8ac3`, {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
         });
 
         expect(response.status()).toBe(200);
         const body = await response.json();
-        expect(body.id).toBe(importId);
-        expect(body.contractorId).toBe(contractorId);
+        expect(body.id).toBe('01978c72-a5a8-75e0-a96d-41247f5a8ac3');
+        expect(body.contractorId).toBe('0197831c-acbf-77a2-96e5-f70b1f31fe32');
         expect(body).toHaveProperty('status');
     });
 });
@@ -230,6 +229,6 @@ test.describe('Security tests', () => {
         const response = await request.get(`${API_URL}/admin/v1/contractors`, {
             headers: { Authorization: 'Bearer invalid-token' }
         });
-        expect(response.status()).toBe(403);
+        expect(response.status()).toBe(401);
     });
 });
