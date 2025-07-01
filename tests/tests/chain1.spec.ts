@@ -4,6 +4,7 @@ import { ContractsPage } from "../../src/pages/ContractsPage";
 import { ResponsibleAssignmentPage } from "../../src/pages/ResponsibleAssignmentPage";
 import { PaymentPage } from "../../src/pages/PaymentPage";
 import { navigateToContracts } from "../../src/utils/navigation";
+import { LoginPage } from "../../src/pages/LoginPage";
 
 let contractChain1: string;
 

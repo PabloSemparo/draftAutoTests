@@ -10,7 +10,7 @@ export default async function globalSetup() {
 
   const browser = await chromium.launch();
   const context = await browser.newContext({
-    ignoreHTTPSErrors: true, 
+    ignoreHTTPSErrors: true,
   });
 
   const page = await context.newPage();

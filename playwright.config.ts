@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 // ✅ Загружаем env-переменные из правильного файла
-dotenv.config({ path: path.resolve(__dirname, "env_settings/.env.test5") });
+dotenv.config({ path: path.resolve(__dirname, "env_settings/.env.test2") });
 
 export default defineConfig({
   testDir: "./API-Tests", // путь к тестам
@@ -12,19 +12,15 @@ export default defineConfig({
   fullyParallel: true,
 
   // ✅ Отчёты
-  reporter: [["list"], ["html", { open: "never" }], ["allure-playwright"]],
+  reporter: [["line"], ["allure-playwright"]],
 
   use: {
-    baseURL: process.env.BASE_URL, // ✅ Подставляем из .env
-    storageState: "tests/storageState.json", // ✅ Используем авторизованную сессию
-    navigationTimeout: 60000,
     trace: "on-first-retry",
-    ignoreHTTPSErrors: true,
-    headless: true,
+    baseURL: 'https://lc.test5.mmk.local',
+    storageState: "tests/storageState.json",
   },
-
   // ✅ Запуск setup.ts один раз перед всеми тестами
-
+  globalSetup:require.resolve("./tests/api-setup.ts"),
   // ✅ Конфигурация браузеров
   projects: [
     {

@@ -8,9 +8,9 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.usernameInput = page.getByRole('textbox', { name: '* Логин' }); 
-    this.passwordInput = page.getByRole('textbox', { name: '* Пароль' }); 
-    this.loginButton = page.locator("button.el-button--primary:has-text('Войти')"); 
+    this.usernameInput = page.getByRole('textbox', { name: '* Логин' });
+    this.passwordInput = page.getByRole('textbox', { name: '* Пароль' });
+    this.loginButton = page.locator("button.el-button--primary:has-text('Войти')");
   }
 
   async login(username: string, password: string) {
