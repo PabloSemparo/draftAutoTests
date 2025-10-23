@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 async function globalSetup(config: FullConfig) {
   // Загружаем .env
-  dotenv.config({ path: "env_settings/.env.test2" });
+  dotenv.config({ path: "env_settings/.env.stage" });
 
   // Создаём папку, если её нет
   const storageDir = "API-Tests";

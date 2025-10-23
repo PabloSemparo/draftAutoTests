@@ -3,7 +3,7 @@ import { LoginPage } from "../src/pages/LoginPage";
 import { users } from "../src/fixtures/users";
 import fs from "fs";
 import dotenv from "dotenv";
-dotenv.config({ path: "env_settings/.env.test5" });
+dotenv.config({ path: "env_settings/.env.stage" });
 
 export default async function globalSetup() {
   console.log("🔹 Глобальная настройка: Авторизация перед тестами...");
