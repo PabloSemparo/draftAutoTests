@@ -1,0 +1,1082 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\playwright.config.ts",
+    "rootDir": "C:/Users/user/WebstormProjects/EQVCOL_AT/API-Tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\tests\\api-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 6
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ],
+      [
+        "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "outputFolder": "allure-results",
+          "detail": true,
+          "suiteTitle": false,
+          "environmentInfo": {
+            "OS": "win32",
+            "NODE_VERSION": "v22.14.0",
+            "TEST_ENV": "stage"
+          }
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/user/WebstormProjects/EQVCOL_AT/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 6
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "C:/Users/user/WebstormProjects/EQVCOL_AT/API-Tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.js/"
+        ],
+        "timeout": 1200000
+      },
+      {
+        "outputDir": "C:/Users/user/WebstormProjects/EQVCOL_AT/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 6
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/user/WebstormProjects/EQVCOL_AT/API-Tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 1200000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts",
+      "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Создание пакетов документов",
+          "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1329,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:22084) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 11
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 1192
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 16
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:53.182Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiJESVNUUklDVCDRgtC40L8g0YEg0YPQutCw0LfQsNC90L3Ri9C8INGB0YPQtNC+0LwifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAgRElTVFJJQ1Qg0YLQuNC/0LAg0YEg0YPQutCw0LfQsNC90L3Ri9C8INGB0YPQtNC+0Lwg0LggTkVFRF9GT1JfR0FTID0gRkFMU0UifX0="
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiYTFjMDY3YjQtOWYyYS00MDBiLWEyODAtYzE1ZDQ4OTU3Nzg1IiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMTI3ZWU1MDgtOGFjYi00OTkzLTgyYmUtZTAxODY5MjQxYzY0IgogIF0KfQ=="
+                        },
+                        {
+                          "name": "Request Headers",
+                          "contentType": "application/json",
+                          "body": "ewogICJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiIsCiAgIkFjY2VwdCI6ICJhcHBsaWNhdGlvbi9qc29uIiwKICAiQ2FjaGUtQ29udHJvbCI6ICJuby1jYWNoZSIsCiAgIkhvc3QiOiAiZXEtZGVidC1jb2xsZWN0aW9uLXN0YWdlLmJkZW5naS5ydSIsCiAgIkFjY2VwdC1FbmNvZGluZyI6ICJnemlwLCBkZWZsYXRlLCBiciIsCiAgIkNvbm5lY3Rpb24iOiAia2VlcC1hbGl2ZSIKfQ=="
+                        },
+                        {
+                          "name": "Response Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJpZCI6ICIwMTlhMTFiNi01NmJjLTdlMDUtOTVlYi0wM2YwOWIxZjBiM2YiCn0="
+                        },
+                        {
+                          "name": "Performance Metrics",
+                          "contentType": "text/plain",
+                          "body": "UmVzcG9uc2UgVGltZTogMTE5NG1zClN0YXR1cyBDb2RlOiAyMDEKUGFja2FnZSBJRDogMDE5YTExYjYtNTZiYy03ZTA1LTk1ZWItMDNmMDliMWYwYjNm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-976f2--FALSE-DISTRICT-Суд-указан--chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-334ef3de1f940728c19a",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 13,
+              "column": 9
+            },
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1219,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:20832) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 6
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 1096
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 14
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:53.187Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiJESVNUUklDVCDRgtC40L8g0LTQtdGE0L7Qu9GC0L3Ri9C5In1dfX0="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAgRElTVFJJQ1Qg0YLQuNC/0LAg0YEg0LTQtdGE0L7Qu9GC0L3Ri9C80Lgg0L3QsNGB0YLRgNC+0LnQutCw0LzQuCDQuCBORUVEX0ZPUl9HQVMgPSBGQUxTRSJ9fQ=="
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiYTFjMDY3YjQtOWYyYS00MDBiLWEyODAtYzE1ZDQ4OTU3Nzg1IiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMDAwMDkwZWUtYzJmOS00MWQ3LWEyMjMtZTZhOTdiOTU3NjhjIgogIF0KfQ=="
+                        },
+                        {
+                          "name": "Response Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJpZCI6ICIwMTlhMTFiNi01NmMxLTdhZWYtOTZlMS1hODhkOTkyZGFlM2IiCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-b22bd-S-FALSE-DISTRICT-Дефолтный--chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-93b1022a535f6041a686",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 81,
+              "column": 9
+            },
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 1380,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:25192) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 6
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 1246
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 15
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:53.239Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiJNQUdJU1RSQVRFINGC0LjQvyDRgSDRg9C60LDQt9Cw0L3QvdGL0Lwg0YHRg9C00L7QvCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAgTUFHSVNUUkFURSDRgtC40L/QsCDRgSDRg9C60LDQt9Cw0L3QvdGL0Lwg0YHRg9C00L7QvCDQuCBORUVEX0ZPUl9HQVMgPSBGQUxTRSJ9fQ=="
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiODkzNTkyZjEtZTI2YS00ZDk2LWEyMzAtNjY3NjdjMjZlNzdhIiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMDAwMDRhNGQtMzU4ZS00NmU1LThhYzUtMzNhNDk1NmYzM2IwIgogIF0KfQ=="
+                        },
+                        {
+                          "name": "Response Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJpZCI6ICIwMTlhMTFiNi01NmMwLTdhMWMtODVmOC1iYTI4NDgwMzMzODMiCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-7e9a6-ALSE-MAGISTRATE-Суд-указан--chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-8e72b799badea4b5f97a",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 128,
+              "column": 9
+            },
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 1697,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:19812) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 6
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 1573
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 12
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:53.212Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiJNQUdJU1RSQVRFINGC0LjQvyDQtNC10YTQvtC70YLQvdGL0LkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAgTUFHSVNUUkFURSDRgtC40L/QsCDRgSDQtNC10YTQvtC70YLQvdGL0LzQuCDQvdCw0YHRgtGA0L7QudC60LDQvNC4INC4IE5FRURfRk9SX0dBUyA9IEZBTFNFIn19"
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiODkzNTkyZjEtZTI2YS00ZDk2LWEyMzAtNjY3NjdjMjZlNzdhIiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMDAwMDkwZWUtYzJmOS00MWQ3LWEyMjMtZTZhOTdiOTU3NjhjIgogIF0KfQ=="
+                        },
+                        {
+                          "name": "Response Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJpZCI6ICIwMTlhMTFiNi01NmMwLTdhMWMtODVmOC1iYTI4NDgwMzMzODQiCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-eee43-FALSE-MAGISTRATE-Дефолтный--chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-776d4f37f78bb8d0973b",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 175,
+              "column": 9
+            },
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE) Суд указан)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 1230,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:10840) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 5
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 1115
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 13
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:53.277Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQoNCw0LnQvtC90L3Ri9C5INGB0YPQtCDQpNCtINGBINGD0LrQsNC30LDQvdC90YvQvCDRgdGD0LTQvtC8In1dfX0="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAg0LTQu9GPINGA0LDQudC+0L3QvdC+0LPQviDRgdGD0LTQsCDQpNCtINC90LAg0L/QtdGH0LDRgtGMINGBIE5FRURfRk9SX0dBUyA9IFRSVUUg0Lgg0YPQutCw0LfQsNC90L3Ri9C8INGB0YPQtNC+0LwifX0="
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiN2JlOTBjNGItNDg3YS00MzY2LTlhZjQtMzVjMWQ4ZjdjOTM3IiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiNTA3N2YwZDUtZGM5ZC00OGJiLWJjZmEtZjU3OWNjZjc4YzM1IgogIF0KfQ=="
+                        },
+                        {
+                          "name": "Response Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJpZCI6ICIwMTlhMTFiNi01NmJjLTdlMDUtOTVlYi0wM2YwOWIxZjBiNDAiCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-81a02-FOR-GAS-IS-TRUE-Суд-указан--chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-a7b0148b0d3553a943e2",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 222,
+              "column": 9
+            },
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE) Дефолтный)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 1406,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:9452) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 8
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 1280
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 13
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:53.204Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQoNCw0LnQvtC90L3Ri9C5INGB0YPQtCDQpNCtINC00LXRhNC+0LvRgtC90YvQuSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAg0LTQu9GPINGA0LDQudC+0L3QvdC+0LPQviDRgdGD0LTQsCDQpNCtINC90LAg0L/QtdGH0LDRgtGMINGBIE5FRURfRk9SX0dBUyA9IFRSVUUg0Lgg0LTQtdGE0L7Qu9GC0L3Ri9C80Lgg0L3QsNGB0YLRgNC+0LnQutCw0LzQuCJ9fQ=="
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiN2JlOTBjNGItNDg3YS00MzY2LTlhZjQtMzVjMWQ4ZjdjOTM3IiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMTI3ZWU1MDgtOGFjYi00OTkzLTgyYmUtZTAxODY5MjQxYzY0IgogIF0KfQ=="
+                        },
+                        {
+                          "name": "Response Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJpZCI6ICIwMTlhMTFiNi01NmJmLTc4NDUtOWQ0Ni01MGI3ZWU5MmQ2Y2IiCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-d5891--FOR-GAS-IS-TRUE-Дефолтный--chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-2209c052b64658669400",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 269,
+              "column": 9
+            },
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE) Суд указан)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 5509,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m5464\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m5464\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts:352:34)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at Object.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at Object.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\legacy.ts:147:48)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts:350:22",
+                        "location": {
+                          "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts",
+                          "column": 34,
+                          "line": 352
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 350 |\u001b[39m         \u001b[36mawait\u001b[39m allure\u001b[33m.\u001b[39mstep(\u001b[32m'Валидация успешного ответа'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 351 |\u001b[39m             expect(response\u001b[33m!\u001b[39m\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m201\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 352 |\u001b[39m             expect(responseTime)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m5000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 353 |\u001b[39m\n \u001b[90m 354 |\u001b[39m             \u001b[36mconst\u001b[39m responseData \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m!\u001b[39m\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 355 |\u001b[39m             allure\u001b[33m.\u001b[39mattachment(\u001b[32m'Response Body'\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(responseData\u001b[33m,\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[35m2\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'application/json'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts",
+                            "column": 34,
+                            "line": 352
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m5464\u001b[39m\n\n\u001b[0m \u001b[90m 350 |\u001b[39m         \u001b[36mawait\u001b[39m allure\u001b[33m.\u001b[39mstep(\u001b[32m'Валидация успешного ответа'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 351 |\u001b[39m             expect(response\u001b[33m!\u001b[39m\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m201\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 352 |\u001b[39m             expect(responseTime)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m5000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 353 |\u001b[39m\n \u001b[90m 354 |\u001b[39m             \u001b[36mconst\u001b[39m responseData \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m!\u001b[39m\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 355 |\u001b[39m             allure\u001b[33m.\u001b[39mattachment(\u001b[32m'Response Body'\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(responseData\u001b[33m,\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[35m2\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'application/json'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts:352:34)\u001b[22m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\u001b[22m\n\u001b[2m    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\u001b[22m\n\u001b[2m    at Object.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\u001b[22m\n\u001b[2m    at Object.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\legacy.ts:147:48)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts:350:22\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 5463
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 7,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m5464\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m5464\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts:352:34)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at Object.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at Object.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\legacy.ts:147:48)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts:350:22",
+                            "location": {
+                              "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts",
+                              "column": 34,
+                              "line": 352
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 350 |\u001b[39m         \u001b[36mawait\u001b[39m allure\u001b[33m.\u001b[39mstep(\u001b[32m'Валидация успешного ответа'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 351 |\u001b[39m             expect(response\u001b[33m!\u001b[39m\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m201\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 352 |\u001b[39m             expect(responseTime)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m5000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 353 |\u001b[39m\n \u001b[90m 354 |\u001b[39m             \u001b[36mconst\u001b[39m responseData \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m!\u001b[39m\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 355 |\u001b[39m             allure\u001b[33m.\u001b[39mattachment(\u001b[32m'Response Body'\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(responseData\u001b[33m,\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[35m2\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'application/json'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:54.522Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQnNC40YDQvtCy0L7QuSDRgdGD0LQg0KTQrSDRgSDRg9C60LDQt9Cw0L3QvdGL0Lwg0YHRg9C00L7QvCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAg0LTQu9GPINC80LjRgNC+0LLQvtCz0L4g0YHRg9C00LAg0KTQrSDQvdCwINC/0LXRh9Cw0YLRjCDRgSBORUVEX0ZPUl9HQVMgPSBUUlVFINC4INGD0LrQsNC30LDQvdC90YvQvCDRgdGD0LTQvtC8In19"
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiYTdkN2FmMzMtYTQyZC00YTY2LWJiOGEtNDBlYjljMWJkMjFjIiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMDAwMDRhNGQtMzU4ZS00NmU1LThhYzUtMzNhNDk1NmYzM2IwIgogIF0KfQ=="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-9ebcb-FOR-GAS-IS-TRUE-Суд-указан--chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\eq-debt-collection-packages-withAllure.spec.ts",
+                        "column": 34,
+                        "line": 352
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-089d7311f80581b65fed",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 316,
+              "column": 9
+            },
+            {
+              "title": "[201 CODE] Пакет документов успешно создан (Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE) Дефолтный)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 1203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Отправка POST запроса /v1/packages",
+                          "duration": 1155
+                        },
+                        {
+                          "title": "Валидация успешного ответа",
+                          "duration": 9
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:54.625Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQnNC40YDQvtCy0L7QuSDRgdGD0LQg0KTQrSDQtNC10YTQvtC70YLQvdGL0LkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KHQvtC30LTQsNC90LjQtSDQv9Cw0LrQtdGC0LAg0LTQu9GPINC80LjRgNC+0LLQvtCz0L4g0YHRg9C00LAg0KTQrSDQvdCwINC/0LXRh9Cw0YLRjCDRgSBORUVEX0ZPUl9HQVMgPSBUUlVFINC4INC00LXRhNC+0LvRgtC90YvQvNC4INC90LDRgdGC0YDQvtC50LrQsNC80LgifX0="
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiYTdkN2FmMzMtYTQyZC00YTY2LWJiOGEtNDBlYjljMWJkMjFjIiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
+                        },
+                        {
+                          "name": "Response Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJpZCI6ICIwMTlhMTFiNi01YzMxLTcyMWItOGEzOS1lNmU0ZmU3NWFjNWUiCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-63cdc--FOR-GAS-IS-TRUE-Дефолтный--chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-a920bae8bae60af9f6f0",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 363,
+              "column": 9
+            },
+            {
+              "title": "[404 CODE] Не найдены контракты",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 1200000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 694,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Подготовка тестовых данных с невалидными контрактами",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Отправка POST запроса с невалидными контрактами",
+                          "duration": 623
+                        },
+                        {
+                          "title": "Валидация ошибки 404",
+                          "duration": 28
+                        }
+                      ],
+                      "startTime": "2025-10-23T15:35:54.656Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkRlYnQgQ29sbGVjdGlvbiBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6IlBhY2thZ2UgQ3JlYXRpb24ifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS1jcmVhdGlvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQntCx0YDQsNCx0L7RgtC60LAg0L7RiNC40LHQvtC6In1dfX0="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0KLQtdGB0YLQuNGA0L7QstCw0L3QuNC1INC+0LHRgNCw0LHQvtGC0LrQuCDRgdC40YLRg9Cw0YbQuNC4INC60L7Qs9C00LAg0LrQvtC90YLRgNCw0LrRgtGLINC90LUg0L3QsNC50LTQtdC90YsifX0="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoibmVnYXRpdmUifV19fQ=="
+                        },
+                        {
+                          "name": "Request Body",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgInBhY2thZ2VUeXBlSWQiOiAiODkzNTkyZjEtZTI2YS00ZDk2LWEyMzAtNjY3NjdjMjZlNzdhIiwKICAiY29udHJhY3RJZHMiOiBbCiAgICAiMDYyNDY5OTEtMzdiNC00MmU5LTg4NjktZWU4MjY1ZjZiZGQ1IiwKICAgICJiNWIwMjU2YS1mNjU0LTRmZDEtYmIzZC1iMmU4NGE4NjExZDIiLAogICAgIjBmNjA3ODc2LTExZGItNDhmYy1hZDdhLWZhNTRlNjJkYmMzYiIKICBdCn0="
+                        },
+                        {
+                          "name": "Error Response",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiB7CiAgICAiY29kZSI6ICJOT1RfRk9VTkQiLAogICAgImRlc2NyaXB0aW9uIjogItCd0LUg0YPQtNCw0LvQvtGB0Ywg0L3QsNC50YLQuCDQutC+0L3RgtGA0LDQutGC0YsiCiAgfSwKICAiZXJyb3JzIjogWwogICAgewogICAgICAia2V5IjogImNvbnRyYWN0SWRzIiwKICAgICAgImNvZGUiOiAiQ09OVFJBQ1RTX0RPX05PVF9FWElTVCIsCiAgICAgICJkZXNjcmlwdGlvbiI6ICLQndC1INGD0LTQsNC70L7RgdGMINC90LDQudGC0Lgg0LrQvtC90YLRgNCw0LrRgtGLOiBbMDYyNDY5OTEtMzdiNC00MmU5LTg4NjktZWU4MjY1ZjZiZGQ1LCAwZjYwNzg3Ni0xMWRiLTQ4ZmMtYWQ3YS1mYTU0ZTYyZGJjM2IsIGI1YjAyNTZhLWY2NTQtNGZkMS1iYjNkLWIyZTg0YTg2MTFkMl0iCiAgICB9CiAgXSwKICAiZGV0YWlscyI6IG51bGwKfQ=="
+                        },
+                        {
+                          "name": "Error Details",
+                          "contentType": "text/plain",
+                          "body": "UmVzcG9uc2UgVGltZTogNjI0bXMKU3RhdHVzIENvZGU6IDQwNApFcnJvcnMgQ291bnQ6IDE="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-eq-debt-e9a46-4-CODE-Не-найдены-контракты-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b442f59b8593b90502b-c9849565ee8242af365d",
+              "file": "eq-debt-collection/eq-debt-collection-packages-withAllure.spec.ts",
+              "line": 410,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-10-23T15:35:50.772Z",
+    "duration": 9341.202,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

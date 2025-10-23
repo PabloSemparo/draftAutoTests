@@ -1,0 +1,8 @@
+{
+  "Content-Type": "application/json",
+  "Accept": "application/json",
+  "Cache-Control": "no-cache",
+  "Host": "eq-debt-collection-stage.bdengi.ru",
+  "Accept-Encoding": "gzip, deflate, br",
+  "Connection": "keep-alive"
+}
