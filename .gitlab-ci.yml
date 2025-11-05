@@ -11,10 +11,8 @@ api-tests:
     - npm ci
     - npx playwright install
   script:
-    - echo "Searching for test file..."
-    - find . -name "eq-debt-collection-packages-id-splitversion.spec.ts" -type f
     - echo "Running API tests..."
-    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages-id-splitversion.spec.ts --reporter=html,line
+    - npx playwright test ./API-Tests/eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts --reporter=html,line
   artifacts:
     when: always
     paths:
