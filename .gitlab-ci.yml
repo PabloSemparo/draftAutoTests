@@ -1,18 +1,19 @@
 stages:
   - test
 
+variables:
+  BASE_URL: "https://eq-debt-collection-stage.bdengi.ru"
+
 api-tests:
   stage: test
   image: node:18
   tags:
     - docker
   before_script:
-    - apt-get update
-    - apt-get install -y libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
     - npm ci
-    - npx playwright install
+    - npx playwright install chromium
   script:
-    - npx playwright test ./API-Tests/eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts --reporter=html,line
+    - npx playwright test ./API-Tests/eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts --reporter=html,line --project=chromium
   artifacts:
     when: always
     paths:
