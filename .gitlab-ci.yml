@@ -15,7 +15,7 @@ api-tests:
   stage: test
   image: node:$NODE_VERSION
   tags:
-    - docker  
+    - docker
   before_script:
     - apt-get update
     - apt-get install -y wget gnupg libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
@@ -29,8 +29,6 @@ api-tests:
     paths:
       - playwright-report/
       - test-results/
-    reports:
-      junit: test-results/junit.xml
     expire_in: 1 week
   only:
     - merge_requests
