@@ -1,3 +1,0 @@
-Response Time: 545ms
-Status: 201
-Package ID: 019a11a5-ad20-7f43-968b-399c675a5fd9
