@@ -21,18 +21,9 @@ api-tests:
     - apt-get install -y wget gnupg libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
     - npm ci
     - npx playwright install
-    - echo "Current directory: $(pwd)"
-    - echo "Directory contents:"
-    - ls -la
-    - echo "API-Tests directory:"
-    - ls -la API-Tests/ || echo "API-Tests not found"
-    - ls -la API-Tests/eq-debt-collection/packages/ || echo "Package directory not found"
   script:
     - echo "Running API tests..."
-    - echo "Checking test file existence..."
-    - find . -name "*.spec.ts" -type f
-    - test -f "API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts" && echo "Test file found" || echo "Test file NOT found"
-    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts --reporter=html,line --verbose
+    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts --reporter=html,line
   artifacts:
     when: always
     paths:
