@@ -1,129 +1,36 @@
-workflow:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: always
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-      when: always
-
 stages:
   - test
 
-# -------------------------------------------
-# 🔹 Цепочка 1
-chain1_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 1"
-    - npx playwright test tests/tests/chain1.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain1.xml
+variables:
+  NODE_VERSION: "18"
+  PLAYWRIGHT_BROWSERS_PATH: "./node_modules/playwright/.local-browsers"
 
-# -------------------------------------------
-# 🔹 Цепочка 2
-chain2_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 2"
-    - npx playwright test tests/tests/chain2.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain2.xml
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - $PLAYWRIGHT_BROWSERS_PATH
 
-# -------------------------------------------
-# 🔹 Цепочка 4
-chain4_tests:
+api-tests:
   stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
+  image: node:$NODE_VERSION
+  before_script:
+    - apt-get update
+    - apt-get install -y wget gnupg libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
     - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 4"
-    - npx playwright test tests/tests/chain4.spec.ts
+    - npx playwright install
+  script:
+    - echo "Running API tests..."
+    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts --reporter=html,line
   artifacts:
     when: always
     paths:
-      - test-results/
       - playwright-report/
-    reports:
-      junit: test-results/results-chain4.xml
-
-# -------------------------------------------
-# 🟦 Цепочка 1 (купленные)
-chain1_purchased_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 1 (покупные)"
-    - npx playwright test tests/tests/chain1_purchased.spec.ts
-  artifacts:
-    when: always
-    paths:
       - test-results/
-      - playwright-report/
     reports:
-      junit: test-results/results-chain1-purchased.xml
-
-# -------------------------------------------
-# 🟦 Цепочка 2 (купленные)
-chain2_purchased_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 2 (покупные)"
-    - npx playwright test tests/tests/chain2_purchased.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain2-purchased.xml
-
-# -------------------------------------------
-# 🟦 Цепочка 4 (купленные)
-chain4_purchased_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 4 (покупные)"
-    - npx playwright test tests/tests/chain4_purchased.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain4-purchased.xml
+      junit: test-results/junit.xml
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
