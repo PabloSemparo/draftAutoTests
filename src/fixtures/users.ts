@@ -1,7 +1,7 @@
 export const users = {
     testUser: {
-      username: "admin",
-      password: "admin",
+      username: "",
+      password: "",
     },
   };
   
