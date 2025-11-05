@@ -1,29 +1,20 @@
 stages:
   - test
 
-variables:
-  NODE_VERSION: "18"
-  PLAYWRIGHT_BROWSERS_PATH: "./node_modules/playwright/.local-browsers"
-
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-    - $PLAYWRIGHT_BROWSERS_PATH
-
 api-tests:
   stage: test
-  image: node:$NODE_VERSION
+  image: node:18
   tags:
     - docker
   before_script:
-    - apt-get update
-    - apt-get install -y wget gnupg libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
+    - apt-get update && apt-get install -y libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
     - npm ci
     - npx playwright install
   script:
+    - echo "Searching for test file..."
+    - find . -name "eq-debt-collection-packages-id-splitversion.spec.ts" -type f
     - echo "Running API tests..."
-    - npx pnpx playwright test eq-debt-collection-packages-id-splitversion.spec.ts
+    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages-id-splitversion.spec.ts --reporter=html,line
   artifacts:
     when: always
     paths:
