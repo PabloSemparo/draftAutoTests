@@ -23,7 +23,7 @@ api-tests:
     - npx playwright install
   script:
     - echo "Running API tests..."
-    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts --reporter=html,line
+    - npx pnpx playwright test eq-debt-collection-packages-id-splitversion.spec.ts
   artifacts:
     when: always
     paths:
