@@ -29,19 +29,16 @@ api-tests:
     - ls -la API-Tests/eq-debt-collection/packages/ || echo "Package directory not found"
   script:
     - echo "Running API tests..."
-    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts --reporter=html,line --verbose || echo "Tests failed but continuing..."
-    - echo "Test execution completed with exit code: $?"
-  after_script:
-    - echo "Checking test results..."
-    - find . -name "*.spec.ts" -type f | head -5
-    - test -f playwright-report/index.html && echo "HTML report generated" || echo "No HTML report"
+    - echo "Checking test file existence..."
+    - find . -name "*.spec.ts" -type f
+    - test -f "API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts" && echo "Test file found" || echo "Test file NOT found"
+    - npx playwright test API-Tests/eq-debt-collection/packages/eq-debt-collection-packages.spec.ts --reporter=html,line --verbose
   artifacts:
     when: always
     paths:
       - playwright-report/
       - test-results/
     expire_in: 1 week
-  allow_failure: true  
   only:
     - merge_requests
     - main
