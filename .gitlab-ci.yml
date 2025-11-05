@@ -1,17 +1,22 @@
 stages:
   - test
 
+variables:
+  BASE_URL: "https://eq-debt-collection-stage.bdengi.ru"
+  # Добавьте если нужны токены авторизации
+  # API_TOKEN: "$API_TOKEN"
+
 api-tests:
   stage: test
   image: node:18
   tags:
     - docker
   before_script:
-    - apt-get update && apt-get install -y libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
+    - apt-get update && apt-get install -y curl libnss3 libatk-bridge2.0-0 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev
     - npm ci
     - npx playwright install
   script:
-    - echo "Running API tests..."
+    - echo "BASE_URL: $API_BASE_URL"
     - npx playwright test ./API-Tests/eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts --reporter=html,line
   artifacts:
     when: always
@@ -19,7 +24,3 @@ api-tests:
       - playwright-report/
       - test-results/
     expire_in: 1 week
-  only:
-    - merge_requests
-    - main
-    - develop
