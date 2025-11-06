@@ -1,129 +1,22 @@
-workflow:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: always
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-      when: always
-
 stages:
   - test
 
-# -------------------------------------------
-# 🔹 Цепочка 1
-chain1_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 1"
-    - npx playwright test tests/tests/chain1.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain1.xml
+variables:
+  BASE_URL: "https://eq-debt-collection-stage.bdengi.ru"
 
-# -------------------------------------------
-# 🔹 Цепочка 2
-chain2_tests:
+api-tests:
   stage: test
-  image: mcr.microsoft.com/playwright:focal
+  image: node:18
   tags:
     - docker
-  script:
+  before_script:
     - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 2"
-    - npx playwright test tests/tests/chain2.spec.ts
+    - npx playwright install chromium
+  script:
+    - npx playwright test ./API-Tests/eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts --reporter=html,line --project=chromium
   artifacts:
     when: always
     paths:
-      - test-results/
       - playwright-report/
-    reports:
-      junit: test-results/results-chain2.xml
-
-# -------------------------------------------
-# 🔹 Цепочка 4
-chain4_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 4"
-    - npx playwright test tests/tests/chain4.spec.ts
-  artifacts:
-    when: always
-    paths:
       - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain4.xml
-
-# -------------------------------------------
-# 🟦 Цепочка 1 (купленные)
-chain1_purchased_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 1 (покупные)"
-    - npx playwright test tests/tests/chain1_purchased.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain1-purchased.xml
-
-# -------------------------------------------
-# 🟦 Цепочка 2 (купленные)
-chain2_purchased_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 2 (покупные)"
-    - npx playwright test tests/tests/chain2_purchased.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain2-purchased.xml
-
-# -------------------------------------------
-# 🟦 Цепочка 4 (купленные)
-chain4_purchased_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:focal
-  tags:
-    - docker
-  script:
-    - npm ci
-    - npx playwright install --with-deps
-    - "echo Запуск тестов: Цепочка 4 (покупные)"
-    - npx playwright test tests/tests/chain4_purchased.spec.ts
-  artifacts:
-    when: always
-    paths:
-      - test-results/
-      - playwright-report/
-    reports:
-      junit: test-results/results-chain4-purchased.xml
+    expire_in: 1 week
