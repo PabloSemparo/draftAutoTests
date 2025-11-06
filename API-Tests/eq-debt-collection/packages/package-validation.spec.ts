@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { PackageAssertions } from './package-assertions';
+import { PackageAssertions } from '../../../utils/package-assertions';
 
 test.describe('Валидация ответов пакетов документов', () => {
 
