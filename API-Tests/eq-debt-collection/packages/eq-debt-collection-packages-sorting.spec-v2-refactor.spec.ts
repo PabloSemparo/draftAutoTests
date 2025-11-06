@@ -8,7 +8,7 @@ const DEFAULT_PARAMS = {
     documentPackageTypeId: '',
     responsibleLawyerId: '',
     number: '',
-    pageNumber: '0', // теперь строки
+    pageNumber: '0',
     pageSize: '100'
 };
 
