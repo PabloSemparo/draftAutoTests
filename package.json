@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test",
+    "convert:postman": "node scripts/Converter.js collections/test.json tests/api/",
+    "test:api": "playwright test tests/api/",
+    "test": "playwright test",
+    "test:report": "playwright test && allure generate allure-results --clean && node scripts/send-allure-report.js",
+    "send-report": "node scripts/send-allure-report.js",
+    "test2": "npx playwright test",
     "test:debug": "npx playwright test --debug",
     "test:head": "npx playwright test --headed",
     "test:headed": "HEADLESS=false npx playwright test",
@@ -26,6 +31,7 @@
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "nodemailer": "^7.0.10"
   }
 }

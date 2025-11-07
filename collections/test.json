@@ -1,0 +1,38 @@
+{
+  "info": {
+    "name": "User API Tests",
+    "description": "Tests for user management API"
+  },
+  "item": [
+    {
+      "name": "Get Users",
+      "request": {
+        "method": "GET",
+        "url": "https://api.example.com/users",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "url": "https://api.example.com/users",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\"\n}"
+        }
+      }
+    }
+  ]
+}

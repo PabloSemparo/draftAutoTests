@@ -59,7 +59,7 @@ const TEST_CASES = {
             contractIds: ['5077f0d5-dc9d-48bb-bcfa-f579ccf78c35'],
             expectedStatus: 201,
             maxResponseTime: 5000,
-            severity: 'normal',
+            severity: 'critical',
             story: 'Создание пакета районного суда ФЭ с указанным судом'
         },
         {
@@ -68,7 +68,7 @@ const TEST_CASES = {
             contractIds: ['127ee508-8acb-4993-82be-e01869241c64'],
             expectedStatus: 201,
             maxResponseTime: 5000,
-            severity: 'normal',
+            severity: 'critical',
             story: 'Создание пакета районного суда ФЭ с дефолтным судом'
         },
         {
@@ -77,7 +77,7 @@ const TEST_CASES = {
             contractIds: ['00004a4d-358e-46e5-8ac5-33a4956f33b0'],
             expectedStatus: 201,
             maxResponseTime: 5000,
-            severity: 'normal',
+            severity: 'critical',
             story: 'Создание пакета мирового суда ФЭ с указанным судом'
         },
         {
@@ -86,7 +86,7 @@ const TEST_CASES = {
             contractIds: ['0000cf37-d804-4fe7-a725-58fa4567bfb4'],
             expectedStatus: 201,
             maxResponseTime: 5000,
-            severity: 'normal',
+            severity: 'critical',
             story: 'Создание пакета мирового суда ФЭ с дефолтным судом'
         }
     ],
