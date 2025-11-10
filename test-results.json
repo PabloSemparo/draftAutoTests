@@ -103,7 +103,7 @@
           "specs": [
             {
               "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан)",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -116,35 +116,60 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3771,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 9675,
+                      "error": {
+                        "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан] Response time 9356ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9356\u001b[39m",
+                        "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан] Response time 9356ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9356\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                        "location": {
+                          "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                          "column": 124,
+                          "line": 176
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                            "column": 124,
+                            "line": 176
+                          },
+                          "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан] Response time 9356ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9356\u001b[39m\n\n\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\u001b[22m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\u001b[22m\n\u001b[2m    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\u001b[22m\n\u001b[2m    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\u001b[22m\n\u001b[2m    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:1272) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:12232) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 7
+                          "duration": 8
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан",
-                          "duration": 3584
+                          "duration": 9362
                         },
                         {
                           "title": "Валидация успешного ответа: Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан",
-                          "duration": 11
-                        },
-                        {
-                          "title": "Валидация ID созданного пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан",
-                          "duration": 5
+                          "duration": 37,
+                          "error": {
+                            "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан] Response time 9356ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9356\u001b[39m",
+                            "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан] Response time 9356ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9356\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                            "location": {
+                              "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                              "column": 124,
+                              "line": 176
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                          }
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:22.371Z",
+                      "startTime": "2025-11-10T10:08:00.733Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -205,32 +230,27 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMzU4MW1zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogOTM1Nm1zClN0YXR1cyBDb2RlOiAyMDE="
                         },
                         {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjUgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMzM4NyIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
-                        },
-                        {
-                          "name": "Response Body",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1kYWMxLTc5YzUtYjg4Yy1jZGE0YmUwYzU1MjIiCn0="
-                        },
-                        {
-                          "name": "Package ID",
+                          "name": "Validation Error",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWRhYzEtNzljNS1iODhjLWNkYTRiZTBjNTUyMg=="
+                          "body": "0J7RiNC40LHQutCwINCy0LDQu9C40LTQsNGG0LjQuCDQvtGC0LLQtdGC0LA6IFvQotC10YHRgtC+0LLRi9C5X05FRURfRk9SX0dBU19JU19GQUxTRSAoRElTVFJJQ1QpINCh0YPQtCDRg9C60LDQt9Cw0L1dIFJlc3BvbnNlIHRpbWUgOTM1Nm1zIHNob3VsZCBiZSBsZXNzIHRoYW4gNTAwMG1zCgobWzJtZXhwZWN0KBtbMjJtG1szMW1yZWNlaXZlZBtbMzltG1sybSkuG1syMm10b0JlTGVzc1RoYW4bWzJtKBtbMjJtG1szMm1leHBlY3RlZBtbMzltG1sybSkbWzIybQoKRXhwZWN0ZWQ6IDwgG1szMm01MDAwG1szOW0KUmVjZWl2ZWQ6ICAgG1szMW05MzU2G1szOW0="
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
                           "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-package-b392f--FALSE-DISTRICT-Суд-указан--chromium\\trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                        "column": 124,
+                        "line": 176
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "d6fa0b4add551d27e42b-9162aea8945a10ec906a",
@@ -240,7 +260,7 @@
             },
             {
               "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный)",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -253,35 +273,60 @@
                     {
                       "workerIndex": 1,
                       "parallelIndex": 1,
-                      "status": "passed",
-                      "duration": 2365,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 9679,
+                      "error": {
+                        "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный] Response time 9349ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9349\u001b[39m",
+                        "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный] Response time 9349ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9349\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                        "location": {
+                          "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                          "column": 124,
+                          "line": 176
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                            "column": 124,
+                            "line": 176
+                          },
+                          "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный] Response time 9349ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9349\u001b[39m\n\n\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\u001b[22m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\u001b[22m\n\u001b[2m    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\u001b[22m\n\u001b[2m    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\u001b[22m\n\u001b[2m    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:19676) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:4608) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 7
+                          "duration": 10
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный",
-                          "duration": 2163
+                          "duration": 9354
                         },
                         {
                           "title": "Валидация успешного ответа: Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный",
-                          "duration": 12
-                        },
-                        {
-                          "title": "Валидация ID созданного пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный",
-                          "duration": 8
+                          "duration": 29,
+                          "error": {
+                            "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный] Response time 9349ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9349\u001b[39m",
+                            "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный] Response time 9349ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9349\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                            "location": {
+                              "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                              "column": 124,
+                              "line": 176
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                          }
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:22.425Z",
+                      "startTime": "2025-11-10T10:08:00.729Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -342,32 +387,27 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMjE2MW1zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogOTM0OW1zClN0YXR1cyBDb2RlOiAyMDE="
                         },
                         {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjMgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMTk3OSIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
-                        },
-                        {
-                          "name": "Response Body",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1kMTQwLTcyNDEtODJjZS1lYzJkMWE2YTIyZWQiCn0="
-                        },
-                        {
-                          "name": "Package ID",
+                          "name": "Validation Error",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWQxNDAtNzI0MS04MmNlLWVjMmQxYTZhMjJlZA=="
+                          "body": "0J7RiNC40LHQutCwINCy0LDQu9C40LTQsNGG0LjQuCDQvtGC0LLQtdGC0LA6IFvQotC10YHRgtC+0LLRi9C5X05FRURfRk9SX0dBU19JU19GQUxTRSAoRElTVFJJQ1QpINCU0LXRhNC+0LvRgtC90YvQuV0gUmVzcG9uc2UgdGltZSA5MzQ5bXMgc2hvdWxkIGJlIGxlc3MgdGhhbiA1MDAwbXMKChtbMm1leHBlY3QoG1syMm0bWzMxbXJlY2VpdmVkG1szOW0bWzJtKS4bWzIybXRvQmVMZXNzVGhhbhtbMm0oG1syMm0bWzMybWV4cGVjdGVkG1szOW0bWzJtKRtbMjJtCgpFeHBlY3RlZDogPCAbWzMybTUwMDAbWzM5bQpSZWNlaXZlZDogICAbWzMxbTkzNDkbWzM5bQ=="
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
                           "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-package-9662a-S-FALSE-DISTRICT-Дефолтный--chromium\\trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                        "column": 124,
+                        "line": 176
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "d6fa0b4add551d27e42b-c7391127da76a55ee0ee",
@@ -377,7 +417,7 @@
             },
             {
               "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан)",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -390,35 +430,60 @@
                     {
                       "workerIndex": 2,
                       "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 2654,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 9571,
+                      "error": {
+                        "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан] Response time 9224ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9224\u001b[39m",
+                        "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан] Response time 9224ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9224\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                        "location": {
+                          "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                          "column": 124,
+                          "line": 176
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                            "column": 124,
+                            "line": 176
+                          },
+                          "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан] Response time 9224ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9224\u001b[39m\n\n\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\u001b[22m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\u001b[22m\n\u001b[2m    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\u001b[22m\n\u001b[2m    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\u001b[22m\n\u001b[2m    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:23756) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:5220) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 7
+                          "duration": 9
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан",
-                          "duration": 2475
+                          "duration": 9229
                         },
                         {
                           "title": "Валидация успешного ответа: Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан",
-                          "duration": 11
-                        },
-                        {
-                          "title": "Валидация ID созданного пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан",
-                          "duration": 5
+                          "duration": 36,
+                          "error": {
+                            "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан] Response time 9224ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9224\u001b[39m",
+                            "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан] Response time 9224ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9224\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                            "location": {
+                              "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                              "column": 124,
+                              "line": 176
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                          }
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:22.437Z",
+                      "startTime": "2025-11-10T10:08:00.849Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -479,32 +544,27 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMjQ3MW1zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogOTIyNG1zClN0YXR1cyBDb2RlOiAyMDE="
                         },
                         {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjQgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMjI3NSIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
-                        },
-                        {
-                          "name": "Response Body",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1kNTdlLTdlNDAtOTM1MS04NTY5MGE4MDBlYjkiCn0="
-                        },
-                        {
-                          "name": "Package ID",
+                          "name": "Validation Error",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWQ1N2UtN2U0MC05MzUxLTg1NjkwYTgwMGViOQ=="
+                          "body": "0J7RiNC40LHQutCwINCy0LDQu9C40LTQsNGG0LjQuCDQvtGC0LLQtdGC0LA6IFvQotC10YHRgtC+0LLRi9C5X05FRURfRk9SX0dBU19JU19GQUxTRSAoTUFHSVNUUkFURSkg0KHRg9C0INGD0LrQsNC30LDQvV0gUmVzcG9uc2UgdGltZSA5MjI0bXMgc2hvdWxkIGJlIGxlc3MgdGhhbiA1MDAwbXMKChtbMm1leHBlY3QoG1syMm0bWzMxbXJlY2VpdmVkG1szOW0bWzJtKS4bWzIybXRvQmVMZXNzVGhhbhtbMm0oG1syMm0bWzMybWV4cGVjdGVkG1szOW0bWzJtKRtbMjJtCgpFeHBlY3RlZDogPCAbWzMybTUwMDAbWzM5bQpSZWNlaXZlZDogICAbWzMxbTkyMjQbWzM5bQ=="
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
                           "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-package-4b3eb-ALSE-MAGISTRATE-Суд-указан--chromium\\trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                        "column": 124,
+                        "line": 176
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "d6fa0b4add551d27e42b-c436dbcb680e5bfd4f60",
@@ -514,7 +574,7 @@
             },
             {
               "title": "[201 CODE] Пакет документов успешно создан (Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный)",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -527,35 +587,60 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 3,
-                      "status": "passed",
-                      "duration": 2200,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 9618,
+                      "error": {
+                        "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный] Response time 9289ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9289\u001b[39m",
+                        "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный] Response time 9289ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9289\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                        "location": {
+                          "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                          "column": 124,
+                          "line": 176
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                            "column": 124,
+                            "line": 176
+                          },
+                          "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный] Response time 9289ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9289\u001b[39m\n\n\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\u001b[22m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\u001b[22m\n\u001b[2m    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\u001b[22m\n\u001b[2m    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\u001b[22m\n\u001b[2m    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:23612) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:20764) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 6
+                          "duration": 8
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный",
-                          "duration": 2019
+                          "duration": 9295
                         },
                         {
                           "title": "Валидация успешного ответа: Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный",
-                          "duration": 11
-                        },
-                        {
-                          "title": "Валидация ID созданного пакета: Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный",
-                          "duration": 7
+                          "duration": 30,
+                          "error": {
+                            "message": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный] Response time 9289ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9289\u001b[39m",
+                            "stack": "Error: [Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный] Response time 9289ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9289\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                            "location": {
+                              "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                              "column": 124,
+                              "line": 176
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                          }
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:22.477Z",
+                      "startTime": "2025-11-10T10:08:00.788Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -616,32 +701,27 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMjAxNW1zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogOTI4OW1zClN0YXR1cyBDb2RlOiAyMDE="
                         },
                         {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjMgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMTg0NCIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
-                        },
-                        {
-                          "name": "Response Body",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1kMTg1LTcyYzEtOWZjNC04OGFiZGNlNjQ0NzUiCn0="
-                        },
-                        {
-                          "name": "Package ID",
+                          "name": "Validation Error",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWQxODUtNzJjMS05ZmM0LTg4YWJkY2U2NDQ3NQ=="
+                          "body": "0J7RiNC40LHQutCwINCy0LDQu9C40LTQsNGG0LjQuCDQvtGC0LLQtdGC0LA6IFvQotC10YHRgtC+0LLRi9C5X05FRURfRk9SX0dBU19JU19GQUxTRSAoTUFHSVNUUkFURSkg0JTQtdGE0L7Qu9GC0L3Ri9C5XSBSZXNwb25zZSB0aW1lIDkyODltcyBzaG91bGQgYmUgbGVzcyB0aGFuIDUwMDBtcwoKG1sybWV4cGVjdCgbWzIybRtbMzFtcmVjZWl2ZWQbWzM5bRtbMm0pLhtbMjJtdG9CZUxlc3NUaGFuG1sybSgbWzIybRtbMzJtZXhwZWN0ZWQbWzM5bRtbMm0pG1syMm0KCkV4cGVjdGVkOiA8IBtbMzJtNTAwMBtbMzltClJlY2VpdmVkOiAgIBtbMzFtOTI4ORtbMzlt"
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
                           "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-package-c3a45-FALSE-MAGISTRATE-Дефолтный--chromium\\trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                        "column": 124,
+                        "line": 176
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "d6fa0b4add551d27e42b-24615d6182ea0d7479f5",
@@ -651,7 +731,7 @@
             },
             {
               "title": "[201 CODE] Пакет документов успешно создан (Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан)",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -664,35 +744,60 @@
                     {
                       "workerIndex": 4,
                       "parallelIndex": 4,
-                      "status": "passed",
-                      "duration": 2336,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 9646,
+                      "error": {
+                        "message": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан] Response time 9345ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9345\u001b[39m",
+                        "stack": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан] Response time 9345ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9345\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                        "location": {
+                          "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                          "column": 124,
+                          "line": 176
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                            "column": 124,
+                            "line": 176
+                          },
+                          "message": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан] Response time 9345ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9345\u001b[39m\n\n\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\u001b[22m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\u001b[22m\n\u001b[2m    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\u001b[22m\n\u001b[2m    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\u001b[22m\n\u001b[2m    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:9936) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:21096) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 5
+                          "duration": 7
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан",
-                          "duration": 2147
+                          "duration": 9349
                         },
                         {
                           "title": "Валидация успешного ответа: Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан",
-                          "duration": 14
-                        },
-                        {
-                          "title": "Валидация ID созданного пакета: Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан",
-                          "duration": 7
+                          "duration": 29,
+                          "error": {
+                            "message": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан] Response time 9345ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9345\u001b[39m",
+                            "stack": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан] Response time 9345ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9345\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                            "location": {
+                              "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                              "column": 124,
+                              "line": 176
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                          }
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:22.440Z",
+                      "startTime": "2025-11-10T10:08:00.752Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -733,7 +838,7 @@
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
                         },
                         {
                           "name": "Allure Metadata (metadata)",
@@ -753,32 +858,27 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMjE0M21zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogOTM0NW1zClN0YXR1cyBDb2RlOiAyMDE="
                         },
                         {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjMgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiOTI2IiwKICAic2VydmVyIjogImVudm95IiwKICAidHJhbnNmZXItZW5jb2RpbmciOiAiY2h1bmtlZCIKfQ=="
-                        },
-                        {
-                          "name": "Response Body",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1kNTQyLTc1NDgtYmJhMy1iZDRmZjY4MmE2YjUiCn0="
-                        },
-                        {
-                          "name": "Package ID",
+                          "name": "Validation Error",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWQ1NDItNzU0OC1iYmEzLWJkNGZmNjgyYTZiNQ=="
+                          "body": "0J7RiNC40LHQutCwINCy0LDQu9C40LTQsNGG0LjQuCDQvtGC0LLQtdGC0LA6IFvQoNCw0LnQvtC90L3Ri9C5INGB0YPQtCDQpNCtINC90LAg0L/QtdGH0LDRgtGMX05FRURfRk9SX0dBU19JU19UUlVFINCh0YPQtCDRg9C60LDQt9Cw0L1dIFJlc3BvbnNlIHRpbWUgOTM0NW1zIHNob3VsZCBiZSBsZXNzIHRoYW4gNTAwMG1zCgobWzJtZXhwZWN0KBtbMjJtG1szMW1yZWNlaXZlZBtbMzltG1sybSkuG1syMm10b0JlTGVzc1RoYW4bWzJtKBtbMjJtG1szMm1leHBlY3RlZBtbMzltG1sybSkbWzIybQoKRXhwZWN0ZWQ6IDwgG1szMm01MDAwG1szOW0KUmVjZWl2ZWQ6ICAgG1szMW05MzQ1G1szOW0="
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
                           "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-package-6d334-FOR-GAS-IS-TRUE-Суд-указан--chromium\\trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                        "column": 124,
+                        "line": 176
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "d6fa0b4add551d27e42b-e51705f04349317dbe78",
@@ -788,7 +888,7 @@
             },
             {
               "title": "[201 CODE] Пакет документов успешно создан (Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный)",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -801,35 +901,60 @@
                     {
                       "workerIndex": 5,
                       "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 2250,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 9597,
+                      "error": {
+                        "message": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный] Response time 9280ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9280\u001b[39m",
+                        "stack": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный] Response time 9280ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9280\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                        "location": {
+                          "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                          "column": 124,
+                          "line": 176
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                            "column": 124,
+                            "line": 176
+                          },
+                          "message": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный] Response time 9280ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9280\u001b[39m\n\n\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\u001b[22m\n\u001b[2m    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\u001b[22m\n\u001b[2m    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\u001b[22m\n\u001b[2m    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\u001b[22m\n\u001b[2m    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\u001b[22m\n\u001b[2m    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\u001b[22m\n\u001b[2m    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\u001b[22m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:24220) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:10348) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 6
+                          "duration": 8
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный",
-                          "duration": 2066
+                          "duration": 9287
                         },
                         {
                           "title": "Валидация успешного ответа: Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный",
-                          "duration": 12
-                        },
-                        {
-                          "title": "Валидация ID созданного пакета: Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный",
-                          "duration": 8
+                          "duration": 34,
+                          "error": {
+                            "message": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный] Response time 9280ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9280\u001b[39m",
+                            "stack": "Error: [Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный] Response time 9280ms should be less than 5000ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m5000\u001b[39m\nReceived:   \u001b[31m9280\u001b[39m\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:176:124)\n    at body (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:48)\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:56)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at call (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:13:23)\n    at Generator._invoke (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at Generator.next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at asyncGeneratorStep (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at _next (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1\n    at AllurePlaywrightTestRuntime.apply (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:2:1)\n    at AllurePlaywrightTestRuntime.step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-playwright\\src\\runtime.ts:12:13)\n    at callRuntimeMethod (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:21:27)\n    at step (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\node_modules\\allure-js-commons\\src\\facade.ts:113:10)\n    at validateSuccessResponse (C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:170:15)\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts:341:19",
+                            "location": {
+                              "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                              "column": 124,
+                              "line": 176
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 174 |\u001b[39m\n \u001b[90m 175 |\u001b[39m             \u001b[90m// 2. Response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 176 |\u001b[39m             expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`[${testName}] Response time ${responseTime}ms should be less than ${maxResponseTime}ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(maxResponseTime)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 177 |\u001b[39m\n \u001b[90m 178 |\u001b[39m             \u001b[90m// 3. Content-Type - безопасное получение headers\u001b[39m\n \u001b[90m 179 |\u001b[39m             \u001b[36mconst\u001b[39m headers \u001b[33m=\u001b[39m safeHeadersToObject(response\u001b[33m.\u001b[39mheaders())\u001b[33m;\u001b[39m\u001b[0m"
+                          }
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:22.493Z",
+                      "startTime": "2025-11-10T10:08:00.813Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -870,7 +995,7 @@
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
                         },
                         {
                           "name": "Allure Metadata (metadata)",
@@ -890,32 +1015,27 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMjA2M21zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogOTI4MG1zClN0YXR1cyBDb2RlOiAyMDE="
                         },
                         {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjMgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMTg4NiIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
-                        },
-                        {
-                          "name": "Response Body",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1jZmZlLTcxYjktYmFlZS01YWU0ZTUyYzc4ZDYiCn0="
-                        },
-                        {
-                          "name": "Package ID",
+                          "name": "Validation Error",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWNmZmUtNzFiOS1iYWVlLTVhZTRlNTJjNzhkNg=="
+                          "body": "0J7RiNC40LHQutCwINCy0LDQu9C40LTQsNGG0LjQuCDQvtGC0LLQtdGC0LA6IFvQoNCw0LnQvtC90L3Ri9C5INGB0YPQtCDQpNCtINC90LAg0L/QtdGH0LDRgtGMX05FRURfRk9SX0dBU19JU19UUlVFINCU0LXRhNC+0LvRgtC90YvQuV0gUmVzcG9uc2UgdGltZSA5MjgwbXMgc2hvdWxkIGJlIGxlc3MgdGhhbiA1MDAwbXMKChtbMm1leHBlY3QoG1syMm0bWzMxbXJlY2VpdmVkG1szOW0bWzJtKS4bWzIybXRvQmVMZXNzVGhhbhtbMm0oG1syMm0bWzMybWV4cGVjdGVkG1szOW0bWzJtKRtbMjJtCgpFeHBlY3RlZDogPCAbWzMybTUwMDAbWzM5bQpSZWNlaXZlZDogICAbWzMxbTkyODAbWzM5bQ=="
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
                           "path": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\test-results\\eq-debt-collection-package-4950e--FOR-GAS-IS-TRUE-Дефолтный--chromium\\trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\eq-debt-collection-packages.spec-v2-refactor.spec.ts",
+                        "column": 124,
+                        "line": 176
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "d6fa0b4add551d27e42b-4f392e31a9b6ee290589",
@@ -936,33 +1056,37 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 3,
-                      "parallelIndex": 3,
+                      "workerIndex": 6,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 1423,
+                      "duration": 829,
                       "errors": [],
                       "stdout": [],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "(node:21136) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 3
+                          "duration": 8
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан",
-                          "duration": 1356
+                          "duration": 557
                         },
                         {
                           "title": "Валидация успешного ответа: Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан",
-                          "duration": 9
+                          "duration": 24
                         },
                         {
                           "title": "Валидация ID созданного пакета: Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан",
-                          "duration": 5
+                          "duration": 12
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:24.822Z",
+                      "startTime": "2025-11-10T10:08:14.846Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1003,7 +1127,7 @@
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
                         },
                         {
                           "name": "Allure Metadata (metadata)",
@@ -1023,22 +1147,22 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMTM1M21zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogNTUxbXMKU3RhdHVzIENvZGU6IDIwMQ=="
                         },
                         {
                           "name": "Response Headers",
                           "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjUgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMTMwNiIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
+                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIk1vbiwgMTAgTm92IDIwMjUgMTA6MDg6MTUgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMTk1IiwKICAic2VydmVyIjogImVudm95IiwKICAidHJhbnNmZXItZW5jb2RpbmciOiAiY2h1bmtlZCIKfQ=="
                         },
                         {
                           "name": "Response Body",
                           "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1kYjExLTcxODktOTEyMS02OTMzMDUxZjA0M2YiCn0="
+                          "body": "ewogICJpZCI6ICIwMTlhNmQzYy1kNzllLTdiMmQtYmRkZS0zMDI3YzUzNzcxOGEiCn0="
                         },
                         {
                           "name": "Package ID",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWRiMTEtNzE4OS05MTIxLTY5MzMwNTFmMDQzZg=="
+                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE2ZDNjLWQ3OWUtN2IyZC1iZGRlLTMwMjdjNTM3NzE4YQ=="
                         },
                         {
                           "name": "trace",
@@ -1069,33 +1193,37 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
+                      "workerIndex": 7,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 1165,
+                      "duration": 1316,
                       "errors": [],
                       "stdout": [],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "(node:4260) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 2
+                          "duration": 11
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный",
-                          "duration": 1115
+                          "duration": 1026
                         },
                         {
                           "title": "Валидация успешного ответа: Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный",
-                          "duration": 9
+                          "duration": 25
                         },
                         {
                           "title": "Валидация ID созданного пакета: Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный",
-                          "duration": 5
+                          "duration": 13
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:24.921Z",
+                      "startTime": "2025-11-10T10:08:14.908Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1136,7 +1264,7 @@
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
                         },
                         {
                           "name": "Allure Metadata (metadata)",
@@ -1156,22 +1284,22 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMTExM21zClN0YXR1cyBDb2RlOiAyMDE="
+                          "body": "UmVzcG9uc2UgVGltZTogMTAyMm1zClN0YXR1cyBDb2RlOiAyMDE="
                         },
                         {
                           "name": "Response Headers",
                           "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjUgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMjIiLAogICJzZXJ2ZXIiOiAiZW52b3kiLAogICJ0cmFuc2Zlci1lbmNvZGluZyI6ICJjaHVua2VkIgp9"
+                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIk1vbiwgMTAgTm92IDIwMjUgMTA6MDg6MTYgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiNzMxIiwKICAic2VydmVyIjogImVudm95IiwKICAidHJhbnNmZXItZW5jb2RpbmciOiAiY2h1bmtlZCIKfQ=="
                         },
                         {
                           "name": "Response Body",
                           "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhNTkwMS1kYTZlLTcxMmQtOTJmMC1kNmRiYmYyYTYwMDUiCn0="
+                          "body": "ewogICJpZCI6ICIwMTlhNmQzYy1kN2YyLTc4NjctYjZjZS05NDIwMTQwYmFhZWIiCn0="
                         },
                         {
                           "name": "Package ID",
                           "contentType": "text/plain",
-                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE1OTAxLWRhNmUtNzEyZC05MmYwLWQ2ZGJiZjJhNjAwNQ=="
+                          "body": "0KHQvtC30LTQsNC9INC/0LDQutC10YIg0YEgSUQ6IDAxOWE2ZDNjLWQ3ZjItNzg2Ny1iNmNlLTk0MjAxNDBiYWFlYg=="
                         },
                         {
                           "name": "trace",
@@ -1202,33 +1330,37 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 8,
+                      "parallelIndex": 5,
                       "status": "passed",
-                      "duration": 1217,
+                      "duration": 1071,
                       "errors": [],
                       "stdout": [],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "(node:10160) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных для негативного сценария",
-                          "duration": 3
+                          "duration": 12
                         },
                         {
                           "title": "Отправка POST запроса для создания пакета: Не найдены контракты",
-                          "duration": 1145
+                          "duration": 757
                         },
                         {
                           "title": "Валидация ошибочного ответа: Не найдены контракты",
-                          "duration": 11
+                          "duration": 25
                         },
                         {
                           "title": "Валидация тела ошибочного ответа: Не найдены контракты",
-                          "duration": 13
+                          "duration": 30
                         }
                       ],
-                      "startTime": "2025-11-06T11:51:24.967Z",
+                      "startTime": "2025-11-10T10:08:14.945Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1294,12 +1426,12 @@
                         {
                           "name": "Performance Metrics",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgVGltZTogMTE0Mm1zClN0YXR1cyBDb2RlOiA0MDQ="
+                          "body": "UmVzcG9uc2UgVGltZTogNzUybXMKU3RhdHVzIENvZGU6IDQwNA=="
                         },
                         {
                           "name": "Response Headers",
                           "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIlRodSwgMDYgTm92IDIwMjUgMTE6NTE6MjUgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiMTA4NSIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
+                          "body": "ewogICJ2YXJ5IjogIm9yaWdpbixhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LW1ldGhvZCxhY2Nlc3MtY29udHJvbC1yZXF1ZXN0LWhlYWRlcnMsYWNjZXB0LWVuY29kaW5nIiwKICAiY29udGVudC1lbmNvZGluZyI6ICJnemlwIiwKICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICJkYXRlIjogIk1vbiwgMTAgTm92IDIwMjUgMTA6MDg6MTUgR01UIiwKICAieC1lbnZveS11cHN0cmVhbS1zZXJ2aWNlLXRpbWUiOiAiNDg4IiwKICAic2VydmVyIjogImVudm95IiwKICAidHJhbnNmZXItZW5jb2RpbmciOiAiY2h1bmtlZCIKfQ=="
                         },
                         {
                           "name": "Error Response Body",
@@ -1334,11 +1466,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-11-06T11:51:20.008Z",
-    "duration": 6327.3640000000005,
-    "expected": 9,
+    "startTime": "2025-11-10T10:07:57.607Z",
+    "duration": 18868.103,
+    "expected": 3,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 6,
     "flaky": 0
   }
 }

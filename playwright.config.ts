@@ -1,7 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
-const CustomEmailReporter = require('./email-reporter');
 
 // ✅ Загружаем env-переменные из правильного файла
 dotenv.config({ path: path.resolve(__dirname, "env_settings/.env.stage") });
