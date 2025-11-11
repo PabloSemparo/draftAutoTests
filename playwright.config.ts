@@ -66,6 +66,8 @@ export default defineConfig({
 
   use: {
     ...currentConfig,
+    trace: 'on-first-retry',
+    ignoreHTTPSErrors: true,
     headless: env.HEADLESS,
     storageState: 'tests/storageState.json',
     launchOptions: {
