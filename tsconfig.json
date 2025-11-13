@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "./tests/*"]
+    },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["tests/**/*", "**/*.ts"],
+  "exclude": ["node_modules"]
+}

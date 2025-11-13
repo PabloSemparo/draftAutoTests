@@ -4,14 +4,14 @@
     "rootDir": "C:/Users/user/WebstormProjects/EQVCOL_AT/API-Tests",
     "forbidOnly": false,
     "fullyParallel": true,
-    "globalSetup": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\tests\\api-setup.ts",
-    "globalTeardown": null,
+    "globalSetup": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\tests\\global-setup.ts",
+    "globalTeardown": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\tests\\global-teardown.ts",
     "globalTimeout": 0,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 6
+      "actualWorkers": 4
     },
     "preserveOutput": "always",
     "reporter": [
@@ -52,7 +52,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 4
         },
         "id": "setup",
         "name": "setup",
@@ -68,7 +68,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 4
         },
         "id": "chromium",
         "name": "chromium",
@@ -89,16 +89,16 @@
   },
   "suites": [
     {
-      "title": "eq-debt-collection\\packages\\id\\convert\\eq-debt-collection-convert-to-gas.spec.ts",
-      "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas.spec.ts",
+      "title": "eq-debt-collection\\packages\\id\\convert\\eq-debt-collection-convert-to-gas-v2-refactor.spec.ts",
+      "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas-v2-refactor.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
           "title": "API: Конвертировать документы пакета в PDF для отправки в ГАС",
-          "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas.spec.ts",
-          "line": 32,
+          "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas-v2-refactor.spec.ts",
+          "line": 7,
           "column": 6,
           "specs": [
             {
@@ -117,63 +117,40 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 512,
+                      "duration": 447,
                       "errors": [],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:24404) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:18476) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 10
+                          "duration": 11
                         },
                         {
                           "title": "Отправка POST запроса на конвертацию в PDF",
-                          "duration": 368
+                          "duration": 308
                         },
                         {
                           "title": "Проверка статус кода 200",
-                          "duration": 5
-                        },
-                        {
-                          "title": "Проверка времени ответа < 5000ms",
-                          "duration": 6
-                        },
-                        {
-                          "title": "Проверка наличия заголовка date",
-                          "duration": 4
-                        },
-                        {
-                          "title": "Логирование заголовков ответа",
                           "duration": 3
                         },
                         {
+                          "title": "Проверка наличия заголовка date",
+                          "duration": 5
+                        },
+                        {
                           "title": "Логирование успешного выполнения",
-                          "duration": 7
+                          "duration": 5
                         }
                       ],
-                      "startTime": "2025-11-11T11:04:05.256Z",
+                      "startTime": "2025-11-12T11:47:39.424Z",
                       "annotations": [],
                       "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InBhcmVudFN1aXRlIiwidmFsdWUiOiJBUEkgVGVzdHMifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN1aXRlIiwidmFsdWUiOiJQYWNrYWdlcyBBUEkifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN1YlN1aXRlIiwidmFsdWUiOiJDb252ZXJ0IHRvIFBERiJ9XX19"
-                        },
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
@@ -197,17 +174,32 @@
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
                           "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoic21va2UifV19fQ=="
                         },
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
                           "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicmVncmVzc2lvbiJ9XX19"
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InBhcmVudFN1aXRlIiwidmFsdWUiOiJBUEkgVGVzdHMifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN1aXRlIiwidmFsdWUiOiJBUEkgVGVzdHMifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN1YlN1aXRlIiwidmFsdWUiOiJQYWNrYWdlcyBBUEkifV19fQ=="
+                        },
+                        {
+                          "name": "Allure Metadata (metadata)",
+                          "contentType": "application/vnd.allure.message+json",
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
                         },
                         {
                           "name": "Allure Metadata (metadata)",
@@ -225,14 +217,9 @@
                           "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJEb2N1bWVudCBJRHMiLCJ2YWx1ZSI6ItCf0YPRgdGC0L7QuSDQvNCw0YHRgdC40LIifV19fQ=="
                         },
                         {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXNwb25zZSBUaW1lIiwidmFsdWUiOiIzNjltcyJ9XX19"
-                        },
-                        {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIk9yaWdpbiwgQWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2QsIEFjY2Vzcy1Db250cm9sLVJlcXVlc3QtSGVhZGVycyIsCiAgImRhdGUiOiAiVHVlLCAxMSBOb3YgMjAyNSAxMTowNDowNCBHTVQiLAogICJ4LWVudm95LXVwc3RyZWFtLXNlcnZpY2UtdGltZSI6ICIxNzAiLAogICJzZXJ2ZXIiOiAiZW52b3kiLAogICJ0cmFuc2Zlci1lbmNvZGluZyI6ICJjaHVua2VkIgp9"
+                          "name": "Response Time",
+                          "contentType": "text/plain",
+                          "body": "UmVzcG9uc2UgdGltZTogMzA5bXM="
                         },
                         {
                           "name": "Request Body",
@@ -242,12 +229,7 @@
                         {
                           "name": "Response Headers",
                           "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIk9yaWdpbiwgQWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2QsIEFjY2Vzcy1Db250cm9sLVJlcXVlc3QtSGVhZGVycyIsCiAgImRhdGUiOiAiVHVlLCAxMSBOb3YgMjAyNSAxMTowNDowNCBHTVQiLAogICJ4LWVudm95LXVwc3RyZWFtLXNlcnZpY2UtdGltZSI6ICIxNzAiLAogICJzZXJ2ZXIiOiAiZW52b3kiLAogICJ0cmFuc2Zlci1lbmNvZGluZyI6ICJjaHVua2VkIgp9"
-                        },
-                        {
-                          "name": "Response Time",
-                          "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgdGltZTogMzY5bXM="
+                          "body": "ewogICJ2YXJ5IjogIk9yaWdpbiwgQWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2QsIEFjY2Vzcy1Db250cm9sLVJlcXVlc3QtSGVhZGVycyIsCiAgImRhdGUiOiAiV2VkLCAxMiBOb3YgMjAyNSAxMTo0NzozOSBHTVQiLAogICJ4LWVudm95LXVwc3RyZWFtLXNlcnZpY2UtdGltZSI6ICI3NSIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
                         }
                       ]
                     }
@@ -255,9 +237,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "9ae8d472981412b311af-b5873bcbcd256bb9c809",
-              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas.spec.ts",
-              "line": 34,
+              "id": "023a52813f555adc2bd4-bb2d7be542e3484c2f7a",
+              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas-v2-refactor.spec.ts",
+              "line": 11,
               "column": 9
             },
             {
@@ -276,54 +258,42 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 683,
+                      "duration": 317,
                       "errors": [],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:12100) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:28460) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных для 422 ошибки",
-                          "duration": 11
+                          "duration": 9
                         },
                         {
                           "title": "Отправка запроса с пакетом, недоступным для ГАС",
-                          "duration": 515
+                          "duration": 162
                         },
                         {
                           "title": "Проверка статус кода 422",
-                          "duration": 6
-                        },
-                        {
-                          "title": "Проверка времени ответа < 2000ms",
-                          "duration": 5
+                          "duration": 3
                         },
                         {
                           "title": "Проверка Content-Type",
-                          "duration": 2
+                          "duration": 4
                         },
                         {
-                          "title": "Парсинг JSON ответа",
-                          "duration": 2
-                        },
-                        {
-                          "title": "Проверка что массив errors не пустой",
-                          "duration": 5
-                        },
-                        {
-                          "title": "Проверка схемы ответа",
-                          "duration": 26
+                          "title": "Проверка структуры ответа",
+                          "duration": 32
                         },
                         {
                           "title": "Логирование ошибки валидации",
-                          "duration": 5
+                          "duration": 7
                         }
                       ],
-                      "startTime": "2025-11-11T11:04:05.312Z",
+                      "startTime": "2025-11-12T11:47:39.423Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -372,19 +342,14 @@
                           "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJFeHBlY3RlZCBFcnJvciIsInZhbHVlIjoi0JTQu9GPINC00LDQvdC90L7Qs9C+INC/0LDQutC10YLQsCDQvdC1INC00L7RgdGC0YPQv9C90LAg0L7RgtC/0YDQsNCy0LrQsCDQsiDQk9CQ0KEifV19fQ=="
                         },
                         {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXNwb25zZSBUaW1lIiwidmFsdWUiOiI1MTdtcyJ9XX19"
+                          "name": "Response Time",
+                          "contentType": "text/plain",
+                          "body": "UmVzcG9uc2UgdGltZTogMTYzbXM="
                         },
                         {
                           "name": "422 Error Response",
                           "contentType": "application/json",
                           "body": "ewogICJzdGF0dXMiOiB7CiAgICAiY29kZSI6ICJWQUxJREFUSU9OIiwKICAgICJkZXNjcmlwdGlvbiI6ICLQlNC70Y8g0LTQsNC90L3QvtCz0L4g0L/QsNC60LXRgtCwINC90LUg0LTQvtGB0YLRg9C/0L3QsCDQvtGC0L/RgNCw0LLQutCwINCyINCT0JDQoS4g0J/QsNC60LXRgiA6IDI5OCAiCiAgfSwKICAiZXJyb3JzIjogWwogICAgewogICAgICAia2V5IjogInBhY2thZ2VJZCIsCiAgICAgICJjb2RlIjogIk5PVF9BQ0NFUFRFRF9GT1JfR0FTIiwKICAgICAgImRlc2NyaXB0aW9uIjogItCU0LvRjyDQtNCw0L3QvdC+0LPQviDQv9Cw0LrQtdGC0LAg0L3QtSDQtNC+0YHRgtGD0L/QvdCwINC+0YLQv9GA0LDQstC60LAg0LIg0JPQkNChLiDQn9Cw0LrQtdGCIDogMjk4ICIKICAgIH0KICBdLAogICJkZXRhaWxzIjogbnVsbAp9"
-                        },
-                        {
-                          "name": "Response Time",
-                          "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgdGltZTogNTE3bXM="
                         },
                         {
                           "name": "Request Details",
@@ -397,9 +362,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "9ae8d472981412b311af-7ac62cd07ea6e5d4929b",
-              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas.spec.ts",
-              "line": 102,
+              "id": "023a52813f555adc2bd4-dcc35ce594203ab2faf6",
+              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas-v2-refactor.spec.ts",
+              "line": 65,
               "column": 9
             },
             {
@@ -418,42 +383,38 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 375,
+                      "duration": 268,
                       "errors": [],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:25356) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:27092) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка невалидных тестовых данных",
-                          "duration": 12
-                        },
-                        {
-                          "title": "Отправка запроса с невалидными данными",
-                          "duration": 230
-                        },
-                        {
-                          "title": "Проверка статус кода 400",
-                          "duration": 6
-                        },
-                        {
-                          "title": "Парсинг JSON ответа",
-                          "duration": 4
-                        },
-                        {
-                          "title": "Проверка структуры ошибки",
                           "duration": 11
                         },
                         {
+                          "title": "Отправка запроса с невалидными данными",
+                          "duration": 149
+                        },
+                        {
+                          "title": "Проверка статус кода 400",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Проверка структуры ошибки",
+                          "duration": 7
+                        },
+                        {
                           "title": "Логирование ошибки 400",
-                          "duration": 6
+                          "duration": 3
                         }
                       ],
-                      "startTime": "2025-11-11T11:04:05.304Z",
+                      "startTime": "2025-11-12T11:47:39.429Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -497,14 +458,14 @@
                           "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJFeHBlY3RlZCBFcnJvciIsInZhbHVlIjoi0J3QtdC/0YDQsNCy0LjQu9GM0L3Ri9C5INGE0L7RgNC80LDRgiDQt9Cw0L/RgNC+0YHQsCJ9XX19"
                         },
                         {
+                          "name": "Response Time",
+                          "contentType": "text/plain",
+                          "body": "UmVzcG9uc2UgdGltZTogMTUwbXM="
+                        },
+                        {
                           "name": "400 Error Response",
                           "contentType": "application/json",
                           "body": "ewogICJzdGF0dXMiOiB7CiAgICAiY29kZSI6ICJCQURfUkVRVUVTVCIsCiAgICAiZGVzY3JpcHRpb24iOiAi0J3QtdC60L7RgNGA0LXQutGC0L3Ri9C5INGE0L7RgNC80LDRgiDQt9Cw0L/RgNC+0YHQsCIKICB9LAogICJlcnJvcnMiOiBbCiAgICB7CiAgICAgICJrZXkiOiAiY291cnRMYXd5ZXJJZCIsCiAgICAgICJjb2RlIjogIklOVkFMSURfRklFTERfRk9STUFUIiwKICAgICAgImRlc2NyaXB0aW9uIjogItCf0L7Qu9C1IGNvdXJ0TGF3eWVySWQg0LTQvtC70LbQvdC+INC40LzQtdGC0Ywg0YLQuNC/IGNsYXNzIGphdmEudXRpbC5VVUlEIgogICAgfQogIF0sCiAgImRldGFpbHMiOiBudWxsCn0="
-                        },
-                        {
-                          "name": "Response Time",
-                          "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgdGltZTogMjMybXM="
                         }
                       ]
                     }
@@ -512,9 +473,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "9ae8d472981412b311af-66eb8cfd0b62adce65f9",
-              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas.spec.ts",
-              "line": 197,
+              "id": "023a52813f555adc2bd4-aa0a17f099e3143bf20f",
+              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas-v2-refactor.spec.ts",
+              "line": 136,
               "column": 9
             },
             {
@@ -533,34 +494,34 @@
                       "workerIndex": 3,
                       "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 1561,
+                      "duration": 442,
                       "errors": [],
                       "stdout": [],
                       "stderr": [
                         {
-                          "text": "(node:20768) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:13584) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Подготовка тестовых данных",
-                          "duration": 8
+                          "duration": 10
                         },
                         {
                           "title": "Отправка запроса для проверки 500 ошибки",
-                          "duration": 1436
+                          "duration": 310
                         },
                         {
                           "title": "Проверка возможных статус кодов",
-                          "duration": 13
+                          "duration": 12
                         },
                         {
-                          "title": "Логирование нормального ответа",
-                          "duration": 2
+                          "title": "Проверка структуры 500 ошибки",
+                          "duration": 8
                         }
                       ],
-                      "startTime": "2025-11-11T11:04:05.311Z",
+                      "startTime": "2025-11-12T11:47:39.446Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -599,1164 +560,19 @@
                           "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJDb3VydCBMYXd5ZXIgSUQiLCJ2YWx1ZSI6Ijk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiJ9XX19"
                         },
                         {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJBY3R1YWwgU3RhdHVzIENvZGUiLCJ2YWx1ZSI6IjIwMCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXNwb25zZSBUaW1lIiwidmFsdWUiOiIxNDM4bXMifV19fQ=="
-                        },
-                        {
-                          "name": "Normal Response",
-                          "contentType": "text/plain",
-                          "body": "U3RhdHVzOiAyMDA="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9ae8d472981412b311af-d6e80066a14c37cec6ec",
-              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas.spec.ts",
-              "line": 254,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "eq-debt-collection\\packages\\id\\eq-debt-collection-packages-id-splitversion.spec.ts",
-      "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "Детальная валидация ответа описания пакета документов",
-          "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-          "line": 4,
-          "column": 6,
-          "specs": [
-            {
-              "title": "Response has all required fields",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
-                      "status": "passed",
-                      "duration": 396,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [
-                        {
-                          "text": "(node:29212) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
-                        }
-                      ],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Проверка наличия всех обязательных полей",
-                          "duration": 21
-                        },
-                        {
-                          "title": "Прикрепление информации о полях",
-                          "duration": 2
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:05.400Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCf0L7Qu9GD0YfQtdC90LjQtSDQtNC10YLQsNC70LXQuSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L/QviBJRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS12YWxpZGF0aW9uIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoiZGV0YWlsZWQtY2hlY2sifV19fQ=="
-                        },
-                        {
-                          "name": "Package Details Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhMTEzZS01OGM1LTc5ZmUtODY3Mi1mNGZlYTljZGM3ZGQiLAogICJudW1iZXIiOiA0MTUsCiAgInR5cGVJZCI6ICJhN2Q3YWYzMy1hNDJkLTRhNjYtYmI4YS00MGViOWMxYmQyMWMiLAogICJzdGF0dXNDb2RlIjogIkZPUk1FRCIsCiAgImNyZWF0ZWRBdCI6ICIyMDI1LTEwLTIzVDE2OjI0OjQ5Ljk4ODcxNCIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAiOTZmMDA3ZGEtNDQxZS00ZGZkLTliZTAtMzZjY2VmZTZlNThiIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Request Info",
-                          "contentType": "text/plain",
-                          "body": "UGFja2FnZSBJRDogMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkClN0YXR1czogMjAwClVSTDogL3YxL3BhY2thZ2VzLzAxOWExMTNlLTU4YzUtNzlmZS04NjcyLWY0ZmVhOWNkYzdkZA=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQn9GA0L7QstC10YDQutCwINC+0LHRj9C30LDRgtC10LvRjNC90YvRhSDQv9C+0LvQtdC5In1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0JLQsNC70LjQtNCw0YbQuNGPINC90LDQu9C40YfQuNGPINCy0YHQtdGFINC+0LHRj9C30LDRgtC10LvRjNC90YvRhSDQv9C+0LvQtdC5INCyINC+0YLQstC10YLQtSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIifX0="
-                        },
-                        {
-                          "name": "Fields Validation",
-                          "contentType": "text/plain",
-                          "body": "RXhwZWN0ZWQgRmllbGRzOiBpZCwgbnVtYmVyLCB0eXBlSWQsIHN0YXR1c0NvZGUsIGNyZWF0ZWRBdCwgcmVzcG9uc2libGVMYXd5ZXJJZCwgaW5jbHVkZWRDb250cmFjdHMKQWN0dWFsIEZpZWxkczogaWQsIG51bWJlciwgdHlwZUlkLCBzdGF0dXNDb2RlLCBjcmVhdGVkQXQsIHJlc3BvbnNpYmxlTGF3eWVySWQsIGluY2x1ZGVkQ29udHJhY3RzCk1pc3NpbmcgRmllbGRzOiBOb25lCkV4dHJhIEZpZWxkczogTm9uZQ=="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "70ce1d2489b203d8c637-a0a721753e4336bb0dcb",
-              "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-              "line": 34,
-              "column": 9
-            },
-            {
-              "title": "All fields have correct data types",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 383,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [
-                        {
-                          "text": "(node:28256) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
-                        }
-                      ],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Проверка типов данных основных полей",
-                          "duration": 22
-                        },
-                        {
-                          "title": "Проверка типа responsibleLawyerId",
-                          "duration": 7
-                        },
-                        {
-                          "title": "Прикрепление информации о типах данных",
-                          "duration": 2
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:05.330Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCf0L7Qu9GD0YfQtdC90LjQtSDQtNC10YLQsNC70LXQuSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L/QviBJRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS12YWxpZGF0aW9uIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoiZGV0YWlsZWQtY2hlY2sifV19fQ=="
-                        },
-                        {
-                          "name": "Package Details Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhMTEzZS01OGM1LTc5ZmUtODY3Mi1mNGZlYTljZGM3ZGQiLAogICJudW1iZXIiOiA0MTUsCiAgInR5cGVJZCI6ICJhN2Q3YWYzMy1hNDJkLTRhNjYtYmI4YS00MGViOWMxYmQyMWMiLAogICJzdGF0dXNDb2RlIjogIkZPUk1FRCIsCiAgImNyZWF0ZWRBdCI6ICIyMDI1LTEwLTIzVDE2OjI0OjQ5Ljk4ODcxNCIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAiOTZmMDA3ZGEtNDQxZS00ZGZkLTliZTAtMzZjY2VmZTZlNThiIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Request Info",
-                          "contentType": "text/plain",
-                          "body": "UGFja2FnZSBJRDogMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkClN0YXR1czogMjAwClVSTDogL3YxL3BhY2thZ2VzLzAxOWExMTNlLTU4YzUtNzlmZS04NjcyLWY0ZmVhOWNkYzdkZA=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQn9GA0L7QstC10YDQutCwINGC0LjQv9C+0LIg0LTQsNC90L3Ri9GFIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0JLQsNC70LjQtNCw0YbQuNGPINC60L7RgNGA0LXQutGC0L3QvtGB0YLQuCDRgtC40L/QvtCyINC00LDQvdC90YvRhSDQstGB0LXRhSDQv9C+0LvQtdC5INC/0LDQutC10YLQsCDQtNC+0LrRg9C80LXQvdGC0L7QsiJ9fQ=="
-                        },
-                        {
-                          "name": "Responsible Lawyer Info",
-                          "contentType": "text/plain",
-                          "body": "VHlwZTogc3RyaW5nClZhbHVlOiA5NmYwMDdkYS00NDFlLTRkZmQtOWJlMC0zNmNjZWZlNmU1OGIKTGVuZ3RoOiAzNg=="
-                        },
-                        {
-                          "name": "Data Types Info",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICJzdHJpbmciLAogICJudW1iZXIiOiAibnVtYmVyIiwKICAidHlwZUlkIjogInN0cmluZyIsCiAgInN0YXR1c0NvZGUiOiAic3RyaW5nIiwKICAiY3JlYXRlZEF0IjogInN0cmluZyIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAic3RyaW5nIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiAiYXJyYXkiCn0="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "70ce1d2489b203d8c637-8764838ebd7eb105a3b6",
-              "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-              "line": 62,
-              "column": 9
-            },
-            {
-              "title": "The createdAt field must be in a valid date format",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 216,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Проверка наличия поля createdAt",
-                          "duration": 8
-                        },
-                        {
-                          "title": "Валидация формата даты",
-                          "duration": 6
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:05.754Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCf0L7Qu9GD0YfQtdC90LjQtSDQtNC10YLQsNC70LXQuSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L/QviBJRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS12YWxpZGF0aW9uIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoiZGV0YWlsZWQtY2hlY2sifV19fQ=="
-                        },
-                        {
-                          "name": "Package Details Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhMTEzZS01OGM1LTc5ZmUtODY3Mi1mNGZlYTljZGM3ZGQiLAogICJudW1iZXIiOiA0MTUsCiAgInR5cGVJZCI6ICJhN2Q3YWYzMy1hNDJkLTRhNjYtYmI4YS00MGViOWMxYmQyMWMiLAogICJzdGF0dXNDb2RlIjogIkZPUk1FRCIsCiAgImNyZWF0ZWRBdCI6ICIyMDI1LTEwLTIzVDE2OjI0OjQ5Ljk4ODcxNCIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAiOTZmMDA3ZGEtNDQxZS00ZGZkLTliZTAtMzZjY2VmZTZlNThiIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Request Info",
-                          "contentType": "text/plain",
-                          "body": "UGFja2FnZSBJRDogMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkClN0YXR1czogMjAwClVSTDogL3YxL3BhY2thZ2VzLzAxOWExMTNlLTU4YzUtNzlmZS04NjcyLWY0ZmVhOWNkYzdkZA=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQktCw0LvQuNC00LDRhtC40Y8g0YTQvtGA0LzQsNGC0LAg0LTQsNGC0YsifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0J/RgNC+0LLQtdGA0LrQsCDRh9GC0L4g0L/QvtC70LUgY3JlYXRlZEF0INGB0L7QtNC10YDQttC40YIg0LrQvtGA0YDQtdC60YLQvdGD0Y4g0LTQsNGC0YMg0LIg0YTQvtGA0LzQsNGC0LUgSVNPIn19"
-                        },
-                        {
-                          "name": "Date Validation",
-                          "contentType": "text/plain",
-                          "body": "T3JpZ2luYWwgVmFsdWU6IDIwMjUtMTAtMjNUMTY6MjQ6NDkuOTg4NzE0ClBhcnNlZCBEYXRlOiAyMDI1LTEwLTIzVDEzOjI0OjQ5Ljk4OFoKSXMgVmFsaWQ6IHRydWUKWWVhcjogMjAyNQpNb250aDogMTAKRGF5OiAyMw=="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "70ce1d2489b203d8c637-b0024ce470abed4dc527",
-              "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-              "line": 103,
-              "column": 9
-            },
-            {
-              "title": "Ensure includedContracts array is not null",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 112,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Проверка структуры ответа",
-                          "duration": 6
-                        },
-                        {
-                          "title": "Проверка массива includedContracts",
-                          "duration": 6
-                        },
-                        {
-                          "title": "Прикрепление информации о массиве контрактов",
-                          "duration": 2
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:05.766Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCf0L7Qu9GD0YfQtdC90LjQtSDQtNC10YLQsNC70LXQuSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L/QviBJRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS12YWxpZGF0aW9uIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoiZGV0YWlsZWQtY2hlY2sifV19fQ=="
-                        },
-                        {
-                          "name": "Package Details Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhMTEzZS01OGM1LTc5ZmUtODY3Mi1mNGZlYTljZGM3ZGQiLAogICJudW1iZXIiOiA0MTUsCiAgInR5cGVJZCI6ICJhN2Q3YWYzMy1hNDJkLTRhNjYtYmI4YS00MGViOWMxYmQyMWMiLAogICJzdGF0dXNDb2RlIjogIkZPUk1FRCIsCiAgImNyZWF0ZWRBdCI6ICIyMDI1LTEwLTIzVDE2OjI0OjQ5Ljk4ODcxNCIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAiOTZmMDA3ZGEtNDQxZS00ZGZkLTliZTAtMzZjY2VmZTZlNThiIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Request Info",
-                          "contentType": "text/plain",
-                          "body": "UGFja2FnZSBJRDogMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkClN0YXR1czogMjAwClVSTDogL3YxL3BhY2thZ2VzLzAxOWExMTNlLTU4YzUtNzlmZS04NjcyLWY0ZmVhOWNkYzdkZA=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQn9GA0L7QstC10YDQutCwINC80LDRgdGB0LjQstCwINC60L7QvdGC0YDQsNC60YLQvtCyIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0JLQsNC70LjQtNCw0YbQuNGPINGH0YLQviBpbmNsdWRlZENvbnRyYWN0cyDRj9Cy0LvRj9C10YLRgdGPINC90LUtbnVsbCDQvNCw0YHRgdC40LLQvtC8In19"
-                        },
-                        {
-                          "name": "Included Contracts Info",
-                          "contentType": "text/plain",
-                          "body": "QXJyYXkgTGVuZ3RoOiAxCklzIEFycmF5OiB0cnVlCklzIE51bGw6IGZhbHNlCkZpcnN0IDUgSXRlbXM6IFsiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0Il0="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "70ce1d2489b203d8c637-6bfa43ca3f8ed8da96af",
-              "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-              "line": 130,
-              "column": 9
-            },
-            {
-              "title": "Validate that responsibleLawyerId is either a non-empty string or null",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 459,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Проверка наличия поля responsibleLawyerId",
-                          "duration": 10
-                        },
-                        {
-                          "title": "Валидация значения responsibleLawyerId",
-                          "duration": 7
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:05.827Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCf0L7Qu9GD0YfQtdC90LjQtSDQtNC10YLQsNC70LXQuSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L/QviBJRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS12YWxpZGF0aW9uIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoiZGV0YWlsZWQtY2hlY2sifV19fQ=="
-                        },
-                        {
-                          "name": "Package Details Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhMTEzZS01OGM1LTc5ZmUtODY3Mi1mNGZlYTljZGM3ZGQiLAogICJudW1iZXIiOiA0MTUsCiAgInR5cGVJZCI6ICJhN2Q3YWYzMy1hNDJkLTRhNjYtYmI4YS00MGViOWMxYmQyMWMiLAogICJzdGF0dXNDb2RlIjogIkZPUk1FRCIsCiAgImNyZWF0ZWRBdCI6ICIyMDI1LTEwLTIzVDE2OjI0OjQ5Ljk4ODcxNCIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAiOTZmMDA3ZGEtNDQxZS00ZGZkLTliZTAtMzZjY2VmZTZlNThiIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Request Info",
-                          "contentType": "text/plain",
-                          "body": "UGFja2FnZSBJRDogMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkClN0YXR1czogMjAwClVSTDogL3YxL3BhY2thZ2VzLzAxOWExMTNlLTU4YzUtNzlmZS04NjcyLWY0ZmVhOWNkYzdkZA=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQktCw0LvQuNC00LDRhtC40Y8g0L7RgtCy0LXRgtGB0YLQstC10L3QvdC+0LPQviDRjtGA0LjRgdGC0LAifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJub3JtYWwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0J/RgNC+0LLQtdGA0LrQsCDRh9GC0L4gcmVzcG9uc2libGVMYXd5ZXJJZCDQu9C40LHQviDQvdC1LdC/0YPRgdGC0LDRjyDRgdGC0YDQvtC60LAsINC70LjQsdC+IG51bGwifX0="
-                        },
-                        {
-                          "name": "Responsible Lawyer Validation",
-                          "contentType": "text/plain",
-                          "body": "VHlwZTogc3RyaW5nClZhbHVlOiA5NmYwMDdkYS00NDFlLTRkZmQtOWJlMC0zNmNjZWZlNmU1OGIKTGVuZ3RoOiAzNgpJcyBVVUlEOiB0cnVl"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "70ce1d2489b203d8c637-0b4fa1fd73b0379fc67e",
-              "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-              "line": 157,
-              "column": 9
-            },
-            {
-              "title": "All includedContracts items are strings",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
-                      "status": "passed",
-                      "duration": 435,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Проверка типов элементов массива",
-                          "duration": 4
-                        },
-                        {
-                          "title": "Прикрепление детальной информации о контрактах",
-                          "duration": 4
-                        },
-                        {
-                          "title": "Дополнительные проверки формата контрактов",
-                          "duration": 4
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:05.843Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCf0L7Qu9GD0YfQtdC90LjQtSDQtNC10YLQsNC70LXQuSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L/QviBJRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS12YWxpZGF0aW9uIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoiZGV0YWlsZWQtY2hlY2sifV19fQ=="
-                        },
-                        {
-                          "name": "Package Details Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhMTEzZS01OGM1LTc5ZmUtODY3Mi1mNGZlYTljZGM3ZGQiLAogICJudW1iZXIiOiA0MTUsCiAgInR5cGVJZCI6ICJhN2Q3YWYzMy1hNDJkLTRhNjYtYmI4YS00MGViOWMxYmQyMWMiLAogICJzdGF0dXNDb2RlIjogIkZPUk1FRCIsCiAgImNyZWF0ZWRBdCI6ICIyMDI1LTEwLTIzVDE2OjI0OjQ5Ljk4ODcxNCIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAiOTZmMDA3ZGEtNDQxZS00ZGZkLTliZTAtMzZjY2VmZTZlNThiIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Request Info",
-                          "contentType": "text/plain",
-                          "body": "UGFja2FnZSBJRDogMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkClN0YXR1czogMjAwClVSTDogL3YxL3BhY2thZ2VzLzAxOWExMTNlLTU4YzUtNzlmZS04NjcyLWY0ZmVhOWNkYzdkZA=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQktCw0LvQuNC00LDRhtC40Y8g0Y3Qu9C10LzQtdC90YLQvtCyINC80LDRgdGB0LjQstCwINC60L7QvdGC0YDQsNC60YLQvtCyIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0J/RgNC+0LLQtdGA0LrQsCDRh9GC0L4g0LLRgdC1INGN0LvQtdC80LXQvdGC0Ysg0LIgaW5jbHVkZWRDb250cmFjdHMg0Y/QstC70Y/RjtGC0YHRjyDRgdGC0YDQvtC60LDQvNC4In19"
-                        },
-                        {
-                          "name": "Contracts Validation Details",
-                          "contentType": "application/json",
-                          "body": "ewogICJ0b3RhbENvdW50IjogMSwKICAic2FtcGxlSXRlbXMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0sCiAgImFsbEFyZVN0cmluZ3MiOiB0cnVlLAogICJ1bmlxdWVUeXBlcyI6IFsKICAgICJzdHJpbmciCiAgXSwKICAic2FtcGxlVVVJRHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Contract Format Check",
-                          "contentType": "text/plain",
-                          "body": "Rmlyc3QgQ29udHJhY3Q6IDAwMDBjZjM3LWQ4MDQtNGZlNy1hNzI1LTU4ZmE0NTY3YmZiNApJcyBVVUlEIEZvcm1hdDogdHJ1ZQpMZW5ndGg6IDM2ClRvdGFsIENvbnRyYWN0czogMQ=="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "70ce1d2489b203d8c637-a4e03dd5ee91c9a4c654",
-              "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-              "line": 181,
-              "column": 9
-            },
-            {
-              "title": "Comprehensive package validation summary",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 368,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Сводная проверка всех критериев",
-                          "duration": 9
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:05.907Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCf0L7Qu9GD0YfQtdC90LjQtSDQtNC10YLQsNC70LXQuSDQv9Cw0LrQtdGC0LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L/QviBJRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicGFja2FnZS12YWxpZGF0aW9uIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoiZGV0YWlsZWQtY2hlY2sifV19fQ=="
-                        },
-                        {
-                          "name": "Package Details Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJpZCI6ICIwMTlhMTEzZS01OGM1LTc5ZmUtODY3Mi1mNGZlYTljZGM3ZGQiLAogICJudW1iZXIiOiA0MTUsCiAgInR5cGVJZCI6ICJhN2Q3YWYzMy1hNDJkLTRhNjYtYmI4YS00MGViOWMxYmQyMWMiLAogICJzdGF0dXNDb2RlIjogIkZPUk1FRCIsCiAgImNyZWF0ZWRBdCI6ICIyMDI1LTEwLTIzVDE2OjI0OjQ5Ljk4ODcxNCIsCiAgInJlc3BvbnNpYmxlTGF3eWVySWQiOiAiOTZmMDA3ZGEtNDQxZS00ZGZkLTliZTAtMzZjY2VmZTZlNThiIiwKICAiaW5jbHVkZWRDb250cmFjdHMiOiBbCiAgICAiMDAwMGNmMzctZDgwNC00ZmU3LWE3MjUtNThmYTQ1NjdiZmI0IgogIF0KfQ=="
-                        },
-                        {
-                          "name": "Request Info",
-                          "contentType": "text/plain",
-                          "body": "UGFja2FnZSBJRDogMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkClN0YXR1czogMjAwClVSTDogL3YxL3BhY2thZ2VzLzAxOWExMTNlLTU4YzUtNzlmZS04NjcyLWY0ZmVhOWNkYzdkZA=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQmtC+0LzQv9C70LXQutGB0L3QsNGPINCy0LDQu9C40LTQsNGG0LjRjyDQv9Cw0LrQtdGC0LAifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImRlc2NyaXB0aW9uIjoi0JrQvtC80L/Qu9C10LrRgdC90LDRjyDQv9GA0L7QstC10YDQutCwINCy0YHQtdGFINCw0YHQv9C10LrRgtC+0LIg0L/QsNC60LXRgtCwINC00L7QutGD0LzQtdC90YLQvtCyIn19"
-                        },
-                        {
-                          "name": "Comprehensive Validation Summary",
-                          "contentType": "application/json",
-                          "body": "ewogICJwYWNrYWdlSWQiOiAiMDE5YTExM2UtNThjNS03OWZlLTg2NzItZjRmZWE5Y2RjN2RkIiwKICAiaGFzQWxsUmVxdWlyZWRGaWVsZHMiOiB0cnVlLAogICJkYXRhVHlwZXNWYWxpZCI6IHsKICAgICJpZCI6IHRydWUsCiAgICAibnVtYmVyIjogdHJ1ZSwKICAgICJ0eXBlSWQiOiB0cnVlLAogICAgInN0YXR1c0NvZGUiOiB0cnVlLAogICAgImNyZWF0ZWRBdCI6IHRydWUsCiAgICAicmVzcG9uc2libGVMYXd5ZXJJZCI6IHRydWUsCiAgICAiaW5jbHVkZWRDb250cmFjdHMiOiB0cnVlCiAgfSwKICAiY3JlYXRlZEF0VmFsaWQiOiB0cnVlLAogICJpbmNsdWRlZENvbnRyYWN0c1ZhbGlkIjogdHJ1ZSwKICAicmVzcG9uc2libGVMYXd5ZXJWYWxpZCI6IHRydWUsCiAgIm92ZXJhbGxTdGF0dXMiOiAiUEFTUyIKfQ=="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "70ce1d2489b203d8c637-5d04873b6cbb9b631995",
-              "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id-splitversion.spec.ts",
-              "line": 231,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "eq-debt-collection\\packages\\id\\eq-debt-collection-packages-id.spec.ts",
-      "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "Полная валидация описания пакета документов",
-          "ok": false,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 1200000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
-                {
-                  "workerIndex": 2,
-                  "parallelIndex": 2,
-                  "status": "failed",
-                  "duration": 250,
-                  "error": {
-                    "message": "Error: Response time 235ms should be less than 200ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m200\u001b[39m\nReceived:   \u001b[31m235\u001b[39m",
-                    "stack": "Error: Response time 235ms should be less than 200ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m200\u001b[39m\nReceived:   \u001b[31m235\u001b[39m\n    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\id\\eq-debt-collection-packages-id.spec.ts:12:87",
-                    "location": {
-                      "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\id\\eq-debt-collection-packages-id.spec.ts",
-                      "column": 87,
-                      "line": 12
-                    },
-                    "snippet": "\u001b[0m \u001b[90m 10 |\u001b[39m\n \u001b[90m 11 |\u001b[39m     \u001b[90m// Test for response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m     expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`Response time ${responseTime}ms should be less than 200ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m\n \u001b[90m 14 |\u001b[39m     \u001b[90m// Test for response content type\u001b[39m\n \u001b[90m 15 |\u001b[39m     \u001b[36mconst\u001b[39m contentType \u001b[33m=\u001b[39m response\u001b[33m.\u001b[39mheaders()[\u001b[32m'content-type'\u001b[39m]\u001b[33m;\u001b[39m\u001b[0m"
-                  },
-                  "errors": [
-                    {
-                      "location": {
-                        "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\id\\eq-debt-collection-packages-id.spec.ts",
-                        "column": 87,
-                        "line": 12
-                      },
-                      "message": "Error: Response time 235ms should be less than 200ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m200\u001b[39m\nReceived:   \u001b[31m235\u001b[39m\n\n\u001b[0m \u001b[90m 10 |\u001b[39m\n \u001b[90m 11 |\u001b[39m     \u001b[90m// Test for response time\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m     expect(responseTime\u001b[33m,\u001b[39m \u001b[32m`Response time ${responseTime}ms should be less than 200ms`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m\n \u001b[90m 14 |\u001b[39m     \u001b[90m// Test for response content type\u001b[39m\n \u001b[90m 15 |\u001b[39m     \u001b[36mconst\u001b[39m contentType \u001b[33m=\u001b[39m response\u001b[33m.\u001b[39mheaders()[\u001b[32m'content-type'\u001b[39m]\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\id\\eq-debt-collection-packages-id.spec.ts:12:87\u001b[22m"
-                    }
-                  ],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-11-11T11:04:06.004Z",
-                  "annotations": [],
-                  "attachments": [],
-                  "errorLocation": {
-                    "file": "C:\\Users\\user\\WebstormProjects\\EQVCOL_AT\\API-Tests\\eq-debt-collection\\packages\\id\\eq-debt-collection-packages-id.spec.ts",
-                    "column": 87,
-                    "line": 12
-                  }
-                }
-              ],
-              "status": "unexpected"
-            }
-          ],
-          "id": "0a80eda8eca1e2a61939-8511875530b558fda6c8",
-          "file": "eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts",
-          "line": 3,
-          "column": 5
-        }
-      ]
-    },
-    {
-      "title": "eq-debt-collection\\packages\\id\\package-with-helpers.spec.ts",
-      "file": "eq-debt-collection/packages/id/package-with-helpers.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "Валидация с кастомными хелперами",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 1200000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 328,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-11-11T11:04:06.046Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "9aebaf6a02111ae3d6d6-26155d573fecd1eb5009",
-          "file": "eq-debt-collection/packages/id/package-with-helpers.spec.ts",
-          "line": 4,
-          "column": 5
-        }
-      ]
-    },
-    {
-      "title": "eq-debt-collection\\packages\\id\\print\\packages-print.spec.ts",
-      "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "API: Отправка документов пакета на печать",
-          "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-          "line": 31,
-          "column": 6,
-          "specs": [
-            {
-              "title": "[200] Документы пакета успешно отправлены на печать",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 6,
-                      "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 301,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [
-                        {
-                          "text": "(node:1620) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
-                        }
-                      ],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Подготовка тестовых данных",
-                          "duration": 5
-                        },
-                        {
-                          "title": "Отправка POST запроса на печать",
-                          "duration": 208
-                        },
-                        {
-                          "title": "Проверка статус кода 200",
-                          "duration": 5
-                        },
-                        {
-                          "title": "Проверка времени ответа < 5000ms",
-                          "duration": 5
-                        },
-                        {
-                          "title": "Проверка наличия заголовка vary",
-                          "duration": 3
-                        },
-                        {
-                          "title": "Логирование успешного выполнения",
-                          "duration": 4
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:08.271Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InBhcmVudFN1aXRlIiwidmFsdWUiOiJBUEkgVGVzdHMifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN1aXRlIiwidmFsdWUiOiJQYWNrYWdlcyBBUEkifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN1YlN1aXRlIiwidmFsdWUiOiJQcmludCBEb2N1bWVudHMifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCe0YLQv9GA0LDQstC60LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L3QsCDQv9C10YfQsNGC0YwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQo9GB0L/QtdGI0L3Ri9C1INGB0YbQtdC90LDRgNC40LgifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6Im93bmVyIiwidmFsdWUiOiJBUEkgVGVhbSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoic21va2UifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoicmVncmVzc2lvbiJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJQYWNrYWdlIElEIiwidmFsdWUiOiIwMTlhNmRmMC0zZDgzLTdhNzgtOTg0Ny03MGFlZDRjN2ZlYWYifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJDb3VydCBMYXd5ZXIgSUQiLCJ2YWx1ZSI6Ijk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXNwb25zZSBUaW1lIiwidmFsdWUiOiIyMDltcyJ9XX19"
-                        },
-                        {
-                          "name": "Request Body",
-                          "contentType": "application/json",
-                          "body": "ewogICJjb3VydExhd3llcklkIjogIjk2ZjAwN2RhLTQ0MWUtNGRmZC05YmUwLTM2Y2NlZmU2ZTU4YiIsCiAgImRvY3VtZW50SWRzIjogW10KfQ=="
-                        },
-                        {
-                          "name": "Response Headers",
-                          "contentType": "application/json",
-                          "body": "ewogICJ2YXJ5IjogIk9yaWdpbiwgQWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2QsIEFjY2Vzcy1Db250cm9sLVJlcXVlc3QtSGVhZGVycyIsCiAgImRhdGUiOiAiVHVlLCAxMSBOb3YgMjAyNSAxMTowNDowNyBHTVQiLAogICJ4LWVudm95LXVwc3RyZWFtLXNlcnZpY2UtdGltZSI6ICI2OCIsCiAgInNlcnZlciI6ICJlbnZveSIsCiAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCn0="
-                        },
-                        {
                           "name": "Response Time",
                           "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgdGltZTogMjA5bXM="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "29a1c9838997d38211dd-d4da6ccfe1baa3405da6",
-              "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-              "line": 33,
-              "column": 9
-            },
-            {
-              "title": "[400] Некорректный формат запроса - отсутствует ID",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 185,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Подготовка запроса с пустым ID пакета",
-                          "duration": 4
-                        },
-                        {
-                          "title": "Отправка запроса с пустым ID без тела запроса",
-                          "duration": 121
-                        },
-                        {
-                          "title": "Проверка статус кода 400",
-                          "duration": 2
-                        },
-                        {
-                          "title": "Проверка времени ответа",
-                          "duration": 3
-                        },
-                        {
-                          "title": "Парсинг JSON ответа",
-                          "duration": 1
-                        },
-                        {
-                          "title": "Проверка структуры ответа",
-                          "duration": 8
-                        },
-                        {
-                          "title": "Проверка объекта status",
-                          "duration": 5
-                        },
-                        {
-                          "title": "Проверка массива errors",
-                          "duration": 14
-                        },
-                        {
-                          "title": "Проверка поля details",
-                          "duration": 2
-                        },
-                        {
-                          "title": "Логирование ошибки валидации",
-                          "duration": 4
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:06.316Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
+                          "body": "UmVzcG9uc2UgdGltZTogMzExbXM="
                         },
                         {
                           "name": "Allure Metadata (metadata)",
                           "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCe0YLQv9GA0LDQstC60LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L3QsCDQv9C10YfQsNGC0YwifV19fQ=="
+                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJBY3R1YWwgU3RhdHVzIENvZGUiLCJ2YWx1ZSI6IjUwMCJ9XX19"
                         },
                         {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQntGI0LjQsdC60Lgg0LLQsNC70LjQtNCw0YbQuNC4In1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJoaWdoIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoidmFsaWRhdGlvbiJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJQYWNrYWdlIElEIiwidmFsdWUiOiJFTVBUWSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXF1ZXN0IEJvZHkiLCJ2YWx1ZSI6Ik5PVCBQUk9WSURFRCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXNwb25zZSBUaW1lIiwidmFsdWUiOiIxMjJtcyJ9XX19"
-                        },
-                        {
-                          "name": "Error Response",
+                          "name": "500 Server Error",
                           "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiB7CiAgICAiY29kZSI6ICJCQURfUkVRVUVTVCIsCiAgICAiZGVzY3JpcHRpb24iOiAi0J3QtdC60L7RgNGA0LXQutGC0L3Ri9C5INGE0L7RgNC80LDRgiDQt9Cw0L/RgNC+0YHQsCIKICB9LAogICJlcnJvcnMiOiBbCiAgICB7CiAgICAgICJrZXkiOiAiaWQiLAogICAgICAiY29kZSI6ICJUWVBFTUlTTUFUQ0giLAogICAgICAiZGVzY3JpcHRpb24iOiAiTWV0aG9kIHBhcmFtZXRlciAnaWQnOiBGYWlsZWQgdG8gY29udmVydCB2YWx1ZSBvZiB0eXBlICdqYXZhLmxhbmcuU3RyaW5nJyB0byByZXF1aXJlZCB0eXBlICdqYXZhLnV0aWwuVVVJRCc7IEludmFsaWQgVVVJRCBzdHJpbmc6IDppZCIKICAgIH0KICBdLAogICJkZXRhaWxzIjogbnVsbAp9"
-                        },
-                        {
-                          "name": "Response Time",
-                          "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgdGltZTogMTIybXM="
-                        },
-                        {
-                          "name": "Request Details",
-                          "contentType": "text/plain",
-                          "body": "0JfQsNC/0YDQvtGBINC+0YLQv9GA0LDQstC70LXQvSDQsdC10Lcg0YLQtdC70LAsINGC0L7Qu9GM0LrQviDRgSDQv9GD0YHRgtGL0LwgSUQg0LIgVVJM"
+                          "body": "ewogICJzdGF0dXMiOiB7CiAgICAiY29kZSI6ICJJTlRFUk5BTF9TRVJWRVJfRVJST1IiLAogICAgImRlc2NyaXB0aW9uIjogItCS0L3Rg9GC0YDQtdC90L3Rj9GPINC+0YjQuNCx0LrQsCDRgdC10YDQstC40YHQsCIKICB9LAogICJlcnJvcnMiOiBudWxsLAogICJkZXRhaWxzIjogbnVsbAp9"
                         }
                       ]
                     }
@@ -1764,391 +580,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "29a1c9838997d38211dd-aa85863e33c2a7aa2cfd",
-              "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-              "line": 95,
-              "column": 9
-            },
-            {
-              "title": "[400] Некорректный формат запроса - ID равен null",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
-                      "status": "passed",
-                      "duration": 359,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Подготовка запроса с ID = null",
-                          "duration": 6
-                        },
-                        {
-                          "title": "Отправка запроса с null ID без тела запроса",
-                          "duration": 298
-                        },
-                        {
-                          "title": "Проверка статус кода 400",
-                          "duration": 3
-                        },
-                        {
-                          "title": "Парсинг JSON ответа",
-                          "duration": 15
-                        },
-                        {
-                          "title": "Проверка структуры ошибки",
-                          "duration": 12
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:06.325Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCe0YLQv9GA0LDQstC60LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L3QsCDQv9C10YfQsNGC0YwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQntGI0LjQsdC60Lgg0LLQsNC70LjQtNCw0YbQuNC4In1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJoaWdoIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoidmFsaWRhdGlvbiJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJQYWNrYWdlIElEIiwidmFsdWUiOiJudWxsIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXF1ZXN0IEJvZHkiLCJ2YWx1ZSI6Ik5PVCBQUk9WSURFRCJ9XX19"
-                        },
-                        {
-                          "name": "Validation Error",
-                          "contentType": "application/json",
-                          "body": "ewogICJrZXkiOiAiaWQiLAogICJjb2RlIjogIlRZUEVNSVNNQVRDSCIsCiAgImRlc2NyaXB0aW9uIjogIk1ldGhvZCBwYXJhbWV0ZXIgJ2lkJzogRmFpbGVkIHRvIGNvbnZlcnQgdmFsdWUgb2YgdHlwZSAnamF2YS5sYW5nLlN0cmluZycgdG8gcmVxdWlyZWQgdHlwZSAnamF2YS51dGlsLlVVSUQnOyBJbnZhbGlkIFVVSUQgc3RyaW5nOiBudWxsIgp9"
-                        },
-                        {
-                          "name": "Response Time",
-                          "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgdGltZTogMjk5bXM="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "29a1c9838997d38211dd-6f16ac2abad842d9ad13",
-              "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-              "line": 171,
-              "column": 9
-            },
-            {
-              "title": "[400] Некорректный формат запроса - ID не UUID",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 243,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Подготовка запроса с невалидным UUID",
-                          "duration": 4
-                        },
-                        {
-                          "title": "Отправка запроса с невалидным ID без тела запроса",
-                          "duration": 196
-                        },
-                        {
-                          "title": "Проверка статус кода 400",
-                          "duration": 2
-                        },
-                        {
-                          "title": "Парсинг JSON ответа",
-                          "duration": 1
-                        },
-                        {
-                          "title": "Проверка описания ошибки",
-                          "duration": 12
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:06.332Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCe0YLQv9GA0LDQstC60LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L3QsCDQv9C10YfQsNGC0YwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQntGI0LjQsdC60Lgg0LLQsNC70LjQtNCw0YbQuNC4In1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJoaWdoIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoidmFsaWRhdGlvbiJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJQYWNrYWdlIElEIiwidmFsdWUiOiJub3QtYS11dWlkIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXF1ZXN0IEJvZHkiLCJ2YWx1ZSI6Ik5PVCBQUk9WSURFRCJ9XX19"
-                        },
-                        {
-                          "name": "Full Error Response",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiB7CiAgICAiY29kZSI6ICJCQURfUkVRVUVTVCIsCiAgICAiZGVzY3JpcHRpb24iOiAi0J3QtdC60L7RgNGA0LXQutGC0L3Ri9C5INGE0L7RgNC80LDRgiDQt9Cw0L/RgNC+0YHQsCIKICB9LAogICJlcnJvcnMiOiBbCiAgICB7CiAgICAgICJrZXkiOiAiaWQiLAogICAgICAiY29kZSI6ICJUWVBFTUlTTUFUQ0giLAogICAgICAiZGVzY3JpcHRpb24iOiAiTWV0aG9kIHBhcmFtZXRlciAnaWQnOiBGYWlsZWQgdG8gY29udmVydCB2YWx1ZSBvZiB0eXBlICdqYXZhLmxhbmcuU3RyaW5nJyB0byByZXF1aXJlZCB0eXBlICdqYXZhLnV0aWwuVVVJRCc7IEludmFsaWQgVVVJRCBzdHJpbmc6IG5vdC1hLXV1aWQiCiAgICB9CiAgXSwKICAiZGV0YWlscyI6IG51bGwKfQ=="
-                        },
-                        {
-                          "name": "Response Time",
-                          "contentType": "text/plain",
-                          "body": "UmVzcG9uc2UgdGltZTogMTk2bXM="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "29a1c9838997d38211dd-528f10bc28bed9204185",
-              "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-              "line": 222,
-              "column": 9
-            },
-            {
-              "title": "[422] Ошибка валидации параметров запроса",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
-                      "status": "passed",
-                      "duration": 863,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Отправка запроса для получения 422 ошибки",
-                          "duration": 837
-                        },
-                        {
-                          "title": "Проверка статус кода",
-                          "duration": 8
-                        },
-                        {
-                          "title": "Логирование успешного ответа",
-                          "duration": 2
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:06.399Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCe0YLQv9GA0LDQstC60LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L3QsCDQv9C10YfQsNGC0YwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQntGI0LjQsdC60Lgg0LLQsNC70LjQtNCw0YbQuNC4In1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJoaWdoIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoidmFsaWRhdGlvbiJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJBY3R1YWwgU3RhdHVzIENvZGUiLCJ2YWx1ZSI6IjIwMCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXNwb25zZSBUaW1lIiwidmFsdWUiOiI4MzdtcyJ9XX19"
-                        },
-                        {
-                          "name": "Success Response",
-                          "contentType": "text/plain",
-                          "body": "U3RhdHVzOiAyMDA="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "29a1c9838997d38211dd-520b8bdf473607004717",
-              "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-              "line": 277,
-              "column": 9
-            },
-            {
-              "title": "[500] Ошибка обработки запроса",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 1200000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "passed",
-                      "duration": 840,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Отправка запроса для проверки 500 ошибки",
-                          "duration": 818
-                        },
-                        {
-                          "title": "Проверка возможных статус кодов",
-                          "duration": 8
-                        },
-                        {
-                          "title": "Логирование нормального ответа",
-                          "duration": 2
-                        }
-                      ],
-                      "startTime": "2025-11-11T11:04:06.518Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImVwaWMiLCJ2YWx1ZSI6IkVxdmFDb2xsZWN0aW9uIEFQSSJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6ImZlYXR1cmUiLCJ2YWx1ZSI6ItCe0YLQv9GA0LDQstC60LAg0LTQvtC60YPQvNC10L3RgtC+0LIg0L3QsCDQv9C10YfQsNGC0YwifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InN0b3J5IiwidmFsdWUiOiLQntGI0LjQsdC60Lgg0YHQtdGA0LLQtdGA0LAifV19fQ=="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InNldmVyaXR5IiwidmFsdWUiOiJjcml0aWNhbCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7ImxhYmVscyI6W3sibmFtZSI6InRhZyIsInZhbHVlIjoic2VydmVyLWVycm9yIn1dfX0="
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJBY3R1YWwgU3RhdHVzIENvZGUiLCJ2YWx1ZSI6IjIwMCJ9XX19"
-                        },
-                        {
-                          "name": "Allure Metadata (metadata)",
-                          "contentType": "application/vnd.allure.message+json",
-                          "body": "eyJ0eXBlIjoibWV0YWRhdGEiLCJkYXRhIjp7InBhcmFtZXRlcnMiOlt7Im5hbWUiOiJSZXNwb25zZSBUaW1lIiwidmFsdWUiOiI4MThtcyJ9XX19"
-                        },
-                        {
-                          "name": "Normal Response",
-                          "contentType": "text/plain",
-                          "body": "U3RhdHVzOiAyMDA="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "29a1c9838997d38211dd-5ede5335bc384c3e0f77",
-              "file": "eq-debt-collection/packages/id/print/packages-print.spec.ts",
-              "line": 338,
+              "id": "023a52813f555adc2bd4-75ad89bd39a99e6687fb",
+              "file": "eq-debt-collection/packages/id/convert/eq-debt-collection-convert-to-gas-v2-refactor.spec.ts",
+              "line": 190,
               "column": 9
             }
           ]
@@ -2158,11 +592,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-11-11T11:04:02.496Z",
-    "duration": 6132.723,
-    "expected": 18,
+    "startTime": "2025-11-12T11:47:37.125Z",
+    "duration": 2835.1209999999996,
+    "expected": 4,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   }
 }

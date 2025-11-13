@@ -62,7 +62,8 @@ export default defineConfig({
   ],
 
   // ✅ Глобальная настройка
-  globalSetup: require.resolve('./tests/api-setup.ts'),
+  globalSetup: './tests/global-setup.ts',
+  globalTeardown: './tests/global-teardown.ts',
 
   use: {
     ...currentConfig,
