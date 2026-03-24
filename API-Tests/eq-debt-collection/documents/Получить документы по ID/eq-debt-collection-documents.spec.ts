@@ -19,7 +19,7 @@ test.describe('v1/packages/{id}/documents [Получить документы �
         await allure.tag("smoke");
         await allure.tag("regression");
 
-        const packagesId = process.env.PACKAGES_ID || '019a788b-f2ce-7be1-b143-eec8c1509ebf';
+        const packagesId = process.env.PACKAGES_ID || '019a7df2-9d1c-725d-9b73-c65e83f9ae0a';
 
         await allure.step("Подготовка тестовых данных", async () => {
             await allure.parameter("Package ID", packagesId);

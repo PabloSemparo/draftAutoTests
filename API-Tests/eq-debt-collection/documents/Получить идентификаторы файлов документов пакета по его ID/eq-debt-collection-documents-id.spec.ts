@@ -19,7 +19,7 @@ test.describe('Получить идентификаторы файлов док
         await allure.tag("smoke");
         await allure.tag("regression");
 
-        const packagesId = process.env.PACKAGES_ID || '019a788b-f2ce-7be1-b143-eec8c1509ebf';
+        const packagesId = process.env.PACKAGES_ID || '019a6dee-2101-7a55-88bc-aae56ec2be77';
 
         await allure.step("Подготовка тестовых данных", async () => {
             await allure.parameter("Package ID", packagesId);
