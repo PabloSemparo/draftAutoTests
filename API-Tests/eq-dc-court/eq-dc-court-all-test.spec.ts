@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const API_BASE_URL = 'http://eq-dc-court.test2.mmk.local/v1';
-const API_KEY = '55298707-117c-44a5-8434-162fb9d2e4c5'; // Замените на реальный API ключ
+const API_KEY = ''; // Замените на реальный API ключ
 
 test.describe('API Тесты', () => {
     // Общая конфигурация для всех тестов - добавляем API ключ в заголовки
