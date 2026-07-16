@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 const API_BASE_URL = 'http://eq-dc-court.test2.mmk.local/v1';
-const API_TOKEN = '55298707-117c-44a5-8434-162fb9d2e4c5'; // Замените на реальный токен
+const API_TOKEN = ''; // Замените на реальный токен
 
 test.describe('EQ DC Court API тесты', () => {
   // Вариант 1: Добавляем токен в заголовки для всех тестов
   test.use({
     extraHTTPHeaders: {
-      'X-API-Key': `55298707-117c-44a5-8434-162fb9d2e4c5`,
+      'X-API-Key': ``,
     },
   });
 
