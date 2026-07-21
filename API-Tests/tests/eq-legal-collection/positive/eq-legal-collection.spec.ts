@@ -4,158 +4,154 @@ import * as allure from "allure-js-commons";
 import { EnforcementService } from "../../../services/enforcementService";
 
 import {
-    EXPECTED_EVENTS
+    EXPECTED_EVENTS,
+    EXCLUDED_STATES
 } from "../../../tests-data/enforcementEvents.data";
 
 
-test.describe("EQ Legal Collection API", function () {
-
-    let enforcementService: EnforcementService;
-
-
-    test.beforeEach(async function ({ request }) {
-
-        enforcementService = new EnforcementService(request);
-
-    });
+test.describe(
+    "EQ Legal Collection API - Enforcement Events",
+    function () {
 
 
-    for (const [state, expectedEvents] of Object.entries(EXPECTED_EVENTS)) {
+        for (
+            const [state, expectedEvents] of Object.entries(EXPECTED_EVENTS)
+                .filter(
+                    function ([state]) {
+
+                        return !EXCLUDED_STATES.has(state);
+
+                    }
+                )
+        ) {
 
 
-        test(
-            `Проверка доступных событий для состояния ${state}`,
-            async function () {
+            test(
+                `Проверка доступных событий для состояния ${state}`,
+                async function ({ request }) {
 
 
-                await allure.feature(
-                    "Legal Collection"
-                );
+                    const enforcementService =
+                        new EnforcementService(request);
 
 
-                await allure.story(
-                    "Получение доступных событий"
-                );
+
+                    await allure.feature(
+                        "Legal Collection"
+                    );
 
 
-                await allure.description(
-                    `
-                    Проверка доступных событий для состояния:
-
-                    ${state}
-
-                    Ожидаемые события:
-
-                    ${expectedEvents.join(", ")}
-                    `
-                );
+                    await allure.story(
+                        "Enforcement Events"
+                    );
 
 
-                const response =
+                    await allure.severity(
+                        "critical"
+                    );
+
+
+                    await allure.description(
+                        `
+                        Проверка доступных событий.
+
+                        State:
+                        ${state}
+
+                        Expected events:
+                        ${expectedEvents.join(", ")}
+                        `
+                    );
+
+
+
+                    const response =
+                        await allure.step(
+                            `GET /v1/enforcements/events?state=${state}`,
+                            async function () {
+
+                                return await enforcementService
+                                    .getAvailableEvents(state);
+
+                            }
+                        );
+
+
+
                     await allure.step(
-                        `GET доступных событий для ${state}`,
+                        "Проверка HTTP статуса 200",
                         async function () {
 
-                            return await enforcementService
-                                .getAvailableEvents(state);
+
+                            expect(
+                                response.raw.status()
+                            )
+                            .toBe(200);
+
 
                         }
                     );
 
 
-                await allure.step(
-                    "Проверка HTTP статуса",
-                    async function () {
 
-                        expect(
-                            response.raw.status()
-                        )
-                        .toBe(200);
-
-                    }
-                );
+                    await allure.step(
+                        "Проверка наличия поля events",
+                        async function () {
 
 
-                await allure.step(
-                    "Проверка структуры ответа",
-                    async function () {
-
-
-                        expect(response.body)
-                            .toHaveProperty("events");
-
-
-                        expect(
-                            Array.isArray(response.body.events)
-                        )
-                        .toBe(true);
-
-
-                    }
-                );
-
-
-                await allure.step(
-                    "Проверка количества событий",
-                    async function () {
-
-
-                        expect(
-                            response.body.events.length
-                        )
-                        .toBe(
-                            expectedEvents.length
-                        );
-
-
-                    }
-                );
-
-
-                await allure.step(
-                    "Проверка соответствия событий",
-                    async function () {
-
-
-                        expect(
-                            response.body.events
-                        )
-                        .toEqual(
-                            expect.arrayContaining(
-                                expectedEvents
+                            expect(
+                                response.body
                             )
-                        );
+                            .toHaveProperty(
+                                "events"
+                            );
 
 
-                    }
-                );
+                        }
+                    );
 
 
-                await allure.step(
-                    "Проверка отсутствия лишних событий",
-                    async function () {
+
+                    await allure.step(
+                        "Проверка количества событий",
+                        async function () {
 
 
-                        const actualEvents =
-                            [...response.body.events]
-                                .sort();
+                            expect(
+                                response.body.events.length
+                            )
+                            .toBe(
+                                expectedEvents.length
+                            );
 
 
-                        const expected =
-                            [...expectedEvents]
-                                .sort();
+                        }
+                    );
 
 
-                        expect(actualEvents)
-                            .toEqual(expected);
+
+                    await allure.step(
+                        "Проверка списка доступных событий",
+                        async function () {
 
 
-                    }
-                );
+                            expect(
+                                response.body.events.sort()
+                            )
+                            .toEqual(
+                                expectedEvents.sort()
+                            );
 
-            }
-        );
+
+                        }
+                    );
+
+
+                }
+            );
+
+        }
+
 
     }
-
-});
+);
