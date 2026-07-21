@@ -2,7 +2,7 @@ stages:
   - test
 
 variables:
-  BASE_URL: "https://eq-debt-collection-stage.bdengi.ru"
+  BASE_URL: "https://eq-legal-collection-stage.bdengi.ru"
 
 api-tests:
   stage: test

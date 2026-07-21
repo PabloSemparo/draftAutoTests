@@ -8,7 +8,7 @@ dotenv.config({ path: path.resolve(__dirname, "env_settings/.env.stage") });
 
 // Конфигурация окружения после загрузки .env
 const env = {
-  BASE_URL: process.env.BASE_URL || 'https://eq-debt-collection-stage.bdengi.ru',
+  BASE_URL: process.env.BASE_URL || 'https://eq-legal-collection-stage.bdengi.ru',
   STAGING_BASE_URL: process.env.STAGING_BASE_URL,
   PRODUCTION_BASE_URL: process.env.PRODUCTION_BASE_URL,
   HEADLESS: process.env.HEADLESS !== 'false',
@@ -49,28 +49,46 @@ export default defineConfig({
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'test-results.json' }],
-    ['allure-playwright', {
-      outputFolder: 'allure-results',
-      detail: true,
-      suiteTitle: false,
-      environmentInfo: {
-        OS: process.platform,
-        NODE_VERSION: process.version,
-        TEST_ENV: process.env.TEST_ENV || 'stage'
-      }
-    }]
+[
+    'allure-playwright',
+    {
+        outputFolder: 'allure-results',
+
+        detail: true,
+
+        suiteTitle: false,
+
+        environmentInfo: {
+
+            PROJECT:
+                "EQ Legal Collection",
+
+            FRAMEWORK:
+                "Playwright",
+
+            LANGUAGE:
+                "TypeScript",
+
+            NODE_VERSION:
+                process.version,
+
+            OS:
+                process.platform,
+
+            ENV:
+                process.env.NODE_ENV || "stage"
+
+        }
+    }
+]
   ],
 
-  // ✅ Глобальная настройка
-  globalSetup: './tests/global-setup.ts',
-  globalTeardown: './tests/global-teardown.ts',
 
   use: {
     ...currentConfig,
     trace: 'on-first-retry',
     ignoreHTTPSErrors: true,
     headless: env.HEADLESS,
-    storageState: 'tests/storageState.json',
     launchOptions: {
       slowMo: env.SLOW_MO,
     },
@@ -91,3 +109,4 @@ export default defineConfig({
     },
   ],
 });
+

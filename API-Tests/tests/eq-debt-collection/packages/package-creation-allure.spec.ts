@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { AllureDecorators } from '../../../utils/allure-decorators';
-import { envValidator } from '../../../utils/env-validator';
+import { AllureDecorators } from '../../../../utils/allure-decorators';
+import { envValidator } from '../../../../utils/env-validator';
 
 envValidator.validate();
 const baseUrl = envValidator.getEnv('BASE_URL');

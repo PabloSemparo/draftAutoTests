@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import contractorData from '../Test\'s Data/contractorData.json';
+import contractorData from '../../Test's Data/contractorData.json';
 const API_URL = process.env.API_URL || 'http://eq-dc-debt-importer.test2.mmk.local';
 const AUTH_TOKEN = process.env.AUTH_TOKEN || '';
 

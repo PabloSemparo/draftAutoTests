@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { assertIsObject, assertIsStringOrNull, assertIsValidDate } from '../../../../utils/custom-matchers';
+import { assertIsObject, assertIsStringOrNull, assertIsValidDate } from '../../../../../utils/custom-matchers';
 
 test('Валидация с кастомными хелперами', async ({ request }) => {
     const response = await request.get('/v1/packages/019a113e-58c5-79fe-8672-f4fea9cdc7dd');
