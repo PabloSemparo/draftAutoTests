@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>crDevTools.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+crDevTools.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">crDevTools_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">crDevTools_exports</span><span class="s1">, {</span>
+  <span class="s2">CRDevTools</span><span class="s1">: () =&gt; </span><span class="s2">CRDevTools</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">crDevTools_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">const </span><span class="s2">kBindingName </span><span class="s1">= </span><span class="s0">&quot;__pw_devtools__&quot;</span><span class="s1">;</span>
+<span class="s3">class </span><span class="s2">CRDevTools </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">preferencesPath</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_preferencesPath </span><span class="s1">= </span><span class="s2">preferencesPath</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_savePromise </span><span class="s1">= </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">install</span><span class="s1">(</span><span class="s2">session</span><span class="s1">) {</span>
+    <span class="s2">session</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;Runtime.bindingCalled&quot;</span><span class="s1">, </span><span class="s2">async </span><span class="s1">(</span><span class="s2">event</span><span class="s1">) =&gt; {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">event</span><span class="s1">.</span><span class="s2">name </span><span class="s1">!== </span><span class="s2">kBindingName</span><span class="s1">)</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">parsed </span><span class="s1">= </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s2">event</span><span class="s1">.</span><span class="s2">payload</span><span class="s1">);</span>
+      <span class="s3">let </span><span class="s2">result </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">__testHookOnBinding</span><span class="s1">)</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">__testHookOnBinding</span><span class="s1">(</span><span class="s2">parsed</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">method </span><span class="s1">=== </span><span class="s0">&quot;getPreferences&quot;</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_prefs </span><span class="s1">=== </span><span class="s3">void </span><span class="s5">0</span><span class="s1">) {</span>
+          <span class="s3">try </span><span class="s1">{</span>
+            <span class="s3">const </span><span class="s2">json </span><span class="s1">= </span><span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">readFile</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_preferencesPath</span><span class="s1">, </span><span class="s0">&quot;utf8&quot;</span><span class="s1">);</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">_prefs </span><span class="s1">= </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s2">json</span><span class="s1">);</span>
+          <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">_prefs </span><span class="s1">= {};</span>
+          <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_prefs</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">method </span><span class="s1">=== </span><span class="s0">&quot;setPreference&quot;</span><span class="s1">) {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_prefs</span><span class="s1">[</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">params</span><span class="s1">[</span><span class="s5">0</span><span class="s1">]] = </span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">params</span><span class="s1">[</span><span class="s5">1</span><span class="s1">];</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_save</span><span class="s1">();</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">method </span><span class="s1">=== </span><span class="s0">&quot;removePreference&quot;</span><span class="s1">) {</span>
+        <span class="s3">delete this</span><span class="s1">.</span><span class="s2">_prefs</span><span class="s1">[</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">params</span><span class="s1">[</span><span class="s5">0</span><span class="s1">]];</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_save</span><span class="s1">();</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">method </span><span class="s1">=== </span><span class="s0">&quot;clearPreferences&quot;</span><span class="s1">) {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_prefs </span><span class="s1">= {};</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_save</span><span class="s1">();</span>
+      <span class="s1">}</span>
+      <span class="s2">session</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Runtime.evaluate&quot;</span><span class="s1">, {</span>
+        <span class="s2">expression</span><span class="s1">: </span><span class="s0">`window.DevToolsAPI.embedderMessageAck(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">id</span><span class="s1">}</span><span class="s0">, </span><span class="s2">$</span><span class="s1">{</span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">result</span><span class="s1">)}</span><span class="s0">)`</span><span class="s1">,</span>
+        <span class="s2">contextId</span><span class="s1">: </span><span class="s2">event</span><span class="s1">.</span><span class="s2">executionContextId</span>
+      <span class="s1">}).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s3">null</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">([</span>
+      <span class="s2">session</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Runtime.enable&quot;</span><span class="s1">),</span>
+      <span class="s2">session</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Runtime.addBinding&quot;</span><span class="s1">, { </span><span class="s2">name</span><span class="s1">: </span><span class="s2">kBindingName </span><span class="s1">}),</span>
+      <span class="s2">session</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Page.enable&quot;</span><span class="s1">),</span>
+      <span class="s2">session</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Page.addScriptToEvaluateOnNewDocument&quot;</span><span class="s1">, { </span><span class="s2">source</span><span class="s1">: </span><span class="s0">`</span>
+        <span class="s0">(() =&gt; { 
+          const init = () =&gt; { 
+            // Lazy init happens when InspectorFrontendHost is initialized. 
+            // At this point DevToolsHost is ready to be used. 
+            const host = window.DevToolsHost; 
+            const old = host.sendMessageToEmbedder.bind(host); 
+            host.sendMessageToEmbedder = message =&gt; { 
+              if (['getPreferences', 'setPreference', 'removePreference', 'clearPreferences'].includes(JSON.parse(message).method)) 
+                window.</span><span class="s2">$</span><span class="s1">{</span><span class="s2">kBindingName</span><span class="s1">}</span><span class="s0">(message); 
+              else 
+                old(message); 
+            }; 
+          }; 
+          let value; 
+          Object.defineProperty(window, 'InspectorFrontendHost', { 
+            configurable: true, 
+            enumerable: true, 
+            get() { return value; }, 
+            set(v) { value = v; init(); }, 
+          }); 
+        })() 
+      ` </span><span class="s1">}),</span>
+      <span class="s2">session</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Runtime.runIfWaitingForDebugger&quot;</span><span class="s1">)</span>
+    <span class="s1">]).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s3">null</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_save</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_savePromise </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_savePromise</span><span class="s1">.</span><span class="s2">then</span><span class="s1">(</span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+      <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">writeFile</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_preferencesPath</span><span class="s1">, </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_prefs</span><span class="s1">)).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s3">null</span><span class="s1">);</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">CRDevTools</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

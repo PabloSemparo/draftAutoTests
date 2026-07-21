@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #56a8f5;}
+.s4 { color: #6aab73;}
+.s5 { color: #c77dbb; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+README.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">json-schema-traverse</span>
+<span class="s2">Traverse JSON Schema passing each schema object to callback</span>
+
+<span class="s1">[![</span><span class="s2">build</span><span class="s1">](</span><span class="s3">https://github.com/epoberezkin/json-schema-traverse/workflows/build/badge.svg</span><span class="s1">)](</span><span class="s3">https://github.com/epoberezkin/json-schema-traverse/actions?query=workflow%3Abuild</span><span class="s1">)</span>
+<span class="s1">[![</span><span class="s2">npm</span><span class="s1">](</span><span class="s3">https://img.shields.io/npm/v/json-schema-traverse</span><span class="s1">)](</span><span class="s3">https://www.npmjs.com/package/json-schema-traverse</span><span class="s1">)</span>
+<span class="s1">[![</span><span class="s2">coverage</span><span class="s1">](</span><span class="s3">https://coveralls.io/repos/github/epoberezkin/json-schema-traverse/badge.svg?branch=master</span><span class="s1">)](</span><span class="s3">https://coveralls.io/github/epoberezkin/json-schema-traverse?branch=master</span><span class="s1">)</span>
+
+
+<span class="s0">## </span><span class="s2">Install</span>
+
+<span class="s0">```</span>
+<span class="s4">npm install json-schema-traverse</span>
+<span class="s0">```</span>
+
+
+<span class="s0">## </span><span class="s2">Usage</span>
+
+<span class="s0">```</span><span class="s5">javascript</span>
+<span class="s4">const traverse = require('json-schema-traverse');</span>
+<span class="s4">const schema = {</span>
+  <span class="s4">properties: {</span>
+    <span class="s4">foo: {type: 'string'},</span>
+    <span class="s4">bar: {type: 'integer'}</span>
+  <span class="s4">}</span>
+<span class="s4">};</span>
+
+<span class="s4">traverse(schema, {cb});</span>
+<span class="s4">// cb is called 3 times with:</span>
+<span class="s4">// 1. root schema</span>
+<span class="s4">// 2. {type: 'string'}</span>
+<span class="s4">// 3. {type: 'integer'}</span>
+
+<span class="s4">// Or:</span>
+
+<span class="s4">traverse(schema, {cb: {pre, post}});</span>
+<span class="s4">// pre is called 3 times with:</span>
+<span class="s4">// 1. root schema</span>
+<span class="s4">// 2. {type: 'string'}</span>
+<span class="s4">// 3. {type: 'integer'}</span>
+<span class="s4">//</span>
+<span class="s4">// post is called 3 times with:</span>
+<span class="s4">// 1. {type: 'string'}</span>
+<span class="s4">// 2. {type: 'integer'}</span>
+<span class="s4">// 3. root schema</span>
+
+<span class="s0">```</span>
+
+<span class="s2">Callback function `cb` is called for each schema object </span><span class="s1">(</span><span class="s2">not including draft-06 boolean schemas</span><span class="s1">)</span><span class="s2">, including the root schema, in pre-order traversal. Schema references </span><span class="s1">($</span><span class="s2">ref</span><span class="s1">) </span><span class="s2">are not resolved, they are passed as is.  Alternatively, you can pass a `{pre, post}` object as `cb`, and then `pre` will be called before traversing child elements, and `post` will be called after all child elements have been traversed.</span>
+
+<span class="s2">Callback is passed these parameters</span><span class="s1">:</span>
+
+<span class="s0">- </span><span class="s1">_</span><span class="s2">schema</span><span class="s1">_: </span><span class="s2">the current schema object</span>
+<span class="s0">- </span><span class="s1">_</span><span class="s2">JSON pointer</span><span class="s1">_: </span><span class="s2">from the root schema to the current schema object</span>
+<span class="s0">- </span><span class="s1">_</span><span class="s2">root schema</span><span class="s1">_: </span><span class="s2">the schema passed to `traverse` object</span>
+<span class="s0">- </span><span class="s1">_</span><span class="s2">parent JSON pointer</span><span class="s1">_: </span><span class="s2">from the root schema to the parent schema object </span><span class="s1">(</span><span class="s2">see below</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">_</span><span class="s2">parent keyword</span><span class="s1">_: </span><span class="s2">the keyword inside which this schema appears </span><span class="s1">(</span><span class="s2">e.g. `properties`, `anyOf`, etc.</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">_</span><span class="s2">parent schema</span><span class="s1">_: </span><span class="s2">not necessarily parent object/array; in the example above the parent schema for `{type</span><span class="s1">: '</span><span class="s2">string'}` is the root schema</span>
+<span class="s0">- </span><span class="s1">_</span><span class="s2">index/property</span><span class="s1">_: </span><span class="s2">index or property name in the array/object containing multiple schemas; in the example above for `{type</span><span class="s1">: '</span><span class="s2">string'}` the property name is `</span><span class="s1">'</span><span class="s2">foo'`</span>
+
+
+<span class="s0">## </span><span class="s2">Traverse objects in all unknown keywords</span>
+
+<span class="s0">```</span><span class="s5">javascript</span>
+<span class="s4">const traverse = require('json-schema-traverse');</span>
+<span class="s4">const schema = {</span>
+  <span class="s4">mySchema: {</span>
+    <span class="s4">minimum: 1,</span>
+    <span class="s4">maximum: 2</span>
+  <span class="s4">}</span>
+<span class="s4">};</span>
+
+<span class="s4">traverse(schema, {allKeys: true, cb});</span>
+<span class="s4">// cb is called 2 times with:</span>
+<span class="s4">// 1. root schema</span>
+<span class="s4">// 2. mySchema</span>
+<span class="s0">```</span>
+
+<span class="s2">Without option `allKeys</span><span class="s1">: </span><span class="s2">true` callback will be called only with root schema.</span>
+
+
+<span class="s0">## </span><span class="s2">Enterprise support</span>
+
+<span class="s2">json-schema-traverse package is a part of </span><span class="s1">[</span><span class="s2">Tidelift enterprise subscription</span><span class="s1">](</span><span class="s3">https://tidelift.com/subscription/pkg/npm-json-schema-traverse?utm_source=npm-json-schema-traverse&amp;utm_medium=referral&amp;utm_campaign=enterprise&amp;utm_term=repo</span><span class="s1">) </span><span class="s2">- it provides a centralised commercial support to open-source software users, in addition to the support provided by software maintainers.</span>
+
+
+<span class="s0">## </span><span class="s2">Security contact</span>
+
+<span class="s2">To report a security vulnerability, please use the</span>
+<span class="s1">[</span><span class="s2">Tidelift security contact</span><span class="s1">](</span><span class="s3">https://tidelift.com/security</span><span class="s1">)</span><span class="s2">.</span>
+<span class="s2">Tidelift will coordinate the fix and disclosure. Please do NOT report security vulnerability via GitHub issues.</span>
+
+
+<span class="s0">## </span><span class="s2">License</span>
+
+<span class="s1">[</span><span class="s2">MIT</span><span class="s1">](</span><span class="s3">https://github.com/epoberezkin/json-schema-traverse/blob/master/LICENSE</span><span class="s1">)</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<html>
+<head>
+<title>fetch.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #5f826b; font-style: italic;}
+.s6 { color: #67a37c; font-style: italic;}
+.s7 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+fetch.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">// based on https://github.com/Ethan-Arrowood/undici-fetch/blob/249269714db874351589d2d364a0645d5160ae71/index.d.ts (MIT license)</span>
+<span class="s0">// and https://github.com/node-fetch/node-fetch/blob/914ce6be5ec67a8bab63d68510aabf07cb818b6d/index.d.ts (MIT license)</span>
+<span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">Blob </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'buffer'</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">URL</span><span class="s3">, </span><span class="s1">URLSearchParams </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'url'</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">ReadableStream </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'stream/web'</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">FormData </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'./formdata'</span>
+
+<span class="s2">import </span><span class="s1">Dispatcher from </span><span class="s4">'./dispatcher'</span>
+
+<span class="s2">export </span><span class="s1">type RequestInfo </span><span class="s3">= </span><span class="s1">string </span><span class="s3">| </span><span class="s1">URL </span><span class="s3">| </span><span class="s1">Request</span>
+
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">function </span><span class="s1">fetch </span><span class="s3">(</span>
+  <span class="s1">input</span><span class="s3">: </span><span class="s1">RequestInfo</span><span class="s3">,</span>
+  <span class="s1">init</span><span class="s3">?: </span><span class="s1">RequestInit</span>
+<span class="s3">): </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">Response</span><span class="s3">&gt;</span>
+
+<span class="s2">export </span><span class="s1">type BodyInit </span><span class="s3">=</span>
+  <span class="s3">| </span><span class="s1">ArrayBuffer</span>
+  <span class="s3">| </span><span class="s1">AsyncIterable</span><span class="s3">&lt;</span><span class="s1">Uint8Array</span><span class="s3">&gt;</span>
+  <span class="s3">| </span><span class="s1">Blob</span>
+  <span class="s3">| </span><span class="s1">FormData</span>
+  <span class="s3">| </span><span class="s1">Iterable</span><span class="s3">&lt;</span><span class="s1">Uint8Array</span><span class="s3">&gt;</span>
+  <span class="s3">| </span><span class="s1">NodeJS</span><span class="s3">.</span><span class="s1">ArrayBufferView</span>
+  <span class="s3">| </span><span class="s1">URLSearchParams</span>
+  <span class="s3">| </span><span class="s2">null</span>
+  <span class="s3">| </span><span class="s1">string</span>
+
+<span class="s2">export class </span><span class="s1">BodyMixin </span><span class="s3">{</span>
+  <span class="s1">readonly body</span><span class="s3">: </span><span class="s1">ReadableStream </span><span class="s3">| </span><span class="s2">null</span>
+  <span class="s1">readonly bodyUsed</span><span class="s3">: </span><span class="s1">boolean</span>
+
+  <span class="s1">readonly arrayBuffer</span><span class="s3">: () =&gt; </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">ArrayBuffer</span><span class="s3">&gt;</span>
+  <span class="s1">readonly blob</span><span class="s3">: () =&gt; </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">Blob</span><span class="s3">&gt;</span>
+  <span class="s5">/**</span>
+   <span class="s5">* </span><span class="s6">@deprecated </span><span class="s5">This method is not recommended for parsing multipart/form-data bodies in server environments.</span>
+   <span class="s5">* It is recommended to use a library such as [@fastify/busboy](https://www.npmjs.com/package/@fastify/busboy) as follows:</span>
+   <span class="s5">* </span>
+   <span class="s5">* </span><span class="s6">@example</span>
+   <span class="s5">* ```js</span>
+   <span class="s5">* import { Busboy } from '@fastify/busboy'</span>
+   <span class="s5">* import { Readable } from 'node:stream'</span>
+   <span class="s5">* </span>
+   <span class="s5">* const response = await fetch('...')</span>
+   <span class="s5">* const busboy = new Busboy({ headers: { 'content-type': response.headers.get('content-type') } })</span>
+   <span class="s5">* </span>
+   <span class="s5">* // handle events emitted from `busboy`</span>
+   <span class="s5">* </span>
+   <span class="s5">* Readable.fromWeb(response.body).pipe(busboy)</span>
+   <span class="s5">* ```</span>
+   <span class="s5">*/</span>
+  <span class="s1">readonly formData</span><span class="s3">: () =&gt; </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">FormData</span><span class="s3">&gt;</span>
+  <span class="s1">readonly json</span><span class="s3">: () =&gt; </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">unknown</span><span class="s3">&gt;</span>
+  <span class="s1">readonly text</span><span class="s3">: () =&gt; </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">string</span><span class="s3">&gt;</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">SpecIterator</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">, </span><span class="s1">TReturn </span><span class="s3">= </span><span class="s1">any</span><span class="s3">, </span><span class="s1">TNext </span><span class="s3">= </span><span class="s1">undefined</span><span class="s3">&gt; {</span>
+  <span class="s1">next</span><span class="s3">(</span><span class="s1">...args</span><span class="s3">: [] | [</span><span class="s1">TNext</span><span class="s3">]): </span><span class="s1">IteratorResult</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">, </span><span class="s1">TReturn</span><span class="s3">&gt;;</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">SpecIterableIterator</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt; </span><span class="s2">extends </span><span class="s1">SpecIterator</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt; {</span>
+  <span class="s3">[</span><span class="s1">Symbol</span><span class="s3">.</span><span class="s1">iterator</span><span class="s3">](): </span><span class="s1">SpecIterableIterator</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt;;</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">SpecIterable</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt; {</span>
+  <span class="s3">[</span><span class="s1">Symbol</span><span class="s3">.</span><span class="s1">iterator</span><span class="s3">](): </span><span class="s1">SpecIterator</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt;;</span>
+<span class="s3">}</span>
+
+<span class="s2">export </span><span class="s1">type HeadersInit </span><span class="s3">= </span><span class="s1">string</span><span class="s3">[][] | </span><span class="s1">Record</span><span class="s3">&lt;</span><span class="s1">string</span><span class="s3">, </span><span class="s1">string </span><span class="s3">| </span><span class="s1">ReadonlyArray</span><span class="s3">&lt;</span><span class="s1">string</span><span class="s3">&gt;&gt; | </span><span class="s1">Headers</span>
+
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">Headers </span><span class="s2">implements </span><span class="s1">SpecIterable</span><span class="s3">&lt;[</span><span class="s1">string</span><span class="s3">, </span><span class="s1">string</span><span class="s3">]&gt; {</span>
+  <span class="s1">constructor </span><span class="s3">(</span><span class="s1">init</span><span class="s3">?: </span><span class="s1">HeadersInit</span><span class="s3">)</span>
+  <span class="s1">readonly append</span><span class="s3">: (</span><span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">value</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s2">void</span>
+  <span class="s1">readonly </span><span class="s2">delete</span><span class="s3">: (</span><span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s2">void</span>
+  <span class="s1">readonly get</span><span class="s3">: (</span><span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s1">string </span><span class="s3">| </span><span class="s2">null</span>
+  <span class="s1">readonly has</span><span class="s3">: (</span><span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s1">boolean</span>
+  <span class="s1">readonly set</span><span class="s3">: (</span><span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">value</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s2">void</span>
+  <span class="s1">readonly getSetCookie</span><span class="s3">: () =&gt; </span><span class="s1">string</span><span class="s3">[]</span>
+  <span class="s1">readonly forEach</span><span class="s3">: (</span>
+    <span class="s1">callbackfn</span><span class="s3">: (</span><span class="s1">value</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">key</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">iterable</span><span class="s3">: </span><span class="s1">Headers</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">,</span>
+    <span class="s1">thisArg</span><span class="s3">?: </span><span class="s1">unknown</span>
+  <span class="s3">) =&gt; </span><span class="s2">void</span>
+
+  <span class="s1">readonly keys</span><span class="s3">: () =&gt; </span><span class="s1">SpecIterableIterator</span><span class="s3">&lt;</span><span class="s1">string</span><span class="s3">&gt;</span>
+  <span class="s1">readonly values</span><span class="s3">: () =&gt; </span><span class="s1">SpecIterableIterator</span><span class="s3">&lt;</span><span class="s1">string</span><span class="s3">&gt;</span>
+  <span class="s1">readonly entries</span><span class="s3">: () =&gt; </span><span class="s1">SpecIterableIterator</span><span class="s3">&lt;[</span><span class="s1">string</span><span class="s3">, </span><span class="s1">string</span><span class="s3">]&gt;</span>
+  <span class="s1">readonly </span><span class="s3">[</span><span class="s1">Symbol</span><span class="s3">.</span><span class="s1">iterator</span><span class="s3">]: () =&gt; </span><span class="s1">SpecIterableIterator</span><span class="s3">&lt;[</span><span class="s1">string</span><span class="s3">, </span><span class="s1">string</span><span class="s3">]&gt;</span>
+<span class="s3">}</span>
+
+<span class="s2">export </span><span class="s1">type RequestCache </span><span class="s3">=</span>
+  <span class="s3">| </span><span class="s4">'default'</span>
+  <span class="s3">| </span><span class="s4">'force-cache'</span>
+  <span class="s3">| </span><span class="s4">'no-cache'</span>
+  <span class="s3">| </span><span class="s4">'no-store'</span>
+  <span class="s3">| </span><span class="s4">'only-if-cached'</span>
+  <span class="s3">| </span><span class="s4">'reload'</span>
+
+<span class="s2">export </span><span class="s1">type RequestCredentials </span><span class="s3">= </span><span class="s4">'omit' </span><span class="s3">| </span><span class="s4">'include' </span><span class="s3">| </span><span class="s4">'same-origin'</span>
+
+<span class="s1">type RequestDestination </span><span class="s3">=</span>
+  <span class="s3">| </span><span class="s4">''</span>
+  <span class="s3">| </span><span class="s4">'audio'</span>
+  <span class="s3">| </span><span class="s4">'audioworklet'</span>
+  <span class="s3">| </span><span class="s4">'document'</span>
+  <span class="s3">| </span><span class="s4">'embed'</span>
+  <span class="s3">| </span><span class="s4">'font'</span>
+  <span class="s3">| </span><span class="s4">'image'</span>
+  <span class="s3">| </span><span class="s4">'manifest'</span>
+  <span class="s3">| </span><span class="s4">'object'</span>
+  <span class="s3">| </span><span class="s4">'paintworklet'</span>
+  <span class="s3">| </span><span class="s4">'report'</span>
+  <span class="s3">| </span><span class="s4">'script'</span>
+  <span class="s3">| </span><span class="s4">'sharedworker'</span>
+  <span class="s3">| </span><span class="s4">'style'</span>
+  <span class="s3">| </span><span class="s4">'track'</span>
+  <span class="s3">| </span><span class="s4">'video'</span>
+  <span class="s3">| </span><span class="s4">'worker'</span>
+  <span class="s3">| </span><span class="s4">'xslt'</span>
+
+<span class="s2">export interface </span><span class="s1">RequestInit </span><span class="s3">{</span>
+  <span class="s1">method</span><span class="s3">?: </span><span class="s1">string</span>
+  <span class="s1">keepalive</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">headers</span><span class="s3">?: </span><span class="s1">HeadersInit</span>
+  <span class="s1">body</span><span class="s3">?: </span><span class="s1">BodyInit </span><span class="s3">| </span><span class="s2">null</span>
+  <span class="s1">redirect</span><span class="s3">?: </span><span class="s1">RequestRedirect</span>
+  <span class="s1">integrity</span><span class="s3">?: </span><span class="s1">string</span>
+  <span class="s1">signal</span><span class="s3">?: </span><span class="s1">AbortSignal </span><span class="s3">| </span><span class="s2">null</span>
+  <span class="s1">credentials</span><span class="s3">?: </span><span class="s1">RequestCredentials</span>
+  <span class="s1">mode</span><span class="s3">?: </span><span class="s1">RequestMode</span>
+  <span class="s1">referrer</span><span class="s3">?: </span><span class="s1">string</span>
+  <span class="s1">referrerPolicy</span><span class="s3">?: </span><span class="s1">ReferrerPolicy</span>
+  <span class="s1">window</span><span class="s3">?: </span><span class="s2">null</span>
+  <span class="s1">dispatcher</span><span class="s3">?: </span><span class="s1">Dispatcher</span>
+  <span class="s1">duplex</span><span class="s3">?: </span><span class="s1">RequestDuplex</span>
+<span class="s3">}</span>
+
+<span class="s2">export </span><span class="s1">type ReferrerPolicy </span><span class="s3">=</span>
+  <span class="s3">| </span><span class="s4">''</span>
+  <span class="s3">| </span><span class="s4">'no-referrer'</span>
+  <span class="s3">| </span><span class="s4">'no-referrer-when-downgrade'</span>
+  <span class="s3">| </span><span class="s4">'origin'</span>
+  <span class="s3">| </span><span class="s4">'origin-when-cross-origin'</span>
+  <span class="s3">| </span><span class="s4">'same-origin'</span>
+  <span class="s3">| </span><span class="s4">'strict-origin'</span>
+  <span class="s3">| </span><span class="s4">'strict-origin-when-cross-origin'</span>
+  <span class="s3">| </span><span class="s4">'unsafe-url'</span><span class="s3">;</span>
+
+<span class="s2">export </span><span class="s1">type RequestMode </span><span class="s3">= </span><span class="s4">'cors' </span><span class="s3">| </span><span class="s4">'navigate' </span><span class="s3">| </span><span class="s4">'no-cors' </span><span class="s3">| </span><span class="s4">'same-origin'</span>
+
+<span class="s2">export </span><span class="s1">type RequestRedirect </span><span class="s3">= </span><span class="s4">'error' </span><span class="s3">| </span><span class="s4">'follow' </span><span class="s3">| </span><span class="s4">'manual'</span>
+
+<span class="s2">export </span><span class="s1">type RequestDuplex </span><span class="s3">= </span><span class="s4">'half'</span>
+
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">Request </span><span class="s2">extends </span><span class="s1">BodyMixin </span><span class="s3">{</span>
+  <span class="s1">constructor </span><span class="s3">(</span><span class="s1">input</span><span class="s3">: </span><span class="s1">RequestInfo</span><span class="s3">, </span><span class="s1">init</span><span class="s3">?: </span><span class="s1">RequestInit</span><span class="s3">)</span>
+
+  <span class="s1">readonly cache</span><span class="s3">: </span><span class="s1">RequestCache</span>
+  <span class="s1">readonly credentials</span><span class="s3">: </span><span class="s1">RequestCredentials</span>
+  <span class="s1">readonly destination</span><span class="s3">: </span><span class="s1">RequestDestination</span>
+  <span class="s1">readonly headers</span><span class="s3">: </span><span class="s1">Headers</span>
+  <span class="s1">readonly integrity</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">readonly method</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">readonly mode</span><span class="s3">: </span><span class="s1">RequestMode</span>
+  <span class="s1">readonly redirect</span><span class="s3">: </span><span class="s1">RequestRedirect</span>
+  <span class="s1">readonly referrer</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">readonly referrerPolicy</span><span class="s3">: </span><span class="s1">ReferrerPolicy</span>
+  <span class="s1">readonly url</span><span class="s3">: </span><span class="s1">string</span>
+
+  <span class="s1">readonly keepalive</span><span class="s3">: </span><span class="s1">boolean</span>
+  <span class="s1">readonly signal</span><span class="s3">: </span><span class="s1">AbortSignal</span>
+  <span class="s1">readonly duplex</span><span class="s3">: </span><span class="s1">RequestDuplex</span>
+
+  <span class="s1">readonly clone</span><span class="s3">: () =&gt; </span><span class="s1">Request</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">ResponseInit </span><span class="s3">{</span>
+  <span class="s1">readonly status</span><span class="s3">?: </span><span class="s1">number</span>
+  <span class="s1">readonly statusText</span><span class="s3">?: </span><span class="s1">string</span>
+  <span class="s1">readonly headers</span><span class="s3">?: </span><span class="s1">HeadersInit</span>
+<span class="s3">}</span>
+
+<span class="s2">export </span><span class="s1">type ResponseType </span><span class="s3">=</span>
+  <span class="s3">| </span><span class="s4">'basic'</span>
+  <span class="s3">| </span><span class="s4">'cors'</span>
+  <span class="s3">| </span><span class="s4">'default'</span>
+  <span class="s3">| </span><span class="s4">'error'</span>
+  <span class="s3">| </span><span class="s4">'opaque'</span>
+  <span class="s3">| </span><span class="s4">'opaqueredirect'</span>
+
+<span class="s2">export </span><span class="s1">type ResponseRedirectStatus </span><span class="s3">= </span><span class="s7">301 </span><span class="s3">| </span><span class="s7">302 </span><span class="s3">| </span><span class="s7">303 </span><span class="s3">| </span><span class="s7">307 </span><span class="s3">| </span><span class="s7">308</span>
+
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">Response </span><span class="s2">extends </span><span class="s1">BodyMixin </span><span class="s3">{</span>
+  <span class="s1">constructor </span><span class="s3">(</span><span class="s1">body</span><span class="s3">?: </span><span class="s1">BodyInit</span><span class="s3">, </span><span class="s1">init</span><span class="s3">?: </span><span class="s1">ResponseInit</span><span class="s3">)</span>
+
+  <span class="s1">readonly headers</span><span class="s3">: </span><span class="s1">Headers</span>
+  <span class="s1">readonly ok</span><span class="s3">: </span><span class="s1">boolean</span>
+  <span class="s1">readonly status</span><span class="s3">: </span><span class="s1">number</span>
+  <span class="s1">readonly statusText</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">readonly type</span><span class="s3">: </span><span class="s1">ResponseType</span>
+  <span class="s1">readonly url</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">readonly redirected</span><span class="s3">: </span><span class="s1">boolean</span>
+
+  <span class="s1">readonly clone</span><span class="s3">: () =&gt; </span><span class="s1">Response</span>
+
+  <span class="s2">static </span><span class="s1">error </span><span class="s3">(): </span><span class="s1">Response</span>
+  <span class="s2">static </span><span class="s1">json</span><span class="s3">(</span><span class="s1">data</span><span class="s3">: </span><span class="s1">any</span><span class="s3">, </span><span class="s1">init</span><span class="s3">?: </span><span class="s1">ResponseInit</span><span class="s3">): </span><span class="s1">Response</span>
+  <span class="s2">static </span><span class="s1">redirect </span><span class="s3">(</span><span class="s1">url</span><span class="s3">: </span><span class="s1">string </span><span class="s3">| </span><span class="s1">URL</span><span class="s3">, </span><span class="s1">status</span><span class="s3">: </span><span class="s1">ResponseRedirectStatus</span><span class="s3">): </span><span class="s1">Response</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

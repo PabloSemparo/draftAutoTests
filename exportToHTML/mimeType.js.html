@@ -1,0 +1,482 @@
+<html>
+<head>
+<title>mimeType.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #42c3d4;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+mimeType.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">mimeType_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">mimeType_exports</span><span class="s1">, {</span>
+  <span class="s2">getMimeTypeForPath</span><span class="s1">: () =&gt; </span><span class="s2">getMimeTypeForPath</span><span class="s1">,</span>
+  <span class="s2">isJsonMimeType</span><span class="s1">: () =&gt; </span><span class="s2">isJsonMimeType</span><span class="s1">,</span>
+  <span class="s2">isTextualMimeType</span><span class="s1">: () =&gt; </span><span class="s2">isTextualMimeType</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">mimeType_exports</span><span class="s1">);</span>
+<span class="s3">function </span><span class="s2">isJsonMimeType</span><span class="s1">(</span><span class="s2">mimeType</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s1">!!</span><span class="s2">mimeType</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s4">/^(application\/json|application\/.*?\+json|text\/(x-)?json)(;\s*charset=.*)?$/</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">isTextualMimeType</span><span class="s1">(</span><span class="s2">mimeType</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s1">!!</span><span class="s2">mimeType</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s4">/^(text\/.*?|application\/(json|(x-)?javascript|xml.*?|ecmascript|graphql|x-www-form-urlencoded)|image\/svg(\+xml)?|application\/.*?(\+json|\+xml))(;\s*charset=.*)?$/</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">getMimeTypeForPath</span><span class="s1">(</span><span class="s2">path</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">dotIndex </span><span class="s1">= </span><span class="s2">path</span><span class="s1">.</span><span class="s2">lastIndexOf</span><span class="s1">(</span><span class="s0">&quot;.&quot;</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">dotIndex </span><span class="s1">=== -</span><span class="s5">1</span><span class="s1">)</span>
+    <span class="s3">return null</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">extension </span><span class="s1">= </span><span class="s2">path</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s2">dotIndex </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">types</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">extension</span><span class="s1">) || </span><span class="s3">null</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">types </span><span class="s1">= </span><span class="s6">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">([</span>
+  <span class="s1">[</span><span class="s0">&quot;ez&quot;</span><span class="s1">, </span><span class="s0">&quot;application/andrew-inset&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;aw&quot;</span><span class="s1">, </span><span class="s0">&quot;application/applixware&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;atom&quot;</span><span class="s1">, </span><span class="s0">&quot;application/atom+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;atomcat&quot;</span><span class="s1">, </span><span class="s0">&quot;application/atomcat+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;atomdeleted&quot;</span><span class="s1">, </span><span class="s0">&quot;application/atomdeleted+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;atomsvc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/atomsvc+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dwd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/atsc-dwd+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;held&quot;</span><span class="s1">, </span><span class="s0">&quot;application/atsc-held+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rsat&quot;</span><span class="s1">, </span><span class="s0">&quot;application/atsc-rsat+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;bdoc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/bdoc&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xcs&quot;</span><span class="s1">, </span><span class="s0">&quot;application/calendar+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ccxml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ccxml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cdfx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/cdfx+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cdmia&quot;</span><span class="s1">, </span><span class="s0">&quot;application/cdmi-capability&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cdmic&quot;</span><span class="s1">, </span><span class="s0">&quot;application/cdmi-container&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cdmid&quot;</span><span class="s1">, </span><span class="s0">&quot;application/cdmi-domain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cdmio&quot;</span><span class="s1">, </span><span class="s0">&quot;application/cdmi-object&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cdmiq&quot;</span><span class="s1">, </span><span class="s0">&quot;application/cdmi-queue&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cu&quot;</span><span class="s1">, </span><span class="s0">&quot;application/cu-seeme&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mpd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/dash+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;davmount&quot;</span><span class="s1">, </span><span class="s0">&quot;application/davmount+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dbk&quot;</span><span class="s1">, </span><span class="s0">&quot;application/docbook+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dssc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/dssc+der&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xdssc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/dssc+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ecma&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ecmascript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;es&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ecmascript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;emma&quot;</span><span class="s1">, </span><span class="s0">&quot;application/emma+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;emotionml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/emotionml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;epub&quot;</span><span class="s1">, </span><span class="s0">&quot;application/epub+zip&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;exi&quot;</span><span class="s1">, </span><span class="s0">&quot;application/exi&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;exp&quot;</span><span class="s1">, </span><span class="s0">&quot;application/express&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;fdt&quot;</span><span class="s1">, </span><span class="s0">&quot;application/fdt+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pfr&quot;</span><span class="s1">, </span><span class="s0">&quot;application/font-tdpfr&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;geojson&quot;</span><span class="s1">, </span><span class="s0">&quot;application/geo+json&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/gml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gpx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/gpx+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gxf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/gxf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gz&quot;</span><span class="s1">, </span><span class="s0">&quot;application/gzip&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;hjson&quot;</span><span class="s1">, </span><span class="s0">&quot;application/hjson&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;stk&quot;</span><span class="s1">, </span><span class="s0">&quot;application/hyperstudio&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ink&quot;</span><span class="s1">, </span><span class="s0">&quot;application/inkml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;inkml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/inkml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ipfix&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ipfix&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;its&quot;</span><span class="s1">, </span><span class="s0">&quot;application/its+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ear&quot;</span><span class="s1">, </span><span class="s0">&quot;application/java-archive&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jar&quot;</span><span class="s1">, </span><span class="s0">&quot;application/java-archive&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;war&quot;</span><span class="s1">, </span><span class="s0">&quot;application/java-archive&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ser&quot;</span><span class="s1">, </span><span class="s0">&quot;application/java-serialized-object&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;class&quot;</span><span class="s1">, </span><span class="s0">&quot;application/java-vm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;js&quot;</span><span class="s1">, </span><span class="s0">&quot;application/javascript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mjs&quot;</span><span class="s1">, </span><span class="s0">&quot;application/javascript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;json&quot;</span><span class="s1">, </span><span class="s0">&quot;application/json&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;map&quot;</span><span class="s1">, </span><span class="s0">&quot;application/json&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;json5&quot;</span><span class="s1">, </span><span class="s0">&quot;application/json5&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jsonml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/jsonml+json&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jsonld&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ld+json&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;lgr&quot;</span><span class="s1">, </span><span class="s0">&quot;application/lgr+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;lostxml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/lost+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;hqx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mac-binhex40&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cpt&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mac-compactpro&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mads&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mads+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;webmanifest&quot;</span><span class="s1">, </span><span class="s0">&quot;application/manifest+json&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mrc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/marc&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mrcx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/marcxml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ma&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mathematica&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mb&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mathematica&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;nb&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mathematica&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mathml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mathml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mbox&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mbox&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mscml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mediaservercontrol+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;metalink&quot;</span><span class="s1">, </span><span class="s0">&quot;application/metalink+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;meta4&quot;</span><span class="s1">, </span><span class="s0">&quot;application/metalink4+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mets&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mets+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;maei&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mmt-aei+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;musd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mmt-usd+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mods&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mods+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m21&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mp21&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp21&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mp21&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m4p&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mp4&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp4s&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mp4&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;doc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/msword&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dot&quot;</span><span class="s1">, </span><span class="s0">&quot;application/msword&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mxf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/mxf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;nq&quot;</span><span class="s1">, </span><span class="s0">&quot;application/n-quads&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;nt&quot;</span><span class="s1">, </span><span class="s0">&quot;application/n-triples&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cjs&quot;</span><span class="s1">, </span><span class="s0">&quot;application/node&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;bin&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;bpk&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;buffer&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;deb&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;deploy&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dist&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;distz&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dll&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dmg&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dms&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dump&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;elc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;exe&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;img&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;iso&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;lrf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mar&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;msi&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;msm&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;msp&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pkg&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;so&quot;</span><span class="s1">, </span><span class="s0">&quot;application/octet-stream&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;oda&quot;</span><span class="s1">, </span><span class="s0">&quot;application/oda&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;opf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/oebps-package+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ogx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ogg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;omdoc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/omdoc+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;onepkg&quot;</span><span class="s1">, </span><span class="s0">&quot;application/onenote&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;onetmp&quot;</span><span class="s1">, </span><span class="s0">&quot;application/onenote&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;onetoc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/onenote&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;onetoc2&quot;</span><span class="s1">, </span><span class="s0">&quot;application/onenote&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;oxps&quot;</span><span class="s1">, </span><span class="s0">&quot;application/oxps&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;relo&quot;</span><span class="s1">, </span><span class="s0">&quot;application/p2p-overlay+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xer&quot;</span><span class="s1">, </span><span class="s0">&quot;application/patch-ops-error+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pdf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pdf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pgp&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pgp-encrypted&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;asc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pgp-signature&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sig&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pgp-signature&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;prf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pics-rules&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;p10&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkcs10&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;p7c&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkcs7-mime&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;p7m&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkcs7-mime&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;p7s&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkcs7-signature&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;p8&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkcs8&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ac&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkix-attr-cert&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cer&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkix-cert&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;crl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkix-crl&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pkipath&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkix-pkipath&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pki&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pkixcmp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pls&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pls+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ai&quot;</span><span class="s1">, </span><span class="s0">&quot;application/postscript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;eps&quot;</span><span class="s1">, </span><span class="s0">&quot;application/postscript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ps&quot;</span><span class="s1">, </span><span class="s0">&quot;application/postscript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;provx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/provenance+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;pskcxml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/pskc+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;raml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/raml+yaml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;owl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rdf+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rdf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rdf+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rif&quot;</span><span class="s1">, </span><span class="s0">&quot;application/reginfo+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rnc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/relax-ng-compact-syntax&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/resource-lists+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rld&quot;</span><span class="s1">, </span><span class="s0">&quot;application/resource-lists-diff+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rs&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rls-services+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rapd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/route-apd+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sls&quot;</span><span class="s1">, </span><span class="s0">&quot;application/route-s-tsid+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rusd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/route-usd+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gbr&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rpki-ghostbusters&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mft&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rpki-manifest&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;roa&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rpki-roa&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rsd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rsd+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rss&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rss+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rtf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/rtf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sbml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sbml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;scq&quot;</span><span class="s1">, </span><span class="s0">&quot;application/scvp-cv-request&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;scs&quot;</span><span class="s1">, </span><span class="s0">&quot;application/scvp-cv-response&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;spq&quot;</span><span class="s1">, </span><span class="s0">&quot;application/scvp-vp-request&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;spp&quot;</span><span class="s1">, </span><span class="s0">&quot;application/scvp-vp-response&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sdp&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sdp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;senmlx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/senml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sensmlx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sensml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;setpay&quot;</span><span class="s1">, </span><span class="s0">&quot;application/set-payment-initiation&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;setreg&quot;</span><span class="s1">, </span><span class="s0">&quot;application/set-registration-initiation&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;shf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/shf+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sieve&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sieve&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;siv&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sieve&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;smi&quot;</span><span class="s1">, </span><span class="s0">&quot;application/smil+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;smil&quot;</span><span class="s1">, </span><span class="s0">&quot;application/smil+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rq&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sparql-query&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;srx&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sparql-results+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gram&quot;</span><span class="s1">, </span><span class="s0">&quot;application/srgs&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;grxml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/srgs+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sru&quot;</span><span class="s1">, </span><span class="s0">&quot;application/sru+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ssdl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ssdl+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ssml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ssml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;swidtag&quot;</span><span class="s1">, </span><span class="s0">&quot;application/swid+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tei&quot;</span><span class="s1">, </span><span class="s0">&quot;application/tei+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;teicorpus&quot;</span><span class="s1">, </span><span class="s0">&quot;application/tei+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tfi&quot;</span><span class="s1">, </span><span class="s0">&quot;application/thraud+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tsd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/timestamped-data&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;toml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/toml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;trig&quot;</span><span class="s1">, </span><span class="s0">&quot;application/trig&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ttml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ttml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ubj&quot;</span><span class="s1">, </span><span class="s0">&quot;application/ubjson&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rsheet&quot;</span><span class="s1">, </span><span class="s0">&quot;application/urc-ressheet+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;td&quot;</span><span class="s1">, </span><span class="s0">&quot;application/urc-targetdesc+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;vxml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/voicexml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;wasm&quot;</span><span class="s1">, </span><span class="s0">&quot;application/wasm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;wgt&quot;</span><span class="s1">, </span><span class="s0">&quot;application/widget&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;hlp&quot;</span><span class="s1">, </span><span class="s0">&quot;application/winhlp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;wsdl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/wsdl+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;wspolicy&quot;</span><span class="s1">, </span><span class="s0">&quot;application/wspolicy+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xaml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xaml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xav&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xcap-att+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xca&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xcap-caps+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xdf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xcap-diff+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xel&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xcap-el+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xns&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xcap-ns+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xenc&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xenc+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xht&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xhtml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xhtml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xhtml+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xlf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xliff+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rng&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xsd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xsl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;dtd&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xml-dtd&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xop&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xop+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xpl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xproc+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*xsl&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xslt+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xslt&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xslt+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xspf&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xspf+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mxml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xv+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xhvml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xv+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xvm&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xv+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xvml&quot;</span><span class="s1">, </span><span class="s0">&quot;application/xv+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;yang&quot;</span><span class="s1">, </span><span class="s0">&quot;application/yang&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;yin&quot;</span><span class="s1">, </span><span class="s0">&quot;application/yin+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;zip&quot;</span><span class="s1">, </span><span class="s0">&quot;application/zip&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*3gpp&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/3gpp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;adp&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/adpcm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;amr&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/amr&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;au&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/basic&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;snd&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/basic&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;kar&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/midi&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mid&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/midi&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;midi&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/midi&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rmi&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/midi&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mxmf&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mobile-xmf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*mp3&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mp3&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m4a&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mp4&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp4a&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mp4&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m2a&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m3a&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp2&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp2a&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp3&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mpga&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;oga&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/ogg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ogg&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/ogg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;opus&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/ogg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;spx&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/ogg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;s3m&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/s3m&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sil&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/silk&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;wav&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/wav&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*wav&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/wave&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;weba&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/webm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;xm&quot;</span><span class="s1">, </span><span class="s0">&quot;audio/xm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ttc&quot;</span><span class="s1">, </span><span class="s0">&quot;font/collection&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;otf&quot;</span><span class="s1">, </span><span class="s0">&quot;font/otf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ttf&quot;</span><span class="s1">, </span><span class="s0">&quot;font/ttf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;woff&quot;</span><span class="s1">, </span><span class="s0">&quot;font/woff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;woff2&quot;</span><span class="s1">, </span><span class="s0">&quot;font/woff2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;exr&quot;</span><span class="s1">, </span><span class="s0">&quot;image/aces&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;apng&quot;</span><span class="s1">, </span><span class="s0">&quot;image/apng&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;avif&quot;</span><span class="s1">, </span><span class="s0">&quot;image/avif&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;bmp&quot;</span><span class="s1">, </span><span class="s0">&quot;image/bmp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;cgm&quot;</span><span class="s1">, </span><span class="s0">&quot;image/cgm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;drle&quot;</span><span class="s1">, </span><span class="s0">&quot;image/dicom-rle&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;emf&quot;</span><span class="s1">, </span><span class="s0">&quot;image/emf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;fits&quot;</span><span class="s1">, </span><span class="s0">&quot;image/fits&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;g3&quot;</span><span class="s1">, </span><span class="s0">&quot;image/g3fax&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gif&quot;</span><span class="s1">, </span><span class="s0">&quot;image/gif&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;heic&quot;</span><span class="s1">, </span><span class="s0">&quot;image/heic&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;heics&quot;</span><span class="s1">, </span><span class="s0">&quot;image/heic-sequence&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;heif&quot;</span><span class="s1">, </span><span class="s0">&quot;image/heif&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;heifs&quot;</span><span class="s1">, </span><span class="s0">&quot;image/heif-sequence&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;hej2&quot;</span><span class="s1">, </span><span class="s0">&quot;image/hej2k&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;hsj2&quot;</span><span class="s1">, </span><span class="s0">&quot;image/hsj2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ief&quot;</span><span class="s1">, </span><span class="s0">&quot;image/ief&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jls&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jls&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jp2&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jp2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpg2&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jp2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpe&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpeg&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpg&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jph&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jph&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jhc&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jphc&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpm&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jpm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpf&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jpx&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpx&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jpx&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jxr&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jxr&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jxra&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jxra&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jxrs&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jxrs&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jxs&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jxs&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jxsc&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jxsc&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jxsi&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jxsi&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jxss&quot;</span><span class="s1">, </span><span class="s0">&quot;image/jxss&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ktx&quot;</span><span class="s1">, </span><span class="s0">&quot;image/ktx&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ktx2&quot;</span><span class="s1">, </span><span class="s0">&quot;image/ktx2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;png&quot;</span><span class="s1">, </span><span class="s0">&quot;image/png&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sgi&quot;</span><span class="s1">, </span><span class="s0">&quot;image/sgi&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;svg&quot;</span><span class="s1">, </span><span class="s0">&quot;image/svg+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;svgz&quot;</span><span class="s1">, </span><span class="s0">&quot;image/svg+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;t38&quot;</span><span class="s1">, </span><span class="s0">&quot;image/t38&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tif&quot;</span><span class="s1">, </span><span class="s0">&quot;image/tiff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tiff&quot;</span><span class="s1">, </span><span class="s0">&quot;image/tiff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tfx&quot;</span><span class="s1">, </span><span class="s0">&quot;image/tiff-fx&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;webp&quot;</span><span class="s1">, </span><span class="s0">&quot;image/webp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;wmf&quot;</span><span class="s1">, </span><span class="s0">&quot;image/wmf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;disposition-notification&quot;</span><span class="s1">, </span><span class="s0">&quot;message/disposition-notification&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;u8msg&quot;</span><span class="s1">, </span><span class="s0">&quot;message/global&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;u8dsn&quot;</span><span class="s1">, </span><span class="s0">&quot;message/global-delivery-status&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;u8mdn&quot;</span><span class="s1">, </span><span class="s0">&quot;message/global-disposition-notification&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;u8hdr&quot;</span><span class="s1">, </span><span class="s0">&quot;message/global-headers&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;eml&quot;</span><span class="s1">, </span><span class="s0">&quot;message/rfc822&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mime&quot;</span><span class="s1">, </span><span class="s0">&quot;message/rfc822&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;3mf&quot;</span><span class="s1">, </span><span class="s0">&quot;model/3mf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;gltf&quot;</span><span class="s1">, </span><span class="s0">&quot;model/gltf+json&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;glb&quot;</span><span class="s1">, </span><span class="s0">&quot;model/gltf-binary&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;iges&quot;</span><span class="s1">, </span><span class="s0">&quot;model/iges&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;igs&quot;</span><span class="s1">, </span><span class="s0">&quot;model/iges&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mesh&quot;</span><span class="s1">, </span><span class="s0">&quot;model/mesh&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;msh&quot;</span><span class="s1">, </span><span class="s0">&quot;model/mesh&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;silo&quot;</span><span class="s1">, </span><span class="s0">&quot;model/mesh&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mtl&quot;</span><span class="s1">, </span><span class="s0">&quot;model/mtl&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;obj&quot;</span><span class="s1">, </span><span class="s0">&quot;model/obj&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;stpx&quot;</span><span class="s1">, </span><span class="s0">&quot;model/step+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;stpz&quot;</span><span class="s1">, </span><span class="s0">&quot;model/step+zip&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;stpxz&quot;</span><span class="s1">, </span><span class="s0">&quot;model/step-xml+zip&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;stl&quot;</span><span class="s1">, </span><span class="s0">&quot;model/stl&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;vrml&quot;</span><span class="s1">, </span><span class="s0">&quot;model/vrml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;wrl&quot;</span><span class="s1">, </span><span class="s0">&quot;model/vrml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*x3db&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d+binary&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;x3dbz&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d+binary&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;x3db&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d+fastinfoset&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*x3dv&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d+vrml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;x3dvz&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d+vrml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;x3d&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;x3dz&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d+xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;x3dv&quot;</span><span class="s1">, </span><span class="s0">&quot;model/x3d-vrml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;appcache&quot;</span><span class="s1">, </span><span class="s0">&quot;text/cache-manifest&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;manifest&quot;</span><span class="s1">, </span><span class="s0">&quot;text/cache-manifest&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ics&quot;</span><span class="s1">, </span><span class="s0">&quot;text/calendar&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ifb&quot;</span><span class="s1">, </span><span class="s0">&quot;text/calendar&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;coffee&quot;</span><span class="s1">, </span><span class="s0">&quot;text/coffeescript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;litcoffee&quot;</span><span class="s1">, </span><span class="s0">&quot;text/coffeescript&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;css&quot;</span><span class="s1">, </span><span class="s0">&quot;text/css&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;csv&quot;</span><span class="s1">, </span><span class="s0">&quot;text/csv&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;htm&quot;</span><span class="s1">, </span><span class="s0">&quot;text/html&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;html&quot;</span><span class="s1">, </span><span class="s0">&quot;text/html&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;shtml&quot;</span><span class="s1">, </span><span class="s0">&quot;text/html&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jade&quot;</span><span class="s1">, </span><span class="s0">&quot;text/jade&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jsx&quot;</span><span class="s1">, </span><span class="s0">&quot;text/jsx&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;less&quot;</span><span class="s1">, </span><span class="s0">&quot;text/less&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;markdown&quot;</span><span class="s1">, </span><span class="s0">&quot;text/markdown&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;md&quot;</span><span class="s1">, </span><span class="s0">&quot;text/markdown&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mml&quot;</span><span class="s1">, </span><span class="s0">&quot;text/mathml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mdx&quot;</span><span class="s1">, </span><span class="s0">&quot;text/mdx&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;n3&quot;</span><span class="s1">, </span><span class="s0">&quot;text/n3&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;conf&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;def&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;in&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ini&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;list&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;log&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;text&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;txt&quot;</span><span class="s1">, </span><span class="s0">&quot;text/plain&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;rtx&quot;</span><span class="s1">, </span><span class="s0">&quot;text/richtext&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*rtf&quot;</span><span class="s1">, </span><span class="s0">&quot;text/rtf&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sgm&quot;</span><span class="s1">, </span><span class="s0">&quot;text/sgml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;sgml&quot;</span><span class="s1">, </span><span class="s0">&quot;text/sgml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;shex&quot;</span><span class="s1">, </span><span class="s0">&quot;text/shex&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;slim&quot;</span><span class="s1">, </span><span class="s0">&quot;text/slim&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;slm&quot;</span><span class="s1">, </span><span class="s0">&quot;text/slim&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;spdx&quot;</span><span class="s1">, </span><span class="s0">&quot;text/spdx&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;styl&quot;</span><span class="s1">, </span><span class="s0">&quot;text/stylus&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;stylus&quot;</span><span class="s1">, </span><span class="s0">&quot;text/stylus&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tsv&quot;</span><span class="s1">, </span><span class="s0">&quot;text/tab-separated-values&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;man&quot;</span><span class="s1">, </span><span class="s0">&quot;text/troff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;me&quot;</span><span class="s1">, </span><span class="s0">&quot;text/troff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ms&quot;</span><span class="s1">, </span><span class="s0">&quot;text/troff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;roff&quot;</span><span class="s1">, </span><span class="s0">&quot;text/troff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;t&quot;</span><span class="s1">, </span><span class="s0">&quot;text/troff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;tr&quot;</span><span class="s1">, </span><span class="s0">&quot;text/troff&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ttl&quot;</span><span class="s1">, </span><span class="s0">&quot;text/turtle&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;uri&quot;</span><span class="s1">, </span><span class="s0">&quot;text/uri-list&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;uris&quot;</span><span class="s1">, </span><span class="s0">&quot;text/uri-list&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;urls&quot;</span><span class="s1">, </span><span class="s0">&quot;text/uri-list&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;vcard&quot;</span><span class="s1">, </span><span class="s0">&quot;text/vcard&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;vtt&quot;</span><span class="s1">, </span><span class="s0">&quot;text/vtt&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;*xml&quot;</span><span class="s1">, </span><span class="s0">&quot;text/xml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;yaml&quot;</span><span class="s1">, </span><span class="s0">&quot;text/yaml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;yml&quot;</span><span class="s1">, </span><span class="s0">&quot;text/yaml&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;3gp&quot;</span><span class="s1">, </span><span class="s0">&quot;video/3gpp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;3gpp&quot;</span><span class="s1">, </span><span class="s0">&quot;video/3gpp&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;3g2&quot;</span><span class="s1">, </span><span class="s0">&quot;video/3gpp2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;h261&quot;</span><span class="s1">, </span><span class="s0">&quot;video/h261&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;h263&quot;</span><span class="s1">, </span><span class="s0">&quot;video/h263&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;h264&quot;</span><span class="s1">, </span><span class="s0">&quot;video/h264&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m4s&quot;</span><span class="s1">, </span><span class="s0">&quot;video/iso.segment&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpgv&quot;</span><span class="s1">, </span><span class="s0">&quot;video/jpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpm&quot;</span><span class="s1">, </span><span class="s0">&quot;video/jpm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;jpgm&quot;</span><span class="s1">, </span><span class="s0">&quot;video/jpm&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mj2&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mj2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mjp2&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mj2&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ts&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mp2t&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp4&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mp4&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mp4v&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mp4&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mpg4&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mp4&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m1v&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;m2v&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mpe&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mpeg&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mpg&quot;</span><span class="s1">, </span><span class="s0">&quot;video/mpeg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;ogv&quot;</span><span class="s1">, </span><span class="s0">&quot;video/ogg&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;mov&quot;</span><span class="s1">, </span><span class="s0">&quot;video/quicktime&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;qt&quot;</span><span class="s1">, </span><span class="s0">&quot;video/quicktime&quot;</span><span class="s1">],</span>
+  <span class="s1">[</span><span class="s0">&quot;webm&quot;</span><span class="s1">, </span><span class="s0">&quot;video/webm&quot;</span><span class="s1">]</span>
+<span class="s1">]);</span>
+<span class="s6">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">getMimeTypeForPath</span><span class="s1">,</span>
+  <span class="s2">isJsonMimeType</span><span class="s1">,</span>
+  <span class="s2">isTextualMimeType</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

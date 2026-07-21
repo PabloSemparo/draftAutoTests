@@ -1,0 +1,293 @@
+<html>
+<head>
+<title>electron.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+electron.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">electron_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">electron_exports</span><span class="s1">, {</span>
+  <span class="s2">Electron</span><span class="s1">: () =&gt; </span><span class="s2">Electron</span><span class="s1">,</span>
+  <span class="s2">ElectronApplication</span><span class="s1">: () =&gt; </span><span class="s2">ElectronApplication</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">electron_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_os </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;os&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">readline </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;readline&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_ascii </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/ascii&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_debugLogger </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/debugLogger&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_eventsHelper </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/eventsHelper&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browserContext </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../browserContext&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_crBrowser </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../chromium/crBrowser&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_crConnection </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../chromium/crConnection&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_crExecutionContext </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../chromium/crExecutionContext&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_crProtocolHelper </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../chromium/crProtocolHelper&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_console </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../console&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_helper </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../helper&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_instrumentation </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../instrumentation&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">js </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../javascript&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_processLauncher </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/processLauncher&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_transport </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../transport&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">ARTIFACTS_FOLDER </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">import_os</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">tmpdir</span><span class="s1">(), </span><span class="s0">&quot;playwright-artifacts-&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">ElectronApplication </span><span class="s3">extends </span><span class="s2">import_instrumentation</span><span class="s1">.</span><span class="s2">SdkObject </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">browser</span><span class="s1">, </span><span class="s2">nodeConnection</span><span class="s1">, </span><span class="s2">process2</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s0">&quot;electron-app&quot;</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeElectronHandlePromise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">ManualPromise</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_process </span><span class="s1">= </span><span class="s2">process2</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContext </span><span class="s1">= </span><span class="s2">browser</span><span class="s1">.</span><span class="s2">_defaultContext</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeConnection </span><span class="s1">= </span><span class="s2">nodeConnection</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeSession </span><span class="s1">= </span><span class="s2">nodeConnection</span><span class="s1">.</span><span class="s2">rootSession</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeSession</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;Runtime.executionContextCreated&quot;</span><span class="s1">, </span><span class="s2">async </span><span class="s1">(</span><span class="s2">event</span><span class="s1">) =&gt; {</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">event</span><span class="s1">.</span><span class="s2">context</span><span class="s1">.</span><span class="s2">auxData </span><span class="s1">|| !</span><span class="s2">event</span><span class="s1">.</span><span class="s2">context</span><span class="s1">.</span><span class="s2">auxData</span><span class="s1">.</span><span class="s2">isDefault</span><span class="s1">)</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">crExecutionContext </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_crExecutionContext</span><span class="s1">.</span><span class="s2">CRExecutionContext</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeSession</span><span class="s1">, </span><span class="s2">event</span><span class="s1">.</span><span class="s2">context</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeExecutionContext </span><span class="s1">= </span><span class="s3">new </span><span class="s2">js</span><span class="s1">.</span><span class="s2">ExecutionContext</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">crExecutionContext</span><span class="s1">, </span><span class="s0">&quot;electron&quot;</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s1">{ </span><span class="s2">result</span><span class="s1">: </span><span class="s2">remoteObject </span><span class="s1">} = </span><span class="s3">await </span><span class="s2">crExecutionContext</span><span class="s1">.</span><span class="s2">_client</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Runtime.evaluate&quot;</span><span class="s1">, {</span>
+        <span class="s2">expression</span><span class="s1">: </span><span class="s0">`require('electron')`</span><span class="s1">,</span>
+        <span class="s2">contextId</span><span class="s1">: </span><span class="s2">event</span><span class="s1">.</span><span class="s2">context</span><span class="s1">.</span><span class="s2">id</span><span class="s1">,</span>
+        <span class="s4">// Needed after Electron 28 to get access to require: https://github.com/microsoft/playwright/issues/28048</span>
+        <span class="s2">includeCommandLineAPI</span><span class="s1">: </span><span class="s3">true</span>
+      <span class="s1">});</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeElectronHandlePromise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s3">new </span><span class="s2">js</span><span class="s1">.</span><span class="s2">JSHandle</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeExecutionContext</span><span class="s1">, </span><span class="s0">&quot;object&quot;</span><span class="s1">, </span><span class="s0">&quot;ElectronModule&quot;</span><span class="s1">, </span><span class="s2">remoteObject</span><span class="s1">.</span><span class="s2">objectId</span><span class="s1">));</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeSession</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;Runtime.consoleAPICalled&quot;</span><span class="s1">, (</span><span class="s2">event</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onConsoleAPI</span><span class="s1">(</span><span class="s2">event</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">appClosePromise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">f</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">once</span><span class="s1">(</span><span class="s2">ElectronApplication</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">Close</span><span class="s1">, </span><span class="s2">f</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContext</span><span class="s1">.</span><span class="s2">setCustomCloseHandler</span><span class="s1">(</span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_browserContext</span><span class="s1">.</span><span class="s2">stopVideoRecording</span><span class="s1">();</span>
+      <span class="s3">const </span><span class="s2">electronHandle </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_nodeElectronHandlePromise</span><span class="s1">;</span>
+      <span class="s3">await </span><span class="s2">electronHandle</span><span class="s1">.</span><span class="s2">evaluate</span><span class="s1">(({ </span><span class="s2">app </span><span class="s1">}) =&gt; </span><span class="s2">app</span><span class="s1">.</span><span class="s2">quit</span><span class="s1">()).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeConnection</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+      <span class="s3">await </span><span class="s2">appClosePromise</span><span class="s1">;</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s1">{</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">Events </span><span class="s1">= {</span>
+      <span class="s2">Close</span><span class="s1">: </span><span class="s0">&quot;close&quot;</span><span class="s1">,</span>
+      <span class="s2">Console</span><span class="s1">: </span><span class="s0">&quot;console&quot;</span>
+    <span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async _onConsoleAPI</span><span class="s1">(</span><span class="s2">event</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">event</span><span class="s1">.</span><span class="s2">executionContextId </span><span class="s1">=== </span><span class="s5">0</span><span class="s1">) {</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeExecutionContext</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">args </span><span class="s1">= </span><span class="s2">event</span><span class="s1">.</span><span class="s2">args</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">arg</span><span class="s1">) =&gt; (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_crExecutionContext</span><span class="s1">.</span><span class="s2">createHandle</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_nodeExecutionContext</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">message </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_console</span><span class="s1">.</span><span class="s2">ConsoleMessage</span><span class="s1">(</span><span class="s3">null</span><span class="s1">, </span><span class="s2">event</span><span class="s1">.</span><span class="s2">type</span><span class="s1">, </span><span class="s3">void </span><span class="s5">0</span><span class="s1">, </span><span class="s2">args</span><span class="s1">, (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_crProtocolHelper</span><span class="s1">.</span><span class="s2">toConsoleMessageLocation</span><span class="s1">)(</span><span class="s2">event</span><span class="s1">.</span><span class="s2">stackTrace</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s2">ElectronApplication</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">Console</span><span class="s1">, </span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async initialize</span><span class="s1">() {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_nodeSession</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Runtime.enable&quot;</span><span class="s1">, {});</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_nodeSession</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;Runtime.evaluate&quot;</span><span class="s1">, { </span><span class="s2">expression</span><span class="s1">: </span><span class="s0">&quot;__playwright_run()&quot; </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">process</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_process</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">context</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_browserContext</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async close</span><span class="s1">() {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_browserContext</span><span class="s1">.</span><span class="s2">close</span><span class="s1">({ </span><span class="s2">reason</span><span class="s1">: </span><span class="s0">&quot;Application exited&quot; </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">async browserWindow</span><span class="s1">(</span><span class="s2">page</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">targetId </span><span class="s1">= </span><span class="s2">page</span><span class="s1">.</span><span class="s2">delegate</span><span class="s1">.</span><span class="s2">_targetId</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">electronHandle </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_nodeElectronHandlePromise</span><span class="s1">;</span>
+    <span class="s3">return await </span><span class="s2">electronHandle</span><span class="s1">.</span><span class="s2">evaluateHandle</span><span class="s1">(({ </span><span class="s2">BrowserWindow</span><span class="s1">, </span><span class="s2">webContents </span><span class="s1">}, </span><span class="s2">targetId2</span><span class="s1">) =&gt; {</span>
+      <span class="s3">const </span><span class="s2">wc </span><span class="s1">= </span><span class="s2">webContents</span><span class="s1">.</span><span class="s2">fromDevToolsTargetId</span><span class="s1">(</span><span class="s2">targetId2</span><span class="s1">);</span>
+      <span class="s3">return </span><span class="s2">BrowserWindow</span><span class="s1">.</span><span class="s2">fromWebContents</span><span class="s1">(</span><span class="s2">wc</span><span class="s1">);</span>
+    <span class="s1">}, </span><span class="s2">targetId</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">Electron </span><span class="s3">extends </span><span class="s2">import_instrumentation</span><span class="s1">.</span><span class="s2">SdkObject </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">playwright</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">(</span><span class="s2">playwright</span><span class="s1">, </span><span class="s0">&quot;electron&quot;</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">logName </span><span class="s1">= </span><span class="s0">&quot;browser&quot;</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async launch</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">app </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">electronArguments </span><span class="s1">= [</span><span class="s0">&quot;--inspect=0&quot;</span><span class="s1">, </span><span class="s0">&quot;--remote-debugging-port=0&quot;</span><span class="s1">, </span><span class="s2">...options</span><span class="s1">.</span><span class="s2">args </span><span class="s1">|| []];</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">import_os</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">platform</span><span class="s1">() === </span><span class="s0">&quot;linux&quot;</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">runningAsRoot </span><span class="s1">= </span><span class="s2">process</span><span class="s1">.</span><span class="s2">geteuid </span><span class="s1">&amp;&amp; </span><span class="s2">process</span><span class="s1">.</span><span class="s2">geteuid</span><span class="s1">() === </span><span class="s5">0</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">runningAsRoot </span><span class="s1">&amp;&amp; </span><span class="s2">electronArguments</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s0">&quot;--no-sandbox&quot;</span><span class="s1">) === -</span><span class="s5">1</span><span class="s1">)</span>
+        <span class="s2">electronArguments</span><span class="s1">.</span><span class="s2">unshift</span><span class="s1">(</span><span class="s0">&quot;--no-sandbox&quot;</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">artifactsDir </span><span class="s1">= </span><span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">mkdtemp</span><span class="s1">(</span><span class="s2">ARTIFACTS_FOLDER</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">browserLogsCollector </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_debugLogger</span><span class="s1">.</span><span class="s2">RecentLogsCollector</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">env </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">env </span><span class="s1">? (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_processLauncher</span><span class="s1">.</span><span class="s2">envArrayToObject</span><span class="s1">)(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">env</span><span class="s1">) : </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">command</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">executablePath</span><span class="s1">) {</span>
+      <span class="s2">command </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">executablePath</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s2">command </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;electron/index.js&quot;</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">error</span><span class="s1">?.</span><span class="s2">code </span><span class="s1">=== </span><span class="s0">&quot;MODULE_NOT_FOUND&quot;</span><span class="s1">) {</span>
+          <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot; </span><span class="s1">+ (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_ascii</span><span class="s1">.</span><span class="s2">wrapInASCIIBox</span><span class="s1">)([</span>
+            <span class="s0">&quot;Electron executablePath not found!&quot;</span><span class="s1">,</span>
+            <span class="s0">&quot;Please install it using `npm install -D electron` or set the executablePath to your Electron executable.&quot;</span>
+          <span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">), </span><span class="s5">1</span><span class="s1">));</span>
+        <span class="s1">}</span>
+        <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s2">electronArguments</span><span class="s1">.</span><span class="s2">unshift</span><span class="s1">(</span><span class="s0">&quot;-r&quot;</span><span class="s1">, </span><span class="s2">require</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s0">&quot;./loader&quot;</span><span class="s1">));</span>
+    <span class="s1">}</span>
+    <span class="s3">let </span><span class="s2">shell </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">platform </span><span class="s1">=== </span><span class="s0">&quot;win32&quot;</span><span class="s1">) {</span>
+      <span class="s2">shell </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s2">command </span><span class="s1">= </span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">command</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">;</span>
+      <span class="s2">electronArguments </span><span class="s1">= </span><span class="s2">electronArguments</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">arg</span><span class="s1">) =&gt; </span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">arg</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">delete </span><span class="s2">env</span><span class="s1">.</span><span class="s2">NODE_OPTIONS</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">launchedProcess</span><span class="s1">, </span><span class="s2">gracefullyClose</span><span class="s1">, </span><span class="s2">kill </span><span class="s1">} = </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_processLauncher</span><span class="s1">.</span><span class="s2">launchProcess</span><span class="s1">)({</span>
+      <span class="s2">command</span><span class="s1">,</span>
+      <span class="s2">args</span><span class="s1">: </span><span class="s2">electronArguments</span><span class="s1">,</span>
+      <span class="s2">env</span><span class="s1">,</span>
+      <span class="s2">log</span><span class="s1">: (</span><span class="s2">message</span><span class="s1">) =&gt; {</span>
+        <span class="s2">progress</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+        <span class="s2">browserLogsCollector</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+      <span class="s1">},</span>
+      <span class="s2">shell</span><span class="s1">,</span>
+      <span class="s2">stdio</span><span class="s1">: </span><span class="s0">&quot;pipe&quot;</span><span class="s1">,</span>
+      <span class="s2">cwd</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">cwd</span><span class="s1">,</span>
+      <span class="s2">tempDirectories</span><span class="s1">: [</span><span class="s2">artifactsDir</span><span class="s1">],</span>
+      <span class="s2">attemptToGracefullyClose</span><span class="s1">: () =&gt; </span><span class="s2">app</span><span class="s1">.</span><span class="s2">close</span><span class="s1">(),</span>
+      <span class="s2">handleSIGINT</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+      <span class="s2">handleSIGTERM</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+      <span class="s2">handleSIGHUP</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+      <span class="s2">onExit</span><span class="s1">: () =&gt; </span><span class="s2">app</span><span class="s1">?.</span><span class="s2">emit</span><span class="s1">(</span><span class="s2">ElectronApplication</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">Close</span><span class="s1">)</span>
+    <span class="s1">});</span>
+    <span class="s3">const </span><span class="s2">waitForXserverError </span><span class="s1">= </span><span class="s2">waitForLine</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">launchedProcess</span><span class="s1">, </span><span class="s6">/Unable to open X display/</span><span class="s1">).</span><span class="s2">then</span><span class="s1">(() =&gt; {</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">([</span>
+        <span class="s0">&quot;Unable to open X display!&quot;</span><span class="s1">,</span>
+        <span class="s0">`================================`</span><span class="s1">,</span>
+        <span class="s0">&quot;Most likely this is because there is no X server available.&quot;</span><span class="s1">,</span>
+        <span class="s0">&quot;Use 'xvfb-run' on Linux to launch your tests with an emulated display server.&quot;</span><span class="s1">,</span>
+        <span class="s0">&quot;For example: 'xvfb-run npm run test:e2e'&quot;</span><span class="s1">,</span>
+        <span class="s0">`================================`</span><span class="s1">,</span>
+        <span class="s2">progress</span><span class="s1">.</span><span class="s2">metadata</span><span class="s1">.</span><span class="s2">log</span>
+      <span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">));</span>
+    <span class="s1">});</span>
+    <span class="s3">const </span><span class="s2">nodeMatchPromise </span><span class="s1">= </span><span class="s2">waitForLine</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">launchedProcess</span><span class="s1">, </span><span class="s6">/^Debugger listening on (ws:\/\/.*)$/</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">chromeMatchPromise </span><span class="s1">= </span><span class="s2">waitForLine</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">launchedProcess</span><span class="s1">, </span><span class="s6">/^DevTools listening on (ws:\/\/.*)$/</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">debuggerDisconnectPromise </span><span class="s1">= </span><span class="s2">waitForLine</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">launchedProcess</span><span class="s1">, </span><span class="s6">/Waiting for the debugger to disconnect\.\.\./</span><span class="s1">);</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">nodeMatch </span><span class="s1">= </span><span class="s3">await </span><span class="s2">nodeMatchPromise</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">nodeTransport </span><span class="s1">= </span><span class="s3">await </span><span class="s2">import_transport</span><span class="s1">.</span><span class="s2">WebSocketTransport</span><span class="s1">.</span><span class="s2">connect</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">nodeMatch</span><span class="s1">[</span><span class="s5">1</span><span class="s1">]);</span>
+      <span class="s3">const </span><span class="s2">nodeConnection </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_crConnection</span><span class="s1">.</span><span class="s2">CRConnection</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">nodeTransport</span><span class="s1">, </span><span class="s2">import_helper</span><span class="s1">.</span><span class="s2">helper</span><span class="s1">.</span><span class="s2">debugProtocolLogger</span><span class="s1">(), </span><span class="s2">browserLogsCollector</span><span class="s1">);</span>
+      <span class="s2">debuggerDisconnectPromise</span><span class="s1">.</span><span class="s2">then</span><span class="s1">(() =&gt; {</span>
+        <span class="s2">nodeTransport</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+      <span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">const </span><span class="s2">chromeMatch </span><span class="s1">= </span><span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">race</span><span class="s1">([</span>
+        <span class="s2">chromeMatchPromise</span><span class="s1">,</span>
+        <span class="s2">waitForXserverError</span>
+      <span class="s1">]);</span>
+      <span class="s3">const </span><span class="s2">chromeTransport </span><span class="s1">= </span><span class="s3">await </span><span class="s2">import_transport</span><span class="s1">.</span><span class="s2">WebSocketTransport</span><span class="s1">.</span><span class="s2">connect</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">chromeMatch</span><span class="s1">[</span><span class="s5">1</span><span class="s1">]);</span>
+      <span class="s3">const </span><span class="s2">browserProcess </span><span class="s1">= {</span>
+        <span class="s2">onclose</span><span class="s1">: </span><span class="s3">void </span><span class="s5">0</span><span class="s1">,</span>
+        <span class="s2">process</span><span class="s1">: </span><span class="s2">launchedProcess</span><span class="s1">,</span>
+        <span class="s2">close</span><span class="s1">: </span><span class="s2">gracefullyClose</span><span class="s1">,</span>
+        <span class="s2">kill</span>
+      <span class="s1">};</span>
+      <span class="s3">const </span><span class="s2">contextOptions </span><span class="s1">= {</span>
+        <span class="s2">...options</span><span class="s1">,</span>
+        <span class="s2">noDefaultViewport</span><span class="s1">: </span><span class="s3">true</span>
+      <span class="s1">};</span>
+      <span class="s3">const </span><span class="s2">browserOptions </span><span class="s1">= {</span>
+        <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;electron&quot;</span><span class="s1">,</span>
+        <span class="s2">isChromium</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+        <span class="s2">headful</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+        <span class="s2">persistent</span><span class="s1">: </span><span class="s2">contextOptions</span><span class="s1">,</span>
+        <span class="s2">browserProcess</span><span class="s1">,</span>
+        <span class="s2">protocolLogger</span><span class="s1">: </span><span class="s2">import_helper</span><span class="s1">.</span><span class="s2">helper</span><span class="s1">.</span><span class="s2">debugProtocolLogger</span><span class="s1">(),</span>
+        <span class="s2">browserLogsCollector</span><span class="s1">,</span>
+        <span class="s2">artifactsDir</span><span class="s1">,</span>
+        <span class="s2">downloadsPath</span><span class="s1">: </span><span class="s2">artifactsDir</span><span class="s1">,</span>
+        <span class="s2">tracesDir</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">tracesDir </span><span class="s1">|| </span><span class="s2">artifactsDir</span><span class="s1">,</span>
+        <span class="s2">originalLaunchOptions</span><span class="s1">: {}</span>
+      <span class="s1">};</span>
+      <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_browserContext</span><span class="s1">.</span><span class="s2">validateBrowserContextOptions</span><span class="s1">)(</span><span class="s2">contextOptions</span><span class="s1">, </span><span class="s2">browserOptions</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">browser </span><span class="s1">= </span><span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">import_crBrowser</span><span class="s1">.</span><span class="s2">CRBrowser</span><span class="s1">.</span><span class="s2">connect</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">attribution</span><span class="s1">.</span><span class="s2">playwright</span><span class="s1">, </span><span class="s2">chromeTransport</span><span class="s1">, </span><span class="s2">browserOptions</span><span class="s1">));</span>
+      <span class="s2">app </span><span class="s1">= </span><span class="s3">new </span><span class="s2">ElectronApplication</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">browser</span><span class="s1">, </span><span class="s2">nodeConnection</span><span class="s1">, </span><span class="s2">launchedProcess</span><span class="s1">);</span>
+      <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">app</span><span class="s1">.</span><span class="s2">initialize</span><span class="s1">());</span>
+      <span class="s3">return </span><span class="s2">app</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s2">kill</span><span class="s1">();</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">waitForLine</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">process2</span><span class="s1">, </span><span class="s2">regex</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">promise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">ManualPromise</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">rl </span><span class="s1">= </span><span class="s2">readline</span><span class="s1">.</span><span class="s2">createInterface</span><span class="s1">({ </span><span class="s2">input</span><span class="s1">: </span><span class="s2">process2</span><span class="s1">.</span><span class="s2">stderr </span><span class="s1">});</span>
+  <span class="s3">const </span><span class="s2">failError </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Process failed to launch!&quot;</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">listeners </span><span class="s1">= [</span>
+    <span class="s2">import_eventsHelper</span><span class="s1">.</span><span class="s2">eventsHelper</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s2">rl</span><span class="s1">, </span><span class="s0">&quot;line&quot;</span><span class="s1">, </span><span class="s2">onLine</span><span class="s1">),</span>
+    <span class="s2">import_eventsHelper</span><span class="s1">.</span><span class="s2">eventsHelper</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s2">rl</span><span class="s1">, </span><span class="s0">&quot;close&quot;</span><span class="s1">, () =&gt; </span><span class="s2">promise</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s2">failError</span><span class="s1">)),</span>
+    <span class="s2">import_eventsHelper</span><span class="s1">.</span><span class="s2">eventsHelper</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s2">process2</span><span class="s1">, </span><span class="s0">&quot;exit&quot;</span><span class="s1">, () =&gt; </span><span class="s2">promise</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s2">failError</span><span class="s1">)),</span>
+    <span class="s4">// It is Ok to remove error handler because we did not create process and there is another listener.</span>
+    <span class="s2">import_eventsHelper</span><span class="s1">.</span><span class="s2">eventsHelper</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s2">process2</span><span class="s1">, </span><span class="s0">&quot;error&quot;</span><span class="s1">, () =&gt; </span><span class="s2">promise</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s2">failError</span><span class="s1">))</span>
+  <span class="s1">];</span>
+  <span class="s3">function </span><span class="s2">onLine</span><span class="s1">(</span><span class="s2">line</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">match </span><span class="s1">= </span><span class="s2">line</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s2">regex</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">match</span><span class="s1">)</span>
+      <span class="s2">promise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">match</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s3">return await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">promise</span><span class="s1">);</span>
+  <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+    <span class="s2">import_eventsHelper</span><span class="s1">.</span><span class="s2">eventsHelper</span><span class="s1">.</span><span class="s2">removeEventListeners</span><span class="s1">(</span><span class="s2">listeners</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">Electron</span><span class="s1">,</span>
+  <span class="s2">ElectronApplication</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

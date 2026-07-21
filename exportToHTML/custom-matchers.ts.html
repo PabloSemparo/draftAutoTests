@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>custom-matchers.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+custom-matchers.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+
+<span class="s4">// Кастомные хелперы вместо несуществующих матчеров</span>
+<span class="s0">export const </span><span class="s1">assertIsObject </span><span class="s2">= (</span><span class="s1">value</span><span class="s2">: </span><span class="s1">any</span><span class="s2">, </span><span class="s1">message</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">) =&gt; {</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">value</span><span class="s2">, </span><span class="s1">message</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">value</span><span class="s2">, </span><span class="s1">message</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'object'</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">value</span><span class="s2">, </span><span class="s1">message</span><span class="s2">).</span><span class="s1">not</span><span class="s2">.</span><span class="s1">toBeNull</span><span class="s2">();</span>
+<span class="s2">};</span>
+
+<span class="s0">export const </span><span class="s1">assertIsStringOrNull </span><span class="s2">= (</span><span class="s1">value</span><span class="s2">: </span><span class="s1">any</span><span class="s2">, </span><span class="s1">message</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">) =&gt; {</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">value </span><span class="s2">!== </span><span class="s0">null</span><span class="s2">) {</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">value</span><span class="s2">, </span><span class="s1">message</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">value</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s1">message</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">};</span>
+
+<span class="s0">export const </span><span class="s1">assertIsValidDate </span><span class="s2">= (</span><span class="s1">dateString</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">message</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">date </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">dateString</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">isNaN</span><span class="s2">(</span><span class="s1">date</span><span class="s2">.</span><span class="s1">getTime</span><span class="s2">()), </span><span class="s1">message</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+<span class="s2">};</span></pre>
+</body>
+</html>

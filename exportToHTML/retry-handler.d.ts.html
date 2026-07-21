@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>retry-handler.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+retry-handler.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s2">&quot;./dispatcher&quot;</span><span class="s3">;</span>
+
+<span class="s0">export default </span><span class="s1">RetryHandler</span><span class="s3">;</span>
+
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">RetryHandler </span><span class="s0">implements </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchHandlers </span><span class="s3">{</span>
+  <span class="s1">constructor</span><span class="s3">(</span>
+    <span class="s1">options</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchOptions </span><span class="s3">&amp; {</span>
+      <span class="s1">retryOptions</span><span class="s3">?: </span><span class="s1">RetryHandler</span><span class="s3">.</span><span class="s1">RetryOptions</span><span class="s3">;</span>
+    <span class="s3">},</span>
+    <span class="s1">retryHandlers</span><span class="s3">: </span><span class="s1">RetryHandler</span><span class="s3">.</span><span class="s1">RetryHandlers</span>
+  <span class="s3">);</span>
+<span class="s3">}</span>
+
+<span class="s1">declare namespace RetryHandler </span><span class="s3">{</span>
+  <span class="s0">export </span><span class="s1">type RetryState </span><span class="s3">= { </span><span class="s1">counter</span><span class="s3">: </span><span class="s1">number</span><span class="s3">; };</span>
+
+  <span class="s0">export </span><span class="s1">type RetryContext </span><span class="s3">= {</span>
+    <span class="s1">state</span><span class="s3">: </span><span class="s1">RetryState</span><span class="s3">;</span>
+    <span class="s1">opts</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchOptions </span><span class="s3">&amp; {</span>
+      <span class="s1">retryOptions</span><span class="s3">?: </span><span class="s1">RetryHandler</span><span class="s3">.</span><span class="s1">RetryOptions</span><span class="s3">;</span>
+    <span class="s3">};</span>
+  <span class="s3">}</span>
+
+  <span class="s0">export </span><span class="s1">type OnRetryCallback </span><span class="s3">= (</span><span class="s1">result</span><span class="s3">?: </span><span class="s1">Error </span><span class="s3">| </span><span class="s0">null</span><span class="s3">) =&gt; </span><span class="s0">void</span><span class="s3">;</span>
+
+  <span class="s0">export </span><span class="s1">type RetryCallback </span><span class="s3">= (</span>
+    <span class="s1">err</span><span class="s3">: </span><span class="s1">Error</span><span class="s3">,</span>
+    <span class="s1">context</span><span class="s3">: {</span>
+      <span class="s1">state</span><span class="s3">: </span><span class="s1">RetryState</span><span class="s3">;</span>
+      <span class="s1">opts</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchOptions </span><span class="s3">&amp; {</span>
+        <span class="s1">retryOptions</span><span class="s3">?: </span><span class="s1">RetryHandler</span><span class="s3">.</span><span class="s1">RetryOptions</span><span class="s3">;</span>
+      <span class="s3">};</span>
+    <span class="s3">},</span>
+    <span class="s1">callback</span><span class="s3">: </span><span class="s1">OnRetryCallback</span>
+  <span class="s3">) =&gt; </span><span class="s1">number </span><span class="s3">| </span><span class="s0">null</span><span class="s3">;</span>
+
+  <span class="s0">export interface </span><span class="s1">RetryOptions </span><span class="s3">{</span>
+    <span class="s4">/**</span>
+     <span class="s4">* Callback to be invoked on every retry iteration.</span>
+     <span class="s4">* It receives the error, current state of the retry object and the options object</span>
+     <span class="s4">* passed when instantiating the retry handler.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{RetryCallback}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">*/</span>
+    <span class="s1">retry</span><span class="s3">?: </span><span class="s1">RetryCallback</span><span class="s3">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* Maximum number of retries to allow.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{number}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">5</span>
+     <span class="s4">*/</span>
+    <span class="s1">maxRetries</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* Max number of milliseconds allow between retries</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{number}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">30000</span>
+     <span class="s4">*/</span>
+    <span class="s1">maxTimeout</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* Initial number of milliseconds to wait before retrying for the first time.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{number}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">500</span>
+     <span class="s4">*/</span>
+    <span class="s1">minTimeout</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* Factior to multiply the timeout factor between retries.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{number}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">2</span>
+     <span class="s4">*/</span>
+    <span class="s1">timeoutFactor</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* It enables to automatically infer timeout between retries based on the `Retry-After` header.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{boolean}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">true</span>
+     <span class="s4">*/</span>
+    <span class="s1">retryAfter</span><span class="s3">?: </span><span class="s1">boolean</span><span class="s3">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* HTTP methods to retry.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{Dispatcher.HttpMethod[]}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE', 'TRACE'],</span>
+     <span class="s4">*/</span>
+    <span class="s1">methods</span><span class="s3">?: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">HttpMethod</span><span class="s3">[];</span>
+    <span class="s4">/**</span>
+     <span class="s4">* Error codes to be retried. e.g. `ECONNRESET`, `ENOTFOUND`, `ETIMEDOUT`, `ECONNREFUSED`, etc.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{string[]}</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">['ECONNRESET','ECONNREFUSED','ENOTFOUND','ENETDOWN','ENETUNREACH','EHOSTDOWN','EHOSTUNREACH','EPIPE']</span>
+     <span class="s4">*/</span>
+    <span class="s1">errorCodes</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">[];</span>
+    <span class="s4">/**</span>
+     <span class="s4">* HTTP status codes to be retried.</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s5">@type </span><span class="s4">{number[]}</span>
+     <span class="s4">* </span><span class="s5">@memberof </span><span class="s4">RetryOptions</span>
+     <span class="s4">* </span><span class="s5">@default </span><span class="s4">[500, 502, 503, 504, 429],</span>
+     <span class="s4">*/</span>
+    <span class="s1">statusCodes</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">[];</span>
+  <span class="s3">}</span>
+
+  <span class="s0">export interface </span><span class="s1">RetryHandlers </span><span class="s3">{</span>
+    <span class="s1">dispatch</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">[</span><span class="s2">&quot;dispatch&quot;</span><span class="s3">];</span>
+    <span class="s1">handler</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchHandlers</span><span class="s3">;</span>
+  <span class="s3">}</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

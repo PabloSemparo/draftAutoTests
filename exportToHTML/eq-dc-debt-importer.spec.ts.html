@@ -1,0 +1,257 @@
+<html>
+<head>
+<title>eq-dc-debt-importer.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-dc-debt-importer.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@faker-js/faker/locale/ru'</span><span class="s2">;</span>
+
+<span class="s4">// Базовые настройки</span>
+<span class="s0">const </span><span class="s1">API_URL </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">API_URL </span><span class="s2">|| </span><span class="s3">'http://eq-dc-debt-importer.test2.mmk.local'</span><span class="s2">;</span>
+<span class="s0">const </span><span class="s1">AUTH_TOKEN </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">AUTH_TOKEN </span><span class="s2">|| </span><span class="s3">'Вводим актуальный токен'</span><span class="s2">;</span>
+
+<span class="s4">// Вспомогательные функции</span>
+<span class="s1">async </span><span class="s0">function </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">data </span><span class="s2">= {}) {</span>
+    <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors`</span><span class="s2">, {</span>
+        <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">},</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s1">faker</span><span class="s2">.</span><span class="s1">company</span><span class="s2">.</span><span class="s1">name</span><span class="s2">(),</span>
+            <span class="s1">description</span><span class="s2">: </span><span class="s1">faker</span><span class="s2">.</span><span class="s1">lorem</span><span class="s2">.</span><span class="s1">sentence</span><span class="s2">(),</span>
+            <span class="s1">inn</span><span class="s2">: </span><span class="s1">faker</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">numeric</span><span class="s2">(</span><span class="s5">10</span><span class="s2">),</span>
+            <span class="s1">status</span><span class="s2">: </span><span class="s3">&quot;ACTIVE&quot;</span><span class="s2">,</span>
+            <span class="s1">contract</span><span class="s2">: {</span>
+                <span class="s1">fileNamePattern</span><span class="s2">: </span><span class="s3">&quot;contract_pattern&quot;</span><span class="s2">,</span>
+                <span class="s1">inputFields</span><span class="s2">: [],</span>
+                <span class="s1">isAutoCourt</span><span class="s2">: </span><span class="s0">false</span>
+            <span class="s2">},</span>
+            <span class="s1">contractAnnex</span><span class="s2">: {</span>
+                <span class="s1">fileNamePattern</span><span class="s2">: </span><span class="s3">&quot;annex_pattern&quot;</span><span class="s2">,</span>
+                <span class="s1">inputFields</span><span class="s2">: []</span>
+            <span class="s2">},</span>
+            <span class="s1">debt</span><span class="s2">: {</span>
+                <span class="s1">fileLocationType</span><span class="s2">: </span><span class="s3">&quot;COMMON&quot;</span><span class="s2">,</span>
+                <span class="s1">inputFields</span><span class="s2">: []</span>
+            <span class="s2">},</span>
+            <span class="s1">...data</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+    <span class="s0">return </span><span class="s1">response</span><span class="s2">;</span>
+<span class="s2">}</span>
+
+<span class="s1">async </span><span class="s0">function </span><span class="s1">createContractImport</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">contractorId</span><span class="s2">) {</span>
+    <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contract-imports`</span><span class="s2">, {</span>
+        <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">},</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+            <span class="s1">contractorId</span><span class="s2">,</span>
+            <span class="s1">assignmentNumber</span><span class="s2">: </span><span class="s1">faker</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">numeric</span><span class="s2">(</span><span class="s5">4</span><span class="s2">),</span>
+            <span class="s1">assigmentDate</span><span class="s2">: </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">().</span><span class="s1">toISOString</span><span class="s2">(),</span>
+            <span class="s1">contractDirectory</span><span class="s2">: </span><span class="s3">&quot;/test/contracts/&quot;</span><span class="s2">,</span>
+            <span class="s1">contractAnnexDirectory</span><span class="s2">: </span><span class="s3">&quot;/test/annexes/&quot;</span><span class="s2">,</span>
+            <span class="s1">debtDirectory</span><span class="s2">: </span><span class="s3">&quot;/test/debts/&quot;</span><span class="s2">,</span>
+            <span class="s1">fileDirectory</span><span class="s2">: </span><span class="s3">&quot;/test/files/&quot;</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+    <span class="s0">return </span><span class="s1">response</span><span class="s2">;</span>
+<span class="s2">}</span>
+
+<span class="s4">// Тесты для работы с контрагентами</span>
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Contractors API'</span><span class="s2">, () =&gt; {</span>
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contractors - should return list of contractors'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors?pageNumber=0&amp;pageSize=25`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'items'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">items</span><span class="s2">).</span><span class="s1">toBeInstanceOf</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'POST /admin/v1/contractors - should create new contractor'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">contractorName </span><span class="s2">= </span><span class="s1">faker</span><span class="s2">.</span><span class="s1">company</span><span class="s2">.</span><span class="s1">name</span><span class="s2">();</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s1">contractorName </span><span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">201</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contractors/{id} - should return contractor details'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">createResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">contractorId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">createResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractorId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">id</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">contractorId</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'contract'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'debt'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'PUT /admin/v1/contractors/{id} - should update contractor'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">createResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">contractorId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">createResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s0">const </span><span class="s1">newName </span><span class="s2">= </span><span class="s1">faker</span><span class="s2">.</span><span class="s1">company</span><span class="s2">.</span><span class="s1">name</span><span class="s2">();</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractorId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">},</span>
+            <span class="s1">data</span><span class="s2">: {</span>
+                <span class="s1">name</span><span class="s2">: </span><span class="s1">newName</span><span class="s2">,</span>
+                <span class="s1">description</span><span class="s2">: </span><span class="s3">&quot;Updated description&quot;</span><span class="s2">,</span>
+                <span class="s1">inn</span><span class="s2">: </span><span class="s1">faker</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">numeric</span><span class="s2">(</span><span class="s5">10</span><span class="s2">),</span>
+                <span class="s1">status</span><span class="s2">: </span><span class="s3">&quot;ACTIVE&quot;</span><span class="s2">,</span>
+                <span class="s1">contract</span><span class="s2">: {</span>
+                    <span class="s1">fileNamePattern</span><span class="s2">: </span><span class="s3">&quot;updated_pattern&quot;</span><span class="s2">,</span>
+                    <span class="s1">inputFields</span><span class="s2">: [],</span>
+                    <span class="s1">isAutoCourt</span><span class="s2">: </span><span class="s0">true</span>
+                <span class="s2">},</span>
+                <span class="s1">contractAnnex</span><span class="s2">: {</span>
+                    <span class="s1">fileNamePattern</span><span class="s2">: </span><span class="s3">&quot;updated_annex_pattern&quot;</span><span class="s2">,</span>
+                    <span class="s1">inputFields</span><span class="s2">: []</span>
+                <span class="s2">},</span>
+                <span class="s1">debt</span><span class="s2">: {</span>
+                    <span class="s1">fileLocationType</span><span class="s2">: </span><span class="s3">&quot;INDIVIDUAL&quot;</span><span class="s2">,</span>
+                    <span class="s1">inputFields</span><span class="s2">: []</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">204</span><span class="s2">);</span>
+
+        <span class="s4">// Verify update</span>
+        <span class="s0">const </span><span class="s1">getResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractorId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">getResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">name</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">newName</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">contract</span><span class="s2">.</span><span class="s1">isAutoCourt</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'DELETE /admin/v1/contractors/{id} - should delete contractor'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">createResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">contractorId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">createResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">delete</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractorId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">204</span><span class="s2">);</span>
+
+        <span class="s4">// Verify deletion</span>
+        <span class="s0">const </span><span class="s1">getResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractorId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">getResponse</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">404</span><span class="s2">);</span>
+    <span class="s2">});</span>
+<span class="s2">});</span>
+
+<span class="s4">// Тесты для работы с импортом договоров</span>
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Contract Imports API'</span><span class="s2">, () =&gt; {</span>
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contract-imports - should return list of contract imports'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">contractorResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">contractorId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">contractorResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contract-imports?contractorId=</span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractorId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'items'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">items</span><span class="s2">).</span><span class="s1">toBeInstanceOf</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'POST /admin/v1/contract-imports - should create new contract import'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">contractorResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">contractorId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">contractorResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractImport</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">contractorId</span><span class="s2">);</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">201</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contract-imports/{id} - should return contract import details'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">contractorResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">contractorId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">contractorResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s0">const </span><span class="s1">importResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractImport</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">contractorId</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">importId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">importResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contract-imports/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">importId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">id</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">importId</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">contractorId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">contractorId</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'status'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+<span class="s2">});</span>
+
+<span class="s4">// Тесты для работы с договорами</span>
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Contracts API'</span><span class="s2">, () =&gt; {</span>
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contracts - should return list of contracts'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s4">// Создаем цепочку: контрагент -&gt; импорт -&gt; проверяем список договоров</span>
+        <span class="s0">const </span><span class="s1">contractorResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractor</span><span class="s2">(</span><span class="s1">request</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">contractorId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">contractorResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s0">const </span><span class="s1">importResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">createContractImport</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">contractorId</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">importId </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">importResponse</span><span class="s2">.</span><span class="s1">json</span><span class="s2">()).</span><span class="s1">id</span><span class="s2">;</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contracts?contractImportId=</span><span class="s1">$</span><span class="s2">{</span><span class="s1">importId</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'items'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">items</span><span class="s2">).</span><span class="s1">toBeInstanceOf</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contracts/{id} - should return contract details'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s4">// В реальном тесте здесь нужно было бы создать тестовый договор</span>
+        <span class="s4">// Для примера просто проверяем что эндпоинт существует</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contracts/55298707-117c-44a5-8434-162fb9d2e4c5`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s4">// Ожидаем 404 или 200 в зависимости от наличия тестовых данных</span>
+        <span class="s1">expect</span><span class="s2">([</span><span class="s5">200</span><span class="s2">, </span><span class="s5">404</span><span class="s2">]).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">());</span>
+    <span class="s2">});</span>
+<span class="s2">});</span>
+
+<span class="s4">// Тесты безопасности</span>
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Security tests'</span><span class="s2">, () =&gt; {</span>
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Unauthorized access should return 401'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors`</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">401</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Invalid token should return 403'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contractors`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">'Bearer invalid-token' </span><span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">403</span><span class="s2">);</span>
+    <span class="s2">});</span>
+<span class="s2">});</span>
+</pre>
+</body>
+</html>

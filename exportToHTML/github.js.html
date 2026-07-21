@@ -1,0 +1,151 @@
+<html>
+<head>
+<title>github.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #42c3d4;}
+.s6 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+github.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">github_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">github_exports</span><span class="s1">, {</span>
+  <span class="s2">GitHubReporter</span><span class="s1">: () =&gt; </span><span class="s2">GitHubReporter</span><span class="s1">,</span>
+  <span class="s3">default</span><span class="s1">: () =&gt; </span><span class="s2">github_default</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">github_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_base </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./base&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_util </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../util&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">GitHubLogger </span><span class="s1">{</span>
+  <span class="s2">_log</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s2">type </span><span class="s1">= </span><span class="s0">&quot;notice&quot;</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s2">message </span><span class="s1">= </span><span class="s2">message</span><span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s5">/\n/g</span><span class="s1">, </span><span class="s0">&quot;%0A&quot;</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">configs </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">entries</span><span class="s1">(</span><span class="s2">options</span><span class="s1">).</span><span class="s2">map</span><span class="s1">(([</span><span class="s2">key</span><span class="s1">, </span><span class="s2">option</span><span class="s1">]) =&gt; </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">key</span><span class="s1">}</span><span class="s0">=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">option</span><span class="s1">}</span><span class="s0">`</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;,&quot;</span><span class="s1">);</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">write</span><span class="s1">((</span><span class="s6">0</span><span class="s1">, </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">stripAnsiEscapes</span><span class="s1">)(</span><span class="s0">`::</span><span class="s2">$</span><span class="s1">{</span><span class="s2">type</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">configs</span><span class="s1">}</span><span class="s0">::</span><span class="s2">$</span><span class="s1">{</span><span class="s2">message</span><span class="s1">}</span>
+<span class="s0">`</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">debug</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_log</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s0">&quot;debug&quot;</span><span class="s1">, </span><span class="s2">options</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">error</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_log</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s0">&quot;error&quot;</span><span class="s1">, </span><span class="s2">options</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">notice</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_log</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s0">&quot;notice&quot;</span><span class="s1">, </span><span class="s2">options</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">warning</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_log</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s0">&quot;warning&quot;</span><span class="s1">, </span><span class="s2">options</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">GitHubReporter </span><span class="s3">extends </span><span class="s2">import_base</span><span class="s1">.</span><span class="s2">TerminalReporter </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">super</span><span class="s1">(</span><span class="s2">options</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">githubLogger </span><span class="s1">= </span><span class="s3">new </span><span class="s2">GitHubLogger</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">screen </span><span class="s1">= { </span><span class="s2">...</span><span class="s3">this</span><span class="s1">.</span><span class="s2">screen</span><span class="s1">, </span><span class="s2">colors</span><span class="s1">: </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">noColors </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">printsToStdio</span><span class="s1">() {</span>
+    <span class="s3">return false</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async onEnd</span><span class="s1">(</span><span class="s2">result</span><span class="s1">) {</span>
+    <span class="s3">await super</span><span class="s1">.</span><span class="s2">onEnd</span><span class="s1">(</span><span class="s2">result</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_printAnnotations</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">onError</span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">errorMessage </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">formatError</span><span class="s1">(</span><span class="s2">error</span><span class="s1">).</span><span class="s2">message</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">githubLogger</span><span class="s1">.</span><span class="s2">error</span><span class="s1">(</span><span class="s2">errorMessage</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_printAnnotations</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">summary </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">generateSummary</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">summaryMessage </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">generateSummaryMessage</span><span class="s1">(</span><span class="s2">summary</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">summary</span><span class="s1">.</span><span class="s2">failuresToPrint</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_printFailureAnnotations</span><span class="s1">(</span><span class="s2">summary</span><span class="s1">.</span><span class="s2">failuresToPrint</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_printSlowTestAnnotations</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_printSummaryAnnotation</span><span class="s1">(</span><span class="s2">summaryMessage</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_printSlowTestAnnotations</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">getSlowTests</span><span class="s1">().</span><span class="s2">forEach</span><span class="s1">(([</span><span class="s2">file</span><span class="s1">, </span><span class="s2">duration</span><span class="s1">]) =&gt; {</span>
+      <span class="s3">const </span><span class="s2">filePath </span><span class="s1">= </span><span class="s2">workspaceRelativePath</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">cwd</span><span class="s1">(), </span><span class="s2">file</span><span class="s1">));</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">githubLogger</span><span class="s1">.</span><span class="s2">warning</span><span class="s1">(</span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">filePath</span><span class="s1">} </span><span class="s0">took </span><span class="s2">$</span><span class="s1">{(</span><span class="s6">0</span><span class="s1">, </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">ms</span><span class="s1">)(</span><span class="s2">duration</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">, {</span>
+        <span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;Slow Test&quot;</span><span class="s1">,</span>
+        <span class="s2">file</span><span class="s1">: </span><span class="s2">filePath</span>
+      <span class="s1">});</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">_printSummaryAnnotation</span><span class="s1">(</span><span class="s2">summary</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">githubLogger</span><span class="s1">.</span><span class="s2">notice</span><span class="s1">(</span><span class="s2">summary</span><span class="s1">, {</span>
+      <span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;</span><span class="s3">\u{1F3AD} </span><span class="s0">Playwright Run Summary&quot;</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">_printFailureAnnotations</span><span class="s1">(</span><span class="s2">failures</span><span class="s1">) {</span>
+    <span class="s2">failures</span><span class="s1">.</span><span class="s2">forEach</span><span class="s1">((</span><span class="s2">test</span><span class="s1">, </span><span class="s2">index</span><span class="s1">) =&gt; {</span>
+      <span class="s3">const </span><span class="s2">title </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">formatTestTitle</span><span class="s1">(</span><span class="s2">test</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">header </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">formatTestHeader</span><span class="s1">(</span><span class="s2">test</span><span class="s1">, { </span><span class="s2">indent</span><span class="s1">: </span><span class="s0">&quot;  &quot;</span><span class="s1">, </span><span class="s2">index</span><span class="s1">: </span><span class="s2">index </span><span class="s1">+ </span><span class="s6">1</span><span class="s1">, </span><span class="s2">mode</span><span class="s1">: </span><span class="s0">&quot;error&quot; </span><span class="s1">});</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">result of test</span><span class="s1">.</span><span class="s2">results</span><span class="s1">) {</span>
+        <span class="s3">const </span><span class="s2">errors </span><span class="s1">= (</span><span class="s6">0</span><span class="s1">, </span><span class="s2">import_base</span><span class="s1">.</span><span class="s2">formatResultFailure</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">screen</span><span class="s1">, </span><span class="s2">test</span><span class="s1">, </span><span class="s2">result</span><span class="s1">, </span><span class="s0">&quot;    &quot;</span><span class="s1">);</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">error of errors</span><span class="s1">) {</span>
+          <span class="s3">const </span><span class="s2">options </span><span class="s1">= {</span>
+            <span class="s2">file</span><span class="s1">: </span><span class="s2">workspaceRelativePath</span><span class="s1">(</span><span class="s2">error</span><span class="s1">.</span><span class="s2">location</span><span class="s1">?.</span><span class="s2">file </span><span class="s1">|| </span><span class="s2">test</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">file</span><span class="s1">),</span>
+            <span class="s2">title</span>
+          <span class="s1">};</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">error</span><span class="s1">.</span><span class="s2">location</span><span class="s1">) {</span>
+            <span class="s2">options</span><span class="s1">.</span><span class="s2">line </span><span class="s1">= </span><span class="s2">error</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">line</span><span class="s1">;</span>
+            <span class="s2">options</span><span class="s1">.</span><span class="s2">col </span><span class="s1">= </span><span class="s2">error</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">column</span><span class="s1">;</span>
+          <span class="s1">}</span>
+          <span class="s3">const </span><span class="s2">message </span><span class="s1">= [</span><span class="s2">header</span><span class="s1">, </span><span class="s2">...</span><span class="s1">(</span><span class="s6">0</span><span class="s1">, </span><span class="s2">import_base</span><span class="s1">.</span><span class="s2">formatRetry</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">screen</span><span class="s1">, </span><span class="s2">result</span><span class="s1">), </span><span class="s2">error</span><span class="s1">.</span><span class="s2">message</span><span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+          <span class="s3">this</span><span class="s1">.</span><span class="s2">githubLogger</span><span class="s1">.</span><span class="s2">error</span><span class="s1">(</span><span class="s2">message</span><span class="s1">, </span><span class="s2">options</span><span class="s1">);</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">workspaceRelativePath</span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">relative</span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">[</span><span class="s0">&quot;GITHUB_WORKSPACE&quot;</span><span class="s1">] ?? </span><span class="s0">&quot;&quot;</span><span class="s1">, </span><span class="s2">filePath</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">var </span><span class="s2">github_default </span><span class="s1">= </span><span class="s2">GitHubReporter</span><span class="s1">;</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s6">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">GitHubReporter</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

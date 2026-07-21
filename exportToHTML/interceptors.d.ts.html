@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>interceptors.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+interceptors.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s2">&quot;./dispatcher&quot;</span><span class="s3">;</span>
+<span class="s0">import </span><span class="s1">RetryHandler from </span><span class="s2">&quot;./retry-handler&quot;</span><span class="s3">;</span>
+
+<span class="s0">export default </span><span class="s1">Interceptors</span><span class="s3">;</span>
+
+<span class="s1">declare namespace Interceptors </span><span class="s3">{</span>
+  <span class="s0">export </span><span class="s1">type DumpInterceptorOpts </span><span class="s3">= { </span><span class="s1">maxSize</span><span class="s3">?: </span><span class="s1">number </span><span class="s3">}</span>
+  <span class="s0">export </span><span class="s1">type RetryInterceptorOpts </span><span class="s3">= </span><span class="s1">RetryHandler</span><span class="s3">.</span><span class="s1">RetryOptions</span>
+  <span class="s0">export </span><span class="s1">type RedirectInterceptorOpts </span><span class="s3">= { </span><span class="s1">maxRedirections</span><span class="s3">?: </span><span class="s1">number </span><span class="s3">}</span>
+  <span class="s0">export </span><span class="s1">type ResponseErrorInterceptorOpts </span><span class="s3">= { </span><span class="s1">throwOnError</span><span class="s3">: </span><span class="s1">boolean </span><span class="s3">}</span>
+
+  <span class="s0">export function </span><span class="s1">createRedirectInterceptor</span><span class="s3">(</span><span class="s1">opts</span><span class="s3">: </span><span class="s1">RedirectInterceptorOpts</span><span class="s3">): </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatcherComposeInterceptor</span>
+  <span class="s0">export function </span><span class="s1">dump</span><span class="s3">(</span><span class="s1">opts</span><span class="s3">?: </span><span class="s1">DumpInterceptorOpts</span><span class="s3">): </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatcherComposeInterceptor</span>
+  <span class="s0">export function </span><span class="s1">retry</span><span class="s3">(</span><span class="s1">opts</span><span class="s3">?: </span><span class="s1">RetryInterceptorOpts</span><span class="s3">): </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatcherComposeInterceptor</span>
+  <span class="s0">export function </span><span class="s1">redirect</span><span class="s3">(</span><span class="s1">opts</span><span class="s3">?: </span><span class="s1">RedirectInterceptorOpts</span><span class="s3">): </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatcherComposeInterceptor</span>
+  <span class="s0">export function </span><span class="s1">responseError</span><span class="s3">(</span><span class="s1">opts</span><span class="s3">?: </span><span class="s1">ResponseErrorInterceptorOpts</span><span class="s3">): </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatcherComposeInterceptor</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "status": {
+    "code": "BAD_REQUEST",
+    "description": "Некорректный формат запроса"
+  },
+  "errors": [
+    {
+      "key": "id",
+      "code": "TYPEMISMATCH",
+      "description": "Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; Invalid UUID string: :id"
+    }
+  ],
+  "details": null
+}

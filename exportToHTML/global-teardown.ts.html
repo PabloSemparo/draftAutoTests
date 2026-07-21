@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>global-teardown.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+global-teardown.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">// tests/global-teardown.ts</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">FullConfig </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'@playwright/test'</span><span class="s3">;</span>
+
+<span class="s1">async </span><span class="s2">function </span><span class="s1">globalTeardown</span><span class="s3">(</span><span class="s1">config</span><span class="s3">: </span><span class="s1">FullConfig</span><span class="s3">) {</span>
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'🔚 Глобальное завершение тестовой сессии'</span><span class="s3">);</span>
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'✅ Все ресурсы освобождены'</span><span class="s3">);</span>
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'📊 Генерация отчетов...'</span><span class="s3">);</span>
+
+  <span class="s0">// Дополнительная логика очистки</span>
+  <span class="s2">const </span><span class="s1">startTime </span><span class="s3">= </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">TEST_START_TIME</span><span class="s3">;</span>
+  <span class="s2">if </span><span class="s3">(</span><span class="s1">startTime</span><span class="s3">) {</span>
+    <span class="s2">const </span><span class="s1">endTime </span><span class="s3">= </span><span class="s2">new </span><span class="s1">Date</span><span class="s3">();</span>
+    <span class="s2">const </span><span class="s1">start </span><span class="s3">= </span><span class="s2">new </span><span class="s1">Date</span><span class="s3">(</span><span class="s1">startTime</span><span class="s3">);</span>
+    <span class="s2">const </span><span class="s1">duration </span><span class="s3">= </span><span class="s1">endTime</span><span class="s3">.</span><span class="s1">getTime</span><span class="s3">() - </span><span class="s1">start</span><span class="s3">.</span><span class="s1">getTime</span><span class="s3">();</span>
+    <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">`⏱️ Общее время выполнения тестов: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">duration</span><span class="s3">}</span><span class="s4">ms`</span><span class="s3">);</span>
+  <span class="s3">}</span>
+
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'🏁 Тестовая сессия завершена'</span><span class="s3">);</span>
+<span class="s3">}</span>
+
+<span class="s2">export default </span><span class="s1">globalTeardown</span><span class="s3">;</span></pre>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<html>
+<head>
+<title>pixelmatch.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #5f826b; font-style: italic;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #cf8e6d;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+pixelmatch.js</font>
+</center></td></tr></table>
+<pre><span class="s0">/**</span>
+ <span class="s0">* </span>
+ <span class="s0">* ISC License</span>
+ <span class="s0">*</span>
+ <span class="s0">* Copyright (c) 2019, Mapbox</span>
+
+ <span class="s0">* Permission to use, copy, modify, and/or distribute this software for any purpose</span>
+ <span class="s0">* with or without fee is hereby granted, provided that the above copyright notice</span>
+ <span class="s0">* and this permission notice appear in all copies.</span>
+ <span class="s0">*</span>
+ <span class="s0">* THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH</span>
+ <span class="s0">* REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND</span>
+ <span class="s0">* FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,</span>
+ <span class="s0">* INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS</span>
+ <span class="s0">* OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER</span>
+ <span class="s0">* TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF</span>
+ <span class="s0">* THIS SOFTWARE.</span>
+ <span class="s0">*/</span>
+
+<span class="s2">'use strict'</span><span class="s3">;</span>
+
+<span class="s1">module</span><span class="s3">.</span><span class="s1">exports </span><span class="s3">= </span><span class="s1">pixelmatch</span><span class="s3">;</span>
+
+<span class="s4">const </span><span class="s1">defaultOptions </span><span class="s3">= {</span>
+    <span class="s1">threshold</span><span class="s3">: </span><span class="s5">0.1</span><span class="s3">,         </span><span class="s6">// matching threshold (0 to 1); smaller is more sensitive</span>
+    <span class="s1">includeAA</span><span class="s3">: </span><span class="s4">false</span><span class="s3">,       </span><span class="s6">// whether to skip anti-aliasing detection</span>
+    <span class="s1">alpha</span><span class="s3">: </span><span class="s5">0.1</span><span class="s3">,             </span><span class="s6">// opacity of original image in diff output</span>
+    <span class="s1">aaColor</span><span class="s3">: [</span><span class="s5">255</span><span class="s3">, </span><span class="s5">255</span><span class="s3">, </span><span class="s5">0</span><span class="s3">], </span><span class="s6">// color of anti-aliased pixels in diff output</span>
+    <span class="s1">diffColor</span><span class="s3">: [</span><span class="s5">255</span><span class="s3">, </span><span class="s5">0</span><span class="s3">, </span><span class="s5">0</span><span class="s3">], </span><span class="s6">// color of different pixels in diff output</span>
+    <span class="s1">diffColorAlt</span><span class="s3">: </span><span class="s4">null</span><span class="s3">,     </span><span class="s6">// whether to detect dark on light differences between img1 and img2 and set an alternative color to differentiate between the two</span>
+    <span class="s1">diffMask</span><span class="s3">: </span><span class="s4">false         </span><span class="s6">// draw the diff over a transparent background (a mask)</span>
+<span class="s3">};</span>
+
+<span class="s4">function </span><span class="s1">pixelmatch</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">, </span><span class="s1">img2</span><span class="s3">, </span><span class="s1">output</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">, </span><span class="s1">options</span><span class="s3">) {</span>
+
+    <span class="s4">if </span><span class="s3">(!</span><span class="s1">isPixelData</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">) || !</span><span class="s1">isPixelData</span><span class="s3">(</span><span class="s1">img2</span><span class="s3">) || (</span><span class="s1">output </span><span class="s3">&amp;&amp; !</span><span class="s1">isPixelData</span><span class="s3">(</span><span class="s1">output</span><span class="s3">)))</span>
+        <span class="s4">throw new </span><span class="s1">Error</span><span class="s3">(</span><span class="s2">'Image data: Uint8Array, Uint8ClampedArray or Buffer expected.'</span><span class="s3">);</span>
+
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">img1</span><span class="s3">.</span><span class="s1">length </span><span class="s3">!== </span><span class="s1">img2</span><span class="s3">.</span><span class="s1">length </span><span class="s3">|| (</span><span class="s1">output </span><span class="s3">&amp;&amp; </span><span class="s1">output</span><span class="s3">.</span><span class="s1">length </span><span class="s3">!== </span><span class="s1">img1</span><span class="s3">.</span><span class="s1">length</span><span class="s3">))</span>
+        <span class="s4">throw new </span><span class="s1">Error</span><span class="s3">(</span><span class="s2">'Image sizes do not match.'</span><span class="s3">);</span>
+
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">img1</span><span class="s3">.</span><span class="s1">length </span><span class="s3">!== </span><span class="s1">width </span><span class="s3">* </span><span class="s1">height </span><span class="s3">* </span><span class="s5">4</span><span class="s3">) </span><span class="s4">throw new </span><span class="s1">Error</span><span class="s3">(</span><span class="s2">'Image data size does not match width/height.'</span><span class="s3">);</span>
+
+    <span class="s1">options </span><span class="s3">= </span><span class="s1">Object</span><span class="s3">.</span><span class="s1">assign</span><span class="s3">({}, </span><span class="s1">defaultOptions</span><span class="s3">, </span><span class="s1">options</span><span class="s3">);</span>
+
+    <span class="s6">// check if images are identical</span>
+    <span class="s4">const </span><span class="s1">len </span><span class="s3">= </span><span class="s1">width </span><span class="s3">* </span><span class="s1">height</span><span class="s3">;</span>
+    <span class="s4">const </span><span class="s1">a32 </span><span class="s3">= </span><span class="s4">new </span><span class="s1">Uint32Array</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">.</span><span class="s1">buffer</span><span class="s3">, </span><span class="s1">img1</span><span class="s3">.</span><span class="s1">byteOffset</span><span class="s3">, </span><span class="s1">len</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">b32 </span><span class="s3">= </span><span class="s4">new </span><span class="s1">Uint32Array</span><span class="s3">(</span><span class="s1">img2</span><span class="s3">.</span><span class="s1">buffer</span><span class="s3">, </span><span class="s1">img2</span><span class="s3">.</span><span class="s1">byteOffset</span><span class="s3">, </span><span class="s1">len</span><span class="s3">);</span>
+    <span class="s4">let </span><span class="s1">identical </span><span class="s3">= </span><span class="s4">true</span><span class="s3">;</span>
+
+    <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">i </span><span class="s3">= </span><span class="s5">0</span><span class="s3">; </span><span class="s1">i </span><span class="s3">&lt; </span><span class="s1">len</span><span class="s3">; </span><span class="s1">i</span><span class="s3">++) {</span>
+        <span class="s4">if </span><span class="s3">(</span><span class="s1">a32</span><span class="s3">[</span><span class="s1">i</span><span class="s3">] !== </span><span class="s1">b32</span><span class="s3">[</span><span class="s1">i</span><span class="s3">]) { </span><span class="s1">identical </span><span class="s3">= </span><span class="s4">false</span><span class="s3">; </span><span class="s4">break</span><span class="s3">; }</span>
+    <span class="s3">}</span>
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">identical</span><span class="s3">) { </span><span class="s6">// fast path if identical</span>
+        <span class="s4">if </span><span class="s3">(</span><span class="s1">output </span><span class="s3">&amp;&amp; !</span><span class="s1">options</span><span class="s3">.</span><span class="s1">diffMask</span><span class="s3">) {</span>
+            <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">i </span><span class="s3">= </span><span class="s5">0</span><span class="s3">; </span><span class="s1">i </span><span class="s3">&lt; </span><span class="s1">len</span><span class="s3">; </span><span class="s1">i</span><span class="s3">++) </span><span class="s1">drawGrayPixel</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">, </span><span class="s5">4 </span><span class="s3">* </span><span class="s1">i</span><span class="s3">, </span><span class="s1">options</span><span class="s3">.</span><span class="s1">alpha</span><span class="s3">, </span><span class="s1">output</span><span class="s3">);</span>
+        <span class="s3">}</span>
+        <span class="s4">return </span><span class="s5">0</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s6">// maximum acceptable square distance between two colors;</span>
+    <span class="s6">// 35215 is the maximum possible value for the YIQ difference metric</span>
+    <span class="s4">const </span><span class="s1">maxDelta </span><span class="s3">= </span><span class="s5">35215 </span><span class="s3">* </span><span class="s1">options</span><span class="s3">.</span><span class="s1">threshold </span><span class="s3">* </span><span class="s1">options</span><span class="s3">.</span><span class="s1">threshold</span><span class="s3">;</span>
+    <span class="s4">let </span><span class="s1">diff </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+
+    <span class="s6">// compare each pixel of one image against the other one</span>
+    <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">y </span><span class="s3">= </span><span class="s5">0</span><span class="s3">; </span><span class="s1">y </span><span class="s3">&lt; </span><span class="s1">height</span><span class="s3">; </span><span class="s1">y</span><span class="s3">++) {</span>
+        <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">x </span><span class="s3">= </span><span class="s5">0</span><span class="s3">; </span><span class="s1">x </span><span class="s3">&lt; </span><span class="s1">width</span><span class="s3">; </span><span class="s1">x</span><span class="s3">++) {</span>
+
+            <span class="s4">const </span><span class="s1">pos </span><span class="s3">= (</span><span class="s1">y </span><span class="s3">* </span><span class="s1">width </span><span class="s3">+ </span><span class="s1">x</span><span class="s3">) * </span><span class="s5">4</span><span class="s3">;</span>
+
+            <span class="s6">// squared YUV distance between colors at this pixel position, negative if the img2 pixel is darker</span>
+            <span class="s4">const </span><span class="s1">delta </span><span class="s3">= </span><span class="s1">colorDelta</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">, </span><span class="s1">img2</span><span class="s3">, </span><span class="s1">pos</span><span class="s3">, </span><span class="s1">pos</span><span class="s3">);</span>
+
+            <span class="s6">// the color difference is above the threshold</span>
+            <span class="s4">if </span><span class="s3">(</span><span class="s1">Math</span><span class="s3">.</span><span class="s1">abs</span><span class="s3">(</span><span class="s1">delta</span><span class="s3">) &gt; </span><span class="s1">maxDelta</span><span class="s3">) {</span>
+                <span class="s6">// check it's a real rendering difference or just anti-aliasing</span>
+                <span class="s4">if </span><span class="s3">(!</span><span class="s1">options</span><span class="s3">.</span><span class="s1">includeAA </span><span class="s3">&amp;&amp; (</span><span class="s1">antialiased</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">, </span><span class="s1">x</span><span class="s3">, </span><span class="s1">y</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">, </span><span class="s1">img2</span><span class="s3">) ||</span>
+                                           <span class="s1">antialiased</span><span class="s3">(</span><span class="s1">img2</span><span class="s3">, </span><span class="s1">x</span><span class="s3">, </span><span class="s1">y</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">, </span><span class="s1">img1</span><span class="s3">))) {</span>
+                    <span class="s6">// one of the pixels is anti-aliasing; draw as yellow and do not count as difference</span>
+                    <span class="s6">// note that we do not include such pixels in a mask</span>
+                    <span class="s4">if </span><span class="s3">(</span><span class="s1">output </span><span class="s3">&amp;&amp; !</span><span class="s1">options</span><span class="s3">.</span><span class="s1">diffMask</span><span class="s3">) </span><span class="s1">drawPixel</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s1">pos</span><span class="s3">, </span><span class="s1">...options</span><span class="s3">.</span><span class="s1">aaColor</span><span class="s3">);</span>
+
+                <span class="s3">} </span><span class="s4">else </span><span class="s3">{</span>
+                    <span class="s6">// found substantial difference not caused by anti-aliasing; draw it as such</span>
+                    <span class="s4">if </span><span class="s3">(</span><span class="s1">output</span><span class="s3">) {</span>
+                        <span class="s1">drawPixel</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s1">pos</span><span class="s3">, </span><span class="s1">...</span><span class="s3">(</span><span class="s1">delta </span><span class="s3">&lt; </span><span class="s5">0 </span><span class="s3">&amp;&amp; </span><span class="s1">options</span><span class="s3">.</span><span class="s1">diffColorAlt </span><span class="s3">|| </span><span class="s1">options</span><span class="s3">.</span><span class="s1">diffColor</span><span class="s3">));</span>
+                    <span class="s3">}</span>
+                    <span class="s1">diff</span><span class="s3">++;</span>
+                <span class="s3">}</span>
+
+            <span class="s3">} </span><span class="s4">else if </span><span class="s3">(</span><span class="s1">output</span><span class="s3">) {</span>
+                <span class="s6">// pixels are similar; draw background as grayscale image blended with white</span>
+                <span class="s4">if </span><span class="s3">(!</span><span class="s1">options</span><span class="s3">.</span><span class="s1">diffMask</span><span class="s3">) </span><span class="s1">drawGrayPixel</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">, </span><span class="s1">pos</span><span class="s3">, </span><span class="s1">options</span><span class="s3">.</span><span class="s1">alpha</span><span class="s3">, </span><span class="s1">output</span><span class="s3">);</span>
+            <span class="s3">}</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+
+    <span class="s6">// return the number of different pixels</span>
+    <span class="s4">return </span><span class="s1">diff</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s4">function </span><span class="s1">isPixelData</span><span class="s3">(</span><span class="s1">arr</span><span class="s3">) {</span>
+    <span class="s6">// work around instanceof Uint8Array not working properly in some Jest environments</span>
+    <span class="s4">return </span><span class="s1">ArrayBuffer</span><span class="s3">.</span><span class="s1">isView</span><span class="s3">(</span><span class="s1">arr</span><span class="s3">) &amp;&amp; </span><span class="s1">arr</span><span class="s3">.</span><span class="s1">constructor</span><span class="s3">.</span><span class="s1">BYTES_PER_ELEMENT </span><span class="s3">=== </span><span class="s5">1</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s6">// check if a pixel is likely a part of anti-aliasing;</span>
+<span class="s6">// based on &quot;Anti-aliased Pixel and Intensity Slope Detector&quot; paper by V. Vysniauskas, 2009</span>
+
+<span class="s4">function </span><span class="s1">antialiased</span><span class="s3">(</span><span class="s1">img</span><span class="s3">, </span><span class="s1">x1</span><span class="s3">, </span><span class="s1">y1</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">, </span><span class="s1">img2</span><span class="s3">) {</span>
+    <span class="s4">const </span><span class="s1">x0 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">max</span><span class="s3">(</span><span class="s1">x1 </span><span class="s3">- </span><span class="s5">1</span><span class="s3">, </span><span class="s5">0</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">y0 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">max</span><span class="s3">(</span><span class="s1">y1 </span><span class="s3">- </span><span class="s5">1</span><span class="s3">, </span><span class="s5">0</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">x2 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">min</span><span class="s3">(</span><span class="s1">x1 </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">, </span><span class="s1">width </span><span class="s3">- </span><span class="s5">1</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">y2 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">min</span><span class="s3">(</span><span class="s1">y1 </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">, </span><span class="s1">height </span><span class="s3">- </span><span class="s5">1</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">pos </span><span class="s3">= (</span><span class="s1">y1 </span><span class="s3">* </span><span class="s1">width </span><span class="s3">+ </span><span class="s1">x1</span><span class="s3">) * </span><span class="s5">4</span><span class="s3">;</span>
+    <span class="s4">let </span><span class="s1">zeroes </span><span class="s3">= </span><span class="s1">x1 </span><span class="s3">=== </span><span class="s1">x0 </span><span class="s3">|| </span><span class="s1">x1 </span><span class="s3">=== </span><span class="s1">x2 </span><span class="s3">|| </span><span class="s1">y1 </span><span class="s3">=== </span><span class="s1">y0 </span><span class="s3">|| </span><span class="s1">y1 </span><span class="s3">=== </span><span class="s1">y2 </span><span class="s3">? </span><span class="s5">1 </span><span class="s3">: </span><span class="s5">0</span><span class="s3">;</span>
+    <span class="s4">let </span><span class="s1">min </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+    <span class="s4">let </span><span class="s1">max </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+    <span class="s4">let </span><span class="s1">minX</span><span class="s3">, </span><span class="s1">minY</span><span class="s3">, </span><span class="s1">maxX</span><span class="s3">, </span><span class="s1">maxY</span><span class="s3">;</span>
+
+    <span class="s6">// go through 8 adjacent pixels</span>
+    <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">x </span><span class="s3">= </span><span class="s1">x0</span><span class="s3">; </span><span class="s1">x </span><span class="s3">&lt;= </span><span class="s1">x2</span><span class="s3">; </span><span class="s1">x</span><span class="s3">++) {</span>
+        <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">y </span><span class="s3">= </span><span class="s1">y0</span><span class="s3">; </span><span class="s1">y </span><span class="s3">&lt;= </span><span class="s1">y2</span><span class="s3">; </span><span class="s1">y</span><span class="s3">++) {</span>
+            <span class="s4">if </span><span class="s3">(</span><span class="s1">x </span><span class="s3">=== </span><span class="s1">x1 </span><span class="s3">&amp;&amp; </span><span class="s1">y </span><span class="s3">=== </span><span class="s1">y1</span><span class="s3">) </span><span class="s4">continue</span><span class="s3">;</span>
+
+            <span class="s6">// brightness delta between the center pixel and adjacent one</span>
+            <span class="s4">const </span><span class="s1">delta </span><span class="s3">= </span><span class="s1">colorDelta</span><span class="s3">(</span><span class="s1">img</span><span class="s3">, </span><span class="s1">img</span><span class="s3">, </span><span class="s1">pos</span><span class="s3">, (</span><span class="s1">y </span><span class="s3">* </span><span class="s1">width </span><span class="s3">+ </span><span class="s1">x</span><span class="s3">) * </span><span class="s5">4</span><span class="s3">, </span><span class="s4">true</span><span class="s3">);</span>
+
+            <span class="s6">// count the number of equal, darker and brighter adjacent pixels</span>
+            <span class="s4">if </span><span class="s3">(</span><span class="s1">delta </span><span class="s3">=== </span><span class="s5">0</span><span class="s3">) {</span>
+                <span class="s1">zeroes</span><span class="s3">++;</span>
+                <span class="s6">// if found more than 2 equal siblings, it's definitely not anti-aliasing</span>
+                <span class="s4">if </span><span class="s3">(</span><span class="s1">zeroes </span><span class="s3">&gt; </span><span class="s5">2</span><span class="s3">) </span><span class="s4">return false</span><span class="s3">;</span>
+
+            <span class="s6">// remember the darkest pixel</span>
+            <span class="s3">} </span><span class="s4">else if </span><span class="s3">(</span><span class="s1">delta </span><span class="s3">&lt; </span><span class="s1">min</span><span class="s3">) {</span>
+                <span class="s1">min </span><span class="s3">= </span><span class="s1">delta</span><span class="s3">;</span>
+                <span class="s1">minX </span><span class="s3">= </span><span class="s1">x</span><span class="s3">;</span>
+                <span class="s1">minY </span><span class="s3">= </span><span class="s1">y</span><span class="s3">;</span>
+
+            <span class="s6">// remember the brightest pixel</span>
+            <span class="s3">} </span><span class="s4">else if </span><span class="s3">(</span><span class="s1">delta </span><span class="s3">&gt; </span><span class="s1">max</span><span class="s3">) {</span>
+                <span class="s1">max </span><span class="s3">= </span><span class="s1">delta</span><span class="s3">;</span>
+                <span class="s1">maxX </span><span class="s3">= </span><span class="s1">x</span><span class="s3">;</span>
+                <span class="s1">maxY </span><span class="s3">= </span><span class="s1">y</span><span class="s3">;</span>
+            <span class="s3">}</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+
+    <span class="s6">// if there are no both darker and brighter pixels among siblings, it's not anti-aliasing</span>
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">min </span><span class="s3">=== </span><span class="s5">0 </span><span class="s3">|| </span><span class="s1">max </span><span class="s3">=== </span><span class="s5">0</span><span class="s3">) </span><span class="s4">return false</span><span class="s3">;</span>
+
+    <span class="s6">// if either the darkest or the brightest pixel has 3+ equal siblings in both images</span>
+    <span class="s6">// (definitely not anti-aliased), this pixel is anti-aliased</span>
+    <span class="s4">return </span><span class="s3">(</span><span class="s1">hasManySiblings</span><span class="s3">(</span><span class="s1">img</span><span class="s3">, </span><span class="s1">minX</span><span class="s3">, </span><span class="s1">minY</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">) &amp;&amp; </span><span class="s1">hasManySiblings</span><span class="s3">(</span><span class="s1">img2</span><span class="s3">, </span><span class="s1">minX</span><span class="s3">, </span><span class="s1">minY</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">)) ||</span>
+           <span class="s3">(</span><span class="s1">hasManySiblings</span><span class="s3">(</span><span class="s1">img</span><span class="s3">, </span><span class="s1">maxX</span><span class="s3">, </span><span class="s1">maxY</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">) &amp;&amp; </span><span class="s1">hasManySiblings</span><span class="s3">(</span><span class="s1">img2</span><span class="s3">, </span><span class="s1">maxX</span><span class="s3">, </span><span class="s1">maxY</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">));</span>
+<span class="s3">}</span>
+
+<span class="s6">// check if a pixel has 3+ adjacent pixels of the same color.</span>
+<span class="s4">function </span><span class="s1">hasManySiblings</span><span class="s3">(</span><span class="s1">img</span><span class="s3">, </span><span class="s1">x1</span><span class="s3">, </span><span class="s1">y1</span><span class="s3">, </span><span class="s1">width</span><span class="s3">, </span><span class="s1">height</span><span class="s3">) {</span>
+    <span class="s4">const </span><span class="s1">x0 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">max</span><span class="s3">(</span><span class="s1">x1 </span><span class="s3">- </span><span class="s5">1</span><span class="s3">, </span><span class="s5">0</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">y0 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">max</span><span class="s3">(</span><span class="s1">y1 </span><span class="s3">- </span><span class="s5">1</span><span class="s3">, </span><span class="s5">0</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">x2 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">min</span><span class="s3">(</span><span class="s1">x1 </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">, </span><span class="s1">width </span><span class="s3">- </span><span class="s5">1</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">y2 </span><span class="s3">= </span><span class="s1">Math</span><span class="s3">.</span><span class="s1">min</span><span class="s3">(</span><span class="s1">y1 </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">, </span><span class="s1">height </span><span class="s3">- </span><span class="s5">1</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">pos </span><span class="s3">= (</span><span class="s1">y1 </span><span class="s3">* </span><span class="s1">width </span><span class="s3">+ </span><span class="s1">x1</span><span class="s3">) * </span><span class="s5">4</span><span class="s3">;</span>
+    <span class="s4">let </span><span class="s1">zeroes </span><span class="s3">= </span><span class="s1">x1 </span><span class="s3">=== </span><span class="s1">x0 </span><span class="s3">|| </span><span class="s1">x1 </span><span class="s3">=== </span><span class="s1">x2 </span><span class="s3">|| </span><span class="s1">y1 </span><span class="s3">=== </span><span class="s1">y0 </span><span class="s3">|| </span><span class="s1">y1 </span><span class="s3">=== </span><span class="s1">y2 </span><span class="s3">? </span><span class="s5">1 </span><span class="s3">: </span><span class="s5">0</span><span class="s3">;</span>
+
+    <span class="s6">// go through 8 adjacent pixels</span>
+    <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">x </span><span class="s3">= </span><span class="s1">x0</span><span class="s3">; </span><span class="s1">x </span><span class="s3">&lt;= </span><span class="s1">x2</span><span class="s3">; </span><span class="s1">x</span><span class="s3">++) {</span>
+        <span class="s4">for </span><span class="s3">(</span><span class="s4">let </span><span class="s1">y </span><span class="s3">= </span><span class="s1">y0</span><span class="s3">; </span><span class="s1">y </span><span class="s3">&lt;= </span><span class="s1">y2</span><span class="s3">; </span><span class="s1">y</span><span class="s3">++) {</span>
+            <span class="s4">if </span><span class="s3">(</span><span class="s1">x </span><span class="s3">=== </span><span class="s1">x1 </span><span class="s3">&amp;&amp; </span><span class="s1">y </span><span class="s3">=== </span><span class="s1">y1</span><span class="s3">) </span><span class="s4">continue</span><span class="s3">;</span>
+
+            <span class="s4">const </span><span class="s1">pos2 </span><span class="s3">= (</span><span class="s1">y </span><span class="s3">* </span><span class="s1">width </span><span class="s3">+ </span><span class="s1">x</span><span class="s3">) * </span><span class="s5">4</span><span class="s3">;</span>
+            <span class="s4">if </span><span class="s3">(</span><span class="s1">img</span><span class="s3">[</span><span class="s1">pos</span><span class="s3">] === </span><span class="s1">img</span><span class="s3">[</span><span class="s1">pos2</span><span class="s3">] &amp;&amp;</span>
+                <span class="s1">img</span><span class="s3">[</span><span class="s1">pos </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">] === </span><span class="s1">img</span><span class="s3">[</span><span class="s1">pos2 </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">] &amp;&amp;</span>
+                <span class="s1">img</span><span class="s3">[</span><span class="s1">pos </span><span class="s3">+ </span><span class="s5">2</span><span class="s3">] === </span><span class="s1">img</span><span class="s3">[</span><span class="s1">pos2 </span><span class="s3">+ </span><span class="s5">2</span><span class="s3">] &amp;&amp;</span>
+                <span class="s1">img</span><span class="s3">[</span><span class="s1">pos </span><span class="s3">+ </span><span class="s5">3</span><span class="s3">] === </span><span class="s1">img</span><span class="s3">[</span><span class="s1">pos2 </span><span class="s3">+ </span><span class="s5">3</span><span class="s3">]) </span><span class="s1">zeroes</span><span class="s3">++;</span>
+
+            <span class="s4">if </span><span class="s3">(</span><span class="s1">zeroes </span><span class="s3">&gt; </span><span class="s5">2</span><span class="s3">) </span><span class="s4">return true</span><span class="s3">;</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+
+    <span class="s4">return false</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s6">// calculate color difference according to the paper &quot;Measuring perceived color difference</span>
+<span class="s6">// using YIQ NTSC transmission color space in mobile applications&quot; by Y. Kotsarenko and F. Ramos</span>
+
+<span class="s4">function </span><span class="s1">colorDelta</span><span class="s3">(</span><span class="s1">img1</span><span class="s3">, </span><span class="s1">img2</span><span class="s3">, </span><span class="s1">k</span><span class="s3">, </span><span class="s1">m</span><span class="s3">, </span><span class="s1">yOnly</span><span class="s3">) {</span>
+    <span class="s4">let </span><span class="s1">r1 </span><span class="s3">= </span><span class="s1">img1</span><span class="s3">[</span><span class="s1">k </span><span class="s3">+ </span><span class="s5">0</span><span class="s3">];</span>
+    <span class="s4">let </span><span class="s1">g1 </span><span class="s3">= </span><span class="s1">img1</span><span class="s3">[</span><span class="s1">k </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">];</span>
+    <span class="s4">let </span><span class="s1">b1 </span><span class="s3">= </span><span class="s1">img1</span><span class="s3">[</span><span class="s1">k </span><span class="s3">+ </span><span class="s5">2</span><span class="s3">];</span>
+    <span class="s4">let </span><span class="s1">a1 </span><span class="s3">= </span><span class="s1">img1</span><span class="s3">[</span><span class="s1">k </span><span class="s3">+ </span><span class="s5">3</span><span class="s3">];</span>
+
+    <span class="s4">let </span><span class="s1">r2 </span><span class="s3">= </span><span class="s1">img2</span><span class="s3">[</span><span class="s1">m </span><span class="s3">+ </span><span class="s5">0</span><span class="s3">];</span>
+    <span class="s4">let </span><span class="s1">g2 </span><span class="s3">= </span><span class="s1">img2</span><span class="s3">[</span><span class="s1">m </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">];</span>
+    <span class="s4">let </span><span class="s1">b2 </span><span class="s3">= </span><span class="s1">img2</span><span class="s3">[</span><span class="s1">m </span><span class="s3">+ </span><span class="s5">2</span><span class="s3">];</span>
+    <span class="s4">let </span><span class="s1">a2 </span><span class="s3">= </span><span class="s1">img2</span><span class="s3">[</span><span class="s1">m </span><span class="s3">+ </span><span class="s5">3</span><span class="s3">];</span>
+
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">a1 </span><span class="s3">=== </span><span class="s1">a2 </span><span class="s3">&amp;&amp; </span><span class="s1">r1 </span><span class="s3">=== </span><span class="s1">r2 </span><span class="s3">&amp;&amp; </span><span class="s1">g1 </span><span class="s3">=== </span><span class="s1">g2 </span><span class="s3">&amp;&amp; </span><span class="s1">b1 </span><span class="s3">=== </span><span class="s1">b2</span><span class="s3">) </span><span class="s4">return </span><span class="s5">0</span><span class="s3">;</span>
+
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">a1 </span><span class="s3">&lt; </span><span class="s5">255</span><span class="s3">) {</span>
+        <span class="s1">a1 </span><span class="s3">/= </span><span class="s5">255</span><span class="s3">;</span>
+        <span class="s1">r1 </span><span class="s3">= </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">r1</span><span class="s3">, </span><span class="s1">a1</span><span class="s3">);</span>
+        <span class="s1">g1 </span><span class="s3">= </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">g1</span><span class="s3">, </span><span class="s1">a1</span><span class="s3">);</span>
+        <span class="s1">b1 </span><span class="s3">= </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">b1</span><span class="s3">, </span><span class="s1">a1</span><span class="s3">);</span>
+    <span class="s3">}</span>
+
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">a2 </span><span class="s3">&lt; </span><span class="s5">255</span><span class="s3">) {</span>
+        <span class="s1">a2 </span><span class="s3">/= </span><span class="s5">255</span><span class="s3">;</span>
+        <span class="s1">r2 </span><span class="s3">= </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">r2</span><span class="s3">, </span><span class="s1">a2</span><span class="s3">);</span>
+        <span class="s1">g2 </span><span class="s3">= </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">g2</span><span class="s3">, </span><span class="s1">a2</span><span class="s3">);</span>
+        <span class="s1">b2 </span><span class="s3">= </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">b2</span><span class="s3">, </span><span class="s1">a2</span><span class="s3">);</span>
+    <span class="s3">}</span>
+
+    <span class="s4">const </span><span class="s1">y1 </span><span class="s3">= </span><span class="s1">rgb2y</span><span class="s3">(</span><span class="s1">r1</span><span class="s3">, </span><span class="s1">g1</span><span class="s3">, </span><span class="s1">b1</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">y2 </span><span class="s3">= </span><span class="s1">rgb2y</span><span class="s3">(</span><span class="s1">r2</span><span class="s3">, </span><span class="s1">g2</span><span class="s3">, </span><span class="s1">b2</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">y </span><span class="s3">= </span><span class="s1">y1 </span><span class="s3">- </span><span class="s1">y2</span><span class="s3">;</span>
+
+    <span class="s4">if </span><span class="s3">(</span><span class="s1">yOnly</span><span class="s3">) </span><span class="s4">return </span><span class="s1">y</span><span class="s3">; </span><span class="s6">// brightness difference only</span>
+
+    <span class="s4">const </span><span class="s1">i </span><span class="s3">= </span><span class="s1">rgb2i</span><span class="s3">(</span><span class="s1">r1</span><span class="s3">, </span><span class="s1">g1</span><span class="s3">, </span><span class="s1">b1</span><span class="s3">) - </span><span class="s1">rgb2i</span><span class="s3">(</span><span class="s1">r2</span><span class="s3">, </span><span class="s1">g2</span><span class="s3">, </span><span class="s1">b2</span><span class="s3">);</span>
+    <span class="s4">const </span><span class="s1">q </span><span class="s3">= </span><span class="s1">rgb2q</span><span class="s3">(</span><span class="s1">r1</span><span class="s3">, </span><span class="s1">g1</span><span class="s3">, </span><span class="s1">b1</span><span class="s3">) - </span><span class="s1">rgb2q</span><span class="s3">(</span><span class="s1">r2</span><span class="s3">, </span><span class="s1">g2</span><span class="s3">, </span><span class="s1">b2</span><span class="s3">);</span>
+
+    <span class="s4">const </span><span class="s1">delta </span><span class="s3">= </span><span class="s5">0.5053 </span><span class="s3">* </span><span class="s1">y </span><span class="s3">* </span><span class="s1">y </span><span class="s3">+ </span><span class="s5">0.299 </span><span class="s3">* </span><span class="s1">i </span><span class="s3">* </span><span class="s1">i </span><span class="s3">+ </span><span class="s5">0.1957 </span><span class="s3">* </span><span class="s1">q </span><span class="s3">* </span><span class="s1">q</span><span class="s3">;</span>
+
+    <span class="s6">// encode whether the pixel lightens or darkens in the sign</span>
+    <span class="s4">return </span><span class="s1">y1 </span><span class="s3">&gt; </span><span class="s1">y2 </span><span class="s3">? -</span><span class="s1">delta </span><span class="s3">: </span><span class="s1">delta</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s4">function </span><span class="s1">rgb2y</span><span class="s3">(</span><span class="s1">r</span><span class="s3">, </span><span class="s1">g</span><span class="s3">, </span><span class="s1">b</span><span class="s3">) { </span><span class="s4">return </span><span class="s1">r </span><span class="s3">* </span><span class="s5">0.29889531 </span><span class="s3">+ </span><span class="s1">g </span><span class="s3">* </span><span class="s5">0.58662247 </span><span class="s3">+ </span><span class="s1">b </span><span class="s3">* </span><span class="s5">0.11448223</span><span class="s3">; }</span>
+<span class="s4">function </span><span class="s1">rgb2i</span><span class="s3">(</span><span class="s1">r</span><span class="s3">, </span><span class="s1">g</span><span class="s3">, </span><span class="s1">b</span><span class="s3">) { </span><span class="s4">return </span><span class="s1">r </span><span class="s3">* </span><span class="s5">0.59597799 </span><span class="s3">- </span><span class="s1">g </span><span class="s3">* </span><span class="s5">0.27417610 </span><span class="s3">- </span><span class="s1">b </span><span class="s3">* </span><span class="s5">0.32180189</span><span class="s3">; }</span>
+<span class="s4">function </span><span class="s1">rgb2q</span><span class="s3">(</span><span class="s1">r</span><span class="s3">, </span><span class="s1">g</span><span class="s3">, </span><span class="s1">b</span><span class="s3">) { </span><span class="s4">return </span><span class="s1">r </span><span class="s3">* </span><span class="s5">0.21147017 </span><span class="s3">- </span><span class="s1">g </span><span class="s3">* </span><span class="s5">0.52261711 </span><span class="s3">+ </span><span class="s1">b </span><span class="s3">* </span><span class="s5">0.31114694</span><span class="s3">; }</span>
+
+<span class="s6">// blend semi-transparent color with white</span>
+<span class="s4">function </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">c</span><span class="s3">, </span><span class="s1">a</span><span class="s3">) {</span>
+    <span class="s4">return </span><span class="s5">255 </span><span class="s3">+ (</span><span class="s1">c </span><span class="s3">- </span><span class="s5">255</span><span class="s3">) * </span><span class="s1">a</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s4">function </span><span class="s1">drawPixel</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s1">pos</span><span class="s3">, </span><span class="s1">r</span><span class="s3">, </span><span class="s1">g</span><span class="s3">, </span><span class="s1">b</span><span class="s3">) {</span>
+    <span class="s1">output</span><span class="s3">[</span><span class="s1">pos </span><span class="s3">+ </span><span class="s5">0</span><span class="s3">] = </span><span class="s1">r</span><span class="s3">;</span>
+    <span class="s1">output</span><span class="s3">[</span><span class="s1">pos </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">] = </span><span class="s1">g</span><span class="s3">;</span>
+    <span class="s1">output</span><span class="s3">[</span><span class="s1">pos </span><span class="s3">+ </span><span class="s5">2</span><span class="s3">] = </span><span class="s1">b</span><span class="s3">;</span>
+    <span class="s1">output</span><span class="s3">[</span><span class="s1">pos </span><span class="s3">+ </span><span class="s5">3</span><span class="s3">] = </span><span class="s5">255</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s4">function </span><span class="s1">drawGrayPixel</span><span class="s3">(</span><span class="s1">img</span><span class="s3">, </span><span class="s1">i</span><span class="s3">, </span><span class="s1">alpha</span><span class="s3">, </span><span class="s1">output</span><span class="s3">) {</span>
+    <span class="s4">const </span><span class="s1">r </span><span class="s3">= </span><span class="s1">img</span><span class="s3">[</span><span class="s1">i </span><span class="s3">+ </span><span class="s5">0</span><span class="s3">];</span>
+    <span class="s4">const </span><span class="s1">g </span><span class="s3">= </span><span class="s1">img</span><span class="s3">[</span><span class="s1">i </span><span class="s3">+ </span><span class="s5">1</span><span class="s3">];</span>
+    <span class="s4">const </span><span class="s1">b </span><span class="s3">= </span><span class="s1">img</span><span class="s3">[</span><span class="s1">i </span><span class="s3">+ </span><span class="s5">2</span><span class="s3">];</span>
+    <span class="s4">const </span><span class="s1">val </span><span class="s3">= </span><span class="s1">blend</span><span class="s3">(</span><span class="s1">rgb2y</span><span class="s3">(</span><span class="s1">r</span><span class="s3">, </span><span class="s1">g</span><span class="s3">, </span><span class="s1">b</span><span class="s3">), </span><span class="s1">alpha </span><span class="s3">* </span><span class="s1">img</span><span class="s3">[</span><span class="s1">i </span><span class="s3">+ </span><span class="s5">3</span><span class="s3">] / </span><span class="s5">255</span><span class="s3">);</span>
+    <span class="s1">drawPixel</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s1">i</span><span class="s3">, </span><span class="s1">val</span><span class="s3">, </span><span class="s1">val</span><span class="s3">, </span><span class="s1">val</span><span class="s3">);</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

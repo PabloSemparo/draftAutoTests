@@ -1,0 +1,542 @@
+<html>
+<head>
+<title>workerMain.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+workerMain.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">workerMain_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">workerMain_exports</span><span class="s1">, {</span>
+  <span class="s2">WorkerMain</span><span class="s1">: () =&gt; </span><span class="s2">WorkerMain</span><span class="s1">,</span>
+  <span class="s2">create</span><span class="s1">: () =&gt; </span><span class="s2">create</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">workerMain_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils2 </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_configLoader </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/configLoader&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_globals </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/globals&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_ipc </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/ipc&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_util </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../util&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fixtureRunner </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./fixtureRunner&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_testInfo </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./testInfo&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_util2 </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./util&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fixtures </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/fixtures&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_poolBuilder </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/poolBuilder&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_process </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/process&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_suiteUtils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/suiteUtils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_testLoader </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/testLoader&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">WorkerMain </span><span class="s3">extends </span><span class="s2">import_process</span><span class="s1">.</span><span class="s2">ProcessRunner </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">();</span>
+    <span class="s4">// Accumulated fatal errors that cannot be attributed to a test.</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors </span><span class="s1">= [];</span>
+    <span class="s4">// The stage of the full cleanup. Once &quot;finished&quot;, we can safely stop running anything.</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_didRunFullCleanup </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s4">// Whether the worker was stopped due to an unhandled error in a test marked with test.fail().</span>
+    <span class="s4">// This should force dispatcher to use a new worker instead.</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_stoppedDueToUnhandledErrorInTestFail </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s4">// Whether the worker was requested to stop.</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s4">// This promise resolves once the single &quot;run test group&quot; call finishes.</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_runFinished </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">ManualPromise</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests </span><span class="s1">= [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_totalRunningTests </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s4">// Suites that had their beforeAll hooks, but not afterAll hooks executed.</span>
+    <span class="s4">// These suites still need afterAll hooks to be executed for the proper cleanup.</span>
+    <span class="s4">// Contains dynamic annotations originated by modifiers with a callback, e.g. `test.skip(() =&gt; true)`.</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_activeSuites </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">TEST_WORKER_INDEX </span><span class="s1">= </span><span class="s2">String</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">workerIndex</span><span class="s1">);</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">TEST_PARALLEL_INDEX </span><span class="s1">= </span><span class="s2">String</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">parallelIndex</span><span class="s1">);</span>
+    <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_globals</span><span class="s1">.</span><span class="s2">setIsWorkerProcess</span><span class="s1">)();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_params </span><span class="s1">= </span><span class="s2">params</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_fixtureRunner </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_fixtureRunner</span><span class="s1">.</span><span class="s2">FixtureRunner</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_runFinished</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">();</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;unhandledRejection&quot;</span><span class="s1">, (</span><span class="s2">reason</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">unhandledError</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">));</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;uncaughtException&quot;</span><span class="s1">, (</span><span class="s2">error</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">unhandledError</span><span class="s1">(</span><span class="s2">error</span><span class="s1">));</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">write </span><span class="s1">= (</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">cb</span><span class="s1">) =&gt; {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;stdOut&quot;</span><span class="s1">, (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_ipc</span><span class="s1">.</span><span class="s2">stdioChunkToParams</span><span class="s1">)(</span><span class="s2">chunk</span><span class="s1">));</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">?.</span><span class="s2">_tracing</span><span class="s1">.</span><span class="s2">appendStdioToTrace</span><span class="s1">(</span><span class="s0">&quot;stdout&quot;</span><span class="s1">, </span><span class="s2">chunk</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">typeof </span><span class="s2">cb </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">)</span>
+        <span class="s2">process</span><span class="s1">.</span><span class="s2">nextTick</span><span class="s1">(</span><span class="s2">cb</span><span class="s1">);</span>
+      <span class="s3">return true</span><span class="s1">;</span>
+    <span class="s1">};</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PW_RUNNER_DEBUG</span><span class="s1">) {</span>
+      <span class="s2">process</span><span class="s1">.</span><span class="s2">stderr</span><span class="s1">.</span><span class="s2">write </span><span class="s1">= (</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">cb</span><span class="s1">) =&gt; {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;stdErr&quot;</span><span class="s1">, (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_ipc</span><span class="s1">.</span><span class="s2">stdioChunkToParams</span><span class="s1">)(</span><span class="s2">chunk</span><span class="s1">));</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">?.</span><span class="s2">_tracing</span><span class="s1">.</span><span class="s2">appendStdioToTrace</span><span class="s1">(</span><span class="s0">&quot;stderr&quot;</span><span class="s1">, </span><span class="s2">chunk</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">typeof </span><span class="s2">cb </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">)</span>
+          <span class="s2">process</span><span class="s1">.</span><span class="s2">nextTick</span><span class="s1">(</span><span class="s2">cb</span><span class="s1">);</span>
+        <span class="s3">return true</span><span class="s1">;</span>
+      <span class="s1">};</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">_stop</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">?.</span><span class="s2">_interrupt</span><span class="s1">();</span>
+    <span class="s1">}</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_runFinished</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async gracefullyClose</span><span class="s1">() {</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_stop</span><span class="s1">();</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_config</span><span class="s1">) {</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">const </span><span class="s2">fakeTestInfo </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_testInfo</span><span class="s1">.</span><span class="s2">TestInfoImpl</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_config</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_params</span><span class="s1">, </span><span class="s3">void </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, () =&gt; {</span>
+      <span class="s1">}, () =&gt; {</span>
+      <span class="s1">}, () =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">const </span><span class="s2">runnable </span><span class="s1">= { </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;teardown&quot; </span><span class="s1">};</span>
+      <span class="s3">await </span><span class="s2">fakeTestInfo</span><span class="s1">.</span><span class="s2">_runWithTimeout</span><span class="s1">(</span><span class="s2">runnable</span><span class="s1">, () =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_loadIfNeeded</span><span class="s1">()).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">teardownScope</span><span class="s1">(</span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">fakeTestInfo</span><span class="s1">, </span><span class="s2">runnable</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">teardownScope</span><span class="s1">(</span><span class="s0">&quot;worker&quot;</span><span class="s1">, </span><span class="s2">fakeTestInfo</span><span class="s1">, </span><span class="s2">runnable</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">await </span><span class="s2">fakeTestInfo</span><span class="s1">.</span><span class="s2">_runWithTimeout</span><span class="s1">(</span><span class="s2">runnable</span><span class="s1">, () =&gt; (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">gracefullyCloseAll</span><span class="s1">)()).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...fakeTestInfo</span><span class="s1">.</span><span class="s2">errors</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">.</span><span class="s2">push</span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util2</span><span class="s1">.</span><span class="s2">testInfoError</span><span class="s1">)(</span><span class="s2">e</span><span class="s1">));</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">.</span><span class="s2">length</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_appendProcessTeardownDiagnostics</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">[</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">]);</span>
+      <span class="s3">const </span><span class="s2">payload </span><span class="s1">= { </span><span class="s2">fatalErrors</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors </span><span class="s1">};</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;teardownErrors&quot;</span><span class="s1">, </span><span class="s2">payload</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">_appendProcessTeardownDiagnostics</span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">count </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_totalRunningTests </span><span class="s1">=== </span><span class="s5">1 </span><span class="s1">? </span><span class="s0">&quot;1 test&quot; </span><span class="s1">: </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_totalRunningTests</span><span class="s1">} </span><span class="s0">tests`</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">lastMessage </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&lt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_totalRunningTests</span><span class="s1">)</span>
+      <span class="s2">lastMessage </span><span class="s1">= </span><span class="s0">`, last </span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests</span><span class="s1">.</span><span class="s2">length</span><span class="s1">} </span><span class="s0">tests were`</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">message </span><span class="s1">= [</span>
+      <span class="s0">&quot;&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;&quot;</span><span class="s1">,</span>
+      <span class="s2">import_utils2</span><span class="s1">.</span><span class="s2">colors</span><span class="s1">.</span><span class="s2">red</span><span class="s1">(</span><span class="s0">`Failed worker ran </span><span class="s2">$</span><span class="s1">{</span><span class="s2">count</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{</span><span class="s2">lastMessage</span><span class="s1">}</span><span class="s0">:`</span><span class="s1">),</span>
+      <span class="s2">...</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">test</span><span class="s1">) =&gt; </span><span class="s2">formatTestTitle</span><span class="s1">(</span><span class="s2">test</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">name</span><span class="s1">))</span>
+    <span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">error</span><span class="s1">.</span><span class="s2">message</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">error</span><span class="s1">.</span><span class="s2">stack</span><span class="s1">) {</span>
+        <span class="s3">let </span><span class="s2">index </span><span class="s1">= </span><span class="s2">error</span><span class="s1">.</span><span class="s2">stack</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s2">error</span><span class="s1">.</span><span class="s2">message</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">index </span><span class="s1">!== -</span><span class="s5">1</span><span class="s1">) {</span>
+          <span class="s2">index </span><span class="s1">+= </span><span class="s2">error</span><span class="s1">.</span><span class="s2">message</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+          <span class="s2">error</span><span class="s1">.</span><span class="s2">stack </span><span class="s1">= </span><span class="s2">error</span><span class="s1">.</span><span class="s2">stack</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">index</span><span class="s1">) + </span><span class="s2">message </span><span class="s1">+ </span><span class="s2">error</span><span class="s1">.</span><span class="s2">stack</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s2">index</span><span class="s1">);</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+      <span class="s2">error</span><span class="s1">.</span><span class="s2">message </span><span class="s1">+= </span><span class="s2">message</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">error</span><span class="s1">.</span><span class="s2">value</span><span class="s1">) {</span>
+      <span class="s2">error</span><span class="s1">.</span><span class="s2">value </span><span class="s1">+= </span><span class="s2">message</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">unhandledError</span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">.</span><span class="s2">push</span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util2</span><span class="s1">.</span><span class="s2">testInfoError</span><span class="s1">)(</span><span class="s2">error</span><span class="s1">));</span>
+      <span class="s3">void this</span><span class="s1">.</span><span class="s2">_stop</span><span class="s1">();</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">.</span><span class="s2">_hasUnhandledError</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">.</span><span class="s2">_hasUnhandledError </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">.</span><span class="s2">_failWithError</span><span class="s1">(</span><span class="s2">error</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">isExpectError </span><span class="s1">= </span><span class="s2">error </span><span class="s3">instanceof </span><span class="s2">Error </span><span class="s1">&amp;&amp; !!</span><span class="s2">error</span><span class="s1">.</span><span class="s2">matcherResult</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">shouldContinueInThisWorker </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest</span><span class="s1">.</span><span class="s2">expectedStatus </span><span class="s1">=== </span><span class="s0">&quot;failed&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">isExpectError</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">shouldContinueInThisWorker</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_stoppedDueToUnhandledErrorInTestFail </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s3">void this</span><span class="s1">.</span><span class="s2">_stop</span><span class="s1">();</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async _loadIfNeeded</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_config</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">config </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_configLoader</span><span class="s1">.</span><span class="s2">deserializeConfig</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_params</span><span class="s1">.</span><span class="s2">config</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">project </span><span class="s1">= </span><span class="s2">config</span><span class="s1">.</span><span class="s2">projects</span><span class="s1">.</span><span class="s2">find</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; </span><span class="s2">p</span><span class="s1">.</span><span class="s2">id </span><span class="s1">=== </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_params</span><span class="s1">.</span><span class="s2">projectId</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">project</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Project &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_params</span><span class="s1">.</span><span class="s2">projectId</span><span class="s1">}</span><span class="s0">&quot; not found in the worker process. Make sure project name does not change.`</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_config </span><span class="s1">= </span><span class="s2">config</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_project </span><span class="s1">= </span><span class="s2">project</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_poolBuilder </span><span class="s1">= </span><span class="s2">import_poolBuilder</span><span class="s1">.</span><span class="s2">PoolBuilder</span><span class="s1">.</span><span class="s2">createForWorker</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async runTestGroup</span><span class="s1">(</span><span class="s2">runPayload</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_runFinished </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">ManualPromise</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">entries </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">(</span><span class="s2">runPayload</span><span class="s1">.</span><span class="s2">entries</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; [</span><span class="s2">e</span><span class="s1">.</span><span class="s2">testId</span><span class="s1">, </span><span class="s2">e</span><span class="s1">]));</span>
+    <span class="s3">let </span><span class="s2">fatalUnknownTestIds</span><span class="s1">;</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_loadIfNeeded</span><span class="s1">();</span>
+      <span class="s3">const </span><span class="s2">fileSuite </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_testLoader</span><span class="s1">.</span><span class="s2">loadTestFile</span><span class="s1">)(</span><span class="s2">runPayload</span><span class="s1">.</span><span class="s2">file</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_config</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">rootDir</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">suite </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_suiteUtils</span><span class="s1">.</span><span class="s2">bindFileSuiteToProject</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">, </span><span class="s2">fileSuite</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_params</span><span class="s1">.</span><span class="s2">repeatEachIndex</span><span class="s1">)</span>
+        <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_suiteUtils</span><span class="s1">.</span><span class="s2">applyRepeatEachIndex</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">, </span><span class="s2">suite</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_params</span><span class="s1">.</span><span class="s2">repeatEachIndex</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">hasEntries </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_suiteUtils</span><span class="s1">.</span><span class="s2">filterTestsRemoveEmptySuites</span><span class="s1">)(</span><span class="s2">suite</span><span class="s1">, (</span><span class="s2">test</span><span class="s1">) =&gt; </span><span class="s2">entries</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">test</span><span class="s1">.</span><span class="s2">id</span><span class="s1">));</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">hasEntries</span><span class="s1">) {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_poolBuilder</span><span class="s1">.</span><span class="s2">buildPools</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">);</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_activeSuites </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_didRunFullCleanup </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">tests </span><span class="s1">= </span><span class="s2">suite</span><span class="s1">.</span><span class="s2">allTests</span><span class="s1">();</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">0</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">tests</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; </span><span class="s2">i</span><span class="s1">++) {</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped </span><span class="s1">&amp;&amp; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_didRunFullCleanup</span><span class="s1">)</span>
+            <span class="s3">break</span><span class="s1">;</span>
+          <span class="s3">const </span><span class="s2">entry </span><span class="s1">= </span><span class="s2">entries</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">tests</span><span class="s1">[</span><span class="s2">i</span><span class="s1">].</span><span class="s2">id</span><span class="s1">);</span>
+          <span class="s2">entries</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">tests</span><span class="s1">[</span><span class="s2">i</span><span class="s1">].</span><span class="s2">id</span><span class="s1">);</span>
+          <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">debugTest</span><span class="s1">)(</span><span class="s0">`test started &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">tests</span><span class="s1">[</span><span class="s2">i</span><span class="s1">].</span><span class="s2">title</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">);</span>
+          <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runTest</span><span class="s1">(</span><span class="s2">tests</span><span class="s1">[</span><span class="s2">i</span><span class="s1">], </span><span class="s2">entry</span><span class="s1">.</span><span class="s2">retry</span><span class="s1">, </span><span class="s2">tests</span><span class="s1">[</span><span class="s2">i </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">]);</span>
+          <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">debugTest</span><span class="s1">)(</span><span class="s0">`test finished &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">tests</span><span class="s1">[</span><span class="s2">i</span><span class="s1">].</span><span class="s2">title</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">);</span>
+        <span class="s1">}</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s2">fatalUnknownTestIds </span><span class="s1">= </span><span class="s2">runPayload</span><span class="s1">.</span><span class="s2">entries</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s2">e</span><span class="s1">.</span><span class="s2">testId</span><span class="s1">);</span>
+        <span class="s3">void this</span><span class="s1">.</span><span class="s2">_stop</span><span class="s1">();</span>
+      <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">.</span><span class="s2">push</span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util2</span><span class="s1">.</span><span class="s2">testInfoError</span><span class="s1">)(</span><span class="s2">e</span><span class="s1">));</span>
+      <span class="s3">void this</span><span class="s1">.</span><span class="s2">_stop</span><span class="s1">();</span>
+    <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">donePayload </span><span class="s1">= {</span>
+        <span class="s2">fatalErrors</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors</span><span class="s1">,</span>
+        <span class="s2">skipTestsDueToSetupFailure</span><span class="s1">: [],</span>
+        <span class="s2">fatalUnknownTestIds</span><span class="s1">,</span>
+        <span class="s2">stoppedDueToUnhandledErrorInTestFail</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_stoppedDueToUnhandledErrorInTestFail</span>
+      <span class="s1">};</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">test of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_skipRemainingTestsInSuite</span><span class="s1">?.</span><span class="s2">allTests</span><span class="s1">() || []) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">entries</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">test</span><span class="s1">.</span><span class="s2">id</span><span class="s1">))</span>
+          <span class="s2">donePayload</span><span class="s1">.</span><span class="s2">skipTestsDueToSetupFailure</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">test</span><span class="s1">.</span><span class="s2">id</span><span class="s1">);</span>
+      <span class="s1">}</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;done&quot;</span><span class="s1">, </span><span class="s2">donePayload</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_fatalErrors </span><span class="s1">= [];</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_skipRemainingTestsInSuite </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_runFinished</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">();</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async _runTest</span><span class="s1">(</span><span class="s2">test</span><span class="s1">, </span><span class="s2">retry</span><span class="s1">, </span><span class="s2">nextTest</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">testInfo </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_testInfo</span><span class="s1">.</span><span class="s2">TestInfoImpl</span><span class="s1">(</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_config</span><span class="s1">,</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">,</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_params</span><span class="s1">,</span>
+      <span class="s2">test</span><span class="s1">,</span>
+      <span class="s2">retry</span><span class="s1">,</span>
+      <span class="s1">(</span><span class="s2">stepBeginPayload</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;stepBegin&quot;</span><span class="s1">, </span><span class="s2">stepBeginPayload</span><span class="s1">),</span>
+      <span class="s1">(</span><span class="s2">stepEndPayload</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;stepEnd&quot;</span><span class="s1">, </span><span class="s2">stepEndPayload</span><span class="s1">),</span>
+      <span class="s1">(</span><span class="s2">attachment</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;attach&quot;</span><span class="s1">, </span><span class="s2">attachment</span><span class="s1">)</span>
+    <span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">processAnnotation </span><span class="s1">= (</span><span class="s2">annotation</span><span class="s1">) =&gt; {</span>
+      <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">annotations</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">annotation</span><span class="s1">);</span>
+      <span class="s3">switch </span><span class="s1">(</span><span class="s2">annotation</span><span class="s1">.</span><span class="s2">type</span><span class="s1">) {</span>
+        <span class="s3">case </span><span class="s0">&quot;fixme&quot;</span><span class="s1">:</span>
+        <span class="s3">case </span><span class="s0">&quot;skip&quot;</span><span class="s1">:</span>
+          <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">expectedStatus </span><span class="s1">= </span><span class="s0">&quot;skipped&quot;</span><span class="s1">;</span>
+          <span class="s3">break</span><span class="s1">;</span>
+        <span class="s3">case </span><span class="s0">&quot;fail&quot;</span><span class="s1">:</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">expectedStatus </span><span class="s1">!== </span><span class="s0">&quot;skipped&quot;</span><span class="s1">)</span>
+            <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">expectedStatus </span><span class="s1">= </span><span class="s0">&quot;failed&quot;</span><span class="s1">;</span>
+          <span class="s3">break</span><span class="s1">;</span>
+        <span class="s3">case </span><span class="s0">&quot;slow&quot;</span><span class="s1">:</span>
+          <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_timeoutManager</span><span class="s1">.</span><span class="s2">slow</span><span class="s1">();</span>
+          <span class="s3">break</span><span class="s1">;</span>
+      <span class="s1">}</span>
+    <span class="s1">};</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">setPool</span><span class="s1">(</span><span class="s2">test</span><span class="s1">.</span><span class="s2">_pool</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">suites </span><span class="s1">= </span><span class="s2">getSuites</span><span class="s1">(</span><span class="s2">test</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">reversedSuites </span><span class="s1">= </span><span class="s2">suites</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">().</span><span class="s2">reverse</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">nextSuites </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">(</span><span class="s2">getSuites</span><span class="s1">(</span><span class="s2">nextTest</span><span class="s1">));</span>
+    <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_timeoutManager</span><span class="s1">.</span><span class="s2">setTimeout</span><span class="s1">(</span><span class="s2">test</span><span class="s1">.</span><span class="s2">timeout</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">annotation of test</span><span class="s1">.</span><span class="s2">annotations</span><span class="s1">)</span>
+      <span class="s2">processAnnotation</span><span class="s1">(</span><span class="s2">annotation</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">suite of suites</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">extraAnnotations </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_activeSuites</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">) || [];</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">annotation of extraAnnotations</span><span class="s1">)</span>
+        <span class="s2">processAnnotation</span><span class="s1">(</span><span class="s2">annotation</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest </span><span class="s1">= </span><span class="s2">testInfo</span><span class="s1">;</span>
+    <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_globals</span><span class="s1">.</span><span class="s2">setCurrentTestInfo</span><span class="s1">)(</span><span class="s2">testInfo</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;testBegin&quot;</span><span class="s1">, </span><span class="s2">buildTestBeginPayload</span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">isSkipped </span><span class="s1">= </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">expectedStatus </span><span class="s1">=== </span><span class="s0">&quot;skipped&quot;</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">hasAfterAllToRunBeforeNextTest </span><span class="s1">= </span><span class="s2">reversedSuites</span><span class="s1">.</span><span class="s2">some</span><span class="s1">((</span><span class="s2">suite</span><span class="s1">) =&gt; {</span>
+      <span class="s3">return this</span><span class="s1">.</span><span class="s2">_activeSuites</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">) &amp;&amp; !</span><span class="s2">nextSuites</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">) &amp;&amp; </span><span class="s2">suite</span><span class="s1">.</span><span class="s2">_hooks</span><span class="s1">.</span><span class="s2">some</span><span class="s1">((</span><span class="s2">hook</span><span class="s1">) =&gt; </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;afterAll&quot;</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">isSkipped </span><span class="s1">&amp;&amp; </span><span class="s2">nextTest </span><span class="s1">&amp;&amp; !</span><span class="s2">hasAfterAllToRunBeforeNextTest</span><span class="s1">) {</span>
+      <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">status </span><span class="s1">= </span><span class="s0">&quot;skipped&quot;</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;testEnd&quot;</span><span class="s1">, </span><span class="s2">buildTestEndPayload</span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">));</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_totalRunningTests</span><span class="s1">++;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">test</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&gt; </span><span class="s5">10</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastRunningTests</span><span class="s1">.</span><span class="s2">shift</span><span class="s1">();</span>
+    <span class="s3">let </span><span class="s2">shouldRunAfterEachHooks </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_allowSkips </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s3">await </span><span class="s1">(</span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+      <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runWithTimeout</span><span class="s1">({ </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;test&quot; </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+        <span class="s3">const </span><span class="s2">traceFixtureRegistration </span><span class="s1">= </span><span class="s2">test</span><span class="s1">.</span><span class="s2">_pool</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s0">&quot;trace&quot;</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">traceFixtureRegistration</span><span class="s1">)</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">typeof </span><span class="s2">traceFixtureRegistration</span><span class="s1">.</span><span class="s2">fn </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">)</span>
+          <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`&quot;trace&quot; option cannot be a function`</span><span class="s1">);</span>
+        <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_tracing</span><span class="s1">.</span><span class="s2">startIfNeeded</span><span class="s1">(</span><span class="s2">traceFixtureRegistration</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">);</span>
+      <span class="s1">});</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped </span><span class="s1">|| </span><span class="s2">isSkipped</span><span class="s1">) {</span>
+        <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">status </span><span class="s1">= </span><span class="s0">&quot;skipped&quot;</span><span class="s1">;</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">removeFolders</span><span class="s1">)([</span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">outputDir</span><span class="s1">]);</span>
+      <span class="s3">let </span><span class="s2">testFunctionParams </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+      <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runAsStep</span><span class="s1">({ </span><span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;Before Hooks&quot;</span><span class="s1">, </span><span class="s2">category</span><span class="s1">: </span><span class="s0">&quot;hook&quot; </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">suite of suites</span><span class="s1">)</span>
+          <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runBeforeAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">);</span>
+        <span class="s2">shouldRunAfterEachHooks </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runEachHooksForSuites</span><span class="s1">(</span><span class="s2">suites</span><span class="s1">, </span><span class="s0">&quot;beforeEach&quot;</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">);</span>
+        <span class="s2">testFunctionParams </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">resolveParametersForFunction</span><span class="s1">(</span><span class="s2">test</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s0">&quot;test&quot;</span><span class="s1">, { </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;test&quot; </span><span class="s1">});</span>
+      <span class="s1">});</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">testFunctionParams </span><span class="s1">=== </span><span class="s3">null</span><span class="s1">) {</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runWithTimeout</span><span class="s1">({ </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;test&quot; </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+        <span class="s3">const </span><span class="s2">fn </span><span class="s1">= </span><span class="s2">test</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">;</span>
+        <span class="s3">await </span><span class="s2">fn</span><span class="s1">(</span><span class="s2">testFunctionParams</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">);</span>
+      <span class="s1">});</span>
+    <span class="s1">})().</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+    <span class="s1">});</span>
+    <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">duration </span><span class="s1">= </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_timeoutManager</span><span class="s1">.</span><span class="s2">defaultSlot</span><span class="s1">().</span><span class="s2">elapsed </span><span class="s1">| </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_allowSkips </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">afterHooksTimeout </span><span class="s1">= </span><span class="s2">calculateMaxTimeout</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">timeout</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">timeout</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">afterHooksSlot </span><span class="s1">= { </span><span class="s2">timeout</span><span class="s1">: </span><span class="s2">afterHooksTimeout</span><span class="s1">, </span><span class="s2">elapsed</span><span class="s1">: </span><span class="s5">0 </span><span class="s1">};</span>
+    <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runAsStep</span><span class="s1">({ </span><span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;After Hooks&quot;</span><span class="s1">, </span><span class="s2">category</span><span class="s1">: </span><span class="s0">&quot;hook&quot; </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+      <span class="s3">let </span><span class="s2">firstAfterHooksError</span><span class="s1">;</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runWithTimeout</span><span class="s1">({ </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">slot</span><span class="s1">: </span><span class="s2">afterHooksSlot </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+          <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">fn of testInfo</span><span class="s1">.</span><span class="s2">_onDidFinishTestFunctions</span><span class="s1">)</span>
+            <span class="s3">await </span><span class="s2">fn</span><span class="s1">();</span>
+        <span class="s1">});</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s2">firstAfterHooksError </span><span class="s1">= </span><span class="s2">firstAfterHooksError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">shouldRunAfterEachHooks</span><span class="s1">)</span>
+          <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runEachHooksForSuites</span><span class="s1">(</span><span class="s2">reversedSuites</span><span class="s1">, </span><span class="s0">&quot;afterEach&quot;</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s2">afterHooksSlot</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s2">firstAfterHooksError </span><span class="s1">= </span><span class="s2">firstAfterHooksError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_tracing</span><span class="s1">.</span><span class="s2">didFinishTestFunctionAndAfterEachHooks</span><span class="s1">();</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">teardownScope</span><span class="s1">(</span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, { </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">slot</span><span class="s1">: </span><span class="s2">afterHooksSlot </span><span class="s1">});</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s2">firstAfterHooksError </span><span class="s1">= </span><span class="s2">firstAfterHooksError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">suite of reversedSuites</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">nextSuites</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">) || </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_isFailure</span><span class="s1">()) {</span>
+          <span class="s3">try </span><span class="s1">{</span>
+            <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runAfterAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">);</span>
+          <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+            <span class="s2">firstAfterHooksError </span><span class="s1">= </span><span class="s2">firstAfterHooksError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+          <span class="s1">}</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">firstAfterHooksError</span><span class="s1">)</span>
+        <span class="s3">throw </span><span class="s2">firstAfterHooksError</span><span class="s1">;</span>
+    <span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+    <span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_isFailure</span><span class="s1">())</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_isStopped</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_didRunFullCleanup </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runAsStep</span><span class="s1">({ </span><span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;Worker Cleanup&quot;</span><span class="s1">, </span><span class="s2">category</span><span class="s1">: </span><span class="s0">&quot;hook&quot; </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+        <span class="s3">let </span><span class="s2">firstWorkerCleanupError</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">teardownSlot </span><span class="s1">= { </span><span class="s2">timeout</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">timeout</span><span class="s1">, </span><span class="s2">elapsed</span><span class="s1">: </span><span class="s5">0 </span><span class="s1">};</span>
+        <span class="s3">try </span><span class="s1">{</span>
+          <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">teardownScope</span><span class="s1">(</span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, { </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">slot</span><span class="s1">: </span><span class="s2">teardownSlot </span><span class="s1">});</span>
+        <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+          <span class="s2">firstWorkerCleanupError </span><span class="s1">= </span><span class="s2">firstWorkerCleanupError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+        <span class="s1">}</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">suite of reversedSuites</span><span class="s1">) {</span>
+          <span class="s3">try </span><span class="s1">{</span>
+            <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runAfterAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">);</span>
+          <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+            <span class="s2">firstWorkerCleanupError </span><span class="s1">= </span><span class="s2">firstWorkerCleanupError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+          <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s3">try </span><span class="s1">{</span>
+          <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">teardownScope</span><span class="s1">(</span><span class="s0">&quot;worker&quot;</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, { </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;teardown&quot;</span><span class="s1">, </span><span class="s2">slot</span><span class="s1">: </span><span class="s2">teardownSlot </span><span class="s1">});</span>
+        <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+          <span class="s2">firstWorkerCleanupError </span><span class="s1">= </span><span class="s2">firstWorkerCleanupError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+        <span class="s1">}</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">firstWorkerCleanupError</span><span class="s1">)</span>
+          <span class="s3">throw </span><span class="s2">firstWorkerCleanupError</span><span class="s1">;</span>
+      <span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">tracingSlot </span><span class="s1">= { </span><span class="s2">timeout</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">timeout</span><span class="s1">, </span><span class="s2">elapsed</span><span class="s1">: </span><span class="s5">0 </span><span class="s1">};</span>
+    <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runWithTimeout</span><span class="s1">({ </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">slot</span><span class="s1">: </span><span class="s2">tracingSlot </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+      <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_tracing</span><span class="s1">.</span><span class="s2">stopIfNeeded</span><span class="s1">();</span>
+    <span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+    <span class="s1">});</span>
+    <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">duration </span><span class="s1">= </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_timeoutManager</span><span class="s1">.</span><span class="s2">defaultSlot</span><span class="s1">().</span><span class="s2">elapsed </span><span class="s1">+ </span><span class="s2">afterHooksSlot</span><span class="s1">.</span><span class="s2">elapsed </span><span class="s1">| </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTest </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+    <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_globals</span><span class="s1">.</span><span class="s2">setCurrentTestInfo</span><span class="s1">)(</span><span class="s3">null</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;testEnd&quot;</span><span class="s1">, </span><span class="s2">buildTestEndPayload</span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">preserveOutput </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_config</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">preserveOutput </span><span class="s1">=== </span><span class="s0">&quot;always&quot; </span><span class="s1">|| </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_config</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">preserveOutput </span><span class="s1">=== </span><span class="s0">&quot;failures-only&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_isFailure</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">preserveOutput</span><span class="s1">)</span>
+      <span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">removeFolders</span><span class="s1">)([</span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">outputDir</span><span class="s1">]);</span>
+  <span class="s1">}</span>
+  <span class="s2">_collectHooksAndModifiers</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">runnables </span><span class="s1">= [];</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">modifier of suite</span><span class="s1">.</span><span class="s2">_modifiers</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">modifierType </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">dependsOnWorkerFixturesOnly</span><span class="s1">(</span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">, </span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">location</span><span class="s1">) ? </span><span class="s0">&quot;beforeAll&quot; </span><span class="s1">: </span><span class="s0">&quot;beforeEach&quot;</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">modifierType </span><span class="s1">!== </span><span class="s2">type</span><span class="s1">)</span>
+        <span class="s3">continue</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">fn </span><span class="s1">= </span><span class="s2">async </span><span class="s1">(</span><span class="s2">fixtures</span><span class="s1">) =&gt; {</span>
+        <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await </span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">(</span><span class="s2">fixtures</span><span class="s1">);</span>
+        <span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_modifier</span><span class="s1">(</span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">type</span><span class="s1">, </span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">location</span><span class="s1">, [!!</span><span class="s2">result</span><span class="s1">, </span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">description</span><span class="s1">]);</span>
+      <span class="s1">};</span>
+      <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_fixtures</span><span class="s1">.</span><span class="s2">inheritFixtureNames</span><span class="s1">)(</span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">, </span><span class="s2">fn</span><span class="s1">);</span>
+      <span class="s2">runnables</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({</span>
+        <span class="s2">title</span><span class="s1">: </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">type</span><span class="s1">} </span><span class="s0">modifier`</span><span class="s1">,</span>
+        <span class="s2">location</span><span class="s1">: </span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">location</span><span class="s1">,</span>
+        <span class="s2">type</span><span class="s1">: </span><span class="s2">modifier</span><span class="s1">.</span><span class="s2">type</span><span class="s1">,</span>
+        <span class="s2">fn</span>
+      <span class="s1">});</span>
+    <span class="s1">}</span>
+    <span class="s2">runnables</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...suite</span><span class="s1">.</span><span class="s2">_hooks</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">hook</span><span class="s1">) =&gt; </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s2">type</span><span class="s1">));</span>
+    <span class="s3">return </span><span class="s2">runnables</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _runBeforeAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_activeSuites</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">))</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">extraAnnotations </span><span class="s1">= [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_activeSuites</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">extraAnnotations</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s0">&quot;beforeAll&quot;</span><span class="s1">, </span><span class="s2">extraAnnotations</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async _runAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">extraAnnotations</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">firstError</span><span class="s1">;</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">hook of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_collectHooksAndModifiers</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">)) {</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runAsStep</span><span class="s1">({ </span><span class="s2">title</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">title</span><span class="s1">, </span><span class="s2">category</span><span class="s1">: </span><span class="s0">&quot;hook&quot;</span><span class="s1">, </span><span class="s2">location</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">location </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+          <span class="s3">const </span><span class="s2">timeSlot </span><span class="s1">= { </span><span class="s2">timeout</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">timeout</span><span class="s1">, </span><span class="s2">elapsed</span><span class="s1">: </span><span class="s5">0 </span><span class="s1">};</span>
+          <span class="s3">const </span><span class="s2">runnable </span><span class="s1">= { </span><span class="s2">type</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">type</span><span class="s1">, </span><span class="s2">slot</span><span class="s1">: </span><span class="s2">timeSlot</span><span class="s1">, </span><span class="s2">location</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">location </span><span class="s1">};</span>
+          <span class="s3">const </span><span class="s2">existingAnnotations </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">annotations</span><span class="s1">);</span>
+          <span class="s3">try </span><span class="s1">{</span>
+            <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">resolveParametersAndRunFunction</span><span class="s1">(</span><span class="s2">hook</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s0">&quot;all-hooks-only&quot;</span><span class="s1">, </span><span class="s2">runnable</span><span class="s1">);</span>
+          <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+            <span class="s3">if </span><span class="s1">(</span><span class="s2">extraAnnotations</span><span class="s1">) {</span>
+              <span class="s3">const </span><span class="s2">newAnnotations </span><span class="s1">= </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">annotations</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">a</span><span class="s1">) =&gt; !</span><span class="s2">existingAnnotations</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">a</span><span class="s1">));</span>
+              <span class="s2">extraAnnotations</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...newAnnotations</span><span class="s1">);</span>
+            <span class="s1">}</span>
+            <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">teardownScope</span><span class="s1">(</span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s2">runnable</span><span class="s1">);</span>
+          <span class="s1">}</span>
+        <span class="s1">});</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s2">firstError </span><span class="s1">= </span><span class="s2">firstError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;beforeAll&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">error </span><span class="s3">instanceof </span><span class="s2">import_testInfo</span><span class="s1">.</span><span class="s2">TestSkipError</span><span class="s1">)</span>
+          <span class="s3">break</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;beforeAll&quot; </span><span class="s1">&amp;&amp; !</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_skipRemainingTestsInSuite</span><span class="s1">) {</span>
+          <span class="s3">this</span><span class="s1">.</span><span class="s2">_skipRemainingTestsInSuite </span><span class="s1">= </span><span class="s2">suite</span><span class="s1">;</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">firstError</span><span class="s1">)</span>
+      <span class="s3">throw </span><span class="s2">firstError</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _runAfterAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_activeSuites</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">))</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_activeSuites</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_runAllHooksForSuite</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s0">&quot;afterAll&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async _runEachHooksForSuites</span><span class="s1">(</span><span class="s2">suites</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s2">slot</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">firstError</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">hooks </span><span class="s1">= </span><span class="s2">suites</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">suite</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_collectHooksAndModifiers</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">)).</span><span class="s2">flat</span><span class="s1">();</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">hook of hooks</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">runnable </span><span class="s1">= { </span><span class="s2">type</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">type</span><span class="s1">, </span><span class="s2">location</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">location</span><span class="s1">, </span><span class="s2">slot </span><span class="s1">};</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_timeoutManager</span><span class="s1">.</span><span class="s2">isTimeExhaustedFor</span><span class="s1">(</span><span class="s2">runnable</span><span class="s1">)) {</span>
+        <span class="s3">continue</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">await </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_runAsStep</span><span class="s1">({ </span><span class="s2">title</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">title</span><span class="s1">, </span><span class="s2">category</span><span class="s1">: </span><span class="s0">&quot;hook&quot;</span><span class="s1">, </span><span class="s2">location</span><span class="s1">: </span><span class="s2">hook</span><span class="s1">.</span><span class="s2">location </span><span class="s1">}, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+          <span class="s3">await this</span><span class="s1">.</span><span class="s2">_fixtureRunner</span><span class="s1">.</span><span class="s2">resolveParametersAndRunFunction</span><span class="s1">(</span><span class="s2">hook</span><span class="s1">.</span><span class="s2">fn</span><span class="s1">, </span><span class="s2">testInfo</span><span class="s1">, </span><span class="s0">&quot;test&quot;</span><span class="s1">, </span><span class="s2">runnable</span><span class="s1">);</span>
+        <span class="s1">});</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s2">firstError </span><span class="s1">= </span><span class="s2">firstError </span><span class="s1">?? </span><span class="s2">error</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">error </span><span class="s3">instanceof </span><span class="s2">import_testInfo</span><span class="s1">.</span><span class="s2">TestSkipError</span><span class="s1">)</span>
+          <span class="s3">break</span><span class="s1">;</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">firstError</span><span class="s1">)</span>
+      <span class="s3">throw </span><span class="s2">firstError</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">buildTestBeginPayload</span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s1">{</span>
+    <span class="s2">testId</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">testId</span><span class="s1">,</span>
+    <span class="s2">startWallTime</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_startWallTime</span>
+  <span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">buildTestEndPayload</span><span class="s1">(</span><span class="s2">testInfo</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s1">{</span>
+    <span class="s2">testId</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">testId</span><span class="s1">,</span>
+    <span class="s2">duration</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">duration</span><span class="s1">,</span>
+    <span class="s2">status</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">status</span><span class="s1">,</span>
+    <span class="s2">errors</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">errors</span><span class="s1">,</span>
+    <span class="s2">hasNonRetriableError</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">_hasNonRetriableError</span><span class="s1">,</span>
+    <span class="s2">expectedStatus</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">expectedStatus</span><span class="s1">,</span>
+    <span class="s2">annotations</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">annotations</span><span class="s1">,</span>
+    <span class="s2">timeout</span><span class="s1">: </span><span class="s2">testInfo</span><span class="s1">.</span><span class="s2">timeout</span>
+  <span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">getSuites</span><span class="s1">(</span><span class="s2">test</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">suites </span><span class="s1">= [];</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">suite </span><span class="s1">= </span><span class="s2">test</span><span class="s1">?.</span><span class="s2">parent</span><span class="s1">; </span><span class="s2">suite</span><span class="s1">; </span><span class="s2">suite </span><span class="s1">= </span><span class="s2">suite</span><span class="s1">.</span><span class="s2">parent</span><span class="s1">)</span>
+    <span class="s2">suites</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">suite</span><span class="s1">);</span>
+  <span class="s2">suites</span><span class="s1">.</span><span class="s2">reverse</span><span class="s1">();</span>
+  <span class="s3">return </span><span class="s2">suites</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">formatTestTitle</span><span class="s1">(</span><span class="s2">test</span><span class="s1">, </span><span class="s2">projectName</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s1">[, </span><span class="s2">...titles</span><span class="s1">] = </span><span class="s2">test</span><span class="s1">.</span><span class="s2">titlePath</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">location </span><span class="s1">= </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">relativeFilePath</span><span class="s1">)(</span><span class="s2">test</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">file</span><span class="s1">)}</span><span class="s0">:</span><span class="s2">$</span><span class="s1">{</span><span class="s2">test</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">line</span><span class="s1">}</span><span class="s0">:</span><span class="s2">$</span><span class="s1">{</span><span class="s2">test</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">column</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">projectTitle </span><span class="s1">= </span><span class="s2">projectName </span><span class="s1">? </span><span class="s0">`[</span><span class="s2">$</span><span class="s1">{</span><span class="s2">projectName</span><span class="s1">}</span><span class="s0">] </span><span class="s3">\u203A </span><span class="s0">` </span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+  <span class="s3">return </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">projectTitle</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{</span><span class="s2">location</span><span class="s1">} </span><span class="s3">\u203A </span><span class="s2">$</span><span class="s1">{</span><span class="s2">titles</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot; </span><span class="s3">\u203A </span><span class="s0">&quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">calculateMaxTimeout</span><span class="s1">(</span><span class="s2">t1</span><span class="s1">, </span><span class="s2">t2</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s1">!</span><span class="s2">t1 </span><span class="s1">|| !</span><span class="s2">t2 </span><span class="s1">? </span><span class="s5">0 </span><span class="s1">: </span><span class="s2">Math</span><span class="s1">.</span><span class="s2">max</span><span class="s1">(</span><span class="s2">t1</span><span class="s1">, </span><span class="s2">t2</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">create </span><span class="s1">= (</span><span class="s2">params</span><span class="s1">) =&gt; </span><span class="s3">new </span><span class="s2">WorkerMain</span><span class="s1">(</span><span class="s2">params</span><span class="s1">);</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">WorkerMain</span><span class="s1">,</span>
+  <span class="s2">create</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

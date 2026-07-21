@@ -1,0 +1,204 @@
+<html>
+<head>
+<title>transport.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+transport.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">transport_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">transport_exports</span><span class="s1">, {</span>
+  <span class="s2">WebSocketTransport</span><span class="s1">: () =&gt; </span><span class="s2">WebSocketTransport</span><span class="s1">,</span>
+  <span class="s2">perMessageDeflate</span><span class="s1">: () =&gt; </span><span class="s2">perMessageDeflate</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">transport_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_happyEyeballs </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./utils/happyEyeballs&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">perMessageDeflate </span><span class="s1">= {</span>
+  <span class="s2">clientNoContextTakeover</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+  <span class="s2">zlibDeflateOptions</span><span class="s1">: {</span>
+    <span class="s2">level</span><span class="s1">: </span><span class="s4">3</span>
+  <span class="s1">},</span>
+  <span class="s2">zlibInflateOptions</span><span class="s1">: {</span>
+    <span class="s2">chunkSize</span><span class="s1">: </span><span class="s4">10 </span><span class="s1">* </span><span class="s4">1024</span>
+  <span class="s1">},</span>
+  <span class="s2">threshold</span><span class="s1">: </span><span class="s4">10 </span><span class="s1">* </span><span class="s4">1024</span>
+<span class="s1">};</span>
+<span class="s3">class </span><span class="s2">WebSocketTransport </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">url</span><span class="s1">, </span><span class="s2">logUrl</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">headers </span><span class="s1">= [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">wsEndpoint </span><span class="s1">= </span><span class="s2">url</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_logUrl </span><span class="s1">= </span><span class="s2">logUrl</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">ws</span><span class="s1">(</span><span class="s2">url</span><span class="s1">, [], {</span>
+      <span class="s2">maxPayload</span><span class="s1">: </span><span class="s4">256 </span><span class="s1">* </span><span class="s4">1024 </span><span class="s1">* </span><span class="s4">1024</span><span class="s1">,</span>
+      <span class="s5">// 256Mb,</span>
+      <span class="s2">headers</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">headers</span><span class="s1">,</span>
+      <span class="s2">followRedirects</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">followRedirects</span><span class="s1">,</span>
+      <span class="s2">agent</span><span class="s1">: </span><span class="s6">/^(https|wss):\/\//</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s2">url</span><span class="s1">) ? </span><span class="s2">import_happyEyeballs</span><span class="s1">.</span><span class="s2">httpsHappyEyeballsAgent </span><span class="s1">: </span><span class="s2">import_happyEyeballs</span><span class="s1">.</span><span class="s2">httpHappyEyeballsAgent</span><span class="s1">,</span>
+      <span class="s2">perMessageDeflate</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;upgrade&quot;</span><span class="s1">, (</span><span class="s2">response</span><span class="s1">) =&gt; {</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s4">0</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; </span><span class="s2">i </span><span class="s1">+= </span><span class="s4">2</span><span class="s1">) {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">headers</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">name</span><span class="s1">: </span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">[</span><span class="s2">i</span><span class="s1">], </span><span class="s2">value</span><span class="s1">: </span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">[</span><span class="s2">i </span><span class="s1">+ </span><span class="s4">1</span><span class="s1">] });</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">debugLogHeader </span><span class="s1">&amp;&amp; </span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] === </span><span class="s2">options</span><span class="s1">.</span><span class="s2">debugLogHeader</span><span class="s1">)</span>
+          <span class="s2">progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">[</span><span class="s2">i </span><span class="s1">+ </span><span class="s4">1</span><span class="s1">]);</span>
+      <span class="s1">}</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_progress </span><span class="s1">= </span><span class="s2">progress</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">messageWrap </span><span class="s1">= (</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">makeWaitForNextTask</span><span class="s1">)();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s0">&quot;message&quot;</span><span class="s1">, (</span><span class="s2">event</span><span class="s1">) =&gt; {</span>
+      <span class="s2">messageWrap</span><span class="s1">(() =&gt; {</span>
+        <span class="s3">const </span><span class="s2">eventData </span><span class="s1">= </span><span class="s2">event</span><span class="s1">.</span><span class="s2">data</span><span class="s1">;</span>
+        <span class="s3">let </span><span class="s2">parsedJson</span><span class="s1">;</span>
+        <span class="s3">try </span><span class="s1">{</span>
+          <span class="s2">parsedJson </span><span class="s1">= </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s2">eventData</span><span class="s1">);</span>
+        <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+          <span class="s3">this</span><span class="s1">.</span><span class="s2">_progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;closing ws&gt; Closing websocket due to malformed JSON. eventData=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">eventData</span><span class="s1">} </span><span class="s0">e=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">e</span><span class="s1">?.</span><span class="s2">message</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+          <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s1">}</span>
+        <span class="s3">try </span><span class="s1">{</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">onmessage</span><span class="s1">)</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">onmessage</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s3">null</span><span class="s1">, </span><span class="s2">parsedJson</span><span class="s1">);</span>
+        <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+          <span class="s3">this</span><span class="s1">.</span><span class="s2">_progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;closing ws&gt; Closing websocket due to failed onmessage callback. eventData=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">eventData</span><span class="s1">} </span><span class="s0">e=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">e</span><span class="s1">?.</span><span class="s2">message</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+          <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+        <span class="s1">}</span>
+      <span class="s1">});</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, (</span><span class="s2">event</span><span class="s1">) =&gt; {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;ws disconnected&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s2">logUrl</span><span class="s1">} </span><span class="s0">code=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">code</span><span class="s1">} </span><span class="s0">reason=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">onclose</span><span class="s1">)</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">onclose</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s3">null</span><span class="s1">, </span><span class="s2">event</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, (</span><span class="s2">error</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;ws error&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s2">logUrl</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">error</span><span class="s1">.</span><span class="s2">type</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">error</span><span class="s1">.</span><span class="s2">message</span><span class="s1">}</span><span class="s0">`</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s2">async connect</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">url</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">return await </span><span class="s2">WebSocketTransport</span><span class="s1">.</span><span class="s2">_connect</span><span class="s1">(</span>
+      <span class="s2">progress</span><span class="s1">,</span>
+      <span class="s2">url</span><span class="s1">,</span>
+      <span class="s2">options</span><span class="s1">,</span>
+      <span class="s3">false</span>
+      <span class="s5">/* hadRedirects */</span>
+    <span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s2">async _connect</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">url</span><span class="s1">, </span><span class="s2">options</span><span class="s1">, </span><span class="s2">hadRedirects</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">logUrl </span><span class="s1">= </span><span class="s2">stripQueryParams</span><span class="s1">(</span><span class="s2">url</span><span class="s1">);</span>
+    <span class="s2">progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;ws connecting&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s2">logUrl</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">transport </span><span class="s1">= </span><span class="s3">new </span><span class="s2">WebSocketTransport</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">url</span><span class="s1">, </span><span class="s2">logUrl</span><span class="s1">, { </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">followRedirects</span><span class="s1">: !!</span><span class="s2">options</span><span class="s1">.</span><span class="s2">followRedirects </span><span class="s1">&amp;&amp; </span><span class="s2">hadRedirects </span><span class="s1">});</span>
+    <span class="s3">const </span><span class="s2">resultPromise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">fulfill</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; {</span>
+      <span class="s2">transport</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;open&quot;</span><span class="s1">, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+        <span class="s2">progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;ws connected&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s2">logUrl</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+        <span class="s2">fulfill</span><span class="s1">({});</span>
+      <span class="s1">});</span>
+      <span class="s2">transport</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, (</span><span class="s2">event</span><span class="s1">) =&gt; {</span>
+        <span class="s2">progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;ws connect error&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s2">logUrl</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">message</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+        <span class="s2">reject</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;WebSocket error: &quot; </span><span class="s1">+ </span><span class="s2">event</span><span class="s1">.</span><span class="s2">message</span><span class="s1">));</span>
+        <span class="s2">transport</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+      <span class="s1">});</span>
+      <span class="s2">transport</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;unexpected-response&quot;</span><span class="s1">, (</span><span class="s2">request</span><span class="s1">, </span><span class="s2">response</span><span class="s1">) =&gt; {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">followRedirects </span><span class="s1">&amp;&amp; !</span><span class="s2">hadRedirects </span><span class="s1">&amp;&amp; (</span><span class="s2">response</span><span class="s1">.</span><span class="s2">statusCode </span><span class="s1">=== </span><span class="s4">301 </span><span class="s1">|| </span><span class="s2">response</span><span class="s1">.</span><span class="s2">statusCode </span><span class="s1">=== </span><span class="s4">302 </span><span class="s1">|| </span><span class="s2">response</span><span class="s1">.</span><span class="s2">statusCode </span><span class="s1">=== </span><span class="s4">307 </span><span class="s1">|| </span><span class="s2">response</span><span class="s1">.</span><span class="s2">statusCode </span><span class="s1">=== </span><span class="s4">308</span><span class="s1">)) {</span>
+          <span class="s2">fulfill</span><span class="s1">({ </span><span class="s2">redirect</span><span class="s1">: </span><span class="s2">response </span><span class="s1">});</span>
+          <span class="s2">transport</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s1">}</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s4">0</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; </span><span class="s2">i </span><span class="s1">+= </span><span class="s4">2</span><span class="s1">) {</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">debugLogHeader </span><span class="s1">&amp;&amp; </span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] === </span><span class="s2">options</span><span class="s1">.</span><span class="s2">debugLogHeader</span><span class="s1">)</span>
+            <span class="s2">progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s2">response</span><span class="s1">.</span><span class="s2">rawHeaders</span><span class="s1">[</span><span class="s2">i </span><span class="s1">+ </span><span class="s4">1</span><span class="s1">]);</span>
+        <span class="s1">}</span>
+        <span class="s3">const </span><span class="s2">chunks </span><span class="s1">= [];</span>
+        <span class="s3">const </span><span class="s2">errorPrefix </span><span class="s1">= </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">logUrl</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">response</span><span class="s1">.</span><span class="s2">statusCode</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">response</span><span class="s1">.</span><span class="s2">statusMessage</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+        <span class="s2">response</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;data&quot;</span><span class="s1">, (</span><span class="s2">chunk</span><span class="s1">) =&gt; </span><span class="s2">chunks</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">));</span>
+        <span class="s2">response</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, () =&gt; {</span>
+          <span class="s3">const </span><span class="s2">error </span><span class="s1">= </span><span class="s2">chunks</span><span class="s1">.</span><span class="s2">length </span><span class="s1">? </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">errorPrefix</span><span class="s1">}</span>
+<span class="s2">$</span><span class="s1">{</span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">concat</span><span class="s1">(</span><span class="s2">chunks</span><span class="s1">)}</span><span class="s0">` </span><span class="s1">: </span><span class="s2">errorPrefix</span><span class="s1">;</span>
+          <span class="s2">progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;ws unexpected response&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s2">error</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+          <span class="s2">reject</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;WebSocket error: &quot; </span><span class="s1">+ </span><span class="s2">error</span><span class="s1">));</span>
+          <span class="s2">transport</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+        <span class="s1">});</span>
+      <span class="s1">});</span>
+    <span class="s1">});</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s2">progress </span><span class="s1">? </span><span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">resultPromise</span><span class="s1">) : </span><span class="s3">await </span><span class="s2">resultPromise</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">redirect</span><span class="s1">) {</span>
+        <span class="s3">const </span><span class="s2">newHeaders </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">fromEntries</span><span class="s1">(</span><span class="s2">Object</span><span class="s1">.</span><span class="s2">entries</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">headers </span><span class="s1">|| {}).</span><span class="s2">filter</span><span class="s1">(([</span><span class="s2">name</span><span class="s1">]) =&gt; {</span>
+          <span class="s3">return </span><span class="s1">!</span><span class="s2">name</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s0">&quot;access-key&quot;</span><span class="s1">) &amp;&amp; </span><span class="s2">name</span><span class="s1">.</span><span class="s2">toLowerCase</span><span class="s1">() !== </span><span class="s0">&quot;authorization&quot;</span><span class="s1">;</span>
+        <span class="s1">}));</span>
+        <span class="s3">return </span><span class="s2">WebSocketTransport</span><span class="s1">.</span><span class="s2">_connect</span><span class="s1">(</span>
+          <span class="s2">progress</span><span class="s1">,</span>
+          <span class="s2">result</span><span class="s1">.</span><span class="s2">redirect</span><span class="s1">.</span><span class="s2">headers</span><span class="s1">.</span><span class="s2">location</span><span class="s1">,</span>
+          <span class="s1">{ </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">headers</span><span class="s1">: </span><span class="s2">newHeaders </span><span class="s1">},</span>
+          <span class="s3">true</span>
+          <span class="s5">/* hadRedirects */</span>
+        <span class="s1">);</span>
+      <span class="s1">}</span>
+      <span class="s3">return </span><span class="s2">transport</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s2">transport</span><span class="s1">.</span><span class="s2">closeAndWait</span><span class="s1">();</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">send</span><span class="s1">(</span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">message</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">close</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_progress</span><span class="s1">?.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;ws disconnecting&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_logUrl</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async closeAndWait</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">readyState </span><span class="s1">=== </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">ws</span><span class="s1">.</span><span class="s2">CLOSED</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">promise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">f</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">once</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, </span><span class="s2">f</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+    <span class="s3">await </span><span class="s2">promise</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">stripQueryParams</span><span class="s1">(</span><span class="s2">url</span><span class="s1">) {</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s3">const </span><span class="s2">u </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s2">url</span><span class="s1">);</span>
+    <span class="s2">u</span><span class="s1">.</span><span class="s2">search </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s2">u</span><span class="s1">.</span><span class="s2">hash </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s2">u</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">();</span>
+  <span class="s1">} </span><span class="s3">catch </span><span class="s1">{</span>
+    <span class="s3">return </span><span class="s2">url</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s5">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s4">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">WebSocketTransport</span><span class="s1">,</span>
+  <span class="s2">perMessageDeflate</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

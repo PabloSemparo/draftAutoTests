@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>send-results.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+send-results.js</font>
+</center></td></tr></table>
+<pre><span class="s0">// scripts/send-results.js</span>
+<span class="s2">const </span><span class="s1">nodemailer </span><span class="s3">= </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'nodemailer'</span><span class="s3">);</span>
+<span class="s2">const </span><span class="s3">{ </span><span class="s1">exec </span><span class="s3">} = </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'child_process'</span><span class="s3">);</span>
+
+<span class="s2">class </span><span class="s1">TestResultSender </span><span class="s3">{</span>
+    <span class="s1">constructor</span><span class="s3">() {</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">transporter </span><span class="s3">= </span><span class="s1">nodemailer</span><span class="s3">.</span><span class="s1">createTransport</span><span class="s3">({</span>
+            <span class="s1">host</span><span class="s3">: </span><span class="s4">'smtp.office365.com'</span><span class="s3">,</span>
+            <span class="s1">port</span><span class="s3">: </span><span class="s5">587</span><span class="s3">,</span>
+            <span class="s1">secure</span><span class="s3">: </span><span class="s2">false</span><span class="s3">,</span>
+            <span class="s1">auth</span><span class="s3">: {</span>
+                <span class="s1">user</span><span class="s3">: </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">OUTLOOK_EMAIL</span><span class="s3">,</span>
+                <span class="s1">pass</span><span class="s3">: </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">OUTLOOK_PASSWORD</span>
+            <span class="s3">}</span>
+        <span class="s3">});</span>
+    <span class="s3">}</span>
+
+    <span class="s1">async runTestsAndSendEmail</span><span class="s3">() {</span>
+        <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'Запуск тестов...'</span><span class="s3">);</span>
+
+        <span class="s1">exec</span><span class="s3">(</span><span class="s4">'npx playwright test --reporter=json'</span><span class="s3">, </span><span class="s1">async </span><span class="s3">(</span><span class="s1">error</span><span class="s3">, </span><span class="s1">stdout</span><span class="s3">, </span><span class="s1">stderr</span><span class="s3">) =&gt; {</span>
+            <span class="s2">let </span><span class="s1">results</span><span class="s3">;</span>
+
+            <span class="s2">try </span><span class="s3">{</span>
+                <span class="s0">// Парсим JSON вывод</span>
+                <span class="s2">const </span><span class="s1">jsonOutput </span><span class="s3">= </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">parse</span><span class="s3">(</span><span class="s1">stdout</span><span class="s3">);</span>
+                <span class="s1">results </span><span class="s3">= </span><span class="s2">this</span><span class="s3">.</span><span class="s1">parseResults</span><span class="s3">(</span><span class="s1">jsonOutput</span><span class="s3">);</span>
+            <span class="s3">} </span><span class="s2">catch </span><span class="s3">(</span><span class="s1">parseError</span><span class="s3">) {</span>
+                <span class="s1">results </span><span class="s3">= {</span>
+                    <span class="s1">total</span><span class="s3">: </span><span class="s5">0</span><span class="s3">,</span>
+                    <span class="s1">passed</span><span class="s3">: </span><span class="s5">0</span><span class="s3">,</span>
+                    <span class="s1">failed</span><span class="s3">: </span><span class="s5">1</span><span class="s3">,</span>
+                    <span class="s1">error</span><span class="s3">: </span><span class="s4">'Ошибка парсинга результатов тестов'</span>
+                <span class="s3">};</span>
+            <span class="s3">}</span>
+
+            <span class="s2">await this</span><span class="s3">.</span><span class="s1">sendEmail</span><span class="s3">(</span><span class="s1">results</span><span class="s3">);</span>
+        <span class="s3">});</span>
+    <span class="s3">}</span>
+
+    <span class="s1">parseResults</span><span class="s3">(</span><span class="s1">jsonOutput</span><span class="s3">) {</span>
+        <span class="s2">const </span><span class="s1">suites </span><span class="s3">= </span><span class="s1">jsonOutput</span><span class="s3">.</span><span class="s1">suites </span><span class="s3">|| [];</span>
+        <span class="s2">let </span><span class="s1">total </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+        <span class="s2">let </span><span class="s1">passed </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+        <span class="s2">let </span><span class="s1">failed </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">tests </span><span class="s3">= [];</span>
+
+        <span class="s1">suites</span><span class="s3">.</span><span class="s1">forEach</span><span class="s3">(</span><span class="s1">suite </span><span class="s3">=&gt; {</span>
+            <span class="s1">suite</span><span class="s3">.</span><span class="s1">specs</span><span class="s3">.</span><span class="s1">forEach</span><span class="s3">(</span><span class="s1">spec </span><span class="s3">=&gt; {</span>
+                <span class="s1">spec</span><span class="s3">.</span><span class="s1">tests</span><span class="s3">.</span><span class="s1">forEach</span><span class="s3">(</span><span class="s1">test </span><span class="s3">=&gt; {</span>
+                    <span class="s1">total</span><span class="s3">++;</span>
+                    <span class="s2">if </span><span class="s3">(</span><span class="s1">test</span><span class="s3">.</span><span class="s1">status </span><span class="s3">=== </span><span class="s4">'expected'</span><span class="s3">) </span><span class="s1">passed</span><span class="s3">++;</span>
+                    <span class="s2">else </span><span class="s1">failed</span><span class="s3">++;</span>
+
+                    <span class="s1">tests</span><span class="s3">.</span><span class="s1">push</span><span class="s3">({</span>
+                        <span class="s1">title</span><span class="s3">: </span><span class="s1">spec</span><span class="s3">.</span><span class="s1">title</span><span class="s3">,</span>
+                        <span class="s1">status</span><span class="s3">: </span><span class="s1">test</span><span class="s3">.</span><span class="s1">status</span><span class="s3">,</span>
+                        <span class="s1">duration</span><span class="s3">: </span><span class="s1">test</span><span class="s3">.</span><span class="s1">duration</span>
+                    <span class="s3">});</span>
+                <span class="s3">});</span>
+            <span class="s3">});</span>
+        <span class="s3">});</span>
+
+        <span class="s2">return </span><span class="s3">{ </span><span class="s1">total</span><span class="s3">, </span><span class="s1">passed</span><span class="s3">, </span><span class="s1">failed</span><span class="s3">, </span><span class="s1">tests </span><span class="s3">};</span>
+    <span class="s3">}</span>
+
+    <span class="s1">async sendEmail</span><span class="s3">(</span><span class="s1">results</span><span class="s3">) {</span>
+        <span class="s2">const </span><span class="s1">mailOptions </span><span class="s3">= {</span>
+            <span class="s1">from</span><span class="s3">: </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">OUTLOOK_EMAIL</span><span class="s3">,</span>
+            <span class="s1">to</span><span class="s3">: </span><span class="s4">'team@company.com'</span><span class="s3">,</span>
+            <span class="s1">subject</span><span class="s3">: </span><span class="s4">`Результаты тестов API - </span><span class="s1">$</span><span class="s3">{</span><span class="s2">new </span><span class="s1">Date</span><span class="s3">().</span><span class="s1">toLocaleString</span><span class="s3">()}</span><span class="s4">`</span><span class="s3">,</span>
+            <span class="s1">html</span><span class="s3">: </span><span class="s2">this</span><span class="s3">.</span><span class="s1">generateEmailBody</span><span class="s3">(</span><span class="s1">results</span><span class="s3">)</span>
+        <span class="s3">};</span>
+
+        <span class="s2">try </span><span class="s3">{</span>
+            <span class="s2">await this</span><span class="s3">.</span><span class="s1">transporter</span><span class="s3">.</span><span class="s1">sendMail</span><span class="s3">(</span><span class="s1">mailOptions</span><span class="s3">);</span>
+            <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'Результаты тестов отправлены на email'</span><span class="s3">);</span>
+        <span class="s3">} </span><span class="s2">catch </span><span class="s3">(</span><span class="s1">error</span><span class="s3">) {</span>
+            <span class="s1">console</span><span class="s3">.</span><span class="s1">error</span><span class="s3">(</span><span class="s4">'Ошибка отправки email:'</span><span class="s3">, </span><span class="s1">error</span><span class="s3">);</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+
+    <span class="s1">generateEmailBody</span><span class="s3">(</span><span class="s1">results</span><span class="s3">) {</span>
+        <span class="s2">return </span><span class="s4">`</span>
+      <span class="s4">&lt;h2&gt;📊 Результаты автоматического тестирования API&lt;/h2&gt; 
+      &lt;div style=&quot;background: #f8f9fa; padding: 20px; border-radius: 8px;&quot;&gt; 
+        &lt;h3 style=&quot;color: #333;&quot;&gt;Статистика выполнения:&lt;/h3&gt; 
+        &lt;p&gt;&lt;strong&gt;Всего тестов:&lt;/strong&gt; </span><span class="s1">$</span><span class="s3">{</span><span class="s1">results</span><span class="s3">.</span><span class="s1">total</span><span class="s3">}</span><span class="s4">&lt;/p&gt; 
+        &lt;p style=&quot;color: green;&quot;&gt;&lt;strong&gt;Успешно:&lt;/strong&gt; </span><span class="s1">$</span><span class="s3">{</span><span class="s1">results</span><span class="s3">.</span><span class="s1">passed</span><span class="s3">}</span><span class="s4">&lt;/p&gt; 
+        &lt;p style=&quot;color: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">results</span><span class="s3">.</span><span class="s1">failed </span><span class="s3">&gt; </span><span class="s5">0 </span><span class="s3">? </span><span class="s4">'red' </span><span class="s3">: </span><span class="s4">'green'</span><span class="s3">}</span><span class="s4">;&quot;&gt;&lt;strong&gt;Провалено:&lt;/strong&gt; </span><span class="s1">$</span><span class="s3">{</span><span class="s1">results</span><span class="s3">.</span><span class="s1">failed</span><span class="s3">}</span><span class="s4">&lt;/p&gt; 
+        &lt;p&gt;&lt;strong&gt;Успешность:&lt;/strong&gt; </span><span class="s1">$</span><span class="s3">{((</span><span class="s1">results</span><span class="s3">.</span><span class="s1">passed </span><span class="s3">/ </span><span class="s1">results</span><span class="s3">.</span><span class="s1">total</span><span class="s3">) * </span><span class="s5">100</span><span class="s3">).</span><span class="s1">toFixed</span><span class="s3">(</span><span class="s5">1</span><span class="s3">)}</span><span class="s4">%&lt;/p&gt; 
+      &lt;/div&gt; 
+       
+      </span><span class="s1">$</span><span class="s3">{</span><span class="s1">results</span><span class="s3">.</span><span class="s1">failed </span><span class="s3">&gt; </span><span class="s5">0 </span><span class="s3">? </span><span class="s4">`</span>
+        <span class="s4">&lt;div style=&quot;margin-top: 20px; color: red;&quot;&gt; 
+          &lt;h3&gt;⚠️ Внимание: есть проваленные тесты!&lt;/h3&gt; 
+          &lt;p&gt;Пожалуйста, проверьте детали выполнения тестов.&lt;/p&gt; 
+        &lt;/div&gt; 
+      ` </span><span class="s3">: </span><span class="s4">`</span>
+        <span class="s4">&lt;div style=&quot;margin-top: 20px; color: green;&quot;&gt; 
+          &lt;h3&gt;✅ Все тесты прошли успешно!&lt;/h3&gt; 
+        &lt;/div&gt; 
+      `</span><span class="s3">}</span>
+      
+      <span class="s4">&lt;div style=&quot;margin-top: 20px;&quot;&gt; 
+        &lt;p&gt;&lt;em&gt;Отчет сгенерирован автоматически&lt;/em&gt;&lt;/p&gt; 
+      &lt;/div&gt; 
+    `</span><span class="s3">;</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+
+<span class="s0">// Запуск</span>
+<span class="s2">const </span><span class="s1">sender </span><span class="s3">= </span><span class="s2">new </span><span class="s1">TestResultSender</span><span class="s3">();</span>
+<span class="s1">sender</span><span class="s3">.</span><span class="s1">runTestsAndSendEmail</span><span class="s3">();</span></pre>
+</body>
+</html>

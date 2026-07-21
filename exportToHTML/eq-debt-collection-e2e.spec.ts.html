@@ -1,0 +1,602 @@
+<html>
+<head>
+<title>eq-debt-collection-e2e.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-debt-collection-e2e.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">allure </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'allure-playwright'</span><span class="s2">;</span>
+
+<span class="s0">const </span><span class="s1">baseUrl </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">BASE_URL </span><span class="s2">|| </span><span class="s3">'https://eq-debt-collection-stage.bdengi.ru'</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'API Tests for Document Packages'</span><span class="s2">, () =&gt; {</span>
+    <span class="s0">let </span><span class="s1">packagesId</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s0">let </span><span class="s1">firstItemId</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'1 Copy - Тестовый NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание пакета документов для районного суда с NEED_FOR_GAS_IS_FALSE и указанным судом'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'district-court'</span><span class="s2">, </span><span class="s3">'gas-false'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a1c067b4-9f2a-400b-a280-c15d48957785'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'32d01ae5-e8b4-4aa3-ad30-812456990764'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить статус код 201'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить время ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить Content-Type'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s0">const </span><span class="s1">contentType </span><span class="s2">= </span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'content-type'</span><span class="s2">];</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">contentType</span><span class="s2">).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить наличие id в ответе'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить схему ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s5">// Сохраняем ID пакета для последующих тестов</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">parameter</span><span class="s2">(</span><span class="s3">'packagesId'</span><span class="s2">, </span><span class="s1">packagesId</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_1'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Получение документов внутри созданного пакета по ID'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'get-documents'</span><span class="s2">, </span><span class="s3">'package-documents'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить статус код 200'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить время ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить структуру ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'items'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'pageNumber'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'pageSize'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'hasMore'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'totalItems'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">)).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить обязательные поля в элементах'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">((</span><span class="s1">item</span><span class="s2">: </span><span class="s1">any</span><span class="s2">, </span><span class="s1">index</span><span class="s2">: </span><span class="s1">number</span><span class="s2">) =&gt; {</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'packageId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'contractId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'settingsPackageId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'generalType'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'typeId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'status'</span><span class="s2">);</span>
+                    <span class="s2">});</span>
+                <span class="s2">});</span>
+
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+                <span class="s1">firstItemId </span><span class="s2">= </span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'28362e06-08be-417c-8c26-4dc17333932e'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить формат UUID settingsPackageId'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">uuidRegex </span><span class="s2">= </span><span class="s6">/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toMatch</span><span class="s2">(</span><span class="s1">uuidRegex</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'2 Copy - Тестовый NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный пакет'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание дефолтного пакета документов для районного суда с NEED_FOR_GAS_IS_FALSE'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'district-court'</span><span class="s2">, </span><span class="s3">'gas-false'</span><span class="s2">, </span><span class="s3">'default'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a1c067b4-9f2a-400b-a280-c15d48957785'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'000090ee-c2f9-41d7-a223-e6a97b95768c'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить статус код 201'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">parameter</span><span class="s2">(</span><span class="s3">'packagesId'</span><span class="s2">, </span><span class="s1">packagesId</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_2'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Получение документов дефолтного пакета по ID'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'get-documents'</span><span class="s2">, </span><span class="s3">'package-documents'</span><span class="s2">, </span><span class="s3">'default'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+                <span class="s1">firstItemId </span><span class="s2">= </span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId для дефолтного пакета'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'69a04ba0-09e2-4fe1-b08e-9d207ecd4060'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'3 Copy - Тестовый NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание пакета документов для мирового суда с NEED_FOR_GAS_IS_FALSE и указанным судом'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'magistrate-court'</span><span class="s2">, </span><span class="s3">'gas-false'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'893592f1-e26a-4d96-a230-66767c26e77a'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'00004a4d-358e-46e5-8ac5-33a4956f33b0'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_3'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId для мирового суда'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'b6628f16-4497-49ef-8227-8ef338d1a6ec'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'4 Copy - Тестовый NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание дефолтного пакета документов для мирового суда с NEED_FOR_GAS_IS_FALSE'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'magistrate-court'</span><span class="s2">, </span><span class="s3">'gas-false'</span><span class="s2">, </span><span class="s3">'default'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'893592f1-e26a-4d96-a230-66767c26e77a'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'000090ee-c2f9-41d7-a223-e6a97b95768c'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_4'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId для дефолтного мирового суда'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'51ff0bc5-4c16-4071-8b79-185f8aed7fc4'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'5 Copy - Районный суд ФЭ на печать NEED_FOR_GAS_IS_TRUE Суд указан'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание пакета документов для районного суда с NEED_FOR_GAS_IS_TRUE и указанным судом'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'district-court'</span><span class="s2">, </span><span class="s3">'gas-true'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'7be90c4b-487a-4366-9af4-35c1d8f7c937'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'5077f0d5-dc9d-48bb-bcfa-f579ccf78c35'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_5'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId для районного суда с GAS'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'c89842ff-1daf-4aba-9d6b-4b6884f4f0b7'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'6 Copy - Районный суд ФЭ на печать NEED_FOR_GAS_IS_TRUE Дефолтный'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание дефолтного пакета документов для районного суда с NEED_FOR_GAS_IS_TRUE'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'district-court'</span><span class="s2">, </span><span class="s3">'gas-true'</span><span class="s2">, </span><span class="s3">'default'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'7be90c4b-487a-4366-9af4-35c1d8f7c937'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'127ee508-8acb-4993-82be-e01869241c64'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_6'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId для дефолтного районного суда с GAS'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'021cb26c-1c96-4f59-80b7-53b1a75b449f'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'7 Copy - Мировой суд ФЭ на печать NEED_FOR_GAS_IS_TRUE Суд указан'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание пакета документов для мирового суда с NEED_FOR_GAS_IS_TRUE и указанным судом'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'magistrate-court'</span><span class="s2">, </span><span class="s3">'gas-true'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a7d7af33-a42d-4a66-bb8a-40eb9c1bd21c'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'00004a4d-358e-46e5-8ac5-33a4956f33b0'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_7'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId для мирового суда с GAS'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'5955e2c4-93ff-417a-8e2a-4f60ab8e400f'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'8 Copy - Мировой суд ФЭ на печать NEED_FOR_GAS_IS_TRUE Дефолтный'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание дефолтного пакета документов для мирового суда с NEED_FOR_GAS_IS_TRUE'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'magistrate-court'</span><span class="s2">, </span><span class="s3">'gas-true'</span><span class="s2">, </span><span class="s3">'default'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a7d7af33-a42d-4a66-bb8a-40eb9c1bd21c'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'0000cf37-d804-4fe7-a725-58fa4567bfb4'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_8'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId для дефолтного мирового суда с GAS'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'bfa913fd-63a8-4734-84ed-cb5da8eecd31'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'9 Copy - E2E тесты для мирового суда с GAS'</span><span class="s2">, () =&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан E2E'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'E2E тест: создание пакета документов для мирового суда с NEED_FOR_GAS_IS_TRUE'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'e2e'</span><span class="s2">, </span><span class="s3">'package-creation'</span><span class="s2">, </span><span class="s3">'magistrate-court'</span><span class="s2">, </span><span class="s3">'gas-true'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a7d7af33-a42d-4a66-bb8a-40eb9c1bd21c'</span><span class="s2">,</span>
+                    <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'00004a4d-358e-46e5-8ac5-33a4956f33b0'</span><span class="s2">]</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Конвертация документов пакета в PDF для отправки в ГАС E2E'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'E2E тест: конвертация документов пакета в PDF формат для ГАС'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'e2e'</span><span class="s2">, </span><span class="s3">'conversion'</span><span class="s2">, </span><span class="s3">'pdf'</span><span class="s2">, </span><span class="s3">'gas'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/convert`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">},</span>
+                <span class="s1">data</span><span class="s2">: {</span>
+                    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+                    <span class="s1">documentIds</span><span class="s2">: []</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить статус код 200'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить время ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">500</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить наличие заголовка date'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'date'</span><span class="s2">]).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s2">});</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Получение документов внутри пакета E2E'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'E2E тест: получение документов внутри созданного пакета'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'e2e'</span><span class="s2">, </span><span class="s3">'get-documents'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить время ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить settingsPackageId в E2E сценарии'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">'5955e2c4-93ff-417a-8e2a-4f60ab8e400f'</span><span class="s2">;</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Получение документов контракта для ГАС E2E'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'E2E тест: получение документов контракта предназначенных для ГАС'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'e2e'</span><span class="s2">, </span><span class="s3">'contract-documents'</span><span class="s2">, </span><span class="s3">'gas'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/contracts/00004a4d-358e-46e5-8ac5-33a4956f33b0/documents/gas?pageNumber=1&amp;pageSize=25`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить статус код 200'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить время ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить Content-Type'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s0">const </span><span class="s1">contentType </span><span class="s2">= </span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'content-type'</span><span class="s2">];</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">contentType</span><span class="s2">).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items </span><span class="s2">&amp;&amp; </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить обязательные свойства документов'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">((</span><span class="s1">item</span><span class="s2">: </span><span class="s1">any</span><span class="s2">, </span><span class="s1">index</span><span class="s2">: </span><span class="s1">number</span><span class="s2">) =&gt; {</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'packageId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'contractId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'settingsPackageId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'generalType'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'typeId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'fileId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'fullFileName'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'createdAt'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'status'</span><span class="s2">);</span>
+
+                        <span class="s5">// Дополнительные проверки типов</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">item</span><span class="s2">.</span><span class="s1">id</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">).</span><span class="s1">toMatch</span><span class="s2">(</span><span class="s6">/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/</span><span class="s2">);</span>
+                    <span class="s2">});</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Получение идентификаторов файлов документов E2E'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'E2E тест: получение идентификаторов файлов документов контракта для ГАС'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">(</span><span class="s3">'e2e'</span><span class="s2">, </span><span class="s3">'file-ids'</span><span class="s2">, </span><span class="s3">'gas'</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/contracts/00004a4d-358e-46e5-8ac5-33a4956f33b0/documents/gas/files/ids`</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: {</span>
+                    <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+            <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить статус код 200'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить время ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить Content-Type'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s0">const </span><span class="s1">contentType </span><span class="s2">= </span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'content-type'</span><span class="s2">];</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">contentType</span><span class="s2">).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверить что ответ является массивом'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">)).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s2">});</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

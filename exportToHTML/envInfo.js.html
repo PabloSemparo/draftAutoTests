@@ -1,0 +1,318 @@
+<html>
+<head>
+<title>envInfo.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #5f826b; font-style: italic;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+envInfo.js</font>
+</center></td></tr></table>
+<pre><span class="s0">/**</span>
+ <span class="s0">* The implementation is based on https://github.com/gagle/node-properties.</span>
+ <span class="s0">*/</span>
+
+<span class="s2">var </span><span class="s1">EOL </span><span class="s3">= </span><span class="s1">process</span><span class="s3">.</span><span class="s1">platform </span><span class="s3">=== </span><span class="s4">&quot;win32&quot; </span><span class="s3">? </span><span class="s4">&quot;</span><span class="s2">\r\n</span><span class="s4">&quot; </span><span class="s3">: </span><span class="s4">&quot;</span><span class="s2">\n</span><span class="s4">&quot;</span><span class="s3">;</span>
+<span class="s2">export var </span><span class="s1">stringifyEnvInfo </span><span class="s3">= </span><span class="s1">envInfo </span><span class="s3">=&gt; {</span>
+  <span class="s2">var </span><span class="s1">lines </span><span class="s3">= [];</span>
+  <span class="s2">for </span><span class="s3">(</span><span class="s2">var </span><span class="s3">[</span><span class="s1">key</span><span class="s3">, </span><span class="s1">value</span><span class="s3">] </span><span class="s1">of Object</span><span class="s3">.</span><span class="s1">entries</span><span class="s3">(</span><span class="s1">envInfo</span><span class="s3">)) {</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">value </span><span class="s3">!== </span><span class="s2">null </span><span class="s3">&amp;&amp; </span><span class="s1">value </span><span class="s3">!== </span><span class="s1">undefined</span><span class="s3">) {</span>
+      <span class="s2">var </span><span class="s1">escapedKey </span><span class="s3">= </span><span class="s1">escapeKey</span><span class="s3">(</span><span class="s1">key</span><span class="s3">);</span>
+      <span class="s2">var </span><span class="s1">escapedValue </span><span class="s3">= </span><span class="s1">escapeValue</span><span class="s3">(</span><span class="s1">value </span><span class="s3">!== </span><span class="s2">null </span><span class="s3">&amp;&amp; </span><span class="s1">value </span><span class="s3">!== </span><span class="s2">void </span><span class="s5">0 </span><span class="s3">? </span><span class="s1">value </span><span class="s3">: </span><span class="s4">&quot;&quot;</span><span class="s3">);</span>
+      <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">&quot;&quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">escapedKey</span><span class="s3">, </span><span class="s4">&quot;=&quot;</span><span class="s3">).</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">escapedValue</span><span class="s3">));</span>
+    <span class="s3">}</span>
+  <span class="s3">}</span>
+  <span class="s2">return </span><span class="s1">lines</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s1">EOL</span><span class="s3">);</span>
+<span class="s3">};</span>
+<span class="s2">export var </span><span class="s1">parseEnvInfo </span><span class="s3">= </span><span class="s1">input </span><span class="s3">=&gt; {</span>
+  <span class="s2">if </span><span class="s3">(!</span><span class="s1">input</span><span class="s3">) {</span>
+    <span class="s2">return </span><span class="s3">{};</span>
+  <span class="s3">}</span>
+  <span class="s2">var </span><span class="s1">envInfo </span><span class="s3">= {};</span>
+  <span class="s2">var </span><span class="s1">escape </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">skipSpace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">isCommentLine </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">newLine </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">multiLine </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">isKey </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">key </span><span class="s3">= </span><span class="s4">&quot;&quot;</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">value </span><span class="s3">= </span><span class="s4">&quot;&quot;</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">unicode</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">unicodeRemaining </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">escapingUnicode </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">keySpace </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">sep </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+  <span class="s2">var </span><span class="s1">line </span><span class="s3">= () =&gt; {</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">key </span><span class="s3">|| </span><span class="s1">value </span><span class="s3">|| </span><span class="s1">sep</span><span class="s3">) {</span>
+      <span class="s1">envInfo</span><span class="s3">[</span><span class="s1">key</span><span class="s3">] = </span><span class="s1">value</span><span class="s3">;</span>
+      <span class="s1">key </span><span class="s3">= </span><span class="s4">&quot;&quot;</span><span class="s3">;</span>
+      <span class="s1">value </span><span class="s3">= </span><span class="s4">&quot;&quot;</span><span class="s3">;</span>
+      <span class="s1">sep </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+    <span class="s3">}</span>
+  <span class="s3">};</span>
+  <span class="s2">var </span><span class="s1">decodeString </span><span class="s3">= (</span><span class="s1">output</span><span class="s3">, </span><span class="s1">char</span><span class="s3">) =&gt; {</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">escapingUnicode </span><span class="s3">&amp;&amp; </span><span class="s1">unicodeRemaining</span><span class="s3">) {</span>
+      <span class="s6">// eslint-disable-next-line no-bitwise</span>
+      <span class="s1">unicode </span><span class="s3">= (</span><span class="s1">unicode </span><span class="s3">&lt;&lt; </span><span class="s5">4</span><span class="s3">) + </span><span class="s1">hex</span><span class="s3">(</span><span class="s1">char</span><span class="s3">);</span>
+      <span class="s2">if </span><span class="s3">(--</span><span class="s1">unicodeRemaining</span><span class="s3">) {</span>
+        <span class="s2">return </span><span class="s1">output</span><span class="s3">;</span>
+      <span class="s3">}</span>
+      <span class="s1">escape </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+      <span class="s1">escapingUnicode </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+      <span class="s2">return </span><span class="s1">output </span><span class="s3">+ </span><span class="s1">String</span><span class="s3">.</span><span class="s1">fromCharCode</span><span class="s3">(</span><span class="s1">unicode</span><span class="s3">);</span>
+    <span class="s3">}</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;u&quot;</span><span class="s3">) {</span>
+      <span class="s1">unicode </span><span class="s3">= </span><span class="s5">0</span><span class="s3">;</span>
+      <span class="s1">escapingUnicode </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+      <span class="s1">unicodeRemaining </span><span class="s3">= </span><span class="s5">4</span><span class="s3">;</span>
+      <span class="s2">return </span><span class="s1">output</span><span class="s3">;</span>
+    <span class="s3">}</span>
+    <span class="s1">escape </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+    <span class="s2">switch </span><span class="s3">(</span><span class="s1">char</span><span class="s3">) {</span>
+      <span class="s2">case </span><span class="s4">&quot;t&quot;</span><span class="s3">:</span>
+        <span class="s2">return </span><span class="s4">&quot;&quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s4">&quot;</span><span class="s2">\t</span><span class="s4">&quot;</span><span class="s3">);</span>
+      <span class="s2">case </span><span class="s4">&quot;r&quot;</span><span class="s3">:</span>
+        <span class="s2">return </span><span class="s4">&quot;&quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s4">&quot;</span><span class="s2">\r</span><span class="s4">&quot;</span><span class="s3">);</span>
+      <span class="s2">case </span><span class="s4">&quot;n&quot;</span><span class="s3">:</span>
+        <span class="s2">return </span><span class="s4">&quot;&quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s4">&quot;</span><span class="s2">\n</span><span class="s4">&quot;</span><span class="s3">);</span>
+      <span class="s2">case </span><span class="s4">&quot;f&quot;</span><span class="s3">:</span>
+        <span class="s2">return </span><span class="s4">&quot;&quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">output</span><span class="s3">, </span><span class="s4">&quot;</span><span class="s2">\f</span><span class="s4">&quot;</span><span class="s3">);</span>
+    <span class="s3">}</span>
+    <span class="s2">return </span><span class="s1">output </span><span class="s3">+ </span><span class="s1">char</span><span class="s3">;</span>
+  <span class="s3">};</span>
+  <span class="s2">for </span><span class="s3">(</span><span class="s2">var </span><span class="s1">char of input</span><span class="s3">) {</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\r</span><span class="s4">&quot;</span><span class="s3">) {</span>
+      <span class="s2">continue</span><span class="s3">;</span>
+    <span class="s3">}</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">isCommentLine</span><span class="s3">) {</span>
+      <span class="s2">if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\n</span><span class="s4">&quot;</span><span class="s3">) {</span>
+        <span class="s1">isCommentLine </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+        <span class="s1">newLine </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">skipSpace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+      <span class="s3">}</span>
+      <span class="s2">continue</span><span class="s3">;</span>
+    <span class="s3">}</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">skipSpace</span><span class="s3">) {</span>
+      <span class="s2">if </span><span class="s3">(</span><span class="s1">isWhitespace</span><span class="s3">(</span><span class="s1">char</span><span class="s3">)) {</span>
+        <span class="s2">continue</span><span class="s3">;</span>
+      <span class="s3">}</span>
+      <span class="s2">if </span><span class="s3">(!</span><span class="s1">multiLine </span><span class="s3">&amp;&amp; </span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\n</span><span class="s4">&quot;</span><span class="s3">) {</span>
+        <span class="s1">isKey </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">keySpace </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+        <span class="s1">newLine </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">line</span><span class="s3">();</span>
+        <span class="s2">continue</span><span class="s3">;</span>
+      <span class="s3">}</span>
+      <span class="s1">skipSpace </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+      <span class="s1">multiLine </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+    <span class="s3">}</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">newLine</span><span class="s3">) {</span>
+      <span class="s1">newLine </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+      <span class="s2">if </span><span class="s3">(</span><span class="s1">isComment</span><span class="s3">(</span><span class="s1">char</span><span class="s3">)) {</span>
+        <span class="s1">isCommentLine </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s2">continue</span><span class="s3">;</span>
+      <span class="s3">}</span>
+    <span class="s3">}</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">!== </span><span class="s4">&quot;</span><span class="s2">\n</span><span class="s4">&quot;</span><span class="s3">) {</span>
+      <span class="s2">if </span><span class="s3">(!</span><span class="s1">escape </span><span class="s3">&amp;&amp; </span><span class="s1">isKey </span><span class="s3">&amp;&amp; </span><span class="s1">isSeparator</span><span class="s3">(</span><span class="s1">char</span><span class="s3">)) {</span>
+        <span class="s1">sep </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">isKey </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+        <span class="s1">keySpace </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+        <span class="s1">skipSpace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s2">continue</span><span class="s3">;</span>
+      <span class="s3">}</span>
+      <span class="s2">if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">&quot;</span><span class="s3">) {</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">escape</span><span class="s3">) {</span>
+          <span class="s2">if </span><span class="s3">(</span><span class="s1">escapingUnicode</span><span class="s3">) {</span>
+            <span class="s2">continue</span><span class="s3">;</span>
+          <span class="s3">}</span>
+          <span class="s2">if </span><span class="s3">(</span><span class="s1">keySpace</span><span class="s3">) {</span>
+            <span class="s1">keySpace </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+            <span class="s1">isKey </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+          <span class="s3">}</span>
+          <span class="s2">if </span><span class="s3">(</span><span class="s1">isKey</span><span class="s3">) {</span>
+            <span class="s1">key </span><span class="s3">+= </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">&quot;</span><span class="s3">;</span>
+          <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+            <span class="s1">value </span><span class="s3">+= </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">&quot;</span><span class="s3">;</span>
+          <span class="s3">}</span>
+        <span class="s3">}</span>
+        <span class="s1">escape </span><span class="s3">= !</span><span class="s1">escape</span><span class="s3">;</span>
+      <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">keySpace</span><span class="s3">) {</span>
+          <span class="s1">keySpace </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+          <span class="s1">isKey </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+        <span class="s3">}</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">isKey</span><span class="s3">) {</span>
+          <span class="s2">if </span><span class="s3">(</span><span class="s1">escape</span><span class="s3">) {</span>
+            <span class="s1">key </span><span class="s3">= </span><span class="s1">decodeString</span><span class="s3">(</span><span class="s1">key</span><span class="s3">, </span><span class="s1">char</span><span class="s3">);</span>
+          <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+            <span class="s2">if </span><span class="s3">(</span><span class="s1">isWhitespace</span><span class="s3">(</span><span class="s1">char</span><span class="s3">)) {</span>
+              <span class="s1">keySpace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+              <span class="s1">skipSpace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+              <span class="s2">continue</span><span class="s3">;</span>
+            <span class="s3">}</span>
+            <span class="s1">key </span><span class="s3">+= </span><span class="s1">char</span><span class="s3">;</span>
+          <span class="s3">}</span>
+        <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+          <span class="s2">if </span><span class="s3">(</span><span class="s1">escape</span><span class="s3">) {</span>
+            <span class="s1">value </span><span class="s3">= </span><span class="s1">decodeString</span><span class="s3">(</span><span class="s1">value</span><span class="s3">, </span><span class="s1">char</span><span class="s3">);</span>
+          <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+            <span class="s1">value </span><span class="s3">+= </span><span class="s1">char</span><span class="s3">;</span>
+          <span class="s3">}</span>
+        <span class="s3">}</span>
+      <span class="s3">}</span>
+    <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+      <span class="s2">if </span><span class="s3">(</span><span class="s1">escape</span><span class="s3">) {</span>
+        <span class="s2">if </span><span class="s3">(!</span><span class="s1">escapingUnicode</span><span class="s3">) {</span>
+          <span class="s1">escape </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+        <span class="s3">}</span>
+        <span class="s1">skipSpace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">multiLine </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+      <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+        <span class="s1">newLine </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">skipSpace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">isKey </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+        <span class="s1">line</span><span class="s3">();</span>
+      <span class="s3">}</span>
+    <span class="s3">}</span>
+  <span class="s3">}</span>
+  <span class="s1">line</span><span class="s3">();</span>
+  <span class="s2">return </span><span class="s1">envInfo</span><span class="s3">;</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">hex </span><span class="s3">= </span><span class="s1">char </span><span class="s3">=&gt; {</span>
+  <span class="s2">switch </span><span class="s3">(</span><span class="s1">char</span><span class="s3">) {</span>
+    <span class="s2">case </span><span class="s4">&quot;0&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">0</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;1&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">1</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;2&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">2</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;3&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">3</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;4&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">4</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;5&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">5</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;6&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">6</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;7&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">7</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;8&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">8</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;9&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">9</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;a&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;A&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">10</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;b&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;B&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">11</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;c&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;C&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">12</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;d&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;D&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">13</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;e&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;E&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">14</span><span class="s3">;</span>
+    <span class="s2">case </span><span class="s4">&quot;f&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;F&quot;</span><span class="s3">:</span>
+      <span class="s2">return </span><span class="s5">15</span><span class="s3">;</span>
+  <span class="s3">}</span>
+  <span class="s2">throw new </span><span class="s1">Error</span><span class="s3">(</span><span class="s4">&quot;Non-hex char &quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">char</span><span class="s3">));</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">escapeKey </span><span class="s3">= </span><span class="s1">key </span><span class="s3">=&gt; {</span>
+  <span class="s2">return </span><span class="s1">mapcatChars</span><span class="s3">(</span><span class="s1">key</span><span class="s3">, (</span><span class="s1">char</span><span class="s3">, </span><span class="s1">code</span><span class="s3">) =&gt; {</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">isSeparator</span><span class="s3">(</span><span class="s1">char</span><span class="s3">)) {</span>
+      <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">&quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">char</span><span class="s3">);</span>
+    <span class="s3">}</span>
+    <span class="s2">return </span><span class="s1">escapeCharacter</span><span class="s3">(</span><span class="s1">char</span><span class="s3">, </span><span class="s1">code</span><span class="s3">, </span><span class="s2">true</span><span class="s3">);</span>
+  <span class="s3">});</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">escapeValue </span><span class="s3">= </span><span class="s1">value </span><span class="s3">=&gt; {</span>
+  <span class="s2">var </span><span class="s1">escapeWhitespace </span><span class="s3">= </span><span class="s2">true</span><span class="s3">;</span>
+  <span class="s2">return </span><span class="s1">mapcatChars</span><span class="s3">(</span><span class="s1">value</span><span class="s3">, (</span><span class="s1">char</span><span class="s3">, </span><span class="s1">code</span><span class="s3">) =&gt; {</span>
+    <span class="s2">if </span><span class="s3">(!</span><span class="s1">isWhitespace</span><span class="s3">(</span><span class="s1">char</span><span class="s3">)) {</span>
+      <span class="s1">escapeWhitespace </span><span class="s3">= </span><span class="s2">false</span><span class="s3">;</span>
+    <span class="s3">}</span>
+    <span class="s2">return </span><span class="s1">escapeCharacter</span><span class="s3">(</span><span class="s1">char</span><span class="s3">, </span><span class="s1">code</span><span class="s3">, </span><span class="s1">escapeWhitespace</span><span class="s3">);</span>
+  <span class="s3">});</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">mapcatChars </span><span class="s3">= (</span><span class="s1">value</span><span class="s3">, </span><span class="s1">fn</span><span class="s3">) =&gt; {</span>
+  <span class="s2">var </span><span class="s1">result </span><span class="s3">= </span><span class="s4">&quot;&quot;</span><span class="s3">;</span>
+  <span class="s2">for </span><span class="s3">(</span><span class="s2">var </span><span class="s1">i </span><span class="s3">= </span><span class="s5">0</span><span class="s3">; </span><span class="s1">i </span><span class="s3">&lt; </span><span class="s1">value</span><span class="s3">.</span><span class="s1">length</span><span class="s3">; </span><span class="s1">i</span><span class="s3">++) {</span>
+    <span class="s2">var </span><span class="s1">char </span><span class="s3">= </span><span class="s1">value</span><span class="s3">[</span><span class="s1">i</span><span class="s3">];</span>
+    <span class="s2">var </span><span class="s1">code </span><span class="s3">= </span><span class="s1">value</span><span class="s3">.</span><span class="s1">charCodeAt</span><span class="s3">(</span><span class="s1">i</span><span class="s3">);</span>
+    <span class="s1">result </span><span class="s3">+= </span><span class="s1">fn</span><span class="s3">(</span><span class="s1">char</span><span class="s3">, </span><span class="s1">code</span><span class="s3">);</span>
+  <span class="s3">}</span>
+  <span class="s2">return </span><span class="s1">result</span><span class="s3">;</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">escapeCharacter </span><span class="s3">= (</span><span class="s1">char</span><span class="s3">, </span><span class="s1">code</span><span class="s3">, </span><span class="s1">escapeWhitespace</span><span class="s3">) =&gt; {</span>
+  <span class="s2">if </span><span class="s3">(</span><span class="s1">isAsciiPrintable</span><span class="s3">(</span><span class="s1">code</span><span class="s3">)) {</span>
+    <span class="s2">if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot; &quot; </span><span class="s3">&amp;&amp; </span><span class="s1">escapeWhitespace</span><span class="s3">) {</span>
+      <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\ </span><span class="s4">&quot;</span><span class="s3">;</span>
+    <span class="s3">} </span><span class="s2">else if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">&quot;</span><span class="s3">) {</span>
+      <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\\\</span><span class="s4">&quot;</span><span class="s3">;</span>
+    <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+      <span class="s2">return </span><span class="s1">char</span><span class="s3">;</span>
+    <span class="s3">}</span>
+  <span class="s3">} </span><span class="s2">else if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\t</span><span class="s4">&quot;</span><span class="s3">) {</span>
+    <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">t&quot;</span><span class="s3">;</span>
+  <span class="s3">} </span><span class="s2">else if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\n</span><span class="s4">&quot;</span><span class="s3">) {</span>
+    <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">n&quot;</span><span class="s3">;</span>
+  <span class="s3">} </span><span class="s2">else if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\f</span><span class="s4">&quot;</span><span class="s3">) {</span>
+    <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">f&quot;</span><span class="s3">;</span>
+  <span class="s3">} </span><span class="s2">else if </span><span class="s3">(</span><span class="s1">char </span><span class="s3">=== </span><span class="s4">&quot;</span><span class="s2">\r</span><span class="s4">&quot;</span><span class="s3">) {</span>
+    <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">r&quot;</span><span class="s3">;</span>
+  <span class="s3">} </span><span class="s2">else if </span><span class="s3">(</span><span class="s1">code </span><span class="s3">&lt; </span><span class="s5">160 </span><span class="s3">|| </span><span class="s1">code </span><span class="s3">&gt;= </span><span class="s5">256</span><span class="s3">) {</span>
+    <span class="s6">// Control sets 0 and 1 or non-ASCII characters</span>
+    <span class="s2">return </span><span class="s1">escapeUnicode</span><span class="s3">(</span><span class="s1">code</span><span class="s3">);</span>
+  <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+    <span class="s2">return </span><span class="s1">char</span><span class="s3">;</span>
+  <span class="s3">}</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">isWhitespace </span><span class="s3">= </span><span class="s1">char </span><span class="s3">=&gt; {</span>
+  <span class="s2">switch </span><span class="s3">(</span><span class="s1">char</span><span class="s3">) {</span>
+    <span class="s2">case </span><span class="s4">&quot;</span><span class="s2">\t</span><span class="s4">&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;</span><span class="s2">\f</span><span class="s4">&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot; &quot;</span><span class="s3">:</span>
+      <span class="s2">return true</span><span class="s3">;</span>
+  <span class="s3">}</span>
+  <span class="s2">return false</span><span class="s3">;</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">isAsciiPrintable </span><span class="s3">= </span><span class="s1">code </span><span class="s3">=&gt; </span><span class="s1">code </span><span class="s3">&gt; </span><span class="s5">31 </span><span class="s3">&amp;&amp; </span><span class="s1">code </span><span class="s3">&lt; </span><span class="s5">127</span><span class="s3">;</span>
+<span class="s2">var </span><span class="s1">escapeUnicode </span><span class="s3">= </span><span class="s1">code </span><span class="s3">=&gt; {</span>
+  <span class="s2">var </span><span class="s1">unicode </span><span class="s3">= </span><span class="s1">code</span><span class="s3">.</span><span class="s1">toString</span><span class="s3">(</span><span class="s5">16</span><span class="s3">);</span>
+  <span class="s2">var </span><span class="s1">prefix </span><span class="s3">= </span><span class="s4">&quot;0&quot;</span><span class="s3">.</span><span class="s1">repeat</span><span class="s3">(</span><span class="s5">4 </span><span class="s3">- </span><span class="s1">unicode</span><span class="s3">.</span><span class="s1">length</span><span class="s3">);</span>
+  <span class="s2">return </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">u&quot;</span><span class="s3">.</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">prefix</span><span class="s3">).</span><span class="s1">concat</span><span class="s3">(</span><span class="s1">unicode</span><span class="s3">);</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">isSeparator </span><span class="s3">= </span><span class="s1">char </span><span class="s3">=&gt; {</span>
+  <span class="s2">switch </span><span class="s3">(</span><span class="s1">char</span><span class="s3">) {</span>
+    <span class="s2">case </span><span class="s4">&quot;=&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;:&quot;</span><span class="s3">:</span>
+      <span class="s2">return true</span><span class="s3">;</span>
+  <span class="s3">}</span>
+  <span class="s2">return false</span><span class="s3">;</span>
+<span class="s3">};</span>
+<span class="s2">var </span><span class="s1">isComment </span><span class="s3">= </span><span class="s1">char </span><span class="s3">=&gt; {</span>
+  <span class="s2">switch </span><span class="s3">(</span><span class="s1">char</span><span class="s3">) {</span>
+    <span class="s2">case </span><span class="s4">&quot;#&quot;</span><span class="s3">:</span>
+    <span class="s2">case </span><span class="s4">&quot;!&quot;</span><span class="s3">:</span>
+      <span class="s2">return true</span><span class="s3">;</span>
+  <span class="s3">}</span>
+  <span class="s2">return false</span><span class="s3">;</span>
+<span class="s3">};</span>
+<span class="s6">//# sourceMappingURL=envInfo.js.map</span></pre>
+</body>
+</html>

@@ -3,12 +3,12 @@
     "target": "ES2020",
     "module": "commonjs",
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "*": ["*", "./tests/*"]
     },
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
-  },
-  "include": ["tests/**/*", "**/*.ts"],
-  "exclude": ["node_modules"]
+  }
 }

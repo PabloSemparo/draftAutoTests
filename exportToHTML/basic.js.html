@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>basic.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+basic.js</font>
+</center></td></tr></table>
+<pre><span class="s0">var </span><span class="s1">isBuffer </span><span class="s2">= </span><span class="s1">require</span><span class="s2">(</span><span class="s3">'../'</span><span class="s2">)</span>
+<span class="s0">var </span><span class="s1">test </span><span class="s2">= </span><span class="s1">require</span><span class="s2">(</span><span class="s3">'tape'</span><span class="s2">)</span>
+
+<span class="s1">test</span><span class="s2">(</span><span class="s3">'is-buffer'</span><span class="s2">, </span><span class="s0">function </span><span class="s2">(</span><span class="s1">t</span><span class="s2">) {</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s1">Buffer</span><span class="s2">.</span><span class="s1">alloc</span><span class="s2">(</span><span class="s4">4</span><span class="s2">)), </span><span class="s0">true</span><span class="s2">, </span><span class="s3">'new Buffer(4)'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s1">Buffer</span><span class="s2">.</span><span class="s1">allocUnsafeSlow</span><span class="s2">(</span><span class="s4">100</span><span class="s2">)), </span><span class="s0">true</span><span class="s2">, </span><span class="s3">'SlowBuffer(100)'</span><span class="s2">)</span>
+
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s1">undefined</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'undefined'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s0">null</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'null'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s3">''</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'empty string'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s0">true</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'true'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s0">false</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'false'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s4">0</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'0'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s4">1</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'1'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s4">1.0</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'1.0'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'string'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">({}), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'{}'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">([]), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'[]'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">(</span><span class="s0">function </span><span class="s1">foo </span><span class="s2">() {}), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'function foo () {}'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">({ </span><span class="s1">isBuffer</span><span class="s2">: </span><span class="s0">null </span><span class="s2">}), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'{ isBuffer: null }'</span><span class="s2">)</span>
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">equal</span><span class="s2">(</span><span class="s1">isBuffer</span><span class="s2">({ </span><span class="s1">isBuffer</span><span class="s2">: </span><span class="s0">function </span><span class="s2">() { </span><span class="s0">throw new </span><span class="s1">Error</span><span class="s2">() } }), </span><span class="s0">false</span><span class="s2">, </span><span class="s3">'{ isBuffer: function () { throw new Error() } }'</span><span class="s2">)</span>
+
+  <span class="s1">t</span><span class="s2">.</span><span class="s1">end</span><span class="s2">()</span>
+<span class="s2">})</span>
+</pre>
+</body>
+</html>

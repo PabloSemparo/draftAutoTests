@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>chain4Purchased.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+chain4Purchased.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;@playwright/test&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">CollectionStrategyPage </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../src/pages/CollectionStrategyPage&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">ContractsPage </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../src/pages/ContractsPage&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">ResponsibleAssignmentPage </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../src/pages/ResponsibleAssignmentPage&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">PaymentPage </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../src/pages/PaymentPage&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">UnrecognizedPaymentsRegistryPage </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../src/pages/attachPaymentOrderToContract&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">navigateToContracts </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../src/utils/navigation&quot;</span><span class="s2">;</span>
+
+<span class="s0">let </span><span class="s1">contractChain4Purchased</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">beforeEach</span><span class="s2">(</span><span class="s1">async </span><span class="s2">({ </span><span class="s1">page </span><span class="s2">}) =&gt; {</span>
+  <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 beforeEach: переход на страницу договоров...&quot;</span><span class="s2">);</span>
+  <span class="s0">await </span><span class="s1">navigateToContracts</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+<span class="s2">});</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span>
+  <span class="s2">.</span><span class="s1">serial</span><span class="s2">(</span><span class="s3">&quot;Цепочка 4 (покупные): Назначение стратегии и ответственного&quot;</span><span class="s2">, () =&gt; {</span>
+  <span class="s1">test</span><span class="s2">(</span><span class="s3">&quot;Цепочка 4 купленных. Шаг 1: Назначение стратегии&quot;</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">page </span><span class="s2">}) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">strategyPage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CollectionStrategyPage</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">strategyPage</span><span class="s2">.</span><span class="s1">goToStrategyPage</span><span class="s2">();</span>
+    <span class="s0">await </span><span class="s1">strategyPage</span><span class="s2">.</span><span class="s1">selectContractForPurchased</span><span class="s2">();</span>
+    <span class="s1">contractChain4Purchased </span><span class="s2">= </span><span class="s0">await </span><span class="s1">strategyPage</span><span class="s2">.</span><span class="s1">getSelectedContractNumber</span><span class="s2">();</span>
+    <span class="s0">await </span><span class="s1">strategyPage</span><span class="s2">.</span><span class="s1">assignProcessPurchased</span><span class="s2">();</span>
+
+    <span class="s0">const </span><span class="s1">contractsPage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ContractsPage</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span>
+      <span class="s0">await </span><span class="s1">contractsPage</span><span class="s2">.</span><span class="s1">verifyContractIsLoaded</span><span class="s2">(</span><span class="s1">contractChain4Purchased</span><span class="s2">)</span>
+    <span class="s2">).</span><span class="s1">toBeTruthy</span><span class="s2">();</span>
+  <span class="s2">});</span>
+
+  <span class="s1">test</span><span class="s2">(</span><span class="s3">&quot;Цепочка 4 купленных. Шаг 2: Назначение ответственного&quot;</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({</span>
+    <span class="s1">page</span><span class="s2">,</span>
+  <span class="s2">}) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">contractsPage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ContractsPage</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">contractsPage</span><span class="s2">.</span><span class="s1">searchContractByNumber</span><span class="s2">(</span><span class="s1">contractChain4Purchased</span><span class="s2">);</span>
+
+    <span class="s0">const </span><span class="s1">responsiblePage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ResponsibleAssignmentPage</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">responsiblePage</span><span class="s2">.</span><span class="s1">assignResponsible</span><span class="s2">(</span><span class="s1">contractChain4Purchased</span><span class="s2">);</span>
+  <span class="s2">});</span>
+
+  <span class="s1">test</span><span class="s2">(</span><span class="s3">&quot;Цепочка 4 купленных. Шаг 3: Оплата ГП мирового суда&quot;</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({</span>
+    <span class="s1">page</span><span class="s2">,</span>
+  <span class="s2">}) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">contractsPage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ContractsPage</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">contractsPage</span><span class="s2">.</span><span class="s1">selectContractAndOpen</span><span class="s2">(</span><span class="s1">contractChain4Purchased</span><span class="s2">);</span>
+
+    <span class="s0">const </span><span class="s1">paymentPage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">PaymentPage</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">paymentPage</span><span class="s2">.</span><span class="s1">payCourtStateDuty</span><span class="s2">();</span>
+  <span class="s2">});</span>
+
+  <span class="s1">test</span><span class="s2">(</span><span class="s3">&quot;Цепочка 4 купленных. Шаг 4: Ручная привязка платежного поручения&quot;</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({</span>
+    <span class="s1">page</span><span class="s2">,</span>
+  <span class="s2">}) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">registryPage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">UnrecognizedPaymentsRegistryPage</span><span class="s2">(</span><span class="s1">page</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">page</span><span class="s2">.</span><span class="s1">goto</span><span class="s2">(</span><span class="s3">&quot;/court-payment-receipt&quot;</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">expect</span><span class="s2">(</span><span class="s1">page</span><span class="s2">).</span><span class="s1">toHaveURL</span><span class="s2">(</span><span class="s3">&quot;/court-payment-receipt&quot;</span><span class="s2">);</span>
+
+    <span class="s0">await </span><span class="s1">registryPage</span><span class="s2">.</span><span class="s1">attachPaymentOrderToContract</span><span class="s2">(</span><span class="s1">contractChain4Purchased</span><span class="s2">);</span>
+  <span class="s2">});</span>
+<span class="s2">});</span>
+</pre>
+</body>
+</html>

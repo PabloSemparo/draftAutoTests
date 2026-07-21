@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>le-unix.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+.s6 { color: #7a7e85;}
+.s7 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+le-unix.js</font>
+</center></td></tr></table>
+<pre><span class="s0">'use strict'</span><span class="s1">;</span>
+
+<span class="s3">const </span><span class="s2">stream </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'stream'</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">Transform </span><span class="s1">= </span><span class="s2">stream</span><span class="s1">.</span><span class="s2">Transform</span><span class="s1">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* Ensures that only &lt;LF&gt; is used for linebreaks</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">{Object} options Stream options</span>
+ <span class="s4">*/</span>
+<span class="s3">class </span><span class="s2">LeWindows </span><span class="s3">extends </span><span class="s2">Transform </span><span class="s1">{</span>
+    <span class="s2">constructor</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+        <span class="s3">super</span><span class="s1">(</span><span class="s2">options</span><span class="s1">);</span>
+        <span class="s6">// init Transform</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">options </span><span class="s1">= </span><span class="s2">options </span><span class="s1">|| {};</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* Escapes dots</span>
+     <span class="s4">*/</span>
+    <span class="s2">_transform</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">encoding</span><span class="s1">, </span><span class="s2">done</span><span class="s1">) {</span>
+        <span class="s3">let </span><span class="s2">buf</span><span class="s1">;</span>
+        <span class="s3">let </span><span class="s2">lastPos </span><span class="s1">= </span><span class="s7">0</span><span class="s1">;</span>
+
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s7">0</span><span class="s1">, </span><span class="s2">len </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">len</span><span class="s1">; </span><span class="s2">i</span><span class="s1">++) {</span>
+            <span class="s3">if </span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] === </span><span class="s7">0x0d</span><span class="s1">) {</span>
+                <span class="s6">// \n</span>
+                <span class="s2">buf </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s2">lastPos</span><span class="s1">, </span><span class="s2">i</span><span class="s1">);</span>
+                <span class="s2">lastPos </span><span class="s1">= </span><span class="s2">i </span><span class="s1">+ </span><span class="s7">1</span><span class="s1">;</span>
+                <span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">buf</span><span class="s1">);</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">lastPos </span><span class="s1">&amp;&amp; </span><span class="s2">lastPos </span><span class="s1">&lt; </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">) {</span>
+            <span class="s2">buf </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s2">lastPos</span><span class="s1">);</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">buf</span><span class="s1">);</span>
+        <span class="s1">} </span><span class="s3">else if </span><span class="s1">(!</span><span class="s2">lastPos</span><span class="s1">) {</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+        <span class="s1">}</span>
+        <span class="s2">done</span><span class="s1">();</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">LeWindows</span><span class="s1">;</span>
+</pre>
+</body>
+</html>

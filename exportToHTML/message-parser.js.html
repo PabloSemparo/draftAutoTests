@@ -1,0 +1,180 @@
+<html>
+<head>
+<title>message-parser.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #2aacb8;}
+.s6 { color: #67a37c; font-style: italic;}
+.s7 { color: #7a7e85;}
+.s8 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+message-parser.js</font>
+</center></td></tr></table>
+<pre><span class="s0">'use strict'</span><span class="s1">;</span>
+
+<span class="s3">const </span><span class="s2">Transform </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'stream'</span><span class="s1">).</span><span class="s2">Transform</span><span class="s1">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* MessageParser instance is a transform stream that separates message headers</span>
+ <span class="s4">* from the rest of the body. Headers are emitted with the 'headers' event. Message</span>
+ <span class="s4">* body is passed on as the resulting stream.</span>
+ <span class="s4">*/</span>
+<span class="s3">class </span><span class="s2">MessageParser </span><span class="s3">extends </span><span class="s2">Transform </span><span class="s1">{</span>
+    <span class="s2">constructor</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+        <span class="s3">super</span><span class="s1">(</span><span class="s2">options</span><span class="s1">);</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes </span><span class="s1">= </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">alloc</span><span class="s1">(</span><span class="s5">4</span><span class="s1">);</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">headersParsed </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">headerBytes </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks </span><span class="s1">= [];</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">rawHeaders </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">bodySize </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* Keeps count of the last 4 bytes in order to detect line breaks on chunk boundaries</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s6">@param </span><span class="s4">{Buffer} data Next data chunk from the stream</span>
+     <span class="s4">*/</span>
+    <span class="s2">updateLastBytes</span><span class="s1">(</span><span class="s2">data</span><span class="s1">) {</span>
+        <span class="s3">let </span><span class="s2">lblen </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+        <span class="s3">let </span><span class="s2">nblen </span><span class="s1">= </span><span class="s2">Math</span><span class="s1">.</span><span class="s2">min</span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">length</span><span class="s1">, </span><span class="s2">lblen</span><span class="s1">);</span>
+
+        <span class="s7">// shift existing bytes</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">0</span><span class="s1">, </span><span class="s2">len </span><span class="s1">= </span><span class="s2">lblen </span><span class="s1">- </span><span class="s2">nblen</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">len</span><span class="s1">; </span><span class="s2">i</span><span class="s1">++) {</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] = </span><span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">[</span><span class="s2">i </span><span class="s1">+ </span><span class="s2">nblen</span><span class="s1">];</span>
+        <span class="s1">}</span>
+
+        <span class="s7">// add new bytes</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">1</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt;= </span><span class="s2">nblen</span><span class="s1">; </span><span class="s2">i</span><span class="s1">++) {</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">[</span><span class="s2">lblen </span><span class="s1">- </span><span class="s2">i</span><span class="s1">] = </span><span class="s2">data</span><span class="s1">[</span><span class="s2">data</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s2">i</span><span class="s1">];</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* Finds and removes message headers from the remaining body. We want to keep</span>
+     <span class="s4">* headers separated until final delivery to be able to modify these</span>
+     <span class="s4">*</span>
+     <span class="s4">* </span><span class="s6">@param </span><span class="s4">{Buffer} data Next chunk of data</span>
+     <span class="s4">* </span><span class="s6">@return </span><span class="s4">{Boolean} Returns true if headers are already found or false otherwise</span>
+     <span class="s4">*/</span>
+    <span class="s2">checkHeaders</span><span class="s1">(</span><span class="s2">data</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">headersParsed</span><span class="s1">) {</span>
+            <span class="s3">return true</span><span class="s1">;</span>
+        <span class="s1">}</span>
+
+        <span class="s3">let </span><span class="s2">lblen </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+        <span class="s3">let </span><span class="s2">headerPos </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">curLinePos </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">0</span><span class="s1">, </span><span class="s2">len </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">.</span><span class="s2">length </span><span class="s1">+ </span><span class="s2">data</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">len</span><span class="s1">; </span><span class="s2">i</span><span class="s1">++) {</span>
+            <span class="s3">let </span><span class="s2">chr</span><span class="s1">;</span>
+            <span class="s3">if </span><span class="s1">(</span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">lblen</span><span class="s1">) {</span>
+                <span class="s2">chr </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">[</span><span class="s2">i</span><span class="s1">];</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s2">chr </span><span class="s1">= </span><span class="s2">data</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s2">lblen</span><span class="s1">];</span>
+            <span class="s1">}</span>
+            <span class="s3">if </span><span class="s1">(</span><span class="s2">chr </span><span class="s1">=== </span><span class="s5">0x0a </span><span class="s1">&amp;&amp; </span><span class="s2">i</span><span class="s1">) {</span>
+                <span class="s3">let </span><span class="s2">pr1 </span><span class="s1">= </span><span class="s2">i </span><span class="s1">- </span><span class="s5">1 </span><span class="s1">&lt; </span><span class="s2">lblen </span><span class="s1">? </span><span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">1</span><span class="s1">] : </span><span class="s2">data</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">1 </span><span class="s1">- </span><span class="s2">lblen</span><span class="s1">];</span>
+                <span class="s3">let </span><span class="s2">pr2 </span><span class="s1">= </span><span class="s2">i </span><span class="s1">&gt; </span><span class="s5">1 </span><span class="s1">? (</span><span class="s2">i </span><span class="s1">- </span><span class="s5">2 </span><span class="s1">&lt; </span><span class="s2">lblen </span><span class="s1">? </span><span class="s3">this</span><span class="s1">.</span><span class="s2">lastBytes</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">2</span><span class="s1">] : </span><span class="s2">data</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">2 </span><span class="s1">- </span><span class="s2">lblen</span><span class="s1">]) : </span><span class="s3">false</span><span class="s1">;</span>
+                <span class="s3">if </span><span class="s1">(</span><span class="s2">pr1 </span><span class="s1">=== </span><span class="s5">0x0a</span><span class="s1">) {</span>
+                    <span class="s3">this</span><span class="s1">.</span><span class="s2">headersParsed </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+                    <span class="s2">headerPos </span><span class="s1">= </span><span class="s2">i </span><span class="s1">- </span><span class="s2">lblen </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">;</span>
+                    <span class="s3">this</span><span class="s1">.</span><span class="s2">headerBytes </span><span class="s1">+= </span><span class="s2">headerPos</span><span class="s1">;</span>
+                    <span class="s3">break</span><span class="s1">;</span>
+                <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">pr1 </span><span class="s1">=== </span><span class="s5">0x0d </span><span class="s1">&amp;&amp; </span><span class="s2">pr2 </span><span class="s1">=== </span><span class="s5">0x0a</span><span class="s1">) {</span>
+                    <span class="s3">this</span><span class="s1">.</span><span class="s2">headersParsed </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+                    <span class="s2">headerPos </span><span class="s1">= </span><span class="s2">i </span><span class="s1">- </span><span class="s2">lblen </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">;</span>
+                    <span class="s3">this</span><span class="s1">.</span><span class="s2">headerBytes </span><span class="s1">+= </span><span class="s2">headerPos</span><span class="s1">;</span>
+                    <span class="s3">break</span><span class="s1">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">headersParsed</span><span class="s1">) {</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">headerPos</span><span class="s1">));</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">rawHeaders </span><span class="s1">= </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">concat</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">headerBytes</span><span class="s1">);</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s0">'headers'</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">parseHeaders</span><span class="s1">());</span>
+            <span class="s3">if </span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1 </span><span class="s1">&gt; </span><span class="s2">headerPos</span><span class="s1">) {</span>
+                <span class="s3">let </span><span class="s2">chunk </span><span class="s1">= </span><span class="s2">data</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s2">headerPos</span><span class="s1">);</span>
+                <span class="s3">this</span><span class="s1">.</span><span class="s2">bodySize </span><span class="s1">+= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+                <span class="s7">// this would be the first chunk of data sent downstream</span>
+                <span class="s2">setImmediate</span><span class="s1">(() =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">));</span>
+            <span class="s1">}</span>
+            <span class="s3">return false</span><span class="s1">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">headerBytes </span><span class="s1">+= </span><span class="s2">data</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">data</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s7">// store last 4 bytes to catch header break</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">updateLastBytes</span><span class="s1">(</span><span class="s2">data</span><span class="s1">);</span>
+
+        <span class="s3">return false</span><span class="s1">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">_transform</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">encoding</span><span class="s1">, </span><span class="s2">callback</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">chunk </span><span class="s1">|| !</span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">) {</span>
+            <span class="s3">return </span><span class="s2">callback</span><span class="s1">();</span>
+        <span class="s1">}</span>
+
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">typeof </span><span class="s2">chunk </span><span class="s1">=== </span><span class="s0">'string'</span><span class="s1">) {</span>
+            <span class="s2">chunk </span><span class="s1">= </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">encoding</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s3">let </span><span class="s2">headersFound</span><span class="s1">;</span>
+
+        <span class="s3">try </span><span class="s1">{</span>
+            <span class="s2">headersFound </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">checkHeaders</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+        <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">E</span><span class="s1">) {</span>
+            <span class="s3">return </span><span class="s2">callback</span><span class="s1">(</span><span class="s2">E</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">headersFound</span><span class="s1">) {</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">bodySize </span><span class="s1">+= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s2">setImmediate</span><span class="s1">(</span><span class="s2">callback</span><span class="s1">);</span>
+    <span class="s1">}</span>
+
+    <span class="s2">_flush</span><span class="s1">(</span><span class="s2">callback</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks</span><span class="s1">) {</span>
+            <span class="s3">let </span><span class="s2">chunk </span><span class="s1">= </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">concat</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">headerBytes</span><span class="s1">);</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">bodySize </span><span class="s1">+= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+            <span class="s3">this</span><span class="s1">.</span><span class="s2">headerChunks </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+        <span class="s1">}</span>
+        <span class="s2">callback</span><span class="s1">();</span>
+    <span class="s1">}</span>
+
+    <span class="s2">parseHeaders</span><span class="s1">() {</span>
+        <span class="s3">let </span><span class="s2">lines </span><span class="s1">= (</span><span class="s3">this</span><span class="s1">.</span><span class="s2">rawHeaders </span><span class="s1">|| </span><span class="s0">''</span><span class="s1">).</span><span class="s2">toString</span><span class="s1">().</span><span class="s2">split</span><span class="s1">(</span><span class="s8">/\r?\n/</span><span class="s1">);</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s2">lines</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&gt; </span><span class="s5">0</span><span class="s1">; </span><span class="s2">i</span><span class="s1">--) {</span>
+            <span class="s3">if </span><span class="s1">(</span><span class="s8">/^\s/</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s2">lines</span><span class="s1">[</span><span class="s2">i</span><span class="s1">])) {</span>
+                <span class="s2">lines</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">1</span><span class="s1">] += </span><span class="s0">'</span><span class="s3">\n</span><span class="s0">' </span><span class="s1">+ </span><span class="s2">lines</span><span class="s1">[</span><span class="s2">i</span><span class="s1">];</span>
+                <span class="s2">lines</span><span class="s1">.</span><span class="s2">splice</span><span class="s1">(</span><span class="s2">i</span><span class="s1">, </span><span class="s5">1</span><span class="s1">);</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s3">return </span><span class="s2">lines</span>
+            <span class="s1">.</span><span class="s2">filter</span><span class="s1">(</span><span class="s2">line </span><span class="s1">=&gt; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">())</span>
+            <span class="s1">.</span><span class="s2">map</span><span class="s1">(</span><span class="s2">line </span><span class="s1">=&gt; ({</span>
+                <span class="s2">key</span><span class="s1">: </span><span class="s2">line</span><span class="s1">.</span><span class="s2">substr</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">line</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s0">':'</span><span class="s1">)).</span><span class="s2">trim</span><span class="s1">().</span><span class="s2">toLowerCase</span><span class="s1">(),</span>
+                <span class="s2">line</span>
+            <span class="s1">}));</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">MessageParser</span><span class="s1">;</span>
+</pre>
+</body>
+</html>
