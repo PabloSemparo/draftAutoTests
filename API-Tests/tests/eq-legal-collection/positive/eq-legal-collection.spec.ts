@@ -9,25 +9,29 @@ import {
 } from "../../../tests-data/enforcementEvents.data";
 
 
+const TEST_NAME = "EQ Legal Collection - Enforcement Events";
+
+
 test.describe(
-    "EQ Legal Collection API - Enforcement Events",
+    TEST_NAME,
     function () {
 
 
         for (
-            const [state, expectedEvents] of Object.entries(EXPECTED_EVENTS)
+            const [
+                state,
+                expectedEvents
+            ] of Object.entries(EXPECTED_EVENTS)
                 .filter(
                     function ([state]) {
-
                         return !EXCLUDED_STATES.has(state);
-
                     }
                 )
         ) {
 
 
             test(
-                `Проверка доступных событий для состояния ${state}`,
+                `Available events for state: ${state}`,
                 async function ({ request }) {
 
 
@@ -51,26 +55,35 @@ test.describe(
                     );
 
 
+                    await allure.tag(
+                        "API"
+                    );
+
+
+                    await allure.tag(
+                        "Regression"
+                    );
+
+
                     await allure.description(
-                        `
-                        Проверка доступных событий.
-
-                        State:
-                        ${state}
-
-                        Expected events:
-                        ${expectedEvents.join(", ")}
-                        `
+                        [
+                            "Проверка доступных событий",
+                            "",
+                            `State: ${state}`,
+                            "",
+                            "Expected events:",
+                            expectedEvents.join(", ")
+                        ].join("\n")
                     );
 
 
 
                     const response =
                         await allure.step(
-                            `GET /v1/enforcements/events?state=${state}`,
+                            `GET available events: ${state}`,
                             async function () {
 
-                                return await enforcementService
+                                return enforcementService
                                     .getAvailableEvents(state);
 
                             }
@@ -79,7 +92,7 @@ test.describe(
 
 
                     await allure.step(
-                        "Проверка HTTP статуса 200",
+                        "Validate response",
                         async function () {
 
 
@@ -89,32 +102,21 @@ test.describe(
                             .toBe(200);
 
 
-                        }
-                    );
 
+                            expect(
+                                response.body.events
+                            )
+                            .toBeDefined();
 
-
-                    await allure.step(
-                        "Проверка наличия поля events",
-                        async function () {
 
 
                             expect(
-                                response.body
+                                Array.isArray(
+                                    response.body.events
+                                )
                             )
-                            .toHaveProperty(
-                                "events"
-                            );
+                            .toBe(true);
 
-
-                        }
-                    );
-
-
-
-                    await allure.step(
-                        "Проверка количества событий",
-                        async function () {
 
 
                             expect(
@@ -125,33 +127,21 @@ test.describe(
                             );
 
 
-                        }
-                    );
-
-
-
-                    await allure.step(
-                        "Проверка списка доступных событий",
-                        async function () {
-
 
                             expect(
-                                response.body.events.sort()
+                                [...response.body.events].sort()
                             )
                             .toEqual(
-                                expectedEvents.sort()
+                                [...expectedEvents].sort()
                             );
-
 
                         }
                     );
-
 
                 }
             );
 
         }
-
 
     }
 );
