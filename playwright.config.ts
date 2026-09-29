@@ -95,17 +95,14 @@ export default defineConfig({
   },
 
   // ✅ Конфигурация проектов
+  // Проект setup удалён: файлов *.setup.* в репозитории нет,
+  // поэтому зависимость chromium от него была мёртвой конфигурацией.
   projects: [
-    {
-      name: 'setup',
-      testMatch: /.*\.setup\.js/,
-    },
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
       },
-      dependencies: ['setup'],
     },
   ],
 });
