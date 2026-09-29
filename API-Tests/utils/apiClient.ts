@@ -189,6 +189,8 @@ export class ApiClient {
     }
 
     return {
+      status: response.status(),
+      headers: response.headers(),
       raw: response,
       body: body as T,
       rawText,

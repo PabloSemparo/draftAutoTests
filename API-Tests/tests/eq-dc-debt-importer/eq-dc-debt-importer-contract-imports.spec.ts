@@ -1,36 +1,56 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-// Базовые настройки
-const API_URL = process.env.API_URL || 'http://eq-dc-debt-importer.test2.mmk.local';
-const AUTH_TOKEN = process.env.AUTH_TOKEN || '';
+import { apiConfig } from "../../config/apiConfig";
+import { DebtImporterService, buildContractImportPayload, buildContractorPayload } from "../../services/debtImporterService";
 
-// Тесты для работы с импортом договоров
-test.describe('Contract Imports API', () => {
-    test('GET /admin/v1/contract-imports - Возвращаем список импортов', async ({ request }) => {
-        const response = await request.get(`${API_URL}/admin/v1/contract-imports?contractorId=55298707-117c-44a5-8434-162fb9d2e4c5&status=DRAFT&pageNumber=0&pageSize=25`, {
-            headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
-        });
+test.describe.serial("eq-dc-debt-importer /admin/v1/contract-imports", () => {
+  test("[200] Возвращает список импортов", async ({ request }) => {
+    const service = new DebtImporterService(request);
+    let contractorId = apiConfig.eqDcDebtImporter.defaultContractorId;
 
-        expect(response.status()).toBe(200);
-        const body = await response.json();
-        expect(body).toHaveProperty('items');
-        expect(body.items).toBeInstanceOf(Array);
+    if (!contractorId) {
+      const contractor = await service.createContractor(buildContractorPayload());
+      expect(contractor.status).toBe(201);
+      contractorId = contractor.body.id;
+    }
+
+    const response = await service.getContractImports({
+      contractorId,
+      status: "DRAFT",
+      pageNumber: 0,
+      pageSize: 25,
     });
 
-    test('GET /admin/v1/contract-imports/{id} - Возвращаем детали импорта [200 CODE]', async ({ request }) => {
-        const response = await request.get(`${API_URL}/admin/v1/contract-imports?contractorId=55298707-117c-44a5-8434-162fb9d2e4c5&status=DRAFT&pageNumber=0&pageSize=25`, {
-            headers: { Authorization: `Bearer ${AUTH_TOKEN}` }
-        });
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("items");
+    expect(Array.isArray(response.body.items)).toBe(true);
+  });
 
-        expect(response.status()).toBe(200);
-        const body = await response.json();
-    });
+  test("[200] Возвращает детали импорта", async ({ request }) => {
+    const service = new DebtImporterService(request);
+
+    const contractor = await service.createContractor(buildContractorPayload());
+    expect(contractor.status).toBe(201);
+
+    const contractImport = await service.createContractImport(
+      buildContractImportPayload(contractor.body.id)
+    );
+    expect(contractImport.status).toBe(201);
+
+    const response = await service.getContractImportById(contractImport.body.id);
+
+    expect(response.status).toBe(200);
+    expect(response.body.id).toBe(contractImport.body.id);
+    expect(response.body.contractorId).toBe(contractor.body.id);
+  });
 });
 
-// Тесты безопасности
-test.describe('Security tests', () => {
-    test('Ошибка авторизации [401 CODE]', async ({ request }) => {
-        const response = await request.get(`${API_URL}/admin/v1/contractors`);
-        expect(response.status()).toBe(401);
-    });
+test.describe("eq-dc-debt-importer security", () => {
+  test("[401] Ошибка авторизации без токена", async ({ request }) => {
+    const service = new DebtImporterService(request, { requireAuth: false, token: undefined });
+
+    const response = await service.getContractors();
+
+    expect(response.status).toBe(401);
+  });
 });

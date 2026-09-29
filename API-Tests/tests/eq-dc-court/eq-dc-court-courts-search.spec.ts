@@ -1,54 +1,26 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-const API_BASE_URL = 'http://eq-dc-court.test2.mmk.local/v1';
-const API_TOKEN = ''; // Замените на реальный токен
+import { DcCourtService } from "../../services/dcCourtService";
+import { expectJsonContentType } from "../../utils/assertions";
 
-test.describe('EQ DC Court API тесты', () => {
-  // Вариант 1: Добавляем токен в заголовки для всех тестов
-  test.use({
-    extraHTTPHeaders: {
-      'X-API-Key': ``,
-    },
+const searchAddress = process.env.EQ_DC_COURT_TEST_ADDRESS ?? "Ульяновск, проспект ульяновский 2";
+
+test.describe("eq-dc-court /v1/courts/search", () => {
+  test("[200] Возвращает список судов по адресу", async ({ request }) => {
+    const courtService = new DcCourtService(request);
+
+    const response = await courtService.searchCourts(searchAddress);
+
+    expect(response.status).toBe(200);
+    expectJsonContentType(response.headers);
+    expect(Array.isArray(response.body)).toBe(true);
   });
 
-  test('Проверка на банкротство с валидными данными [200 CODE]', async ({ request }) => {
-    const params = new URLSearchParams({
-      inn: '614334131355',
-      fio: 'Старченко Владислав Владимирович',
-      birthDate: '1996-11-26'
-    });
+  test("[401/403] Запрос без авторизации отклоняется", async ({ request }) => {
+    const courtService = new DcCourtService(request, { requireAuth: false, apiKey: undefined, token: undefined });
 
-    // Вариант 2: Добавляем токен непосредственно в запрос (если нужно переопределить)
-    const response = await request.get(`${API_BASE_URL}/bankrupts/check?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${API_TOKEN}`
-      }
-    });
+    const response = await courtService.searchCourts(searchAddress);
 
-    // Проверка статуса кода
-    expect(response.status()).toBe(200);
-
-    const responseBody = await response.json();
-
-    // Проверка заголовка Content-Type
-    expect(response.headers()['content-type']).toContain('application/json');
-
-    // Проверка наличия и типа поля status
-    expect(responseBody).toHaveProperty('status');
-    expect(typeof responseBody.status).toBe('string');
-  });
-
-  // Тест на проверку авторизации
-  test('Реджектим если нет api токена', async ({ request }) => {
-    const params = new URLSearchParams({
-      inn: '614334131355',
-      fio: 'Старченко Владислав Владимирович',
-      birthDate: '1996-11-26'
-    });
-
-    // Делаем запрос без токена
-    const response = await request.get(`${API_BASE_URL}/bankrupts/check?${params}`, {
-      headers: {} // Очищаем заголовки
-    });
+    expect([401, 403]).toContain(response.status);
   });
 });

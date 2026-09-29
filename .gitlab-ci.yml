@@ -13,10 +13,9 @@ api-tests:
     - npm ci
     - npx playwright install chromium
   script:
-    # Путь исправлен: файл лежит в API-Tests/tests/... (а не API-Tests/eq-debt-collection/...)
-    - npx playwright test API-Tests/tests/eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts --reporter=html,line --project=chromium
-    # Для набора eq-legal-collection нужна masked-переменная API_KEY
-    # - npx playwright test API-Tests/tests/eq-legal-collection --reporter=html,line --project=chromium
+    - npm run typecheck:api
+    # Для наборов API нужны masked/secrets variables: API_KEY/AUTH_TOKEN и service-specific base URLs.
+    - npm run test:api -- --reporter=html,line --project=chromium
   artifacts:
     when: always
     paths:

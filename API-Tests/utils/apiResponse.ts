@@ -1,6 +1,10 @@
 import { APIResponse } from "@playwright/test";
 
 export interface ApiResponse<T = unknown> {
+  /** HTTP status code */
+  status: number;
+  /** Response headers */
+  headers: Record<string, string>;
   /** Сырой ответ Playwright: статус, заголовки, повторное чтение тела */
   raw: APIResponse;
   /**

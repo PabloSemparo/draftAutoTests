@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "convert:postman": "node scripts/Converter.js collections/test.json tests/api/",
-    "test:api": "playwright test tests/api/",
+    "test:api": "playwright test API-Tests/tests/eq-legal-collection API-Tests/tests/eq-dc-court API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contract-imports.spec.ts API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contractors.spec.ts",
+    "test:api:legal": "playwright test API-Tests/tests/eq-legal-collection",
+    "test:api:dc-court": "playwright test API-Tests/tests/eq-dc-court",
+    "test:api:debt-importer": "playwright test API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contract-imports.spec.ts API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contractors.spec.ts",
     "test": "playwright test",
     "test:report": "playwright test && allure generate allure-results --clean && node scripts/send-allure-report.js",
     "send-report": "node scripts/send-allure-report.js",
@@ -16,7 +19,8 @@
     "test:staging": "NODE_ENV=staging npx playwright test",
     "test:production": "NODE_ENV=production npx playwright test",
     "test:slow": "HEADLESS=false SLOW_MO=1000 npx playwright test",
-    "typecheck": "tsc --noEmit -p tsconfig.api.json"
+    "typecheck": "tsc --noEmit -p tsconfig.api.json",
+    "typecheck:api": "tsc --noEmit -p tsconfig.api.json"
   },
   "keywords": [],
   "author": "",

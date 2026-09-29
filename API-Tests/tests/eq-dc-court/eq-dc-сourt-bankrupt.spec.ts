@@ -1,18 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('Проверка на банкротство с валидными данными [200 CODE]', async ({ request }) => {
-  const BASE_URL = 'http://eq-dc-court.test2.mmk.local'
-  const response = await request.get(`${BASE_URL}/v1/bankrupts/check`, {
-    headers: {
-      'X-API-KEY': '',
-      'Accept': 'application/json'
-    },
-    params: {
-      inn: '614334131355',
-      fio: 'Старченко Владислав Владимирович',
-      birthDate: '1996-11-26'
-    }
-  });
+import { DcCourtService } from "../../services/dcCourtService";
 
-  expect(response.status()).toBe(200);
+const validParams = {
+  inn: process.env.EQ_DC_COURT_TEST_INN ?? "614334131355",
+  fio: process.env.EQ_DC_COURT_TEST_FIO ?? "Старченко Владислав Владимирович",
+  birthDate: process.env.EQ_DC_COURT_TEST_BIRTH_DATE ?? "1996-11-26",
+};
+
+test("eq-dc-court: [200] Проверка на банкротство с валидными данными", async ({ request }) => {
+  const courtService = new DcCourtService(request);
+
+  const response = await courtService.checkBankrupt(validParams);
+
+  expect(response.status).toBe(200);
+  expect(response.body).toHaveProperty("status");
 });

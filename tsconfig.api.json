@@ -13,7 +13,7 @@
     "noEmit": true
   },
   // Область проверки намеренно ограничена новым API-слоем (клиент, сервисы,
-  // модели, тестовые данные) и спеками eq-legal-collection.
+  // модели, тестовые данные) и уже мигрированными спеками.
   // Остальные наборы пока содержат предсуществующие ошибки типов —
   // по мере их починки список include можно расширять.
   "include": [
@@ -21,6 +21,9 @@
     "API-Tests/services/**/*.ts",
     "API-Tests/models/**/*.ts",
     "API-Tests/tests-data/**/*.ts",
-    "API-Tests/tests/eq-legal-collection/**/*.ts"
+    "API-Tests/tests/eq-legal-collection/**/*.ts",
+    "API-Tests/tests/eq-dc-court/**/*.ts",
+    "API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contract-imports.spec.ts",
+    "API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contractors.spec.ts"
   ]
 }

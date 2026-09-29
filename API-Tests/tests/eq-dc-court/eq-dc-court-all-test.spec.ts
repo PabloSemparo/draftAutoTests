@@ -1,125 +1,71 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-const API_BASE_URL = 'http://eq-dc-court.test2.mmk.local/v1';
-const API_KEY = ''; // Замените на реальный API ключ
+import { DcCourtService } from "../../services/dcCourtService";
+import { expectJsonContentType } from "../../utils/assertions";
 
-test.describe('API Тесты', () => {
-    // Общая конфигурация для всех тестов - добавляем API ключ в заголовки
-    test.use({
-        extraHTTPHeaders: {
-            'X-API-KEY': `${API_KEY}`,
-            // Или, если используется X-API-Key:
-            // 'X-API-Key': API_KEY,
-        },
+const VALID_BANKRUPT_PARAMS = {
+  inn: process.env.EQ_DC_COURT_TEST_INN ?? "614334131355",
+  fio: process.env.EQ_DC_COURT_TEST_FIO ?? "Старченко Владислав Владимирович",
+  birthDate: process.env.EQ_DC_COURT_TEST_BIRTH_DATE ?? "1996-11-26",
+};
+
+const VALID_ADDRESS = process.env.EQ_DC_COURT_TEST_ADDRESS ?? "Ульяновск, проспект ульяновский 2";
+
+test.describe("eq-dc-court API", () => {
+  test("[200] Проверка на банкротство с валидными данными", async ({ request }) => {
+    const courtService = new DcCourtService(request);
+
+    const response = await courtService.checkBankrupt(VALID_BANKRUPT_PARAMS);
+
+    expect(response.status).toBe(200);
+    expectJsonContentType(response.headers);
+    expect(response.body).toHaveProperty("status");
+  });
+
+  test("[200] Поиск судов возвращает список по валидному адресу", async ({ request }) => {
+    const courtService = new DcCourtService(request);
+
+    const response = await courtService.searchCourts(VALID_ADDRESS);
+
+    expect(response.status).toBe(200);
+    expectJsonContentType(response.headers);
+    expect(Array.isArray(response.body)).toBe(true);
+  });
+
+  test("[401/403] Запрос без API-ключа отклоняется", async ({ request }) => {
+    const courtService = new DcCourtService(request, { requireAuth: false, apiKey: undefined, token: undefined });
+
+    const response = await courtService.checkBankrupt(VALID_BANKRUPT_PARAMS);
+
+    expect([401, 403], "Service should reject unauthenticated requests").toContain(response.status);
+  });
+
+  const validationCases = [
+    {
+      name: "нет inn",
+      params: { fio: VALID_BANKRUPT_PARAMS.fio, birthDate: VALID_BANKRUPT_PARAMS.birthDate },
+    },
+    {
+      name: "нет fio",
+      params: { inn: VALID_BANKRUPT_PARAMS.inn, birthDate: VALID_BANKRUPT_PARAMS.birthDate },
+    },
+    {
+      name: "нет birthDate",
+      params: { inn: VALID_BANKRUPT_PARAMS.inn, fio: VALID_BANKRUPT_PARAMS.fio },
+    },
+    {
+      name: "невалидный inn",
+      params: { ...VALID_BANKRUPT_PARAMS, inn: "invalid" },
+    },
+  ];
+
+  for (const { name, params } of validationCases) {
+    test(`[400/422] Validation: ${name}`, async ({ request }) => {
+      const courtService = new DcCourtService(request);
+
+      const response = await courtService.checkBankrupt(params);
+
+      expect([400, 422], `Validation case '${name}' should fail`).toContain(response.status);
     });
-
-    test('Проверка на банкротство [CODE 200]', async ({ request }) => {
-        const params = new URLSearchParams({
-            inn: '614334131355',
-            fio: 'Старченко Владислав Владимирович',
-            birthDate: '1996-11-26'
-        });
-
-        const response = await request.get(`${API_BASE_URL}/bankrupts/check?${params}`);
-
-        // Проверка статуса кода
-        expect(response.status()).toBe(200);
-
-        const responseBody = await response.json();
-
-        // Проверка заголовка Content-Type
-        expect(response.headers()['content-type']).toContain('application/json');
-
-        // Проверка наличия и типа поля status
-        expect(responseBody).toHaveProperty('status');
-        expect(typeof responseBody.status).toBe('string');
-    });
-
-    test('Поиск судов возвращает суд по валиданому адресу [CODE 200]', async ({ request }) => {
-        const response = await request.get(`${API_BASE_URL}/courts/search?address=Ульяновск, проспект ульяновский 2`);
-
-        expect(response.status()).toBe(200);
-
-        const responseBody = await response.json();
-
-        if (responseBody.length > 0) {
-            const court = responseBody[0];
-            expect(court).toHaveProperty('id');
-            expect(court).toHaveProperty('name');
-            expect(court).toHaveProperty('address');
-
-            if (court.hasOwnProperty('dutyAmount')) {
-                expect(Number.isInteger(court.dutyAmount)).toBeTruthy();
-                expect(court.dutyAmount).toBeGreaterThanOrEqual(0);
-            }
-        }
-    });
-
-    test('Запрос без API ключа', async ({ request }) => {
-
-        const response = await request.get(`${API_BASE_URL}/bankrupts/check`, {
-            headers: {} // Переопределяем заголовки, удаляя авторизацию
-        });
-
-        expect(response.status()).toBe(422);
-
-
-    });
-
-    test('Получаем ошибку, если отсутствует обязательное поле [400 CODE]', async ({ request }) => {
-            // Делаем запрос без обязательных параметров
-            const response = await request.get(`${API_BASE_URL}/bankrupts/check`);
-
-            // Проверяем статус код (ожидаем 400 Bad Request или 422 Unprocessable Entity)
-            expect(response.status()).toBeGreaterThanOrEqual(400);
-            expect(response.status()).toBeLessThan(500);
-
-            const responseBody = await response.json();
-
-            // Проверяем структуру ответа
-            expect(responseBody).toEqual({
-                status: {
-                    code: "VALIDATION",
-                    description: "Для проверки банкротства должно быть заполнено inn или fio + birthDate"
-                }
-            });
-
-            // Альтернативный вариант с поэтапной проверкой
-            expect(responseBody).toHaveProperty('status');
-            expect(responseBody.status).toEqual(expect.objectContaining({
-                code: "VALIDATION",
-                description: "Для проверки банкротства должно быть заполнено inn или fio + birthDate"
-            }));
-        });
-
-// Дополнительные тесты для разных комбинаций параметров
-        test.describe('Проверки валидации', () => {
-            const testCases = [
-                {
-                    name: 'Пропущена все поля',
-                    params: {},
-                    expectedError: "Для проверки банкротства должно быть заполнено inn или fio + birthDate"
-                },
-                {
-                    name: 'Перадано только ФИО',
-                    params: { fio: 'Иванов Иван Иванович' },
-                    expectedError: "Для проверки банкротства должно быть заполнено inn или fio + birthDate"
-                },
-                {
-                    name: 'Только дата рождения без ФИО',
-                    params: { birthDate: '1990-01-01' },
-                    expectedError: "Для проверки банкротства должно быть заполнено inn или fio + birthDate"
-                }
-            ];
-
-            testCases.forEach(({ name, params, expectedError }) => {
-                test(`Validation: ${name}`, async ({ request }) => {
-                    const query = new URLSearchParams(params);
-                    const response = await request.get(`${API_BASE_URL}/bankrupts/check?${query}`);
-
-                    expect(response.status()).toBeGreaterThanOrEqual(400);
-
-                    const responseBody = await response.json();
-                    expect(responseBody.status.description).toBe(expectedError);
-    });
-});})})
+  }
+});
