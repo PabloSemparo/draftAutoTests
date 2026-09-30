@@ -5,7 +5,33 @@
  * для локального запуска и CI. Значения загружаются в playwright.config.ts через
  * env_settings/.env.stage или приходят как CI/CD variables.
  */
-export const apiConfig = {
+
+// Типы конфигурации
+export interface ApiConfig {
+  eqLegalCollection: {
+    baseUrl: string;
+    apiKey?: string;
+  };
+  eqDebtCollection: {
+    baseUrl: string;
+    defaultPackageId?: string;
+  };
+  eqDcCourt: {
+    baseUrl: string;
+    apiKey?: string;
+    token?: string;
+  };
+  eqDcDebtImporter: {
+    baseUrl: string;
+    token?: string;
+    defaultContractorId?: string;
+    defaultContractImportId?: string;
+    defaultContractId?: string;
+  };
+}
+
+// Конфигурация по умолчанию
+export const apiConfig: ApiConfig = {
   eqLegalCollection: {
     baseUrl: getRequiredEnv(
       "EQ_LEGAL_COLLECTION_BASE_URL",
@@ -47,6 +73,7 @@ export const apiConfig = {
   },
 };
 
+// Экспорт функций для работы с окружением
 export function getRequiredEnv(
   name: string,
   value: string | undefined,

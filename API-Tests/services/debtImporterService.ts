@@ -1,5 +1,8 @@
+/**
+ * Service layer для eq-dc-debt-importer с фикстурами
+ */
+
 import type { APIRequestContext } from "@playwright/test";
-import { faker } from "@faker-js/faker/locale/ru";
 
 import { apiConfig, requireBaseUrl, requireSecret } from "../config/apiConfig";
 import { ApiClient, ApiClientOptions } from "../utils/apiClient";
@@ -13,6 +16,8 @@ import {
   ContractorPayload,
   ContractorResponse,
 } from "../models/debtImporter";
+
+import { getValidContractorPayload, getValidContractImportPayload } from "../fixtures/debtImporter";
 
 interface DebtImporterServiceOptions extends ApiClientOptions {
   requireAuth?: boolean;
@@ -114,45 +119,50 @@ export class DebtImporterService extends ApiClient {
       url: `/admin/v1/contracts/${id}`,
     });
   }
-}
 
-export function buildContractorPayload(
-  overrides: Partial<ContractorPayload> = {}
-): ContractorPayload {
-  return {
-    name: faker.company.name(),
-    description: faker.lorem.sentence(),
-    inn: faker.string.numeric(10),
-    status: "ACTIVE",
-    contract: {
-      fileNamePattern: "contract_pattern",
-      inputFields: [],
-      isAutoCourt: false,
-    },
-    contractAnnex: {
-      fileNamePattern: "annex_pattern",
-      inputFields: [],
-    },
-    debt: {
-      fileLocationType: "COMMON",
-      inputFields: [],
-    },
-    ...overrides,
-  };
-}
+  // === Методы с использованием фикстур ===
 
-export function buildContractImportPayload(
-  contractorId: string,
-  overrides: Partial<ContractImportPayload> = {}
-): ContractImportPayload {
-  return {
-    contractorId,
-    assignmentNumber: faker.string.numeric(4),
-    assigmentDate: new Date().toISOString(),
-    contractDirectory: "/test/contracts/",
-    contractAnnexDirectory: "/test/annexes/",
-    debtDirectory: "/test/debts/",
-    fileDirectory: "/test/files/",
-    ...overrides,
-  };
+  /**
+   * Создание тестового контрактора с использованием фикстур
+   */
+  async createTestContractor(overrides: Partial<ContractorPayload> = {}): Promise<ApiResponse<ContractorResponse>> {
+    const payload = getValidContractorPayload(overrides);
+    return this.createContractor(payload);
+  }
+
+  /**
+   * Создание тестового импорта контракта с использованием фикстур
+   */
+  async createTestContractImport(
+    contractorId: string,
+    overrides: Partial<ContractImportPayload> = {}
+  ): Promise<ApiResponse<ContractImportResponse>> {
+    const payload = getValidContractImportPayload(contractorId, overrides);
+    return this.createContractImport(payload);
+  }
+
+  /**
+   * Создание контрактора с определенным статусом
+   */
+  async createContractorWithStatus(
+    status: string,
+    overrides: Partial<ContractorPayload> = {}
+  ): Promise<ApiResponse<ContractorResponse>> {
+    return this.createTestContractor({ status, ...overrides });
+  }
+
+  /**
+   * Создание импорта контракта с определенными директориями
+   */
+  async createContractImportWithDirectories(
+    contractorId: string,
+    directories: {
+      contractDirectory?: string;
+      contractAnnexDirectory?: string;
+      debtDirectory?: string;
+      fileDirectory?: string;
+    }
+  ): Promise<ApiResponse<ContractImportResponse>> {
+    return this.createTestContractImport(contractorId, directories);
+  }
 }

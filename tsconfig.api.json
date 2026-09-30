@@ -10,7 +10,16 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    // Поддержка новых путей для fixtures и test-utils
+    "baseUrl": ".",
+    "paths": {
+      "@fixtures/*": ["API-Tests/fixtures/*"],
+      "@test-utils/*": ["API-Tests/test-utils/*"],
+      "@services/*": ["API-Tests/services/*"],
+      "@models/*": ["API-Tests/models/*"],
+      "@config/*": ["API-Tests/config/*"]
+    }
   },
   // Область проверки намеренно ограничена новым API-слоем (клиент, сервисы,
   // модели, тестовые данные) и уже мигрированными спеками.
@@ -21,6 +30,9 @@
     "API-Tests/services/**/*.ts",
     "API-Tests/models/**/*.ts",
     "API-Tests/tests-data/**/*.ts",
+    "API-Tests/fixtures/**/*.ts",
+    "API-Tests/test-utils/**/*.ts",
+    "API-Tests/config/**/*.ts",
     "API-Tests/tests/eq-legal-collection/**/*.ts",
     "API-Tests/tests/eq-dc-court/**/*.ts",
     "API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contract-imports.spec.ts",
