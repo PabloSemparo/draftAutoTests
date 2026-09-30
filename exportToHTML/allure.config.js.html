@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>allure.config.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+allure.config.js</font>
+</center></td></tr></table>
+<pre><span class="s0">module</span><span class="s1">.</span><span class="s0">exports </span><span class="s1">= {</span>
+    <span class="s0">RESULT_DIR</span><span class="s1">: </span><span class="s2">'allure-results'</span><span class="s1">,</span>
+    <span class="s0">REPORT_DIR</span><span class="s1">: </span><span class="s2">'allure-report'</span><span class="s1">,</span>
+    <span class="s0">SCREENSHOT_DIR</span><span class="s1">: </span><span class="s2">'screenshots'</span><span class="s1">,</span>
+    <span class="s0">VIDEO_DIR</span><span class="s1">: </span><span class="s2">'videos'</span><span class="s1">,</span>
+
+    <span class="s3">// Категории для багов</span>
+    <span class="s0">categories</span><span class="s1">: [</span>
+        <span class="s1">{</span>
+            <span class="s0">name</span><span class="s1">: </span><span class="s2">'Failed tests'</span><span class="s1">,</span>
+            <span class="s0">messageRegex</span><span class="s1">: </span><span class="s2">'.*AssertionError.*'</span><span class="s1">,</span>
+            <span class="s0">matchedStatuses</span><span class="s1">: [</span><span class="s2">'failed'</span><span class="s1">]</span>
+        <span class="s1">},</span>
+        <span class="s1">{</span>
+            <span class="s0">name</span><span class="s1">: </span><span class="s2">'Broken tests'</span><span class="s1">,</span>
+            <span class="s0">traceRegex</span><span class="s1">: </span><span class="s2">'.*RuntimeException.*'</span><span class="s1">,</span>
+            <span class="s0">matchedStatuses</span><span class="s1">: [</span><span class="s2">'broken'</span><span class="s1">]</span>
+        <span class="s1">},</span>
+        <span class="s1">{</span>
+            <span class="s0">name</span><span class="s1">: </span><span class="s2">'Passed tests'</span><span class="s1">,</span>
+            <span class="s0">matchedStatuses</span><span class="s1">: [</span><span class="s2">'passed'</span><span class="s1">]</span>
+        <span class="s1">}</span>
+    <span class="s1">],</span>
+
+    <span class="s3">// Environment variables для отчета</span>
+    <span class="s0">environment</span><span class="s1">: {</span>
+        <span class="s0">base_url</span><span class="s1">: </span><span class="s0">process</span><span class="s1">.</span><span class="s0">env</span><span class="s1">.</span><span class="s0">BASE_URL</span><span class="s1">,</span>
+        <span class="s0">node_version</span><span class="s1">: </span><span class="s0">process</span><span class="s1">.</span><span class="s0">version</span><span class="s1">,</span>
+        <span class="s0">platform</span><span class="s1">: </span><span class="s0">process</span><span class="s1">.</span><span class="s0">platform</span>
+    <span class="s1">}</span>
+<span class="s1">};</span><span class="s0">module</span><span class="s1">.</span><span class="s0">exports </span><span class="s1">= {</span>
+    <span class="s0">RESULT_DIR</span><span class="s1">: </span><span class="s2">'allure-results'</span><span class="s1">,</span>
+    <span class="s0">REPORT_DIR</span><span class="s1">: </span><span class="s2">'allure-report'</span><span class="s1">,</span>
+    <span class="s0">SCREENSHOT_DIR</span><span class="s1">: </span><span class="s2">'screenshots'</span><span class="s1">,</span>
+    <span class="s0">VIDEO_DIR</span><span class="s1">: </span><span class="s2">'videos'</span><span class="s1">,</span>
+
+    <span class="s3">// Категории для багов</span>
+    <span class="s0">categories</span><span class="s1">: [</span>
+        <span class="s1">{</span>
+            <span class="s0">name</span><span class="s1">: </span><span class="s2">'Failed tests'</span><span class="s1">,</span>
+            <span class="s0">messageRegex</span><span class="s1">: </span><span class="s2">'.*AssertionError.*'</span><span class="s1">,</span>
+            <span class="s0">matchedStatuses</span><span class="s1">: [</span><span class="s2">'failed'</span><span class="s1">]</span>
+        <span class="s1">},</span>
+        <span class="s1">{</span>
+            <span class="s0">name</span><span class="s1">: </span><span class="s2">'Broken tests'</span><span class="s1">,</span>
+            <span class="s0">traceRegex</span><span class="s1">: </span><span class="s2">'.*RuntimeException.*'</span><span class="s1">,</span>
+            <span class="s0">matchedStatuses</span><span class="s1">: [</span><span class="s2">'broken'</span><span class="s1">]</span>
+        <span class="s1">},</span>
+        <span class="s1">{</span>
+            <span class="s0">name</span><span class="s1">: </span><span class="s2">'Passed tests'</span><span class="s1">,</span>
+            <span class="s0">matchedStatuses</span><span class="s1">: [</span><span class="s2">'passed'</span><span class="s1">]</span>
+        <span class="s1">}</span>
+    <span class="s1">],</span>
+
+    <span class="s3">// Environment variables для отчета</span>
+    <span class="s0">environment</span><span class="s1">: {</span>
+        <span class="s0">base_url</span><span class="s1">: </span><span class="s0">process</span><span class="s1">.</span><span class="s0">env</span><span class="s1">.</span><span class="s0">BASE_URL</span><span class="s1">,</span>
+        <span class="s0">node_version</span><span class="s1">: </span><span class="s0">process</span><span class="s1">.</span><span class="s0">version</span><span class="s1">,</span>
+        <span class="s0">platform</span><span class="s1">: </span><span class="s0">process</span><span class="s1">.</span><span class="s0">platform</span>
+    <span class="s1">}</span>
+<span class="s1">};</span></pre>
+</body>
+</html>

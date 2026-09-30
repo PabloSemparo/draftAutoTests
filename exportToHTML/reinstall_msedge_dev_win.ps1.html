@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>reinstall_msedge_dev_win.ps1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #2aacb8; font-style: italic;}
+.s4 { color: #cf8e6d; font-style: italic;}
+.s5 { color: #cf8e6d;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+reinstall_msedge_dev_win.ps1</font>
+</center></td></tr></table>
+<pre><span class="s0">$ErrorActionPreference = '</span><span class="s2">Stop</span><span class="s0">'</span>
+<span class="s0">$url = $</span><span class="s1">args</span><span class="s0">[</span><span class="s3">0</span><span class="s0">]</span>
+
+<span class="s0">Write-Host &quot;</span><span class="s2">Downloading Microsoft Edge Dev</span><span class="s0">&quot;</span>
+<span class="s0">$wc = New-Object </span><span class="s1">net.webclient 
+</span><span class="s0">$msiInstaller = &quot;$env:temp</span><span class="s2">\microsoft-edge-dev.msi</span><span class="s0">&quot;</span>
+<span class="s0">$wc.Downloadfile($url, $msiInstaller)</span>
+
+<span class="s0">Write-Host &quot;</span><span class="s2">Installing Microsoft Edge Dev</span><span class="s0">&quot;</span>
+<span class="s0">$arguments = &quot;</span><span class="s2">/i </span><span class="s4">`&quot;</span><span class="s0">$msiInstaller</span><span class="s4">`&quot; </span><span class="s2">/quiet</span><span class="s0">&quot;</span>
+<span class="s0">Start-Process msiexec.exe -</span><span class="s1">ArgumentList </span><span class="s0">$arguments -</span><span class="s1">Wait 
+</span><span class="s0">Remove-Item $msiInstaller</span>
+
+<span class="s0">$suffix = &quot;</span><span class="s2">\\Microsoft\\Edge Dev\\Application\\msedge.exe</span><span class="s0">&quot;</span>
+<span class="s5">if </span><span class="s0">(Test-Path &quot;${env:ProgramFiles(x86)}$suffix&quot;) {</span>
+    <span class="s0">(Get-Item &quot;${env:ProgramFiles(x86)}$suffix&quot;)</span><span class="s1">.VersionInfo 
+</span><span class="s0">} </span><span class="s5">elseif </span><span class="s0">(Test-Path &quot;${env:ProgramFiles}$suffix&quot;) {</span>
+    <span class="s0">(Get-Item &quot;${env:ProgramFiles}$suffix&quot;)</span><span class="s1">.VersionInfo 
+</span><span class="s0">} </span><span class="s5">else </span><span class="s0">{</span>
+    <span class="s0">Write-Host &quot;</span><span class="s2">ERROR: Failed to install Microsoft Edge Dev.</span><span class="s0">&quot;</span>
+    <span class="s0">Write-Host &quot;</span><span class="s2">ERROR: This could be due to insufficient privileges, in which case re-running as Administrator may help.</span><span class="s0">&quot;</span>
+    <span class="s5">exit </span><span class="s3">1</span>
+<span class="s0">}</span>
+</pre>
+</body>
+</html>

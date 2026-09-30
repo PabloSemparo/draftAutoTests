@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>.gitlab-ci.yml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+.gitlab-ci.yml</font>
+</center></td></tr></table>
+<pre><span class="s0">stages</span><span class="s1">:</span>
+  <span class="s1">- </span><span class="s3">test</span>
+
+<span class="s0">variables</span><span class="s1">:</span>
+  <span class="s0">BASE_URL</span><span class="s1">: </span><span class="s4">&quot;https://eq-debt-collection-stage.bdengi.ru&quot;</span>
+
+<span class="s0">api-tests</span><span class="s1">:</span>
+  <span class="s0">stage</span><span class="s1">: </span><span class="s3">test</span>
+  <span class="s0">image</span><span class="s1">: </span><span class="s3">node:18</span>
+  <span class="s0">tags</span><span class="s1">:</span>
+    <span class="s1">- </span><span class="s3">docker</span>
+  <span class="s0">before_script</span><span class="s1">:</span>
+    <span class="s1">- </span><span class="s3">npm ci</span>
+    <span class="s1">- </span><span class="s3">npx playwright install chromium</span>
+  <span class="s0">script</span><span class="s1">:</span>
+    <span class="s1">- </span><span class="s3">npx playwright test ./API-Tests/eq-debt-collection/packages/id/eq-debt-collection-packages-id.spec.ts --reporter=html,line --project=chromium</span>
+  <span class="s0">artifacts</span><span class="s1">:</span>
+    <span class="s0">when</span><span class="s1">: </span><span class="s3">always</span>
+    <span class="s0">paths</span><span class="s1">:</span>
+      <span class="s1">- </span><span class="s3">playwright-report/</span>
+      <span class="s1">- </span><span class="s3">test-results/</span>
+    <span class="s0">expire_in</span><span class="s1">: </span><span class="s3">1 week</span></pre>
+</body>
+</html>

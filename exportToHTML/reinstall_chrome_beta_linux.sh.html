@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>reinstall_chrome_beta_linux.sh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4; font-weight: bold;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+reinstall_chrome_beta_linux.sh</font>
+</center></td></tr></table>
+<pre><span class="s0">#!/usr/bin/env bash</span>
+<span class="s1">set -e</span>
+<span class="s1">set -x</span>
+
+<span class="s2">if [[ $</span><span class="s3">(</span><span class="s1">arch</span><span class="s3">) </span><span class="s2">== </span><span class="s4">&quot;aarch64&quot; </span><span class="s2">]]</span><span class="s1">; </span><span class="s2">then</span>
+  <span class="s1">echo </span><span class="s4">&quot;ERROR: not supported on Linux Arm64&quot;</span>
+  <span class="s1">exit </span><span class="s5">1</span>
+<span class="s2">fi</span>
+
+<span class="s2">if </span><span class="s3">[ </span><span class="s1">-z </span><span class="s4">&quot;</span><span class="s3">$PLAYWRIGHT_HOST_PLATFORM_OVERRIDE</span><span class="s4">&quot; </span><span class="s3">]</span><span class="s1">; </span><span class="s2">then</span>
+  <span class="s2">if [[ ! </span><span class="s1">-f </span><span class="s4">&quot;/etc/os-release&quot; </span><span class="s2">]]</span><span class="s1">; </span><span class="s2">then</span>
+    <span class="s1">echo </span><span class="s4">&quot;ERROR: cannot install on unknown linux distribution (/etc/os-release is missing)&quot;</span>
+    <span class="s1">exit </span><span class="s5">1</span>
+  <span class="s2">fi</span>
+
+  <span class="s1">ID=</span><span class="s2">$</span><span class="s3">(</span><span class="s1">bash -c </span><span class="s4">'source /etc/os-release &amp;&amp; echo $ID'</span><span class="s3">)</span>
+  <span class="s2">if [[ </span><span class="s4">&quot;</span><span class="s2">$</span><span class="s3">{</span><span class="s1">ID</span><span class="s3">}</span><span class="s4">&quot; </span><span class="s1">!= </span><span class="s4">&quot;ubuntu&quot; </span><span class="s2">&amp;&amp; </span><span class="s4">&quot;</span><span class="s2">$</span><span class="s3">{</span><span class="s1">ID</span><span class="s3">}</span><span class="s4">&quot; </span><span class="s1">!= </span><span class="s4">&quot;debian&quot; </span><span class="s2">]]</span><span class="s1">; </span><span class="s2">then</span>
+    <span class="s1">echo </span><span class="s4">&quot;ERROR: cannot install on </span><span class="s3">$ID </span><span class="s4">distribution - only Ubuntu and Debian are supported&quot;</span>
+    <span class="s1">exit </span><span class="s5">1</span>
+  <span class="s2">fi</span>
+<span class="s2">fi</span>
+
+<span class="s6"># 1. make sure to remove old beta if any.</span>
+<span class="s2">if </span><span class="s1">dpkg --get-selections | grep -q </span><span class="s4">&quot;^google-chrome-beta[[:space:]]*install$&quot; </span><span class="s2">&gt;</span><span class="s1">/dev/null; </span><span class="s2">then</span>
+  <span class="s1">apt-get remove -y google-chrome-beta</span>
+<span class="s2">fi</span>
+
+<span class="s6"># 2. Update apt lists (needed to install curl and chrome dependencies)</span>
+<span class="s1">apt-get update</span>
+
+<span class="s6"># 3. Install curl to download chrome</span>
+<span class="s2">if ! </span><span class="s1">command -v curl </span><span class="s2">&gt;</span><span class="s1">/dev/null; </span><span class="s2">then</span>
+  <span class="s1">apt-get install -y curl</span>
+<span class="s2">fi</span>
+
+<span class="s6"># 4. download chrome beta from dl.google.com and install it.</span>
+<span class="s1">cd /tmp</span>
+<span class="s1">curl -O https://dl.google.com/linux/direct/google-chrome-beta_current_amd64.deb</span>
+<span class="s1">apt-get install -y ./google-chrome-beta_current_amd64.deb</span>
+<span class="s1">rm -rf ./google-chrome-beta_current_amd64.deb</span>
+<span class="s1">cd -</span>
+<span class="s1">google-chrome-beta --version</span>
+</pre>
+</body>
+</html>

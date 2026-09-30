@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>snapshot.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #d5b778;}
+.s2 { color: #bababa;}
+.s3 { color: #6aab73;}
+.s4 { color: #cf8e6d;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+snapshot.html</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s1">&gt;</span>
+<span class="s1">&lt;html </span><span class="s2">lang</span><span class="s3">=&quot;en&quot;</span><span class="s1">&gt;</span>
+  <span class="s1">&lt;body&gt;</span>
+    <span class="s1">&lt;script&gt;</span>
+      <span class="s0">(async () =&gt; {</span>
+        <span class="s4">if </span><span class="s0">(!navigator.serviceWorker)</span>
+          <span class="s4">throw new </span><span class="s0">Error(</span><span class="s3">`Service workers are not supported.</span><span class="s4">\n</span><span class="s3">Make sure to serve the Trace Viewer (</span><span class="s0">${window.location}</span><span class="s3">) via HTTPS or localhost.`</span><span class="s0">);</span>
+        <span class="s0">navigator.serviceWorker.register(</span><span class="s3">'sw.bundle.js'</span><span class="s0">);</span>
+        <span class="s4">if </span><span class="s0">(!navigator.serviceWorker.controller)</span>
+          <span class="s0">await </span><span class="s4">new </span><span class="s0">Promise(f =&gt; navigator.serviceWorker.oncontrollerchange = f);</span>
+        <span class="s4">const </span><span class="s0">traceUrl = </span><span class="s4">new </span><span class="s0">URL(location.href).searchParams.get(</span><span class="s3">'trace'</span><span class="s0">);</span>
+        <span class="s4">const </span><span class="s0">params = </span><span class="s4">new </span><span class="s0">URLSearchParams();</span>
+        <span class="s0">params.set(</span><span class="s3">'trace'</span><span class="s0">, traceUrl);</span>
+        <span class="s0">await fetch(</span><span class="s3">'contexts?' </span><span class="s0">+ params.toString()).then(r =&gt; r.json());</span>
+        <span class="s0">await location.reload();</span>
+      <span class="s0">})();</span>
+    <span class="s1">&lt;/script&gt;</span>
+    <span class="s1">&lt;script </span><span class="s2">src</span><span class="s3">=&quot;stall.js&quot;</span><span class="s1">&gt;&lt;/script&gt;</span>
+  <span class="s1">&lt;/body&gt;</span>
+<span class="s1">&lt;/html&gt;</span>
+</pre>
+</body>
+</html>

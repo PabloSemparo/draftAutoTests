@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>api.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+api.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">URL</span><span class="s2">, </span><span class="s1">UrlObject </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'url'</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">Duplex </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'stream'</span>
+<span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s3">'./dispatcher'</span>
+
+<span class="s0">export </span><span class="s2">{</span>
+  <span class="s1">request</span><span class="s2">,</span>
+  <span class="s1">stream</span><span class="s2">,</span>
+  <span class="s1">pipeline</span><span class="s2">,</span>
+  <span class="s1">connect</span><span class="s2">,</span>
+  <span class="s1">upgrade</span><span class="s2">,</span>
+<span class="s2">}</span>
+
+<span class="s4">/** Performs an HTTP request. */</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">request</span><span class="s2">(</span>
+  <span class="s1">url</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL </span><span class="s2">| </span><span class="s1">UrlObject</span><span class="s2">,</span>
+  <span class="s1">options</span><span class="s2">?: { </span><span class="s1">dispatcher</span><span class="s2">?: </span><span class="s1">Dispatcher </span><span class="s2">} &amp; </span><span class="s1">Omit</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">RequestOptions</span><span class="s2">, </span><span class="s3">'origin' </span><span class="s2">| </span><span class="s3">'path' </span><span class="s2">| </span><span class="s3">'method'</span><span class="s2">&gt; &amp; </span><span class="s1">Partial</span><span class="s2">&lt;</span><span class="s1">Pick</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">RequestOptions</span><span class="s2">, </span><span class="s3">'method'</span><span class="s2">&gt;&gt;,</span>
+<span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">ResponseData</span><span class="s2">&gt;;</span>
+
+<span class="s4">/** A faster version of `request`. */</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">stream</span><span class="s2">(</span>
+  <span class="s1">url</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL </span><span class="s2">| </span><span class="s1">UrlObject</span><span class="s2">,</span>
+  <span class="s1">options</span><span class="s2">: { </span><span class="s1">dispatcher</span><span class="s2">?: </span><span class="s1">Dispatcher </span><span class="s2">} &amp; </span><span class="s1">Omit</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">RequestOptions</span><span class="s2">, </span><span class="s3">'origin' </span><span class="s2">| </span><span class="s3">'path'</span><span class="s2">&gt;,</span>
+  <span class="s1">factory</span><span class="s2">: </span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">StreamFactory</span>
+<span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">StreamData</span><span class="s2">&gt;;</span>
+
+<span class="s4">/** For easy use with `stream.pipeline`. */</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">pipeline</span><span class="s2">(</span>
+  <span class="s1">url</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL </span><span class="s2">| </span><span class="s1">UrlObject</span><span class="s2">,</span>
+  <span class="s1">options</span><span class="s2">: { </span><span class="s1">dispatcher</span><span class="s2">?: </span><span class="s1">Dispatcher </span><span class="s2">} &amp; </span><span class="s1">Omit</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">PipelineOptions</span><span class="s2">, </span><span class="s3">'origin' </span><span class="s2">| </span><span class="s3">'path'</span><span class="s2">&gt;,</span>
+  <span class="s1">handler</span><span class="s2">: </span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">PipelineHandler</span>
+<span class="s2">): </span><span class="s1">Duplex</span><span class="s2">;</span>
+
+<span class="s4">/** Starts two-way communications with the requested resource. */</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">connect</span><span class="s2">(</span>
+  <span class="s1">url</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL </span><span class="s2">| </span><span class="s1">UrlObject</span><span class="s2">,</span>
+  <span class="s1">options</span><span class="s2">?: { </span><span class="s1">dispatcher</span><span class="s2">?: </span><span class="s1">Dispatcher </span><span class="s2">} &amp; </span><span class="s1">Omit</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">ConnectOptions</span><span class="s2">, </span><span class="s3">'origin' </span><span class="s2">| </span><span class="s3">'path'</span><span class="s2">&gt;</span>
+<span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">ConnectData</span><span class="s2">&gt;;</span>
+
+<span class="s4">/** Upgrade to a different protocol. */</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">upgrade</span><span class="s2">(</span>
+  <span class="s1">url</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL </span><span class="s2">| </span><span class="s1">UrlObject</span><span class="s2">,</span>
+  <span class="s1">options</span><span class="s2">?: { </span><span class="s1">dispatcher</span><span class="s2">?: </span><span class="s1">Dispatcher </span><span class="s2">} &amp; </span><span class="s1">Omit</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">UpgradeOptions</span><span class="s2">, </span><span class="s3">'origin' </span><span class="s2">| </span><span class="s3">'path'</span><span class="s2">&gt;</span>
+<span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">UpgradeData</span><span class="s2">&gt;;</span>
+</pre>
+</body>
+</html>

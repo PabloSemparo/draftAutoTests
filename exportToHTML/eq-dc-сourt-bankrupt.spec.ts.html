@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>eq-dc-сourt-bankrupt.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-dc-сourt-bankrupt.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">(</span><span class="s3">'Проверка на банкротство с валидными данными [200 CODE]'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+  <span class="s0">const </span><span class="s1">BASE_URL </span><span class="s2">= </span><span class="s3">'http://eq-dc-court.test2.mmk.local'</span>
+  <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">BASE_URL</span><span class="s2">}</span><span class="s3">/v1/bankrupts/check`</span><span class="s2">, {</span>
+    <span class="s1">headers</span><span class="s2">: {</span>
+      <span class="s3">'X-API-KEY'</span><span class="s2">: </span><span class="s3">'55298707-117c-44a5-8434-162fb9d2e4c5'</span><span class="s2">,</span>
+      <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+    <span class="s2">},</span>
+    <span class="s1">params</span><span class="s2">: {</span>
+      <span class="s1">inn</span><span class="s2">: </span><span class="s3">'614334131355'</span><span class="s2">,</span>
+      <span class="s1">fio</span><span class="s2">: </span><span class="s3">'Старченко Владислав Владимирович'</span><span class="s2">,</span>
+      <span class="s1">birthDate</span><span class="s2">: </span><span class="s3">'1996-11-26'</span>
+    <span class="s2">}</span>
+  <span class="s2">});</span>
+
+  <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+<span class="s2">});</span>
+</pre>
+</body>
+</html>

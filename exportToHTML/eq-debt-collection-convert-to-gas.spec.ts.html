@@ -1,0 +1,339 @@
+<html>
+<head>
+<title>eq-debt-collection-convert-to-gas.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-debt-collection-convert-to-gas.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">// tests/packages-convert.spec.ts</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">test</span><span class="s3">, </span><span class="s1">expect </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'@playwright/test'</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">allure </span><span class="s3">} </span><span class="s1">from </span><span class="s4">&quot;allure-playwright&quot;</span><span class="s3">;</span>
+
+<span class="s0">// Типы объявлены непосредственно в файле</span>
+<span class="s2">interface </span><span class="s1">ApiResponse </span><span class="s3">{</span>
+    <span class="s1">status</span><span class="s3">: {</span>
+        <span class="s1">code</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+        <span class="s1">description</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s3">};</span>
+    <span class="s1">errors</span><span class="s3">?: </span><span class="s1">ApiError</span><span class="s3">[];</span>
+    <span class="s1">details</span><span class="s3">?: </span><span class="s1">any</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s2">interface </span><span class="s1">ApiError </span><span class="s3">{</span>
+    <span class="s1">key</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s1">code</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s1">description</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s2">interface </span><span class="s1">ConvertRequest </span><span class="s3">{</span>
+    <span class="s1">courtLawyerId</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s1">documentIds</span><span class="s3">: </span><span class="s1">string</span><span class="s3">[];</span>
+<span class="s3">}</span>
+
+<span class="s0">// Константы для тестовых данных</span>
+<span class="s2">const </span><span class="s1">VALID_PACKAGE_ID </span><span class="s3">= </span><span class="s4">'019a6df0-3d83-7a78-9847-70aed4c7feaf'</span><span class="s3">;</span>
+<span class="s2">const </span><span class="s1">VALID_COURT_LAWYER_ID </span><span class="s3">= </span><span class="s4">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s3">;</span>
+<span class="s2">const </span><span class="s1">INVALID_PACKAGE_ID </span><span class="s3">= </span><span class="s4">'019a06e7-f490-7379-8527-92ba7e0aa701'</span><span class="s3">; </span><span class="s0">// Для 422 ошибки</span>
+<span class="s2">const </span><span class="s1">BASE_URL </span><span class="s3">= </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">BASE_URL </span><span class="s3">|| </span><span class="s4">'https://eq-debt-collection-stage.bdengi.ru'</span><span class="s3">;</span>
+
+<span class="s1">test</span><span class="s3">.</span><span class="s1">describe</span><span class="s3">(</span><span class="s4">'API: Конвертировать документы пакета в PDF для отправки в ГАС'</span><span class="s3">, () =&gt; {</span>
+
+    <span class="s1">test</span><span class="s3">(</span><span class="s4">'[200] Успешно сконвертированы документы пакета в PDF для отправки в ГАС'</span><span class="s3">, </span><span class="s1">async </span><span class="s3">({ </span><span class="s1">request </span><span class="s3">}) =&gt; {</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parentSuite</span><span class="s3">(</span><span class="s4">&quot;API Tests&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">suite</span><span class="s3">(</span><span class="s4">&quot;Packages API&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">subSuite</span><span class="s3">(</span><span class="s4">&quot;Convert to PDF&quot;</span><span class="s3">);</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">epic</span><span class="s3">(</span><span class="s4">&quot;EqvaCollection API&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">feature</span><span class="s3">(</span><span class="s4">&quot;Конвертация документов в PDF&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">story</span><span class="s3">(</span><span class="s4">&quot;Успешные сценарии&quot;</span><span class="s3">);</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">severity</span><span class="s3">(</span><span class="s4">&quot;critical&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">owner</span><span class="s3">(</span><span class="s4">&quot;API Team&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">tag</span><span class="s3">(</span><span class="s4">&quot;smoke&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">tag</span><span class="s3">(</span><span class="s4">&quot;regression&quot;</span><span class="s3">);</span>
+
+        <span class="s2">const </span><span class="s1">requestBody</span><span class="s3">: </span><span class="s1">ConvertRequest </span><span class="s3">= {</span>
+            <span class="s1">courtLawyerId</span><span class="s3">: </span><span class="s1">VALID_COURT_LAWYER_ID</span><span class="s3">,</span>
+            <span class="s1">documentIds</span><span class="s3">: []</span>
+        <span class="s3">};</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Подготовка тестовых данных&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Package ID&quot;</span><span class="s3">, </span><span class="s1">VALID_PACKAGE_ID</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Court Lawyer ID&quot;</span><span class="s3">, </span><span class="s1">VALID_COURT_LAWYER_ID</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Document IDs&quot;</span><span class="s3">, </span><span class="s4">&quot;Пустой массив&quot;</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">let </span><span class="s1">response</span><span class="s3">: </span><span class="s1">any</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">startTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Отправка POST запроса на конвертацию в PDF&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">response </span><span class="s3">= </span><span class="s2">await </span><span class="s1">request</span><span class="s3">.</span><span class="s1">post</span><span class="s3">(</span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">BASE_URL</span><span class="s3">}</span><span class="s4">/v1/packages/</span><span class="s1">$</span><span class="s3">{</span><span class="s1">VALID_PACKAGE_ID</span><span class="s3">}</span><span class="s4">/convert`</span><span class="s3">, {</span>
+                <span class="s1">headers</span><span class="s3">: {</span>
+                    <span class="s4">'Accept'</span><span class="s3">: </span><span class="s4">'application/json'</span><span class="s3">,</span>
+                    <span class="s4">'Content-Type'</span><span class="s3">: </span><span class="s4">'application/json'</span>
+                <span class="s3">},</span>
+                <span class="s1">data</span><span class="s3">: </span><span class="s1">requestBody</span>
+            <span class="s3">});</span>
+        <span class="s3">});</span>
+
+        <span class="s2">const </span><span class="s1">responseTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">() - </span><span class="s1">startTime</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">statusCode </span><span class="s3">= </span><span class="s1">response</span><span class="s3">.</span><span class="s1">status</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка статус кода 200&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">statusCode</span><span class="s3">, </span><span class="s4">'Статус код должен быть 200'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s5">200</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка времени ответа &lt; 5000ms&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseTime</span><span class="s3">, </span><span class="s4">'Время ответа должно быть меньше 5000ms'</span><span class="s3">).</span><span class="s1">toBeLessThan</span><span class="s3">(</span><span class="s5">5000</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Response Time&quot;</span><span class="s3">, </span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">responseTime</span><span class="s3">}</span><span class="s4">ms`</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка наличия заголовка date&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">const </span><span class="s1">headers </span><span class="s3">= </span><span class="s1">response</span><span class="s3">.</span><span class="s1">headers</span><span class="s3">();</span>
+            <span class="s2">const </span><span class="s1">dateHeader </span><span class="s3">= </span><span class="s1">headers</span><span class="s3">.</span><span class="s1">date</span><span class="s3">;</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">dateHeader</span><span class="s3">, </span><span class="s4">'Заголовок date должен присутствовать'</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Логирование заголовков ответа&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">const </span><span class="s1">headers </span><span class="s3">= </span><span class="s1">response</span><span class="s3">.</span><span class="s1">headers</span><span class="s3">();</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Response Headers&quot;</span><span class="s3">, </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">headers</span><span class="s3">, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">2</span><span class="s3">), </span><span class="s4">&quot;application/json&quot;</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Логирование успешного выполнения&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Request Body&quot;</span><span class="s3">, </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">requestBody</span><span class="s3">, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">2</span><span class="s3">), </span><span class="s4">&quot;application/json&quot;</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Response Headers&quot;</span><span class="s3">, </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">response</span><span class="s3">.</span><span class="s1">headers</span><span class="s3">(), </span><span class="s2">null</span><span class="s3">, </span><span class="s5">2</span><span class="s3">), </span><span class="s4">&quot;application/json&quot;</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Response Time&quot;</span><span class="s3">, </span><span class="s4">`Response time: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">responseTime</span><span class="s3">}</span><span class="s4">ms`</span><span class="s3">, </span><span class="s4">&quot;text/plain&quot;</span><span class="s3">);</span>
+        <span class="s3">});</span>
+    <span class="s3">});</span>
+
+    <span class="s1">test</span><span class="s3">(</span><span class="s4">'[422] Для данного пакета не доступна отправка в ГАС'</span><span class="s3">, </span><span class="s1">async </span><span class="s3">({ </span><span class="s1">request </span><span class="s3">}) =&gt; {</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">epic</span><span class="s3">(</span><span class="s4">&quot;EqvaCollection API&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">feature</span><span class="s3">(</span><span class="s4">&quot;Конвертация документов в PDF&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">story</span><span class="s3">(</span><span class="s4">&quot;Ошибки валидации&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">severity</span><span class="s3">(</span><span class="s4">&quot;high&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">tag</span><span class="s3">(</span><span class="s4">&quot;validation&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">tag</span><span class="s3">(</span><span class="s4">&quot;gas-validation&quot;</span><span class="s3">);</span>
+
+        <span class="s2">const </span><span class="s1">requestBody</span><span class="s3">: </span><span class="s1">ConvertRequest </span><span class="s3">= {</span>
+            <span class="s1">courtLawyerId</span><span class="s3">: </span><span class="s1">VALID_COURT_LAWYER_ID</span><span class="s3">,</span>
+            <span class="s1">documentIds</span><span class="s3">: []</span>
+        <span class="s3">};</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Подготовка тестовых данных для 422 ошибки&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Package ID&quot;</span><span class="s3">, </span><span class="s1">INVALID_PACKAGE_ID</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Court Lawyer ID&quot;</span><span class="s3">, </span><span class="s1">VALID_COURT_LAWYER_ID</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Expected Error&quot;</span><span class="s3">, </span><span class="s4">&quot;Для данного пакета не доступна отправка в ГАС&quot;</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">let </span><span class="s1">response</span><span class="s3">: </span><span class="s1">any</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">startTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Отправка запроса с пакетом, недоступным для ГАС&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">response </span><span class="s3">= </span><span class="s2">await </span><span class="s1">request</span><span class="s3">.</span><span class="s1">post</span><span class="s3">(</span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">BASE_URL</span><span class="s3">}</span><span class="s4">/v1/packages/</span><span class="s1">$</span><span class="s3">{</span><span class="s1">INVALID_PACKAGE_ID</span><span class="s3">}</span><span class="s4">/convert`</span><span class="s3">, {</span>
+                <span class="s1">headers</span><span class="s3">: {</span>
+                    <span class="s4">'Accept'</span><span class="s3">: </span><span class="s4">'application/json'</span><span class="s3">,</span>
+                    <span class="s4">'Content-Type'</span><span class="s3">: </span><span class="s4">'application/json'</span>
+                <span class="s3">},</span>
+                <span class="s1">data</span><span class="s3">: </span><span class="s1">requestBody</span>
+            <span class="s3">});</span>
+        <span class="s3">});</span>
+
+        <span class="s2">const </span><span class="s1">responseTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">() - </span><span class="s1">startTime</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">statusCode </span><span class="s3">= </span><span class="s1">response</span><span class="s3">.</span><span class="s1">status</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка статус кода 422&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">statusCode</span><span class="s3">, </span><span class="s4">'Статус код должен быть 422'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s5">422</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка времени ответа &lt; 2000ms&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseTime</span><span class="s3">, </span><span class="s4">'Время ответа должно быть меньше 2000ms'</span><span class="s3">).</span><span class="s1">toBeLessThan</span><span class="s3">(</span><span class="s5">2000</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Response Time&quot;</span><span class="s3">, </span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">responseTime</span><span class="s3">}</span><span class="s4">ms`</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка Content-Type&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">const </span><span class="s1">headers </span><span class="s3">= </span><span class="s1">response</span><span class="s3">.</span><span class="s1">headers</span><span class="s3">();</span>
+            <span class="s2">const </span><span class="s1">contentType </span><span class="s3">= </span><span class="s1">headers</span><span class="s3">[</span><span class="s4">'content-type'</span><span class="s3">];</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">contentType</span><span class="s3">, </span><span class="s4">'Content-Type должен быть application/json'</span><span class="s3">).</span><span class="s1">toContain</span><span class="s3">(</span><span class="s4">'application/json'</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">let </span><span class="s1">responseBody</span><span class="s3">: </span><span class="s1">ApiResponse</span><span class="s3">;</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Парсинг JSON ответа&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">responseBody </span><span class="s3">= </span><span class="s2">await </span><span class="s1">response</span><span class="s3">.</span><span class="s1">json</span><span class="s3">();</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка что массив errors не пустой&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">Array</span><span class="s3">.</span><span class="s1">isArray</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">), </span><span class="s4">'Errors должен быть массивом'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s2">true</span><span class="s3">);</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">, </span><span class="s4">'Массив ошибок не должен быть пустым'</span><span class="s3">).</span><span class="s1">not</span><span class="s3">.</span><span class="s1">toHaveLength</span><span class="s3">(</span><span class="s5">0</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка схемы ответа&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s0">// Проверка корневой структуры</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">, </span><span class="s4">'Ответ должен содержать статус, ошибки и детали'</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'status'</span><span class="s3">);</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'errors'</span><span class="s3">);</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'details'</span><span class="s3">);</span>
+
+            <span class="s0">// Проверка структуры status</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">status</span><span class="s3">, </span><span class="s4">'Status должен содержать code и description'</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'code'</span><span class="s3">);</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">status</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'description'</span><span class="s3">);</span>
+
+            <span class="s0">// Проверка что errors является массивом</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">Array</span><span class="s3">.</span><span class="s1">isArray</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">), </span><span class="s4">'Errors должен быть массивом'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s2">true</span><span class="s3">);</span>
+
+            <span class="s0">// Проверка структуры каждой ошибки</span>
+            <span class="s2">if </span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors </span><span class="s3">&amp;&amp; </span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">.</span><span class="s1">length </span><span class="s3">&gt; </span><span class="s5">0</span><span class="s3">) {</span>
+                <span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">.</span><span class="s1">forEach</span><span class="s3">((</span><span class="s1">error</span><span class="s3">: </span><span class="s1">ApiError</span><span class="s3">, </span><span class="s1">index</span><span class="s3">: </span><span class="s1">number</span><span class="s3">) =&gt; {</span>
+                    <span class="s1">expect</span><span class="s3">(</span><span class="s1">error</span><span class="s3">, </span><span class="s4">`Error[</span><span class="s1">$</span><span class="s3">{</span><span class="s1">index</span><span class="s3">}</span><span class="s4">] должен содержать key, code и description`</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'key'</span><span class="s3">);</span>
+                    <span class="s1">expect</span><span class="s3">(</span><span class="s1">error</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'code'</span><span class="s3">);</span>
+                    <span class="s1">expect</span><span class="s3">(</span><span class="s1">error</span><span class="s3">).</span><span class="s1">toHaveProperty</span><span class="s3">(</span><span class="s4">'description'</span><span class="s3">);</span>
+                <span class="s3">});</span>
+            <span class="s3">}</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Логирование ошибки валидации&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;422 Error Response&quot;</span><span class="s3">, </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">2</span><span class="s3">), </span><span class="s4">&quot;application/json&quot;</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Response Time&quot;</span><span class="s3">, </span><span class="s4">`Response time: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">responseTime</span><span class="s3">}</span><span class="s4">ms`</span><span class="s3">, </span><span class="s4">&quot;text/plain&quot;</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Request Details&quot;</span><span class="s3">, </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">({</span>
+                <span class="s1">packageId</span><span class="s3">: </span><span class="s1">INVALID_PACKAGE_ID</span><span class="s3">,</span>
+                <span class="s1">courtLawyerId</span><span class="s3">: </span><span class="s1">VALID_COURT_LAWYER_ID</span><span class="s3">,</span>
+                <span class="s1">documentIds</span><span class="s3">: []</span>
+            <span class="s3">}, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">2</span><span class="s3">), </span><span class="s4">&quot;application/json&quot;</span><span class="s3">);</span>
+        <span class="s3">});</span>
+    <span class="s3">});</span>
+
+    <span class="s1">test</span><span class="s3">(</span><span class="s4">'[400] Неправильный формат запроса'</span><span class="s3">, </span><span class="s1">async </span><span class="s3">({ </span><span class="s1">request </span><span class="s3">}) =&gt; {</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">epic</span><span class="s3">(</span><span class="s4">&quot;EqvaCollection API&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">feature</span><span class="s3">(</span><span class="s4">&quot;Конвертация документов в PDF&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">story</span><span class="s3">(</span><span class="s4">&quot;Ошибки валидации&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">severity</span><span class="s3">(</span><span class="s4">&quot;high&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">tag</span><span class="s3">(</span><span class="s4">&quot;validation&quot;</span><span class="s3">);</span>
+
+        <span class="s0">// Создаем невалидный запрос - например, с неправильным courtLawyerId</span>
+        <span class="s2">const </span><span class="s1">invalidRequestBody </span><span class="s3">= {</span>
+            <span class="s1">courtLawyerId</span><span class="s3">: </span><span class="s4">&quot;invalid-uuid-format&quot;</span><span class="s3">,</span>
+            <span class="s1">documentIds</span><span class="s3">: []</span>
+        <span class="s3">};</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Подготовка невалидных тестовых данных&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Package ID&quot;</span><span class="s3">, </span><span class="s1">VALID_PACKAGE_ID</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Court Lawyer ID&quot;</span><span class="s3">, </span><span class="s4">&quot;invalid-uuid-format&quot;</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Expected Error&quot;</span><span class="s3">, </span><span class="s4">&quot;Неправильный формат запроса&quot;</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">let </span><span class="s1">response</span><span class="s3">: </span><span class="s1">any</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">startTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Отправка запроса с невалидными данными&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">response </span><span class="s3">= </span><span class="s2">await </span><span class="s1">request</span><span class="s3">.</span><span class="s1">post</span><span class="s3">(</span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">BASE_URL</span><span class="s3">}</span><span class="s4">/v1/packages/</span><span class="s1">$</span><span class="s3">{</span><span class="s1">VALID_PACKAGE_ID</span><span class="s3">}</span><span class="s4">/convert`</span><span class="s3">, {</span>
+                <span class="s1">headers</span><span class="s3">: {</span>
+                    <span class="s4">'Accept'</span><span class="s3">: </span><span class="s4">'application/json'</span><span class="s3">,</span>
+                    <span class="s4">'Content-Type'</span><span class="s3">: </span><span class="s4">'application/json'</span>
+                <span class="s3">},</span>
+                <span class="s1">data</span><span class="s3">: </span><span class="s1">invalidRequestBody</span>
+            <span class="s3">});</span>
+        <span class="s3">});</span>
+
+        <span class="s2">const </span><span class="s1">responseTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">() - </span><span class="s1">startTime</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">statusCode </span><span class="s3">= </span><span class="s1">response</span><span class="s3">.</span><span class="s1">status</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка статус кода 400&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">statusCode</span><span class="s3">, </span><span class="s4">'Статус код должен быть 400'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s5">400</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">let </span><span class="s1">responseBody</span><span class="s3">: </span><span class="s1">ApiResponse</span><span class="s3">;</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Парсинг JSON ответа&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">responseBody </span><span class="s3">= </span><span class="s2">await </span><span class="s1">response</span><span class="s3">.</span><span class="s1">json</span><span class="s3">();</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка структуры ошибки&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">status</span><span class="s3">.</span><span class="s1">code</span><span class="s3">, </span><span class="s4">'Код статуса должен быть BAD_REQUEST'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s4">'BAD_REQUEST'</span><span class="s3">);</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">status</span><span class="s3">.</span><span class="s1">description</span><span class="s3">, </span><span class="s4">'Описание должно соответствовать'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s4">'Некорректный формат запроса'</span><span class="s3">);</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">Array</span><span class="s3">.</span><span class="s1">isArray</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">), </span><span class="s4">'Errors должен быть массивом'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s2">true</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Логирование ошибки 400&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;400 Error Response&quot;</span><span class="s3">, </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">2</span><span class="s3">), </span><span class="s4">&quot;application/json&quot;</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Response Time&quot;</span><span class="s3">, </span><span class="s4">`Response time: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">responseTime</span><span class="s3">}</span><span class="s4">ms`</span><span class="s3">, </span><span class="s4">&quot;text/plain&quot;</span><span class="s3">);</span>
+        <span class="s3">});</span>
+    <span class="s3">});</span>
+
+    <span class="s1">test</span><span class="s3">(</span><span class="s4">'[500] Ошибка обработки запроса'</span><span class="s3">, </span><span class="s1">async </span><span class="s3">({ </span><span class="s1">request </span><span class="s3">}) =&gt; {</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">epic</span><span class="s3">(</span><span class="s4">&quot;EqvaCollection API&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">feature</span><span class="s3">(</span><span class="s4">&quot;Конвертация документов в PDF&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">story</span><span class="s3">(</span><span class="s4">&quot;Ошибки сервера&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">severity</span><span class="s3">(</span><span class="s4">&quot;critical&quot;</span><span class="s3">);</span>
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">tag</span><span class="s3">(</span><span class="s4">&quot;server-error&quot;</span><span class="s3">);</span>
+
+        <span class="s2">const </span><span class="s1">requestBody</span><span class="s3">: </span><span class="s1">ConvertRequest </span><span class="s3">= {</span>
+            <span class="s1">courtLawyerId</span><span class="s3">: </span><span class="s1">VALID_COURT_LAWYER_ID</span><span class="s3">,</span>
+            <span class="s1">documentIds</span><span class="s3">: []</span>
+        <span class="s3">};</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Подготовка тестовых данных&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Package ID&quot;</span><span class="s3">, </span><span class="s1">VALID_PACKAGE_ID</span><span class="s3">);</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Court Lawyer ID&quot;</span><span class="s3">, </span><span class="s1">VALID_COURT_LAWYER_ID</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">let </span><span class="s1">response</span><span class="s3">: </span><span class="s1">any</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">startTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Отправка запроса для проверки 500 ошибки&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s1">response </span><span class="s3">= </span><span class="s2">await </span><span class="s1">request</span><span class="s3">.</span><span class="s1">post</span><span class="s3">(</span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">BASE_URL</span><span class="s3">}</span><span class="s4">/v1/packages/</span><span class="s1">$</span><span class="s3">{</span><span class="s1">VALID_PACKAGE_ID</span><span class="s3">}</span><span class="s4">/convert`</span><span class="s3">, {</span>
+                <span class="s1">headers</span><span class="s3">: {</span>
+                    <span class="s4">'Accept'</span><span class="s3">: </span><span class="s4">'application/json'</span><span class="s3">,</span>
+                    <span class="s4">'Content-Type'</span><span class="s3">: </span><span class="s4">'application/json'</span>
+                <span class="s3">},</span>
+                <span class="s1">data</span><span class="s3">: </span><span class="s1">requestBody</span>
+            <span class="s3">});</span>
+        <span class="s3">});</span>
+
+        <span class="s2">const </span><span class="s1">responseTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">() - </span><span class="s1">startTime</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">statusCode </span><span class="s3">= </span><span class="s1">response</span><span class="s3">.</span><span class="s1">status</span><span class="s3">();</span>
+
+        <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка возможных статус кодов&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+            <span class="s0">// В нормальных условиях должен быть 200, но проверяем на случай ошибки сервера</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">statusCode</span><span class="s3">, </span><span class="s4">'Статус код должен быть определен'</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s2">typeof </span><span class="s1">statusCode</span><span class="s3">, </span><span class="s4">'Статус код должен быть числом'</span><span class="s3">).</span><span class="s1">toBe</span><span class="s3">(</span><span class="s4">'number'</span><span class="s3">);</span>
+
+            <span class="s2">const </span><span class="s1">expectedStatuses </span><span class="s3">= [</span><span class="s5">200</span><span class="s3">, </span><span class="s5">500</span><span class="s3">];</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">expectedStatuses</span><span class="s3">, </span><span class="s4">`Статус код должен быть одним из: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">expectedStatuses</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s4">', '</span><span class="s3">)}</span><span class="s4">`</span><span class="s3">).</span><span class="s1">toContain</span><span class="s3">(</span><span class="s1">statusCode</span><span class="s3">);</span>
+
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Actual Status Code&quot;</span><span class="s3">, </span><span class="s1">statusCode</span><span class="s3">.</span><span class="s1">toString</span><span class="s3">());</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">parameter</span><span class="s3">(</span><span class="s4">&quot;Response Time&quot;</span><span class="s3">, </span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">responseTime</span><span class="s3">}</span><span class="s4">ms`</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">statusCode </span><span class="s3">=== </span><span class="s5">500</span><span class="s3">) {</span>
+            <span class="s2">let </span><span class="s1">responseBody</span><span class="s3">: </span><span class="s1">ApiResponse</span><span class="s3">;</span>
+
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Парсинг JSON ответа для 500 ошибки&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+                <span class="s1">responseBody </span><span class="s3">= </span><span class="s2">await </span><span class="s1">response</span><span class="s3">.</span><span class="s1">json</span><span class="s3">();</span>
+            <span class="s3">});</span>
+
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Проверка структуры 500 ошибки&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">status</span><span class="s3">.</span><span class="s1">code</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+                <span class="s1">expect</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+
+                <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;500 Server Error&quot;</span><span class="s3">, </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">responseBody</span><span class="s3">, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">2</span><span class="s3">), </span><span class="s4">&quot;application/json&quot;</span><span class="s3">);</span>
+            <span class="s3">});</span>
+        <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+            <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">step</span><span class="s3">(</span><span class="s4">&quot;Логирование нормального ответа&quot;</span><span class="s3">, </span><span class="s1">async </span><span class="s3">() =&gt; {</span>
+                <span class="s2">await </span><span class="s1">allure</span><span class="s3">.</span><span class="s1">attachment</span><span class="s3">(</span><span class="s4">&quot;Normal Response&quot;</span><span class="s3">, </span><span class="s4">`Status: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">statusCode</span><span class="s3">}</span><span class="s4">`</span><span class="s3">, </span><span class="s4">&quot;text/plain&quot;</span><span class="s3">);</span>
+            <span class="s3">});</span>
+        <span class="s3">}</span>
+    <span class="s3">});</span>
+<span class="s3">});</span></pre>
+</body>
+</html>

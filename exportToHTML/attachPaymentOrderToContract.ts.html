@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>attachPaymentOrderToContract.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+attachPaymentOrderToContract.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Page</span><span class="s2">, </span><span class="s1">Locator</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;@playwright/test&quot;</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">UnrecognizedPaymentsRegistryPage </span><span class="s2">{</span>
+  <span class="s0">private </span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">registryTab</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">attachPaymentButton</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">contractNumberDropdown</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">documentTypeDropdown</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">documentTypeOption</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">paymentDateInput</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">paymentNumberInput</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">attachButton</span><span class="s2">;</span>
+
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">) {</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">page </span><span class="s2">= </span><span class="s1">page</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">registryTab </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;link&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Реестр неразобранных платежных поручений&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">attachPaymentButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span>
+      <span class="s3">&quot;tbody tr:first-child .el-button.el-button--primary&quot;</span>
+    <span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">contractNumberDropdown </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;*Номер договора&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">documentTypeDropdown </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;*Тип документа&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">documentTypeOption </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByText</span><span class="s2">(</span>
+      <span class="s3">&quot;Платежный документ (госпошлина) мирового суда&quot;</span>
+    <span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">paymentDateInput </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;textbox&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;*Дата оплаты&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">paymentNumberInput </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;textbox&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;*Номер платежного поручения&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">attachButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Прикрепить документ&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async attachPaymentOrderToContract</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s0">if </span><span class="s2">(!</span><span class="s1">contractNumber</span><span class="s2">) {</span>
+      <span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span>
+        <span class="s3">&quot;❌ Ошибка: Номер договора не передан в `attachPaymentOrderToContract`!&quot;</span>
+      <span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span>
+      <span class="s3">&quot;🔹 Открываем вкладку 'Реестр неразобранных платежных поручений'...&quot;</span>
+    <span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">registryTab</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Ищем платежное поручение...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForTimeout</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Нажимаем 'Прикрепить платежный документ к договору'...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">attachPaymentButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`🔹 Выбираем номер договора: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">}</span><span class="s3">...`</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">contractNumberDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">contractNumberDropdown</span><span class="s2">.</span><span class="s1">fill</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">);</span>
+
+    <span class="s5">// 🔹 Ожидаем загрузку страницы и завершение API-запроса</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForResponse</span><span class="s2">(</span>
+      <span class="s2">(</span><span class="s1">response</span><span class="s2">) =&gt;</span>
+        <span class="s1">response</span><span class="s2">.</span><span class="s1">url</span><span class="s2">().</span><span class="s1">includes</span><span class="s2">(</span><span class="s3">&quot;/api/v1/contract/table&quot;</span><span class="s2">) &amp;&amp;</span>
+        <span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">() === </span><span class="s4">200</span>
+    <span class="s2">);</span>
+
+    <span class="s5">// 🔹 Находим и кликаем по нужному договору в списке</span>
+    <span class="s0">const </span><span class="s1">selectedContract </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;.el-select-dropdown__item&quot;</span><span class="s2">, {</span>
+      <span class="s1">hasText</span><span class="s2">: </span><span class="s1">contractNumber</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">await </span><span class="s1">selectedContract</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForResponse</span><span class="s2">(</span>
+      <span class="s2">(</span><span class="s1">response</span><span class="s2">) =&gt;</span>
+        <span class="s1">response</span><span class="s2">.</span><span class="s1">url</span><span class="s2">().</span><span class="s1">includes</span><span class="s2">(</span><span class="s3">&quot;/api/v1/contract/table&quot;</span><span class="s2">) &amp;&amp;</span>
+        <span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">() === </span><span class="s4">200</span>
+    <span class="s2">);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Выбираем тип документа...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">documentTypeDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">documentTypeOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Заполняем дату оплаты...&quot;</span><span class="s2">);</span>
+    <span class="s0">const </span><span class="s1">today </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">().</span><span class="s1">toISOString</span><span class="s2">().</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;T&quot;</span><span class="s2">)[</span><span class="s4">0</span><span class="s2">];</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">paymentDateInput</span><span class="s2">.</span><span class="s1">fill</span><span class="s2">(</span><span class="s1">today</span><span class="s2">);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Заполняем номер платежного поручения...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">paymentNumberInput</span><span class="s2">.</span><span class="s1">fill</span><span class="s2">(</span><span class="s3">&quot;7777&quot;</span><span class="s2">);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Подтверждаем привязку платежа...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">attachButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;✅ Операция выполнена успешно!&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

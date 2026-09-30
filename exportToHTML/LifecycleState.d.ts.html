@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>LifecycleState.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LifecycleState.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">type </span><span class="s2">{ </span><span class="s1">FixtureResult</span><span class="s2">, </span><span class="s1">StepResult</span><span class="s2">, </span><span class="s1">TestResult </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../model.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">type </span><span class="s2">{ </span><span class="s1">FixtureResultWrapper</span><span class="s2">, </span><span class="s1">FixtureType</span><span class="s2">, </span><span class="s1">TestResultWrapper</span><span class="s2">, </span><span class="s1">TestScope </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./types.js&quot;</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s1">declare </span><span class="s0">class </span><span class="s1">LifecycleState </span><span class="s2">{</span>
+    <span class="s1">#private</span><span class="s2">;</span>
+    <span class="s1">getScope</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">TestScope </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s1">getWrappedFixtureResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">FixtureResultWrapper </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s1">getFixtureResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">FixtureResult </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s1">getWrappedTestResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">TestResultWrapper </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s1">getTestResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">TestResult </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s1">getStepResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">StepResult </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s1">getExecutionItem</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">FixtureResult </span><span class="s2">| </span><span class="s1">TestResult </span><span class="s2">| </span><span class="s1">StepResult </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s1">setTestResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">, </span><span class="s1">scopeUuids</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">[]) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">deleteTestResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">setStepResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">result</span><span class="s2">: </span><span class="s1">StepResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">deleteStepResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">setFixtureResult</span><span class="s2">: (</span><span class="s1">scopeUuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">type</span><span class="s2">: </span><span class="s1">FixtureType</span><span class="s2">, </span><span class="s1">result</span><span class="s2">: </span><span class="s1">FixtureResult</span><span class="s2">) =&gt; </span><span class="s1">FixtureResultWrapper</span><span class="s2">;</span>
+    <span class="s1">deleteFixtureResult</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">setScope</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">data</span><span class="s2">?: </span><span class="s1">Partial</span><span class="s2">&lt;</span><span class="s1">TestScope</span><span class="s2">&gt;) =&gt; </span><span class="s1">TestScope</span><span class="s2">;</span>
+    <span class="s1">deleteScope</span><span class="s2">: (</span><span class="s1">uuid</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

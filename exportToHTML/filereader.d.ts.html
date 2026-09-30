@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>filereader.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+filereader.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">Blob </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'buffer'</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">DOMException</span><span class="s3">, </span><span class="s1">EventInit </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'./patch'</span>
+
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">FileReader </span><span class="s3">{</span>
+  <span class="s1">__proto__</span><span class="s3">: </span><span class="s1">EventTarget </span><span class="s3">&amp; </span><span class="s1">FileReader</span>
+
+  <span class="s1">constructor </span><span class="s3">()</span>
+
+  <span class="s1">readAsArrayBuffer </span><span class="s3">(</span><span class="s1">blob</span><span class="s3">: </span><span class="s1">Blob</span><span class="s3">): </span><span class="s2">void</span>
+  <span class="s1">readAsBinaryString </span><span class="s3">(</span><span class="s1">blob</span><span class="s3">: </span><span class="s1">Blob</span><span class="s3">): </span><span class="s2">void</span>
+  <span class="s1">readAsText </span><span class="s3">(</span><span class="s1">blob</span><span class="s3">: </span><span class="s1">Blob</span><span class="s3">, </span><span class="s1">encoding</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">): </span><span class="s2">void</span>
+  <span class="s1">readAsDataURL </span><span class="s3">(</span><span class="s1">blob</span><span class="s3">: </span><span class="s1">Blob</span><span class="s3">): </span><span class="s2">void</span>
+
+  <span class="s1">abort </span><span class="s3">(): </span><span class="s2">void</span>
+
+  <span class="s2">static </span><span class="s1">readonly EMPTY </span><span class="s3">= </span><span class="s5">0</span>
+  <span class="s2">static </span><span class="s1">readonly LOADING </span><span class="s3">= </span><span class="s5">1</span>
+  <span class="s2">static </span><span class="s1">readonly DONE </span><span class="s3">= </span><span class="s5">2</span>
+
+  <span class="s1">readonly EMPTY </span><span class="s3">= </span><span class="s5">0</span>
+  <span class="s1">readonly LOADING </span><span class="s3">= </span><span class="s5">1</span>
+  <span class="s1">readonly DONE </span><span class="s3">= </span><span class="s5">2</span>
+
+  <span class="s1">readonly readyState</span><span class="s3">: </span><span class="s1">number</span>
+
+  <span class="s1">readonly result</span><span class="s3">: </span><span class="s1">string </span><span class="s3">| </span><span class="s1">ArrayBuffer </span><span class="s3">| </span><span class="s2">null</span>
+
+  <span class="s1">readonly error</span><span class="s3">: </span><span class="s1">DOMException </span><span class="s3">| </span><span class="s2">null</span>
+
+  <span class="s1">onloadstart</span><span class="s3">: </span><span class="s2">null </span><span class="s3">| ((</span><span class="s2">this</span><span class="s3">: </span><span class="s1">FileReader</span><span class="s3">, </span><span class="s1">event</span><span class="s3">: </span><span class="s1">ProgressEvent</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">)</span>
+  <span class="s1">onprogress</span><span class="s3">: </span><span class="s2">null </span><span class="s3">| ((</span><span class="s2">this</span><span class="s3">: </span><span class="s1">FileReader</span><span class="s3">, </span><span class="s1">event</span><span class="s3">: </span><span class="s1">ProgressEvent</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">)</span>
+  <span class="s1">onload</span><span class="s3">: </span><span class="s2">null </span><span class="s3">| ((</span><span class="s2">this</span><span class="s3">: </span><span class="s1">FileReader</span><span class="s3">, </span><span class="s1">event</span><span class="s3">: </span><span class="s1">ProgressEvent</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">)</span>
+  <span class="s1">onabort</span><span class="s3">: </span><span class="s2">null </span><span class="s3">|  ((</span><span class="s2">this</span><span class="s3">: </span><span class="s1">FileReader</span><span class="s3">, </span><span class="s1">event</span><span class="s3">: </span><span class="s1">ProgressEvent</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">)</span>
+  <span class="s1">onerror</span><span class="s3">: </span><span class="s2">null </span><span class="s3">| ((</span><span class="s2">this</span><span class="s3">: </span><span class="s1">FileReader</span><span class="s3">, </span><span class="s1">event</span><span class="s3">: </span><span class="s1">ProgressEvent</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">)</span>
+  <span class="s1">onloadend</span><span class="s3">: </span><span class="s2">null </span><span class="s3">| ((</span><span class="s2">this</span><span class="s3">: </span><span class="s1">FileReader</span><span class="s3">, </span><span class="s1">event</span><span class="s3">: </span><span class="s1">ProgressEvent</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">)</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">ProgressEventInit </span><span class="s2">extends </span><span class="s1">EventInit </span><span class="s3">{</span>
+  <span class="s1">lengthComputable</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">loaded</span><span class="s3">?: </span><span class="s1">number</span>
+  <span class="s1">total</span><span class="s3">?: </span><span class="s1">number</span>
+<span class="s3">}</span>
+
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">ProgressEvent </span><span class="s3">{</span>
+  <span class="s1">__proto__</span><span class="s3">: </span><span class="s1">Event </span><span class="s3">&amp; </span><span class="s1">ProgressEvent</span>
+
+  <span class="s1">constructor </span><span class="s3">(</span><span class="s1">type</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">eventInitDict</span><span class="s3">?: </span><span class="s1">ProgressEventInit</span><span class="s3">)</span>
+
+  <span class="s1">readonly lengthComputable</span><span class="s3">: </span><span class="s1">boolean</span>
+  <span class="s1">readonly loaded</span><span class="s3">: </span><span class="s1">number</span>
+  <span class="s1">readonly total</span><span class="s3">: </span><span class="s1">number</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

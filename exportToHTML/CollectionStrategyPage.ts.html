@@ -1,0 +1,192 @@
+<html>
+<head>
+<title>CollectionStrategyPage.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CollectionStrategyPage.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Page</span><span class="s2">, </span><span class="s1">Locator</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;@playwright/test&quot;</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">CollectionStrategyPage </span><span class="s2">{</span>
+  <span class="s0">private </span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">strategyMenu</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">assignProcessButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">processDropdown</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">processOCB</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">assignToSelectedContractsButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">nextPageButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">selectedContractNumber</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">) {</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">page </span><span class="s2">= </span><span class="s1">page</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">strategyMenu </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span>
+      <span class="s3">&quot;span.menu-item-title:has-text('Стратегия взыскания')&quot;</span>
+    <span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">assignProcessButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span>
+      <span class="s3">&quot;button:has-text('Назначить процесс')&quot;</span>
+    <span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">processDropdown </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Выберите процесс&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">assignToSelectedContractsButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span>
+      <span class="s3">&quot;button:has-text('Назначить к выбранным договорам')&quot;</span>
+    <span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">processOCB </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;option&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Взыскание ОСВ&quot;</span><span class="s2">,</span>
+      <span class="s1">exact</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">nextPageButton </span><span class="s2">= </span><span class="s1">page</span>
+      <span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;.el-pagination .btn-next:not([disabled])&quot;</span><span class="s2">)</span>
+      <span class="s2">.</span><span class="s1">first</span><span class="s2">();</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async goToStrategyPage</span><span class="s2">() {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Переход в 'Стратегия взыскания'...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">strategyMenu</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async filterByOrganization</span><span class="s2">() {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Применяем фильтр по организации 'Турбозайм'...&quot;</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Колонка&quot; </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;option&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Организация&quot; </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Вид фильтрации&quot; </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;option&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Содержит&quot; </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span>
+      <span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;textbox&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Значение&quot; </span><span class="s2">})</span>
+      <span class="s2">.</span><span class="s1">fill</span><span class="s2">(</span><span class="s3">&quot;Турбозайм&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Применить&quot; </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForResponse</span><span class="s2">(</span>
+      <span class="s2">(</span><span class="s1">response</span><span class="s2">) =&gt;</span>
+        <span class="s1">response</span><span class="s2">.</span><span class="s1">url</span><span class="s2">().</span><span class="s1">includes</span><span class="s2">(</span><span class="s3">&quot;/api/v1/importedcontractpackage/table&quot;</span><span class="s2">) &amp;&amp;</span>
+        <span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">() === </span><span class="s4">200</span>
+    <span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForTimeout</span><span class="s2">(</span><span class="s4">3000</span><span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async selectContract</span><span class="s2">() {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Ищем договор c 'АА'...&quot;</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">filterByOrganization</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">searchContract</span><span class="s2">(</span>
+      <span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">, </span><span class="s1">status</span><span class="s2">) =&gt;</span>
+        <span class="s1">contractNumber</span><span class="s2">.</span><span class="s1">startsWith</span><span class="s2">(</span><span class="s3">&quot;АА&quot;</span><span class="s2">) &amp;&amp;</span>
+        <span class="s1">status </span><span class="s2">!== </span><span class="s3">&quot;Клиент банкрот&quot; </span><span class="s2">&amp;&amp;</span>
+        <span class="s1">status </span><span class="s2">!== </span><span class="s3">&quot;Статус банкротства не ясен&quot;</span>
+    <span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async selectContractForPurchased</span><span class="s2">() {</span>
+    <span class="s5">//console.log(&quot;🔹 Ищем договор для купленных (без 'АА')...&quot;);</span>
+
+    <span class="s5">// await this.filterByOrganization();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">searchContract</span><span class="s2">(</span>
+      <span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">, </span><span class="s1">status</span><span class="s2">) =&gt;</span>
+        <span class="s2">!</span><span class="s1">contractNumber</span><span class="s2">.</span><span class="s1">startsWith</span><span class="s2">(</span><span class="s3">&quot;АА&quot;</span><span class="s2">) &amp;&amp;</span>
+        <span class="s1">status </span><span class="s2">!== </span><span class="s3">&quot;Клиент банкрот&quot; </span><span class="s2">&amp;&amp;</span>
+        <span class="s1">status </span><span class="s2">!== </span><span class="s3">&quot;Статус банкротства не ясен&quot;</span>
+    <span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s0">private </span><span class="s1">async searchContract</span><span class="s2">(</span>
+    <span class="s1">condition</span><span class="s2">: (</span><span class="s1">contractNumber</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">status</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">boolean</span>
+  <span class="s2">) {</span>
+    <span class="s0">let </span><span class="s1">currentPage </span><span class="s2">= </span><span class="s4">1</span><span class="s2">;</span>
+
+    <span class="s0">while </span><span class="s2">(</span><span class="s0">true</span><span class="s2">) {</span>
+      <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForSelector</span><span class="s2">(</span><span class="s3">&quot;tbody tr&quot;</span><span class="s2">, {</span>
+        <span class="s1">state</span><span class="s2">: </span><span class="s3">&quot;visible&quot;</span><span class="s2">,</span>
+        <span class="s1">timeout</span><span class="s2">: </span><span class="s4">10000</span><span class="s2">,</span>
+      <span class="s2">});</span>
+      <span class="s0">const </span><span class="s1">rows </span><span class="s2">= </span><span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;tbody tr&quot;</span><span class="s2">).</span><span class="s1">all</span><span class="s2">();</span>
+
+      <span class="s0">for </span><span class="s2">(</span><span class="s0">const </span><span class="s1">row of rows</span><span class="s2">) {</span>
+        <span class="s0">const </span><span class="s1">contractNumberElement </span><span class="s2">= </span><span class="s1">row</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;td:nth-child(2) span&quot;</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">statusElement </span><span class="s2">= </span><span class="s1">row</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;td:nth-child(7)&quot;</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">contractNumber </span><span class="s2">=</span>
+          <span class="s2">(</span><span class="s0">await </span><span class="s1">contractNumberElement</span><span class="s2">.</span><span class="s1">textContent</span><span class="s2">())?.</span><span class="s1">trim</span><span class="s2">() || </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+        <span class="s0">const </span><span class="s1">status </span><span class="s2">= (</span><span class="s0">await </span><span class="s1">statusElement</span><span class="s2">.</span><span class="s1">textContent</span><span class="s2">())?.</span><span class="s1">trim</span><span class="s2">() || </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`Проверяем договор: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">} </span><span class="s3">| Статус: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">status</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">condition</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">, </span><span class="s1">status</span><span class="s2">)) {</span>
+          <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`✅ Найден подходящий договор: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+          <span class="s0">await </span><span class="s1">contractNumberElement</span><span class="s2">.</span><span class="s1">scrollIntoViewIfNeeded</span><span class="s2">();</span>
+          <span class="s0">const </span><span class="s1">checkbox </span><span class="s2">= </span><span class="s1">row</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span>
+            <span class="s3">&quot;.table-select-checkbox .el-checkbox__inner&quot;</span>
+          <span class="s2">);</span>
+          <span class="s0">await </span><span class="s1">checkbox</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+          <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForTimeout</span><span class="s2">(</span><span class="s4">1000</span><span class="s2">);</span>
+
+          <span class="s0">this</span><span class="s2">.</span><span class="s1">selectedContractNumber </span><span class="s2">= </span><span class="s1">contractNumber</span><span class="s2">;</span>
+          <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+      <span class="s2">}</span>
+
+      <span class="s0">if </span><span class="s2">(</span><span class="s0">await this</span><span class="s2">.</span><span class="s1">nextPageButton</span><span class="s2">.</span><span class="s1">isVisible</span><span class="s2">()) {</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`🔹 Переходим на следующую страницу </span><span class="s1">$</span><span class="s2">{</span><span class="s1">currentPage </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">}</span><span class="s3">...`</span><span class="s2">);</span>
+        <span class="s0">await this</span><span class="s2">.</span><span class="s1">nextPageButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+        <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForTimeout</span><span class="s2">(</span><span class="s4">2000</span><span class="s2">);</span>
+      <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span><span class="s3">&quot;❌ Не найден подходящий договор после всех страниц!&quot;</span><span class="s2">);</span>
+      <span class="s2">}</span>
+
+      <span class="s1">currentPage</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async getSelectedContractNumber</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">&gt; {</span>
+    <span class="s0">if </span><span class="s2">(!</span><span class="s0">this</span><span class="s2">.</span><span class="s1">selectedContractNumber</span><span class="s2">) {</span>
+      <span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span><span class="s3">&quot;❌ Ошибка: Не выбран договор!&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`✅ Выбран договор: </span><span class="s1">$</span><span class="s2">{</span><span class="s0">this</span><span class="s2">.</span><span class="s1">selectedContractNumber</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+    <span class="s0">return this</span><span class="s2">.</span><span class="s1">selectedContractNumber</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async assignProcess</span><span class="s2">(</span><span class="s1">processName</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`🔹 Назначаем процесс: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">processName</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">assignProcessButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">processDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">processOCB</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">assignToSelectedContractsButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;✅ Процесс назначен успешно!&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async assignProcessPurchased</span><span class="s2">() {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Назначаем процесс 'Взыскание ОСВ для купленных'...&quot;</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">assignProcessButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">processDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s0">const </span><span class="s1">processForPurchased </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;option&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Взыскание ОСВ для купленных&quot;</span><span class="s2">,</span>
+      <span class="s1">exact</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+    <span class="s2">});</span>
+
+    <span class="s0">await </span><span class="s1">processForPurchased</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">assignToSelectedContractsButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;✅ Процесс 'Взыскание ОСВ для купленных' успешно назначен!&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

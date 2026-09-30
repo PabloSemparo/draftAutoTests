@@ -1,0 +1,358 @@
+<html>
+<head>
+<title>webSocketMockSource.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+webSocketMockSource.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">webSocketMockSource_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">webSocketMockSource_exports</span><span class="s1">, {</span>
+  <span class="s2">source</span><span class="s1">: () =&gt; </span><span class="s2">source</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">webSocketMockSource_exports</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">source </span><span class="s1">= </span><span class="s0">`</span>
+<span class="s0">var __commonJS = obj =&gt; { 
+  let required = false; 
+  let result; 
+  return function __require() { 
+    if (!required) { 
+      required = true; 
+      let fn; 
+      for (const name in obj) { fn = obj[name]; break; } 
+      const module = { exports: {} }; 
+      fn(module.exports, module); 
+      result = module.exports; 
+    } 
+    return result; 
+  } 
+}; 
+var __export = (target, all) =&gt; {for (var name in all) target[name] = all[name];}; 
+var __toESM = mod =&gt; ({ ...mod, 'default': mod }); 
+var __toCommonJS = mod =&gt; ({ ...mod, __esModule: true }); 
+ 
+ 
+// packages/injected/src/webSocketMock.ts 
+var webSocketMock_exports = {}; 
+__export(webSocketMock_exports, { 
+  inject: () =&gt; inject 
+}); 
+module.exports = __toCommonJS(webSocketMock_exports); 
+function inject(globalThis) { 
+  if (globalThis.__pwWebSocketDispatch) 
+    return; 
+  function generateId() { 
+    const bytes = new Uint8Array(32); 
+    globalThis.crypto.getRandomValues(bytes); 
+    const hex = &quot;0123456789abcdef&quot;; 
+    return [...bytes].map((value) =&gt; { 
+      const high = Math.floor(value / 16); 
+      const low = value % 16; 
+      return hex[high] + hex[low]; 
+    }).join(&quot;&quot;); 
+  } 
+  function bufferToData(b) { 
+    let s = &quot;&quot;; 
+    for (let i = 0; i &lt; b.length; i++) 
+      s += String.fromCharCode(b[i]); 
+    return { data: globalThis.btoa(s), isBase64: true }; 
+  } 
+  function stringToBuffer(s) { 
+    s = globalThis.atob(s); 
+    const b = new Uint8Array(s.length); 
+    for (let i = 0; i &lt; s.length; i++) 
+      b[i] = s.charCodeAt(i); 
+    return b.buffer; 
+  } 
+  function messageToData(message, cb) { 
+    if (message instanceof globalThis.Blob) 
+      return message.arrayBuffer().then((buffer) =&gt; cb(bufferToData(new Uint8Array(buffer)))); 
+    if (typeof message === &quot;string&quot;) 
+      return cb({ data: message, isBase64: false }); 
+    if (ArrayBuffer.isView(message)) 
+      return cb(bufferToData(new Uint8Array(message.buffer, message.byteOffset, message.byteLength))); 
+    return cb(bufferToData(new Uint8Array(message))); 
+  } 
+  function dataToMessage(data, binaryType) { 
+    if (!data.isBase64) 
+      return data.data; 
+    const buffer = stringToBuffer(data.data); 
+    return binaryType === &quot;arraybuffer&quot; ? buffer : new Blob([buffer]); 
+  } 
+  const binding = globalThis.__pwWebSocketBinding; 
+  const NativeWebSocket = globalThis.WebSocket; 
+  const idToWebSocket = /* @__PURE__ */ new Map(); 
+  globalThis.__pwWebSocketDispatch = (request) =&gt; { 
+    const ws = idToWebSocket.get(request.id); 
+    if (!ws) 
+      return; 
+    if (request.type === &quot;connect&quot;) 
+      ws._apiConnect(); 
+    if (request.type === &quot;passthrough&quot;) 
+      ws._apiPassThrough(); 
+    if (request.type === &quot;ensureOpened&quot;) 
+      ws._apiEnsureOpened(); 
+    if (request.type === &quot;sendToPage&quot;) 
+      ws._apiSendToPage(dataToMessage(request.data, ws.binaryType)); 
+    if (request.type === &quot;closePage&quot;) 
+      ws._apiClosePage(request.code, request.reason, request.wasClean); 
+    if (request.type === &quot;sendToServer&quot;) 
+      ws._apiSendToServer(dataToMessage(request.data, ws.binaryType)); 
+    if (request.type === &quot;closeServer&quot;) 
+      ws._apiCloseServer(request.code, request.reason, request.wasClean); 
+  }; 
+  const _WebSocketMock = class _WebSocketMock extends EventTarget { 
+    constructor(url, protocols) { 
+      var _a, _b; 
+      super(); 
+      // WebSocket.CLOSED 
+      this.CONNECTING = 0; 
+      // WebSocket.CONNECTING 
+      this.OPEN = 1; 
+      // WebSocket.OPEN 
+      this.CLOSING = 2; 
+      // WebSocket.CLOSING 
+      this.CLOSED = 3; 
+      // WebSocket.CLOSED 
+      this._oncloseListener = null; 
+      this._onerrorListener = null; 
+      this._onmessageListener = null; 
+      this._onopenListener = null; 
+      this.bufferedAmount = 0; 
+      this.extensions = &quot;&quot;; 
+      this.protocol = &quot;&quot;; 
+      this.readyState = 0; 
+      this._origin = &quot;&quot;; 
+      this._passthrough = false; 
+      this._wsBufferedMessages = []; 
+      this._binaryType = &quot;blob&quot;; 
+      this.url = new URL(url, globalThis.window.document.baseURI).href.replace(/^http/, &quot;ws&quot;); 
+      this._origin = (_b = (_a = URL.parse(this.url)) == null ? void 0 : _a.origin) != null ? _b : &quot;&quot;; 
+      this._protocols = protocols; 
+      this._id = generateId(); 
+      idToWebSocket.set(this._id, this); 
+      binding({ type: &quot;onCreate&quot;, id: this._id, url: this.url }); 
+    } 
+    // --- native WebSocket implementation --- 
+    get binaryType() { 
+      return this._binaryType; 
+    } 
+    set binaryType(type) { 
+      this._binaryType = type; 
+      if (this._ws) 
+        this._ws.binaryType = type; 
+    } 
+    get onclose() { 
+      return this._oncloseListener; 
+    } 
+    set onclose(listener) { 
+      if (this._oncloseListener) 
+        this.removeEventListener(&quot;close&quot;, this._oncloseListener); 
+      this._oncloseListener = listener; 
+      if (this._oncloseListener) 
+        this.addEventListener(&quot;close&quot;, this._oncloseListener); 
+    } 
+    get onerror() { 
+      return this._onerrorListener; 
+    } 
+    set onerror(listener) { 
+      if (this._onerrorListener) 
+        this.removeEventListener(&quot;error&quot;, this._onerrorListener); 
+      this._onerrorListener = listener; 
+      if (this._onerrorListener) 
+        this.addEventListener(&quot;error&quot;, this._onerrorListener); 
+    } 
+    get onopen() { 
+      return this._onopenListener; 
+    } 
+    set onopen(listener) { 
+      if (this._onopenListener) 
+        this.removeEventListener(&quot;open&quot;, this._onopenListener); 
+      this._onopenListener = listener; 
+      if (this._onopenListener) 
+        this.addEventListener(&quot;open&quot;, this._onopenListener); 
+    } 
+    get onmessage() { 
+      return this._onmessageListener; 
+    } 
+    set onmessage(listener) { 
+      if (this._onmessageListener) 
+        this.removeEventListener(&quot;message&quot;, this._onmessageListener); 
+      this._onmessageListener = listener; 
+      if (this._onmessageListener) 
+        this.addEventListener(&quot;message&quot;, this._onmessageListener); 
+    } 
+    send(message) { 
+      if (this.readyState === _WebSocketMock.CONNECTING) 
+        throw new DOMException(</span><span class="s3">\`</span><span class="s0">Failed to execute 'send' on 'WebSocket': Still in CONNECTING state.</span><span class="s3">\`</span><span class="s0">); 
+      if (this.readyState !== _WebSocketMock.OPEN) 
+        throw new DOMException(</span><span class="s3">\`</span><span class="s0">WebSocket is already in CLOSING or CLOSED state.</span><span class="s3">\`</span><span class="s0">); 
+      if (this._passthrough) { 
+        if (this._ws) 
+          this._apiSendToServer(message); 
+      } else { 
+        messageToData(message, (data) =&gt; binding({ type: &quot;onMessageFromPage&quot;, id: this._id, data })); 
+      } 
+    } 
+    close(code, reason) { 
+      if (code !== void 0 &amp;&amp; code !== 1e3 &amp;&amp; (code &lt; 3e3 || code &gt; 4999)) 
+        throw new DOMException(</span><span class="s3">\`</span><span class="s0">Failed to execute 'close' on 'WebSocket': The close code must be either 1000, or between 3000 and 4999. </span><span class="s3">\$</span><span class="s0">{code} is neither.</span><span class="s3">\`</span><span class="s0">); 
+      if (this.readyState === _WebSocketMock.OPEN || this.readyState === _WebSocketMock.CONNECTING) 
+        this.readyState = _WebSocketMock.CLOSING; 
+      if (this._passthrough) 
+        this._apiCloseServer(code, reason, true); 
+      else 
+        binding({ type: &quot;onClosePage&quot;, id: this._id, code, reason, wasClean: true }); 
+    } 
+    // --- methods called from the routing API --- 
+    _apiEnsureOpened() { 
+      if (!this._ws) 
+        this._ensureOpened(); 
+    } 
+    _apiSendToPage(message) { 
+      this._ensureOpened(); 
+      if (this.readyState !== _WebSocketMock.OPEN) 
+        throw new DOMException(</span><span class="s3">\`</span><span class="s0">WebSocket is already in CLOSING or CLOSED state.</span><span class="s3">\`</span><span class="s0">); 
+      this.dispatchEvent(new MessageEvent(&quot;message&quot;, { data: message, origin: this._origin, cancelable: true })); 
+    } 
+    _apiSendToServer(message) { 
+      if (!this._ws) 
+        throw new Error(&quot;Cannot send a message before connecting to the server&quot;); 
+      if (this._ws.readyState === _WebSocketMock.CONNECTING) 
+        this._wsBufferedMessages.push(message); 
+      else 
+        this._ws.send(message); 
+    } 
+    _apiConnect() { 
+      if (this._ws) 
+        throw new Error(&quot;Can only connect to the server once&quot;); 
+      this._ws = new NativeWebSocket(this.url, this._protocols); 
+      this._ws.binaryType = this._binaryType; 
+      this._ws.onopen = () =&gt; { 
+        for (const message of this._wsBufferedMessages) 
+          this._ws.send(message); 
+        this._wsBufferedMessages = []; 
+        this._ensureOpened(); 
+      }; 
+      this._ws.onclose = (event) =&gt; { 
+        this._onWSClose(event.code, event.reason, event.wasClean); 
+      }; 
+      this._ws.onmessage = (event) =&gt; { 
+        if (this._passthrough) 
+          this._apiSendToPage(event.data); 
+        else 
+          messageToData(event.data, (data) =&gt; binding({ type: &quot;onMessageFromServer&quot;, id: this._id, data })); 
+      }; 
+      this._ws.onerror = () =&gt; { 
+        const event = new Event(&quot;error&quot;, { cancelable: true }); 
+        this.dispatchEvent(event); 
+      }; 
+    } 
+    // This method connects to the server, and passes all messages through, 
+    // as if WebSocketMock was not engaged. 
+    _apiPassThrough() { 
+      this._passthrough = true; 
+      this._apiConnect(); 
+    } 
+    _apiCloseServer(code, reason, wasClean) { 
+      if (!this._ws) { 
+        this._onWSClose(code, reason, wasClean); 
+        return; 
+      } 
+      if (this._ws.readyState === _WebSocketMock.CONNECTING || this._ws.readyState === _WebSocketMock.OPEN) 
+        this._ws.close(code, reason); 
+    } 
+    _apiClosePage(code, reason, wasClean) { 
+      if (this.readyState === _WebSocketMock.CLOSED) 
+        return; 
+      this.readyState = _WebSocketMock.CLOSED; 
+      this.dispatchEvent(new CloseEvent(&quot;close&quot;, { code, reason, wasClean, cancelable: true })); 
+      this._maybeCleanup(); 
+      if (this._passthrough) 
+        this._apiCloseServer(code, reason, wasClean); 
+      else 
+        binding({ type: &quot;onClosePage&quot;, id: this._id, code, reason, wasClean }); 
+    } 
+    // --- internals --- 
+    _ensureOpened() { 
+      var _a; 
+      if (this.readyState !== _WebSocketMock.CONNECTING) 
+        return; 
+      this.extensions = ((_a = this._ws) == null ? void 0 : _a.extensions) || &quot;&quot;; 
+      if (this._ws) 
+        this.protocol = this._ws.protocol; 
+      else if (Array.isArray(this._protocols)) 
+        this.protocol = this._protocols[0] || &quot;&quot;; 
+      else 
+        this.protocol = this._protocols || &quot;&quot;; 
+      this.readyState = _WebSocketMock.OPEN; 
+      this.dispatchEvent(new Event(&quot;open&quot;, { cancelable: true })); 
+    } 
+    _onWSClose(code, reason, wasClean) { 
+      if (this._passthrough) 
+        this._apiClosePage(code, reason, wasClean); 
+      else 
+        binding({ type: &quot;onCloseServer&quot;, id: this._id, code, reason, wasClean }); 
+      if (this._ws) { 
+        this._ws.onopen = null; 
+        this._ws.onclose = null; 
+        this._ws.onmessage = null; 
+        this._ws.onerror = null; 
+        this._ws = void 0; 
+        this._wsBufferedMessages = []; 
+      } 
+      this._maybeCleanup(); 
+    } 
+    _maybeCleanup() { 
+      if (this.readyState === _WebSocketMock.CLOSED &amp;&amp; !this._ws) 
+        idToWebSocket.delete(this._id); 
+    } 
+  }; 
+  _WebSocketMock.CONNECTING = 0; 
+  // WebSocket.CONNECTING 
+  _WebSocketMock.OPEN = 1; 
+  // WebSocket.OPEN 
+  _WebSocketMock.CLOSING = 2; 
+  // WebSocket.CLOSING 
+  _WebSocketMock.CLOSED = 3; 
+  let WebSocketMock = _WebSocketMock; 
+  globalThis.WebSocket = class WebSocket extends WebSocketMock { 
+  }; 
+} 
+`</span><span class="s1">;</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">source</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

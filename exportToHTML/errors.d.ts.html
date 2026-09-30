@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>errors.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+errors.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">IncomingHttpHeaders </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./header&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">Client from </span><span class="s3">'./client'</span>
+
+<span class="s0">export default </span><span class="s1">Errors</span>
+
+<span class="s1">declare namespace Errors </span><span class="s2">{</span>
+  <span class="s0">export class </span><span class="s1">UndiciError </span><span class="s0">extends </span><span class="s1">Error </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Connect timeout error. */</span>
+  <span class="s0">export class </span><span class="s1">ConnectTimeoutError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'ConnectTimeoutError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_CONNECT_TIMEOUT'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** A header exceeds the `headersTimeout` option. */</span>
+  <span class="s0">export class </span><span class="s1">HeadersTimeoutError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'HeadersTimeoutError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_HEADERS_TIMEOUT'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Headers overflow error. */</span>
+  <span class="s0">export class </span><span class="s1">HeadersOverflowError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'HeadersOverflowError'</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_HEADERS_OVERFLOW'</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** A body exceeds the `bodyTimeout` option. */</span>
+  <span class="s0">export class </span><span class="s1">BodyTimeoutError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'BodyTimeoutError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_BODY_TIMEOUT'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s0">export class </span><span class="s1">ResponseStatusCodeError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">constructor </span><span class="s2">(</span>
+      <span class="s1">message</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">,</span>
+      <span class="s1">statusCode</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">,</span>
+      <span class="s1">headers</span><span class="s2">?: </span><span class="s1">IncomingHttpHeaders </span><span class="s2">| </span><span class="s1">string</span><span class="s2">[] | </span><span class="s0">null</span><span class="s2">,</span>
+      <span class="s1">body</span><span class="s2">?: </span><span class="s0">null </span><span class="s2">| </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">any</span><span class="s2">&gt; | </span><span class="s1">string</span>
+    <span class="s2">);</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'ResponseStatusCodeError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_RESPONSE_STATUS_CODE'</span><span class="s2">;</span>
+    <span class="s1">body</span><span class="s2">: </span><span class="s0">null </span><span class="s2">| </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">any</span><span class="s2">&gt; | </span><span class="s1">string</span>
+    <span class="s1">status</span><span class="s2">: </span><span class="s1">number</span>
+    <span class="s1">statusCode</span><span class="s2">: </span><span class="s1">number</span>
+    <span class="s1">headers</span><span class="s2">: </span><span class="s1">IncomingHttpHeaders </span><span class="s2">| </span><span class="s1">string</span><span class="s2">[] | </span><span class="s0">null</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Passed an invalid argument. */</span>
+  <span class="s0">export class </span><span class="s1">InvalidArgumentError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'InvalidArgumentError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_INVALID_ARG'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Returned an invalid value. */</span>
+  <span class="s0">export class </span><span class="s1">InvalidReturnValueError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'InvalidReturnValueError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_INVALID_RETURN_VALUE'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** The request has been aborted by the user. */</span>
+  <span class="s0">export class </span><span class="s1">RequestAbortedError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'AbortError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_ABORTED'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Expected error with reason. */</span>
+  <span class="s0">export class </span><span class="s1">InformationalError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'InformationalError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_INFO'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Request body length does not match content-length header. */</span>
+  <span class="s0">export class </span><span class="s1">RequestContentLengthMismatchError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'RequestContentLengthMismatchError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_REQ_CONTENT_LENGTH_MISMATCH'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Response body length does not match content-length header. */</span>
+  <span class="s0">export class </span><span class="s1">ResponseContentLengthMismatchError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'ResponseContentLengthMismatchError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_RES_CONTENT_LENGTH_MISMATCH'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Trying to use a destroyed client. */</span>
+  <span class="s0">export class </span><span class="s1">ClientDestroyedError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'ClientDestroyedError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_DESTROYED'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Trying to use a closed client. */</span>
+  <span class="s0">export class </span><span class="s1">ClientClosedError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'ClientClosedError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_CLOSED'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** There is an error with the socket. */</span>
+  <span class="s0">export class </span><span class="s1">SocketError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'SocketError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_SOCKET'</span><span class="s2">;</span>
+    <span class="s1">socket</span><span class="s2">: </span><span class="s1">Client</span><span class="s2">.</span><span class="s1">SocketInfo </span><span class="s2">| </span><span class="s0">null</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** Encountered unsupported functionality. */</span>
+  <span class="s0">export class </span><span class="s1">NotSupportedError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'NotSupportedError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_NOT_SUPPORTED'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** No upstream has been added to the BalancedPool. */</span>
+  <span class="s0">export class </span><span class="s1">BalancedPoolMissingUpstreamError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'MissingUpstreamError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_BPL_MISSING_UPSTREAM'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s0">export class </span><span class="s1">HTTPParserError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'HTTPParserError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s4">/** The response exceed the length allowed. */</span>
+  <span class="s0">export class </span><span class="s1">ResponseExceededMaxSizeError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'ResponseExceededMaxSizeError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_RES_EXCEEDED_MAX_SIZE'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s0">export class </span><span class="s1">RequestRetryError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">constructor </span><span class="s2">(</span>
+      <span class="s1">message</span><span class="s2">: </span><span class="s1">string</span><span class="s2">,</span>
+      <span class="s1">statusCode</span><span class="s2">: </span><span class="s1">number</span><span class="s2">,</span>
+      <span class="s1">headers</span><span class="s2">?: </span><span class="s1">IncomingHttpHeaders </span><span class="s2">| </span><span class="s1">string</span><span class="s2">[] | </span><span class="s0">null</span><span class="s2">,</span>
+      <span class="s1">body</span><span class="s2">?: </span><span class="s0">null </span><span class="s2">| </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">any</span><span class="s2">&gt; | </span><span class="s1">string</span>
+    <span class="s2">);</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'RequestRetryError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_REQ_RETRY'</span><span class="s2">;</span>
+    <span class="s1">statusCode</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s1">data</span><span class="s2">: {</span>
+      <span class="s1">count</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s2">};</span>
+    <span class="s1">headers</span><span class="s2">: </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">string </span><span class="s2">| </span><span class="s1">string</span><span class="s2">[]&gt;;</span>
+  <span class="s2">}</span>
+
+  <span class="s0">export class </span><span class="s1">SecureProxyConnectionError </span><span class="s0">extends </span><span class="s1">UndiciError </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s3">'SecureProxyConnectionError'</span><span class="s2">;</span>
+    <span class="s1">code</span><span class="s2">: </span><span class="s3">'UND_ERR_PRX_TLS'</span><span class="s2">;</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

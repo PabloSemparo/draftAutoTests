@@ -1,0 +1,336 @@
+<html>
+<head>
+<title>connection.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+connection.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">connection_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">connection_exports</span><span class="s1">, {</span>
+  <span class="s2">Connection</span><span class="s1">: () =&gt; </span><span class="s2">Connection</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">connection_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_eventEmitter </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./eventEmitter&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_android </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./android&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_artifact </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./artifact&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browser </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./browser&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browserContext </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./browserContext&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browserType </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./browserType&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_cdpSession </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./cdpSession&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_channelOwner </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./channelOwner&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_clientInstrumentation </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./clientInstrumentation&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_dialog </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./dialog&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_electron </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./electron&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_elementHandle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./elementHandle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_errors </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./errors&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fetch </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./fetch&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_frame </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./frame&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_jsHandle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./jsHandle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_jsonPipe </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./jsonPipe&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_localUtils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./localUtils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_network </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./network&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_page </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./page&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_playwright </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./playwright&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_stream </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./stream&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_tracing </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./tracing&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_worker </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./worker&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_writableStream </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./writableStream&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_validator </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../protocol/validator&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_stackTrace </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/isomorphic/stackTrace&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">Root </span><span class="s3">extends </span><span class="s2">import_channelOwner</span><span class="s1">.</span><span class="s2">ChannelOwner </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">connection</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">(</span><span class="s2">connection</span><span class="s1">, </span><span class="s0">&quot;Root&quot;</span><span class="s1">, </span><span class="s0">&quot;&quot;</span><span class="s1">, {});</span>
+  <span class="s1">}</span>
+  <span class="s2">async initialize</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s2">import_playwright</span><span class="s1">.</span><span class="s2">Playwright</span><span class="s1">.</span><span class="s2">from</span><span class="s1">((</span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">initialize</span><span class="s1">({</span>
+      <span class="s2">sdkLanguage</span><span class="s1">: </span><span class="s0">&quot;javascript&quot;</span>
+    <span class="s1">})).</span><span class="s2">playwright</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">DummyChannelOwner </span><span class="s3">extends </span><span class="s2">import_channelOwner</span><span class="s1">.</span><span class="s2">ChannelOwner </span><span class="s1">{</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">Connection </span><span class="s3">extends </span><span class="s2">import_eventEmitter</span><span class="s1">.</span><span class="s2">EventEmitter </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">platform</span><span class="s1">, </span><span class="s2">localUtils</span><span class="s1">, </span><span class="s2">instrumentation</span><span class="s1">, </span><span class="s2">headers </span><span class="s1">= []) {</span>
+    <span class="s3">super</span><span class="s1">(</span><span class="s2">platform</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_objects </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= (</span><span class="s2">message</span><span class="s1">) =&gt; {</span>
+    <span class="s1">};</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastId </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_isRemote </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_rawBuffers </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_tracingCount </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_instrumentation </span><span class="s1">= </span><span class="s2">instrumentation </span><span class="s1">|| (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_clientInstrumentation</span><span class="s1">.</span><span class="s2">createInstrumentation</span><span class="s1">)();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_localUtils </span><span class="s1">= </span><span class="s2">localUtils</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_rootObject </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Root</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">headers </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">markAsRemote</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_isRemote </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">isRemote</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_isRemote</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">useRawBuffers</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_rawBuffers </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">rawBuffers</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_rawBuffers</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">localUtils</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_localUtils</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async initializePlaywright</span><span class="s1">() {</span>
+    <span class="s3">return await this</span><span class="s1">.</span><span class="s2">_rootObject</span><span class="s1">.</span><span class="s2">initialize</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">getObjectWithKnownName</span><span class="s1">(</span><span class="s2">guid</span><span class="s1">) {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_objects</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">guid</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">setIsTracing</span><span class="s1">(</span><span class="s2">isTracing</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">isTracing</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_tracingCount</span><span class="s1">++;</span>
+    <span class="s3">else</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_tracingCount</span><span class="s1">--;</span>
+  <span class="s1">}</span>
+  <span class="s2">async sendMessageToServer</span><span class="s1">(</span><span class="s2">object</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closedError</span><span class="s1">)</span>
+      <span class="s3">throw this</span><span class="s1">.</span><span class="s2">_closedError</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">_wasCollected</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;The object has been collected to prevent unbounded heap growth.&quot;</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">guid </span><span class="s1">= </span><span class="s2">object</span><span class="s1">.</span><span class="s2">_guid</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">type </span><span class="s1">= </span><span class="s2">object</span><span class="s1">.</span><span class="s2">_type</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">id </span><span class="s1">= ++</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastId</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">message </span><span class="s1">= { </span><span class="s2">id</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s2">params </span><span class="s1">};</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">isLogEnabled</span><span class="s1">(</span><span class="s0">&quot;channel&quot;</span><span class="s1">)) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">&quot;channel&quot;</span><span class="s1">, </span><span class="s0">&quot;SEND&gt; &quot; </span><span class="s1">+ </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">message</span><span class="s1">));</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">location </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">frames</span><span class="s1">?.[</span><span class="s5">0</span><span class="s1">] ? { </span><span class="s2">file</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">frames</span><span class="s1">[</span><span class="s5">0</span><span class="s1">].</span><span class="s2">file</span><span class="s1">, </span><span class="s2">line</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">frames</span><span class="s1">[</span><span class="s5">0</span><span class="s1">].</span><span class="s2">line</span><span class="s1">, </span><span class="s2">column</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">frames</span><span class="s1">[</span><span class="s5">0</span><span class="s1">].</span><span class="s2">column </span><span class="s1">} : </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">metadata </span><span class="s1">= { </span><span class="s2">title</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">title</span><span class="s1">, </span><span class="s2">location</span><span class="s1">, </span><span class="s2">internal</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">internal</span><span class="s1">, </span><span class="s2">stepId</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">stepId </span><span class="s1">};</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tracingCount </span><span class="s1">&amp;&amp; </span><span class="s2">options</span><span class="s1">.</span><span class="s2">frames </span><span class="s1">&amp;&amp; </span><span class="s2">type </span><span class="s1">!== </span><span class="s0">&quot;LocalUtils&quot;</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_localUtils</span><span class="s1">?.</span><span class="s2">addStackToTracingNoReply</span><span class="s1">({ </span><span class="s2">callData</span><span class="s1">: { </span><span class="s2">stack</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">frames </span><span class="s1">?? [], </span><span class="s2">id </span><span class="s1">} }).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">zones</span><span class="s1">.</span><span class="s2">empty</span><span class="s1">.</span><span class="s2">run</span><span class="s1">(() =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">onmessage</span><span class="s1">({ </span><span class="s2">...message</span><span class="s1">, </span><span class="s2">metadata </span><span class="s1">}));</span>
+    <span class="s3">return await new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">resolve</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">id</span><span class="s1">, { </span><span class="s2">resolve</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">, </span><span class="s2">title</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">title</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">method </span><span class="s1">}));</span>
+  <span class="s1">}</span>
+  <span class="s2">_validatorFromWireContext</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s1">{</span>
+      <span class="s2">tChannelImpl</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tChannelImplFromWire</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">),</span>
+      <span class="s2">binary</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_rawBuffers </span><span class="s1">? </span><span class="s0">&quot;buffer&quot; </span><span class="s1">: </span><span class="s0">&quot;fromBase64&quot;</span><span class="s1">,</span>
+      <span class="s2">isUnderTest</span><span class="s1">: () =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">isUnderTest</span><span class="s1">()</span>
+    <span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">dispatch</span><span class="s1">(</span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closedError</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">id</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">result</span><span class="s1">, </span><span class="s2">error</span><span class="s1">, </span><span class="s2">log </span><span class="s1">} = </span><span class="s2">message</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">id</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">isLogEnabled</span><span class="s1">(</span><span class="s0">&quot;channel&quot;</span><span class="s1">))</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">&quot;channel&quot;</span><span class="s1">, </span><span class="s0">&quot;&lt;RECV &quot; </span><span class="s1">+ </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">message</span><span class="s1">));</span>
+      <span class="s3">const </span><span class="s2">callback </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">id</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">callback</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Cannot find command to respond: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">id</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">id</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">error </span><span class="s1">&amp;&amp; !</span><span class="s2">result</span><span class="s1">) {</span>
+        <span class="s3">const </span><span class="s2">parsedError </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_errors</span><span class="s1">.</span><span class="s2">parseError</span><span class="s1">)(</span><span class="s2">error</span><span class="s1">);</span>
+        <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_stackTrace</span><span class="s1">.</span><span class="s2">rewriteErrorMessage</span><span class="s1">)(</span><span class="s2">parsedError</span><span class="s1">, </span><span class="s2">parsedError</span><span class="s1">.</span><span class="s2">message </span><span class="s1">+ </span><span class="s2">formatCallLog</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">, </span><span class="s2">log</span><span class="s1">));</span>
+        <span class="s2">callback</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s2">parsedError</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s3">const </span><span class="s2">validator2 </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_validator</span><span class="s1">.</span><span class="s2">findValidator</span><span class="s1">)(</span><span class="s2">callback</span><span class="s1">.</span><span class="s2">type</span><span class="s1">, </span><span class="s2">callback</span><span class="s1">.</span><span class="s2">method</span><span class="s1">, </span><span class="s0">&quot;Result&quot;</span><span class="s1">);</span>
+        <span class="s2">callback</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">validator2</span><span class="s1">(</span><span class="s2">result</span><span class="s1">, </span><span class="s0">&quot;&quot;</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_validatorFromWireContext</span><span class="s1">()));</span>
+      <span class="s1">}</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">isLogEnabled</span><span class="s1">(</span><span class="s0">&quot;channel&quot;</span><span class="s1">))</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_platform</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">&quot;channel&quot;</span><span class="s1">, </span><span class="s0">&quot;&lt;EVENT &quot; </span><span class="s1">+ </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">message</span><span class="s1">));</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">method </span><span class="s1">=== </span><span class="s0">&quot;__create__&quot;</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_createRemoteObject</span><span class="s1">(</span><span class="s2">guid</span><span class="s1">, </span><span class="s2">params</span><span class="s1">.</span><span class="s2">type</span><span class="s1">, </span><span class="s2">params</span><span class="s1">.</span><span class="s2">guid</span><span class="s1">, </span><span class="s2">params</span><span class="s1">.</span><span class="s2">initializer</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">object </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_objects</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">guid</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">object</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Cannot find object to &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">method</span><span class="s1">}</span><span class="s0">&quot;: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">guid</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">method </span><span class="s1">=== </span><span class="s0">&quot;__adopt__&quot;</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">child </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_objects</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">guid</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">child</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Unknown new child: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">params</span><span class="s1">.</span><span class="s2">guid</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s2">object</span><span class="s1">.</span><span class="s2">_adopt</span><span class="s1">(</span><span class="s2">child</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">method </span><span class="s1">=== </span><span class="s0">&quot;__dispose__&quot;</span><span class="s1">) {</span>
+      <span class="s2">object</span><span class="s1">.</span><span class="s2">_dispose</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">validator </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_validator</span><span class="s1">.</span><span class="s2">findValidator</span><span class="s1">)(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">_type</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s0">&quot;Event&quot;</span><span class="s1">);</span>
+    <span class="s2">object</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">validator</span><span class="s1">(</span><span class="s2">params</span><span class="s1">, </span><span class="s0">&quot;&quot;</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_validatorFromWireContext</span><span class="s1">()));</span>
+  <span class="s1">}</span>
+  <span class="s2">close</span><span class="s1">(</span><span class="s2">cause</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closedError</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closedError </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_errors</span><span class="s1">.</span><span class="s2">TargetClosedError</span><span class="s1">(</span><span class="s2">cause</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">callback of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">values</span><span class="s1">())</span>
+      <span class="s2">callback</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closedError</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">clear</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_tChannelImplFromWire</span><span class="s1">(</span><span class="s2">names</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">, </span><span class="s2">path</span><span class="s1">, </span><span class="s2">context</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">arg </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">arg </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">arg</span><span class="s1">.</span><span class="s2">guid </span><span class="s1">=== </span><span class="s0">&quot;string&quot;</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">object </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_objects</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">arg</span><span class="s1">.</span><span class="s2">guid</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">object</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Object with guid </span><span class="s2">$</span><span class="s1">{</span><span class="s2">arg</span><span class="s1">.</span><span class="s2">guid</span><span class="s1">} </span><span class="s0">was not bound in the connection`</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">names </span><span class="s1">!== </span><span class="s0">&quot;*&quot; </span><span class="s1">&amp;&amp; !</span><span class="s2">names</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">_type</span><span class="s1">))</span>
+        <span class="s3">throw new </span><span class="s2">import_validator</span><span class="s1">.</span><span class="s2">ValidationError</span><span class="s1">(</span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">path</span><span class="s1">}</span><span class="s0">: expected channel </span><span class="s2">$</span><span class="s1">{</span><span class="s2">names</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">()}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s3">return </span><span class="s2">object</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">throw new </span><span class="s2">import_validator</span><span class="s1">.</span><span class="s2">ValidationError</span><span class="s1">(</span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">path</span><span class="s1">}</span><span class="s0">: expected channel </span><span class="s2">$</span><span class="s1">{</span><span class="s2">names</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">()}</span><span class="s0">`</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_createRemoteObject</span><span class="s1">(</span><span class="s2">parentGuid</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">parent </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_objects</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">parentGuid</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">parent</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Cannot find parent object </span><span class="s2">$</span><span class="s1">{</span><span class="s2">parentGuid</span><span class="s1">} </span><span class="s0">to create </span><span class="s2">$</span><span class="s1">{</span><span class="s2">guid</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">let </span><span class="s2">result</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">validator </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_validator</span><span class="s1">.</span><span class="s2">findValidator</span><span class="s1">)(</span><span class="s2">type</span><span class="s1">, </span><span class="s0">&quot;&quot;</span><span class="s1">, </span><span class="s0">&quot;Initializer&quot;</span><span class="s1">);</span>
+    <span class="s2">initializer </span><span class="s1">= </span><span class="s2">validator</span><span class="s1">(</span><span class="s2">initializer</span><span class="s1">, </span><span class="s0">&quot;&quot;</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_validatorFromWireContext</span><span class="s1">());</span>
+    <span class="s3">switch </span><span class="s1">(</span><span class="s2">type</span><span class="s1">) {</span>
+      <span class="s3">case </span><span class="s0">&quot;Android&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">Android</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;AndroidSocket&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">AndroidSocket</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;AndroidDevice&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">AndroidDevice</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;APIRequestContext&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_fetch</span><span class="s1">.</span><span class="s2">APIRequestContext</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Artifact&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_artifact</span><span class="s1">.</span><span class="s2">Artifact</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;BindingCall&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_page</span><span class="s1">.</span><span class="s2">BindingCall</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Browser&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browser</span><span class="s1">.</span><span class="s2">Browser</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;BrowserContext&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browserContext</span><span class="s1">.</span><span class="s2">BrowserContext</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;BrowserType&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browserType</span><span class="s1">.</span><span class="s2">BrowserType</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;CDPSession&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_cdpSession</span><span class="s1">.</span><span class="s2">CDPSession</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Dialog&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_dialog</span><span class="s1">.</span><span class="s2">Dialog</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Electron&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_electron</span><span class="s1">.</span><span class="s2">Electron</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;ElectronApplication&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_electron</span><span class="s1">.</span><span class="s2">ElectronApplication</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;ElementHandle&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_elementHandle</span><span class="s1">.</span><span class="s2">ElementHandle</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Frame&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_frame</span><span class="s1">.</span><span class="s2">Frame</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;JSHandle&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_jsHandle</span><span class="s1">.</span><span class="s2">JSHandle</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;JsonPipe&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_jsonPipe</span><span class="s1">.</span><span class="s2">JsonPipe</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;LocalUtils&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_localUtils</span><span class="s1">.</span><span class="s2">LocalUtils</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_localUtils</span><span class="s1">)</span>
+          <span class="s3">this</span><span class="s1">.</span><span class="s2">_localUtils </span><span class="s1">= </span><span class="s2">result</span><span class="s1">;</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Page&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_page</span><span class="s1">.</span><span class="s2">Page</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Playwright&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_playwright</span><span class="s1">.</span><span class="s2">Playwright</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Request&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">Request</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Response&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">Response</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Route&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">Route</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Stream&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_stream</span><span class="s1">.</span><span class="s2">Stream</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;SocksSupport&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">DummyChannelOwner</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Tracing&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_tracing</span><span class="s1">.</span><span class="s2">Tracing</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;WebSocket&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">WebSocket</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;WebSocketRoute&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">WebSocketRoute</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;Worker&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_worker</span><span class="s1">.</span><span class="s2">Worker</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">case </span><span class="s0">&quot;WritableStream&quot;</span><span class="s1">:</span>
+        <span class="s2">result </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_writableStream</span><span class="s1">.</span><span class="s2">WritableStream</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s3">default</span><span class="s1">:</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Missing type &quot; </span><span class="s1">+ </span><span class="s2">type</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">formatCallLog</span><span class="s1">(</span><span class="s2">platform</span><span class="s1">, </span><span class="s2">log</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">log </span><span class="s1">|| !</span><span class="s2">log</span><span class="s1">.</span><span class="s2">some</span><span class="s1">((</span><span class="s2">l</span><span class="s1">) =&gt; !!</span><span class="s2">l</span><span class="s1">))</span>
+    <span class="s3">return </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+  <span class="s3">return </span><span class="s0">`</span>
+<span class="s0">Call log: 
+</span><span class="s2">$</span><span class="s1">{</span><span class="s2">platform</span><span class="s1">.</span><span class="s2">colors</span><span class="s1">.</span><span class="s2">dim</span><span class="s1">(</span><span class="s2">log</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">))}</span>
+<span class="s0">`</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">Connection</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

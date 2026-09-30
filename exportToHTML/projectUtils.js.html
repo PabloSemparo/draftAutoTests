@@ -1,0 +1,264 @@
+<html>
+<head>
+<title>projectUtils.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+projectUtils.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">projectUtils_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">projectUtils_exports</span><span class="s1">, {</span>
+  <span class="s2">buildDependentProjects</span><span class="s1">: () =&gt; </span><span class="s2">buildDependentProjects</span><span class="s1">,</span>
+  <span class="s2">buildProjectsClosure</span><span class="s1">: () =&gt; </span><span class="s2">buildProjectsClosure</span><span class="s1">,</span>
+  <span class="s2">buildTeardownToSetupsMap</span><span class="s1">: () =&gt; </span><span class="s2">buildTeardownToSetupsMap</span><span class="s1">,</span>
+  <span class="s2">collectFilesForProject</span><span class="s1">: () =&gt; </span><span class="s2">collectFilesForProject</span><span class="s1">,</span>
+  <span class="s2">filterProjects</span><span class="s1">: () =&gt; </span><span class="s2">filterProjects</span><span class="s1">,</span>
+  <span class="s2">findTopLevelProjects</span><span class="s1">: () =&gt; </span><span class="s2">findTopLevelProjects</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">projectUtils_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_util </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;util&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_util2 </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../util&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">readFileAsync </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">promisify</span><span class="s1">)(</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">readFile</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">readDirAsync </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">promisify</span><span class="s1">)(</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">readdir</span><span class="s1">);</span>
+<span class="s3">function </span><span class="s2">wildcardPatternToRegExp</span><span class="s1">(</span><span class="s2">pattern</span><span class="s1">) {</span>
+  <span class="s3">return new </span><span class="s2">RegExp</span><span class="s1">(</span><span class="s0">&quot;^&quot; </span><span class="s1">+ </span><span class="s2">pattern</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;*&quot;</span><span class="s1">).</span><span class="s2">map</span><span class="s1">(</span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">escapeRegExp</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;.*&quot;</span><span class="s1">) + </span><span class="s0">&quot;$&quot;</span><span class="s1">, </span><span class="s0">&quot;ig&quot;</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">filterProjects</span><span class="s1">(</span><span class="s2">projects</span><span class="s1">, </span><span class="s2">projectNames</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">projectNames</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">[</span><span class="s2">...projects</span><span class="s1">];</span>
+  <span class="s3">const </span><span class="s2">projectNamesToFind </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">unmatchedProjectNames </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">patterns </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">name of projectNames</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">lowerCaseName </span><span class="s1">= </span><span class="s2">name</span><span class="s1">.</span><span class="s2">toLocaleLowerCase</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">lowerCaseName</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s0">&quot;*&quot;</span><span class="s1">)) {</span>
+      <span class="s2">patterns</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">wildcardPatternToRegExp</span><span class="s1">(</span><span class="s2">lowerCaseName</span><span class="s1">));</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">projectNamesToFind</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">lowerCaseName</span><span class="s1">);</span>
+      <span class="s2">unmatchedProjectNames</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">lowerCaseName</span><span class="s1">, </span><span class="s2">name</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s2">projects</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">project</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">lowerCaseName </span><span class="s1">= </span><span class="s2">project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">name</span><span class="s1">.</span><span class="s2">toLocaleLowerCase</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">projectNamesToFind</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">lowerCaseName</span><span class="s1">)) {</span>
+      <span class="s2">unmatchedProjectNames</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">lowerCaseName</span><span class="s1">);</span>
+      <span class="s3">return true</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">regex of patterns</span><span class="s1">) {</span>
+      <span class="s2">regex</span><span class="s1">.</span><span class="s2">lastIndex </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">regex</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s2">lowerCaseName</span><span class="s1">))</span>
+        <span class="s3">return true</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">return false</span><span class="s1">;</span>
+  <span class="s1">});</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">unmatchedProjectNames</span><span class="s1">.</span><span class="s2">size</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">unknownProjectNames </span><span class="s1">= </span><span class="s2">Array</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">unmatchedProjectNames</span><span class="s1">.</span><span class="s2">values</span><span class="s1">()).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">n</span><span class="s1">) =&gt; </span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">n</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;, &quot;</span><span class="s1">);</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Project(s) </span><span class="s2">$</span><span class="s1">{</span><span class="s2">unknownProjectNames</span><span class="s1">} </span><span class="s0">not found. Available projects: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">projects</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; </span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">p</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">name</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;, &quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">result</span><span class="s1">.</span><span class="s2">length</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">allProjects </span><span class="s1">= </span><span class="s2">projects</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; </span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">p</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">name</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;, &quot;</span><span class="s1">);</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`No projects matched. Available projects: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">allProjects</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">buildTeardownToSetupsMap</span><span class="s1">(</span><span class="s2">projects</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">project of projects</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">teardown</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">setups </span><span class="s1">= </span><span class="s2">result</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">teardown</span><span class="s1">) || [];</span>
+      <span class="s2">setups</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">project</span><span class="s1">);</span>
+      <span class="s2">result</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">teardown</span><span class="s1">, </span><span class="s2">setups</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">buildProjectsClosure</span><span class="s1">(</span><span class="s2">projects</span><span class="s1">, </span><span class="s2">hasTests</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">visit </span><span class="s1">= (</span><span class="s2">depth</span><span class="s1">, </span><span class="s2">project</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">depth </span><span class="s1">&gt; </span><span class="s5">100</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">error </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Circular dependency detected between projects.&quot;</span><span class="s1">);</span>
+      <span class="s2">error</span><span class="s1">.</span><span class="s2">stack </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">depth </span><span class="s1">=== </span><span class="s5">0 </span><span class="s1">&amp;&amp; </span><span class="s2">hasTests </span><span class="s1">&amp;&amp; !</span><span class="s2">hasTests</span><span class="s1">(</span><span class="s2">project</span><span class="s1">))</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">project</span><span class="s1">) !== </span><span class="s0">&quot;dependency&quot;</span><span class="s1">)</span>
+      <span class="s2">result</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">project</span><span class="s1">, </span><span class="s2">depth </span><span class="s1">? </span><span class="s0">&quot;dependency&quot; </span><span class="s1">: </span><span class="s0">&quot;top-level&quot;</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">dep of project</span><span class="s1">.</span><span class="s2">deps</span><span class="s1">)</span>
+      <span class="s2">visit</span><span class="s1">(</span><span class="s2">depth </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">, </span><span class="s2">dep</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">teardown</span><span class="s1">)</span>
+      <span class="s2">visit</span><span class="s1">(</span><span class="s2">depth </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">, </span><span class="s2">project</span><span class="s1">.</span><span class="s2">teardown</span><span class="s1">);</span>
+  <span class="s1">};</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">p of projects</span><span class="s1">)</span>
+    <span class="s2">visit</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">p</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">findTopLevelProjects</span><span class="s1">(</span><span class="s2">config</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">closure </span><span class="s1">= </span><span class="s2">buildProjectsClosure</span><span class="s1">(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">projects</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s1">[</span><span class="s2">...closure</span><span class="s1">].</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">entry</span><span class="s1">) =&gt; </span><span class="s2">entry</span><span class="s1">[</span><span class="s5">1</span><span class="s1">] === </span><span class="s0">&quot;top-level&quot;</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">entry</span><span class="s1">) =&gt; </span><span class="s2">entry</span><span class="s1">[</span><span class="s5">0</span><span class="s1">]);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">buildDependentProjects</span><span class="s1">(</span><span class="s2">forProjects</span><span class="s1">, </span><span class="s2">projects</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">reverseDeps </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">(</span><span class="s2">projects</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; [</span><span class="s2">p</span><span class="s1">, []]));</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">project of projects</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">dep of project</span><span class="s1">.</span><span class="s2">deps</span><span class="s1">)</span>
+      <span class="s2">reverseDeps</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">dep</span><span class="s1">).</span><span class="s2">push</span><span class="s1">(</span><span class="s2">project</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">visit </span><span class="s1">= (</span><span class="s2">depth</span><span class="s1">, </span><span class="s2">project</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">depth </span><span class="s1">&gt; </span><span class="s5">100</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">error </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Circular dependency detected between projects.&quot;</span><span class="s1">);</span>
+      <span class="s2">error</span><span class="s1">.</span><span class="s2">stack </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">project</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">reverseDep of reverseDeps</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">project</span><span class="s1">))</span>
+      <span class="s2">visit</span><span class="s1">(</span><span class="s2">depth </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">, </span><span class="s2">reverseDep</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">teardown</span><span class="s1">)</span>
+      <span class="s2">visit</span><span class="s1">(</span><span class="s2">depth </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">, </span><span class="s2">project</span><span class="s1">.</span><span class="s2">teardown</span><span class="s1">);</span>
+  <span class="s1">};</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">forProject of forProjects</span><span class="s1">)</span>
+    <span class="s2">visit</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">forProject</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">collectFilesForProject</span><span class="s1">(</span><span class="s2">project</span><span class="s1">, </span><span class="s2">fsCache </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">()) {</span>
+  <span class="s3">const </span><span class="s2">extensions </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">([</span><span class="s0">&quot;.js&quot;</span><span class="s1">, </span><span class="s0">&quot;.ts&quot;</span><span class="s1">, </span><span class="s0">&quot;.mjs&quot;</span><span class="s1">, </span><span class="s0">&quot;.mts&quot;</span><span class="s1">, </span><span class="s0">&quot;.cjs&quot;</span><span class="s1">, </span><span class="s0">&quot;.cts&quot;</span><span class="s1">, </span><span class="s0">&quot;.jsx&quot;</span><span class="s1">, </span><span class="s0">&quot;.tsx&quot;</span><span class="s1">, </span><span class="s0">&quot;.mjsx&quot;</span><span class="s1">, </span><span class="s0">&quot;.mtsx&quot;</span><span class="s1">, </span><span class="s0">&quot;.cjsx&quot;</span><span class="s1">, </span><span class="s0">&quot;.ctsx&quot;</span><span class="s1">]);</span>
+  <span class="s3">const </span><span class="s2">testFileExtension </span><span class="s1">= (</span><span class="s2">file</span><span class="s1">) =&gt; </span><span class="s2">extensions</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">extname</span><span class="s1">(</span><span class="s2">file</span><span class="s1">));</span>
+  <span class="s3">const </span><span class="s2">allFiles </span><span class="s1">= </span><span class="s3">await </span><span class="s2">cachedCollectFiles</span><span class="s1">(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">testDir</span><span class="s1">, </span><span class="s2">project</span><span class="s1">.</span><span class="s2">respectGitIgnore</span><span class="s1">, </span><span class="s2">fsCache</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">testMatch </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util2</span><span class="s1">.</span><span class="s2">createFileMatcher</span><span class="s1">)(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">testMatch</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">testIgnore </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util2</span><span class="s1">.</span><span class="s2">createFileMatcher</span><span class="s1">)(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">testIgnore</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">testFiles </span><span class="s1">= </span><span class="s2">allFiles</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">file</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">testFileExtension</span><span class="s1">(</span><span class="s2">file</span><span class="s1">))</span>
+      <span class="s3">return false</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">isTest </span><span class="s1">= !</span><span class="s2">testIgnore</span><span class="s1">(</span><span class="s2">file</span><span class="s1">) &amp;&amp; </span><span class="s2">testMatch</span><span class="s1">(</span><span class="s2">file</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">isTest</span><span class="s1">)</span>
+      <span class="s3">return false</span><span class="s1">;</span>
+    <span class="s3">return true</span><span class="s1">;</span>
+  <span class="s1">});</span>
+  <span class="s3">return </span><span class="s2">testFiles</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">cachedCollectFiles</span><span class="s1">(</span><span class="s2">testDir</span><span class="s1">, </span><span class="s2">respectGitIgnore</span><span class="s1">, </span><span class="s2">fsCache</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">key </span><span class="s1">= </span><span class="s2">testDir </span><span class="s1">+ </span><span class="s0">&quot;:&quot; </span><span class="s1">+ </span><span class="s2">respectGitIgnore</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">result </span><span class="s1">= </span><span class="s2">fsCache</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">key</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">result</span><span class="s1">) {</span>
+    <span class="s2">result </span><span class="s1">= </span><span class="s3">await </span><span class="s2">collectFiles</span><span class="s1">(</span><span class="s2">testDir</span><span class="s1">, </span><span class="s2">respectGitIgnore</span><span class="s1">);</span>
+    <span class="s2">fsCache</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">key</span><span class="s1">, </span><span class="s2">result</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">collectFiles</span><span class="s1">(</span><span class="s2">testDir</span><span class="s1">, </span><span class="s2">respectGitIgnore</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">existsSync</span><span class="s1">(</span><span class="s2">testDir</span><span class="s1">))</span>
+    <span class="s3">return </span><span class="s1">[];</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">statSync</span><span class="s1">(</span><span class="s2">testDir</span><span class="s1">).</span><span class="s2">isDirectory</span><span class="s1">())</span>
+    <span class="s3">return </span><span class="s1">[];</span>
+  <span class="s3">const </span><span class="s2">checkIgnores </span><span class="s1">= (</span><span class="s2">entryPath</span><span class="s1">, </span><span class="s2">rules</span><span class="s1">, </span><span class="s2">isDirectory</span><span class="s1">, </span><span class="s2">parentStatus</span><span class="s1">) =&gt; {</span>
+    <span class="s3">let </span><span class="s2">status </span><span class="s1">= </span><span class="s2">parentStatus</span><span class="s1">;</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">rule of rules</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">ruleIncludes </span><span class="s1">= </span><span class="s2">rule</span><span class="s1">.</span><span class="s2">negate</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">status </span><span class="s1">=== </span><span class="s0">&quot;included&quot; </span><span class="s1">=== </span><span class="s2">ruleIncludes</span><span class="s1">)</span>
+        <span class="s3">continue</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">relative </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">relative</span><span class="s1">(</span><span class="s2">rule</span><span class="s1">.</span><span class="s2">dir</span><span class="s1">, </span><span class="s2">entryPath</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">rule</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s0">&quot;/&quot; </span><span class="s1">+ </span><span class="s2">relative</span><span class="s1">) || </span><span class="s2">rule</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s2">relative</span><span class="s1">)) {</span>
+        <span class="s2">status </span><span class="s1">= </span><span class="s2">ruleIncludes </span><span class="s1">? </span><span class="s0">&quot;included&quot; </span><span class="s1">: </span><span class="s0">&quot;ignored&quot;</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">isDirectory </span><span class="s1">&amp;&amp; (</span><span class="s2">rule</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s0">&quot;/&quot; </span><span class="s1">+ </span><span class="s2">relative </span><span class="s1">+ </span><span class="s0">&quot;/&quot;</span><span class="s1">) || </span><span class="s2">rule</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s2">relative </span><span class="s1">+ </span><span class="s0">&quot;/&quot;</span><span class="s1">))) {</span>
+        <span class="s2">status </span><span class="s1">= </span><span class="s2">ruleIncludes </span><span class="s1">? </span><span class="s0">&quot;included&quot; </span><span class="s1">: </span><span class="s0">&quot;ignored&quot;</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">isDirectory </span><span class="s1">&amp;&amp; </span><span class="s2">ruleIncludes </span><span class="s1">&amp;&amp; (</span><span class="s2">rule</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s0">&quot;/&quot; </span><span class="s1">+ </span><span class="s2">relative</span><span class="s1">, </span><span class="s3">true</span><span class="s1">) || </span><span class="s2">rule</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s2">relative</span><span class="s1">, </span><span class="s3">true</span><span class="s1">))) {</span>
+        <span class="s2">status </span><span class="s1">= </span><span class="s0">&quot;ignored-but-recurse&quot;</span><span class="s1">;</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s3">return </span><span class="s2">status</span><span class="s1">;</span>
+  <span class="s1">};</span>
+  <span class="s3">const </span><span class="s2">files </span><span class="s1">= [];</span>
+  <span class="s3">const </span><span class="s2">visit </span><span class="s1">= </span><span class="s2">async </span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s2">rules</span><span class="s1">, </span><span class="s2">status</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">entries </span><span class="s1">= </span><span class="s3">await </span><span class="s2">readDirAsync</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, { </span><span class="s2">withFileTypes</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+    <span class="s2">entries</span><span class="s1">.</span><span class="s2">sort</span><span class="s1">((</span><span class="s2">a</span><span class="s1">, </span><span class="s2">b</span><span class="s1">) =&gt; </span><span class="s2">a</span><span class="s1">.</span><span class="s2">name</span><span class="s1">.</span><span class="s2">localeCompare</span><span class="s1">(</span><span class="s2">b</span><span class="s1">.</span><span class="s2">name</span><span class="s1">));</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">respectGitIgnore</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">gitignore </span><span class="s1">= </span><span class="s2">entries</span><span class="s1">.</span><span class="s2">find</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s2">e</span><span class="s1">.</span><span class="s2">isFile</span><span class="s1">() &amp;&amp; </span><span class="s2">e</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;.gitignore&quot;</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">gitignore</span><span class="s1">) {</span>
+        <span class="s3">const </span><span class="s2">content </span><span class="s1">= </span><span class="s3">await </span><span class="s2">readFileAsync</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s2">gitignore</span><span class="s1">.</span><span class="s2">name</span><span class="s1">), </span><span class="s0">&quot;utf8&quot;</span><span class="s1">);</span>
+        <span class="s3">const </span><span class="s2">newRules </span><span class="s1">= </span><span class="s2">content</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s6">/\r?\n/</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">s</span><span class="s1">) =&gt; {</span>
+          <span class="s2">s </span><span class="s1">= </span><span class="s2">s</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">();</span>
+          <span class="s3">if </span><span class="s1">(!</span><span class="s2">s</span><span class="s1">)</span>
+            <span class="s3">return</span><span class="s1">;</span>
+          <span class="s3">const </span><span class="s2">rule </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">minimatch</span><span class="s1">.</span><span class="s2">Minimatch</span><span class="s1">(</span><span class="s2">s</span><span class="s1">, { </span><span class="s2">matchBase</span><span class="s1">: </span><span class="s3">true</span><span class="s1">, </span><span class="s2">dot</span><span class="s1">: </span><span class="s3">true</span><span class="s1">, </span><span class="s2">flipNegate</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">rule</span><span class="s1">.</span><span class="s2">comment</span><span class="s1">)</span>
+            <span class="s3">return</span><span class="s1">;</span>
+          <span class="s2">rule</span><span class="s1">.</span><span class="s2">dir </span><span class="s1">= </span><span class="s2">dir</span><span class="s1">;</span>
+          <span class="s3">return </span><span class="s2">rule</span><span class="s1">;</span>
+        <span class="s1">}).</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">rule</span><span class="s1">) =&gt; !!</span><span class="s2">rule</span><span class="s1">);</span>
+        <span class="s2">rules </span><span class="s1">= [</span><span class="s2">...rules</span><span class="s1">, </span><span class="s2">...newRules</span><span class="s1">];</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">entry of entries</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">entry</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;.&quot; </span><span class="s1">|| </span><span class="s2">entry</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;..&quot;</span><span class="s1">)</span>
+        <span class="s3">continue</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">entry</span><span class="s1">.</span><span class="s2">isFile</span><span class="s1">() &amp;&amp; </span><span class="s2">entry</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;.gitignore&quot;</span><span class="s1">)</span>
+        <span class="s3">continue</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">entry</span><span class="s1">.</span><span class="s2">isDirectory</span><span class="s1">() &amp;&amp; </span><span class="s2">entry</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;node_modules&quot;</span><span class="s1">)</span>
+        <span class="s3">continue</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">entryPath </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s2">entry</span><span class="s1">.</span><span class="s2">name</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">entryStatus </span><span class="s1">= </span><span class="s2">checkIgnores</span><span class="s1">(</span><span class="s2">entryPath</span><span class="s1">, </span><span class="s2">rules</span><span class="s1">, </span><span class="s2">entry</span><span class="s1">.</span><span class="s2">isDirectory</span><span class="s1">(), </span><span class="s2">status</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">entry</span><span class="s1">.</span><span class="s2">isDirectory</span><span class="s1">() &amp;&amp; </span><span class="s2">entryStatus </span><span class="s1">!== </span><span class="s0">&quot;ignored&quot;</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">visit</span><span class="s1">(</span><span class="s2">entryPath</span><span class="s1">, </span><span class="s2">rules</span><span class="s1">, </span><span class="s2">entryStatus</span><span class="s1">);</span>
+      <span class="s3">else if </span><span class="s1">(</span><span class="s2">entry</span><span class="s1">.</span><span class="s2">isFile</span><span class="s1">() &amp;&amp; </span><span class="s2">entryStatus </span><span class="s1">=== </span><span class="s0">&quot;included&quot;</span><span class="s1">)</span>
+        <span class="s2">files</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">entryPath</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">};</span>
+  <span class="s3">await </span><span class="s2">visit</span><span class="s1">(</span><span class="s2">testDir</span><span class="s1">, [], </span><span class="s0">&quot;included&quot;</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">files</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">buildDependentProjects</span><span class="s1">,</span>
+  <span class="s2">buildProjectsClosure</span><span class="s1">,</span>
+  <span class="s2">buildTeardownToSetupsMap</span><span class="s1">,</span>
+  <span class="s2">collectFilesForProject</span><span class="s1">,</span>
+  <span class="s2">filterProjects</span><span class="s1">,</span>
+  <span class="s2">findTopLevelProjects</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

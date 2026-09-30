@@ -1,0 +1,632 @@
+<html>
+<head>
+<title>services.json</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #2aacb8;}
+.s4 { color: #cf8e6d;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+services.json</font>
+</center></td></tr></table>
+<pre><span class="s0">{</span>
+    <span class="s2">&quot;1und1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;1&amp;1 Mail (German hosting provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.1und1.de&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span><span class="s0">,</span>
+        <span class="s2">&quot;authMethod&quot;</span><span class="s0">: </span><span class="s2">&quot;LOGIN&quot;</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;126&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;126 Mail (NetEase)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.126.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;163&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;163 Mail (NetEase)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.163.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Aliyun&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Alibaba Cloud Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;aliyun.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.aliyun.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;AliyunQiye&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Alibaba Cloud Enterprise Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.qiye.aliyun.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;AOL&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AOL Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;aol.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.aol.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Aruba&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Aruba PEC (Italian email provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;aruba.it&quot;</span><span class="s0">, </span><span class="s2">&quot;pec.aruba.it&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Aruba PEC&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtps.aruba.it&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span><span class="s0">,</span>
+        <span class="s2">&quot;authMethod&quot;</span><span class="s0">: </span><span class="s2">&quot;LOGIN&quot;</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Bluewin&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Bluewin (Swiss email provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtpauths.bluewin.ch&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;bluewin.ch&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;BOL&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;BOL Mail (Brazilian provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;bol.com.br&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.bol.com.br&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span><span class="s0">,</span>
+        <span class="s2">&quot;requireTLS&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;DebugMail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;DebugMail (email testing service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;debugmail.io&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">25</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Disroot&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Disroot (privacy-focused provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;disroot.org&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;disroot.org&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">false</span><span class="s0">,</span>
+        <span class="s2">&quot;authMethod&quot;</span><span class="s0">: </span><span class="s2">&quot;LOGIN&quot;</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;DynectEmail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Dyn Email Delivery&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Dynect&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.dynect.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">25</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;ElasticEmail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Elastic Email&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Elastic Email&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.elasticemail.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Ethereal&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Ethereal Email (email testing service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;ethereal.email&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.ethereal.email&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;FastMail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;FastMail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;fastmail.fm&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.fastmail.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Feishu Mail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Feishu Mail (Lark)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Feishu&quot;</span><span class="s0">, </span><span class="s2">&quot;FeishuMail&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;www.feishu.cn&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.feishu.cn&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Forward Email&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Forward Email (email forwarding service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;FE&quot;</span><span class="s0">, </span><span class="s2">&quot;ForwardEmail&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;forwardemail.net&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.forwardemail.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;GandiMail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Gandi Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Gandi&quot;</span><span class="s0">, </span><span class="s2">&quot;Gandi Mail&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;mail.gandi.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Gmail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Gmail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Google Mail&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;gmail.com&quot;</span><span class="s0">, </span><span class="s2">&quot;googlemail.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.gmail.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;GMX&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;GMX Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;gmx.com&quot;</span><span class="s0">, </span><span class="s2">&quot;gmx.net&quot;</span><span class="s0">, </span><span class="s2">&quot;gmx.de&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;mail.gmx.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Godaddy&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;GoDaddy Email (US)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtpout.secureserver.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">25</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;GodaddyAsia&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;GoDaddy Email (Asia)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.asia.secureserver.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">25</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;GodaddyEurope&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;GoDaddy Email (Europe)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.europe.secureserver.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">25</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;hot.ee&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Hot.ee (Estonian email provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;mail.hot.ee&quot;</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Hotmail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Outlook.com / Hotmail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Outlook&quot;</span><span class="s0">, </span><span class="s2">&quot;Outlook.com&quot;</span><span class="s0">, </span><span class="s2">&quot;Hotmail.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;hotmail.com&quot;</span><span class="s0">, </span><span class="s2">&quot;outlook.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp-mail.outlook.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;iCloud&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;iCloud Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Me&quot;</span><span class="s0">, </span><span class="s2">&quot;Mac&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;me.com&quot;</span><span class="s0">, </span><span class="s2">&quot;mac.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mail.me.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Infomaniak&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Infomaniak Mail (Swiss hosting provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;mail.infomaniak.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;ik.me&quot;</span><span class="s0">, </span><span class="s2">&quot;ikmail.com&quot;</span><span class="s0">, </span><span class="s2">&quot;etik.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;KolabNow&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;KolabNow (secure email service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;kolabnow.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Kolab&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.kolabnow.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span><span class="s0">,</span>
+        <span class="s2">&quot;authMethod&quot;</span><span class="s0">: </span><span class="s2">&quot;LOGIN&quot;</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Loopia&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Loopia (Swedish hosting provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;mailcluster.loopia.se&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Loops&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Loops&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.loops.so&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;mail.ee&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mail.ee (Estonian email provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mail.ee&quot;</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Mail.ru&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mail.ru&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mail.ru&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Mailcatch.app&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mailcatch (email testing service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;sandbox-smtp.mailcatch.app&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">2525</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Maildev&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;MailDev (local email testing)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">1025</span><span class="s0">,</span>
+        <span class="s2">&quot;ignoreTLS&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;MailerSend&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;MailerSend&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mailersend.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Mailgun&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mailgun&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mailgun.org&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Mailjet&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mailjet&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;in.mailjet.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Mailosaur&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mailosaur (email testing service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;mailosaur.io&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">25</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Mailtrap&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mailtrap&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;live.smtp.mailtrap.io&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Mandrill&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Mandrill (by Mailchimp)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mandrillapp.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Naver&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Naver Mail (Korean email provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.naver.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;OhMySMTP&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;OhMySMTP (email delivery service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.ohmysmtp.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">false</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;One&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;One.com Email&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;send.one.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;OpenMailBox&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;OpenMailBox&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;OMB&quot;</span><span class="s0">, </span><span class="s2">&quot;openmailbox.org&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.openmailbox.org&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Outlook365&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Microsoft 365 / Office 365&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.office365.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">false</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Postmark&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Postmark&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;PostmarkApp&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.postmarkapp.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">2525</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Proton&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Proton Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;ProtonMail&quot;</span><span class="s0">, </span><span class="s2">&quot;Proton.me&quot;</span><span class="s0">, </span><span class="s2">&quot;Protonmail.com&quot;</span><span class="s0">, </span><span class="s2">&quot;Protonmail.ch&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;proton.me&quot;</span><span class="s0">, </span><span class="s2">&quot;protonmail.com&quot;</span><span class="s0">, </span><span class="s2">&quot;pm.me&quot;</span><span class="s0">, </span><span class="s2">&quot;protonmail.ch&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.protonmail.ch&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span><span class="s0">,</span>
+        <span class="s2">&quot;requireTLS&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;qiye.aliyun&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Alibaba Mail Enterprise Edition&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mxhichina.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s2">&quot;465&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;QQ&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;QQ Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;qq.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.qq.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;QQex&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;QQ Enterprise Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;QQ Enterprise&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;exmail.qq.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.exmail.qq.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Resend&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Resend&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.resend.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Runbox&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Runbox (Norwegian email provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;runbox.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.runbox.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SendCloud&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;SendCloud (Chinese email delivery)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.sendcloud.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">2525</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SendGrid&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;SendGrid&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.sendgrid.net&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SendinBlue&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Brevo (formerly Sendinblue)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Brevo&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp-relay.brevo.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SendPulse&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;SendPulse&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp-pulse.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES US East (N. Virginia)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.us-east-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-AP-NORTHEAST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Asia Pacific (Tokyo)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.ap-northeast-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-AP-NORTHEAST-2&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Asia Pacific (Seoul)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.ap-northeast-2.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-AP-NORTHEAST-3&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Asia Pacific (Osaka)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.ap-northeast-3.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-AP-SOUTH-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Asia Pacific (Mumbai)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.ap-south-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-AP-SOUTHEAST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Asia Pacific (Singapore)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.ap-southeast-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-AP-SOUTHEAST-2&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Asia Pacific (Sydney)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.ap-southeast-2.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-CA-CENTRAL-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Canada (Central)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.ca-central-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-EU-CENTRAL-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Europe (Frankfurt)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.eu-central-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-EU-NORTH-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Europe (Stockholm)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.eu-north-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-EU-WEST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Europe (Ireland)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.eu-west-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-EU-WEST-2&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Europe (London)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.eu-west-2.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-EU-WEST-3&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES Europe (Paris)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.eu-west-3.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-SA-EAST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES South America (São Paulo)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.sa-east-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-US-EAST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES US East (N. Virginia)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.us-east-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-US-EAST-2&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES US East (Ohio)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.us-east-2.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-US-GOV-EAST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES GovCloud (US-East)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.us-gov-east-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-US-GOV-WEST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES GovCloud (US-West)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.us-gov-west-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-US-WEST-1&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES US West (N. California)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.us-west-1.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SES-US-WEST-2&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;AWS SES US West (Oregon)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;email-smtp.us-west-2.amazonaws.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Seznam&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Seznam Email (Czech email provider)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Seznam Email&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;seznam.cz&quot;</span><span class="s0">, </span><span class="s2">&quot;email.cz&quot;</span><span class="s0">, </span><span class="s2">&quot;post.cz&quot;</span><span class="s0">, </span><span class="s2">&quot;spoluzaci.cz&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.seznam.cz&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;SMTP2GO&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;SMTP2GO&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;mail.smtp2go.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">2525</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Sparkpost&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;SparkPost&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;SparkPost&quot;</span><span class="s0">, </span><span class="s2">&quot;SparkPost Mail&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;sparkpost.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.sparkpostmail.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">false</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Tipimail&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Tipimail (email delivery service)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.tipimail.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Tutanota&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Tutanota (Tuta Mail)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;tutanota.com&quot;</span><span class="s0">, </span><span class="s2">&quot;tuta.com&quot;</span><span class="s0">, </span><span class="s2">&quot;tutanota.de&quot;</span><span class="s0">, </span><span class="s2">&quot;tuta.io&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.tutanota.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Yahoo&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Yahoo Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;yahoo.com&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.mail.yahoo.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Yandex&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Yandex Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;domains&quot;</span><span class="s0">: [</span><span class="s2">&quot;yandex.ru&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.yandex.ru&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Zimbra&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Zimbra Mail Server&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;aliases&quot;</span><span class="s0">: [</span><span class="s2">&quot;Zimbra Collaboration&quot;</span><span class="s0">],</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.zimbra.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">587</span><span class="s0">,</span>
+        <span class="s2">&quot;requireTLS&quot;</span><span class="s0">: </span><span class="s4">true</span>
+    <span class="s0">},</span>
+
+    <span class="s2">&quot;Zoho&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Zoho Mail&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;host&quot;</span><span class="s0">: </span><span class="s2">&quot;smtp.zoho.com&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="s0">: </span><span class="s3">465</span><span class="s0">,</span>
+        <span class="s2">&quot;secure&quot;</span><span class="s0">: </span><span class="s4">true</span><span class="s0">,</span>
+        <span class="s2">&quot;authMethod&quot;</span><span class="s0">: </span><span class="s2">&quot;LOGIN&quot;</span>
+    <span class="s0">}</span>
+<span class="s0">}</span>
+</pre>
+</body>
+</html>

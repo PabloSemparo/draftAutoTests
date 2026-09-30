@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>jsHandle.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+jsHandle.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">jsHandle_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">jsHandle_exports</span><span class="s1">, {</span>
+  <span class="s2">JSHandle</span><span class="s1">: () =&gt; </span><span class="s2">JSHandle</span><span class="s1">,</span>
+  <span class="s2">assertMaxArguments</span><span class="s1">: () =&gt; </span><span class="s2">assertMaxArguments</span><span class="s1">,</span>
+  <span class="s2">parseResult</span><span class="s1">: () =&gt; </span><span class="s2">parseResult</span><span class="s1">,</span>
+  <span class="s2">serializeArgument</span><span class="s1">: () =&gt; </span><span class="s2">serializeArgument</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">jsHandle_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_channelOwner </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./channelOwner&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_errors </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./errors&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_serializers </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../protocol/serializers&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">JSHandle </span><span class="s3">extends </span><span class="s2">import_channelOwner</span><span class="s1">.</span><span class="s2">ChannelOwner </span><span class="s1">{</span>
+  <span class="s3">static </span><span class="s2">from</span><span class="s1">(</span><span class="s2">handle</span><span class="s1">) {</span>
+    <span class="s3">return </span><span class="s2">handle</span><span class="s1">.</span><span class="s2">_object</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">(</span><span class="s2">parent</span><span class="s1">, </span><span class="s2">type</span><span class="s1">, </span><span class="s2">guid</span><span class="s1">, </span><span class="s2">initializer</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_preview </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_initializer</span><span class="s1">.</span><span class="s2">preview</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;previewUpdated&quot;</span><span class="s1">, ({ </span><span class="s2">preview </span><span class="s1">}) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_preview </span><span class="s1">= </span><span class="s2">preview</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async evaluate</span><span class="s1">(</span><span class="s2">pageFunction</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">evaluateExpression</span><span class="s1">({ </span><span class="s2">expression</span><span class="s1">: </span><span class="s2">String</span><span class="s1">(</span><span class="s2">pageFunction</span><span class="s1">), </span><span class="s2">isFunction</span><span class="s1">: </span><span class="s3">typeof </span><span class="s2">pageFunction </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">: </span><span class="s2">serializeArgument</span><span class="s1">(</span><span class="s2">arg</span><span class="s1">) });</span>
+    <span class="s3">return </span><span class="s2">parseResult</span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">value</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async _evaluateFunction</span><span class="s1">(</span><span class="s2">functionDeclaration</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">evaluateExpression</span><span class="s1">({ </span><span class="s2">expression</span><span class="s1">: </span><span class="s2">functionDeclaration</span><span class="s1">, </span><span class="s2">isFunction</span><span class="s1">: </span><span class="s3">true</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">: </span><span class="s2">serializeArgument</span><span class="s1">(</span><span class="s3">void </span><span class="s4">0</span><span class="s1">) });</span>
+    <span class="s3">return </span><span class="s2">parseResult</span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">value</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async evaluateHandle</span><span class="s1">(</span><span class="s2">pageFunction</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">evaluateExpressionHandle</span><span class="s1">({ </span><span class="s2">expression</span><span class="s1">: </span><span class="s2">String</span><span class="s1">(</span><span class="s2">pageFunction</span><span class="s1">), </span><span class="s2">isFunction</span><span class="s1">: </span><span class="s3">typeof </span><span class="s2">pageFunction </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">: </span><span class="s2">serializeArgument</span><span class="s1">(</span><span class="s2">arg</span><span class="s1">) });</span>
+    <span class="s3">return </span><span class="s2">JSHandle</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">handle</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async getProperty</span><span class="s1">(</span><span class="s2">propertyName</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">getProperty</span><span class="s1">({ </span><span class="s2">name</span><span class="s1">: </span><span class="s2">propertyName </span><span class="s1">});</span>
+    <span class="s3">return </span><span class="s2">JSHandle</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">handle</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async getProperties</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">map </span><span class="s1">= </span><span class="s5">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s1">{ </span><span class="s2">name</span><span class="s1">, </span><span class="s2">value </span><span class="s1">} </span><span class="s2">of </span><span class="s1">(</span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">getPropertyList</span><span class="s1">()).</span><span class="s2">properties</span><span class="s1">)</span>
+      <span class="s2">map</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">name</span><span class="s1">, </span><span class="s2">JSHandle</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">value</span><span class="s1">));</span>
+    <span class="s3">return </span><span class="s2">map</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async jsonValue</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s2">parseResult</span><span class="s1">((</span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">jsonValue</span><span class="s1">()).</span><span class="s2">value</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">asElement</span><span class="s1">() {</span>
+    <span class="s3">return null</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async </span><span class="s1">[</span><span class="s2">Symbol</span><span class="s1">.</span><span class="s2">asyncDispose</span><span class="s1">]() {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">dispose</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async dispose</span><span class="s1">() {</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">dispose</span><span class="s1">();</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">((</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_errors</span><span class="s1">.</span><span class="s2">isTargetClosedError</span><span class="s1">)(</span><span class="s2">e</span><span class="s1">))</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s3">throw </span><span class="s2">e</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">toString</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_preview</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">serializeArgument</span><span class="s1">(</span><span class="s2">arg</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">handles </span><span class="s1">= [];</span>
+  <span class="s3">const </span><span class="s2">pushHandle </span><span class="s1">= (</span><span class="s2">channel</span><span class="s1">) =&gt; {</span>
+    <span class="s2">handles</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">channel</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">handles</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s4">1</span><span class="s1">;</span>
+  <span class="s1">};</span>
+  <span class="s3">const </span><span class="s2">value </span><span class="s1">= (</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_serializers</span><span class="s1">.</span><span class="s2">serializeValue</span><span class="s1">)(</span><span class="s2">arg</span><span class="s1">, (</span><span class="s2">value2</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">value2 </span><span class="s3">instanceof </span><span class="s2">JSHandle</span><span class="s1">)</span>
+      <span class="s3">return </span><span class="s1">{ </span><span class="s2">h</span><span class="s1">: </span><span class="s2">pushHandle</span><span class="s1">(</span><span class="s2">value2</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">) };</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">fallThrough</span><span class="s1">: </span><span class="s2">value2 </span><span class="s1">};</span>
+  <span class="s1">});</span>
+  <span class="s3">return </span><span class="s1">{ </span><span class="s2">value</span><span class="s1">, </span><span class="s2">handles </span><span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">parseResult</span><span class="s1">(</span><span class="s2">value</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s1">(</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_serializers</span><span class="s1">.</span><span class="s2">parseSerializedValue</span><span class="s1">)(</span><span class="s2">value</span><span class="s1">, </span><span class="s3">void </span><span class="s4">0</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">assertMaxArguments</span><span class="s1">(</span><span class="s2">count</span><span class="s1">, </span><span class="s2">max</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">count </span><span class="s1">&gt; </span><span class="s2">max</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Too many arguments. If you need to pass more than 1 argument to the function wrap them in an object.&quot;</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s5">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s4">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">JSHandle</span><span class="s1">,</span>
+  <span class="s2">assertMaxArguments</span><span class="s1">,</span>
+  <span class="s2">parseResult</span><span class="s1">,</span>
+  <span class="s2">serializeArgument</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

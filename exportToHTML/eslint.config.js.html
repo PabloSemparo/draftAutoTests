@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>eslint.config.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eslint.config.js</font>
+</center></td></tr></table>
+<pre><span class="s0">'use strict'</span><span class="s1">;</span>
+
+<span class="s3">const </span><span class="s2">globals </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'globals'</span><span class="s1">);</span>
+
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= [</span>
+    <span class="s1">{</span>
+        <span class="s2">ignores</span><span class="s1">: [</span><span class="s0">'node_modules/**'</span><span class="s1">, </span><span class="s0">'coverage/**'</span><span class="s1">, </span><span class="s0">'dist/**'</span><span class="s1">, </span><span class="s0">'build/**'</span><span class="s1">, </span><span class="s0">'.nyc_output/**'</span><span class="s1">]</span>
+    <span class="s1">},</span>
+    <span class="s1">{</span>
+        <span class="s2">files</span><span class="s1">: [</span><span class="s0">'**/*.js'</span><span class="s1">],</span>
+        <span class="s2">languageOptions</span><span class="s1">: {</span>
+            <span class="s2">ecmaVersion</span><span class="s1">: </span><span class="s4">2017</span><span class="s1">,</span>
+            <span class="s2">sourceType</span><span class="s1">: </span><span class="s0">'script'</span><span class="s1">,</span>
+            <span class="s2">globals</span><span class="s1">: </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">assign</span><span class="s1">({}, </span><span class="s2">globals</span><span class="s1">.</span><span class="s2">node</span><span class="s1">, </span><span class="s2">globals</span><span class="s1">.</span><span class="s2">es2017</span><span class="s1">, {</span>
+                <span class="s2">it</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+                <span class="s2">describe</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+                <span class="s2">beforeEach</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+                <span class="s2">afterEach</span><span class="s1">: </span><span class="s3">true</span>
+            <span class="s1">})</span>
+        <span class="s1">},</span>
+        <span class="s2">rules</span><span class="s1">: {</span>
+            <span class="s5">// Error detection</span>
+            <span class="s0">'for-direction'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-await-in-loop'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-div-regex'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s2">eqeqeq</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'dot-notation'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s2">curly</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-fallthrough'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-unused-expressions'</span><span class="s1">: [</span>
+                <span class="s0">'error'</span><span class="s1">,</span>
+                <span class="s1">{</span>
+                    <span class="s2">allowShortCircuit</span><span class="s1">: </span><span class="s3">true</span>
+                <span class="s1">}</span>
+            <span class="s1">],</span>
+            <span class="s0">'no-unused-vars'</span><span class="s1">: [</span>
+                <span class="s0">'error'</span><span class="s1">,</span>
+                <span class="s1">{</span>
+                    <span class="s2">varsIgnorePattern</span><span class="s1">: </span><span class="s0">'^_'</span><span class="s1">,</span>
+                    <span class="s2">argsIgnorePattern</span><span class="s1">: </span><span class="s0">'^_'</span><span class="s1">,</span>
+                    <span class="s2">caughtErrorsIgnorePattern</span><span class="s1">: </span><span class="s0">'^_'</span>
+                <span class="s1">}</span>
+            <span class="s1">],</span>
+            <span class="s0">'handle-callback-err'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-new'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'new-cap'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-eval'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-invalid-this'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s2">radix</span><span class="s1">: [</span><span class="s0">'error'</span><span class="s1">, </span><span class="s0">'always'</span><span class="s1">],</span>
+            <span class="s0">'no-use-before-define'</span><span class="s1">: [</span><span class="s0">'error'</span><span class="s1">, </span><span class="s0">'nofunc'</span><span class="s1">],</span>
+            <span class="s0">'callback-return'</span><span class="s1">: [</span><span class="s0">'error'</span><span class="s1">, [</span><span class="s0">'callback'</span><span class="s1">, </span><span class="s0">'cb'</span><span class="s1">, </span><span class="s0">'done'</span><span class="s1">]],</span>
+            <span class="s0">'no-regex-spaces'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-empty'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-duplicate-case'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-empty-character-class'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-redeclare'</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">, </span><span class="s5">// Disabled per project preference</span>
+            <span class="s0">'block-scoped-var'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-sequences'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-throw-literal'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-useless-call'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-useless-concat'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-void'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s2">yoda</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-undef'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'global-require'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-var'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-bitwise'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-lonely-if'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-mixed-spaces-and-tabs'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'arrow-body-style'</span><span class="s1">: [</span><span class="s0">'error'</span><span class="s1">, </span><span class="s0">'as-needed'</span><span class="s1">],</span>
+            <span class="s0">'arrow-parens'</span><span class="s1">: [</span><span class="s0">'error'</span><span class="s1">, </span><span class="s0">'as-needed'</span><span class="s1">],</span>
+            <span class="s0">'prefer-arrow-callback'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'object-shorthand'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'prefer-spread'</span><span class="s1">: </span><span class="s0">'error'</span><span class="s1">,</span>
+            <span class="s0">'no-prototype-builtins'</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">, </span><span class="s5">// Disabled per project preference</span>
+            <span class="s2">strict</span><span class="s1">: [</span><span class="s0">'error'</span><span class="s1">, </span><span class="s0">'global'</span><span class="s1">],</span>
+
+            <span class="s5">// Disable all formatting rules (handled by Prettier)</span>
+            <span class="s2">indent</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">,</span>
+            <span class="s2">quotes</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">,</span>
+            <span class="s0">'linebreak-style'</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">,</span>
+            <span class="s2">semi</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">,</span>
+            <span class="s0">'quote-props'</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">,</span>
+            <span class="s0">'comma-dangle'</span><span class="s1">: </span><span class="s0">'off'</span><span class="s1">,</span>
+            <span class="s0">'comma-style'</span><span class="s1">: </span><span class="s0">'off'</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">];</span>
+</pre>
+</body>
+</html>

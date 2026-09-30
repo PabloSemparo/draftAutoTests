@@ -1,0 +1,1302 @@
+<html>
+<head>
+<title>nativeDeps.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+nativeDeps.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">nativeDeps_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">nativeDeps_exports</span><span class="s1">, {</span>
+  <span class="s2">deps</span><span class="s1">: () =&gt; </span><span class="s2">deps</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">nativeDeps_exports</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">deps </span><span class="s1">= {</span>
+  <span class="s0">&quot;ubuntu20.04-x64&quot;</span><span class="s1">: {</span>
+    <span class="s2">tools</span><span class="s1">: [</span>
+      <span class="s0">&quot;xvfb&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-noto-color-emoji&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;ttf-unifont&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-cyrillic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-scalable&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-liberation&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-ipafont-gothic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-wqy-zenhei&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-tlwg-loma-otf&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;ttf-ubuntu-font-family&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">chromium</span><span class="s1">: [</span>
+      <span class="s0">&quot;fonts-liberation&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxshmfence1&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">firefox</span><span class="s1">: [</span>
+      <span class="s0">&quot;ffmpeg&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangoft2-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxt6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxtst6&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">webkit</span><span class="s1">: [</span>
+      <span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx264-155&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant1c2a&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicu66&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg-turbo8&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnghttp2-14&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16-16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libvpx6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1-7&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">lib2package</span><span class="s1">: {</span>
+      <span class="s0">&quot;libflite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_usenglish.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_grapheme_lang.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_grapheme_lex.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_indic_lang.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_indic_lex.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmulex.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_time_awb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_awb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_kal16.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_kal.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_rms.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_slt.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx264.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libx264-155&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libasound.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libEGL.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libenchant1c2a&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk_pixbuf-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgdk-pixbuf2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-x11-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgio-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libGL.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libGLESv2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgmodule-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgobject-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgthread-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-x11-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicui18n.so.66&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu66&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicuuc.so.66&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu66&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg.so.8&quot;</span><span class="s1">: </span><span class="s0">&quot;libjpeg-turbo8&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify.so.4&quot;</span><span class="s1">: </span><span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnssutil3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libOpenGL.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangoft2-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpangoft2-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16.so.16&quot;</span><span class="s1">: </span><span class="s0">&quot;libpng16-16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsmime3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libvpx.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libvpx6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebp6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff2dec.so.1.0.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11-xcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-dri3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb-dri3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcomposite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcursor.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXdamage.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXext.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXfixes.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXi.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrandr.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrender.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXt.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxt6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXtst.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxtst6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxshmfence.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxshmfence1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libevent-2.1-7&quot;</span>
+    <span class="s1">}</span>
+  <span class="s1">},</span>
+  <span class="s0">&quot;ubuntu22.04-x64&quot;</span><span class="s1">: {</span>
+    <span class="s2">tools</span><span class="s1">: [</span>
+      <span class="s0">&quot;xvfb&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-noto-color-emoji&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-unifont&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-cyrillic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-scalable&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-liberation&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-ipafont-gothic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-wqy-zenhei&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-tlwg-loma-otf&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-freefont-ttf&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">chromium</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">firefox</span><span class="s1">: [</span>
+      <span class="s0">&quot;ffmpeg&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxtst6&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">webkit</span><span class="s1">: [</span>
+      <span class="s0">&quot;libsoup-3.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-libav&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-bad&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-base&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-good&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicu70&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libffi7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglx0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4-1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg-turbo8&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16-16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libproxy1v5&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx264-163&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libavif13&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">lib2package</span><span class="s1">: {</span>
+      <span class="s0">&quot;libavif.so.13&quot;</span><span class="s1">: </span><span class="s0">&quot;libavif13&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsoup-3.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsoup-3.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libasound.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libEGL.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libffi.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libffi7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk_pixbuf-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgio-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libGLESv2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libGLX.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglx0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgmodule-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgobject-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstallocators-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstapp-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstaudio-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstbase-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstfft-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstgl-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstpbutils-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgsttag-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstvideo-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-4-1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg.so.8&quot;</span><span class="s1">: </span><span class="s0">&quot;libjpeg-turbo8&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify.so.4&quot;</span><span class="s1">: </span><span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnssutil3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libOpenGL.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16.so.16&quot;</span><span class="s1">: </span><span class="s0">&quot;libpng16-16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libproxy.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libproxy1v5&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsmime3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff2dec.so.1.0.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11-xcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcomposite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcursor.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXdamage.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXext.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXfixes.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXi.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrandr.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrender.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXtst.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxtst6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicui18n.so.60&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu70&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicuuc.so.66&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu70&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicui18n.so.66&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu70&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebp6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx264.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libx264-163&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libvpx.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libvpx7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libevent-2.1-7&quot;</span>
+    <span class="s1">}</span>
+  <span class="s1">},</span>
+  <span class="s0">&quot;ubuntu24.04-x64&quot;</span><span class="s1">: {</span>
+    <span class="s2">tools</span><span class="s1">: [</span>
+      <span class="s0">&quot;xvfb&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-noto-color-emoji&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-unifont&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-cyrillic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-scalable&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-liberation&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-ipafont-gothic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-wqy-zenhei&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-tlwg-loma-otf&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-freefont-ttf&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">chromium</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">firefox</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrender1&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">webkit</span><span class="s1">: [</span>
+      <span class="s0">&quot;gstreamer1.0-libav&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-bad&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-base&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-good&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicu74&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1-7t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-plugins-bad1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4-1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicu74&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg-turbo8&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16-16t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libvpx9&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx264-164&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libavif16&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">lib2package</span><span class="s1">: {</span>
+      <span class="s0">&quot;libavif.so.16&quot;</span><span class="s1">: </span><span class="s0">&quot;libavif16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libasound.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libasound2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk-bridge2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatspi2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcups2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libevent-2.1-7t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_grapheme_lang.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_grapheme_lex.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_indic_lang.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_indic_lex.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_time_awb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_awb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_kal.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_kal16.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_rms.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmu_us_slt.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_cmulex.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite_usenglish.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libflite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libflite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk_pixbuf-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgio-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libGLESv2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgmodule-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgobject-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstallocators-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstapp-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstaudio-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstbase-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstcodecparsers-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-bad1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstfft-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstgl-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstpbutils-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgsttag-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstvideo-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-4-1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicudata.so.74&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu74&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicui18n.so.74&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu74&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicuuc.so.74&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu74&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg.so.8&quot;</span><span class="s1">: </span><span class="s0">&quot;libjpeg-turbo8&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnssutil3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16.so.16&quot;</span><span class="s1">: </span><span class="s0">&quot;libpng16-16t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsmime3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsoup-3.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsoup-3.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libvpx.so.9&quot;</span><span class="s1">: </span><span class="s0">&quot;libvpx9&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebp7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff2dec.so.1.0.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11-xcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcomposite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcursor.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXdamage.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXext.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXfixes.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXi.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrandr.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrender.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx264.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libx264-164&quot;</span>
+    <span class="s1">}</span>
+  <span class="s1">},</span>
+  <span class="s0">&quot;debian11-x64&quot;</span><span class="s1">: {</span>
+    <span class="s2">tools</span><span class="s1">: [</span>
+      <span class="s0">&quot;xvfb&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-noto-color-emoji&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-unifont&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-cyrillic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-scalable&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-liberation&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-ipafont-gothic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-wqy-zenhei&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-tlwg-loma-otf&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-freefont-ttf&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">chromium</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">firefox</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxtst6&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">webkit</span><span class="s1">: [</span>
+      <span class="s0">&quot;gstreamer1.0-libav&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-bad&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-base&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-good&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglx0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicu67&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg62-turbo&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnghttp2-14&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16-16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libproxy1v5&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1-7&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">lib2package</span><span class="s1">: {</span>
+      <span class="s0">&quot;libasound.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libEGL.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk_pixbuf-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgio-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libGLESv2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libGLX.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglx0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgmodule-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgobject-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstallocators-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstapp-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstaudio-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstbase-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstfft-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstgl-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstpbutils-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgsttag-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstvideo-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicui18n.so.67&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu67&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicuuc.so.67&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu67&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg.so.62&quot;</span><span class="s1">: </span><span class="s0">&quot;libjpeg62-turbo&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify.so.4&quot;</span><span class="s1">: </span><span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnssutil3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libOpenGL.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16.so.16&quot;</span><span class="s1">: </span><span class="s0">&quot;libpng16-16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libproxy.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libproxy1v5&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsmime3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebp6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff2dec.so.1.0.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11-xcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcomposite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcursor.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXdamage.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXext.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXfixes.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXi.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrandr.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrender.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXtst.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxtst6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libevent-2.1-7&quot;</span>
+    <span class="s1">}</span>
+  <span class="s1">},</span>
+  <span class="s0">&quot;debian12-x64&quot;</span><span class="s1">: {</span>
+    <span class="s2">tools</span><span class="s1">: [</span>
+      <span class="s0">&quot;xvfb&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-noto-color-emoji&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-unifont&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-scalable&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-liberation&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-ipafont-gothic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-wqy-zenhei&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-tlwg-loma-otf&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-freefont-ttf&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">chromium</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">firefox</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxtst6&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">webkit</span><span class="s1">: [</span>
+      <span class="s0">&quot;libsoup-3.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-libav&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-bad&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-base&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-good&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglx0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4-1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicu72&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg62-turbo&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16-16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libproxy1v5&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libavif15&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">lib2package</span><span class="s1">: {</span>
+      <span class="s0">&quot;libavif.so.15&quot;</span><span class="s1">: </span><span class="s0">&quot;libavif15&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsoup-3.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsoup-3.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libasound.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk-bridge2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatspi2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcups2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgio-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgobject-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnssutil3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsmime3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcomposite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXdamage.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXext.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXfixes.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrandr.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-4-1&quot;</span>
+    <span class="s1">}</span>
+  <span class="s1">},</span>
+  <span class="s0">&quot;debian13-x64&quot;</span><span class="s1">: {</span>
+    <span class="s2">tools</span><span class="s1">: [</span>
+      <span class="s0">&quot;xvfb&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-noto-color-emoji&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-unifont&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;xfonts-scalable&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-liberation&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-ipafont-gothic&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-wqy-zenhei&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-tlwg-loma-otf&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;fonts-freefont-ttf&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">chromium</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">firefox</span><span class="s1">: [</span>
+      <span class="s0">&quot;libasound2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo-gobject2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-glib-1-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpangocairo-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-xcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb-shm0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcursor1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxi6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxrender1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxtst6&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">webkit</span><span class="s1">: [</span>
+      <span class="s0">&quot;libsoup-3.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-libav&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-bad&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-base&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;gstreamer1.0-plugins-good&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libegl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libenchant-2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libepoxy0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevdev2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfontconfig1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libfreetype6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-pixbuf-2.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgles2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglx0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-gl1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer-plugins-base1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgstreamer1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4-1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgudev-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz-icu0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libharfbuzz0b&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libhyphen0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicu76&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libjpeg62-turbo&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;liblcms2-2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libmanette-0.2-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnotify4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopengl0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopenjp2-7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libopus0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16-16t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libproxy1v5&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsecret-1-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-client0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-egl1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwayland-server0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebp7&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwebpdemux2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libwoff1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxml2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxslt1.1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatomic1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1-7t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libavif16&quot;</span>
+    <span class="s1">],</span>
+    <span class="s2">lib2package</span><span class="s1">: {</span>
+      <span class="s0">&quot;libicudata.so.74&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu76&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicui18n.so.74&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu76&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libicuuc.so.74&quot;</span><span class="s1">: </span><span class="s0">&quot;libicu76&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libevent-2.1.so.7&quot;</span><span class="s1">: </span><span class="s0">&quot;libevent-2.1-7t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpng16.so.16&quot;</span><span class="s1">: </span><span class="s0">&quot;libpng16-16t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgdk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-3.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-3-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libavif.so.16&quot;</span><span class="s1">: </span><span class="s0">&quot;libavif16&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsoup-3.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libsoup-3.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libasound.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libasound2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk1.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatk-bridge-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatk-bridge2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libatspi.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libatspi2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcairo.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcairo2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libcups.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libcups2t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdbus-1.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libdbus-1-3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libdrm.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libdrm2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgbm.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgbm1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgio-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libglib-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgobject-2.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libglib2.0-0t64&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnspr4.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnspr4&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnss3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libnssutil3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libpango-1.0.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libpango-1.0-0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libsmime3.so&quot;</span><span class="s1">: </span><span class="s0">&quot;libnss3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libX11.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libx11-6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxcb.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcb1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXcomposite.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxcomposite1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXdamage.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libxdamage1&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXext.so.6&quot;</span><span class="s1">: </span><span class="s0">&quot;libxext6&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXfixes.so.3&quot;</span><span class="s1">: </span><span class="s0">&quot;libxfixes3&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libxkbcommon.so.0&quot;</span><span class="s1">: </span><span class="s0">&quot;libxkbcommon0&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libXrandr.so.2&quot;</span><span class="s1">: </span><span class="s0">&quot;libxrandr2&quot;</span><span class="s1">,</span>
+      <span class="s0">&quot;libgtk-4.so.1&quot;</span><span class="s1">: </span><span class="s0">&quot;libgtk-4-1&quot;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s2">deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu20.04-arm64&quot;</span><span class="s1">] = {</span>
+  <span class="s2">tools</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu20.04-x64&quot;</span><span class="s1">].</span><span class="s2">tools</span><span class="s1">],</span>
+  <span class="s2">chromium</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu20.04-x64&quot;</span><span class="s1">].</span><span class="s2">chromium</span><span class="s1">],</span>
+  <span class="s2">firefox</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu20.04-x64&quot;</span><span class="s1">].</span><span class="s2">firefox</span>
+  <span class="s1">],</span>
+  <span class="s2">webkit</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu20.04-x64&quot;</span><span class="s1">].</span><span class="s2">webkit</span>
+  <span class="s1">],</span>
+  <span class="s2">lib2package</span><span class="s1">: {</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu20.04-x64&quot;</span><span class="s1">].</span><span class="s2">lib2package</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s2">deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu22.04-arm64&quot;</span><span class="s1">] = {</span>
+  <span class="s2">tools</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu22.04-x64&quot;</span><span class="s1">].</span><span class="s2">tools</span><span class="s1">],</span>
+  <span class="s2">chromium</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu22.04-x64&quot;</span><span class="s1">].</span><span class="s2">chromium</span><span class="s1">],</span>
+  <span class="s2">firefox</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu22.04-x64&quot;</span><span class="s1">].</span><span class="s2">firefox</span>
+  <span class="s1">],</span>
+  <span class="s2">webkit</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu22.04-x64&quot;</span><span class="s1">].</span><span class="s2">webkit</span>
+  <span class="s1">],</span>
+  <span class="s2">lib2package</span><span class="s1">: {</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu22.04-x64&quot;</span><span class="s1">].</span><span class="s2">lib2package</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s2">deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu24.04-arm64&quot;</span><span class="s1">] = {</span>
+  <span class="s2">tools</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu24.04-x64&quot;</span><span class="s1">].</span><span class="s2">tools</span><span class="s1">],</span>
+  <span class="s2">chromium</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu24.04-x64&quot;</span><span class="s1">].</span><span class="s2">chromium</span><span class="s1">],</span>
+  <span class="s2">firefox</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu24.04-x64&quot;</span><span class="s1">].</span><span class="s2">firefox</span>
+  <span class="s1">],</span>
+  <span class="s2">webkit</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu24.04-x64&quot;</span><span class="s1">].</span><span class="s2">webkit</span>
+  <span class="s1">],</span>
+  <span class="s2">lib2package</span><span class="s1">: {</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;ubuntu24.04-x64&quot;</span><span class="s1">].</span><span class="s2">lib2package</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s2">deps</span><span class="s1">[</span><span class="s0">&quot;debian11-arm64&quot;</span><span class="s1">] = {</span>
+  <span class="s2">tools</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian11-x64&quot;</span><span class="s1">].</span><span class="s2">tools</span><span class="s1">],</span>
+  <span class="s2">chromium</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian11-x64&quot;</span><span class="s1">].</span><span class="s2">chromium</span><span class="s1">],</span>
+  <span class="s2">firefox</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian11-x64&quot;</span><span class="s1">].</span><span class="s2">firefox</span>
+  <span class="s1">],</span>
+  <span class="s2">webkit</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian11-x64&quot;</span><span class="s1">].</span><span class="s2">webkit</span>
+  <span class="s1">],</span>
+  <span class="s2">lib2package</span><span class="s1">: {</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian11-x64&quot;</span><span class="s1">].</span><span class="s2">lib2package</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s2">deps</span><span class="s1">[</span><span class="s0">&quot;debian12-arm64&quot;</span><span class="s1">] = {</span>
+  <span class="s2">tools</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian12-x64&quot;</span><span class="s1">].</span><span class="s2">tools</span><span class="s1">],</span>
+  <span class="s2">chromium</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian12-x64&quot;</span><span class="s1">].</span><span class="s2">chromium</span><span class="s1">],</span>
+  <span class="s2">firefox</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian12-x64&quot;</span><span class="s1">].</span><span class="s2">firefox</span>
+  <span class="s1">],</span>
+  <span class="s2">webkit</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian12-x64&quot;</span><span class="s1">].</span><span class="s2">webkit</span>
+  <span class="s1">],</span>
+  <span class="s2">lib2package</span><span class="s1">: {</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian12-x64&quot;</span><span class="s1">].</span><span class="s2">lib2package</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s2">deps</span><span class="s1">[</span><span class="s0">&quot;debian13-arm64&quot;</span><span class="s1">] = {</span>
+  <span class="s2">tools</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian13-x64&quot;</span><span class="s1">].</span><span class="s2">tools</span><span class="s1">],</span>
+  <span class="s2">chromium</span><span class="s1">: [</span><span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian13-x64&quot;</span><span class="s1">].</span><span class="s2">chromium</span><span class="s1">],</span>
+  <span class="s2">firefox</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian13-x64&quot;</span><span class="s1">].</span><span class="s2">firefox</span>
+  <span class="s1">],</span>
+  <span class="s2">webkit</span><span class="s1">: [</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian13-x64&quot;</span><span class="s1">].</span><span class="s2">webkit</span>
+  <span class="s1">],</span>
+  <span class="s2">lib2package</span><span class="s1">: {</span>
+    <span class="s2">...deps</span><span class="s1">[</span><span class="s0">&quot;debian13-x64&quot;</span><span class="s1">].</span><span class="s2">lib2package</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">deps</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<html>
+<head>
+<title>legacy.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+legacy.js</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">* as </span><span class="s1">allure from </span><span class="s3">&quot;allure-js-commons&quot;</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use api exported by &quot;allure-js-commons&quot; instead.</span>
+ <span class="s4">*/</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use api exported by &quot;allure-js-commons&quot; instead.</span>
+ <span class="s4">*/</span>
+<span class="s0">export var </span><span class="s1">allurePlaywrightLegacyApi </span><span class="s2">= {</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { label } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">label</span><span class="s2">: </span><span class="s0">function </span><span class="s1">label</span><span class="s2">() {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">label</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">, </span><span class="s1">arguments</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { labels } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">labels</span><span class="s2">: </span><span class="s0">function </span><span class="s1">labels</span><span class="s2">() {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">, </span><span class="s1">arguments</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { link } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">link</span><span class="s2">: </span><span class="s0">function </span><span class="s1">link</span><span class="s2">(</span><span class="s1">type</span><span class="s2">, </span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">link</span><span class="s2">(</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">type</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { links } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">links</span><span class="s2">: </span><span class="s0">function </span><span class="s1">links</span><span class="s2">() {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">links</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">, </span><span class="s1">arguments</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { parameter } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">parameter</span><span class="s2">: </span><span class="s0">function </span><span class="s1">parameter</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">parameter</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">options</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { description } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">description</span><span class="s2">: </span><span class="s0">function </span><span class="s1">description</span><span class="s2">() {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">, </span><span class="s1">arguments</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { descriptionHtml } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">descriptionHtml</span><span class="s2">: </span><span class="s0">function </span><span class="s1">descriptionHtml</span><span class="s2">(</span><span class="s1">html</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">descriptionHtml</span><span class="s2">(</span><span class="s1">html</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { testCaseId } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">testCaseId</span><span class="s2">: </span><span class="s0">function </span><span class="s1">testCaseId</span><span class="s2">(</span><span class="s1">id</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">testCaseId</span><span class="s2">(</span><span class="s1">id</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { historyId } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">historyId</span><span class="s2">: </span><span class="s0">function </span><span class="s1">historyId</span><span class="s2">(</span><span class="s1">id</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">historyId</span><span class="s2">(</span><span class="s1">id</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { allureId } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">allureId</span><span class="s2">: </span><span class="s0">function </span><span class="s1">allureId</span><span class="s2">(</span><span class="s1">id</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">allureId</span><span class="s2">(</span><span class="s1">id</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { displayName } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">displayName</span><span class="s2">: </span><span class="s0">function </span><span class="s1">displayName</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">displayName</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { attachment } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">attachment</span><span class="s2">: </span><span class="s0">function </span><span class="s1">attachment</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">content</span><span class="s2">, </span><span class="s1">type</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">content</span><span class="s2">, {</span>
+      <span class="s1">contentType</span><span class="s2">: </span><span class="s1">type</span>
+    <span class="s2">}));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { issue } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">issue</span><span class="s2">: </span><span class="s0">function </span><span class="s1">issue</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">url</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">issue</span><span class="s2">(</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { tms } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">tms</span><span class="s2">: </span><span class="s0">function </span><span class="s1">tms</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">url</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tms</span><span class="s2">(</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { epic } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">epic</span><span class="s2">: </span><span class="s0">function </span><span class="s1">epic</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">epic</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { feature } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">feature</span><span class="s2">: </span><span class="s0">function </span><span class="s1">feature</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">feature</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { story } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">story</span><span class="s2">: </span><span class="s0">function </span><span class="s1">story</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { suite } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">suite</span><span class="s2">: </span><span class="s0">function </span><span class="s1">suite</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">suite</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { parentSuite } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">parentSuite</span><span class="s2">: </span><span class="s0">function </span><span class="s1">parentSuite</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">parentSuite</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { subSuite } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">subSuite</span><span class="s2">: </span><span class="s0">function </span><span class="s1">subSuite</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">subSuite</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { owner } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">owner</span><span class="s2">: </span><span class="s0">function </span><span class="s1">owner</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">owner</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { severity } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">severity</span><span class="s2">: </span><span class="s0">function </span><span class="s1">severity</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { layer } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">layer</span><span class="s2">: </span><span class="s0">function </span><span class="s1">layer</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">layer</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { tag } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">tag</span><span class="s2">: </span><span class="s0">function </span><span class="s1">tag</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tag</span><span class="s2">(</span><span class="s1">name</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { tags } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">tags</span><span class="s2">: </span><span class="s0">function </span><span class="s1">tags</span><span class="s2">() {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">tags</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">, </span><span class="s1">arguments</span><span class="s2">));</span>
+  <span class="s2">},</span>
+  <span class="s4">/**</span>
+   <span class="s4">* </span><span class="s5">@deprecated </span><span class="s4">please use import { step } from &quot;allure-js-commons&quot; instead.</span>
+   <span class="s4">*/</span>
+  <span class="s1">step</span><span class="s2">: </span><span class="s0">function </span><span class="s1">step</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">body</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">body</span><span class="s2">));</span>
+  <span class="s2">}</span>
+<span class="s2">};</span>
+<span class="s6">//# sourceMappingURL=legacy.js.map</span></pre>
+</body>
+</html>

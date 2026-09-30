@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>PaymentPage.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PaymentPage.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Page</span><span class="s2">, </span><span class="s1">Locator </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;@playwright/test&quot;</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">PaymentPage </span><span class="s2">{</span>
+  <span class="s0">private </span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">operationsButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">stateDutyOption</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">executeButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">dutyTypeDropdown</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">courtDutyOption</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">sendRequestButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">confirmButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">) {</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">page </span><span class="s2">= </span><span class="s1">page</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">operationsButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Операции&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">stateDutyOption </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByText</span><span class="s2">(</span><span class="s3">&quot;Оплата госпошлины&quot;</span><span class="s2">, { </span><span class="s1">exact</span><span class="s2">: </span><span class="s0">true </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">executeButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Выполнить&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">dutyTypeDropdown </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Выберите тип госпошлины&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">courtDutyOption </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;option&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Госпошлина для вынесения судебного приказа&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">sendRequestButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Отправить запрос для оплаты гос. пошлины&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">confirmButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Подтвердить&quot; </span><span class="s2">});</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async payCourtStateDuty</span><span class="s2">() {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Начинаем оплату госпошлины...&quot;</span><span class="s2">);</span>
+
+    <span class="s0">await </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">all</span><span class="s2">([</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">operationsButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">(),</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForResponse</span><span class="s2">(</span>
+        <span class="s2">(</span><span class="s1">response</span><span class="s2">) =&gt;</span>
+          <span class="s1">response</span>
+            <span class="s2">.</span><span class="s1">url</span><span class="s2">()</span>
+            <span class="s2">.</span><span class="s1">includes</span><span class="s2">(</span><span class="s3">&quot;/api/v1/contract/available_user_operations&quot;</span><span class="s2">) &amp;&amp;</span>
+          <span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">() === </span><span class="s4">200</span>
+      <span class="s2">),</span>
+    <span class="s2">]);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">stateDutyOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">executeButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">dutyTypeDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">courtDutyOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">sendRequestButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">all</span><span class="s2">([</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">confirmButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">(),</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForResponse</span><span class="s2">(</span>
+        <span class="s2">(</span><span class="s1">response</span><span class="s2">) =&gt;</span>
+          <span class="s1">response</span><span class="s2">.</span><span class="s1">url</span><span class="s2">().</span><span class="s1">includes</span><span class="s2">(</span><span class="s3">&quot;/api/v1/taxpayment/start_magistrate&quot;</span><span class="s2">) &amp;&amp;</span>
+          <span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">() === </span><span class="s4">200</span>
+      <span class="s2">),</span>
+    <span class="s2">]);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;✅ Оплата госпошлины успешно завершена!&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

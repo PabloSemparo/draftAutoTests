@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>loader.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+loader.js</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">FileSystemWriter </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./FileSystemWriter.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">InMemoryWriter </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./InMemoryWriter.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">MessageWriter </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./MessageWriter.js&quot;</span><span class="s2">;</span>
+<span class="s0">var </span><span class="s1">wellKnownWriters </span><span class="s2">= {</span>
+  <span class="s1">InMemoryWriter</span><span class="s2">: </span><span class="s1">InMemoryWriter</span><span class="s2">,</span>
+  <span class="s1">FileSystemWriter</span><span class="s2">: </span><span class="s1">FileSystemWriter</span><span class="s2">,</span>
+  <span class="s1">MessageWriter</span><span class="s2">: </span><span class="s1">MessageWriter</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">resolveWriter </span><span class="s2">= </span><span class="s1">value </span><span class="s2">=&gt; {</span>
+  <span class="s0">if </span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">value </span><span class="s2">=== </span><span class="s3">&quot;string&quot;</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">createWriter</span><span class="s2">(</span><span class="s1">value</span><span class="s2">);</span>
+  <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">value </span><span class="s0">instanceof </span><span class="s1">Array</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">createWriter</span><span class="s2">(</span><span class="s1">value</span><span class="s2">[</span><span class="s4">0</span><span class="s2">], </span><span class="s1">value</span><span class="s2">.</span><span class="s1">slice</span><span class="s2">(</span><span class="s4">1</span><span class="s2">));</span>
+  <span class="s2">}</span>
+  <span class="s0">return </span><span class="s1">value</span><span class="s2">;</span>
+<span class="s2">};</span>
+<span class="s0">var </span><span class="s1">createWriter </span><span class="s2">= </span><span class="s0">function </span><span class="s1">createWriter</span><span class="s2">(</span><span class="s1">nameOrPath</span><span class="s2">) {</span>
+  <span class="s0">var </span><span class="s1">_getKnownWriterCtor</span><span class="s2">;</span>
+  <span class="s0">var </span><span class="s1">args </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">1 </span><span class="s2">&amp;&amp; </span><span class="s1">arguments</span><span class="s2">[</span><span class="s4">1</span><span class="s2">] !== </span><span class="s1">undefined </span><span class="s2">? </span><span class="s1">arguments</span><span class="s2">[</span><span class="s4">1</span><span class="s2">] : [];</span>
+  <span class="s5">// eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires</span>
+  <span class="s0">var </span><span class="s1">ctorOrInstance </span><span class="s2">= (</span><span class="s1">_getKnownWriterCtor </span><span class="s2">= </span><span class="s1">getKnownWriterCtor</span><span class="s2">(</span><span class="s1">nameOrPath</span><span class="s2">)) !== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">_getKnownWriterCtor </span><span class="s2">!== </span><span class="s0">void </span><span class="s4">0 </span><span class="s2">? </span><span class="s1">_getKnownWriterCtor </span><span class="s2">: </span><span class="s1">requireWriterCtor</span><span class="s2">(</span><span class="s1">nameOrPath</span><span class="s2">);</span>
+  <span class="s0">return typeof </span><span class="s1">ctorOrInstance </span><span class="s2">=== </span><span class="s3">&quot;function&quot; </span><span class="s2">? </span><span class="s0">new </span><span class="s1">ctorOrInstance</span><span class="s2">(</span><span class="s1">...args</span><span class="s2">) : </span><span class="s1">ctorOrInstance</span><span class="s2">;</span>
+<span class="s2">};</span>
+<span class="s0">var </span><span class="s1">getKnownWriterCtor </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">wellKnownWriters</span><span class="s2">[</span><span class="s1">name</span><span class="s2">];</span>
+<span class="s0">var </span><span class="s1">requireWriterCtor </span><span class="s2">= </span><span class="s1">modulePath </span><span class="s2">=&gt; {</span>
+  <span class="s5">// eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires</span>
+  <span class="s0">return </span><span class="s1">require</span><span class="s2">(</span><span class="s1">modulePath</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s5">//# sourceMappingURL=loader.js.map</span></pre>
+</body>
+</html>

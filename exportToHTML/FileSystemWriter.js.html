@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>FileSystemWriter.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+FileSystemWriter.js</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">copyFileSync</span><span class="s2">, </span><span class="s1">mkdirSync</span><span class="s2">, </span><span class="s1">writeFileSync </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;node:fs&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">join </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;node:path&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">stringifyEnvInfo </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../utils/envInfo.js&quot;</span><span class="s2">;</span>
+<span class="s0">var </span><span class="s1">writeJson </span><span class="s2">= (</span><span class="s1">path</span><span class="s2">, </span><span class="s1">data</span><span class="s2">) =&gt; {</span>
+  <span class="s1">writeFileSync</span><span class="s2">(</span><span class="s1">path</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">data</span><span class="s2">), </span><span class="s3">&quot;utf-8&quot;</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export class </span><span class="s1">FileSystemWriter </span><span class="s2">{</span>
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">config</span><span class="s2">) {</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">config </span><span class="s2">= </span><span class="s1">config</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s1">writeAttachment</span><span class="s2">(</span><span class="s1">distFileName</span><span class="s2">, </span><span class="s1">content</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">path </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">buildPath</span><span class="s2">(</span><span class="s1">distFileName</span><span class="s2">);</span>
+    <span class="s1">writeFileSync</span><span class="s2">(</span><span class="s1">path</span><span class="s2">, </span><span class="s1">content</span><span class="s2">, </span><span class="s3">&quot;utf-8&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">writeAttachmentFromPath</span><span class="s2">(</span><span class="s1">distFileName</span><span class="s2">, </span><span class="s1">from</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">to </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">buildPath</span><span class="s2">(</span><span class="s1">distFileName</span><span class="s2">);</span>
+    <span class="s1">copyFileSync</span><span class="s2">(</span><span class="s1">from</span><span class="s2">, </span><span class="s1">to</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">writeEnvironmentInfo</span><span class="s2">(</span><span class="s1">info</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">text </span><span class="s2">= </span><span class="s1">stringifyEnvInfo</span><span class="s2">(</span><span class="s1">info</span><span class="s2">);</span>
+    <span class="s0">var </span><span class="s1">path </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">buildPath</span><span class="s2">(</span><span class="s3">&quot;environment.properties&quot;</span><span class="s2">);</span>
+    <span class="s1">writeFileSync</span><span class="s2">(</span><span class="s1">path</span><span class="s2">, </span><span class="s1">text</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">writeCategoriesDefinitions</span><span class="s2">(</span><span class="s1">categories</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">path </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">buildPath</span><span class="s2">(</span><span class="s3">&quot;categories.json&quot;</span><span class="s2">);</span>
+    <span class="s1">writeJson</span><span class="s2">(</span><span class="s1">path</span><span class="s2">, </span><span class="s1">categories</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">writeGroup</span><span class="s2">(</span><span class="s1">result</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">path </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">buildPath</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">uuid</span><span class="s2">, </span><span class="s3">&quot;-container.json&quot;</span><span class="s2">));</span>
+    <span class="s1">writeJson</span><span class="s2">(</span><span class="s1">path</span><span class="s2">, </span><span class="s1">result</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">writeResult</span><span class="s2">(</span><span class="s1">result</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">path </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">buildPath</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">uuid</span><span class="s2">, </span><span class="s3">&quot;-result.json&quot;</span><span class="s2">));</span>
+    <span class="s1">writeJson</span><span class="s2">(</span><span class="s1">path</span><span class="s2">, </span><span class="s1">result</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">buildPath</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s1">mkdirSync</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">config</span><span class="s2">.</span><span class="s1">resultsDir</span><span class="s2">, {</span>
+      <span class="s1">recursive</span><span class="s2">: </span><span class="s0">true</span>
+    <span class="s2">});</span>
+    <span class="s0">return </span><span class="s1">join</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">config</span><span class="s2">.</span><span class="s1">resultsDir</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+<span class="s4">//# sourceMappingURL=FileSystemWriter.js.map</span></pre>
+</body>
+</html>

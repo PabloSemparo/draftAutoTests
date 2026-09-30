@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>nodePlatform.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+nodePlatform.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">nodePlatform_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">nodePlatform_exports</span><span class="s1">, {</span>
+  <span class="s2">nodePlatform</span><span class="s1">: () =&gt; </span><span class="s2">nodePlatform</span><span class="s1">,</span>
+  <span class="s2">setBoxedStackPrefixes</span><span class="s1">: () =&gt; </span><span class="s2">setBoxedStackPrefixes</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">nodePlatform_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_crypto </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;crypto&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">util </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;util&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_stream </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;stream&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_events </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;events&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_debugLogger </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./debugLogger&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_zones </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./zones&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_debug </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./debug&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">pipelineAsync </span><span class="s1">= </span><span class="s2">util</span><span class="s1">.</span><span class="s2">promisify</span><span class="s1">(</span><span class="s2">import_stream</span><span class="s1">.</span><span class="s2">pipeline</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">NodeZone </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">zone</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_zone </span><span class="s1">= </span><span class="s2">zone</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">push</span><span class="s1">(</span><span class="s2">data</span><span class="s1">) {</span>
+    <span class="s3">return new </span><span class="s2">NodeZone</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_zone</span><span class="s1">.</span><span class="s2">with</span><span class="s1">(</span><span class="s0">&quot;apiZone&quot;</span><span class="s1">, </span><span class="s2">data</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">pop</span><span class="s1">() {</span>
+    <span class="s3">return new </span><span class="s2">NodeZone</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_zone</span><span class="s1">.</span><span class="s2">without</span><span class="s1">(</span><span class="s0">&quot;apiZone&quot;</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">run</span><span class="s1">(</span><span class="s2">func</span><span class="s1">) {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_zone</span><span class="s1">.</span><span class="s2">run</span><span class="s1">(</span><span class="s2">func</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">data</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_zone</span><span class="s1">.</span><span class="s2">data</span><span class="s1">(</span><span class="s0">&quot;apiZone&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">let </span><span class="s2">boxedStackPrefixes </span><span class="s1">= [];</span>
+<span class="s3">function </span><span class="s2">setBoxedStackPrefixes</span><span class="s1">(</span><span class="s2">prefixes</span><span class="s1">) {</span>
+  <span class="s2">boxedStackPrefixes </span><span class="s1">= </span><span class="s2">prefixes</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">coreDir </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">require</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s0">&quot;../../../package.json&quot;</span><span class="s1">));</span>
+<span class="s3">const </span><span class="s2">nodePlatform </span><span class="s1">= {</span>
+  <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;node&quot;</span><span class="s1">,</span>
+  <span class="s2">boxedStackPrefixes</span><span class="s1">: () =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PWDEBUGIMPL</span><span class="s1">)</span>
+      <span class="s3">return </span><span class="s1">[];</span>
+    <span class="s3">return </span><span class="s1">[</span><span class="s2">coreDir</span><span class="s1">, </span><span class="s2">...boxedStackPrefixes</span><span class="s1">];</span>
+  <span class="s1">},</span>
+  <span class="s2">calculateSha1</span><span class="s1">: (</span><span class="s2">text</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">sha1 </span><span class="s1">= </span><span class="s2">import_crypto</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">createHash</span><span class="s1">(</span><span class="s0">&quot;sha1&quot;</span><span class="s1">);</span>
+    <span class="s2">sha1</span><span class="s1">.</span><span class="s2">update</span><span class="s1">(</span><span class="s2">text</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">sha1</span><span class="s1">.</span><span class="s2">digest</span><span class="s1">(</span><span class="s0">&quot;hex&quot;</span><span class="s1">));</span>
+  <span class="s1">},</span>
+  <span class="s2">colors</span><span class="s1">: </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">colors</span><span class="s1">,</span>
+  <span class="s2">coreDir</span><span class="s1">,</span>
+  <span class="s2">createGuid</span><span class="s1">: () =&gt; </span><span class="s2">import_crypto</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">randomBytes</span><span class="s1">(</span><span class="s5">16</span><span class="s1">).</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">&quot;hex&quot;</span><span class="s1">),</span>
+  <span class="s2">defaultMaxListeners</span><span class="s1">: () =&gt; </span><span class="s2">import_events</span><span class="s1">.</span><span class="s2">EventEmitter</span><span class="s1">.</span><span class="s2">defaultMaxListeners</span><span class="s1">,</span>
+  <span class="s2">fs</span><span class="s1">: () =&gt; </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">,</span>
+  <span class="s2">env</span><span class="s1">: </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">,</span>
+  <span class="s2">inspectCustom</span><span class="s1">: </span><span class="s2">util</span><span class="s1">.</span><span class="s2">inspect</span><span class="s1">.</span><span class="s2">custom</span><span class="s1">,</span>
+  <span class="s2">isDebugMode</span><span class="s1">: () =&gt; (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_debug</span><span class="s1">.</span><span class="s2">debugMode</span><span class="s1">)() === </span><span class="s0">&quot;inspector&quot;</span><span class="s1">,</span>
+  <span class="s2">isJSDebuggerAttached</span><span class="s1">: () =&gt; !!</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;inspector&quot;</span><span class="s1">).</span><span class="s2">url</span><span class="s1">(),</span>
+  <span class="s2">isLogEnabled</span><span class="s1">(</span><span class="s2">name</span><span class="s1">) {</span>
+    <span class="s3">return </span><span class="s2">import_debugLogger</span><span class="s1">.</span><span class="s2">debugLogger</span><span class="s1">.</span><span class="s2">isEnabled</span><span class="s1">(</span><span class="s2">name</span><span class="s1">);</span>
+  <span class="s1">},</span>
+  <span class="s2">isUnderTest</span><span class="s1">: () =&gt; (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_debug</span><span class="s1">.</span><span class="s2">isUnderTest</span><span class="s1">)(),</span>
+  <span class="s2">log</span><span class="s1">(</span><span class="s2">name</span><span class="s1">, </span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s2">import_debugLogger</span><span class="s1">.</span><span class="s2">debugLogger</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s2">name</span><span class="s1">, </span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s1">},</span>
+  <span class="s2">path</span><span class="s1">: () =&gt; </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">,</span>
+  <span class="s2">pathSeparator</span><span class="s1">: </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">sep</span><span class="s1">,</span>
+  <span class="s2">showInternalStackFrames</span><span class="s1">: () =&gt; !!</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PWDEBUGIMPL</span><span class="s1">,</span>
+  <span class="s2">async streamFile</span><span class="s1">(</span><span class="s2">path2</span><span class="s1">, </span><span class="s2">stream</span><span class="s1">) {</span>
+    <span class="s3">await </span><span class="s2">pipelineAsync</span><span class="s1">(</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">createReadStream</span><span class="s1">(</span><span class="s2">path2</span><span class="s1">), </span><span class="s2">stream</span><span class="s1">);</span>
+  <span class="s1">},</span>
+  <span class="s2">streamReadable</span><span class="s1">: (</span><span class="s2">channel</span><span class="s1">) =&gt; {</span>
+    <span class="s3">return new </span><span class="s2">ReadableStreamImpl</span><span class="s1">(</span><span class="s2">channel</span><span class="s1">);</span>
+  <span class="s1">},</span>
+  <span class="s2">streamWritable</span><span class="s1">: (</span><span class="s2">channel</span><span class="s1">) =&gt; {</span>
+    <span class="s3">return new </span><span class="s2">WritableStreamImpl</span><span class="s1">(</span><span class="s2">channel</span><span class="s1">);</span>
+  <span class="s1">},</span>
+  <span class="s2">zones</span><span class="s1">: {</span>
+    <span class="s2">current</span><span class="s1">: () =&gt; </span><span class="s3">new </span><span class="s2">NodeZone</span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_zones</span><span class="s1">.</span><span class="s2">currentZone</span><span class="s1">)()),</span>
+    <span class="s2">empty</span><span class="s1">: </span><span class="s3">new </span><span class="s2">NodeZone</span><span class="s1">(</span><span class="s2">import_zones</span><span class="s1">.</span><span class="s2">emptyZone</span><span class="s1">)</span>
+  <span class="s1">}</span>
+<span class="s1">};</span>
+<span class="s3">class </span><span class="s2">ReadableStreamImpl </span><span class="s3">extends </span><span class="s2">import_stream</span><span class="s1">.</span><span class="s2">Readable </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">channel</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_channel </span><span class="s1">= </span><span class="s2">channel</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _read</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">read</span><span class="s1">({ </span><span class="s2">size</span><span class="s1">: </span><span class="s5">1024 </span><span class="s1">* </span><span class="s5">1024 </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">binary</span><span class="s1">.</span><span class="s2">byteLength</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">binary</span><span class="s1">);</span>
+    <span class="s3">else</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">null</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_destroy</span><span class="s1">(</span><span class="s2">error</span><span class="s1">, </span><span class="s2">callback</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">close</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s3">null</span><span class="s1">);</span>
+    <span class="s3">super</span><span class="s1">.</span><span class="s2">_destroy</span><span class="s1">(</span><span class="s2">error</span><span class="s1">, </span><span class="s2">callback</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">WritableStreamImpl </span><span class="s3">extends </span><span class="s2">import_stream</span><span class="s1">.</span><span class="s2">Writable </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">channel</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_channel </span><span class="s1">= </span><span class="s2">channel</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _write</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">encoding</span><span class="s1">, </span><span class="s2">callback</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">error </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">write</span><span class="s1">({ </span><span class="s2">binary</span><span class="s1">: </span><span class="s3">typeof </span><span class="s2">chunk </span><span class="s1">=== </span><span class="s0">&quot;string&quot; </span><span class="s1">? </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">) : </span><span class="s2">chunk </span><span class="s1">}).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s2">e</span><span class="s1">);</span>
+    <span class="s2">callback</span><span class="s1">(</span><span class="s2">error </span><span class="s1">|| </span><span class="s3">null</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async _final</span><span class="s1">(</span><span class="s2">callback</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">error </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_channel</span><span class="s1">.</span><span class="s2">close</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s2">e</span><span class="s1">);</span>
+    <span class="s2">callback</span><span class="s1">(</span><span class="s2">error </span><span class="s1">|| </span><span class="s3">null</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">nodePlatform</span><span class="s1">,</span>
+  <span class="s2">setBoxedStackPrefixes</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<html>
+<head>
+<title>relaxed-body.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #cf8e6d;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+relaxed-body.js</font>
+</center></td></tr></table>
+<pre><span class="s0">'use strict'</span><span class="s1">;</span>
+
+<span class="s3">// streams through a message body and calculates relaxed body hash</span>
+
+<span class="s4">const </span><span class="s2">Transform </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'stream'</span><span class="s1">).</span><span class="s2">Transform</span><span class="s1">;</span>
+<span class="s4">const </span><span class="s2">crypto </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'crypto'</span><span class="s1">);</span>
+
+<span class="s4">class </span><span class="s2">RelaxedBody </span><span class="s4">extends </span><span class="s2">Transform </span><span class="s1">{</span>
+    <span class="s2">constructor</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+        <span class="s4">super</span><span class="s1">();</span>
+        <span class="s2">options </span><span class="s1">= </span><span class="s2">options </span><span class="s1">|| {};</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">chunkBuffer </span><span class="s1">= [];</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">chunkBufferLen </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">bodyHash </span><span class="s1">= </span><span class="s2">crypto</span><span class="s1">.</span><span class="s2">createHash</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">hashAlgo </span><span class="s1">|| </span><span class="s0">'sha1'</span><span class="s1">);</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">remainder </span><span class="s1">= </span><span class="s0">''</span><span class="s1">;</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">byteLength </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">debug </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">;</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">_debugBody </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">debug </span><span class="s1">? [] : </span><span class="s4">false</span><span class="s1">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">updateHash</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">) {</span>
+        <span class="s4">let </span><span class="s2">bodyStr</span><span class="s1">;</span>
+
+        <span class="s3">// find next remainder</span>
+        <span class="s4">let </span><span class="s2">nextRemainder </span><span class="s1">= </span><span class="s0">''</span><span class="s1">;</span>
+
+        <span class="s3">// This crux finds and removes the spaces from the last line and the newline characters after the last non-empty line</span>
+        <span class="s3">// If we get another chunk that does not match this description then we can restore the previously processed data</span>
+        <span class="s4">let </span><span class="s2">state </span><span class="s1">= </span><span class="s0">'file'</span><span class="s1">;</span>
+        <span class="s4">for </span><span class="s1">(</span><span class="s4">let </span><span class="s2">i </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&gt;= </span><span class="s5">0</span><span class="s1">; </span><span class="s2">i</span><span class="s1">--) {</span>
+            <span class="s4">let </span><span class="s2">c </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i</span><span class="s1">];</span>
+
+            <span class="s4">if </span><span class="s1">(</span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'file' </span><span class="s1">&amp;&amp; (</span><span class="s2">c </span><span class="s1">=== </span><span class="s5">0x0a </span><span class="s1">|| </span><span class="s2">c </span><span class="s1">=== </span><span class="s5">0x0d</span><span class="s1">)) {</span>
+                <span class="s3">// do nothing, found \n or \r at the end of chunk, stil end of file</span>
+            <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'file' </span><span class="s1">&amp;&amp; (</span><span class="s2">c </span><span class="s1">=== </span><span class="s5">0x09 </span><span class="s1">|| </span><span class="s2">c </span><span class="s1">=== </span><span class="s5">0x20</span><span class="s1">)) {</span>
+                <span class="s3">// switch to line ending mode, this is the last non-empty line</span>
+                <span class="s2">state </span><span class="s1">= </span><span class="s0">'line'</span><span class="s1">;</span>
+            <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'line' </span><span class="s1">&amp;&amp; (</span><span class="s2">c </span><span class="s1">=== </span><span class="s5">0x09 </span><span class="s1">|| </span><span class="s2">c </span><span class="s1">=== </span><span class="s5">0x20</span><span class="s1">)) {</span>
+                <span class="s3">// do nothing, found ' ' or \t at the end of line, keep processing the last non-empty line</span>
+            <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'file' </span><span class="s1">|| </span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'line'</span><span class="s1">) {</span>
+                <span class="s3">// non line/file ending character found, switch to body mode</span>
+                <span class="s2">state </span><span class="s1">= </span><span class="s0">'body'</span><span class="s1">;</span>
+                <span class="s4">if </span><span class="s1">(</span><span class="s2">i </span><span class="s1">=== </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">) {</span>
+                    <span class="s3">// final char is not part of line end or file end, so do nothing</span>
+                    <span class="s4">break</span><span class="s1">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s4">if </span><span class="s1">(</span><span class="s2">i </span><span class="s1">=== </span><span class="s5">0</span><span class="s1">) {</span>
+                <span class="s3">// reached to the beginning of the chunk, check if it is still about the ending</span>
+                <span class="s3">// and if the remainder also matches</span>
+                <span class="s4">if </span><span class="s1">(</span>
+                    <span class="s1">(</span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'file' </span><span class="s1">&amp;&amp; (!</span><span class="s4">this</span><span class="s1">.</span><span class="s2">remainder </span><span class="s1">|| </span><span class="s6">/[\r\n]$/</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s4">this</span><span class="s1">.</span><span class="s2">remainder</span><span class="s1">))) ||</span>
+                    <span class="s1">(</span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'line' </span><span class="s1">&amp;&amp; (!</span><span class="s4">this</span><span class="s1">.</span><span class="s2">remainder </span><span class="s1">|| </span><span class="s6">/[ \t]$/</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s4">this</span><span class="s1">.</span><span class="s2">remainder</span><span class="s1">)))</span>
+                <span class="s1">) {</span>
+                    <span class="s3">// keep everything</span>
+                    <span class="s4">this</span><span class="s1">.</span><span class="s2">remainder </span><span class="s1">+= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">'binary'</span><span class="s1">);</span>
+                    <span class="s4">return</span><span class="s1">;</span>
+                <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'line' </span><span class="s1">|| </span><span class="s2">state </span><span class="s1">=== </span><span class="s0">'file'</span><span class="s1">) {</span>
+                    <span class="s3">// process existing remainder as normal line but store the current chunk</span>
+                    <span class="s2">nextRemainder </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">'binary'</span><span class="s1">);</span>
+                    <span class="s2">chunk </span><span class="s1">= </span><span class="s4">false</span><span class="s1">;</span>
+                    <span class="s4">break</span><span class="s1">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s4">if </span><span class="s1">(</span><span class="s2">state </span><span class="s1">!== </span><span class="s0">'body'</span><span class="s1">) {</span>
+                <span class="s4">continue</span><span class="s1">;</span>
+            <span class="s1">}</span>
+
+            <span class="s3">// reached first non ending byte</span>
+            <span class="s2">nextRemainder </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s2">i </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">).</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">'binary'</span><span class="s1">);</span>
+            <span class="s2">chunk </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">i </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">);</span>
+            <span class="s4">break</span><span class="s1">;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">let </span><span class="s2">needsFixing </span><span class="s1">= !!</span><span class="s4">this</span><span class="s1">.</span><span class="s2">remainder</span><span class="s1">;</span>
+        <span class="s4">if </span><span class="s1">(</span><span class="s2">chunk </span><span class="s1">&amp;&amp; !</span><span class="s2">needsFixing</span><span class="s1">) {</span>
+            <span class="s3">// check if we even need to change anything</span>
+            <span class="s4">for </span><span class="s1">(</span><span class="s4">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">0</span><span class="s1">, </span><span class="s2">len </span><span class="s1">= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">len</span><span class="s1">; </span><span class="s2">i</span><span class="s1">++) {</span>
+                <span class="s4">if </span><span class="s1">(</span><span class="s2">i </span><span class="s1">&amp;&amp; </span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] === </span><span class="s5">0x0a </span><span class="s1">&amp;&amp; </span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">1</span><span class="s1">] !== </span><span class="s5">0x0d</span><span class="s1">) {</span>
+                    <span class="s3">// missing \r before \n</span>
+                    <span class="s2">needsFixing </span><span class="s1">= </span><span class="s4">true</span><span class="s1">;</span>
+                    <span class="s4">break</span><span class="s1">;</span>
+                <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">i </span><span class="s1">&amp;&amp; </span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] === </span><span class="s5">0x0d </span><span class="s1">&amp;&amp; </span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">1</span><span class="s1">] === </span><span class="s5">0x20</span><span class="s1">) {</span>
+                    <span class="s3">// trailing WSP found</span>
+                    <span class="s2">needsFixing </span><span class="s1">= </span><span class="s4">true</span><span class="s1">;</span>
+                    <span class="s4">break</span><span class="s1">;</span>
+                <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">i </span><span class="s1">&amp;&amp; </span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] === </span><span class="s5">0x20 </span><span class="s1">&amp;&amp; </span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i </span><span class="s1">- </span><span class="s5">1</span><span class="s1">] === </span><span class="s5">0x20</span><span class="s1">) {</span>
+                    <span class="s3">// multiple spaces found, needs to be replaced with just one</span>
+                    <span class="s2">needsFixing </span><span class="s1">= </span><span class="s4">true</span><span class="s1">;</span>
+                    <span class="s4">break</span><span class="s1">;</span>
+                <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">[</span><span class="s2">i</span><span class="s1">] === </span><span class="s5">0x09</span><span class="s1">) {</span>
+                    <span class="s3">// TAB found, needs to be replaced with a space</span>
+                    <span class="s2">needsFixing </span><span class="s1">= </span><span class="s4">true</span><span class="s1">;</span>
+                    <span class="s4">break</span><span class="s1">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s4">if </span><span class="s1">(</span><span class="s2">needsFixing</span><span class="s1">) {</span>
+            <span class="s2">bodyStr </span><span class="s1">= </span><span class="s4">this</span><span class="s1">.</span><span class="s2">remainder </span><span class="s1">+ (</span><span class="s2">chunk </span><span class="s1">? </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">'binary'</span><span class="s1">) : </span><span class="s0">''</span><span class="s1">);</span>
+            <span class="s4">this</span><span class="s1">.</span><span class="s2">remainder </span><span class="s1">= </span><span class="s2">nextRemainder</span><span class="s1">;</span>
+            <span class="s2">bodyStr </span><span class="s1">= </span><span class="s2">bodyStr</span>
+                <span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s6">/\r?\n/g</span><span class="s1">, </span><span class="s0">'</span><span class="s4">\n</span><span class="s0">'</span><span class="s1">) </span><span class="s3">// use js line endings</span>
+                <span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s6">/[ \t]*$/gm</span><span class="s1">, </span><span class="s0">''</span><span class="s1">) </span><span class="s3">// remove line endings, rtrim</span>
+                <span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s6">/[ \t]+/gm</span><span class="s1">, </span><span class="s0">' '</span><span class="s1">) </span><span class="s3">// single spaces</span>
+                <span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s6">/\n/g</span><span class="s1">, </span><span class="s0">'</span><span class="s4">\r\n</span><span class="s0">'</span><span class="s1">); </span><span class="s3">// restore rfc822 line endings</span>
+            <span class="s2">chunk </span><span class="s1">= </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">bodyStr</span><span class="s1">, </span><span class="s0">'binary'</span><span class="s1">);</span>
+        <span class="s1">} </span><span class="s4">else if </span><span class="s1">(</span><span class="s2">nextRemainder</span><span class="s1">) {</span>
+            <span class="s4">this</span><span class="s1">.</span><span class="s2">remainder </span><span class="s1">= </span><span class="s2">nextRemainder</span><span class="s1">;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">if </span><span class="s1">(</span><span class="s4">this</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">) {</span>
+            <span class="s4">this</span><span class="s1">.</span><span class="s2">_debugBody</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+        <span class="s1">}</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">bodyHash</span><span class="s1">.</span><span class="s2">update</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+    <span class="s1">}</span>
+
+    <span class="s2">_transform</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">encoding</span><span class="s1">, </span><span class="s2">callback</span><span class="s1">) {</span>
+        <span class="s4">if </span><span class="s1">(!</span><span class="s2">chunk </span><span class="s1">|| !</span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">) {</span>
+            <span class="s4">return </span><span class="s2">callback</span><span class="s1">();</span>
+        <span class="s1">}</span>
+
+        <span class="s4">if </span><span class="s1">(</span><span class="s4">typeof </span><span class="s2">chunk </span><span class="s1">=== </span><span class="s0">'string'</span><span class="s1">) {</span>
+            <span class="s2">chunk </span><span class="s1">= </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">, </span><span class="s2">encoding</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">updateHash</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">byteLength </span><span class="s1">+= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+        <span class="s2">callback</span><span class="s1">();</span>
+    <span class="s1">}</span>
+
+    <span class="s2">_flush</span><span class="s1">(</span><span class="s2">callback</span><span class="s1">) {</span>
+        <span class="s3">// generate final hash and emit it</span>
+        <span class="s4">if </span><span class="s1">(</span><span class="s6">/[\r\n]$/</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s4">this</span><span class="s1">.</span><span class="s2">remainder</span><span class="s1">) &amp;&amp; </span><span class="s4">this</span><span class="s1">.</span><span class="s2">byteLength </span><span class="s1">&gt; </span><span class="s5">2</span><span class="s1">) {</span>
+            <span class="s3">// add terminating line end</span>
+            <span class="s4">this</span><span class="s1">.</span><span class="s2">bodyHash</span><span class="s1">.</span><span class="s2">update</span><span class="s1">(</span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s0">'</span><span class="s4">\r\n</span><span class="s0">'</span><span class="s1">));</span>
+        <span class="s1">}</span>
+        <span class="s4">if </span><span class="s1">(!</span><span class="s4">this</span><span class="s1">.</span><span class="s2">byteLength</span><span class="s1">) {</span>
+            <span class="s3">// emit empty line buffer to keep the stream flowing</span>
+            <span class="s4">this</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s0">'</span><span class="s4">\r\n</span><span class="s0">'</span><span class="s1">));</span>
+            <span class="s3">// this.bodyHash.update(Buffer.from('\r\n'));</span>
+        <span class="s1">}</span>
+
+        <span class="s4">this</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s0">'hash'</span><span class="s1">, </span><span class="s4">this</span><span class="s1">.</span><span class="s2">bodyHash</span><span class="s1">.</span><span class="s2">digest</span><span class="s1">(</span><span class="s0">'base64'</span><span class="s1">), </span><span class="s4">this</span><span class="s1">.</span><span class="s2">debug </span><span class="s1">? </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">concat</span><span class="s1">(</span><span class="s4">this</span><span class="s1">.</span><span class="s2">_debugBody</span><span class="s1">) : </span><span class="s4">false</span><span class="s1">);</span>
+        <span class="s2">callback</span><span class="s1">();</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">RelaxedBody</span><span class="s1">;</span>
+</pre>
+</body>
+</html>
