@@ -11,6 +11,8 @@
 export type { ContractorPayload, ContractorFixture } from './debtImporter';
 export type { PackageFixture, ContractFixture } from './debtCollection';
 export type { CourtSearchFixture } from './dcCourt';
+export type { FacsimileDetailDtoRs, FacsimileCreateUpdateDtoRq } from './openapi/facsimile';
+export type { PackageDetailsResponse, PackagePayload, PackageListResponse } from './openapi/package';
 
 export {
   getValidContractorPayload,
@@ -32,3 +34,23 @@ export {
   getValidBankruptCheckParams,
   getValidCourtData,
 } from './dcCourt';
+
+// OpenAPI фикстуры
+export {
+  getValidFacsimileDetail,
+  getValidFacsimileCreateUpdate,
+  getValidFacsimileList,
+  getFacsimileForLawyer,
+  FacsimileFixtureBuilder,
+} from './openapi/facsimile';
+
+export {
+  getValidPackage,
+  getValidPackagePayload,
+  getPackageWithStatus,
+  getPackageWithContracts,
+  getPackageStatusUpdatePayload,
+  getValidPackageList,
+  getPackageForLawyer,
+  PackageFixtureBuilder,
+} from './openapi/package';
