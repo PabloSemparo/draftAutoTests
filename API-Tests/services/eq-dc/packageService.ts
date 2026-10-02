@@ -19,7 +19,7 @@ import {
   PrintPayload,
   RecreateDocumentsPayload,
   RecreateSingleDocumentPayload,
-} from '../../models/openapi/package';
+} from '../../models/eq-dc/package';
 
 interface PackageServiceOptions extends ApiClientOptions {
   requireAuth?: boolean;

@@ -11,8 +11,8 @@
 export type { ContractorPayload, ContractorFixture } from './debtImporter';
 export type { PackageFixture, ContractFixture } from './debtCollection';
 export type { CourtSearchFixture } from './dcCourt';
-export type { FacsimileDetailDtoRs, FacsimileCreateUpdateDtoRq } from './openapi/facsimile';
-export type { PackageDetailsResponse, PackagePayload, PackageListResponse } from './openapi/package';
+export type { FacsimileDetailDtoRs, FacsimileCreateUpdateDtoRq } from './eq-dc/facsimile';
+export type { PackageDetailsResponse, PackagePayload, PackageListResponse } from './eq-dc/package';
 
 export {
   getValidContractorPayload,
@@ -42,7 +42,7 @@ export {
   getValidFacsimileList,
   getFacsimileForLawyer,
   FacsimileFixtureBuilder,
-} from './openapi/facsimile';
+} from './eq-dc/facsimile';
 
 export {
   getValidPackage,
@@ -53,4 +53,4 @@ export {
   getValidPackageList,
   getPackageForLawyer,
   PackageFixtureBuilder,
-} from './openapi/package';
+} from './eq-dc/package';

@@ -12,7 +12,7 @@ import {
   FacsimileListResponse,
   FacsimileCreateDtoRs,
   ErrorDtoRs,
-} from '../../models/openapi/facsimile';
+} from '../../models/eq-dc/facsimile';
 
 interface FacsimileServiceOptions extends ApiClientOptions {
   requireAuth?: boolean;

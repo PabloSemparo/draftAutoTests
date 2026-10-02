@@ -7,5 +7,5 @@ export * from './debtCollection';
 export * from './dcCourt';
 export * from './debtImporter';
 export * from './enforcementEvents';
-export * from './openapi/facsimile';
-export * from './openapi/package';
+export * from './eq-dc/facsimile';
+export * from './eq-dc/package';

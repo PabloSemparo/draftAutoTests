@@ -9,7 +9,7 @@ import type {
   PackagePayload,
   PackageListResponse,
   PackageStatusUpdatePayload
-} from '../../models/openapi/package';
+} from '../../models/eq-dc/package';
 
 /**
  * Генерация случайного UUID

@@ -8,7 +8,7 @@ import type {
   FacsimileDetailDtoRs, 
   FacsimileCreateUpdateDtoRq, 
   FacsimileListResponse 
-} from '../../models/openapi/facsimile';
+} from '../../models/eq-dc/facsimile';
 
 /**
  * Генерация случайного UUID
