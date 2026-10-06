@@ -1,4 +1,4 @@
-import type { ListResponse } from "./common";
+import type { ListResponse } from "@models/common";
 
 export interface ContractorPayload {
   name: string;

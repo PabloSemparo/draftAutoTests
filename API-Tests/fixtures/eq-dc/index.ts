@@ -3,4 +3,3 @@
  */
 
 export * from './facsimile';
-export * from './package';

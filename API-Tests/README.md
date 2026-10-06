@@ -17,14 +17,32 @@ API-Tests/
 │   ├── contract-utils.ts  # Утилиты для работы с договорами
 │   ├── base-test-utils.ts
 │   ├── assertions.ts
-│   ├── allure-config.ts
-│   └── boundary-values.ts
+│   ├── boundary-values.ts # Генерация граничных значений
+│   ├── migrate.ts         # Миграционные утилиты
+│   └── allure-config.ts   # Конфигурация Allure
+├── utils/                 # Базовые утилиты API (ApiClient, ApiResponse)
+│   ├── apiClient.ts       # Класс ApiClient для работы с API
+│   ├── apiRequest.ts      # Интерфейс ApiRequest
+│   ├── apiResponse.ts     # Интерфейс ApiResponse
+│   ├── allure-decorators.ts
+│   ├── allure-helpers.ts
+│   └── assertions.ts      # Базовые ассерты
 ├── config/
-│   └── apiConfig.ts
-├── models/                # Модели API ответов
-├── services/              # Сервисы для работы с API
+│   └── apiConfig.ts       # Централизованная конфигурация окружения
+├── models/                # TypeScript модели API ответов
+│   ├── common.ts          # Общие типы (ListResponse, ApiError)
+│   ├── debtCollection.ts
+│   ├── dcCourt.ts
+│   ├── debtImporter.ts
+│   ├── enforcementEvents.ts
+│   └── eq-dc/             # Модели для eq-debt-collection
+├── services/              # Service layer для работы с API
+│   ├── debtCollectionService.ts
+│   ├── dcCourtService.ts
+│   ├── debtImporterService.ts
+│   ├── enforcementService.ts
+│   └── eq-dc/             # Сервисы для eq-debt-collection
 ├── tests-data/            # Статические данные для тестов
-├── utils/                 # Вспомогательные утилиты
 ├── tests/                 # Тестовые наборы
 │   ├── eq-legal-collection/
 │   ├── eq-dc-court/
@@ -35,7 +53,10 @@ API-Tests/
 │   └── simple-contract.spec.ts
 ├── playwright.config.ts   # Конфигурация Playwright
 ├── tsconfig.api.json      # Конфигурация TypeScript
-└── REFACTORING.md         # Документация по рефакторингу
+├── CHANGELOG.md           # История изменений
+├── PATTERN.md             # Документация по паттернам
+├── REFACTORING.md         # Документация по рефакторингу
+└── USAGE.md               # Подробное руководство по использованию
 ```
 
 ## Использование
@@ -102,10 +123,38 @@ const contractData = getValidContractPayload({
 ### Утилиты
 
 ```typescript
-import { BaseTestUtils, PackageAssertions } from '../test-utils';
+import { BaseTestUtils, PackageAssertions, boundaryValues } from '../test-utils';
 
 await BaseTestUtils.setupAllure('Feature', 'Story', 'Description');
 BaseTestUtils.validatePackageResponseStructure(responseBody);
+
+// Генерация граничных значений
+const values = boundaryValues.generate(10, 100); // [9, 10, 11, 99, 100, 101]
+```
+
+### Базовые утилиты API (`utils/`)
+
+Файлы в `utils/` предоставляют низкоуровневые утилиты для работы с API:
+
+```typescript
+import { ApiClient, ApiResponse } from '../utils/apiClient';
+import { apiConfig, requireBaseUrl } from '../config/apiConfig';
+import { allure } from 'allure-playwright';
+
+// Использование ApiClient
+const client = new ApiClient(request, {
+    baseUrl: apiConfig.eqDebtCollection.baseUrl,
+    apiKey: process.env.API_KEY
+});
+
+const response: ApiResponse = await client.get({ url: '/api/v1/packages' });
+
+// Проверка статуса
+expect(response.status).toBe(200);
+expect(response.body).toBeDefined();
+
+// Прикрепление ответа к отчету Allure
+await allure.attachment('API Response', JSON.stringify(response.body, null, 2), 'application/json');
 ```
 
 ### Работа с договорами (Contracts)

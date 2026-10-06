@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Service layer для eq-debt-collection
  */
 
@@ -91,8 +91,8 @@ export class DebtCollectionService extends ApiClient {
   /**
    * Создание тестового пакета с использованием фикстур
    */
-  async createTestPackage(overrides: Record<string, unknown> = {}): Promise<ApiResponse<PackageResponse>> {
-    const payload = getValidDebtPackage(overrides);
+  async createTestPackage(overrides: Partial<Record<string, unknown>> = {}): Promise<ApiResponse<PackageResponse>> {
+    const payload = getValidDebtPackage(overrides) as unknown as PackagePayload;
     return this.createPackage(payload);
   }
 
@@ -110,3 +110,4 @@ export class DebtCollectionService extends ApiClient {
     return this.createTestPackage({ includedContracts: contractIds });
   }
 }
+

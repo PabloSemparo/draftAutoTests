@@ -12,7 +12,6 @@ import {
   PackageListResponse,
   PackageStatusUpdatePayload,
   PackageResponse,
-  ErrorDtoRs,
   FileInfoPayload,
   ExcludeDocumentPayload,
   ConvertToGasPayload,
@@ -20,6 +19,7 @@ import {
   RecreateDocumentsPayload,
   RecreateSingleDocumentPayload,
 } from '../../models/eq-dc/package';
+import type { ErrorDtoRs } from '../../models/eq-dc/facsimile';
 
 interface PackageServiceOptions extends ApiClientOptions {
   requireAuth?: boolean;
@@ -195,10 +195,10 @@ export class PackageService extends ApiClient {
    */
   protected handleErrorResponse(response: any): ErrorDtoRs {
     return {
-      status: {
-        code: response.status?.code || 'UNKNOWN_ERROR',
-        description: response.status?.description || 'Неизвестная ошибка',
-      },
+      status: response.status ? {
+        code: response.status.code,
+        description: response.status.description,
+      } : undefined,
       errors: response.errors,
       details: response.details,
     };

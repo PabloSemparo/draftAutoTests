@@ -75,7 +75,8 @@ export class AllureConfig {
     if (body.constructor.name === 'AsyncFunction') {
       return await AllureDecorators.step(name, body as () => Promise<T>);
     } else {
-      return AllureDecorators.stepSync(name, body as () => T);
+      // stepSync может отсутствовать в старых версиях Allure
+      return AllureDecorators.step(name, async () => body() as T);
     }
   }
 }

@@ -4,7 +4,7 @@
  */
 
 import { faker } from '@faker-js/faker/locale/ru';
-import type { FixtureBuilder, PackageFixture, ContractFixture, BaseResponse, ListResponse, ApiError, ApiResponse } from './types';
+import type { FixtureBuilder, PackageFixture, ContractFixture, BaseResponse, ListResponse, ApiError } from './types';
 
 // Генерация случайного UUID
 const generateUUID = (): string => {
@@ -37,7 +37,7 @@ const generateCreatedAt = (): string => {
 };
 
 // Реализация фикстуры пакета долгов
-export const getValidDebtPackage = (overrides: Record<string, unknown> = {}): Record<string, unknown> => {
+export const getValidDebtPackage = (overrides: Partial<Record<string, unknown>> = {}): Record<string, unknown> => {
   return {
     id: generateUUID(),
     number: generatePackageNumber(),

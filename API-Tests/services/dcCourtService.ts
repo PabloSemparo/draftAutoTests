@@ -88,8 +88,8 @@ export class DcCourtService extends ApiClient {
   /**
    * Создание фиктивного элемента поиска судов
    */
-  getTestCourtSearchItem(overrides: Record<string, unknown> = {}): CourtSearchItem {
-    return getValidCourtSearchItem(overrides);
+  getTestCourtSearchItem(overrides: Partial<Record<string, unknown>> = {}): CourtSearchItem {
+    return getValidCourtSearchItem(overrides) as unknown as CourtSearchItem;
   }
 }
 

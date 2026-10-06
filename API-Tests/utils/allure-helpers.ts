@@ -2,6 +2,8 @@
  * Вспомогательные функции для Allure
  */
 
+import { allure } from 'allure-playwright';
+
 export class AllureHelpers {
   /**
    * Прикрепление ответа API к отчету
@@ -35,6 +37,10 @@ export class AllureHelpers {
    * Запуск теста с именем и описанием
    */
   static async startTest(name: string, description?: string): Promise<void> {
-    await allure.test(name, description);
+    // allure.test может отсутствовать в старых версиях Allure
+    // Используем allure.label для установки имени и описания
+    if (description) {
+      await allure.label('Description', description);
+    }
   }
 }

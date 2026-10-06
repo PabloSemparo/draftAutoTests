@@ -37,10 +37,22 @@ export interface CourtSearchFixture extends FixtureBuilder<unknown> {
 export type { BaseResponse } from '../models/common';
 export type { ListResponse } from '../models/common';
 export type { ApiError } from '../models/eq-dc/facsimile';
-export type { ApiResponse } from '../models/eq-dc/facsimile';
 
-// Импортируем типы из debtImporter
-export type { ContractorPayload, ContractorResponse, ContractImportPayload, ContractImportResponse, ContractResponse } from '../models/debtImporter';
+// Определение типов из debtImporter (для избежания проблем с относительными импортами)
+export interface ContractorPayload {
+  name: string;
+  description?: string;
+  inn: string;
+  status: string;
+  contract?: Record<string, unknown>;
+  contractAnnex?: Record<string, unknown>;
+  contractDebt?: Record<string, unknown>;
+  debt?: Record<string, unknown>;
+}
+
+export interface ContractorResponse extends ContractorPayload {
+  id: string;
+}
 
 // Типы для договоров (Contracts)
 // Используем CreateContractRequest и CreateContractResponse из test-utils/contract-utils.ts

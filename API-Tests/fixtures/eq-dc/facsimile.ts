@@ -7,8 +7,13 @@ import { faker } from '@faker-js/faker/locale/ru';
 import type { 
   FacsimileDetailDtoRs, 
   FacsimileCreateUpdateDtoRq, 
-  FacsimileListResponse 
+  FacsimileListResponse,
+  ErrorDtoRs,
+  ApiError 
 } from '../../models/eq-dc/facsimile';
+
+// Экспорт типов для использования в fixtures/types.ts
+export type { FacsimileDetailDtoRs, FacsimileCreateUpdateDtoRq, FacsimileListResponse, ErrorDtoRs, ApiError };
 
 /**
  * Генерация случайного UUID

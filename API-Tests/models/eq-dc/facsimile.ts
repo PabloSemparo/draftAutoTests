@@ -42,9 +42,9 @@ export interface FacsimileListResponse {
 }
 
 export interface ErrorDtoRs {
-  status: {
-    code: string;
-    description: string;
+  status?: {
+    code?: string;
+    description?: string;
   };
   errors?: ApiError[];
   details?: Record<string, unknown>;

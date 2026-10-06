@@ -12,7 +12,6 @@
 // Используем ContractorFixture и ContractorPayload из debtImporter.ts
 // Экспортируем типы из eq-dc/facsimile.ts
 export type { FacsimileDetailDtoRs, FacsimileCreateUpdateDtoRq, FacsimileListResponse } from './eq-dc/facsimile';
-export type { PackageDetailsResponse, PackagePayload, PackageListResponse, PackageStatusUpdatePayload } from './eq-dc/package';
 
 export {
   getValidContractorPayload,
@@ -46,17 +45,6 @@ export {
   getFacsimileForLawyer,
   FacsimileFixtureBuilder,
 } from './eq-dc/facsimile';
-
-export {
-  getValidPackage,
-  getValidPackagePayload,
-  getPackageWithStatus,
-  getPackageWithContracts,
-  getPackageStatusUpdatePayload,
-  getValidPackageList,
-  getPackageForLawyer,
-  PackageFixtureBuilder,
-} from './eq-dc/package';
 
 // Фикстуры для договоров (Contracts)
 export {

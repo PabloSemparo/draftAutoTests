@@ -5,6 +5,13 @@ export interface ListResponse<T> {
   pageSize?: number;
 }
 
+export interface BaseResponse {
+  status?: {
+    code?: string;
+    description?: string;
+  };
+}
+
 export interface ApiErrorItem {
   code?: string;
   description?: string;

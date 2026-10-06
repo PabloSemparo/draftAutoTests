@@ -47,7 +47,7 @@ export class BaseTestUtils {
   /**
    * Логирование шага в Allure отчете
    */
-  static async logStep(name: string, action: () => Promise<void> | void): Promise<void> {
+  static async logStep(name: string, action: () => Promise<void>): Promise<void> {
     await allure.step(name, action);
   }
 
@@ -225,7 +225,7 @@ export class BaseTestUtils {
     ).toBe(true);
 
     // Валидация поля ответственного юриста
-    this.validateResponsibleLawyerId(responseBody.responsibleLawyerId);
+    this.validateResponsibleLawyerId(responseBody.responsibleLawyerId as string | null);
   }
 
   /**

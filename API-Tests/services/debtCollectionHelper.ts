@@ -4,7 +4,7 @@
  */
 
 import { getValidDebtPackage } from '../fixtures/debtCollection';
-import type { DebtCollectionServiceOptions } from './debtCollectionService';
+// DebtCollectionServiceOptions - не существует, используем DebtCollectionService
 
 /**
  * Создание тестового пакета долгов с использованием фикстур

@@ -166,3 +166,35 @@ export class DebtImporterService extends ApiClient {
     return this.createTestContractImport(contractorId, directories);
   }
 }
+
+// === Вспомогательные функции ===
+
+/** Сборщик полезной нагрузки для импорта контракта */
+export function buildContractImportPayload(
+  contractorId: string,
+  overrides?: Partial<ContractImportPayload>
+): ContractImportPayload {
+  const basePayload: ContractImportPayload = {
+    contractorId,
+    assignmentNumber: `ASSIGN-${Date.now()}`,
+    assigmentDate: new Date().toISOString().split('T')[0],
+    contractDirectory: `/contracts/${Date.now()}`,
+    contractAnnexDirectory: `/annexes/${Date.now()}`,
+    debtDirectory: `/debts/${Date.now()}`,
+    fileDirectory: `/files/${Date.now()}`,
+  };
+
+  return overrides ? { ...basePayload, ...overrides } : basePayload;
+}
+
+/** Сборщик полезной нагрузки для контрактора */
+export function buildContractorPayload(params?: Partial<ContractorPayload>): ContractorPayload {
+  const basePayload: ContractorPayload = {
+    name: '',
+    description: '',
+    inn: '',
+    status: '',
+  };
+
+  return params ? { ...basePayload, ...params } : basePayload;
+}

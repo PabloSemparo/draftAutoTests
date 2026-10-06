@@ -22,4 +22,4 @@ export {
 } from './contract-utils';
 
 // Типы для удобства - экспортируются из fixtures/types.ts
-export type { BaseResponse, ListResponse, ApiError, ApiResponse } from '../fixtures/types';
+export type { BaseResponse, ListResponse, ApiError } from '../fixtures/types';
