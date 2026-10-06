@@ -68,3 +68,82 @@ export interface ApiResponse<T = unknown> {
   errors?: ApiError[];
   details?: Record<string, unknown>;
 }
+
+// Типы для договоров (Contracts)
+export interface CreateContractRequest {
+  type?: string;
+  properties?: {
+    companyId?: string;
+    registerName?: string;
+    name?: string;
+    contractOuterSystemId?: string;
+    contractOuterSystemName?: string;
+    importedContractPackageId?: string;
+    contractNumber?: string;
+    signDate?: string;
+    plannedFinishDate?: string;
+    dueDate?: string;
+    percentStopDate?: string;
+    statusCreditPipeline?: string;
+    fundingChannel?: string;
+    receiveChannel?: string;
+    loanType?: string;
+    microfinanceLineNumber?: string;
+    loanAmount?: number;
+    debtPercentRate?: number;
+    debtLoanTermDays?: number;
+    debtAnnualInterestRate?: number;
+    debtAmountDebtOnDatePay?: number;
+    debtAmountInterestPayDateReturn?: number;
+    debtAmountInterestPerDayReturn?: number;
+    debtAmountPercentPerDayStopInterest?: number;
+    debtAmountPenaltyPerDayStopInterest?: number;
+    debtAmountFinePerDayStopInterest?: number;
+    paymentProvider?: string;
+    clientId?: string;
+    employeeId?: string;
+    bailiffDepartmentId?: string;
+    fullRepaymentDebtDate?: string;
+    fullRepaymentDebtChannelName?: string;
+    fullRepaymentDebtRegistrationDate?: string;
+    documentsWithdrawalDate?: string;
+    collectionTerminateDecisionRegistrationDate?: string;
+    clientDeathDate?: string;
+    loanFraudulentRecognitionDate?: string;
+    clientBankruptcyRecognitionDate?: string;
+    collectionStoppedByCompanyDecisionDate?: string;
+    collectionTerminateReasonId?: null;
+    wronglyBroughtToCollection?: boolean;
+    comment?: string;
+    pensionDepartmentId?: null;
+    stoppingAccrualsIdentifiers?: string[];
+    isRefinancing?: boolean;
+    cardNumber?: string;
+    bki?: {
+      nameBki?: string[];
+      idLoanBki?: string;
+    };
+    previousOwner?: {
+      previousOwnerOfTheContract?: string;
+      contractSaleDate?: null;
+      inn?: string;
+      counteragentId?: string;
+      cessionContractNumber?: string;
+    };
+    contractNumber1C?: null;
+    interactionRefusal?: boolean;
+    monthlyPayment?: number;
+    extendedContractExpirationDate?: string;
+    prolongationSign?: boolean;
+    pti?: number;
+    extendedLoanTerm?: number;
+    bailiffDepartmentCode?: string;
+  };
+}
+
+// Интерфейс для ответа создания договора
+export interface CreateContractResponse {
+  result: {
+    id: string;
+  };
+}
