@@ -1,0 +1,4 @@
+Error: Project(s) "stage" not found. Available projects: "chromium"
+    at filterProjects (C:\Users\user\WebstormProjects\EQVCOL_AT\node_modules\playwright\lib\runner\projectUtils.js:80:11)
+    at runTests (C:\Users\user\WebstormProjects\EQVCOL_AT\node_modules\playwright\lib\program.js:217:42)
+    at i.<anonymous> (C:\Users\user\WebstormProjects\EQVCOL_AT\node_modules\playwright\lib\program.js:71:7)

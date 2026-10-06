@@ -9,7 +9,7 @@ import { test, expect } from '@playwright/test';
 import { createContract, getGlobalContractId, setGlobalContractId, ContractUtils } from '../test-utils';
 
 // Константы для тестов
-const BASE_URL = process.env.BASE_URL || 'https://lc.preprod.mmk.local:8080';
+const BASE_URL = 'https://lc.preprod.mmk.local:8080';
 
 // Пример тела запроса для создания договора
 const contractData = {

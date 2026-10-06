@@ -10,6 +10,12 @@ import dotenv from 'dotenv';
  *   Запуск с UI: npx playwright test --ui
  *   Запуск с отладкой: npx playwright test --debug
  *   Генерация отчета: npx allure generate allure-results --clean -o allure-report
+ * 
+ * Для тестов с HTTPS (lc.preprod.mmk.local:8080) используется SSL renegotiation.
+ * Если возникает ошибка "unsafe legacy renegotiation disabled", запустите с:
+ *   NODE_TLS_REJECT_UNAUTHORIZED=0 npx playwright test
+ * 
+ * Подробности см. в API-Tests/SSL-FIX.md
  */
 
 // Загрузка переменных окружения
@@ -57,6 +63,11 @@ export default defineConfig({
 
     // Аккуратное завершение
     exit: true,
+
+    // Игнорировать ошибки HTTPS для API тестов (解决 SSL renegotiation ошибка)
+    // Этот флаг должен быть установлен на уровне APIRequestContext
+    // но Playwright не предоставляет прямого способа это сделать в конфиге
+    // Поэтому используем env переменную NODE_TLS_REJECT_UNAUTHORIZED=0
   },
 
   // Конфигурация проектов (для разных окружений)
