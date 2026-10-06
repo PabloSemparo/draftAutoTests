@@ -4,7 +4,7 @@
  */
 
 import { faker } from '@faker-js/faker/locale/ru';
-import type { FixtureBuilder, ContractorFixture, ContractFixture } from './types';
+import type { FixtureBuilder, ContractorFixture, ContractFixture, PackageFixture, CourtSearchFixture, BaseResponse, ListResponse, ApiError, ApiResponse } from './types';
 import type {
   ContractorPayload,
   ContractorResponse,
@@ -97,6 +97,9 @@ export const getValidContract = (overrides: Record<string, unknown> = {}): Recor
     ...overrides,
   };
 };
+
+// Экспорт типов для совместимости
+export type { ContractorPayload, ContractorResponse, ContractImportPayload, ContractImportResponse } from '../models/debtImporter';
 
 // Экспорт для совместимости со старым кодом
 export const buildContractorPayload = getValidContractorPayload;

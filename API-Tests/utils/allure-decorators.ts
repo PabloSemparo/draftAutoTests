@@ -1,11 +1,11 @@
 /**
- * Allure декораторы - централизованное управление Allure метаданными
+ * Allure helpers - централизованное управление Allure метаданными
  */
 
 import { allure } from 'allure-playwright';
 
 /**
- * Класс для удобного управления Allure отчетами
+ * Класс для удобного управления Allure метаданными
  */
 export class AllureDecorators {
   /**
@@ -32,7 +32,9 @@ export class AllureDecorators {
   /**
    * Установка критичности
    */
-  static async severity(severity: 'blocker' | 'critical' | 'normal' | 'minor' | 'trivial'): Promise<void> {
+  static async severity(
+    severity: 'blocker' | 'critical' | 'normal' | 'minor' | 'trivial'
+  ): Promise<void> {
     await allure.severity(severity);
   }
 
@@ -46,65 +48,101 @@ export class AllureDecorators {
   /**
    * Прикрепление JSON данных
    */
-  static async attachJson(name: string, data: unknown): Promise<void> {
-    await allure.attachment(name, JSON.stringify(data, null, 2), 'application/json');
+  static async attachJson(
+    name: string,
+    data: unknown
+  ): Promise<void> {
+    await allure.attachment(
+      name,
+      JSON.stringify(data, null, 2),
+      'application/json'
+    );
   }
 
   /**
-   * Прикрепление текстового файла
+   * Прикрепление текстовых данных
    */
-  static async attachText(name: string, text: string): Promise<void> {
-    await allure.attachment(name, text, 'text/plain');
+  static async attachText(
+    name: string,
+    text: string
+  ): Promise<void> {
+    await allure.attachment(
+      name,
+      text,
+      'text/plain'
+    );
   }
 
   /**
-   * Создание шага (асинхронный)
+   * Создание Allure шага.
+   *
+   * В Legacy API allure.step() не возвращает результат callback.
+   * Поэтому результат сохраняется отдельно и возвращается после выполнения шага.
    */
-  static async step<T>(name: string, body: () => Promise<T>): Promise<T> {
-    return await allure.step(name, body);
-  }
+  static async step<T>(
+    name: string,
+    body: () => T | Promise<T>
+  ): Promise<T> {
+    let result!: T;
 
-  /**
-   * Создание шага (синхронный)
-   */
-  static stepSync<T>(name: string, body: () => T): T {
-    return allure.step(name, body);
+    await allure.step(name, async () => {
+      result = await body();
+    });
+
+    return result;
   }
 
   /**
    * Установка параметра
    */
-  static async parameter(name: string, value: string | number | boolean): Promise<void> {
-    await allure.parameter(name, String(value));
+  static async parameter(
+    name: string,
+    value: string | number | boolean
+  ): Promise<void> {
+    await allure.parameter(
+      name,
+      String(value)
+    );
   }
 
   /**
    * Установка родительского сьюта
    */
-  static async parentSuite(suite: string): Promise<void> {
+  static async parentSuite(
+    suite: string
+  ): Promise<void> {
     await allure.parentSuite(suite);
   }
 
   /**
    * Установка сьюта
    */
-  static async suite(suite: string): Promise<void> {
+  static async suite(
+    suite: string
+  ): Promise<void> {
     await allure.suite(suite);
   }
 
   /**
    * Установка подсьюта
    */
-  static async subSuite(subSuite: string): Promise<void> {
+  static async subSuite(
+    subSuite: string
+  ): Promise<void> {
     await allure.subSuite(subSuite);
   }
+}
 
-  /**
-   * Установка селектора
-   */
-  static async selector(selector: string): Promise<void> {
-    await allure.selector(selector);
-  }
+/**
+ * Минимальный интерфейс API response,
+ * необходимый для прикрепления ответа к Allure.
+ */
+interface ApiResponse {
+  headers?: {
+    get(name: string): string | null;
+  };
+
+  text(): Promise<string>;
 }
 
 /**
@@ -114,19 +152,41 @@ export class AllureHelpers {
   /**
    * Прикрепление ответа API к отчету
    */
-  static async attachApiResponse(response: any, name: string = 'API Response'): Promise<void> {
-    const contentType = response.headers?.get('content-type');
+  static async attachApiResponse(
+    response: ApiResponse,
+    name: string = 'API Response'
+  ): Promise<void> {
+    const contentType =
+      response.headers?.get('content-type');
+
     const body = await response.text();
 
     if (contentType?.includes('application/json')) {
-      await AllureDecorators.attachJson(name, JSON.parse(body));
-    } else {
-      await AllureDecorators.attachText(name, body);
+      try {
+        const jsonBody: unknown = JSON.parse(body);
+
+        await AllureDecorators.attachJson(
+          name,
+          jsonBody
+        );
+      } catch {
+        await AllureDecorators.attachText(
+          name,
+          body
+        );
+      }
+
+      return;
     }
+
+    await AllureDecorators.attachText(
+      name,
+      body
+    );
   }
 
   /**
-   * Прикрепление информации о окружении
+   * Прикрепление информации об окружении
    */
   static async attachEnvironmentInfo(): Promise<void> {
     const envInfo = {
@@ -136,16 +196,14 @@ export class AllureHelpers {
       BRANCH: process.env.BRANCH,
     };
 
-    await AllureDecorators.attachJson('Environment Info', envInfo);
-  }
-
-  /**
-   * Запуск теста с именем и описанием
-   */
-  static async startTest(name: string, description?: string): Promise<void> {
-    await allure.test(name, description);
+    await AllureDecorators.attachJson(
+      'Environment Info',
+      envInfo
+    );
   }
 }
 
-// Экспорт утилит для удобства
-export { AllureDecorators as Allure, AllureHelpers };
+/**
+ * Короткий алиас для AllureDecorators.
+ */
+export const Allure = AllureDecorators;

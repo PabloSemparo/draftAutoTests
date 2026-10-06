@@ -38,20 +38,14 @@ export interface PackageStatusUpdatePayload {
   statusCode: string;
 }
 
-export interface ErrorDtoRs {
-  status: {
+export interface PackageResponse extends PackageDetailsResponse {
+  status?: {
     code: string;
     description: string;
   };
-  errors?: ApiError[];
-  details?: Record<string, unknown>;
 }
 
-export interface ApiError {
-  key: string;
-  code: string;
-  description: string;
-}
+// Используем ApiError из models/eq-dc/facsimile.ts
 
 // Для update FileInfo
 export interface FileInfoPayload {

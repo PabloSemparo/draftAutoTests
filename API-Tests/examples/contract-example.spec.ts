@@ -6,7 +6,7 @@
  */
 
 import { test, expect } from '@playwright/test';
-import { createContract, getGlobalContractId, setGlobalContractId, ContractUtils } from '../test-utils/contract-utils';
+import { createContract, getGlobalContractId, setGlobalContractId, ContractUtils } from '../test-utils';
 
 // Константы для тестов
 const BASE_URL = process.env.BASE_URL || 'https://lc.preprod.mmk.local:8080';

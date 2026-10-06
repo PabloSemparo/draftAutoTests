@@ -3,8 +3,8 @@
  * Централизованное управление настройками отчетов
  */
 
-import { AllureDecorators } from './allure-decorators';
-import { AllureHelpers } from './allure-helpers';
+import { AllureDecorators } from '../utils/allure-decorators';
+import { AllureHelpers } from '../utils/allure-helpers';
 
 /**
  * Класс для удобного управления Allure отчетами

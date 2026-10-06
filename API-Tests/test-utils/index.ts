@@ -21,5 +21,5 @@ export {
     GLOBAL_CONTRACT_ID_KEY
 } from './contract-utils';
 
-// Типы для удобства
+// Типы для удобства - экспортируются из fixtures/types.ts
 export type { BaseResponse, ListResponse, ApiError, ApiResponse } from '../fixtures/types';

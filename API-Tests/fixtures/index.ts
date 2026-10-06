@@ -9,11 +9,10 @@
  * - Переопределяйте поля через overrides для кастомизации
  */
 
-export type { ContractorPayload, ContractorFixture } from './debtImporter';
-export type { PackageFixture, ContractFixture } from './debtCollection';
-export type { CourtSearchFixture } from './dcCourt';
-export type { FacsimileDetailDtoRs, FacsimileCreateUpdateDtoRq } from './eq-dc/facsimile';
-export type { PackageDetailsResponse, PackagePayload, PackageListResponse } from './eq-dc/package';
+// Используем ContractorFixture и ContractorPayload из debtImporter.ts
+// Экспортируем типы из eq-dc/facsimile.ts
+export type { FacsimileDetailDtoRs, FacsimileCreateUpdateDtoRq, FacsimileListResponse } from './eq-dc/facsimile';
+export type { PackageDetailsResponse, PackagePayload, PackageListResponse, PackageStatusUpdatePayload } from './eq-dc/package';
 
 export {
   getValidContractorPayload,
@@ -28,6 +27,9 @@ export {
   getValidContract,
   getDebtPackageWithStatus,
   getDebtPackageWithContracts,
+  buildTestPackage,
+  buildTestContract,
+  buildDebtPackage,
 } from './debtCollection';
 
 export {
@@ -64,5 +66,4 @@ export {
   ContractOptions,
 } from './contract';
 
-// Типы для договоров
-export type { CreateContractRequest, CreateContractResponse } from '../test-utils/contract-utils';
+// Типы для договоров - экспортируются из test-utils/contract-utils.ts

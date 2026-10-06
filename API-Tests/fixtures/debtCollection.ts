@@ -4,7 +4,7 @@
  */
 
 import { faker } from '@faker-js/faker/locale/ru';
-import type { FixtureBuilder, PackageFixture, ContractFixture } from './types';
+import type { FixtureBuilder, PackageFixture, ContractFixture, BaseResponse, ListResponse, ApiError, ApiResponse } from './types';
 
 // Генерация случайного UUID
 const generateUUID = (): string => {
@@ -111,31 +111,28 @@ export class DebtCollectionContractFixture implements ContractFixture {
     return getValidContract();
   }
 
-  withOverrides(overrides: Record<string, unknown>): ContractFixture {
-    this.contract = { ...this.contract, ...overrides };
-    return this;
+  withOverrides(overrides: Partial<Record<string, unknown>>): Record<string, unknown> {
+    return { ...this.contract, ...overrides };
   }
 
-  withInputFields(fields: Record<string, unknown>[]): ContractFixture {
-    this.contract = {
+  withInputFields(fields: Record<string, unknown>[]): Record<string, unknown> {
+    return {
       ...this.contract,
       contract: {
-        ...this.contract.contract,
+        ...(this.contract.contract as Record<string, unknown> | undefined),
         inputFields: fields,
       },
     };
-    return this;
   }
 
-  withCalculateType(type: string): ContractFixture {
-    this.contract = {
+  withCalculateType(type: string): Record<string, unknown> {
+    return {
       ...this.contract,
       contract: {
-        ...this.contract.contract,
+        ...(this.contract.contract as Record<string, unknown> | undefined),
         calculateType: type,
       },
     };
-    return this;
   }
 
   build(): Record<string, unknown> {

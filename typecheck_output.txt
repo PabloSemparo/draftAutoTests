@@ -1,0 +1,28 @@
+API-Tests/fixtures/index.ts(14,15): error TS2459: Module '"./eq-dc/facsimile"' declares 'FacsimileDetailDtoRs' locally, but it is not exported.
+API-Tests/fixtures/index.ts(14,37): error TS2459: Module '"./eq-dc/facsimile"' declares 'FacsimileCreateUpdateDtoRq' locally, but it is not exported.
+API-Tests/fixtures/index.ts(14,65): error TS2459: Module '"./eq-dc/facsimile"' declares 'FacsimileListResponse' locally, but it is not exported.
+API-Tests/fixtures/index.ts(15,15): error TS2459: Module '"./eq-dc/package"' declares 'PackageDetailsResponse' locally, but it is not exported.
+API-Tests/fixtures/index.ts(15,39): error TS2459: Module '"./eq-dc/package"' declares 'PackagePayload' locally, but it is not exported.
+API-Tests/fixtures/index.ts(15,55): error TS2459: Module '"./eq-dc/package"' declares 'PackageListResponse' locally, but it is not exported.
+API-Tests/fixtures/index.ts(15,76): error TS2724: '"./eq-dc/package"' has no exported member named 'PackageStatusUpdatePayload'. Did you mean 'getPackageStatusUpdatePayload'?
+API-Tests/fixtures/types.ts(12,59): error TS2304: Cannot find name 'ContractorPayload'.
+API-Tests/fixtures/types.ts(13,31): error TS2304: Cannot find name 'ContractorPayload'.
+API-Tests/fixtures/types.ts(14,58): error TS2304: Cannot find name 'ContractorPayload'.
+API-Tests/fixtures/types.ts(37,15): error TS2305: Module '"../models/common"' has no exported member 'BaseResponse'.
+API-Tests/fixtures/types.ts(40,15): error TS2305: Module '"../models/eq-dc/facsimile"' has no exported member 'ApiResponse'.
+API-Tests/services/dcCourtService.ts(92,5): error TS2739: Type 'Record<string, unknown>' is missing the following properties from type 'CourtSearchItem': id, name, address
+API-Tests/services/debtCollectionHelper.ts(7,15): error TS2724: '"./debtCollectionService"' has no exported member named 'DebtCollectionServiceOptions'. Did you mean 'DebtCollectionService'?
+API-Tests/services/debtCollectionService.ts(96,31): error TS2345: Argument of type 'Record<string, unknown>' is not assignable to parameter of type 'PackagePayload'.
+  Type 'Record<string, unknown>' is missing the following properties from type 'PackagePayload': typeId, statusCode, includedContracts
+API-Tests/services/eq-dc/packageService.ts(15,3): error TS2305: Module '"../../models/eq-dc/package"' has no exported member 'ErrorDtoRs'.
+API-Tests/test-utils/allure-config.ts(78,31): error TS2339: Property 'stepSync' does not exist on type 'typeof AllureDecorators'.
+API-Tests/test-utils/base-test-utils.ts(51,29): error TS2345: Argument of type '() => void | Promise<void>' is not assignable to parameter of type '() => Promise<void>'.
+  Type 'void | Promise<void>' is not assignable to type 'Promise<void>'.
+    Type 'void' is not assignable to type 'Promise<void>'.
+API-Tests/test-utils/base-test-utils.ts(228,38): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contract-imports.spec.ts(4,31): error TS2305: Module '"../../services/debtImporterService"' has no exported member 'buildContractImportPayload'.
+API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contract-imports.spec.ts(4,59): error TS2305: Module '"../../services/debtImporterService"' has no exported member 'buildContractorPayload'.
+API-Tests/utils/allure-helpers.ts(14,13): error TS2304: Cannot find name 'allure'.
+API-Tests/utils/allure-helpers.ts(16,13): error TS2304: Cannot find name 'allure'.
+API-Tests/utils/allure-helpers.ts(31,11): error TS2304: Cannot find name 'allure'.
+API-Tests/utils/allure-helpers.ts(38,11): error TS2304: Cannot find name 'allure'.
