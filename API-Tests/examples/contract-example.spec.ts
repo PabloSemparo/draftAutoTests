@@ -50,6 +50,10 @@ const contractData = {
 test('Пример 1: Простое создание договора', async ({ request }) => {
     console.log('\n=== Пример 1: Простое создание договора ===\n');
     
+    // Демонстрация использования AUTH_TOKEN
+    console.log(`Используем токен авторизации: Bearer ${AUTH_TOKEN.substring(0, 20)}...`);
+    console.log(`URL: ${BASE_URL}`);
+    
     // Создаем договор (без передачи request - используется внутренний APIRequestContext)
     const contractId = await createContract(contractData, BASE_URL);
     
@@ -63,6 +67,10 @@ test('Пример 1: Простое создание договора', async (
 // Тест 2: Использование глобальной переменной CONTRACT
 test('Пример 2: Использование глобальной переменной CONTRACT', async ({ request }) => {
     console.log('\n=== Пример 2: Использование глобальной переменной CONTRACT ===\n');
+    
+    // Демонстрация использования AUTH_TOKEN
+    console.log(`Используем токен авторизации: Bearer ${AUTH_TOKEN.substring(0, 20)}...`);
+    console.log(`URL: ${BASE_URL}`);
     
     // Создаем договор (без передачи request - используется внутренний APIRequestContext)
     const contractId = await createContract(contractData, BASE_URL);
@@ -112,9 +120,40 @@ test('Пример 4: Использование ID в следующем тес
     console.log(`✅ ID договора сохранен для следующего теста: ${contractId}`);
 });
 
-// Тест 5: Использование ContractUtils
-test('Пример 5: Использование ContractUtils', async ({ request }) => {
-    console.log('\n=== Пример 5: Использование ContractUtils ===\n');
+// Тест 5: Ручная авторизация с использованием AUTH_TOKEN
+test('Пример 5: Ручная авторизация с AUTH_TOKEN', async ({ request }) => {
+    console.log('\n=== Пример 5: Ручная авторизация с AUTH_TOKEN ===\n');
+    
+    // Демонстрация использования AUTH_TOKEN напрямую
+    console.log(`Используем токен авторизации: Bearer ${AUTH_TOKEN.substring(0, 20)}...`);
+    
+    // Пример ручного запроса с заголовком Authorization
+    const response = await request.post(`${BASE_URL}/api/v1/contract`, {
+        data: contractData,
+        headers: {
+            'Authorization': `Bearer ${AUTH_TOKEN}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    });
+    
+    // Проверяем статус ответа
+    expect(response.ok()).toBeTruthy();
+    
+    // Получаем ответ
+    const responseBody: any = await response.json();
+    expect(responseBody?.result?.id).toBeTruthy();
+    
+    console.log(`✅ Ручной запрос с авторизацией успешен: ${responseBody.result.id}`);
+});
+
+// Тест 6: Использование ContractUtils
+test('Пример 6: Использование ContractUtils', async ({ request }) => {
+    console.log('\n=== Пример 6: Использование ContractUtils ===\n');
+    
+    // Демонстрация использования AUTH_TOKEN
+    console.log(`Используем токен авторизации: Bearer ${AUTH_TOKEN.substring(0, 20)}...`);
+    console.log(`URL: ${BASE_URL}`);
     
     // Создаем договор через ContractUtils (без передачи request - используется внутренний APIRequestContext)
     const contractId = await ContractUtils.createContract(contractData, BASE_URL);
@@ -125,9 +164,12 @@ test('Пример 5: Использование ContractUtils', async ({ reques
     console.log(`✅ ID договора сохранен через ContractUtils: ${contractId}`);
 });
 
-// Тест 6: Валидация полей ответа
-test('Пример 6: Валидация полей ответа', async ({ request }) => {
-    console.log('\n=== Пример 6: Валидация полей ответа ===\n');
+// Тест 7: Валидация полей ответа
+test('Пример 7: Валидация полей ответа', async ({ request }) => {
+    console.log('\n=== Пример 7: Валидация полей ответа ===\n');
+    
+    // Демонстрация использования AUTH_TOKEN
+    console.log(`Используем токен авторизации: Bearer ${AUTH_TOKEN.substring(0, 20)}...`);
     
     // Создаем договор (без передачи request - используется внутренний APIRequestContext)
     const contractId = await createContract(contractData, BASE_URL);
