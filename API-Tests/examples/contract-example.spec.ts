@@ -3,6 +3,10 @@
  * 
  * Этот файл демонстрирует, как использовать утилиту createContract
  * для создания договоров и сохранения их ID в глобальную переменную CONTRACT
+ * 
+ * Авторизация:
+ * Для работы с Legacy API используется Bearer token
+ * Token можно установить в переменной окружения CONTRACTS_API_TOKEN
  */
 
 import { test, expect } from '@playwright/test';
@@ -10,6 +14,12 @@ import { createContract, getGlobalContractId, setGlobalContractId, ContractUtils
 
 // Константы для тестов
 const BASE_URL = 'https://lc.preprod.mmk.local:8080';
+
+/**
+ * Bearer token для авторизации в Legacy API
+ * Можно переопределить через переменную окружения CONTRACTS_API_TOKEN
+ */
+const AUTH_TOKEN = process.env.CONTRACTS_API_TOKEN || 'eyJhbGciOiJSUzI1NiIsImtpZCI6IkYyQ0M5RDBBMTYyQTUwNDcwRkExOTUzRkNEM0I4MEVBRTlBODA3MjBSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IjhzeWRDaFlxVUVjUG9aVV96VHVBNnVtb0J5QSJ9.eyJuYmYiOjE3MzQwNzE0NjcsImV4cCI6MTczNDA3NTA2NywiaXNzIjoiaHR0cHM6Ly9lcXZhbnRhLmNvbS8iLCJjbGllbnRfaWQiOiJsY19jbGllbnQiLCJzdWIiOiJiZWE1NDQ1OS0zYWJiLTQxNTAtYmZkOC1iYTY4YzZkNTg3MGMiLCJhdXRoX3RpbWUiOjE3MzQwNzE0NjcsImlkcCI6ImxvY2FsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbWFpbC5jb20iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IlpQVDZPNURGRlZXVVRYREkzRUNVSDdPWk1HRVE0S0FRIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlciI6Iis3MTAxMDIyMjMzNDQiLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOmZhbHNlLCJqdGkiOiI5QjUyNEY1N0IxODJCODE5MDU0MkU2ODgxOTAwQzU1QSIsImlhdCI6MTczNDA3MTQ2Nywic2NvcGUiOlsib3BlbmlkIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.bE205aWpTEIG3vjrq7tlhn9bq15utls4MkPVHCIpxCgwl-NJBqhP90cb6UQz7yuZfDoCc9VP8ZVbry-gf0nVuMRWy-NqKbn7tFPMc3I6wBisWsm4jbHcOp655cTmWRTxV0AHAfxT-x1ZC5aA2c2pu2w-dGiGM2un2PRVBzPN6hnSKr3p310x0DWn2sQWKys-mAeC5EHWAZ6d9hExuV2haCLSr0YPfSvRxU4qhifvC50Da-f2-DD0S8wJSV7mOyxNXviHuDgPY_8Tw9OQ_3kiPBETBPbQuvjqNQZUAiSHuRdlM0YG5Io7aXK3Mr-MrfNNJlVpPg_DcGs7n564ctcbuA';
 
 // Пример тела запроса для создания договора
 const contractData = {
