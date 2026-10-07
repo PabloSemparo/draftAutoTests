@@ -3,7 +3,6 @@
     "target": "ES2020",
     "module": "commonjs",
     "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
     "paths": {
       "*": ["*", "./tests/*"]
     },

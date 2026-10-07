@@ -1,0 +1,18 @@
+Running: npx playwright test -c API-Tests/playwright.config.ts API-Tests/examples/contract-example.spec.ts --timeout=60000
+[1A[2K[2m[WebServer] [22mnpm error Missing script: "start:api"
+[2m[WebServer] [22mnpm error
+[2m[WebServer] [22mnpm error Did you mean this?
+[2m[WebServer] [22mnpm error   npm run test:api # run the "test:api" package script
+[2m[WebServer] [22mnpm error
+[2m[WebServer] [22mnpm error To see a list of scripts, run:
+[2m[WebServer] [22mnpm error   npm run
+
+[1A[2K[2m[WebServer] [22mnpm error A complete log of this run can be found in: C:\Users\user\AppData\Local\npm-cache\_logs\2026-10-07T08_44_01_944Z-debug-0.log
+
+Error: Process from config.webServer was not able to start. Exit code: 1
+
+[1A[2K
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report test-results\html-report[39m
+[36m[39m

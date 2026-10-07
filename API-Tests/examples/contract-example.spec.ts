@@ -40,8 +40,8 @@ const contractData = {
 test('Пример 1: Простое создание договора', async ({ request }) => {
     console.log('\n=== Пример 1: Простое создание договора ===\n');
     
-    // Создаем договор
-    const contractId = await createContract(request, contractData, BASE_URL);
+    // Создаем договор (без передачи request - используется внутренний APIRequestContext)
+    const contractId = await createContract(contractData, BASE_URL);
     
     // Проверяем, что ID не пустой
     expect(contractId).toBeTruthy();
@@ -54,8 +54,8 @@ test('Пример 1: Простое создание договора', async (
 test('Пример 2: Использование глобальной переменной CONTRACT', async ({ request }) => {
     console.log('\n=== Пример 2: Использование глобальной переменной CONTRACT ===\n');
     
-    // Создаем договор
-    const contractId = await createContract(request, contractData, BASE_URL);
+    // Создаем договор (без передачи request - используется внутренний APIRequestContext)
+    const contractId = await createContract(contractData, BASE_URL);
     
     // Проверяем, что ID сохранен в глобальной переменной CONTRACT
     const globalContractId = getGlobalContractId();
@@ -68,8 +68,8 @@ test('Пример 2: Использование глобальной перем
 test('Пример 3: Ручное управление глобальной переменной', async ({ request }) => {
     console.log('\n=== Пример 3: Ручное управление глобальной переменной ===\n');
     
-    // Создаем договор
-    const contractId = await createContract(request, contractData, BASE_URL);
+    // Создаем договор (без передачи request - используется внутренний APIRequestContext)
+    const contractId = await createContract(contractData, BASE_URL);
     
     // Устанавливаем ID вручную (если нужно переопределить)
     setGlobalContractId(contractId);
@@ -86,8 +86,8 @@ test('Пример 3: Ручное управление глобальной п�
 test('Пример 4: Использование ID в следующем тесте', async ({ request }) => {
     console.log('\n=== Пример 4: Использование ID в следующем тесте ===\n');
     
-    // Создаем договор
-    const contractId = await createContract(request, contractData, BASE_URL);
+    // Создаем договор (без передачи request - используется внутренний APIRequestContext)
+    const contractId = await createContract(contractData, BASE_URL);
     
     // Сохраняем ID для использования в следующем тесте
     // В реальном сценарии это можно сделать через:
@@ -106,8 +106,8 @@ test('Пример 4: Использование ID в следующем тес
 test('Пример 5: Использование ContractUtils', async ({ request }) => {
     console.log('\n=== Пример 5: Использование ContractUtils ===\n');
     
-    // Создаем договор через ContractUtils
-    const contractId = await ContractUtils.createContract(request, contractData, BASE_URL);
+    // Создаем договор через ContractUtils (без передачи request - используется внутренний APIRequestContext)
+    const contractId = await ContractUtils.createContract(contractData, BASE_URL);
     
     // Проверяем, что ID сохранен
     expect(ContractUtils.getGlobalContractId()).toBe(contractId);
@@ -119,8 +119,8 @@ test('Пример 5: Использование ContractUtils', async ({ reques
 test('Пример 6: Валидация полей ответа', async ({ request }) => {
     console.log('\n=== Пример 6: Валидация полей ответа ===\n');
     
-    // Создаем договор
-    const contractId = await createContract(request, contractData, BASE_URL);
+    // Создаем договор (без передачи request - используется внутренний APIRequestContext)
+    const contractId = await createContract(contractData, BASE_URL);
     
     // Проверяем формат ID (GUID)
     const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

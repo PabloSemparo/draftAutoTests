@@ -1,0 +1,6 @@
+
+> eq-auto@1.0.0 test:api:examples:node
+> set NODE_TLS_REJECT_UNAUTHORIZED=0 && node_modules/.bin/playwright.cmd test -c API-Tests/playwright.config.ts API-Tests/examples
+
+"node_modules" не является внутренней или внешней
+командой, исполняемой программой или пакетным файлом.

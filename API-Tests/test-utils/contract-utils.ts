@@ -7,6 +7,8 @@
  * import { createContract, getContractId, setGlobalContractId } from '../test-utils/contract-utils';
  */
 
+import { NodeApiTransport } from './apiTransport';
+
 /**
  * Интерфейс для тела запроса создания договора
  */
@@ -97,48 +99,84 @@ export interface CreateContractResponse {
 export const GLOBAL_CONTRACT_ID_KEY = 'contractId';
 
 /**
- * Создает договор через API и сохраняет его ID в глобальную переменную CONTRACT
+ * Базовый URL для Legacy API (lc.preprod.mmk.local:8080)
+ * Использует NodeApiTransport с SSL_OP_LEGACY_SERVER_CONNECT для обхода проблем с renegotiation
+ */
+const LEGACY_API_BASE_URL = 'https://lc.preprod.mmk.local:8080';
+
+/**
+ * Создает договор через Legacy API (NodeApiTransport) и сохраняет его ID в глобальную переменную CONTRACT
  * 
- * @param request - Playwright request context
+ * Использует NodeApiTransport с SSL_OP_LEGACY_SERVER_CONNECT для обхода ошибки
+ * "unsafe legacy renegotiation disabled" при работе с lc.preprod.mmk.local:8080
+ * 
  * @param contractData - Данные для создания договора (тело запроса)
  * @param baseUrl - Базовый URL API (по умолчанию из env или дефолтный)
  * @returns Promise<string> - ID созданного договора
  * 
  * @example
- * const contractId = await createContract(request, {
+ * const contractId = await createContract({
  *     companyId: "123",
  *     contractNumber: "TEST-001",
  *     loanAmount: 100000
  * });
  */
 export async function createContract(
-    request: any,
     contractData: CreateContractRequest,
     baseUrl?: string
 ): Promise<string> {
-    const url = baseUrl || process.env.BASE_URL || 'https://lc.preprod.mmk.local:8080';
+    // Используем переданный baseUrl или значение по умолчанию
+    const url = baseUrl || process.env.BASE_URL || LEGACY_API_BASE_URL;
     const endpoint = '/api/v1/contract';
     
     console.log(`🚀 Создание договора на ${url}${endpoint}`);
     
-    const response = await request.post(`${url}${endpoint}`, {
-        data: contractData
-    });
+    // Проверяем, используем ли мы Legacy API (lc.preprod.mmk.local:8080)
+    const isLegacyApi = url.includes('lc.preprod.mmk.local:8080');
     
-    // Проверка статуса ответа
-    if (response.status() !== 200 && response.status() !== 201) {
-        throw new Error(`Ошибка при создании договора: статус ${response.status()}`);
+    let contractId: string;
+    
+    if (isLegacyApi) {
+        // Используем NodeApiTransport для Legacy API
+        console.log(`🔧 Используем NodeApiTransport для Legacy API (lc.preprod.mmk.local:8080)`);
+        
+        const transport = new NodeApiTransport(url);
+        
+        const response = await transport.post<CreateContractResponse>(endpoint, contractData);
+        
+        if (!response.body || !response.body.result?.id) {
+            throw new Error(`Ошибка при создании договора: статус ${response.status}, response: ${response.rawText}`);
+        }
+        
+        contractId = response.body.result.id;
+        
+        console.log(`✅ Договор успешно создан через NodeApiTransport с ID: ${contractId}`);
+    } else {
+        // Используем Playwright APIRequestContext для обычного API
+        console.log(`🔧 Используем Playwright APIRequestContext для обычного API`);
+        
+        const { createAPIRequestContextWithBaseURL } = await import('./apiContext');
+        const apiContext = await createAPIRequestContextWithBaseURL(url);
+        const response = await apiContext.post(endpoint, {
+            data: contractData
+        });
+        
+        // Проверка статуса ответа
+        if (response.status() !== 200 && response.status() !== 201) {
+            throw new Error(`Ошибка при создании договора: статус ${response.status()}`);
+        }
+        
+        // Парсинг ответа
+        const responseBody: CreateContractResponse = await response.json();
+        
+        if (!responseBody?.result?.id) {
+            throw new Error('В ответе не найдено поле result.id');
+        }
+        
+        contractId = responseBody.result.id;
+        
+        console.log(`✅ Договор успешно создан через Playwright APIRequestContext с ID: ${contractId}`);
     }
-    
-    // Парсинг ответа
-    const responseBody: CreateContractResponse = await response.json();
-    
-    // Извлечение ID из response.result.id
-    if (!responseBody?.result?.id) {
-        throw new Error('В ответе не найдено поле result.id');
-    }
-    
-    const contractId = responseBody.result.id;
     
     // Сохранение ID в глобальную переменную CONTRACT (в контексте теста)
     if (typeof process !== 'undefined' && process['testInfo']) {

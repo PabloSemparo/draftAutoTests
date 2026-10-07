@@ -1,0 +1,241 @@
+
+> eq-auto@1.0.0 test:api:examples:node
+> set NODE_TLS_REJECT_UNAUTHORIZED=0 && npm exec -- playwright test -c API-Tests/playwright.config.ts API-Tests/examples
+
+
+Running 16 tests using 6 workers
+
+[1A[2K[1/16] [stage] › API-Tests\examples\contract-example.spec.ts:68:5 › Пример 3: Ручное управление глобальной переменной
+[1A[2K[2/16] [stage] › API-Tests\examples\contract-example.spec.ts:54:5 › Пример 2: Использование глобальной переменной CONTRACT
+[1A[2K[3/16] [stage] › API-Tests\examples\contract-example.spec.ts:40:5 › Пример 1: Простое создание договора
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:68:5 › Пример 3: Ручное управление глобальной переменной
+
+=== Пример 3: Ручное управление глобальной переменной ===
+
+
+[1A[2K🚀 Создание договора на https://lc.preprod.mmk.local:8080/api/v1/contract
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:54:5 › Пример 2: Использование глобальной переменной CONTRACT
+
+=== Пример 2: Использование глобальной переменной CONTRACT ===
+
+
+[1A[2K[4/16] [stage] › API-Tests\examples\contract-example.spec.ts:86:5 › Пример 4: Использование ID в следующем тесте
+[1A[2K🚀 Создание договора на https://lc.preprod.mmk.local:8080/api/v1/contract
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:40:5 › Пример 1: Простое создание договора
+
+=== Пример 1: Простое создание договора ===
+
+
+[1A[2K🚀 Создание договора на https://lc.preprod.mmk.local:8080/api/v1/contract
+
+[1A[2K[5/16] [stage] › API-Tests\examples\contract-example.spec.ts:106:5 › Пример 5: Использование ContractUtils
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:86:5 › Пример 4: Использование ID в следующем тесте
+
+=== Пример 4: Использование ID в следующем тесте ===
+
+
+[1A[2K🚀 Создание договора на https://lc.preprod.mmk.local:8080/api/v1/contract
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:68:5 › Пример 3: Ручное управление глобальной переменной
+(node:15540) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[6/16] [stage] › API-Tests\examples\contract-example.spec.ts:119:5 › Пример 6: Валидация полей ответа
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:54:5 › Пример 2: Использование глобальной переменной CONTRACT
+(node:10032) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:106:5 › Пример 5: Использование ContractUtils
+
+=== Пример 5: Использование ContractUtils ===
+
+
+[1A[2K🚀 Создание договора на https://lc.preprod.mmk.local:8080/api/v1/contract
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:119:5 › Пример 6: Валидация полей ответа
+
+=== Пример 6: Валидация полей ответа ===
+
+
+[1A[2K🚀 Создание договора на https://lc.preprod.mmk.local:8080/api/v1/contract
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:40:5 › Пример 1: Простое создание договора
+(node:24084) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:86:5 › Пример 4: Использование ID в следующем тесте
+(node:24712) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:106:5 › Пример 5: Использование ContractUtils
+(node:13244) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[stage] › API-Tests\examples\contract-example.spec.ts:119:5 › Пример 6: Валидация полей ответа
+(node:14620) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K  1) [stage] › API-Tests\examples\contract-example.spec.ts:68:5 › Пример 3: Ручное управление глобальной переменной 
+
+    Error: apiRequestContext.post: write EPROTO 60430000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+
+    Call log:
+    [2m  - → POST https://lc.preprod.mmk.local:8080/api/v1/contract[22m
+    [2m    - user-agent: Playwright/1.56.1 (x64; windows 10.0) node/22.14[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - content-type: application/json[22m
+    [2m    - content-length: 703[22m
+
+
+       at test-utils\contract-utils.ts:127
+
+      125 |     // Создаем APIRequestContext с ignoreHTTPSErrors: true
+      126 |     const apiContext = await createAPIRequestContextWithBaseURL(url);
+    > 127 |     const response = await apiContext.post(endpoint, {
+          |                                       ^
+      128 |         data: contractData
+      129 |     });
+      130 |     
+        at createContract (C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\test-utils\contract-utils.ts:127:39)
+        at C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\examples\contract-example.spec.ts:72:24
+
+
+[1A[2K  2) [stage] › API-Tests\examples\contract-example.spec.ts:54:5 › Пример 2: Использование глобальной переменной CONTRACT 
+
+    Error: apiRequestContext.post: write EPROTO 80590000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+
+    Call log:
+    [2m  - → POST https://lc.preprod.mmk.local:8080/api/v1/contract[22m
+    [2m    - user-agent: Playwright/1.56.1 (x64; windows 10.0) node/22.14[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - content-type: application/json[22m
+    [2m    - content-length: 703[22m
+
+
+       at test-utils\contract-utils.ts:127
+
+      125 |     // Создаем APIRequestContext с ignoreHTTPSErrors: true
+      126 |     const apiContext = await createAPIRequestContextWithBaseURL(url);
+    > 127 |     const response = await apiContext.post(endpoint, {
+          |                                       ^
+      128 |         data: contractData
+      129 |     });
+      130 |     
+        at createContract (C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\test-utils\contract-utils.ts:127:39)
+        at C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\examples\contract-example.spec.ts:58:24
+
+
+[1A[2K  3) [stage] › API-Tests\examples\contract-example.spec.ts:40:5 › Пример 1: Простое создание договора 
+
+    Error: apiRequestContext.post: write EPROTO 38290000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+
+    Call log:
+    [2m  - → POST https://lc.preprod.mmk.local:8080/api/v1/contract[22m
+    [2m    - user-agent: Playwright/1.56.1 (x64; windows 10.0) node/22.14[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - content-type: application/json[22m
+    [2m    - content-length: 703[22m
+
+
+       at test-utils\contract-utils.ts:127
+
+      125 |     // Создаем APIRequestContext с ignoreHTTPSErrors: true
+      126 |     const apiContext = await createAPIRequestContextWithBaseURL(url);
+    > 127 |     const response = await apiContext.post(endpoint, {
+          |                                       ^
+      128 |         data: contractData
+      129 |     });
+      130 |     
+        at createContract (C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\test-utils\contract-utils.ts:127:39)
+        at C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\examples\contract-example.spec.ts:44:24
+
+
+[1A[2K  4) [stage] › API-Tests\examples\contract-example.spec.ts:106:5 › Пример 5: Использование ContractUtils 
+
+    Error: apiRequestContext.post: write EPROTO 18620000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+
+    Call log:
+    [2m  - → POST https://lc.preprod.mmk.local:8080/api/v1/contract[22m
+    [2m    - user-agent: Playwright/1.56.1 (x64; windows 10.0) node/22.14[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - content-type: application/json[22m
+    [2m    - content-length: 703[22m
+
+
+       at test-utils\contract-utils.ts:127
+
+      125 |     // Создаем APIRequestContext с ignoreHTTPSErrors: true
+      126 |     const apiContext = await createAPIRequestContextWithBaseURL(url);
+    > 127 |     const response = await apiContext.post(endpoint, {
+          |                                       ^
+      128 |         data: contractData
+      129 |     });
+      130 |     
+        at Object.createContract (C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\test-utils\contract-utils.ts:127:39)
+        at C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\examples\contract-example.spec.ts:110:24
+
+
+[1A[2K  5) [stage] › API-Tests\examples\contract-example.spec.ts:86:5 › Пример 4: Использование ID в следующем тесте 
+
+    Error: apiRequestContext.post: write EPROTO F4610000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+
+    Call log:
+    [2m  - → POST https://lc.preprod.mmk.local:8080/api/v1/contract[22m
+    [2m    - user-agent: Playwright/1.56.1 (x64; windows 10.0) node/22.14[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - content-type: application/json[22m
+    [2m    - content-length: 703[22m
+
+
+       at test-utils\contract-utils.ts:127
+
+      125 |     // Создаем APIRequestContext с ignoreHTTPSErrors: true
+      126 |     const apiContext = await createAPIRequestContextWithBaseURL(url);
+    > 127 |     const response = await apiContext.post(endpoint, {
+          |                                       ^
+      128 |         data: contractData
+      129 |     });
+      130 |     
+        at createContract (C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\test-utils\contract-utils.ts:127:39)
+        at C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\examples\contract-example.spec.ts:90:24
+
+
+[1A[2K  6) [stage] › API-Tests\examples\contract-example.spec.ts:119:5 › Пример 6: Валидация полей ответа 
+
+    Error: apiRequestContext.post: write EPROTO A0140000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+
+    Call log:
+    [2m  - → POST https://lc.preprod.mmk.local:8080/api/v1/contract[22m
+    [2m    - user-agent: Playwright/1.56.1 (x64; windows 10.0) node/22.14[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - content-type: application/json[22m
+    [2m    - content-length: 703[22m
+
+
+       at test-utils\contract-utils.ts:127
+
+      125 |     // Создаем APIRequestContext с ignoreHTTPSErrors: true
+      126 |     const apiContext = await createAPIRequestContextWithBaseURL(url);
+    > 127 |     const response = await apiContext.post(endpoint, {
+          |                                       ^
+      128 |         data: contractData
+      129 |     });
+      130 |     
+        at createContract (C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\test-utils\contract-utils.ts:127:39)
+        at C:\Users\user\WebstormProjects\EQVCOL_AT\API-Tests\examples\contract-example.spec.ts:123:24
+
+
+[1A[2K[7/16] [production] › API-Tests\examples\contract-example.spec.ts:68:5 › Пример 3: Ручное управление глобальной переменной
+[1A[2K  7) [production] › API-Tests\examples\contract-example.spec.ts:68:5 › Пример 3: Ручное управление глобальной переменной 
+
+    Error: worker process exited unexpectedly (code=3221225786, signal=null)
+
+

@@ -21,5 +21,20 @@ export {
     GLOBAL_CONTRACT_ID_KEY
 } from './contract-utils';
 
+// Создание APIRequestContext с правильными настройками SSL
+export {
+    createAPIRequestContext,
+    createAPIRequestContextWithBaseURL,
+} from './apiContext';
+
+// Legacy API Transport через Node.js https.request()
+export {
+    ApiTransport,
+    ApiTransportResponse,
+    NodeApiTransport,
+    NodeApiTransport as NodeJsApiTransport,
+    nodeApiTransportFactory as nodeApiTransportFactory,
+} from './apiTransport';
+
 // Типы для удобства - экспортируются из fixtures/types.ts
 export type { BaseResponse, ListResponse, ApiError } from '../fixtures/types';
