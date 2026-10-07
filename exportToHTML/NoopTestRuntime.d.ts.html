@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>NoopTestRuntime.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+NoopTestRuntime.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">type </span><span class="s2">{ </span><span class="s1">TestRuntime </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./types.js&quot;</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s1">declare </span><span class="s0">class </span><span class="s1">NoopTestRuntime </span><span class="s0">implements </span><span class="s1">TestRuntime </span><span class="s2">{</span>
+    <span class="s1">attachment</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">attachmentFromPath</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">description</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">descriptionHtml</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">displayName</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">historyId</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">labels</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">links</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">parameter</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">logStep</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">step</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;(</span><span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">body</span><span class="s2">: () =&gt; </span><span class="s1">T </span><span class="s2">| </span><span class="s1">PromiseLike</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;;</span>
+    <span class="s1">stepDisplayName</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">stepParameter</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">testCaseId</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+    <span class="s1">warning</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+<span class="s2">}</span>
+<span class="s0">export </span><span class="s1">declare </span><span class="s0">const </span><span class="s1">noopRuntime</span><span class="s2">: </span><span class="s1">TestRuntime</span><span class="s2">;</span>
+</pre>
+</body>
+</html>

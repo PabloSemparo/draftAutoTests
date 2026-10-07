@@ -1,0 +1,212 @@
+<html>
+<head>
+<title>eq-debt-collection-packages-sorting.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-debt-collection-packages-sorting.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">epic</span><span class="s2">, </span><span class="s1">feature</span><span class="s2">, </span><span class="s1">owner</span><span class="s2">, </span><span class="s1">tag</span><span class="s2">, </span><span class="s1">story</span><span class="s2">, </span><span class="s1">severity</span><span class="s2">, </span><span class="s1">description</span><span class="s2">, </span><span class="s1">step</span><span class="s2">, </span><span class="s1">attachment </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'allure-js-commons'</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Описание пакетов API Tests'</span><span class="s2">, () =&gt; {</span>
+    <span class="s0">const </span><span class="s1">API_URL </span><span class="s2">= </span><span class="s3">'https://eq-debt-collection-stage.bdengi.ru/v1/packages?statusCode=&amp;documentPackageTypeId=&amp;responsibleLawyerId=&amp;number=&amp;pageNumber=0&amp;pageSize=100'</span><span class="s2">;</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">beforeEach</span><span class="s2">(() =&gt; {</span>
+        <span class="s1">epic</span><span class="s2">(</span><span class="s3">'EqvaCollection API'</span><span class="s2">);</span>
+        <span class="s1">feature</span><span class="s2">(</span><span class="s3">'Проверки получения данных по пакетам'</span><span class="s2">);</span>
+        <span class="s1">owner</span><span class="s2">(</span><span class="s3">'API Team'</span><span class="s2">);</span>
+        <span class="s1">tag</span><span class="s2">(</span><span class="s3">'package-listing'</span><span class="s2">);</span>
+        <span class="s1">tag</span><span class="s2">(</span><span class="s3">'smoke'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Список, отсортированный по дате создания desc'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s1">story</span><span class="s2">(</span><span class="s3">'Получение списка пакетов'</span><span class="s2">);</span>
+        <span class="s1">severity</span><span class="s2">(</span><span class="s3">'critical'</span><span class="s2">);</span>
+        <span class="s1">description</span><span class="s2">(</span><span class="s3">'Получение списка пакетов документов с сортировкой по дате создания в порядке убывания'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Подготовка параметров запроса'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'API URL'</span><span class="s2">, </span><span class="s1">API_URL</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Query Parameters'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">({</span>
+                <span class="s1">statusCode</span><span class="s2">: </span><span class="s3">''</span><span class="s2">,</span>
+                <span class="s1">documentPackageTypeId</span><span class="s2">: </span><span class="s3">''</span><span class="s2">,</span>
+                <span class="s1">responsibleLawyerId</span><span class="s2">: </span><span class="s3">''</span><span class="s2">,</span>
+                <span class="s1">number</span><span class="s2">: </span><span class="s3">''</span><span class="s2">,</span>
+                <span class="s1">pageNumber</span><span class="s2">: </span><span class="s4">0</span><span class="s2">,</span>
+                <span class="s1">pageSize</span><span class="s2">: </span><span class="s4">100</span>
+            <span class="s2">}, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s5">// Send API request and measure time</span>
+        <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+
+        <span class="s0">let </span><span class="s1">response</span><span class="s2">;</span>
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Отправка GET запроса для получения списка пакетов'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">API_URL</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">const </span><span class="s1">endTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+        <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">endTime </span><span class="s2">- </span><span class="s1">startTime</span><span class="s2">;</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка базовых параметров ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s5">// Test for status code</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">!.</span><span class="s1">status</span><span class="s2">(), </span><span class="s3">'Status code should be 200'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+
+            <span class="s5">// Test for response time</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">, </span><span class="s3">`Response time </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseTime</span><span class="s2">}</span><span class="s3">ms should be less than 50000ms`</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">50000</span><span class="s2">);</span>
+
+            <span class="s5">// Test for Content-Type header</span>
+            <span class="s0">const </span><span class="s1">contentType </span><span class="s2">= </span><span class="s1">response</span><span class="s2">!.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'content-type'</span><span class="s2">];</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">contentType</span><span class="s2">, </span><span class="s3">'Content-Type should be application/json'</span><span class="s2">).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Performance Metrics'</span><span class="s2">,</span>
+                <span class="s3">`Response Time: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseTime</span><span class="s2">}</span><span class="s3">ms</span><span class="s0">\n</span><span class="s3">Status Code: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">response</span><span class="s2">!.</span><span class="s1">status</span><span class="s2">()}</span><span class="s0">\n</span><span class="s3">Content-Type: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contentType</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                <span class="s3">'text/plain'</span>
+            <span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s5">// Parse response JSON</span>
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">!.</span><span class="s1">json</span><span class="s2">();</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Прикрепление данных ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Response Body'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка структуры ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s5">// Test for items array</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">, </span><span class="s3">'Response should contain items array'</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">), </span><span class="s3">'Items should be an array'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+            <span class="s5">// Test for totalItems</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">totalItems</span><span class="s2">, </span><span class="s3">'Response should contain totalItems'</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">totalItems</span><span class="s2">, </span><span class="s3">'totalItems should be a number'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+
+            <span class="s5">// Test for hasMore</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">hasMore</span><span class="s2">, </span><span class="s3">'Response should contain hasMore'</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">hasMore</span><span class="s2">, </span><span class="s3">'hasMore should be a boolean'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'boolean'</span><span class="s2">);</span>
+
+            <span class="s5">// Test for pagination fields</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">pageNumber</span><span class="s2">, </span><span class="s3">'Response should contain pageNumber'</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">pageNumber</span><span class="s2">, </span><span class="s3">'pageNumber should be a number'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">pageSize</span><span class="s2">, </span><span class="s3">'Response should contain pageSize'</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">pageSize</span><span class="s2">, </span><span class="s3">'pageSize should be a number'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Pagination Info'</span><span class="s2">,</span>
+                <span class="s3">`Total Items: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">totalItems</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Has More: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">hasMore</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Page Number: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">pageNumber</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Page Size: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">pageSize</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                <span class="s3">'text/plain'</span>
+            <span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Валидация структуры элементов списка'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items </span><span class="s2">&amp;&amp; </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+                <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'First Item Example'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+                <span class="s0">for </span><span class="s2">(</span><span class="s0">const </span><span class="s2">[</span><span class="s1">index</span><span class="s2">, </span><span class="s1">item</span><span class="s2">] </span><span class="s1">of responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">entries</span><span class="s2">()) {</span>
+                    <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">`Проверка элемента </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have id`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have number`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have typeId`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'typeId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have statusCode`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'statusCode'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have createdAt`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'createdAt'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have responsibleLawyerId`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'responsibleLawyerId'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have includedContracts`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'includedContracts'</span><span class="s2">);</span>
+
+                        <span class="s5">// Проверка типов данных</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">item</span><span class="s2">.</span><span class="s1">id</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">id should be string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">item</span><span class="s2">.</span><span class="s1">number</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">number should be number`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">item</span><span class="s2">.</span><span class="s1">typeId</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">typeId should be string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">item</span><span class="s2">.</span><span class="s1">statusCode</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">statusCode should be string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">item</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">, </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">createdAt should be string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">([</span><span class="s3">'string'</span><span class="s2">, </span><span class="s3">'object'</span><span class="s2">].</span><span class="s1">includes</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">item</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">), </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">responsibleLawyerId should be string or null`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">), </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">includedContracts should be array`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+                        <span class="s5">// Дополнительные проверки для createdAt</span>
+                        <span class="s0">const </span><span class="s1">createdAtDate </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">);</span>
+                        <span class="s1">expect</span><span class="s2">(</span><span class="s1">isNaN</span><span class="s2">(</span><span class="s1">createdAtDate</span><span class="s2">.</span><span class="s1">getTime</span><span class="s2">()), </span><span class="s3">`Item </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">createdAt should be valid date`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+                    <span class="s2">});</span>
+                <span class="s2">}</span>
+
+                <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'List Statistics'</span><span class="s2">,</span>
+                    <span class="s3">`Total Items in Response: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">First Item ID: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">id</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">First Item Status: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">statusCode</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                    <span class="s3">'text/plain'</span>
+                <span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка пустого списка'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                    <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Empty List Info'</span><span class="s2">, </span><span class="s3">'The packages list is empty'</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s3">'Items array should be empty'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+                <span class="s2">});</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка сортировки по дате создания'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items </span><span class="s2">&amp;&amp; </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">1</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">dates </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">map</span><span class="s2">((</span><span class="s1">item</span><span class="s2">: </span><span class="s1">any</span><span class="s2">) =&gt; </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">).</span><span class="s1">getTime</span><span class="s2">());</span>
+                <span class="s0">const </span><span class="s1">sortedDates </span><span class="s2">= [</span><span class="s1">...dates</span><span class="s2">].</span><span class="s1">sort</span><span class="s2">((</span><span class="s1">a</span><span class="s2">, </span><span class="s1">b</span><span class="s2">) =&gt; </span><span class="s1">b </span><span class="s2">- </span><span class="s1">a</span><span class="s2">); </span><span class="s5">// DESC order</span>
+
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">dates</span><span class="s2">, </span><span class="s3">'Items should be sorted by createdAt in descending order'</span><span class="s2">).</span><span class="s1">toEqual</span><span class="s2">(</span><span class="s1">sortedDates</span><span class="s2">);</span>
+
+                <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Sorting Validation'</span><span class="s2">,</span>
+                    <span class="s3">`First Date: </span><span class="s1">$</span><span class="s2">{</span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">dates</span><span class="s2">[</span><span class="s4">0</span><span class="s2">]).</span><span class="s1">toISOString</span><span class="s2">()}</span><span class="s0">\n</span><span class="s3">Last Date: </span><span class="s1">$</span><span class="s2">{</span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">dates</span><span class="s2">[</span><span class="s1">dates</span><span class="s2">.</span><span class="s1">length </span><span class="s2">- </span><span class="s4">1</span><span class="s2">]).</span><span class="s1">toISOString</span><span class="s2">()}</span><span class="s0">\n</span><span class="s3">Is Sorted DESC: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">dates</span><span class="s2">.</span><span class="s1">every</span><span class="s2">((</span><span class="s1">date</span><span class="s2">, </span><span class="s1">i</span><span class="s2">) =&gt; </span><span class="s1">i </span><span class="s2">=== </span><span class="s4">0 </span><span class="s2">|| </span><span class="s1">date </span><span class="s2">&lt;= </span><span class="s1">dates</span><span class="s2">[</span><span class="s1">i </span><span class="s2">- </span><span class="s4">1</span><span class="s2">]))}</span><span class="s3">`</span><span class="s2">,</span>
+                    <span class="s3">'text/plain'</span>
+                <span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Список с фильтрацией по documentPackageTypeId'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s1">story</span><span class="s2">(</span><span class="s3">'Фильтрация списка пакетов'</span><span class="s2">);</span>
+        <span class="s1">severity</span><span class="s2">(</span><span class="s3">'normal'</span><span class="s2">);</span>
+        <span class="s1">description</span><span class="s2">(</span><span class="s3">'Получение списка пакетов с фильтрацией по типу документа'</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">filteredUrl </span><span class="s2">= </span><span class="s3">'https://eq-debt-collection-stage.bdengi.ru/v1/packages?statusCode=FORMATION&amp;documentPackageTypeId=71bb38da-44ed-491d-ac5b-0452774c67b9&amp;responsibleLawyerId=&amp;number=&amp;pageNumber=0&amp;pageSize=25'</span><span class="s2">;</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Подготовка параметров запроса с фильтрацией'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Filtered API URL'</span><span class="s2">, </span><span class="s1">filteredUrl</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+
+        <span class="s0">let </span><span class="s1">response</span><span class="s2">;</span>
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Отправка GET запроса с фильтрацией'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">filteredUrl</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+        <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка ответа с фильтрацией'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">!.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s4">1000</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">!.</span><span class="s1">json</span><span class="s2">();</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Filtered Response'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+            <span class="s5">// Проверка что все элементы имеют нужный typeId</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items </span><span class="s2">&amp;&amp; </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">targetTypeId </span><span class="s2">= </span><span class="s3">'71bb38da-44ed-491d-ac5b-0452774c67b9'</span><span class="s2">;</span>
+                <span class="s0">const </span><span class="s1">allMatchType </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">every</span><span class="s2">((</span><span class="s1">item</span><span class="s2">: </span><span class="s1">any</span><span class="s2">) =&gt; </span><span class="s1">item</span><span class="s2">.</span><span class="s1">typeId </span><span class="s2">=== </span><span class="s1">targetTypeId</span><span class="s2">);</span>
+
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">allMatchType</span><span class="s2">, </span><span class="s3">'All items should have the filtered typeId'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+                <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Filter Validation'</span><span class="s2">,</span>
+                    <span class="s3">`Filtered by typeId: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">targetTypeId</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Items Count: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">All Match Filter: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">allMatchType</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                    <span class="s3">'text/plain'</span>
+                <span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

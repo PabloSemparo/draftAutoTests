@@ -1,0 +1,283 @@
+<html>
+<head>
+<title>firefoxPrefs.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #5f826b; font-style: italic;}
+.s6 { color: #67a37c; font-style: italic;}
+.s7 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+firefoxPrefs.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">firefoxPrefs_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">firefoxPrefs_exports</span><span class="s1">, {</span>
+  <span class="s2">createProfile</span><span class="s1">: () =&gt; </span><span class="s2">createProfile</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">firefoxPrefs_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s5">/**</span>
+ <span class="s5">* </span><span class="s6">@license</span>
+ <span class="s5">* Copyright 2023 Google Inc.</span>
+ <span class="s5">* SPDX-License-Identifier: Apache-2.0</span>
+ <span class="s5">*/</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">createProfile</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">existsSync</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">path</span><span class="s1">)) {</span>
+    <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">mkdir</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">path</span><span class="s1">, {</span>
+      <span class="s2">recursive</span><span class="s1">: </span><span class="s3">true</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">await </span><span class="s2">writePreferences</span><span class="s1">({</span>
+    <span class="s2">preferences</span><span class="s1">: {</span>
+      <span class="s2">...defaultProfilePreferences</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">preferences</span><span class="s1">),</span>
+      <span class="s2">...options</span><span class="s1">.</span><span class="s2">preferences</span>
+    <span class="s1">},</span>
+    <span class="s2">path</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">path</span>
+  <span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">defaultProfilePreferences</span><span class="s1">(</span><span class="s2">extraPrefs</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">server </span><span class="s1">= </span><span class="s0">&quot;dummy.test&quot;</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">defaultPrefs </span><span class="s1">= {</span>
+    <span class="s4">// Make sure Shield doesn't hit the network.</span>
+    <span class="s0">&quot;app.normandy.api_url&quot;</span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">,</span>
+    <span class="s4">// Disable Firefox old build background check</span>
+    <span class="s0">&quot;app.update.checkInstallTime&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable automatically upgrading Firefox</span>
+    <span class="s0">&quot;app.update.disabledForTesting&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Increase the APZ content response timeout to 1 minute</span>
+    <span class="s0">&quot;apz.content_response_timeout&quot;</span><span class="s1">: </span><span class="s7">6e4</span><span class="s1">,</span>
+    <span class="s4">// Prevent various error message on the console</span>
+    <span class="s4">// jest-puppeteer asserts that no error message is emitted by the console</span>
+    <span class="s0">&quot;browser.contentblocking.features.standard&quot;</span><span class="s1">: </span><span class="s0">&quot;-tp,tpPrivate,cookieBehavior0,-cm,-fp&quot;</span><span class="s1">,</span>
+    <span class="s4">// Enable the dump function: which sends messages to the system</span>
+    <span class="s4">// console</span>
+    <span class="s4">// https://bugzilla.mozilla.org/show_bug.cgi?id=1543115</span>
+    <span class="s0">&quot;browser.dom.window.dump.enabled&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Make sure newtab weather doesn't hit the network to retrieve weather data.</span>
+    <span class="s0">&quot;browser.newtabpage.activity-stream.discoverystream.region-weather-config&quot;</span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">,</span>
+    <span class="s4">// Make sure newtab wallpapers don't hit the network to retrieve wallpaper data.</span>
+    <span class="s0">&quot;browser.newtabpage.activity-stream.newtabWallpapers.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Make sure Topsites doesn't hit the network to retrieve sponsored tiles.</span>
+    <span class="s0">&quot;browser.newtabpage.activity-stream.showSponsoredTopSites&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable topstories</span>
+    <span class="s0">&quot;browser.newtabpage.activity-stream.feeds.system.topstories&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Always display a blank page</span>
+    <span class="s0">&quot;browser.newtabpage.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Background thumbnails in particular cause grief: and disabling</span>
+    <span class="s4">// thumbnails in general cannot hurt</span>
+    <span class="s0">&quot;browser.pagethumbnails.capturing_disabled&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Disable safebrowsing components.</span>
+    <span class="s0">&quot;browser.safebrowsing.blockedURIs.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;browser.safebrowsing.downloads.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;browser.safebrowsing.malware.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;browser.safebrowsing.phishing.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable updates to search engines.</span>
+    <span class="s0">&quot;browser.search.update&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Do not restore the last open set of tabs if the browser has crashed</span>
+    <span class="s0">&quot;browser.sessionstore.resume_from_crash&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Skip check for default browser on startup</span>
+    <span class="s0">&quot;browser.shell.checkDefaultBrowser&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable newtabpage</span>
+    <span class="s0">&quot;browser.startup.homepage&quot;</span><span class="s1">: </span><span class="s0">&quot;about:blank&quot;</span><span class="s1">,</span>
+    <span class="s4">// Do not redirect user when a milstone upgrade of Firefox is detected</span>
+    <span class="s0">&quot;browser.startup.homepage_override.mstone&quot;</span><span class="s1">: </span><span class="s0">&quot;ignore&quot;</span><span class="s1">,</span>
+    <span class="s4">// Start with a blank page about:blank</span>
+    <span class="s0">&quot;browser.startup.page&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s4">// Do not allow background tabs to be zombified on Android: otherwise for</span>
+    <span class="s4">// tests that open additional tabs: the test harness tab itself might get</span>
+    <span class="s4">// unloaded</span>
+    <span class="s0">&quot;browser.tabs.disableBackgroundZombification&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Do not warn when closing all other open tabs</span>
+    <span class="s0">&quot;browser.tabs.warnOnCloseOtherTabs&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Do not warn when multiple tabs will be opened</span>
+    <span class="s0">&quot;browser.tabs.warnOnOpen&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Do not automatically offer translations, as tests do not expect this.</span>
+    <span class="s0">&quot;browser.translations.automaticallyPopup&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable the UI tour.</span>
+    <span class="s0">&quot;browser.uitour.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Turn off search suggestions in the location bar so as not to trigger</span>
+    <span class="s4">// network connections.</span>
+    <span class="s0">&quot;browser.urlbar.suggest.searches&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable first run splash page on Windows 10</span>
+    <span class="s0">&quot;browser.usedOnWindows10.introURL&quot;</span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">,</span>
+    <span class="s4">// Do not warn on quitting Firefox</span>
+    <span class="s0">&quot;browser.warnOnQuit&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Defensively disable data reporting systems</span>
+    <span class="s0">&quot;datareporting.healthreport.documentServerURI&quot;</span><span class="s1">: </span><span class="s0">`http://</span><span class="s2">$</span><span class="s1">{</span><span class="s2">server</span><span class="s1">}</span><span class="s0">/dummy/healthreport/`</span><span class="s1">,</span>
+    <span class="s0">&quot;datareporting.healthreport.logging.consoleEnabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;datareporting.healthreport.service.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;datareporting.healthreport.service.firstRun&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;datareporting.healthreport.uploadEnabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Do not show datareporting policy notifications which can interfere with tests</span>
+    <span class="s0">&quot;datareporting.policy.dataSubmissionEnabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s0">&quot;datareporting.policy.dataSubmissionPolicyBypassNotification&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// DevTools JSONViewer sometimes fails to load dependencies with its require.js.</span>
+    <span class="s4">// This doesn't affect Puppeteer but spams console (Bug 1424372)</span>
+    <span class="s0">&quot;devtools.jsonview.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable popup-blocker</span>
+    <span class="s0">&quot;dom.disable_open_during_load&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Enable the support for File object creation in the content process</span>
+    <span class="s4">// Required for |Page.setFileInputFiles| protocol method.</span>
+    <span class="s0">&quot;dom.file.createInChild&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Disable the ProcessHangMonitor</span>
+    <span class="s0">&quot;dom.ipc.reportProcessHangs&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable slow script dialogues</span>
+    <span class="s0">&quot;dom.max_chrome_script_run_time&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s0">&quot;dom.max_script_run_time&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s4">// Disable background timer throttling to allow tests to run in parallel</span>
+    <span class="s4">// without a decrease in performance.</span>
+    <span class="s0">&quot;dom.min_background_timeout_value&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s0">&quot;dom.min_background_timeout_value_without_budget_throttling&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s0">&quot;dom.timeout.enable_budget_timer_throttling&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable HTTPS-First upgrades</span>
+    <span class="s0">&quot;dom.security.https_first&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Only load extensions from the application and user profile</span>
+    <span class="s4">// AddonManager.SCOPE_PROFILE + AddonManager.SCOPE_APPLICATION</span>
+    <span class="s0">&quot;extensions.autoDisableScopes&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s0">&quot;extensions.enabledScopes&quot;</span><span class="s1">: </span><span class="s7">5</span><span class="s1">,</span>
+    <span class="s4">// Disable metadata caching for installed add-ons by default</span>
+    <span class="s0">&quot;extensions.getAddons.cache.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable installing any distribution extensions or add-ons.</span>
+    <span class="s0">&quot;extensions.installDistroAddons&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disabled screenshots extension</span>
+    <span class="s0">&quot;extensions.screenshots.disabled&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Turn off extension updates so they do not bother tests</span>
+    <span class="s0">&quot;extensions.update.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Turn off extension updates so they do not bother tests</span>
+    <span class="s0">&quot;extensions.update.notifyUser&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Make sure opening about:addons will not hit the network</span>
+    <span class="s0">&quot;extensions.webservice.discoverURL&quot;</span><span class="s1">: </span><span class="s0">`http://</span><span class="s2">$</span><span class="s1">{</span><span class="s2">server</span><span class="s1">}</span><span class="s0">/dummy/discoveryURL`</span><span class="s1">,</span>
+    <span class="s4">// Allow the application to have focus even it runs in the background</span>
+    <span class="s0">&quot;focusmanager.testmode&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Disable useragent updates</span>
+    <span class="s0">&quot;general.useragent.updates.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Always use network provider for geolocation tests so we bypass the</span>
+    <span class="s4">// macOS dialog raised by the corelocation provider</span>
+    <span class="s0">&quot;geo.provider.testing&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Do not scan Wifi</span>
+    <span class="s0">&quot;geo.wifi.scan&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// No hang monitor</span>
+    <span class="s0">&quot;hangmonitor.timeout&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s4">// Show chrome errors and warnings in the error console</span>
+    <span class="s0">&quot;javascript.options.showInConsole&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Do not throttle rendering (requestAnimationFrame) in background tabs</span>
+    <span class="s0">&quot;layout.testing.top-level-always-active&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Disable download and usage of OpenH264: and Widevine plugins</span>
+    <span class="s0">&quot;media.gmp-manager.updateEnabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable the GFX sanity window</span>
+    <span class="s0">&quot;media.sanity-test.disabled&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Disable connectivity service pings</span>
+    <span class="s0">&quot;network.connectivity-service.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable experimental feature that is only available in Nightly</span>
+    <span class="s0">&quot;network.cookie.sameSite.laxByDefault&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Do not prompt for temporary redirects</span>
+    <span class="s0">&quot;network.http.prompt-temp-redirect&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable speculative connections so they are not reported as leaking</span>
+    <span class="s4">// when they are hanging around</span>
+    <span class="s0">&quot;network.http.speculative-parallel-limit&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s4">// Do not automatically switch between offline and online</span>
+    <span class="s0">&quot;network.manage-offline-status&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Make sure SNTP requests do not hit the network</span>
+    <span class="s0">&quot;network.sntp.pools&quot;</span><span class="s1">: </span><span class="s2">server</span><span class="s1">,</span>
+    <span class="s4">// Disable Flash.</span>
+    <span class="s0">&quot;plugin.state.flash&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s0">&quot;privacy.trackingprotection.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Can be removed once Firefox 89 is no longer supported</span>
+    <span class="s4">// https://bugzilla.mozilla.org/show_bug.cgi?id=1710839</span>
+    <span class="s0">&quot;remote.enabled&quot;</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+    <span class="s4">// Don't do network connections for mitm priming</span>
+    <span class="s0">&quot;security.certerrors.mitm.priming.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Local documents have access to all other local documents,</span>
+    <span class="s4">// including directory listings</span>
+    <span class="s0">&quot;security.fileuri.strict_origin_policy&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Do not wait for the notification button security delay</span>
+    <span class="s0">&quot;security.notification_enable_delay&quot;</span><span class="s1">: </span><span class="s7">0</span><span class="s1">,</span>
+    <span class="s4">// Do not automatically fill sign-in forms with known usernames and</span>
+    <span class="s4">// passwords</span>
+    <span class="s0">&quot;signon.autofillForms&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable password capture, so that tests that include forms are not</span>
+    <span class="s4">// influenced by the presence of the persistent doorhanger notification</span>
+    <span class="s0">&quot;signon.rememberSignons&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Disable first-run welcome page</span>
+    <span class="s0">&quot;startup.homepage_welcome_url&quot;</span><span class="s1">: </span><span class="s0">&quot;about:blank&quot;</span><span class="s1">,</span>
+    <span class="s4">// Disable first-run welcome page</span>
+    <span class="s0">&quot;startup.homepage_welcome_url.additional&quot;</span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">,</span>
+    <span class="s4">// Disable browser animations (tabs, fullscreen, sliding alerts)</span>
+    <span class="s0">&quot;toolkit.cosmeticAnimations.enabled&quot;</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+    <span class="s4">// Prevent starting into safe mode after application crashes</span>
+    <span class="s0">&quot;toolkit.startup.max_resumed_crashes&quot;</span><span class="s1">: -</span><span class="s7">1</span>
+  <span class="s1">};</span>
+  <span class="s3">return </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">assign</span><span class="s1">(</span><span class="s2">defaultPrefs</span><span class="s1">, </span><span class="s2">extraPrefs</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">writePreferences</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">prefsPath </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">path</span><span class="s1">, </span><span class="s0">&quot;prefs.js&quot;</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">lines </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">entries</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">preferences</span><span class="s1">).</span><span class="s2">map</span><span class="s1">(([</span><span class="s2">key</span><span class="s1">, </span><span class="s2">value</span><span class="s1">]) =&gt; {</span>
+    <span class="s3">return </span><span class="s0">`user_pref(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">key</span><span class="s1">)}</span><span class="s0">, </span><span class="s2">$</span><span class="s1">{</span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">value</span><span class="s1">)}</span><span class="s0">);`</span><span class="s1">;</span>
+  <span class="s1">});</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">allSettled</span><span class="s1">([</span>
+    <span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">writeFile</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">path</span><span class="s1">, </span><span class="s0">&quot;user.js&quot;</span><span class="s1">), </span><span class="s2">lines</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">)),</span>
+    <span class="s4">// Create a backup of the preferences file if it already exitsts.</span>
+    <span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">access</span><span class="s1">(</span><span class="s2">prefsPath</span><span class="s1">, </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">constants</span><span class="s1">.</span><span class="s2">F_OK</span><span class="s1">).</span><span class="s2">then</span><span class="s1">(</span>
+      <span class="s2">async </span><span class="s1">() =&gt; {</span>
+        <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">copyFile</span><span class="s1">(</span>
+          <span class="s2">prefsPath</span><span class="s1">,</span>
+          <span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">path</span><span class="s1">, </span><span class="s0">&quot;prefs.js.playwright&quot;</span><span class="s1">)</span>
+        <span class="s1">);</span>
+      <span class="s1">},</span>
+      <span class="s4">// Swallow only if file does not exist</span>
+      <span class="s1">() =&gt; {</span>
+      <span class="s1">}</span>
+    <span class="s1">)</span>
+  <span class="s1">]);</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">command of result</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">command</span><span class="s1">.</span><span class="s2">status </span><span class="s1">=== </span><span class="s0">&quot;rejected&quot;</span><span class="s1">) {</span>
+      <span class="s3">throw </span><span class="s2">command</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s7">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">createProfile</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

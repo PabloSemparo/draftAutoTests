@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>mock-interceptor.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+mock-interceptor.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">IncomingHttpHeaders </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./header'</span>
+<span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s3">'./dispatcher'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">BodyInit</span><span class="s2">, </span><span class="s1">Headers </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./fetch'</span>
+
+<span class="s0">export </span><span class="s2">{</span>
+  <span class="s1">Interceptable</span><span class="s2">,</span>
+  <span class="s1">MockInterceptor</span><span class="s2">,</span>
+  <span class="s1">MockScope</span>
+<span class="s2">}</span>
+
+<span class="s4">/** The scope associated with a mock dispatch. */</span>
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">MockScope</span><span class="s2">&lt;</span><span class="s1">TData </span><span class="s0">extends </span><span class="s1">object </span><span class="s2">= </span><span class="s1">object</span><span class="s2">&gt; {</span>
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">mockDispatch</span><span class="s2">: </span><span class="s1">MockInterceptor</span><span class="s2">.</span><span class="s1">MockDispatch</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;);</span>
+  <span class="s4">/** Delay a reply by a set amount of time in ms. */</span>
+  <span class="s1">delay</span><span class="s2">(</span><span class="s1">waitInMs</span><span class="s2">: </span><span class="s1">number</span><span class="s2">): </span><span class="s1">MockScope</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;;</span>
+  <span class="s4">/** Persist the defined mock data for the associated reply. It will return the defined mock data indefinitely. */</span>
+  <span class="s1">persist</span><span class="s2">(): </span><span class="s1">MockScope</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;;</span>
+  <span class="s4">/** Define a reply for a set amount of matching requests. */</span>
+  <span class="s1">times</span><span class="s2">(</span><span class="s1">repeatTimes</span><span class="s2">: </span><span class="s1">number</span><span class="s2">): </span><span class="s1">MockScope</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;;</span>
+<span class="s2">}</span>
+
+<span class="s4">/** The interceptor for a Mock. */</span>
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">MockInterceptor </span><span class="s2">{</span>
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">options</span><span class="s2">: </span><span class="s1">MockInterceptor</span><span class="s2">.</span><span class="s1">Options</span><span class="s2">, </span><span class="s1">mockDispatches</span><span class="s2">: </span><span class="s1">MockInterceptor</span><span class="s2">.</span><span class="s1">MockDispatch</span><span class="s2">[]);</span>
+  <span class="s4">/** Mock an undici request with the defined reply. */</span>
+  <span class="s1">reply</span><span class="s2">&lt;</span><span class="s1">TData </span><span class="s0">extends </span><span class="s1">object </span><span class="s2">= </span><span class="s1">object</span><span class="s2">&gt;(</span><span class="s1">replyOptionsCallback</span><span class="s2">: </span><span class="s1">MockInterceptor</span><span class="s2">.</span><span class="s1">MockReplyOptionsCallback</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;): </span><span class="s1">MockScope</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;;</span>
+  <span class="s1">reply</span><span class="s2">&lt;</span><span class="s1">TData </span><span class="s0">extends </span><span class="s1">object </span><span class="s2">= </span><span class="s1">object</span><span class="s2">&gt;(</span>
+    <span class="s1">statusCode</span><span class="s2">: </span><span class="s1">number</span><span class="s2">,</span>
+    <span class="s1">data</span><span class="s2">?: </span><span class="s1">TData </span><span class="s2">| </span><span class="s1">Buffer </span><span class="s2">| </span><span class="s1">string </span><span class="s2">| </span><span class="s1">MockInterceptor</span><span class="s2">.</span><span class="s1">MockResponseDataHandler</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;,</span>
+    <span class="s1">responseOptions</span><span class="s2">?: </span><span class="s1">MockInterceptor</span><span class="s2">.</span><span class="s1">MockResponseOptions</span>
+  <span class="s2">): </span><span class="s1">MockScope</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">&gt;;</span>
+  <span class="s4">/** Mock an undici request by throwing the defined reply error. */</span>
+  <span class="s1">replyWithError</span><span class="s2">&lt;</span><span class="s1">TError </span><span class="s0">extends </span><span class="s1">Error </span><span class="s2">= </span><span class="s1">Error</span><span class="s2">&gt;(</span><span class="s1">error</span><span class="s2">: </span><span class="s1">TError</span><span class="s2">): </span><span class="s1">MockScope</span><span class="s2">;</span>
+  <span class="s4">/** Set default reply headers on the interceptor for subsequent mocked replies. */</span>
+  <span class="s1">defaultReplyHeaders</span><span class="s2">(</span><span class="s1">headers</span><span class="s2">: </span><span class="s1">IncomingHttpHeaders</span><span class="s2">): </span><span class="s1">MockInterceptor</span><span class="s2">;</span>
+  <span class="s4">/** Set default reply trailers on the interceptor for subsequent mocked replies. */</span>
+  <span class="s1">defaultReplyTrailers</span><span class="s2">(</span><span class="s1">trailers</span><span class="s2">: </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">string</span><span class="s2">&gt;): </span><span class="s1">MockInterceptor</span><span class="s2">;</span>
+  <span class="s4">/** Set automatically calculated content-length header on subsequent mocked replies. */</span>
+  <span class="s1">replyContentLength</span><span class="s2">(): </span><span class="s1">MockInterceptor</span><span class="s2">;</span>
+<span class="s2">}</span>
+
+<span class="s1">declare namespace MockInterceptor </span><span class="s2">{</span>
+  <span class="s4">/** MockInterceptor options. */</span>
+  <span class="s0">export interface </span><span class="s1">Options </span><span class="s2">{</span>
+    <span class="s4">/** Path to intercept on. */</span>
+    <span class="s1">path</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">RegExp </span><span class="s2">| ((</span><span class="s1">path</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">boolean</span><span class="s2">);</span>
+    <span class="s4">/** Method to intercept on. Defaults to GET. */</span>
+    <span class="s1">method</span><span class="s2">?: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">RegExp </span><span class="s2">| ((</span><span class="s1">method</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">boolean</span><span class="s2">);</span>
+    <span class="s4">/** Body to intercept on. */</span>
+    <span class="s1">body</span><span class="s2">?: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">RegExp </span><span class="s2">| ((</span><span class="s1">body</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">boolean</span><span class="s2">);</span>
+    <span class="s4">/** Headers to intercept on. */</span>
+    <span class="s1">headers</span><span class="s2">?: </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">string </span><span class="s2">| </span><span class="s1">RegExp </span><span class="s2">| ((</span><span class="s1">body</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s1">boolean</span><span class="s2">)&gt; | ((</span><span class="s1">headers</span><span class="s2">: </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">string</span><span class="s2">&gt;) =&gt; </span><span class="s1">boolean</span><span class="s2">);</span>
+    <span class="s4">/** Query params to intercept on */</span>
+    <span class="s1">query</span><span class="s2">?: </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">any</span><span class="s2">&gt;;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">MockDispatch</span><span class="s2">&lt;</span><span class="s1">TData </span><span class="s0">extends </span><span class="s1">object </span><span class="s2">= </span><span class="s1">object</span><span class="s2">, </span><span class="s1">TError </span><span class="s0">extends </span><span class="s1">Error </span><span class="s2">= </span><span class="s1">Error</span><span class="s2">&gt; </span><span class="s0">extends </span><span class="s1">Options </span><span class="s2">{</span>
+    <span class="s1">times</span><span class="s2">: </span><span class="s1">number </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">persist</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+    <span class="s1">consumed</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+    <span class="s1">data</span><span class="s2">: </span><span class="s1">MockDispatchData</span><span class="s2">&lt;</span><span class="s1">TData</span><span class="s2">, </span><span class="s1">TError</span><span class="s2">&gt;;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">MockDispatchData</span><span class="s2">&lt;</span><span class="s1">TData </span><span class="s0">extends </span><span class="s1">object </span><span class="s2">= </span><span class="s1">object</span><span class="s2">, </span><span class="s1">TError </span><span class="s0">extends </span><span class="s1">Error </span><span class="s2">= </span><span class="s1">Error</span><span class="s2">&gt; </span><span class="s0">extends </span><span class="s1">MockResponseOptions </span><span class="s2">{</span>
+    <span class="s1">error</span><span class="s2">: </span><span class="s1">TError </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">statusCode</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s1">data</span><span class="s2">?: </span><span class="s1">TData </span><span class="s2">| </span><span class="s1">string</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">MockResponseOptions </span><span class="s2">{</span>
+    <span class="s1">headers</span><span class="s2">?: </span><span class="s1">IncomingHttpHeaders</span><span class="s2">;</span>
+    <span class="s1">trailers</span><span class="s2">?: </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">string</span><span class="s2">&gt;;</span>
+  <span class="s2">}</span>
+
+  <span class="s0">export interface </span><span class="s1">MockResponseCallbackOptions </span><span class="s2">{</span>
+    <span class="s1">path</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">method</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">headers</span><span class="s2">?: </span><span class="s1">Headers </span><span class="s2">| </span><span class="s1">Record</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">, </span><span class="s1">string</span><span class="s2">&gt;;</span>
+    <span class="s1">origin</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">body</span><span class="s2">?: </span><span class="s1">BodyInit </span><span class="s2">| </span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">DispatchOptions</span><span class="s2">[</span><span class="s3">'body'</span><span class="s2">] | </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">maxRedirections</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s0">export </span><span class="s1">type MockResponseDataHandler</span><span class="s2">&lt;</span><span class="s1">TData </span><span class="s0">extends </span><span class="s1">object </span><span class="s2">= </span><span class="s1">object</span><span class="s2">&gt; = (</span>
+    <span class="s1">opts</span><span class="s2">: </span><span class="s1">MockResponseCallbackOptions</span>
+  <span class="s2">) =&gt; </span><span class="s1">TData </span><span class="s2">| </span><span class="s1">Buffer </span><span class="s2">| </span><span class="s1">string</span><span class="s2">;</span>
+
+  <span class="s0">export </span><span class="s1">type MockReplyOptionsCallback</span><span class="s2">&lt;</span><span class="s1">TData </span><span class="s0">extends </span><span class="s1">object </span><span class="s2">= </span><span class="s1">object</span><span class="s2">&gt; = (</span>
+    <span class="s1">opts</span><span class="s2">: </span><span class="s1">MockResponseCallbackOptions</span>
+  <span class="s2">) =&gt; { </span><span class="s1">statusCode</span><span class="s2">: </span><span class="s1">number</span><span class="s2">, </span><span class="s1">data</span><span class="s2">?: </span><span class="s1">TData </span><span class="s2">| </span><span class="s1">Buffer </span><span class="s2">| </span><span class="s1">string</span><span class="s2">, </span><span class="s1">responseOptions</span><span class="s2">?: </span><span class="s1">MockResponseOptions </span><span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">interface </span><span class="s1">Interceptable </span><span class="s0">extends </span><span class="s1">Dispatcher </span><span class="s2">{</span>
+  <span class="s4">/** Intercepts any matching requests that use the same origin as this mock client. */</span>
+  <span class="s1">intercept</span><span class="s2">(</span><span class="s1">options</span><span class="s2">: </span><span class="s1">MockInterceptor</span><span class="s2">.</span><span class="s1">Options</span><span class="s2">): </span><span class="s1">MockInterceptor</span><span class="s2">;</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

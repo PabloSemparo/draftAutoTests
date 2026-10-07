@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>ReporterRuntime.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #5f826b; font-style: italic;}
+.s6 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReporterRuntime.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">type AttachmentOptions</span><span class="s3">, </span><span class="s1">type FixtureResult</span><span class="s3">, </span><span class="s1">type Label</span><span class="s3">, </span><span class="s1">type StepResult</span><span class="s3">, </span><span class="s1">type TestResult </span><span class="s3">} </span><span class="s1">from </span><span class="s4">&quot;../../model.js&quot;</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">type </span><span class="s3">{ </span><span class="s1">Category</span><span class="s3">, </span><span class="s1">EnvironmentInfo</span><span class="s3">, </span><span class="s1">RuntimeMessage </span><span class="s3">} </span><span class="s1">from </span><span class="s4">&quot;../types.js&quot;</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">type </span><span class="s3">{ </span><span class="s1">FixtureType</span><span class="s3">, </span><span class="s1">LinkConfig</span><span class="s3">, </span><span class="s1">ReporterRuntimeConfig</span><span class="s3">, </span><span class="s1">TestScope</span><span class="s3">, </span><span class="s1">Writer </span><span class="s3">} </span><span class="s1">from </span><span class="s4">&quot;./types.js&quot;</span><span class="s3">;</span>
+<span class="s2">export interface </span><span class="s1">StepStack </span><span class="s3">{</span>
+    <span class="s1">clear</span><span class="s3">(): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">removeRoot</span><span class="s3">(</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">currentStep</span><span class="s3">(</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s1">string </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">;</span>
+    <span class="s1">addStep</span><span class="s3">(</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">stepUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">removeStep</span><span class="s3">(</span><span class="s1">stepUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+<span class="s3">}</span>
+<span class="s5">/**</span>
+ <span class="s5">* Simpler steps stack implementation that contains only the current steps without root nodes</span>
+ <span class="s5">* Useful, when you need to create steps without binding them to a specific test or fixture</span>
+ <span class="s5">* </span><span class="s6">@example</span>
+ <span class="s5">* ```js</span>
+ <span class="s5">* const stack = new ShallowStepsStack();</span>
+ <span class="s5">*</span>
+ <span class="s5">* stack.startStep({ name: &quot;step 1&quot; });</span>
+ <span class="s5">* stack.startStep({ name: &quot;step 1.1&quot; });</span>
+ <span class="s5">* stack.stopStep({ status: Status.FAILED });</span>
+ <span class="s5">* stack.stopStep({ status: Status.PASSED });</span>
+ <span class="s5">* stack.steps // =&gt; [{ name: &quot;step 1&quot;, status: Status.PASSED, steps: [{ name: &quot;step 1.1&quot;, status: Status.FAILED }] }]</span>
+ <span class="s5">* ```</span>
+ <span class="s5">*/</span>
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">ShallowStepsStack </span><span class="s3">{</span>
+    <span class="s1">#private</span><span class="s3">;</span>
+    <span class="s1">steps</span><span class="s3">: </span><span class="s1">StepResult</span><span class="s3">[];</span>
+    <span class="s1">currentStep</span><span class="s3">(): </span><span class="s1">StepResult</span><span class="s3">;</span>
+    <span class="s1">startStep</span><span class="s3">(</span><span class="s1">step</span><span class="s3">: </span><span class="s1">Partial</span><span class="s3">&lt;</span><span class="s1">StepResult</span><span class="s3">&gt;): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">updateStep</span><span class="s3">(</span><span class="s1">updateFunc</span><span class="s3">: (</span><span class="s1">result</span><span class="s3">: </span><span class="s1">StepResult</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">stopStep</span><span class="s3">(</span><span class="s1">opts</span><span class="s3">?: {</span>
+        <span class="s1">stop</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+        <span class="s1">duration</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s3">}): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">findStepByUuid</span><span class="s3">(</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s1">StepResult </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">;</span>
+    <span class="s1">addAttachment</span><span class="s3">(</span><span class="s1">attachment</span><span class="s3">: </span><span class="s1">AttachmentOptions</span><span class="s3">, </span><span class="s1">writer</span><span class="s3">: </span><span class="s1">Writer</span><span class="s3">): </span><span class="s1">string</span><span class="s3">;</span>
+<span class="s3">}</span>
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">DefaultStepStack </span><span class="s2">implements </span><span class="s1">StepStack </span><span class="s3">{</span>
+    <span class="s2">private </span><span class="s1">stepsByRoot</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">rootsByStep</span><span class="s3">;</span>
+    <span class="s1">clear</span><span class="s3">: () =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">removeRoot</span><span class="s3">: (</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">currentStep</span><span class="s3">: (</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s1">string </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">;</span>
+    <span class="s1">addStep</span><span class="s3">: (</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">stepUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">removeStep</span><span class="s3">(</span><span class="s1">stepUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+<span class="s3">}</span>
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">ReporterRuntime </span><span class="s3">{</span>
+    <span class="s1">#private</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">readonly state</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">notifier</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">stepStack</span><span class="s3">;</span>
+    <span class="s1">writer</span><span class="s3">: </span><span class="s1">Writer</span><span class="s3">;</span>
+    <span class="s1">categories</span><span class="s3">?: </span><span class="s1">Category</span><span class="s3">[];</span>
+    <span class="s1">environmentInfo</span><span class="s3">?: </span><span class="s1">EnvironmentInfo</span><span class="s3">;</span>
+    <span class="s1">linkConfig</span><span class="s3">?: </span><span class="s1">LinkConfig</span><span class="s3">;</span>
+    <span class="s1">globalLabels</span><span class="s3">: </span><span class="s1">Label</span><span class="s3">[];</span>
+    <span class="s1">constructor</span><span class="s3">({ </span><span class="s1">writer</span><span class="s3">, </span><span class="s1">listeners</span><span class="s3">, </span><span class="s1">environmentInfo</span><span class="s3">, </span><span class="s1">categories</span><span class="s3">, </span><span class="s1">links</span><span class="s3">, </span><span class="s1">globalLabels</span><span class="s3">, }: </span><span class="s1">ReporterRuntimeConfig</span><span class="s3">);</span>
+    <span class="s1">startScope</span><span class="s3">: () =&gt; </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s1">updateScope</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">updateFunc</span><span class="s3">: (</span><span class="s1">scope</span><span class="s3">: </span><span class="s1">TestScope</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeScope</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">startFixture</span><span class="s3">: (</span><span class="s1">scopeUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">type</span><span class="s3">: </span><span class="s1">FixtureType</span><span class="s3">, </span><span class="s1">fixtureResult</span><span class="s3">: </span><span class="s1">Partial</span><span class="s3">&lt;</span><span class="s1">FixtureResult</span><span class="s3">&gt;) =&gt; </span><span class="s1">string </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">;</span>
+    <span class="s1">updateFixture</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">updateFunc</span><span class="s3">: (</span><span class="s1">result</span><span class="s3">: </span><span class="s1">FixtureResult</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">stopFixture</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">opts</span><span class="s3">?: {</span>
+        <span class="s1">stop</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+        <span class="s1">duration</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s3">}) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">startTest</span><span class="s3">: (</span><span class="s1">result</span><span class="s3">: </span><span class="s1">Partial</span><span class="s3">&lt;</span><span class="s1">TestResult</span><span class="s3">&gt;, </span><span class="s1">scopeUuids</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">[]) =&gt; </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s1">updateTest</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">updateFunc</span><span class="s3">: (</span><span class="s1">result</span><span class="s3">: </span><span class="s1">TestResult</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">stopTest</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">opts</span><span class="s3">?: {</span>
+        <span class="s1">stop</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+        <span class="s1">duration</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s3">}) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeTest</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">currentStep</span><span class="s3">: (</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s1">string </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">;</span>
+    <span class="s1">startStep</span><span class="s3">: (</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">parentStepUuid</span><span class="s3">: </span><span class="s1">string </span><span class="s3">| </span><span class="s2">null </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">, </span><span class="s1">result</span><span class="s3">: </span><span class="s1">Partial</span><span class="s3">&lt;</span><span class="s1">StepResult</span><span class="s3">&gt;) =&gt; </span><span class="s1">string </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">;</span>
+    <span class="s1">updateStep</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">updateFunc</span><span class="s3">: (</span><span class="s1">stepResult</span><span class="s3">: </span><span class="s1">StepResult</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">stopStep</span><span class="s3">: (</span><span class="s1">uuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">opts</span><span class="s3">?: {</span>
+        <span class="s1">stop</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+        <span class="s1">duration</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s3">}) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeAttachment</span><span class="s3">: (</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">parentStepUuid</span><span class="s3">: </span><span class="s1">string </span><span class="s3">| </span><span class="s2">null </span><span class="s3">| </span><span class="s1">undefined</span><span class="s3">, </span><span class="s1">attachmentName</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">attachmentContentOrPath</span><span class="s3">: </span><span class="s1">Buffer </span><span class="s3">| </span><span class="s1">string</span><span class="s3">, </span><span class="s1">options</span><span class="s3">: </span><span class="s1">AttachmentOptions </span><span class="s3">&amp; {</span>
+        <span class="s1">wrapInStep</span><span class="s3">?: </span><span class="s1">boolean</span><span class="s3">;</span>
+        <span class="s1">timestamp</span><span class="s3">?: </span><span class="s1">number</span><span class="s3">;</span>
+    <span class="s3">}) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeEnvironmentInfo</span><span class="s3">: () =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeCategoriesDefinitions</span><span class="s3">: () =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">applyRuntimeMessages</span><span class="s3">: (</span><span class="s1">rootUuid</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">messages</span><span class="s3">: </span><span class="s1">RuntimeMessage</span><span class="s3">[]) =&gt; </span><span class="s2">void</span><span class="s3">;</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

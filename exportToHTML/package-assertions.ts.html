@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>package-assertions.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+package-assertions.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">APIResponse </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+
+<span class="s0">export interface </span><span class="s1">PackageResponse </span><span class="s2">{</span>
+    <span class="s1">id</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">number</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s1">typeId</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">statusCode</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">createdAt</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">responsibleLawyerId</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">includedContracts</span><span class="s2">: </span><span class="s1">string</span><span class="s2">[];</span>
+<span class="s2">}</span>
+
+<span class="s0">export class </span><span class="s1">PackageAssertions </span><span class="s2">{</span>
+    <span class="s0">static </span><span class="s1">async validatePackageResponse</span><span class="s2">(</span>
+        <span class="s1">response</span><span class="s2">: </span><span class="s1">APIResponse</span><span class="s2">,</span>
+        <span class="s1">options</span><span class="s2">: { </span><span class="s1">maxResponseTime</span><span class="s2">?: </span><span class="s1">number </span><span class="s2">} = {}</span>
+    <span class="s2">) {</span>
+        <span class="s0">const </span><span class="s1">maxResponseTime </span><span class="s2">= </span><span class="s1">options</span><span class="s2">.</span><span class="s1">maxResponseTime </span><span class="s2">|| </span><span class="s4">200</span><span class="s2">;</span>
+        <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+        <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+        <span class="s5">// Basic response checks</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s1">maxResponseTime</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'content-type'</span><span class="s2">]).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">responseData</span><span class="s2">: </span><span class="s1">PackageResponse </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+        <span class="s5">// Validate all required fields exist</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">validateRequiredFields</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">);</span>
+
+        <span class="s5">// Validate data types</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">validateDataTypes</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">);</span>
+
+        <span class="s5">// Validate specific field constraints</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">validateFieldConstraints</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">);</span>
+
+        <span class="s0">return </span><span class="s2">{ </span><span class="s1">responseData</span><span class="s2">, </span><span class="s1">responseTime </span><span class="s2">};</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">validateRequiredFields</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">: </span><span class="s1">any</span><span class="s2">) {</span>
+        <span class="s0">const </span><span class="s1">expectedKeys </span><span class="s2">= [</span><span class="s3">'id'</span><span class="s2">, </span><span class="s3">'number'</span><span class="s2">, </span><span class="s3">'typeId'</span><span class="s2">, </span><span class="s3">'statusCode'</span><span class="s2">, </span><span class="s3">'createdAt'</span><span class="s2">, </span><span class="s3">'responsibleLawyerId'</span><span class="s2">, </span><span class="s3">'includedContracts'</span><span class="s2">];</span>
+
+        <span class="s1">expectedKeys</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">key </span><span class="s2">=&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s3">`Missing required field: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">key</span><span class="s2">}</span><span class="s3">`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s1">key</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">validateDataTypes</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">: </span><span class="s1">PackageResponse</span><span class="s2">) {</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">number</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">typeId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">statusCode</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+
+        <span class="s5">// responsibleLawyerId can be string or null</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">!== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">)).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+        <span class="s5">// Validate includedContracts items</span>
+        <span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">((</span><span class="s1">contract</span><span class="s2">, </span><span class="s1">index</span><span class="s2">) =&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">contract</span><span class="s2">, </span><span class="s3">`Invalid contract type at index </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">}</span><span class="s3">`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">validateFieldConstraints</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">: </span><span class="s1">PackageResponse</span><span class="s2">) {</span>
+        <span class="s5">// Validate createdAt is a valid date</span>
+        <span class="s0">const </span><span class="s1">createdAtDate </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">isNaN</span><span class="s2">(</span><span class="s1">createdAtDate</span><span class="s2">.</span><span class="s1">getTime</span><span class="s2">()), </span><span class="s3">'createdAt should be a valid ISO date string'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+
+        <span class="s5">// Validate includedContracts is not null</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">).</span><span class="s1">not</span><span class="s2">.</span><span class="s1">toBeNull</span><span class="s2">();</span>
+
+        <span class="s5">// Validate responsibleLawyerId constraints</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">) {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">.</span><span class="s1">length</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

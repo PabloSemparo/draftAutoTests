@@ -1,0 +1,407 @@
+<html>
+<head>
+<title>contractorData.json</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #cf8e6d;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+contractorData.json</font>
+</center></td></tr></table>
+<pre><span class="s0">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="s0">: </span><span class="s2">&quot;Быстроденги&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Быстроденьги&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;inn&quot;</span><span class="s0">: </span><span class="s2">&quot;1234567890&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;status&quot;</span><span class="s0">: </span><span class="s2">&quot;DRAFT&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;contract&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;fileNameRegex&quot;</span><span class="s0">: </span><span class="s2">&quot;(Приложение 3)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;inputFields&quot;</span><span class="s0">: [</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000004&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Номер договора&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000005&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Дата заключения договора&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000006&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Дата образования задолженности&quot;</span><span class="s0">,</span>
+                    <span class="s2">&quot;Срок займа  (в днях)&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;DATE_PLUS_DAYS&quot;</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000007&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Дата образования задолженности&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000009&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Наименование услуги&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;MATCH_REGEXP_AND_REPLACE&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;calculateAction&quot;</span><span class="s0">: </span><span class="s2">&quot;(Транш),^((?!Транш).)*$&quot;</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000010&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Наименование услуги&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;MATCH_REGEXP_AND_REPLACE&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;calculateAction&quot;</span><span class="s0">: </span><span class="s2">&quot;(Транш),^((?!Транш).)*$&quot;</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000011&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Наименование услуги&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;MATCH_REGEXP_AND_REPLACE&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;calculateAction&quot;</span><span class="s0">: </span><span class="s2">&quot;(Аннуитет|аннуитет),^((?!Аннуитет|аннуитет).)*$&quot;</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000012&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Номер ДМЛ/УДМЛ&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000013&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Выданная сумма&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000014&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Провайдер&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000015&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Процентная ставка в день&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000016&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Срок займа  (в днях)&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000017&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Полная стоимость займа&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000024&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Идентификатор мирового суда&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000037&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Идентификатор районного суда&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000055&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фамилия Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000056&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Имя Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000057&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Отчество Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000058&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Пол Должника&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;MATCH_REGEXP_AND_REPLACE&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;calculateAction&quot;</span><span class="s0">: </span><span class="s2">&quot;(M),(F)&quot;</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000061&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Серия паспорта Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000062&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Номер паспорта Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000063&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Дата выдачи паспорта Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000064&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Код органа, выдавшего паспорт Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000065&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Кем выдан паспорт Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000066&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Место рождения Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000067&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Дата рождения Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000068&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;ИНН Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000069&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;СНИЛС Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000070&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Мобильный телефон Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000071&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Электронная почта (e-mail)&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000072&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Адрес регистрации Индекс&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000074&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Адрес регистрации Регион&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000076&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Адрес регистрации Город&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000077&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Адрес регистрации Улица&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000078&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Адрес регистрации Дом&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000079&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Адрес регистрации Корпус&quot;</span><span class="s0">,</span>
+                    <span class="s2">&quot;Адрес регистрации Строение&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000080&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Адрес регистрации Квартира&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000081&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Служебный телефон Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000082&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Наименование организации&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000093&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Место работы Адрес&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000097&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Маска карты&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000103&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Индекс&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000105&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Регион&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000106&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Город&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000107&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Улица&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000109&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Дом&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000110&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Строение&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000109&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Улица&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000111&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Корпус&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000112&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Фактический адрес Квартира&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000113&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Телефон по месту постоянной регистрации Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000114&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Телефон по фактическому адресу Должника&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000115&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Наименование бюро кредитных историй&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000116&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;УИД&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000123&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Дата возврата средств по договору&quot;</span>
+                <span class="s0">]</span>
+            <span class="s0">},</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;00000000-0000-0000-0001-000000000126&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;Дата возврата средств по договору&quot;</span><span class="s0">,</span>
+                    <span class="s2">&quot;Дата заключения договора&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;DAYS_BETWEEN_DATES&quot;</span>
+            <span class="s0">}</span>
+        <span class="s0">],</span>
+        <span class="s2">&quot;isAutoCourt&quot;</span><span class="s0">: </span><span class="s3">false</span>
+    <span class="s0">},</span>
+    <span class="s2">&quot;contractAnnex&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;fileNameRegex&quot;</span><span class="s0">: </span><span class="s2">&quot;(Приложение 1)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;inputFields&quot;</span><span class="s0">: [</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;3fa85f64-5717-4562-b3fc-2c963f66afa6&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;string&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;CONCAT&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;calculateAction&quot;</span><span class="s0">: </span><span class="s2">&quot;string&quot;</span>
+            <span class="s0">}</span>
+        <span class="s0">]</span>
+    <span class="s0">},</span>
+    <span class="s2">&quot;contractDebt&quot;</span><span class="s0">: {</span>
+        <span class="s2">&quot;fileNamePattern&quot;</span><span class="s0">: </span><span class="s2">&quot;(?=расчеты задол)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;fileLocationType&quot;</span><span class="s0">: </span><span class="s2">&quot;COMMON&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;inputFields&quot;</span><span class="s0">: [</span>
+            <span class="s0">{</span>
+                <span class="s2">&quot;outputFieldId&quot;</span><span class="s0">: </span><span class="s2">&quot;3fa85f64-5717-4562-b3fc-2c963f66afa6&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;inputColumnHeaders&quot;</span><span class="s0">: [</span>
+                    <span class="s2">&quot;string&quot;</span>
+                <span class="s0">],</span>
+                <span class="s2">&quot;calculateType&quot;</span><span class="s0">: </span><span class="s2">&quot;CONCAT&quot;</span><span class="s0">,</span>
+                <span class="s2">&quot;calculateAction&quot;</span><span class="s0">: </span><span class="s2">&quot;string&quot;</span>
+            <span class="s0">}</span>
+        <span class="s0">]</span>
+    <span class="s0">}</span>
+<span class="s0">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>allure-decorators.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+allure-decorators.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">allure </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'allure-playwright'</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">AllureDecorators </span><span class="s2">{</span>
+    <span class="s0">static </span><span class="s1">epic</span><span class="s2">(</span><span class="s1">epic</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">epic</span><span class="s2">(</span><span class="s1">epic</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">feature</span><span class="s2">(</span><span class="s1">feature</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">feature</span><span class="s2">(</span><span class="s1">feature</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">story</span><span class="s2">(</span><span class="s1">story</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s1">story</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">severity</span><span class="s2">(</span><span class="s1">severity</span><span class="s2">: </span><span class="s3">'blocker' </span><span class="s2">| </span><span class="s3">'critical' </span><span class="s2">| </span><span class="s3">'normal' </span><span class="s2">| </span><span class="s3">'minor' </span><span class="s2">| </span><span class="s3">'trivial'</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s1">severity</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">owner</span><span class="s2">(</span><span class="s1">owner</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">owner</span><span class="s2">(</span><span class="s1">owner</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">tag</span><span class="s2">(</span><span class="s1">tag</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">tag</span><span class="s2">(</span><span class="s1">tag</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">description</span><span class="s2">(</span><span class="s1">description</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s1">description</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">async step</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;(</span><span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">body</span><span class="s2">: () =&gt; </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; {</span>
+        <span class="s0">return await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">return await </span><span class="s1">body</span><span class="s2">();</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">stepSync</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;(</span><span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">body</span><span class="s2">: () =&gt; </span><span class="s1">T</span><span class="s2">): </span><span class="s1">T </span><span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, () =&gt; {</span>
+            <span class="s0">return </span><span class="s1">body</span><span class="s2">();</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">attachScreenshot</span><span class="s2">(</span><span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">screenshot</span><span class="s2">: </span><span class="s1">Buffer</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">screenshot</span><span class="s2">, </span><span class="s3">'image/png'</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">attachJson</span><span class="s2">(</span><span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">data</span><span class="s2">: </span><span class="s1">any</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">data</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">attachText</span><span class="s2">(</span><span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">text</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">text</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">link</span><span class="s2">(</span><span class="s1">url</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">name</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">link</span><span class="s2">(</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name </span><span class="s2">|| </span><span class="s1">url</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

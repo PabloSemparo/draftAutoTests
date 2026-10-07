@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>eq-dc-court-courts-search.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-dc-court-courts-search.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+
+<span class="s0">const </span><span class="s1">API_BASE_URL </span><span class="s2">= </span><span class="s3">'http://eq-dc-court.test2.mmk.local/v1'</span><span class="s2">;</span>
+<span class="s0">const </span><span class="s1">API_TOKEN </span><span class="s2">= </span><span class="s3">'55298707-117c-44a5-8434-162fb9d2e4c5'</span><span class="s2">; </span><span class="s4">// Замените на реальный токен</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'EQ DC Court API тесты'</span><span class="s2">, () =&gt; {</span>
+  <span class="s4">// Вариант 1: Добавляем токен в заголовки для всех тестов</span>
+  <span class="s1">test</span><span class="s2">.</span><span class="s1">use</span><span class="s2">({</span>
+    <span class="s1">extraHTTPHeaders</span><span class="s2">: {</span>
+      <span class="s3">'X-API-Key'</span><span class="s2">: </span><span class="s3">`55298707-117c-44a5-8434-162fb9d2e4c5`</span><span class="s2">,</span>
+    <span class="s2">},</span>
+  <span class="s2">});</span>
+
+  <span class="s1">test</span><span class="s2">(</span><span class="s3">'Проверка на банкротство с валидными данными [200 CODE]'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">params </span><span class="s2">= </span><span class="s0">new </span><span class="s1">URLSearchParams</span><span class="s2">({</span>
+      <span class="s1">inn</span><span class="s2">: </span><span class="s3">'614334131355'</span><span class="s2">,</span>
+      <span class="s1">fio</span><span class="s2">: </span><span class="s3">'Старченко Владислав Владимирович'</span><span class="s2">,</span>
+      <span class="s1">birthDate</span><span class="s2">: </span><span class="s3">'1996-11-26'</span>
+    <span class="s2">});</span>
+
+    <span class="s4">// Вариант 2: Добавляем токен непосредственно в запрос (если нужно переопределить)</span>
+    <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_BASE_URL</span><span class="s2">}</span><span class="s3">/bankrupts/check?</span><span class="s1">$</span><span class="s2">{</span><span class="s1">params</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+      <span class="s1">headers</span><span class="s2">: {</span>
+        <span class="s3">'Authorization'</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_TOKEN</span><span class="s2">}</span><span class="s3">`</span>
+      <span class="s2">}</span>
+    <span class="s2">});</span>
+
+    <span class="s4">// Проверка статуса кода</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+
+    <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+    <span class="s4">// Проверка заголовка Content-Type</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'content-type'</span><span class="s2">]).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+    <span class="s4">// Проверка наличия и типа поля status</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'status'</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">status</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+  <span class="s2">});</span>
+
+  <span class="s4">// Тест на проверку авторизации</span>
+  <span class="s1">test</span><span class="s2">(</span><span class="s3">'Реджектим если нет api токена'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">params </span><span class="s2">= </span><span class="s0">new </span><span class="s1">URLSearchParams</span><span class="s2">({</span>
+      <span class="s1">inn</span><span class="s2">: </span><span class="s3">'614334131355'</span><span class="s2">,</span>
+      <span class="s1">fio</span><span class="s2">: </span><span class="s3">'Старченко Владислав Владимирович'</span><span class="s2">,</span>
+      <span class="s1">birthDate</span><span class="s2">: </span><span class="s3">'1996-11-26'</span>
+    <span class="s2">});</span>
+
+    <span class="s4">// Делаем запрос без токена</span>
+    <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_BASE_URL</span><span class="s2">}</span><span class="s3">/bankrupts/check?</span><span class="s1">$</span><span class="s2">{</span><span class="s1">params</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, {</span>
+      <span class="s1">headers</span><span class="s2">: {} </span><span class="s4">// Очищаем заголовки</span>
+    <span class="s2">});</span>
+  <span class="s2">});</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

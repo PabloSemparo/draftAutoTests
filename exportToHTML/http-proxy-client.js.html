@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>http-proxy-client.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #cf8e6d;}
+.s5 { color: #67a37c; font-style: italic;}
+.s6 { color: #7a7e85;}
+.s7 { color: #2aacb8;}
+.s8 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+http-proxy-client.js</font>
+</center></td></tr></table>
+<pre><span class="s0">'use strict'</span><span class="s1">;</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* Minimal HTTP/S proxy client</span>
+ <span class="s3">*/</span>
+
+<span class="s4">const </span><span class="s2">net </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'net'</span><span class="s1">);</span>
+<span class="s4">const </span><span class="s2">tls </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'tls'</span><span class="s1">);</span>
+<span class="s4">const </span><span class="s2">urllib </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'url'</span><span class="s1">);</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* Establishes proxied connection to destinationPort</span>
+ <span class="s3">*</span>
+ <span class="s3">* httpProxyClient(&quot;http://localhost:3128/&quot;, 80, &quot;google.com&quot;, function(err, socket){</span>
+ <span class="s3">*     socket.write(&quot;GET / HTTP/1.0\r\n\r\n&quot;);</span>
+ <span class="s3">* });</span>
+ <span class="s3">*</span>
+ <span class="s3">* </span><span class="s5">@param </span><span class="s3">{String} proxyUrl proxy configuration, etg &quot;http://proxy.host:3128/&quot;</span>
+ <span class="s3">* </span><span class="s5">@param </span><span class="s3">{Number} destinationPort Port to open in destination host</span>
+ <span class="s3">* </span><span class="s5">@param </span><span class="s3">{String} destinationHost Destination hostname</span>
+ <span class="s3">* </span><span class="s5">@param </span><span class="s3">{Function} callback Callback to run with the rocket object once connection is established</span>
+ <span class="s3">*/</span>
+<span class="s4">function </span><span class="s2">httpProxyClient</span><span class="s1">(</span><span class="s2">proxyUrl</span><span class="s1">, </span><span class="s2">destinationPort</span><span class="s1">, </span><span class="s2">destinationHost</span><span class="s1">, </span><span class="s2">callback</span><span class="s1">) {</span>
+    <span class="s4">let </span><span class="s2">proxy </span><span class="s1">= </span><span class="s2">urllib</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s2">proxyUrl</span><span class="s1">);</span>
+
+    <span class="s6">// create a socket connection to the proxy server</span>
+    <span class="s4">let </span><span class="s2">options</span><span class="s1">;</span>
+    <span class="s4">let </span><span class="s2">connect</span><span class="s1">;</span>
+    <span class="s4">let </span><span class="s2">socket</span><span class="s1">;</span>
+
+    <span class="s2">options </span><span class="s1">= {</span>
+        <span class="s2">host</span><span class="s1">: </span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">hostname</span><span class="s1">,</span>
+        <span class="s2">port</span><span class="s1">: </span><span class="s2">Number</span><span class="s1">(</span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">port</span><span class="s1">) ? </span><span class="s2">Number</span><span class="s1">(</span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">port</span><span class="s1">) : </span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">protocol </span><span class="s1">=== </span><span class="s0">'https:' </span><span class="s1">? </span><span class="s7">443 </span><span class="s1">: </span><span class="s7">80</span>
+    <span class="s1">};</span>
+
+    <span class="s4">if </span><span class="s1">(</span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">protocol </span><span class="s1">=== </span><span class="s0">'https:'</span><span class="s1">) {</span>
+        <span class="s6">// we can use untrusted proxies as long as we verify actual SMTP certificates</span>
+        <span class="s2">options</span><span class="s1">.</span><span class="s2">rejectUnauthorized </span><span class="s1">= </span><span class="s4">false</span><span class="s1">;</span>
+        <span class="s2">connect </span><span class="s1">= </span><span class="s2">tls</span><span class="s1">.</span><span class="s2">connect</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s2">tls</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s4">else </span><span class="s1">{</span>
+        <span class="s2">connect </span><span class="s1">= </span><span class="s2">net</span><span class="s1">.</span><span class="s2">connect</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s2">net</span><span class="s1">);</span>
+    <span class="s1">}</span>
+
+    <span class="s6">// Error harness for initial connection. Once connection is established, the responsibility</span>
+    <span class="s6">// to handle errors is passed to whoever uses this socket</span>
+    <span class="s4">let </span><span class="s2">finished </span><span class="s1">= </span><span class="s4">false</span><span class="s1">;</span>
+    <span class="s4">let </span><span class="s2">tempSocketErr </span><span class="s1">= </span><span class="s2">err </span><span class="s1">=&gt; {</span>
+        <span class="s4">if </span><span class="s1">(</span><span class="s2">finished</span><span class="s1">) {</span>
+            <span class="s4">return</span><span class="s1">;</span>
+        <span class="s1">}</span>
+        <span class="s2">finished </span><span class="s1">= </span><span class="s4">true</span><span class="s1">;</span>
+        <span class="s4">try </span><span class="s1">{</span>
+            <span class="s2">socket</span><span class="s1">.</span><span class="s2">destroy</span><span class="s1">();</span>
+        <span class="s1">} </span><span class="s4">catch </span><span class="s1">(</span><span class="s2">_E</span><span class="s1">) {</span>
+            <span class="s6">// ignore</span>
+        <span class="s1">}</span>
+        <span class="s2">callback</span><span class="s1">(</span><span class="s2">err</span><span class="s1">);</span>
+    <span class="s1">};</span>
+
+    <span class="s4">let </span><span class="s2">timeoutErr </span><span class="s1">= () =&gt; {</span>
+        <span class="s4">let </span><span class="s2">err </span><span class="s1">= </span><span class="s4">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">'Proxy socket timed out'</span><span class="s1">);</span>
+        <span class="s2">err</span><span class="s1">.</span><span class="s2">code </span><span class="s1">= </span><span class="s0">'ETIMEDOUT'</span><span class="s1">;</span>
+        <span class="s2">tempSocketErr</span><span class="s1">(</span><span class="s2">err</span><span class="s1">);</span>
+    <span class="s1">};</span>
+
+    <span class="s2">socket </span><span class="s1">= </span><span class="s2">connect</span><span class="s1">(</span><span class="s2">options</span><span class="s1">, () =&gt; {</span>
+        <span class="s4">if </span><span class="s1">(</span><span class="s2">finished</span><span class="s1">) {</span>
+            <span class="s4">return</span><span class="s1">;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">let </span><span class="s2">reqHeaders </span><span class="s1">= {</span>
+            <span class="s2">Host</span><span class="s1">: </span><span class="s2">destinationHost </span><span class="s1">+ </span><span class="s0">':' </span><span class="s1">+ </span><span class="s2">destinationPort</span><span class="s1">,</span>
+            <span class="s2">Connection</span><span class="s1">: </span><span class="s0">'close'</span>
+        <span class="s1">};</span>
+        <span class="s4">if </span><span class="s1">(</span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">auth</span><span class="s1">) {</span>
+            <span class="s2">reqHeaders</span><span class="s1">[</span><span class="s0">'Proxy-Authorization'</span><span class="s1">] = </span><span class="s0">'Basic ' </span><span class="s1">+ </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">auth</span><span class="s1">).</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">'base64'</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s2">socket</span><span class="s1">.</span><span class="s2">write</span><span class="s1">(</span>
+            <span class="s6">// HTTP method</span>
+            <span class="s0">'CONNECT ' </span><span class="s1">+</span>
+                <span class="s2">destinationHost </span><span class="s1">+</span>
+                <span class="s0">':' </span><span class="s1">+</span>
+                <span class="s2">destinationPort </span><span class="s1">+</span>
+                <span class="s0">' HTTP/1.1</span><span class="s4">\r\n</span><span class="s0">' </span><span class="s1">+</span>
+                <span class="s6">// HTTP request headers</span>
+                <span class="s2">Object</span><span class="s1">.</span><span class="s2">keys</span><span class="s1">(</span><span class="s2">reqHeaders</span><span class="s1">)</span>
+                    <span class="s1">.</span><span class="s2">map</span><span class="s1">(</span><span class="s2">key </span><span class="s1">=&gt; </span><span class="s2">key </span><span class="s1">+ </span><span class="s0">': ' </span><span class="s1">+ </span><span class="s2">reqHeaders</span><span class="s1">[</span><span class="s2">key</span><span class="s1">])</span>
+                    <span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">'</span><span class="s4">\r\n</span><span class="s0">'</span><span class="s1">) +</span>
+                <span class="s6">// End request</span>
+                <span class="s0">'</span><span class="s4">\r\n\r\n</span><span class="s0">'</span>
+        <span class="s1">);</span>
+
+        <span class="s4">let </span><span class="s2">headers </span><span class="s1">= </span><span class="s0">''</span><span class="s1">;</span>
+        <span class="s4">let </span><span class="s2">onSocketData </span><span class="s1">= </span><span class="s2">chunk </span><span class="s1">=&gt; {</span>
+            <span class="s4">let </span><span class="s2">match</span><span class="s1">;</span>
+            <span class="s4">let </span><span class="s2">remainder</span><span class="s1">;</span>
+
+            <span class="s4">if </span><span class="s1">(</span><span class="s2">finished</span><span class="s1">) {</span>
+                <span class="s4">return</span><span class="s1">;</span>
+            <span class="s1">}</span>
+
+            <span class="s2">headers </span><span class="s1">+= </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">'binary'</span><span class="s1">);</span>
+            <span class="s4">if </span><span class="s1">((</span><span class="s2">match </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s8">/\r\n\r\n/</span><span class="s1">))) {</span>
+                <span class="s2">socket</span><span class="s1">.</span><span class="s2">removeListener</span><span class="s1">(</span><span class="s0">'data'</span><span class="s1">, </span><span class="s2">onSocketData</span><span class="s1">);</span>
+
+                <span class="s2">remainder </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">.</span><span class="s2">substr</span><span class="s1">(</span><span class="s2">match</span><span class="s1">.</span><span class="s2">index </span><span class="s1">+ </span><span class="s2">match</span><span class="s1">[</span><span class="s7">0</span><span class="s1">].</span><span class="s2">length</span><span class="s1">);</span>
+                <span class="s2">headers </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">.</span><span class="s2">substr</span><span class="s1">(</span><span class="s7">0</span><span class="s1">, </span><span class="s2">match</span><span class="s1">.</span><span class="s2">index</span><span class="s1">);</span>
+                <span class="s4">if </span><span class="s1">(</span><span class="s2">remainder</span><span class="s1">) {</span>
+                    <span class="s2">socket</span><span class="s1">.</span><span class="s2">unshift</span><span class="s1">(</span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">remainder</span><span class="s1">, </span><span class="s0">'binary'</span><span class="s1">));</span>
+                <span class="s1">}</span>
+
+                <span class="s6">// proxy connection is now established</span>
+                <span class="s2">finished </span><span class="s1">= </span><span class="s4">true</span><span class="s1">;</span>
+
+                <span class="s6">// check response code</span>
+                <span class="s2">match </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s8">/^HTTP\/\d+\.\d+ (\d+)/i</span><span class="s1">);</span>
+                <span class="s4">if </span><span class="s1">(!</span><span class="s2">match </span><span class="s1">|| (</span><span class="s2">match</span><span class="s1">[</span><span class="s7">1</span><span class="s1">] || </span><span class="s0">''</span><span class="s1">).</span><span class="s2">charAt</span><span class="s1">(</span><span class="s7">0</span><span class="s1">) !== </span><span class="s0">'2'</span><span class="s1">) {</span>
+                    <span class="s4">try </span><span class="s1">{</span>
+                        <span class="s2">socket</span><span class="s1">.</span><span class="s2">destroy</span><span class="s1">();</span>
+                    <span class="s1">} </span><span class="s4">catch </span><span class="s1">(</span><span class="s2">_E</span><span class="s1">) {</span>
+                        <span class="s6">// ignore</span>
+                    <span class="s1">}</span>
+                    <span class="s4">return </span><span class="s2">callback</span><span class="s1">(</span><span class="s4">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">'Invalid response from proxy' </span><span class="s1">+ ((</span><span class="s2">match </span><span class="s1">&amp;&amp; </span><span class="s0">': ' </span><span class="s1">+ </span><span class="s2">match</span><span class="s1">[</span><span class="s7">1</span><span class="s1">]) || </span><span class="s0">''</span><span class="s1">)));</span>
+                <span class="s1">}</span>
+
+                <span class="s2">socket</span><span class="s1">.</span><span class="s2">removeListener</span><span class="s1">(</span><span class="s0">'error'</span><span class="s1">, </span><span class="s2">tempSocketErr</span><span class="s1">);</span>
+                <span class="s2">socket</span><span class="s1">.</span><span class="s2">removeListener</span><span class="s1">(</span><span class="s0">'timeout'</span><span class="s1">, </span><span class="s2">timeoutErr</span><span class="s1">);</span>
+                <span class="s2">socket</span><span class="s1">.</span><span class="s2">setTimeout</span><span class="s1">(</span><span class="s7">0</span><span class="s1">);</span>
+
+                <span class="s4">return </span><span class="s2">callback</span><span class="s1">(</span><span class="s4">null</span><span class="s1">, </span><span class="s2">socket</span><span class="s1">);</span>
+            <span class="s1">}</span>
+        <span class="s1">};</span>
+        <span class="s2">socket</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">'data'</span><span class="s1">, </span><span class="s2">onSocketData</span><span class="s1">);</span>
+    <span class="s1">});</span>
+
+    <span class="s2">socket</span><span class="s1">.</span><span class="s2">setTimeout</span><span class="s1">(</span><span class="s2">httpProxyClient</span><span class="s1">.</span><span class="s2">timeout </span><span class="s1">|| </span><span class="s7">30 </span><span class="s1">* </span><span class="s7">1000</span><span class="s1">);</span>
+    <span class="s2">socket</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">'timeout'</span><span class="s1">, </span><span class="s2">timeoutErr</span><span class="s1">);</span>
+
+    <span class="s2">socket</span><span class="s1">.</span><span class="s2">once</span><span class="s1">(</span><span class="s0">'error'</span><span class="s1">, </span><span class="s2">tempSocketErr</span><span class="s1">);</span>
+<span class="s1">}</span>
+
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">httpProxyClient</span><span class="s1">;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<html>
+<head>
+<title>dependencies.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+dependencies.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">dependencies_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">dependencies_exports</span><span class="s1">, {</span>
+  <span class="s2">dockerVersion</span><span class="s1">: () =&gt; </span><span class="s2">dockerVersion</span><span class="s1">,</span>
+  <span class="s2">installDependenciesLinux</span><span class="s1">: () =&gt; </span><span class="s2">installDependenciesLinux</span><span class="s1">,</span>
+  <span class="s2">installDependenciesWindows</span><span class="s1">: () =&gt; </span><span class="s2">installDependenciesWindows</span><span class="s1">,</span>
+  <span class="s2">readDockerVersionSync</span><span class="s1">: () =&gt; </span><span class="s2">readDockerVersionSync</span><span class="s1">,</span>
+  <span class="s2">transformCommandsForRoot</span><span class="s1">: () =&gt; </span><span class="s2">transformCommandsForRoot</span><span class="s1">,</span>
+  <span class="s2">validateDependenciesLinux</span><span class="s1">: () =&gt; </span><span class="s2">validateDependenciesLinux</span><span class="s1">,</span>
+  <span class="s2">validateDependenciesWindows</span><span class="s1">: () =&gt; </span><span class="s2">validateDependenciesWindows</span><span class="s1">,</span>
+  <span class="s2">writeDockerVersion</span><span class="s1">: () =&gt; </span><span class="s2">writeDockerVersion</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">dependencies_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">childProcess </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;child_process&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_os </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;os&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_nativeDeps </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./nativeDeps&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_ascii </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/ascii&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_hostPlatform </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/hostPlatform&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_spawnAsync </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/spawnAsync&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_userAgent </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/userAgent&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import__ </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;.&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">BIN_DIRECTORY </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">__dirname</span><span class="s1">, </span><span class="s0">&quot;..&quot;</span><span class="s1">, </span><span class="s0">&quot;..&quot;</span><span class="s1">, </span><span class="s0">&quot;..&quot;</span><span class="s1">, </span><span class="s0">&quot;bin&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">languageBindingVersion </span><span class="s1">= </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PW_CLI_DISPLAY_VERSION </span><span class="s1">|| </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../../package.json&quot;</span><span class="s1">).</span><span class="s2">version</span><span class="s1">;</span>
+<span class="s3">const </span><span class="s2">dockerVersionFilePath </span><span class="s1">= </span><span class="s0">&quot;/ms-playwright/.docker-info&quot;</span><span class="s1">;</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">writeDockerVersion</span><span class="s1">(</span><span class="s2">dockerImageNameTemplate</span><span class="s1">) {</span>
+  <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">mkdir</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">dockerVersionFilePath</span><span class="s1">), { </span><span class="s2">recursive</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+  <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">writeFile</span><span class="s1">(</span><span class="s2">dockerVersionFilePath</span><span class="s1">, </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">dockerVersion</span><span class="s1">(</span><span class="s2">dockerImageNameTemplate</span><span class="s1">), </span><span class="s3">null</span><span class="s1">, </span><span class="s5">2</span><span class="s1">), </span><span class="s0">&quot;utf8&quot;</span><span class="s1">);</span>
+  <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">chmod</span><span class="s1">(</span><span class="s2">dockerVersionFilePath</span><span class="s1">, </span><span class="s5">511</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">dockerVersion</span><span class="s1">(</span><span class="s2">dockerImageNameTemplate</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s1">{</span>
+    <span class="s2">driverVersion</span><span class="s1">: </span><span class="s2">languageBindingVersion</span><span class="s1">,</span>
+    <span class="s2">dockerImageName</span><span class="s1">: </span><span class="s2">dockerImageNameTemplate</span><span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s0">&quot;%version%&quot;</span><span class="s1">, </span><span class="s2">languageBindingVersion</span><span class="s1">)</span>
+  <span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">readDockerVersionSync</span><span class="s1">() {</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s3">const </span><span class="s2">data </span><span class="s1">= </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">readFileSync</span><span class="s1">(</span><span class="s2">dockerVersionFilePath</span><span class="s1">, </span><span class="s0">&quot;utf8&quot;</span><span class="s1">));</span>
+    <span class="s3">return </span><span class="s1">{</span>
+      <span class="s2">...data</span><span class="s1">,</span>
+      <span class="s2">dockerImageNameTemplate</span><span class="s1">: </span><span class="s2">data</span><span class="s1">.</span><span class="s2">dockerImageName</span><span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">driverVersion</span><span class="s1">, </span><span class="s0">&quot;%version%&quot;</span><span class="s1">)</span>
+    <span class="s1">};</span>
+  <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+    <span class="s3">return null</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">checkExecutable </span><span class="s1">= (</span><span class="s2">filePath</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">platform </span><span class="s1">=== </span><span class="s0">&quot;win32&quot;</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s2">filePath</span><span class="s1">.</span><span class="s2">endsWith</span><span class="s1">(</span><span class="s0">&quot;.exe&quot;</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">access</span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">, </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">constants</span><span class="s1">.</span><span class="s2">X_OK</span><span class="s1">).</span><span class="s2">then</span><span class="s1">(() =&gt; </span><span class="s3">true</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">(() =&gt; </span><span class="s3">false</span><span class="s1">);</span>
+<span class="s1">};</span>
+<span class="s3">function </span><span class="s2">isSupportedWindowsVersion</span><span class="s1">() {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">import_os</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">platform</span><span class="s1">() !== </span><span class="s0">&quot;win32&quot; </span><span class="s1">|| </span><span class="s2">import_os</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">arch</span><span class="s1">() !== </span><span class="s0">&quot;x64&quot;</span><span class="s1">)</span>
+    <span class="s3">return false</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s1">[</span><span class="s2">major</span><span class="s1">, </span><span class="s2">minor</span><span class="s1">] = </span><span class="s2">import_os</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">release</span><span class="s1">().</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;.&quot;</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">token</span><span class="s1">) =&gt; </span><span class="s2">parseInt</span><span class="s1">(</span><span class="s2">token</span><span class="s1">, </span><span class="s5">10</span><span class="s1">));</span>
+  <span class="s3">return </span><span class="s2">major </span><span class="s1">&gt; </span><span class="s5">6 </span><span class="s1">|| </span><span class="s2">major </span><span class="s1">=== </span><span class="s5">6 </span><span class="s1">&amp;&amp; </span><span class="s2">minor </span><span class="s1">&gt; </span><span class="s5">1</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">installDependenciesWindows</span><span class="s1">(</span><span class="s2">targets</span><span class="s1">, </span><span class="s2">dryRun</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">targets</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s0">&quot;chromium&quot;</span><span class="s1">)) {</span>
+    <span class="s3">const </span><span class="s2">command </span><span class="s1">= </span><span class="s0">&quot;powershell.exe&quot;</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">args </span><span class="s1">= [</span><span class="s0">&quot;-ExecutionPolicy&quot;</span><span class="s1">, </span><span class="s0">&quot;Bypass&quot;</span><span class="s1">, </span><span class="s0">&quot;-File&quot;</span><span class="s1">, </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">BIN_DIRECTORY</span><span class="s1">, </span><span class="s0">&quot;install_media_pack.ps1&quot;</span><span class="s1">)];</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">dryRun</span><span class="s1">) {</span>
+      <span class="s2">console</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">command</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">quoteProcessArgs</span><span class="s1">(</span><span class="s2">args</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot; &quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">code </span><span class="s1">} = </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_spawnAsync</span><span class="s1">.</span><span class="s2">spawnAsync</span><span class="s1">)(</span><span class="s2">command</span><span class="s1">, </span><span class="s2">args</span><span class="s1">, { </span><span class="s2">cwd</span><span class="s1">: </span><span class="s2">BIN_DIRECTORY</span><span class="s1">, </span><span class="s2">stdio</span><span class="s1">: </span><span class="s0">&quot;inherit&quot; </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">code </span><span class="s1">!== </span><span class="s5">0</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Failed to install windows dependencies!&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">installDependenciesLinux</span><span class="s1">(</span><span class="s2">targets</span><span class="s1">, </span><span class="s2">dryRun</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">libraries </span><span class="s1">= [];</span>
+  <span class="s3">const </span><span class="s2">platform </span><span class="s1">= </span><span class="s2">import_hostPlatform</span><span class="s1">.</span><span class="s2">hostPlatform</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">import_hostPlatform</span><span class="s1">.</span><span class="s2">isOfficiallySupportedPlatform</span><span class="s1">)</span>
+    <span class="s2">console</span><span class="s1">.</span><span class="s2">warn</span><span class="s1">(</span><span class="s0">`BEWARE: your OS is not officially supported by Playwright; installing dependencies for </span><span class="s2">$</span><span class="s1">{</span><span class="s2">platform</span><span class="s1">} </span><span class="s0">as a fallback.`</span><span class="s1">);</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">target of targets</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">info </span><span class="s1">= </span><span class="s2">import_nativeDeps</span><span class="s1">.</span><span class="s2">deps</span><span class="s1">[</span><span class="s2">platform</span><span class="s1">];</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">info</span><span class="s1">) {</span>
+      <span class="s2">console</span><span class="s1">.</span><span class="s2">warn</span><span class="s1">(</span><span class="s0">`Cannot install dependencies for </span><span class="s2">$</span><span class="s1">{</span><span class="s2">platform</span><span class="s1">} </span><span class="s0">with Playwright </span><span class="s2">$</span><span class="s1">{(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_userAgent</span><span class="s1">.</span><span class="s2">getPlaywrightVersion</span><span class="s1">)()}</span><span class="s0">!`</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">libraries</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...info</span><span class="s1">[</span><span class="s2">target</span><span class="s1">]);</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">uniqueLibraries </span><span class="s1">= </span><span class="s2">Array</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Set</span><span class="s1">(</span><span class="s2">libraries</span><span class="s1">));</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">dryRun</span><span class="s1">)</span>
+    <span class="s2">console</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`Installing dependencies...`</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">commands </span><span class="s1">= [];</span>
+  <span class="s2">commands</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s0">&quot;apt-get update&quot;</span><span class="s1">);</span>
+  <span class="s2">commands</span><span class="s1">.</span><span class="s2">push</span><span class="s1">([</span>
+    <span class="s0">&quot;apt-get&quot;</span><span class="s1">,</span>
+    <span class="s0">&quot;install&quot;</span><span class="s1">,</span>
+    <span class="s0">&quot;-y&quot;</span><span class="s1">,</span>
+    <span class="s0">&quot;--no-install-recommends&quot;</span><span class="s1">,</span>
+    <span class="s2">...uniqueLibraries</span>
+  <span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot; &quot;</span><span class="s1">));</span>
+  <span class="s3">const </span><span class="s1">{ </span><span class="s2">command</span><span class="s1">, </span><span class="s2">args</span><span class="s1">, </span><span class="s2">elevatedPermissions </span><span class="s1">} = </span><span class="s3">await </span><span class="s2">transformCommandsForRoot</span><span class="s1">(</span><span class="s2">commands</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">dryRun</span><span class="s1">) {</span>
+    <span class="s2">console</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">command</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">quoteProcessArgs</span><span class="s1">(</span><span class="s2">args</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot; &quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">elevatedPermissions</span><span class="s1">)</span>
+    <span class="s2">console</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">&quot;Switching to root user to install dependencies...&quot;</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">child </span><span class="s1">= </span><span class="s2">childProcess</span><span class="s1">.</span><span class="s2">spawn</span><span class="s1">(</span><span class="s2">command</span><span class="s1">, </span><span class="s2">args</span><span class="s1">, { </span><span class="s2">stdio</span><span class="s1">: </span><span class="s0">&quot;inherit&quot; </span><span class="s1">});</span>
+  <span class="s3">await new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">resolve</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; {</span>
+    <span class="s2">child</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;exit&quot;</span><span class="s1">, (</span><span class="s2">code</span><span class="s1">) =&gt; </span><span class="s2">code </span><span class="s1">=== </span><span class="s5">0 </span><span class="s1">? </span><span class="s2">resolve</span><span class="s1">() : </span><span class="s2">reject</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Installation process exited with code: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">code</span><span class="s1">}</span><span class="s0">`</span><span class="s1">)));</span>
+    <span class="s2">child</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">);</span>
+  <span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">validateDependenciesWindows</span><span class="s1">(</span><span class="s2">sdkLanguage</span><span class="s1">, </span><span class="s2">windowsExeAndDllDirectories</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">directoryPaths </span><span class="s1">= </span><span class="s2">windowsExeAndDllDirectories</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">lddPaths </span><span class="s1">= [];</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">directoryPath of directoryPaths</span><span class="s1">)</span>
+    <span class="s2">lddPaths</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...</span><span class="s3">await </span><span class="s2">executablesOrSharedLibraries</span><span class="s1">(</span><span class="s2">directoryPath</span><span class="s1">));</span>
+  <span class="s3">const </span><span class="s2">allMissingDeps </span><span class="s1">= </span><span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">lddPaths</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">lddPath</span><span class="s1">) =&gt; </span><span class="s2">missingFileDependenciesWindows</span><span class="s1">(</span><span class="s2">sdkLanguage</span><span class="s1">, </span><span class="s2">lddPath</span><span class="s1">)));</span>
+  <span class="s3">const </span><span class="s2">missingDeps </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">deps2 of allMissingDeps</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">dep of deps2</span><span class="s1">)</span>
+      <span class="s2">missingDeps</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">dep</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">missingDeps</span><span class="s1">.</span><span class="s2">size</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">isCrtMissing </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">isMediaFoundationMissing </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">dep of missingDeps</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">dep</span><span class="s1">.</span><span class="s2">startsWith</span><span class="s1">(</span><span class="s0">&quot;api-ms-win-crt&quot;</span><span class="s1">) || </span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;vcruntime140.dll&quot; </span><span class="s1">|| </span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;vcruntime140_1.dll&quot; </span><span class="s1">|| </span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;msvcp140.dll&quot;</span><span class="s1">)</span>
+      <span class="s2">isCrtMissing </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s3">else if </span><span class="s1">(</span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;mf.dll&quot; </span><span class="s1">|| </span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;mfplat.dll&quot; </span><span class="s1">|| </span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;msmpeg2vdec.dll&quot; </span><span class="s1">|| </span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;evr.dll&quot; </span><span class="s1">|| </span><span class="s2">dep </span><span class="s1">=== </span><span class="s0">&quot;avrt.dll&quot;</span><span class="s1">)</span>
+      <span class="s2">isMediaFoundationMissing </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">details </span><span class="s1">= [];</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">isCrtMissing</span><span class="s1">) {</span>
+    <span class="s2">details</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span>
+      <span class="s0">`Some of the Universal C Runtime files cannot be found on the system. You can fix`</span><span class="s1">,</span>
+      <span class="s0">`that by installing Microsoft Visual C++ Redistributable for Visual Studio from:`</span><span class="s1">,</span>
+      <span class="s0">`https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads`</span><span class="s1">,</span>
+      <span class="s0">``</span>
+    <span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">isMediaFoundationMissing</span><span class="s1">) {</span>
+    <span class="s2">details</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span>
+      <span class="s0">`Some of the Media Foundation files cannot be found on the system. If you are`</span><span class="s1">,</span>
+      <span class="s0">`on Windows Server try fixing this by running the following command in PowerShell`</span><span class="s1">,</span>
+      <span class="s0">`as Administrator:`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`    Install-WindowsFeature Server-Media-Foundation`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`For Windows N editions visit:`</span><span class="s1">,</span>
+      <span class="s0">`https://support.microsoft.com/en-us/help/3145500/media-feature-pack-list-for-windows-n-editions`</span><span class="s1">,</span>
+      <span class="s0">``</span>
+    <span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">details</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span>
+    <span class="s0">`Full list of missing libraries:`</span><span class="s1">,</span>
+    <span class="s0">`    </span><span class="s2">$</span><span class="s1">{[</span><span class="s2">...missingDeps</span><span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n    </span><span class="s0">&quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">,</span>
+    <span class="s0">``</span>
+  <span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">message </span><span class="s1">= </span><span class="s0">`Host system is missing dependencies! 
+ 
+</span><span class="s2">$</span><span class="s1">{</span><span class="s2">details</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">isSupportedWindowsVersion</span><span class="s1">()) {</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+    <span class="s2">console</span><span class="s1">.</span><span class="s2">warn</span><span class="s1">(</span><span class="s0">`WARNING: running on unsupported windows version!`</span><span class="s1">);</span>
+    <span class="s2">console</span><span class="s1">.</span><span class="s2">warn</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">validateDependenciesLinux</span><span class="s1">(</span><span class="s2">sdkLanguage</span><span class="s1">, </span><span class="s2">linuxLddDirectories</span><span class="s1">, </span><span class="s2">dlOpenLibraries</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">directoryPaths </span><span class="s1">= </span><span class="s2">linuxLddDirectories</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">lddPaths </span><span class="s1">= [];</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">directoryPath of directoryPaths</span><span class="s1">)</span>
+    <span class="s2">lddPaths</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...</span><span class="s3">await </span><span class="s2">executablesOrSharedLibraries</span><span class="s1">(</span><span class="s2">directoryPath</span><span class="s1">));</span>
+  <span class="s3">const </span><span class="s2">missingDepsPerFile </span><span class="s1">= </span><span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">lddPaths</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">lddPath</span><span class="s1">) =&gt; </span><span class="s2">missingFileDependencies</span><span class="s1">(</span><span class="s2">lddPath</span><span class="s1">, </span><span class="s2">directoryPaths</span><span class="s1">)));</span>
+  <span class="s3">const </span><span class="s2">missingDeps </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">deps2 of missingDepsPerFile</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">dep of deps2</span><span class="s1">)</span>
+      <span class="s2">missingDeps</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">dep</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">dep of </span><span class="s3">await </span><span class="s2">missingDLOPENLibraries</span><span class="s1">(</span><span class="s2">dlOpenLibraries</span><span class="s1">))</span>
+    <span class="s2">missingDeps</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">dep</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">missingDeps</span><span class="s1">.</span><span class="s2">size</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">allMissingDeps </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">(</span><span class="s2">missingDeps</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">missingPackages </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">libraryToPackageNameMapping </span><span class="s1">= </span><span class="s2">import_nativeDeps</span><span class="s1">.</span><span class="s2">deps</span><span class="s1">[</span><span class="s2">import_hostPlatform</span><span class="s1">.</span><span class="s2">hostPlatform</span><span class="s1">] ? {</span>
+    <span class="s2">...import_nativeDeps</span><span class="s1">.</span><span class="s2">deps</span><span class="s1">[</span><span class="s2">import_hostPlatform</span><span class="s1">.</span><span class="s2">hostPlatform</span><span class="s1">]?.</span><span class="s2">lib2package </span><span class="s1">|| {},</span>
+    <span class="s2">...MANUAL_LIBRARY_TO_PACKAGE_NAME_UBUNTU</span>
+  <span class="s1">} : {};</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">missingDep of missingDeps</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">packageName </span><span class="s1">= </span><span class="s2">libraryToPackageNameMapping</span><span class="s1">[</span><span class="s2">missingDep</span><span class="s1">];</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">packageName</span><span class="s1">) {</span>
+      <span class="s2">missingPackages</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">packageName</span><span class="s1">);</span>
+      <span class="s2">missingDeps</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">missingDep</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">maybeSudo </span><span class="s1">= </span><span class="s2">process</span><span class="s1">.</span><span class="s2">getuid</span><span class="s1">?.() &amp;&amp; </span><span class="s2">import_os</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">platform</span><span class="s1">() !== </span><span class="s0">&quot;win32&quot; </span><span class="s1">? </span><span class="s0">&quot;sudo &quot; </span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">dockerInfo </span><span class="s1">= </span><span class="s2">readDockerVersionSync</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">errorLines </span><span class="s1">= [</span>
+    <span class="s0">`Host system is missing dependencies to run browsers.`</span>
+  <span class="s1">];</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">dockerInfo </span><span class="s1">&amp;&amp; !</span><span class="s2">dockerInfo</span><span class="s1">.</span><span class="s2">driverVersion</span><span class="s1">.</span><span class="s2">startsWith</span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_userAgent</span><span class="s1">.</span><span class="s2">getPlaywrightVersion</span><span class="s1">)(</span>
+    <span class="s3">true</span>
+    <span class="s4">/* majorMinorOnly */</span>
+  <span class="s1">) + </span><span class="s0">&quot;.&quot;</span><span class="s1">)) {</span>
+    <span class="s3">const </span><span class="s2">pwVersion </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_userAgent</span><span class="s1">.</span><span class="s2">getPlaywrightVersion</span><span class="s1">)();</span>
+    <span class="s3">const </span><span class="s2">requiredDockerImage </span><span class="s1">= </span><span class="s2">dockerInfo</span><span class="s1">.</span><span class="s2">dockerImageName</span><span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s2">dockerInfo</span><span class="s1">.</span><span class="s2">driverVersion</span><span class="s1">, </span><span class="s2">pwVersion</span><span class="s1">);</span>
+    <span class="s2">errorLines</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...</span><span class="s1">[</span>
+      <span class="s0">`This is most likely due to Docker image version not matching Playwright version:`</span><span class="s1">,</span>
+      <span class="s0">`- Playwright  : </span><span class="s2">$</span><span class="s1">{</span><span class="s2">pwVersion</span><span class="s1">}</span><span class="s0">`</span><span class="s1">,</span>
+      <span class="s0">`- Docker image: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">dockerInfo</span><span class="s1">.</span><span class="s2">driverVersion</span><span class="s1">}</span><span class="s0">`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`Either:`</span><span class="s1">,</span>
+      <span class="s0">`- (recommended) use Docker image &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">requiredDockerImage</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">,</span>
+      <span class="s0">`- (alternative 1) run the following command inside Docker to install missing dependencies:`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`    </span><span class="s2">$</span><span class="s1">{</span><span class="s2">maybeSudo</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import__</span><span class="s1">.</span><span class="s2">buildPlaywrightCLICommand</span><span class="s1">)(</span><span class="s2">sdkLanguage</span><span class="s1">, </span><span class="s0">&quot;install-deps&quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`- (alternative 2) use apt inside Docker:`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`    </span><span class="s2">$</span><span class="s1">{</span><span class="s2">maybeSudo</span><span class="s1">}</span><span class="s0">apt-get install </span><span class="s2">$</span><span class="s1">{[</span><span class="s2">...missingPackages</span><span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\\\n        </span><span class="s0">&quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`&lt;3 Playwright Team`</span>
+    <span class="s1">]);</span>
+  <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">missingPackages</span><span class="s1">.</span><span class="s2">size </span><span class="s1">&amp;&amp; !</span><span class="s2">missingDeps</span><span class="s1">.</span><span class="s2">size</span><span class="s1">) {</span>
+    <span class="s2">errorLines</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...</span><span class="s1">[</span>
+      <span class="s0">`Please install them with the following command:`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`    </span><span class="s2">$</span><span class="s1">{</span><span class="s2">maybeSudo</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import__</span><span class="s1">.</span><span class="s2">buildPlaywrightCLICommand</span><span class="s1">)(</span><span class="s2">sdkLanguage</span><span class="s1">, </span><span class="s0">&quot;install-deps&quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`Alternatively, use apt:`</span><span class="s1">,</span>
+      <span class="s0">`    </span><span class="s2">$</span><span class="s1">{</span><span class="s2">maybeSudo</span><span class="s1">}</span><span class="s0">apt-get install </span><span class="s2">$</span><span class="s1">{[</span><span class="s2">...missingPackages</span><span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\\\n        </span><span class="s0">&quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">,</span>
+      <span class="s0">``</span><span class="s1">,</span>
+      <span class="s0">`&lt;3 Playwright Team`</span>
+    <span class="s1">]);</span>
+  <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+    <span class="s2">errorLines</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">...</span><span class="s1">[</span>
+      <span class="s0">`Missing libraries:`</span><span class="s1">,</span>
+      <span class="s2">...</span><span class="s1">[</span><span class="s2">...allMissingDeps</span><span class="s1">].</span><span class="s2">map</span><span class="s1">((</span><span class="s2">dep</span><span class="s1">) =&gt; </span><span class="s0">&quot;    &quot; </span><span class="s1">+ </span><span class="s2">dep</span><span class="s1">)</span>
+    <span class="s1">]);</span>
+  <span class="s1">}</span>
+  <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot; </span><span class="s1">+ (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_ascii</span><span class="s1">.</span><span class="s2">wrapInASCIIBox</span><span class="s1">)(</span><span class="s2">errorLines</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">), </span><span class="s5">1</span><span class="s1">));</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">isSharedLib</span><span class="s1">(</span><span class="s2">basename</span><span class="s1">) {</span>
+  <span class="s3">switch </span><span class="s1">(</span><span class="s2">import_os</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">platform</span><span class="s1">()) {</span>
+    <span class="s3">case </span><span class="s0">&quot;linux&quot;</span><span class="s1">:</span>
+      <span class="s3">return </span><span class="s2">basename</span><span class="s1">.</span><span class="s2">endsWith</span><span class="s1">(</span><span class="s0">&quot;.so&quot;</span><span class="s1">) || </span><span class="s2">basename</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s0">&quot;.so.&quot;</span><span class="s1">);</span>
+    <span class="s3">case </span><span class="s0">&quot;win32&quot;</span><span class="s1">:</span>
+      <span class="s3">return </span><span class="s2">basename</span><span class="s1">.</span><span class="s2">endsWith</span><span class="s1">(</span><span class="s0">&quot;.dll&quot;</span><span class="s1">);</span>
+    <span class="s3">default</span><span class="s1">:</span>
+      <span class="s3">return false</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">executablesOrSharedLibraries</span><span class="s1">(</span><span class="s2">directoryPath</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">existsSync</span><span class="s1">(</span><span class="s2">directoryPath</span><span class="s1">))</span>
+    <span class="s3">return </span><span class="s1">[];</span>
+  <span class="s3">const </span><span class="s2">allPaths </span><span class="s1">= (</span><span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">readdir</span><span class="s1">(</span><span class="s2">directoryPath</span><span class="s1">)).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">file</span><span class="s1">) =&gt; </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">directoryPath</span><span class="s1">, </span><span class="s2">file</span><span class="s1">));</span>
+  <span class="s3">const </span><span class="s2">allStats </span><span class="s1">= </span><span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">allPaths</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">aPath</span><span class="s1">) =&gt; </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">stat</span><span class="s1">(</span><span class="s2">aPath</span><span class="s1">)));</span>
+  <span class="s3">const </span><span class="s2">filePaths </span><span class="s1">= </span><span class="s2">allPaths</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">aPath</span><span class="s1">, </span><span class="s2">index</span><span class="s1">) =&gt; </span><span class="s2">allStats</span><span class="s1">[</span><span class="s2">index</span><span class="s1">].</span><span class="s2">isFile</span><span class="s1">());</span>
+  <span class="s3">const </span><span class="s2">executablersOrLibraries </span><span class="s1">= (</span><span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">filePaths</span><span class="s1">.</span><span class="s2">map</span><span class="s1">(</span><span class="s2">async </span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">basename </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">basename</span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">).</span><span class="s2">toLowerCase</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">isSharedLib</span><span class="s1">(</span><span class="s2">basename</span><span class="s1">))</span>
+      <span class="s3">return </span><span class="s2">filePath</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">await </span><span class="s2">checkExecutable</span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">))</span>
+      <span class="s3">return </span><span class="s2">filePath</span><span class="s1">;</span>
+    <span class="s3">return false</span><span class="s1">;</span>
+  <span class="s1">}))).</span><span class="s2">filter</span><span class="s1">(</span><span class="s2">Boolean</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">executablersOrLibraries</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">missingFileDependenciesWindows</span><span class="s1">(</span><span class="s2">sdkLanguage</span><span class="s1">, </span><span class="s2">filePath</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">executable </span><span class="s1">= </span><span class="s2">import__</span><span class="s1">.</span><span class="s2">registry</span><span class="s1">.</span><span class="s2">findExecutable</span><span class="s1">(</span><span class="s0">&quot;winldd&quot;</span><span class="s1">).</span><span class="s2">executablePathOrDie</span><span class="s1">(</span><span class="s2">sdkLanguage</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">dirname </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s1">{ </span><span class="s2">stdout</span><span class="s1">, </span><span class="s2">code </span><span class="s1">} = </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_spawnAsync</span><span class="s1">.</span><span class="s2">spawnAsync</span><span class="s1">)(</span><span class="s2">executable</span><span class="s1">, [</span><span class="s2">filePath</span><span class="s1">], {</span>
+    <span class="s2">cwd</span><span class="s1">: </span><span class="s2">dirname</span><span class="s1">,</span>
+    <span class="s2">env</span><span class="s1">: {</span>
+      <span class="s2">...process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">,</span>
+      <span class="s2">LD_LIBRARY_PATH</span><span class="s1">: </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">LD_LIBRARY_PATH </span><span class="s1">? </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">LD_LIBRARY_PATH</span><span class="s1">}</span><span class="s0">:</span><span class="s2">$</span><span class="s1">{</span><span class="s2">dirname</span><span class="s1">}</span><span class="s0">` </span><span class="s1">: </span><span class="s2">dirname</span>
+    <span class="s1">}</span>
+  <span class="s1">});</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">code </span><span class="s1">!== </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">[];</span>
+  <span class="s3">const </span><span class="s2">missingDeps </span><span class="s1">= </span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">line</span><span class="s1">) =&gt; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">()).</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">line</span><span class="s1">) =&gt; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">endsWith</span><span class="s1">(</span><span class="s0">&quot;not found&quot;</span><span class="s1">) &amp;&amp; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s0">&quot;=&gt;&quot;</span><span class="s1">)).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">line</span><span class="s1">) =&gt; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;=&gt;&quot;</span><span class="s1">)[</span><span class="s5">0</span><span class="s1">].</span><span class="s2">trim</span><span class="s1">().</span><span class="s2">toLowerCase</span><span class="s1">());</span>
+  <span class="s3">return </span><span class="s2">missingDeps</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">missingFileDependencies</span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">, </span><span class="s2">extraLDPaths</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">dirname </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">filePath</span><span class="s1">);</span>
+  <span class="s3">let </span><span class="s2">LD_LIBRARY_PATH </span><span class="s1">= </span><span class="s2">extraLDPaths</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;:&quot;</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">LD_LIBRARY_PATH</span><span class="s1">)</span>
+    <span class="s2">LD_LIBRARY_PATH </span><span class="s1">= </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">LD_LIBRARY_PATH</span><span class="s1">}</span><span class="s0">:</span><span class="s2">$</span><span class="s1">{</span><span class="s2">LD_LIBRARY_PATH</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s1">{ </span><span class="s2">stdout</span><span class="s1">, </span><span class="s2">code </span><span class="s1">} = </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_spawnAsync</span><span class="s1">.</span><span class="s2">spawnAsync</span><span class="s1">)(</span><span class="s0">&quot;ldd&quot;</span><span class="s1">, [</span><span class="s2">filePath</span><span class="s1">], {</span>
+    <span class="s2">cwd</span><span class="s1">: </span><span class="s2">dirname</span><span class="s1">,</span>
+    <span class="s2">env</span><span class="s1">: {</span>
+      <span class="s2">...process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">,</span>
+      <span class="s2">LD_LIBRARY_PATH</span>
+    <span class="s1">}</span>
+  <span class="s1">});</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">code </span><span class="s1">!== </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">[];</span>
+  <span class="s3">const </span><span class="s2">missingDeps </span><span class="s1">= </span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">line</span><span class="s1">) =&gt; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">()).</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">line</span><span class="s1">) =&gt; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">endsWith</span><span class="s1">(</span><span class="s0">&quot;not found&quot;</span><span class="s1">) &amp;&amp; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s0">&quot;=&gt;&quot;</span><span class="s1">)).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">line</span><span class="s1">) =&gt; </span><span class="s2">line</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;=&gt;&quot;</span><span class="s1">)[</span><span class="s5">0</span><span class="s1">].</span><span class="s2">trim</span><span class="s1">());</span>
+  <span class="s3">return </span><span class="s2">missingDeps</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">missingDLOPENLibraries</span><span class="s1">(</span><span class="s2">libraries</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">libraries</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">[];</span>
+  <span class="s3">const </span><span class="s1">{ </span><span class="s2">stdout</span><span class="s1">, </span><span class="s2">code</span><span class="s1">, </span><span class="s2">error </span><span class="s1">} = </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_spawnAsync</span><span class="s1">.</span><span class="s2">spawnAsync</span><span class="s1">)(</span><span class="s0">&quot;/sbin/ldconfig&quot;</span><span class="s1">, [</span><span class="s0">&quot;-p&quot;</span><span class="s1">], {});</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">code </span><span class="s1">!== </span><span class="s5">0 </span><span class="s1">|| </span><span class="s2">error</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">[];</span>
+  <span class="s3">const </span><span class="s2">isLibraryAvailable </span><span class="s1">= (</span><span class="s2">library</span><span class="s1">) =&gt; </span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">toLowerCase</span><span class="s1">().</span><span class="s2">includes</span><span class="s1">(</span><span class="s2">library</span><span class="s1">.</span><span class="s2">toLowerCase</span><span class="s1">());</span>
+  <span class="s3">return </span><span class="s2">libraries</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">library</span><span class="s1">) =&gt; !</span><span class="s2">isLibraryAvailable</span><span class="s1">(</span><span class="s2">library</span><span class="s1">));</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">MANUAL_LIBRARY_TO_PACKAGE_NAME_UBUNTU </span><span class="s1">= {</span>
+  <span class="s4">// libgstlibav.so (the only actual library provided by gstreamer1.0-libav) is not</span>
+  <span class="s4">// in the ldconfig cache, so we detect the actual library required for playing h.264</span>
+  <span class="s4">// and if it's missing recommend installing missing gstreamer lib.</span>
+  <span class="s4">// gstreamer1.0-libav -&gt; libavcodec57 -&gt; libx264-152</span>
+  <span class="s0">&quot;libx264.so&quot;</span><span class="s1">: </span><span class="s0">&quot;gstreamer1.0-libav&quot;</span>
+<span class="s1">};</span>
+<span class="s3">function </span><span class="s2">quoteProcessArgs</span><span class="s1">(</span><span class="s2">args</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s2">args</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">arg</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">arg</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s0">&quot; &quot;</span><span class="s1">))</span>
+      <span class="s3">return </span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">arg</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s2">arg</span><span class="s1">;</span>
+  <span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">transformCommandsForRoot</span><span class="s1">(</span><span class="s2">commands</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">isRoot </span><span class="s1">= </span><span class="s2">process</span><span class="s1">.</span><span class="s2">getuid</span><span class="s1">?.() === </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">isRoot</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">command</span><span class="s1">: </span><span class="s0">&quot;sh&quot;</span><span class="s1">, </span><span class="s2">args</span><span class="s1">: [</span><span class="s0">&quot;-c&quot;</span><span class="s1">, </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">commands</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;&amp;&amp; &quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">], </span><span class="s2">elevatedPermissions</span><span class="s1">: </span><span class="s3">false </span><span class="s1">};</span>
+  <span class="s3">const </span><span class="s2">sudoExists </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_spawnAsync</span><span class="s1">.</span><span class="s2">spawnAsync</span><span class="s1">)(</span><span class="s0">&quot;which&quot;</span><span class="s1">, [</span><span class="s0">&quot;sudo&quot;</span><span class="s1">]);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">sudoExists</span><span class="s1">.</span><span class="s2">code </span><span class="s1">=== </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">command</span><span class="s1">: </span><span class="s0">&quot;sudo&quot;</span><span class="s1">, </span><span class="s2">args</span><span class="s1">: [</span><span class="s0">&quot;--&quot;</span><span class="s1">, </span><span class="s0">&quot;sh&quot;</span><span class="s1">, </span><span class="s0">&quot;-c&quot;</span><span class="s1">, </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">commands</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;&amp;&amp; &quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">], </span><span class="s2">elevatedPermissions</span><span class="s1">: </span><span class="s3">true </span><span class="s1">};</span>
+  <span class="s3">return </span><span class="s1">{ </span><span class="s2">command</span><span class="s1">: </span><span class="s0">&quot;su&quot;</span><span class="s1">, </span><span class="s2">args</span><span class="s1">: [</span><span class="s0">&quot;root&quot;</span><span class="s1">, </span><span class="s0">&quot;-c&quot;</span><span class="s1">, </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">commands</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;&amp;&amp; &quot;</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">], </span><span class="s2">elevatedPermissions</span><span class="s1">: </span><span class="s3">true </span><span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">dockerVersion</span><span class="s1">,</span>
+  <span class="s2">installDependenciesLinux</span><span class="s1">,</span>
+  <span class="s2">installDependenciesWindows</span><span class="s1">,</span>
+  <span class="s2">readDockerVersionSync</span><span class="s1">,</span>
+  <span class="s2">transformCommandsForRoot</span><span class="s1">,</span>
+  <span class="s2">validateDependenciesLinux</span><span class="s1">,</span>
+  <span class="s2">validateDependenciesWindows</span><span class="s1">,</span>
+  <span class="s2">writeDockerVersion</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<html>
+<head>
+<title>eq-debt-collection-packages-id-splitversion.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #42c3d4;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-debt-collection-packages-id-splitversion.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">allure </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'allure-playwright'</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Детальная валидация ответа описания пакета документов'</span><span class="s2">, () =&gt; {</span>
+    <span class="s0">let </span><span class="s1">responseData</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+    <span class="s0">const </span><span class="s1">PACKAGE_ID </span><span class="s2">= </span><span class="s3">'019a113e-58c5-79fe-8672-f4fea9cdc7dd'</span><span class="s2">;</span>
+
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">beforeEach</span><span class="s2">(</span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">epic</span><span class="s2">(</span><span class="s3">'EqvaCollection API'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">feature</span><span class="s2">(</span><span class="s3">'Получение деталей пакета документов по ID'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">owner</span><span class="s2">(</span><span class="s3">'API Team'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">tag</span><span class="s2">(</span><span class="s3">'package-validation'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">tag</span><span class="s2">(</span><span class="s3">'detailed-check'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">`Получение деталей пакета с ID: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">PACKAGE_ID</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">PACKAGE_ID</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка статус кода ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">(), </span><span class="s3">'Status code should be 200'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s1">responseData </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Прикрепление данных ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Package Details Response'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+                <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Request Info'</span><span class="s2">,</span>
+                    <span class="s3">`Package ID: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">PACKAGE_ID</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Status: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()}</span><span class="s0">\n</span><span class="s3">URL: /v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">PACKAGE_ID</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                    <span class="s3">'text/plain'</span>
+                <span class="s2">);</span>
+            <span class="s2">});</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Response has all required fields'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s3">'Проверка обязательных полей'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s3">'critical'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Валидация наличия всех обязательных полей в ответе пакета документов'</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">expectedKeys </span><span class="s2">= [</span><span class="s3">'id'</span><span class="s2">, </span><span class="s3">'number'</span><span class="s2">, </span><span class="s3">'typeId'</span><span class="s2">, </span><span class="s3">'statusCode'</span><span class="s2">, </span><span class="s3">'createdAt'</span><span class="s2">, </span><span class="s3">'responsibleLawyerId'</span><span class="s2">, </span><span class="s3">'includedContracts'</span><span class="s2">];</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка наличия всех обязательных полей'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">expectedKeys</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">key </span><span class="s2">=&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s3">`Response should have property: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">key</span><span class="s2">}</span><span class="s3">`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s1">key</span><span class="s2">);</span>
+            <span class="s2">});</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Прикрепление информации о полях'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">const </span><span class="s1">actualKeys </span><span class="s2">= </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">missingKeys </span><span class="s2">= </span><span class="s1">expectedKeys</span><span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">key </span><span class="s2">=&gt; !</span><span class="s1">actualKeys</span><span class="s2">.</span><span class="s1">includes</span><span class="s2">(</span><span class="s1">key</span><span class="s2">));</span>
+            <span class="s0">const </span><span class="s1">extraKeys </span><span class="s2">= </span><span class="s1">actualKeys</span><span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">key </span><span class="s2">=&gt; !</span><span class="s1">expectedKeys</span><span class="s2">.</span><span class="s1">includes</span><span class="s2">(</span><span class="s1">key</span><span class="s2">));</span>
+
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Fields Validation'</span><span class="s2">,</span>
+                <span class="s3">`Expected Fields: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">expectedKeys</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">', '</span><span class="s2">)}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Actual Fields: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">actualKeys</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">', '</span><span class="s2">)}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Missing Fields: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">missingKeys</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0 </span><span class="s2">? </span><span class="s1">missingKeys</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">', '</span><span class="s2">) : </span><span class="s3">'None'</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Extra Fields: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">extraKeys</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0 </span><span class="s2">? </span><span class="s1">extraKeys</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">', '</span><span class="s2">) : </span><span class="s3">'None'</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                <span class="s3">'text/plain'</span>
+            <span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'All fields have correct data types'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s3">'Проверка типов данных'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s3">'critical'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Валидация корректности типов данных всех полей пакета документов'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка типов данных основных полей'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">, </span><span class="s3">'id should be a string'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">number</span><span class="s2">, </span><span class="s3">'number should be a number'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">typeId</span><span class="s2">, </span><span class="s3">'typeId should be a string'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">statusCode</span><span class="s2">, </span><span class="s3">'statusCode should be a string'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">, </span><span class="s3">'createdAt should be a string'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">), </span><span class="s3">'includedContracts should be an array'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка типа responsibleLawyerId'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">!== </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">, </span><span class="s3">'responsibleLawyerId should be a string when not null'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Responsible Lawyer Info'</span><span class="s2">,</span>
+                    <span class="s3">`Type: string</span><span class="s0">\n</span><span class="s3">Value: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Length: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                    <span class="s3">'text/plain'</span>
+                <span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Responsible Lawyer Info'</span><span class="s2">, </span><span class="s3">'Type: null</span><span class="s0">\n</span><span class="s3">Value: null'</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Прикрепление информации о типах данных'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">const </span><span class="s1">typeInfo </span><span class="s2">= {</span>
+                <span class="s1">id</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">,</span>
+                <span class="s1">number</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">number</span><span class="s2">,</span>
+                <span class="s1">typeId</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">typeId</span><span class="s2">,</span>
+                <span class="s1">statusCode</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">statusCode</span><span class="s2">,</span>
+                <span class="s1">createdAt</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">,</span>
+                <span class="s1">responsibleLawyerId</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">? </span><span class="s3">'null' </span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">,</span>
+                <span class="s1">includedContracts</span><span class="s2">: </span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">) ? </span><span class="s3">'array' </span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span>
+            <span class="s2">};</span>
+
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Data Types Info'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">typeInfo</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'The createdAt field must be in a valid date format'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s3">'Валидация формата даты'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s3">'normal'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Проверка что поле createdAt содержит корректную дату в формате ISO'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка наличия поля createdAt'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s3">'Response should have createdAt field'</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'createdAt'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Валидация формата даты'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">const </span><span class="s1">createdAtDate </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">isValidDate </span><span class="s2">= !</span><span class="s1">isNaN</span><span class="s2">(</span><span class="s1">createdAtDate</span><span class="s2">.</span><span class="s1">getTime</span><span class="s2">());</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">isValidDate</span><span class="s2">, </span><span class="s3">'createdAt should be a valid date'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Date Validation'</span><span class="s2">,</span>
+                <span class="s3">`Original Value: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Parsed Date: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">createdAtDate</span><span class="s2">.</span><span class="s1">toISOString</span><span class="s2">()}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Is Valid: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">isValidDate</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Year: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">createdAtDate</span><span class="s2">.</span><span class="s1">getFullYear</span><span class="s2">()}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Month: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">createdAtDate</span><span class="s2">.</span><span class="s1">getMonth</span><span class="s2">() + </span><span class="s4">1</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Day: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">createdAtDate</span><span class="s2">.</span><span class="s1">getDate</span><span class="s2">()}</span><span class="s3">`</span><span class="s2">,</span>
+                <span class="s3">'text/plain'</span>
+            <span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Ensure includedContracts array is not null'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s3">'Проверка массива контрактов'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s3">'normal'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Валидация что includedContracts является не-null массивом'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка структуры ответа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s3">'Response should be defined'</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">, </span><span class="s3">'Response should be an object'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'object'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка массива includedContracts'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">, </span><span class="s3">'includedContracts should be defined'</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">), </span><span class="s3">'includedContracts should be an array'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">, </span><span class="s3">'includedContracts should not be null'</span><span class="s2">).</span><span class="s1">not</span><span class="s2">.</span><span class="s1">toBeNull</span><span class="s2">();</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Прикрепление информации о массиве контрактов'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Included Contracts Info'</span><span class="s2">,</span>
+                <span class="s3">`Array Length: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Is Array: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">)}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`Is Null: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts </span><span class="s2">=== </span><span class="s0">null</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                <span class="s3">`First 5 Items: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">slice</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s4">5</span><span class="s2">))}</span><span class="s3">`</span><span class="s2">,</span>
+                <span class="s3">'text/plain'</span>
+            <span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Validate that responsibleLawyerId is either a non-empty string or null'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s3">'Валидация ответственного юриста'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s3">'normal'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Проверка что responsibleLawyerId либо не-пустая строка, либо null'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка наличия поля responsibleLawyerId'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s3">'Response should have responsibleLawyerId field'</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'responsibleLawyerId'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Валидация значения responsibleLawyerId'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">) {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s3">'responsibleLawyerId should not be empty if it is a string'</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+
+                <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Responsible Lawyer Validation'</span><span class="s2">,</span>
+                    <span class="s3">`Type: string</span><span class="s0">\n</span><span class="s3">Value: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Length: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Is UUID: </span><span class="s1">$</span><span class="s2">{</span><span class="s5">/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i</span><span class="s2">.</span><span class="s1">test</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">)}</span><span class="s3">`</span><span class="s2">,</span>
+                    <span class="s3">'text/plain'</span>
+                <span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">, </span><span class="s3">'responsibleLawyerId should be null if not a string'</span><span class="s2">).</span><span class="s1">toBeNull</span><span class="s2">();</span>
+                <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Responsible Lawyer Validation'</span><span class="s2">, </span><span class="s3">'Type: null</span><span class="s0">\n</span><span class="s3">Value: null'</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'All includedContracts items are strings'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s3">'Валидация элементов массива контрактов'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s3">'critical'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Проверка что все элементы в includedContracts являются строками'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Проверка типов элементов массива'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">((</span><span class="s1">contract</span><span class="s2">: </span><span class="s1">any</span><span class="s2">, </span><span class="s1">index</span><span class="s2">: </span><span class="s1">number</span><span class="s2">) =&gt; {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">contract</span><span class="s2">, </span><span class="s3">`Contract at index </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should be a string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+            <span class="s2">});</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Прикрепление детальной информации о контрактах'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s6">// Исправленная версия без использования Set с spread оператором</span>
+            <span class="s0">const </span><span class="s1">contractTypes </span><span class="s2">= </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">map</span><span class="s2">((</span><span class="s1">contract</span><span class="s2">: </span><span class="s1">any</span><span class="s2">) =&gt; </span><span class="s0">typeof </span><span class="s1">contract</span><span class="s2">);</span>
+            <span class="s0">const </span><span class="s1">uniqueTypes</span><span class="s2">: </span><span class="s1">string</span><span class="s2">[] = [];</span>
+            <span class="s1">contractTypes</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">((</span><span class="s1">type</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; {</span>
+                <span class="s0">if </span><span class="s2">(!</span><span class="s1">uniqueTypes</span><span class="s2">.</span><span class="s1">includes</span><span class="s2">(</span><span class="s1">type</span><span class="s2">)) {</span>
+                    <span class="s1">uniqueTypes</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">type</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s1">contractsInfo </span><span class="s2">= {</span>
+                <span class="s1">totalCount</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">length</span><span class="s2">,</span>
+                <span class="s1">sampleItems</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">slice</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s4">10</span><span class="s2">), </span><span class="s6">// Первые 10 элементов</span>
+                <span class="s1">allAreStrings</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">every</span><span class="s2">((</span><span class="s1">contract</span><span class="s2">: </span><span class="s1">any</span><span class="s2">) =&gt; </span><span class="s0">typeof </span><span class="s1">contract </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">),</span>
+                <span class="s1">uniqueTypes</span><span class="s2">: </span><span class="s1">uniqueTypes</span><span class="s2">,</span>
+                <span class="s1">sampleUUIDs</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span>
+                    <span class="s2">.</span><span class="s1">filter</span><span class="s2">((</span><span class="s1">contract</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) =&gt; </span><span class="s5">/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i</span><span class="s2">.</span><span class="s1">test</span><span class="s2">(</span><span class="s1">contract</span><span class="s2">))</span>
+                    <span class="s2">.</span><span class="s1">slice</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s4">5</span><span class="s2">)</span>
+            <span class="s2">};</span>
+
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Contracts Validation Details'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">contractsInfo</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Дополнительные проверки формата контрактов'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">const </span><span class="s1">firstContract </span><span class="s2">= </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+                <span class="s0">const </span><span class="s1">isUUID </span><span class="s2">= </span><span class="s5">/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i</span><span class="s2">.</span><span class="s1">test</span><span class="s2">(</span><span class="s1">firstContract</span><span class="s2">);</span>
+
+                <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Contract Format Check'</span><span class="s2">,</span>
+                    <span class="s3">`First Contract: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">firstContract</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                    <span class="s3">`Is UUID Format: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">isUUID</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                    <span class="s3">`Length: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">firstContract</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">` </span><span class="s2">+</span>
+                    <span class="s3">`Total Contracts: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                    <span class="s3">'text/plain'</span>
+                <span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Comprehensive package validation summary'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">story</span><span class="s2">(</span><span class="s3">'Комплексная валидация пакета'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">(</span><span class="s3">'critical'</span><span class="s2">);</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Комплексная проверка всех аспектов пакета документов'</span><span class="s2">);</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Сводная проверка всех критериев'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+            <span class="s0">const </span><span class="s1">validationSummary </span><span class="s2">= {</span>
+                <span class="s1">packageId</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">,</span>
+                <span class="s1">hasAllRequiredFields</span><span class="s2">: [</span><span class="s3">'id'</span><span class="s2">, </span><span class="s3">'number'</span><span class="s2">, </span><span class="s3">'typeId'</span><span class="s2">, </span><span class="s3">'statusCode'</span><span class="s2">, </span><span class="s3">'createdAt'</span><span class="s2">, </span><span class="s3">'responsibleLawyerId'</span><span class="s2">, </span><span class="s3">'includedContracts'</span><span class="s2">]</span>
+                    <span class="s2">.</span><span class="s1">every</span><span class="s2">(</span><span class="s1">key </span><span class="s2">=&gt; </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">hasOwnProperty</span><span class="s2">(</span><span class="s1">key</span><span class="s2">)),</span>
+                <span class="s1">dataTypesValid</span><span class="s2">: {</span>
+                    <span class="s1">id</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">,</span>
+                    <span class="s1">number</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">number </span><span class="s2">=== </span><span class="s3">'number'</span><span class="s2">,</span>
+                    <span class="s1">typeId</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">typeId </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">,</span>
+                    <span class="s1">statusCode</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">statusCode </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">,</span>
+                    <span class="s1">createdAt</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">,</span>
+                    <span class="s1">responsibleLawyerId</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">|| </span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">,</span>
+                    <span class="s1">includedContracts</span><span class="s2">: </span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">)</span>
+                <span class="s2">},</span>
+                <span class="s1">createdAtValid</span><span class="s2">: !</span><span class="s1">isNaN</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Date</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">).</span><span class="s1">getTime</span><span class="s2">()),</span>
+                <span class="s1">includedContractsValid</span><span class="s2">: </span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">) &amp;&amp;</span>
+                    <span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp;</span>
+                    <span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">every</span><span class="s2">((</span><span class="s1">contract</span><span class="s2">: </span><span class="s1">any</span><span class="s2">) =&gt; </span><span class="s0">typeof </span><span class="s1">contract </span><span class="s2">=== </span><span class="s3">'string'</span><span class="s2">),</span>
+                <span class="s1">responsibleLawyerValid</span><span class="s2">: </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">||</span>
+                    <span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId </span><span class="s2">=== </span><span class="s3">'string' </span><span class="s2">&amp;&amp; </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">),</span>
+                <span class="s1">overallStatus</span><span class="s2">: </span><span class="s3">'PASS'</span>
+            <span class="s2">};</span>
+
+            <span class="s6">// Проверяем общий статус</span>
+            <span class="s1">validationSummary</span><span class="s2">.</span><span class="s1">overallStatus </span><span class="s2">=</span>
+                <span class="s1">validationSummary</span><span class="s2">.</span><span class="s1">hasAllRequiredFields </span><span class="s2">&amp;&amp;</span>
+                <span class="s1">Object</span><span class="s2">.</span><span class="s1">values</span><span class="s2">(</span><span class="s1">validationSummary</span><span class="s2">.</span><span class="s1">dataTypesValid</span><span class="s2">).</span><span class="s1">every</span><span class="s2">(</span><span class="s1">Boolean</span><span class="s2">) &amp;&amp;</span>
+                <span class="s1">validationSummary</span><span class="s2">.</span><span class="s1">createdAtValid </span><span class="s2">&amp;&amp;</span>
+                <span class="s1">validationSummary</span><span class="s2">.</span><span class="s1">includedContractsValid </span><span class="s2">&amp;&amp;</span>
+                <span class="s1">validationSummary</span><span class="s2">.</span><span class="s1">responsibleLawyerValid </span><span class="s2">? </span><span class="s3">'PASS' </span><span class="s2">: </span><span class="s3">'FAIL'</span><span class="s2">;</span>
+
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Comprehensive Validation Summary'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">validationSummary</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+            <span class="s6">// Финальные проверки</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">validationSummary</span><span class="s2">.</span><span class="s1">overallStatus</span><span class="s2">, </span><span class="s3">'All validation criteria should pass'</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'PASS'</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

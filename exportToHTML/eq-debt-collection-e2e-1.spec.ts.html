@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>eq-debt-collection-e2e-1.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-debt-collection-e2e-1.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">allure </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'allure-playwright'</span><span class="s2">;</span>
+
+<span class="s0">const </span><span class="s1">baseUrl </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">BASE_URL </span><span class="s2">|| </span><span class="s3">'https://eq-debt-collection-stage.bdengi.ru'</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">.</span><span class="s1">serial</span><span class="s2">(</span><span class="s3">'API Tests for Document Packages - 1 Copy (Serial)'</span><span class="s2">, () =&gt; {</span>
+    <span class="s0">let </span><span class="s1">packagesId</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'[201 CODE] Пакет документов успешно создан'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Создание пакета документов для районного суда с NEED_FOR_GAS_IS_FALSE и указанным судом'</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">requestBody </span><span class="s2">= {</span>
+            <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">&quot;96f007da-441e-4dfd-9be0-36ccefe6e58b&quot;</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">&quot;a1c067b4-9f2a-400b-a280-c15d48957785&quot;</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">&quot;32d01ae5-e8b4-4aa3-ad30-812456990764&quot;</span><span class="s2">]</span>
+        <span class="s2">};</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: {</span>
+                <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+            <span class="s2">},</span>
+            <span class="s1">data</span><span class="s2">: </span><span class="s1">requestBody</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">packagesId </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">id</span><span class="s2">;</span>
+
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">parameter</span><span class="s2">(</span><span class="s3">'createdPackagesId'</span><span class="s2">, </span><span class="s1">packagesId</span><span class="s2">);</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'Created package ID:'</span><span class="s2">, </span><span class="s1">packagesId</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'[200 CODE] Документы внутри пакета получены по его ID_1'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">await </span><span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s3">'Получение документов внутри созданного пакета по его ID'</span><span class="s2">);</span>
+
+        <span class="s5">// packagesId доступен из предыдущего теста благодаря test.describe.serial()</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">packagesId</span><span class="s2">, </span><span class="s3">'packagesId должен быть установлен из предыдущего теста'</span><span class="s2">).</span><span class="s1">toBeTruthy</span><span class="s2">();</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">baseUrl</span><span class="s2">}</span><span class="s3">/v1/packages/</span><span class="s1">$</span><span class="s2">{</span><span class="s1">packagesId</span><span class="s2">}</span><span class="s3">/documents?pageNumber=0&amp;pageSize=100`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: {</span>
+                <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+        <span class="s5">// Все остальные проверки из оригинального теста</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'items'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">)).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) {</span>
+            <span class="s0">const </span><span class="s1">firstItem </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">items</span><span class="s2">[</span><span class="s4">0</span><span class="s2">];</span>
+
+            <span class="s5">// Проверяем обязательные поля</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'packageId'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'contractId'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'settingsPackageId'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'generalType'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'typeId'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'status'</span><span class="s2">);</span>
+
+            <span class="s5">// Проверяем конкретное значение settingsPackageId</span>
+            <span class="s0">const </span><span class="s1">expectedSettingsPackageId </span><span class="s2">= </span><span class="s3">&quot;28362e06-08be-417c-8c26-4dc17333932e&quot;</span><span class="s2">;</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedSettingsPackageId</span><span class="s2">);</span>
+
+            <span class="s5">// Проверяем UUID формат</span>
+            <span class="s0">const </span><span class="s1">uuidRegex </span><span class="s2">= </span><span class="s6">/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i</span><span class="s2">;</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">firstItem</span><span class="s2">.</span><span class="s1">settingsPackageId</span><span class="s2">).</span><span class="s1">toMatch</span><span class="s2">(</span><span class="s1">uuidRegex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

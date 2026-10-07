@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>cookies.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+cookies.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+
+<span class="s2">import </span><span class="s1">type </span><span class="s3">{ </span><span class="s1">Headers </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'./fetch'</span>
+
+<span class="s2">export interface </span><span class="s1">Cookie </span><span class="s3">{</span>
+  <span class="s1">name</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">value</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">expires</span><span class="s3">?: </span><span class="s1">Date </span><span class="s3">| </span><span class="s1">number</span>
+  <span class="s1">maxAge</span><span class="s3">?: </span><span class="s1">number</span>
+  <span class="s1">domain</span><span class="s3">?: </span><span class="s1">string</span>
+  <span class="s1">path</span><span class="s3">?: </span><span class="s1">string</span>
+  <span class="s1">secure</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">httpOnly</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">sameSite</span><span class="s3">?: </span><span class="s4">'Strict' </span><span class="s3">| </span><span class="s4">'Lax' </span><span class="s3">| </span><span class="s4">'None'</span>
+  <span class="s1">unparsed</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">[]</span>
+<span class="s3">}</span>
+
+<span class="s2">export function </span><span class="s1">deleteCookie </span><span class="s3">(</span>
+  <span class="s1">headers</span><span class="s3">: </span><span class="s1">Headers</span><span class="s3">,</span>
+  <span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">,</span>
+  <span class="s1">attributes</span><span class="s3">?: { </span><span class="s1">name</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">domain</span><span class="s3">?: </span><span class="s1">string </span><span class="s3">}</span>
+<span class="s3">): </span><span class="s2">void</span>
+
+<span class="s2">export function </span><span class="s1">getCookies </span><span class="s3">(</span><span class="s1">headers</span><span class="s3">: </span><span class="s1">Headers</span><span class="s3">): </span><span class="s1">Record</span><span class="s3">&lt;</span><span class="s1">string</span><span class="s3">, </span><span class="s1">string</span><span class="s3">&gt;</span>
+
+<span class="s2">export function </span><span class="s1">getSetCookies </span><span class="s3">(</span><span class="s1">headers</span><span class="s3">: </span><span class="s1">Headers</span><span class="s3">): </span><span class="s1">Cookie</span><span class="s3">[]</span>
+
+<span class="s2">export function </span><span class="s1">setCookie </span><span class="s3">(</span><span class="s1">headers</span><span class="s3">: </span><span class="s1">Headers</span><span class="s3">, </span><span class="s1">cookie</span><span class="s3">: </span><span class="s1">Cookie</span><span class="s3">): </span><span class="s2">void</span>
+</pre>
+</body>
+</html>

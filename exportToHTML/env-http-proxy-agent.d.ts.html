@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>env-http-proxy-agent.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+env-http-proxy-agent.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Agent from </span><span class="s2">'./agent'</span>
+<span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s2">'./dispatcher'</span>
+
+<span class="s0">export default </span><span class="s1">EnvHttpProxyAgent</span>
+
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">EnvHttpProxyAgent </span><span class="s0">extends </span><span class="s1">Dispatcher </span><span class="s3">{</span>
+  <span class="s1">constructor</span><span class="s3">(</span><span class="s1">opts</span><span class="s3">?: </span><span class="s1">EnvHttpProxyAgent</span><span class="s3">.</span><span class="s1">Options</span><span class="s3">)</span>
+
+  <span class="s1">dispatch</span><span class="s3">(</span><span class="s1">options</span><span class="s3">: </span><span class="s1">Agent</span><span class="s3">.</span><span class="s1">DispatchOptions</span><span class="s3">, </span><span class="s1">handler</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchHandlers</span><span class="s3">): </span><span class="s1">boolean</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s1">declare namespace EnvHttpProxyAgent </span><span class="s3">{</span>
+  <span class="s0">export interface </span><span class="s1">Options </span><span class="s0">extends </span><span class="s1">Agent</span><span class="s3">.</span><span class="s1">Options </span><span class="s3">{</span>
+    <span class="s4">/** Overrides the value of the HTTP_PROXY environment variable  */</span>
+    <span class="s1">httpProxy</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s4">/** Overrides the value of the HTTPS_PROXY environment variable  */</span>
+    <span class="s1">httpsProxy</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s4">/** Overrides the value of the NO_PROXY environment variable  */</span>
+    <span class="s1">noProxy</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">;</span>
+  <span class="s3">}</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

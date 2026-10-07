@@ -1,61 +1,76 @@
 module.exports = {
-    RESULT_DIR: 'allure-results',
-    REPORT_DIR: 'allure-report',
-    SCREENSHOT_DIR: 'screenshots',
-    VIDEO_DIR: 'videos',
 
-    // Категории для багов
+    RESULT_DIR: "allure-results",
+
+    REPORT_DIR: "allure-report",
+
+    SCREENSHOT_DIR: "screenshots",
+
+    VIDEO_DIR: "videos",
+
+
     categories: [
+
         {
-            name: 'Failed tests',
-            messageRegex: '.*AssertionError.*',
-            matchedStatuses: ['failed']
+            name: "Assertion failures",
+            messageRegex: ".*AssertionError.*",
+            matchedStatuses: [
+                "failed"
+            ]
         },
+
+
         {
-            name: 'Broken tests',
-            traceRegex: '.*RuntimeException.*',
-            matchedStatuses: ['broken']
+            name: "API errors",
+            messageRegex: ".*(500|502|503|504).*",
+            matchedStatuses: [
+                "broken",
+                "failed"
+            ]
         },
+
+
         {
-            name: 'Passed tests',
-            matchedStatuses: ['passed']
+            name: "Timeout errors",
+            messageRegex: ".*Timeout.*",
+            matchedStatuses: [
+                "broken"
+            ]
+        },
+
+
+        {
+            name: "Infrastructure problems",
+            traceRegex: ".*ECONNREFUSED.*|.*ENOTFOUND.*",
+            matchedStatuses: [
+                "broken"
+            ]
         }
+
     ],
 
-    // Environment variables для отчета
-    environment: {
-        base_url: process.env.BASE_URL,
-        node_version: process.version,
-        platform: process.platform
-    }
-};module.exports = {
-    RESULT_DIR: 'allure-results',
-    REPORT_DIR: 'allure-report',
-    SCREENSHOT_DIR: 'screenshots',
-    VIDEO_DIR: 'videos',
 
-    // Категории для багов
-    categories: [
-        {
-            name: 'Failed tests',
-            messageRegex: '.*AssertionError.*',
-            matchedStatuses: ['failed']
-        },
-        {
-            name: 'Broken tests',
-            traceRegex: '.*RuntimeException.*',
-            matchedStatuses: ['broken']
-        },
-        {
-            name: 'Passed tests',
-            matchedStatuses: ['passed']
-        }
-    ],
-
-    // Environment variables для отчета
     environment: {
-        base_url: process.env.BASE_URL,
-        node_version: process.version,
-        platform: process.platform
+
+        BASE_URL:
+            process.env.BASE_URL || "not_defined",
+
+
+        NODE_VERSION:
+            process.version,
+
+
+        PLATFORM:
+            `${process.platform} ${process.arch}`,
+
+
+        TEST_FRAMEWORK:
+            "Playwright + TypeScript",
+
+
+        API_AUTOMATION:
+            "EQ Legal Collection"
+
     }
+
 };

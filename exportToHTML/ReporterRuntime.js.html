@@ -1,0 +1,723 @@
+<html>
+<head>
+<title>ReporterRuntime.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+.s5 { color: #7a7e85;}
+.s6 { color: #5f826b; font-style: italic;}
+.s7 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReporterRuntime.js</font>
+</center></td></tr></table>
+<pre><span class="s0">function </span><span class="s1">ownKeys</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">t </span><span class="s2">= </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">(</span><span class="s1">e</span><span class="s2">); </span><span class="s0">if </span><span class="s2">(</span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertySymbols</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">o </span><span class="s2">= </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertySymbols</span><span class="s2">(</span><span class="s1">e</span><span class="s2">); </span><span class="s1">r </span><span class="s2">&amp;&amp; (</span><span class="s1">o </span><span class="s2">= </span><span class="s1">o</span><span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s0">function </span><span class="s2">(</span><span class="s1">r</span><span class="s2">) { </span><span class="s0">return </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptor</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">).</span><span class="s1">enumerable</span><span class="s2">; })), </span><span class="s1">t</span><span class="s2">.</span><span class="s1">push</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">o</span><span class="s2">); } </span><span class="s0">return </span><span class="s1">t</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_objectSpread</span><span class="s2">(</span><span class="s1">e</span><span class="s2">) { </span><span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">r </span><span class="s2">= </span><span class="s3">1</span><span class="s2">; </span><span class="s1">r </span><span class="s2">&lt; </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">r</span><span class="s2">++) { </span><span class="s0">var </span><span class="s1">t </span><span class="s2">= </span><span class="s0">null </span><span class="s2">!= </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">r</span><span class="s2">] ? </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">r</span><span class="s2">] : {}; </span><span class="s1">r </span><span class="s2">% </span><span class="s3">2 </span><span class="s2">? </span><span class="s1">ownKeys</span><span class="s2">(</span><span class="s1">Object</span><span class="s2">(</span><span class="s1">t</span><span class="s2">), !</span><span class="s3">0</span><span class="s2">).</span><span class="s1">forEach</span><span class="s2">(</span><span class="s0">function </span><span class="s2">(</span><span class="s1">r</span><span class="s2">) { </span><span class="s1">_defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">t</span><span class="s2">[</span><span class="s1">r</span><span class="s2">]); }) : </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptors </span><span class="s2">? </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">defineProperties</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptors</span><span class="s2">(</span><span class="s1">t</span><span class="s2">)) : </span><span class="s1">ownKeys</span><span class="s2">(</span><span class="s1">Object</span><span class="s2">(</span><span class="s1">t</span><span class="s2">)).</span><span class="s1">forEach</span><span class="s2">(</span><span class="s0">function </span><span class="s2">(</span><span class="s1">r</span><span class="s2">) { </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptor</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">r</span><span class="s2">)); }); } </span><span class="s0">return </span><span class="s1">e</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_classPrivateMethodInitSpec</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">a</span><span class="s2">) { </span><span class="s1">_checkPrivateRedeclaration</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">a</span><span class="s2">), </span><span class="s1">a</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">e</span><span class="s2">); }</span>
+<span class="s0">function </span><span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">t</span><span class="s2">, </span><span class="s1">a</span><span class="s2">) { </span><span class="s1">_checkPrivateRedeclaration</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">t</span><span class="s2">), </span><span class="s1">t</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">a</span><span class="s2">); }</span>
+<span class="s0">function </span><span class="s1">_checkPrivateRedeclaration</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">t</span><span class="s2">) { </span><span class="s0">if </span><span class="s2">(</span><span class="s1">t</span><span class="s2">.</span><span class="s1">has</span><span class="s2">(</span><span class="s1">e</span><span class="s2">)) </span><span class="s0">throw new </span><span class="s1">TypeError</span><span class="s2">(</span><span class="s4">&quot;Cannot initialize the same private elements twice on an object&quot;</span><span class="s2">); }</span>
+<span class="s0">function </span><span class="s1">_defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">t</span><span class="s2">) { </span><span class="s0">return </span><span class="s2">(</span><span class="s1">r </span><span class="s2">= </span><span class="s1">_toPropertyKey</span><span class="s2">(</span><span class="s1">r</span><span class="s2">)) </span><span class="s0">in </span><span class="s1">e </span><span class="s2">? </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, { </span><span class="s1">value</span><span class="s2">: </span><span class="s1">t</span><span class="s2">, </span><span class="s1">enumerable</span><span class="s2">: !</span><span class="s3">0</span><span class="s2">, </span><span class="s1">configurable</span><span class="s2">: !</span><span class="s3">0</span><span class="s2">, </span><span class="s1">writable</span><span class="s2">: !</span><span class="s3">0 </span><span class="s2">}) : </span><span class="s1">e</span><span class="s2">[</span><span class="s1">r</span><span class="s2">] = </span><span class="s1">t</span><span class="s2">, </span><span class="s1">e</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_toPropertyKey</span><span class="s2">(</span><span class="s1">t</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s1">_toPrimitive</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s4">&quot;string&quot;</span><span class="s2">); </span><span class="s0">return </span><span class="s4">&quot;symbol&quot; </span><span class="s2">== </span><span class="s0">typeof </span><span class="s1">i </span><span class="s2">? </span><span class="s1">i </span><span class="s2">: </span><span class="s1">i </span><span class="s2">+ </span><span class="s4">&quot;&quot;</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_toPrimitive</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">r</span><span class="s2">) { </span><span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;object&quot; </span><span class="s2">!= </span><span class="s0">typeof </span><span class="s1">t </span><span class="s2">|| !</span><span class="s1">t</span><span class="s2">) </span><span class="s0">return </span><span class="s1">t</span><span class="s2">; </span><span class="s0">var </span><span class="s1">e </span><span class="s2">= </span><span class="s1">t</span><span class="s2">[</span><span class="s1">Symbol</span><span class="s2">.</span><span class="s1">toPrimitive</span><span class="s2">]; </span><span class="s0">if </span><span class="s2">(</span><span class="s0">void </span><span class="s3">0 </span><span class="s2">!== </span><span class="s1">e</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s1">e</span><span class="s2">.</span><span class="s1">call</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">r </span><span class="s2">|| </span><span class="s4">&quot;default&quot;</span><span class="s2">); </span><span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;object&quot; </span><span class="s2">!= </span><span class="s0">typeof </span><span class="s1">i</span><span class="s2">) </span><span class="s0">return </span><span class="s1">i</span><span class="s2">; </span><span class="s0">throw new </span><span class="s1">TypeError</span><span class="s2">(</span><span class="s4">&quot;@@toPrimitive must return a primitive value.&quot;</span><span class="s2">); } </span><span class="s0">return </span><span class="s2">(</span><span class="s4">&quot;string&quot; </span><span class="s2">=== </span><span class="s1">r </span><span class="s2">? </span><span class="s1">String </span><span class="s2">: </span><span class="s1">Number</span><span class="s2">)(</span><span class="s1">t</span><span class="s2">); }</span>
+<span class="s0">function </span><span class="s1">_classPrivateGetter</span><span class="s2">(</span><span class="s1">s</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">a</span><span class="s2">) { </span><span class="s0">return </span><span class="s1">a</span><span class="s2">(</span><span class="s1">_assertClassBrand</span><span class="s2">(</span><span class="s1">s</span><span class="s2">, </span><span class="s1">r</span><span class="s2">)); }</span>
+<span class="s0">function </span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">s</span><span class="s2">, </span><span class="s1">a</span><span class="s2">) { </span><span class="s0">return </span><span class="s1">s</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">_assertClassBrand</span><span class="s2">(</span><span class="s1">s</span><span class="s2">, </span><span class="s1">a</span><span class="s2">)); }</span>
+<span class="s0">function </span><span class="s1">_assertClassBrand</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">t</span><span class="s2">, </span><span class="s1">n</span><span class="s2">) { </span><span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;function&quot; </span><span class="s2">== </span><span class="s0">typeof </span><span class="s1">e </span><span class="s2">? </span><span class="s1">e </span><span class="s2">=== </span><span class="s1">t </span><span class="s2">: </span><span class="s1">e</span><span class="s2">.</span><span class="s1">has</span><span class="s2">(</span><span class="s1">t</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&lt; </span><span class="s3">3 </span><span class="s2">? </span><span class="s1">t </span><span class="s2">: </span><span class="s1">n</span><span class="s2">; </span><span class="s0">throw new </span><span class="s1">TypeError</span><span class="s2">(</span><span class="s4">&quot;Private element is not present on this object&quot;</span><span class="s2">); }</span>
+<span class="s5">/* eslint max-lines: 0 */</span>
+<span class="s0">import </span><span class="s1">path from </span><span class="s4">&quot;node:path&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">extname </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;path&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">Stage </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;../../model.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">LifecycleState </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;./LifecycleState.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">Notifier </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;./Notifier.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">createFixtureResult</span><span class="s2">, </span><span class="s1">createStepResult</span><span class="s2">, </span><span class="s1">createTestResult </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;./factory.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">hasSkipLabel </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;./testplan.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">deepClone</span><span class="s2">, </span><span class="s1">formatLinks</span><span class="s2">, </span><span class="s1">getTestResultHistoryId</span><span class="s2">, </span><span class="s1">getTestResultTestCaseId</span><span class="s2">, </span><span class="s1">randomUuid </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;./utils.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">buildAttachmentFileName </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;./utils/attachments.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">resolveWriter </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;./writer/loader.js&quot;</span><span class="s2">;</span>
+<span class="s0">var </span><span class="s1">_runningSteps </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_ShallowStepsStack_brand </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakSet</span><span class="s2">();</span>
+<span class="s6">/**</span>
+ <span class="s6">* Simpler steps stack implementation that contains only the current steps without root nodes</span>
+ <span class="s6">* Useful, when you need to create steps without binding them to a specific test or fixture</span>
+ <span class="s6">* </span><span class="s7">@example</span>
+ <span class="s6">* ```js</span>
+ <span class="s6">* const stack = new ShallowStepsStack();</span>
+ <span class="s6">*</span>
+ <span class="s6">* stack.startStep({ name: &quot;step 1&quot; });</span>
+ <span class="s6">* stack.startStep({ name: &quot;step 1.1&quot; });</span>
+ <span class="s6">* stack.stopStep({ status: Status.FAILED });</span>
+ <span class="s6">* stack.stopStep({ status: Status.PASSED });</span>
+ <span class="s6">* stack.steps // =&gt; [{ name: &quot;step 1&quot;, status: Status.PASSED, steps: [{ name: &quot;step 1.1&quot;, status: Status.FAILED }] }]</span>
+ <span class="s6">* ```</span>
+ <span class="s6">*/</span>
+<span class="s0">export class </span><span class="s1">ShallowStepsStack </span><span class="s2">{</span>
+  <span class="s1">constructor</span><span class="s2">() {</span>
+    <span class="s1">_classPrivateMethodInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_ShallowStepsStack_brand</span><span class="s2">);</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;steps&quot;</span><span class="s2">, []);</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_runningSteps</span><span class="s2">, []);</span>
+  <span class="s2">}</span>
+  <span class="s1">currentStep</span><span class="s2">() {</span>
+    <span class="s0">return </span><span class="s1">_classPrivateGetter</span><span class="s2">(</span><span class="s1">_ShallowStepsStack_brand</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s1">_get_currentStep</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">startStep</span><span class="s2">(</span><span class="s1">step</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">stepResult </span><span class="s2">= </span><span class="s1">_objectSpread</span><span class="s2">(</span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">createStepResult</span><span class="s2">()), </span><span class="s1">step</span><span class="s2">);</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">_classPrivateGetter</span><span class="s2">(</span><span class="s1">_ShallowStepsStack_brand</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s1">_get_currentStep</span><span class="s2">)) {</span>
+      <span class="s1">_classPrivateGetter</span><span class="s2">(</span><span class="s1">_ShallowStepsStack_brand</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s1">_get_currentStep</span><span class="s2">).</span><span class="s1">steps</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">stepResult</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">steps</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">stepResult</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_runningSteps</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">push</span><span class="s2">(</span><span class="s1">stepResult</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">updateStep</span><span class="s2">(</span><span class="s1">updateFunc</span><span class="s2">) {</span>
+    <span class="s0">if </span><span class="s2">(!</span><span class="s1">_classPrivateGetter</span><span class="s2">(</span><span class="s1">_ShallowStepsStack_brand</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s1">_get_currentStep</span><span class="s2">)) {</span>
+      <span class="s5">// eslint-disable-next-line no-console</span>
+      <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;There is no running step in the stack to update!&quot;</span><span class="s2">);</span>
+      <span class="s0">return</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s1">updateFunc</span><span class="s2">(</span><span class="s1">_classPrivateGetter</span><span class="s2">(</span><span class="s1">_ShallowStepsStack_brand</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s1">_get_currentStep</span><span class="s2">));</span>
+  <span class="s2">}</span>
+  <span class="s1">stopStep</span><span class="s2">(</span><span class="s1">opts</span><span class="s2">) {</span>
+    <span class="s0">if </span><span class="s2">(!</span><span class="s1">_classPrivateGetter</span><span class="s2">(</span><span class="s1">_ShallowStepsStack_brand</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s1">_get_currentStep</span><span class="s2">)) {</span>
+      <span class="s5">// eslint-disable-next-line no-console</span>
+      <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;There is no running step in the stack to stop!&quot;</span><span class="s2">);</span>
+      <span class="s0">return</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">var </span><span class="s2">{</span>
+      <span class="s1">stop</span><span class="s2">,</span>
+      <span class="s1">duration </span><span class="s2">= </span><span class="s3">0</span>
+    <span class="s2">} = </span><span class="s1">opts </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">opts </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s1">opts </span><span class="s2">: {};</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">updateStep</span><span class="s2">(</span><span class="s1">result </span><span class="s2">=&gt; {</span>
+      <span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">= (</span><span class="s1">stop </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">stop </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s1">stop </span><span class="s2">: </span><span class="s1">result</span><span class="s2">.</span><span class="s1">start</span><span class="s2">) ? </span><span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">+ </span><span class="s1">duration </span><span class="s2">: </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_runningSteps</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">pop</span><span class="s2">();</span>
+  <span class="s2">}</span>
+  <span class="s1">findStepByUuid</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">findRecursively </span><span class="s2">= </span><span class="s1">steps </span><span class="s2">=&gt; {</span>
+      <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">s of steps</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">s</span><span class="s2">.</span><span class="s1">uuid </span><span class="s2">=== </span><span class="s1">uuid</span><span class="s2">) {</span>
+          <span class="s0">return </span><span class="s1">s</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">var </span><span class="s1">found </span><span class="s2">= </span><span class="s1">findRecursively</span><span class="s2">(</span><span class="s1">s</span><span class="s2">.</span><span class="s1">steps</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">found</span><span class="s2">) {</span>
+          <span class="s0">return </span><span class="s1">found</span><span class="s2">;</span>
+        <span class="s2">}</span>
+      <span class="s2">}</span>
+      <span class="s0">return </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s2">};</span>
+    <span class="s0">return </span><span class="s1">findRecursively</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">steps</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s1">addAttachment</span><span class="s2">(</span><span class="s1">attachment</span><span class="s2">, </span><span class="s1">writer</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">isPath </span><span class="s2">= !!</span><span class="s1">attachment</span><span class="s2">.</span><span class="s1">path</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">fileExt </span><span class="s2">= </span><span class="s1">attachment</span><span class="s2">.</span><span class="s1">path </span><span class="s2">? </span><span class="s1">path</span><span class="s2">.</span><span class="s1">extname</span><span class="s2">(</span><span class="s1">attachment</span><span class="s2">.</span><span class="s1">path</span><span class="s2">) : </span><span class="s1">undefined</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">fileName </span><span class="s2">= </span><span class="s1">buildAttachmentFileName</span><span class="s2">({</span>
+      <span class="s1">contentType</span><span class="s2">: </span><span class="s1">attachment</span><span class="s2">.</span><span class="s1">contentType</span><span class="s2">,</span>
+      <span class="s1">fileExtension</span><span class="s2">: </span><span class="s1">fileExt</span>
+    <span class="s2">});</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">isPath</span><span class="s2">) {</span>
+      <span class="s1">writer</span><span class="s2">.</span><span class="s1">writeAttachmentFromPath</span><span class="s2">(</span><span class="s1">fileName</span><span class="s2">, </span><span class="s1">attachment</span><span class="s2">.</span><span class="s1">path</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">attachment</span><span class="s2">.</span><span class="s1">body</span><span class="s2">) {</span>
+      <span class="s1">writer</span><span class="s2">.</span><span class="s1">writeAttachment</span><span class="s2">(</span><span class="s1">fileName</span><span class="s2">, </span><span class="s1">attachment</span><span class="s2">.</span><span class="s1">body</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">return </span><span class="s1">fileName</span><span class="s2">;</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+<span class="s0">function </span><span class="s1">_get_currentStep</span><span class="s2">(</span><span class="s1">_this</span><span class="s2">) {</span>
+  <span class="s0">return </span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_runningSteps</span><span class="s2">, </span><span class="s1">_this</span><span class="s2">)[</span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_runningSteps</span><span class="s2">, </span><span class="s1">_this</span><span class="s2">).</span><span class="s1">length </span><span class="s2">- </span><span class="s3">1</span><span class="s2">];</span>
+<span class="s2">}</span>
+<span class="s0">export class </span><span class="s1">DefaultStepStack </span><span class="s2">{</span>
+  <span class="s1">constructor</span><span class="s2">() {</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;stepsByRoot&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">Map</span><span class="s2">());</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;rootsByStep&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">Map</span><span class="s2">());</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;clear&quot;</span><span class="s2">, () =&gt; {</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">rootsByStep</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;removeRoot&quot;</span><span class="s2">, </span><span class="s1">rootUuid </span><span class="s2">=&gt; {</span>
+      <span class="s0">var </span><span class="s1">maybeValue </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">delete</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">maybeValue</span><span class="s2">) {</span>
+        <span class="s1">maybeValue</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">stepUuid </span><span class="s2">=&gt; </span><span class="s0">this</span><span class="s2">.</span><span class="s1">rootsByStep</span><span class="s2">.</span><span class="s1">delete</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">));</span>
+      <span class="s2">}</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;currentStep&quot;</span><span class="s2">, </span><span class="s1">rootUuid </span><span class="s2">=&gt; {</span>
+      <span class="s0">var </span><span class="s1">maybeValue </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">maybeValue</span><span class="s2">) {</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">return </span><span class="s1">maybeValue</span><span class="s2">[</span><span class="s1">maybeValue</span><span class="s2">.</span><span class="s1">length </span><span class="s2">- </span><span class="s3">1</span><span class="s2">];</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;addStep&quot;</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">stepUuid</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">maybeValue </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">maybeValue</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, [</span><span class="s1">stepUuid</span><span class="s2">]);</span>
+      <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s1">maybeValue</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">);</span>
+      <span class="s2">}</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">rootsByStep</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">);</span>
+    <span class="s2">});</span>
+  <span class="s2">}</span>
+  <span class="s1">removeStep</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">rootUuid </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">rootsByStep</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">);</span>
+    <span class="s0">if </span><span class="s2">(!</span><span class="s1">rootUuid</span><span class="s2">) {</span>
+      <span class="s0">return</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">var </span><span class="s1">maybeValue </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+    <span class="s0">if </span><span class="s2">(!</span><span class="s1">maybeValue</span><span class="s2">) {</span>
+      <span class="s0">return</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">var </span><span class="s1">newValue </span><span class="s2">= </span><span class="s1">maybeValue</span><span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">value </span><span class="s2">=&gt; </span><span class="s1">value </span><span class="s2">!== </span><span class="s1">stepUuid</span><span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">stepsByRoot</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">newValue</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+<span class="s0">var </span><span class="s1">_handleMetadataMessage </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_handleStepMetadataMessage </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_handleStartStepMessage </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_handleStopStepMessage </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_handleAttachmentContentMessage </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_handleAttachmentPathMessage </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_findParent </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_writeFixturesOfScope </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_writeContainer </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">var </span><span class="s1">_calculateTimings </span><span class="s2">= </span><span class="s5">/*#__PURE__*/</span><span class="s0">new </span><span class="s1">WeakMap</span><span class="s2">();</span>
+<span class="s0">export class </span><span class="s1">ReporterRuntime </span><span class="s2">{</span>
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">_ref</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this2 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s2">{</span>
+      <span class="s1">writer</span><span class="s2">,</span>
+      <span class="s1">listeners </span><span class="s2">= [],</span>
+      <span class="s1">environmentInfo</span><span class="s2">,</span>
+      <span class="s1">categories</span><span class="s2">,</span>
+      <span class="s1">links</span><span class="s2">: </span><span class="s1">_links</span><span class="s2">,</span>
+      <span class="s1">globalLabels </span><span class="s2">= {}</span>
+    <span class="s2">} = </span><span class="s1">_ref</span><span class="s2">;</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;state&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">LifecycleState</span><span class="s2">());</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;notifier&quot;</span><span class="s2">, </span><span class="s0">void </span><span class="s3">0</span><span class="s2">);</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;stepStack&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">DefaultStepStack</span><span class="s2">());</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;writer&quot;</span><span class="s2">, </span><span class="s0">void </span><span class="s3">0</span><span class="s2">);</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;categories&quot;</span><span class="s2">, </span><span class="s0">void </span><span class="s3">0</span><span class="s2">);</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;environmentInfo&quot;</span><span class="s2">, </span><span class="s0">void </span><span class="s3">0</span><span class="s2">);</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;linkConfig&quot;</span><span class="s2">, </span><span class="s0">void </span><span class="s3">0</span><span class="s2">);</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;globalLabels&quot;</span><span class="s2">, []);</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;startScope&quot;</span><span class="s2">, () =&gt; {</span>
+      <span class="s0">var </span><span class="s1">uuid </span><span class="s2">= </span><span class="s1">randomUuid</span><span class="s2">();</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">setScope</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">return </span><span class="s1">uuid</span><span class="s2">;</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;updateScope&quot;</span><span class="s2">, (</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">updateFunc</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">scope </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getScope</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">scope</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;count not update scope: no scope with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s1">updateFunc</span><span class="s2">(</span><span class="s1">scope</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;writeScope&quot;</span><span class="s2">, </span><span class="s1">uuid </span><span class="s2">=&gt; {</span>
+      <span class="s0">var </span><span class="s1">scope </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getScope</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">scope</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;count not write scope: no scope with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_writeFixturesOfScope</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">scope</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">deleteScope</span><span class="s2">(</span><span class="s1">scope</span><span class="s2">.</span><span class="s1">uuid</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;startFixture&quot;</span><span class="s2">, (</span><span class="s1">scopeUuid</span><span class="s2">, </span><span class="s1">type</span><span class="s2">, </span><span class="s1">fixtureResult</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">scope </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getScope</span><span class="s2">(</span><span class="s1">scopeUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">scope</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;count not start fixture: no scope with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">scopeUuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s1">uuid </span><span class="s2">= </span><span class="s1">randomUuid</span><span class="s2">();</span>
+      <span class="s0">var </span><span class="s1">wrappedFixture </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">setFixtureResult</span><span class="s2">(</span><span class="s1">scopeUuid</span><span class="s2">, </span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">type</span><span class="s2">, </span><span class="s1">_objectSpread</span><span class="s2">(</span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">createFixtureResult</span><span class="s2">()), {}, {</span>
+        <span class="s1">start</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+      <span class="s2">}, </span><span class="s1">fixtureResult</span><span class="s2">));</span>
+      <span class="s1">scope</span><span class="s2">.</span><span class="s1">fixtures</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">wrappedFixture</span><span class="s2">);</span>
+      <span class="s0">return </span><span class="s1">uuid</span><span class="s2">;</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;updateFixture&quot;</span><span class="s2">, (</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">updateFunc</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">fixture </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getFixtureResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">fixture</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not update fixture: no fixture with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s1">updateFunc</span><span class="s2">(</span><span class="s1">fixture</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;stopFixture&quot;</span><span class="s2">, (</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">opts</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">fixture </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getFixtureResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">fixture</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not stop fixture: no fixture with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s1">startStop </span><span class="s2">= </span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_calculateTimings</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">fixture</span><span class="s2">.</span><span class="s1">start</span><span class="s2">, </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">: </span><span class="s1">opts</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">, </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">: </span><span class="s1">opts</span><span class="s2">.</span><span class="s1">duration</span><span class="s2">);</span>
+      <span class="s1">fixture</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">startStop</span><span class="s2">.</span><span class="s1">start</span><span class="s2">;</span>
+      <span class="s1">fixture</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">= </span><span class="s1">startStop</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">;</span>
+      <span class="s1">fixture</span><span class="s2">.</span><span class="s1">stage </span><span class="s2">= </span><span class="s1">Stage</span><span class="s2">.</span><span class="s1">FINISHED</span><span class="s2">;</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;startTest&quot;</span><span class="s2">, </span><span class="s0">function </span><span class="s2">(</span><span class="s1">result</span><span class="s2">) {</span>
+      <span class="s0">var </span><span class="s1">scopeUuids </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s3">1 </span><span class="s2">&amp;&amp; </span><span class="s1">arguments</span><span class="s2">[</span><span class="s3">1</span><span class="s2">] !== </span><span class="s1">undefined </span><span class="s2">? </span><span class="s1">arguments</span><span class="s2">[</span><span class="s3">1</span><span class="s2">] : [];</span>
+      <span class="s0">var </span><span class="s1">uuid </span><span class="s2">= </span><span class="s1">randomUuid</span><span class="s2">();</span>
+      <span class="s0">var </span><span class="s1">testResult </span><span class="s2">= </span><span class="s1">_objectSpread</span><span class="s2">(</span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">createTestResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">)), {}, {</span>
+        <span class="s1">start</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+      <span class="s2">}, </span><span class="s1">deepClone</span><span class="s2">(</span><span class="s1">result</span><span class="s2">));</span>
+      <span class="s1">_this2</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">beforeTestResultStart</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s1">scopeUuids</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">scopeUuid </span><span class="s2">=&gt; {</span>
+        <span class="s0">var </span><span class="s1">scope </span><span class="s2">= </span><span class="s1">_this2</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getScope</span><span class="s2">(</span><span class="s1">scopeUuid</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">scope</span><span class="s2">) {</span>
+          <span class="s5">// eslint-disable-next-line no-console</span>
+          <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;count not link test to the scope: no scope with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+          <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s1">scope</span><span class="s2">.</span><span class="s1">tests</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s2">});</span>
+      <span class="s1">_this2</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">setTestResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">testResult</span><span class="s2">, </span><span class="s1">scopeUuids</span><span class="s2">);</span>
+      <span class="s1">_this2</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">afterTestResultStart</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s0">return </span><span class="s1">uuid</span><span class="s2">;</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;updateTest&quot;</span><span class="s2">, (</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">updateFunc</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">testResult </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getTestResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">testResult</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not update test result: no test with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot;) is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">beforeTestResultUpdate</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s1">updateFunc</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">afterTestResultUpdate</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;stopTest&quot;</span><span class="s2">, (</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">opts</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">_testResult$testCaseI</span><span class="s2">, </span><span class="s1">_testResult$historyId</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">wrapped </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getWrappedTestResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">wrapped</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not stop test result: no test with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot;) is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s1">testResult </span><span class="s2">= </span><span class="s1">wrapped</span><span class="s2">.</span><span class="s1">value</span><span class="s2">;</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">beforeTestResultStop</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s0">var </span><span class="s1">scopeUuids </span><span class="s2">= </span><span class="s1">wrapped</span><span class="s2">.</span><span class="s1">scopeUuids</span><span class="s2">;</span>
+      <span class="s1">scopeUuids</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">scopeUuid </span><span class="s2">=&gt; {</span>
+        <span class="s0">var </span><span class="s1">scope </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getScope</span><span class="s2">(</span><span class="s1">scopeUuid</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">scope</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">) {</span>
+          <span class="s1">testResult</span><span class="s2">.</span><span class="s1">labels </span><span class="s2">= [</span><span class="s1">...testResult</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">, </span><span class="s1">...scope</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">];</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">scope</span><span class="s2">.</span><span class="s1">links</span><span class="s2">) {</span>
+          <span class="s1">testResult</span><span class="s2">.</span><span class="s1">links </span><span class="s2">= [</span><span class="s1">...testResult</span><span class="s2">.</span><span class="s1">links</span><span class="s2">, </span><span class="s1">...scope</span><span class="s2">.</span><span class="s1">links</span><span class="s2">];</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">scope</span><span class="s2">.</span><span class="s1">parameters</span><span class="s2">) {</span>
+          <span class="s1">testResult</span><span class="s2">.</span><span class="s1">parameters </span><span class="s2">= [</span><span class="s1">...testResult</span><span class="s2">.</span><span class="s1">parameters</span><span class="s2">, </span><span class="s1">...scope</span><span class="s2">.</span><span class="s1">parameters</span><span class="s2">];</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">scope</span><span class="s2">.</span><span class="s1">description</span><span class="s2">) {</span>
+          <span class="s0">var </span><span class="s1">_testResult$descripti</span><span class="s2">;</span>
+          <span class="s1">testResult</span><span class="s2">.</span><span class="s1">description </span><span class="s2">= (</span><span class="s1">_testResult$descripti </span><span class="s2">= </span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">description</span><span class="s2">) !== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">_testResult$descripti </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s1">_testResult$descripti </span><span class="s2">: </span><span class="s1">scope</span><span class="s2">.</span><span class="s1">description</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">scope </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">scope</span><span class="s2">.</span><span class="s1">descriptionHtml</span><span class="s2">) {</span>
+          <span class="s0">var </span><span class="s1">_testResult$descripti2</span><span class="s2">;</span>
+          <span class="s1">testResult</span><span class="s2">.</span><span class="s1">descriptionHtml </span><span class="s2">= (</span><span class="s1">_testResult$descripti2 </span><span class="s2">= </span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">descriptionHtml</span><span class="s2">) !== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">_testResult$descripti2 </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s1">_testResult$descripti2 </span><span class="s2">: </span><span class="s1">scope</span><span class="s2">.</span><span class="s1">descriptionHtml</span><span class="s2">;</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+      <span class="s1">testResult</span><span class="s2">.</span><span class="s1">labels </span><span class="s2">= [</span><span class="s1">...</span><span class="s0">this</span><span class="s2">.</span><span class="s1">globalLabels</span><span class="s2">, </span><span class="s1">...testResult</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">];</span>
+      <span class="s2">(</span><span class="s1">_testResult$testCaseI </span><span class="s2">= </span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">testCaseId</span><span class="s2">) !== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">_testResult$testCaseI </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s1">_testResult$testCaseI </span><span class="s2">: </span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">testCaseId </span><span class="s2">= </span><span class="s1">getTestResultTestCaseId</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s2">(</span><span class="s1">_testResult$historyId </span><span class="s2">= </span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">historyId</span><span class="s2">) !== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">_testResult$historyId </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s1">_testResult$historyId </span><span class="s2">: </span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">historyId </span><span class="s2">= </span><span class="s1">getTestResultHistoryId</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s0">var </span><span class="s1">startStop </span><span class="s2">= </span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_calculateTimings</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">start</span><span class="s2">, </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">: </span><span class="s1">opts</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">, </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">: </span><span class="s1">opts</span><span class="s2">.</span><span class="s1">duration</span><span class="s2">);</span>
+      <span class="s1">testResult</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">startStop</span><span class="s2">.</span><span class="s1">start</span><span class="s2">;</span>
+      <span class="s1">testResult</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">= </span><span class="s1">startStop</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">;</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">afterTestResultStop</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;writeTest&quot;</span><span class="s2">, </span><span class="s1">uuid </span><span class="s2">=&gt; {</span>
+      <span class="s0">var </span><span class="s1">testResult </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getTestResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">testResult</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not write test result: no test with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">hasSkipLabel</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">)) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">deleteTestResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">beforeTestResultWrite</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">writer</span><span class="s2">.</span><span class="s1">writeResult</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">deleteTestResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">afterTestResultWrite</span><span class="s2">(</span><span class="s1">testResult</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;currentStep&quot;</span><span class="s2">, </span><span class="s1">rootUuid </span><span class="s2">=&gt; {</span>
+      <span class="s0">return this</span><span class="s2">.</span><span class="s1">stepStack</span><span class="s2">.</span><span class="s1">currentStep</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;startStep&quot;</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">parentStepUuid</span><span class="s2">, </span><span class="s1">result</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">parent </span><span class="s2">= </span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_findParent</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">parentStepUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">parent</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not start test step: no context for root &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s4">&quot; and parentStepUuid &quot;</span><span class="s2">).</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">parentStepUuid</span><span class="s2">), </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s1">stepResult </span><span class="s2">= </span><span class="s1">_objectSpread</span><span class="s2">(</span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">createStepResult</span><span class="s2">()), {}, {</span>
+        <span class="s1">start</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+      <span class="s2">}, </span><span class="s1">result</span><span class="s2">);</span>
+      <span class="s1">parent</span><span class="s2">.</span><span class="s1">steps</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">stepResult</span><span class="s2">);</span>
+      <span class="s0">var </span><span class="s1">stepUuid </span><span class="s2">= </span><span class="s1">randomUuid</span><span class="s2">();</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">setStepResult</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">, </span><span class="s1">stepResult</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">stepStack</span><span class="s2">.</span><span class="s1">addStep</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">stepUuid</span><span class="s2">);</span>
+      <span class="s0">return </span><span class="s1">stepUuid</span><span class="s2">;</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;updateStep&quot;</span><span class="s2">, (</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">updateFunc</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">step </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getStepResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">step</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not update test step: no step with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s1">updateFunc</span><span class="s2">(</span><span class="s1">step</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;stopStep&quot;</span><span class="s2">, (</span><span class="s1">uuid</span><span class="s2">, </span><span class="s1">opts</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">step </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getStepResult</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">step</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not stop test step: no step with uuid &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">, </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">beforeStepStop</span><span class="s2">(</span><span class="s1">step</span><span class="s2">);</span>
+      <span class="s0">var </span><span class="s1">startStop </span><span class="s2">= </span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_calculateTimings</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">step</span><span class="s2">.</span><span class="s1">start</span><span class="s2">, </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">: </span><span class="s1">opts</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">, </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">opts </span><span class="s2">=== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">: </span><span class="s1">opts</span><span class="s2">.</span><span class="s1">duration</span><span class="s2">);</span>
+      <span class="s1">step</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">startStop</span><span class="s2">.</span><span class="s1">start</span><span class="s2">;</span>
+      <span class="s1">step</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">= </span><span class="s1">startStop</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">;</span>
+      <span class="s1">step</span><span class="s2">.</span><span class="s1">stage </span><span class="s2">= </span><span class="s1">Stage</span><span class="s2">.</span><span class="s1">FINISHED</span><span class="s2">;</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">stepStack</span><span class="s2">.</span><span class="s1">removeStep</span><span class="s2">(</span><span class="s1">uuid</span><span class="s2">);</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier</span><span class="s2">.</span><span class="s1">afterStepStop</span><span class="s2">(</span><span class="s1">step</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;writeAttachment&quot;</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">parentStepUuid</span><span class="s2">, </span><span class="s1">attachmentName</span><span class="s2">, </span><span class="s1">attachmentContentOrPath</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">_options$fileExtensio</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">parent </span><span class="s2">= </span><span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_findParent</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">parentStepUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">parent</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not write test attachment: no context for root &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s4">&quot; and parentStepUuid &quot;</span><span class="s2">).</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">parentStepUuid</span><span class="s2">), </span><span class="s4">&quot; is found&quot;</span><span class="s2">));</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s1">isPath </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">attachmentContentOrPath </span><span class="s2">=== </span><span class="s4">&quot;string&quot;</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">fileExtension </span><span class="s2">= (</span><span class="s1">_options$fileExtensio </span><span class="s2">= </span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">) !== </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">_options$fileExtensio </span><span class="s2">!== </span><span class="s0">void </span><span class="s3">0 </span><span class="s2">? </span><span class="s1">_options$fileExtensio </span><span class="s2">: </span><span class="s1">isPath </span><span class="s2">? </span><span class="s1">extname</span><span class="s2">(</span><span class="s1">attachmentContentOrPath</span><span class="s2">) : </span><span class="s1">undefined</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">attachmentFileName </span><span class="s2">= </span><span class="s1">buildAttachmentFileName</span><span class="s2">({</span>
+        <span class="s1">contentType</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">contentType</span><span class="s2">,</span>
+        <span class="s1">fileExtension</span>
+      <span class="s2">});</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">isPath</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">writer</span><span class="s2">.</span><span class="s1">writeAttachmentFromPath</span><span class="s2">(</span><span class="s1">attachmentFileName</span><span class="s2">, </span><span class="s1">attachmentContentOrPath</span><span class="s2">);</span>
+      <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">writer</span><span class="s2">.</span><span class="s1">writeAttachment</span><span class="s2">(</span><span class="s1">attachmentFileName</span><span class="s2">, </span><span class="s1">attachmentContentOrPath</span><span class="s2">);</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s1">attachment </span><span class="s2">= {</span>
+        <span class="s1">name</span><span class="s2">: </span><span class="s1">attachmentName</span><span class="s2">,</span>
+        <span class="s1">source</span><span class="s2">: </span><span class="s1">attachmentFileName</span><span class="s2">,</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">contentType</span>
+      <span class="s2">};</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">options</span><span class="s2">.</span><span class="s1">wrapInStep</span><span class="s2">) {</span>
+        <span class="s0">var </span><span class="s2">{</span>
+          <span class="s1">timestamp </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+        <span class="s2">} = </span><span class="s1">options</span><span class="s2">;</span>
+        <span class="s1">parent</span><span class="s2">.</span><span class="s1">steps</span><span class="s2">.</span><span class="s1">push</span><span class="s2">({</span>
+          <span class="s1">name</span><span class="s2">: </span><span class="s1">attachmentName</span><span class="s2">,</span>
+          <span class="s1">attachments</span><span class="s2">: [</span><span class="s1">attachment</span><span class="s2">],</span>
+          <span class="s1">start</span><span class="s2">: </span><span class="s1">timestamp</span><span class="s2">,</span>
+          <span class="s1">stop</span><span class="s2">: </span><span class="s1">timestamp</span>
+        <span class="s2">});</span>
+      <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s1">parent</span><span class="s2">.</span><span class="s1">attachments</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">attachment</span><span class="s2">);</span>
+      <span class="s2">}</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;writeEnvironmentInfo&quot;</span><span class="s2">, () =&gt; {</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s0">this</span><span class="s2">.</span><span class="s1">environmentInfo</span><span class="s2">) {</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">writer</span><span class="s2">.</span><span class="s1">writeEnvironmentInfo</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">environmentInfo</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;writeCategoriesDefinitions&quot;</span><span class="s2">, () =&gt; {</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s0">this</span><span class="s2">.</span><span class="s1">categories</span><span class="s2">) {</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s1">serializedCategories </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">categories</span><span class="s2">.</span><span class="s1">map</span><span class="s2">(</span><span class="s1">c </span><span class="s2">=&gt; {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">messageRegex </span><span class="s0">instanceof </span><span class="s1">RegExp</span><span class="s2">) {</span>
+          <span class="s1">c</span><span class="s2">.</span><span class="s1">messageRegex </span><span class="s2">= </span><span class="s1">c</span><span class="s2">.</span><span class="s1">messageRegex</span><span class="s2">.</span><span class="s1">source</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">traceRegex </span><span class="s0">instanceof </span><span class="s1">RegExp</span><span class="s2">) {</span>
+          <span class="s1">c</span><span class="s2">.</span><span class="s1">traceRegex </span><span class="s2">= </span><span class="s1">c</span><span class="s2">.</span><span class="s1">traceRegex</span><span class="s2">.</span><span class="s1">source</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">c</span><span class="s2">;</span>
+      <span class="s2">});</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">writer</span><span class="s2">.</span><span class="s1">writeCategoriesDefinitions</span><span class="s2">(</span><span class="s1">serializedCategories</span><span class="s2">);</span>
+    <span class="s2">});</span>
+    <span class="s1">_defineProperty</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s4">&quot;applyRuntimeMessages&quot;</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">messages</span><span class="s2">) =&gt; {</span>
+      <span class="s1">messages</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">message </span><span class="s2">=&gt; {</span>
+        <span class="s0">switch </span><span class="s2">(</span><span class="s1">message</span><span class="s2">.</span><span class="s1">type</span><span class="s2">) {</span>
+          <span class="s0">case </span><span class="s4">&quot;metadata&quot;</span><span class="s2">:</span>
+            <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_handleMetadataMessage</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">data</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+          <span class="s0">case </span><span class="s4">&quot;step_metadata&quot;</span><span class="s2">:</span>
+            <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_handleStepMetadataMessage</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">data</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+          <span class="s0">case </span><span class="s4">&quot;step_start&quot;</span><span class="s2">:</span>
+            <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_handleStartStepMessage</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">data</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+          <span class="s0">case </span><span class="s4">&quot;step_stop&quot;</span><span class="s2">:</span>
+            <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_handleStopStepMessage</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">data</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+          <span class="s0">case </span><span class="s4">&quot;attachment_content&quot;</span><span class="s2">:</span>
+            <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_handleAttachmentContentMessage</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">data</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+          <span class="s0">case </span><span class="s4">&quot;attachment_path&quot;</span><span class="s2">:</span>
+            <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_handleAttachmentPathMessage</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">data</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+          <span class="s0">default</span><span class="s2">:</span>
+            <span class="s5">// eslint-disable-next-line no-console</span>
+            <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not apply runtime messages: unknown message &quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">message</span><span class="s2">)));</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_handleMetadataMessage</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">) =&gt; {</span>
+      <span class="s5">// only display name could be set to fixture.</span>
+      <span class="s0">var </span><span class="s1">fixtureResult </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getWrappedFixtureResult</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">var </span><span class="s2">{</span>
+        <span class="s1">links</span><span class="s2">,</span>
+        <span class="s1">labels</span><span class="s2">,</span>
+        <span class="s1">parameters</span><span class="s2">,</span>
+        <span class="s1">displayName</span><span class="s2">,</span>
+        <span class="s1">testCaseId</span><span class="s2">,</span>
+        <span class="s1">historyId</span><span class="s2">,</span>
+        <span class="s1">description</span><span class="s2">,</span>
+        <span class="s1">descriptionHtml</span>
+      <span class="s2">} = </span><span class="s1">message</span><span class="s2">;</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">fixtureResult</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">displayName</span><span class="s2">) {</span>
+          <span class="s0">this</span><span class="s2">.</span><span class="s1">updateFixture</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">result </span><span class="s2">=&gt; {</span>
+            <span class="s1">result</span><span class="s2">.</span><span class="s1">name </span><span class="s2">= </span><span class="s1">displayName</span><span class="s2">;</span>
+          <span class="s2">});</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">historyId</span><span class="s2">) {</span>
+          <span class="s5">// eslint-disable-next-line no-console</span>
+          <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;historyId can't be changed within test fixtures&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">testCaseId</span><span class="s2">) {</span>
+          <span class="s5">// eslint-disable-next-line no-console</span>
+          <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;testCaseId can't be changed within test fixtures&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">links </span><span class="s2">|| </span><span class="s1">labels </span><span class="s2">|| </span><span class="s1">parameters </span><span class="s2">|| </span><span class="s1">description </span><span class="s2">|| </span><span class="s1">descriptionHtml</span><span class="s2">) {</span>
+          <span class="s5">// in some frameworks, afterEach methods can be executed before test stop event, while</span>
+          <span class="s5">// in others after. To remove the possible undetermined behaviour we only allow</span>
+          <span class="s5">// using runtime metadata API in before hooks.</span>
+          <span class="s0">if </span><span class="s2">(</span><span class="s1">fixtureResult</span><span class="s2">.</span><span class="s1">type </span><span class="s2">=== </span><span class="s4">&quot;after&quot;</span><span class="s2">) {</span>
+            <span class="s5">// eslint-disable-next-line no-console</span>
+            <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;metadata messages isn't supported for after test fixtures&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+          <span class="s2">}</span>
+          <span class="s0">this</span><span class="s2">.</span><span class="s1">updateScope</span><span class="s2">(</span><span class="s1">fixtureResult</span><span class="s2">.</span><span class="s1">scopeUuid</span><span class="s2">, </span><span class="s1">scope </span><span class="s2">=&gt; {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">links</span><span class="s2">) {</span>
+              <span class="s1">scope</span><span class="s2">.</span><span class="s1">links </span><span class="s2">= [</span><span class="s1">...scope</span><span class="s2">.</span><span class="s1">links</span><span class="s2">, </span><span class="s1">...</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">linkConfig </span><span class="s2">? </span><span class="s1">formatLinks</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">linkConfig</span><span class="s2">, </span><span class="s1">links</span><span class="s2">) : </span><span class="s1">links</span><span class="s2">)];</span>
+            <span class="s2">}</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">labels</span><span class="s2">) {</span>
+              <span class="s1">scope</span><span class="s2">.</span><span class="s1">labels </span><span class="s2">= [</span><span class="s1">...scope</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">, </span><span class="s1">...labels</span><span class="s2">];</span>
+            <span class="s2">}</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">parameters</span><span class="s2">) {</span>
+              <span class="s1">scope</span><span class="s2">.</span><span class="s1">parameters </span><span class="s2">= [</span><span class="s1">...scope</span><span class="s2">.</span><span class="s1">parameters</span><span class="s2">, </span><span class="s1">...parameters</span><span class="s2">];</span>
+            <span class="s2">}</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">description</span><span class="s2">) {</span>
+              <span class="s1">scope</span><span class="s2">.</span><span class="s1">description </span><span class="s2">= </span><span class="s1">description</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">descriptionHtml</span><span class="s2">) {</span>
+              <span class="s1">scope</span><span class="s2">.</span><span class="s1">descriptionHtml </span><span class="s2">= </span><span class="s1">descriptionHtml</span><span class="s2">;</span>
+            <span class="s2">}</span>
+          <span class="s2">});</span>
+        <span class="s2">}</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">updateTest</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">result </span><span class="s2">=&gt; {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">links</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">links </span><span class="s2">= [</span><span class="s1">...result</span><span class="s2">.</span><span class="s1">links</span><span class="s2">, </span><span class="s1">...</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">linkConfig </span><span class="s2">? </span><span class="s1">formatLinks</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">linkConfig</span><span class="s2">, </span><span class="s1">links</span><span class="s2">) : </span><span class="s1">links</span><span class="s2">)];</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">labels</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">labels </span><span class="s2">= [</span><span class="s1">...result</span><span class="s2">.</span><span class="s1">labels</span><span class="s2">, </span><span class="s1">...labels</span><span class="s2">];</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">parameters</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">parameters </span><span class="s2">= [</span><span class="s1">...result</span><span class="s2">.</span><span class="s1">parameters</span><span class="s2">, </span><span class="s1">...parameters</span><span class="s2">];</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">displayName</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">name </span><span class="s2">= </span><span class="s1">displayName</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">testCaseId</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">testCaseId </span><span class="s2">= </span><span class="s1">testCaseId</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">historyId</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">historyId </span><span class="s2">= </span><span class="s1">historyId</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">description</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">description </span><span class="s2">= </span><span class="s1">description</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">descriptionHtml</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">descriptionHtml </span><span class="s2">= </span><span class="s1">descriptionHtml</span><span class="s2">;</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_handleStepMetadataMessage</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">stepUuid </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">currentStep</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">stepUuid</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not handle step metadata message: no step is running&quot;</span><span class="s2">);</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">var </span><span class="s2">{</span>
+        <span class="s1">name</span><span class="s2">,</span>
+        <span class="s1">parameters</span>
+      <span class="s2">} = </span><span class="s1">message</span><span class="s2">;</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">updateStep</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">, </span><span class="s1">stepResult </span><span class="s2">=&gt; {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+          <span class="s1">stepResult</span><span class="s2">.</span><span class="s1">name </span><span class="s2">= </span><span class="s1">name</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">parameters</span><span class="s2">) {</span>
+          <span class="s1">stepResult</span><span class="s2">.</span><span class="s1">parameters </span><span class="s2">= [</span><span class="s1">...stepResult</span><span class="s2">.</span><span class="s1">parameters</span><span class="s2">, </span><span class="s1">...parameters</span><span class="s2">];</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_handleStartStepMessage</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">) =&gt; {</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">startStep</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">undefined</span><span class="s2">, </span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">message</span><span class="s2">));</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_handleStopStepMessage</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">stepUuid </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">currentStep</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">stepUuid</span><span class="s2">) {</span>
+        <span class="s5">// eslint-disable-next-line no-console</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">error</span><span class="s2">(</span><span class="s4">&quot;could not handle step stop message: no step is running&quot;</span><span class="s2">);</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">updateStep</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">, </span><span class="s1">result </span><span class="s2">=&gt; {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">message</span><span class="s2">.</span><span class="s1">status </span><span class="s2">&amp;&amp; !</span><span class="s1">result</span><span class="s2">.</span><span class="s1">status</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">status </span><span class="s2">= </span><span class="s1">message</span><span class="s2">.</span><span class="s1">status</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">message</span><span class="s2">.</span><span class="s1">statusDetails</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">statusDetails </span><span class="s2">= </span><span class="s1">_objectSpread</span><span class="s2">(</span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">result</span><span class="s2">.</span><span class="s1">statusDetails</span><span class="s2">), </span><span class="s1">message</span><span class="s2">.</span><span class="s1">statusDetails</span><span class="s2">);</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">stopStep</span><span class="s2">(</span><span class="s1">stepUuid</span><span class="s2">, {</span>
+        <span class="s1">stop</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">stop</span>
+      <span class="s2">});</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_handleAttachmentContentMessage</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">) =&gt; {</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">writeAttachment</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">undefined</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">name</span><span class="s2">, </span><span class="s1">Buffer</span><span class="s2">.</span><span class="s1">from</span><span class="s2">(</span><span class="s1">message</span><span class="s2">.</span><span class="s1">content</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">encoding</span><span class="s2">), {</span>
+        <span class="s1">encoding</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">encoding</span><span class="s2">,</span>
+        <span class="s1">contentType</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">contentType</span><span class="s2">,</span>
+        <span class="s1">fileExtension</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">,</span>
+        <span class="s1">wrapInStep</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">wrapInStep</span><span class="s2">,</span>
+        <span class="s1">timestamp</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">timestamp</span>
+      <span class="s2">});</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_handleAttachmentPathMessage</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">message</span><span class="s2">) =&gt; {</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">writeAttachment</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">undefined</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">name</span><span class="s2">, </span><span class="s1">message</span><span class="s2">.</span><span class="s1">path</span><span class="s2">, {</span>
+        <span class="s1">contentType</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">contentType</span><span class="s2">,</span>
+        <span class="s1">fileExtension</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">,</span>
+        <span class="s1">wrapInStep</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">wrapInStep</span><span class="s2">,</span>
+        <span class="s1">timestamp</span><span class="s2">: </span><span class="s1">message</span><span class="s2">.</span><span class="s1">timestamp</span>
+      <span class="s2">});</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_findParent</span><span class="s2">, (</span><span class="s1">rootUuid</span><span class="s2">, </span><span class="s1">parentStepUuid</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">root </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getExecutionItem</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+      <span class="s0">if </span><span class="s2">(!</span><span class="s1">root</span><span class="s2">) {</span>
+        <span class="s0">return</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">parentStepUuid </span><span class="s2">=== </span><span class="s0">null</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">root</span><span class="s2">;</span>
+      <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">parentStepUuid </span><span class="s2">=== </span><span class="s1">undefined</span><span class="s2">) {</span>
+        <span class="s0">var </span><span class="s1">_stepUuid </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">currentStep</span><span class="s2">(</span><span class="s1">rootUuid</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">_stepUuid </span><span class="s2">? </span><span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getStepResult</span><span class="s2">(</span><span class="s1">_stepUuid</span><span class="s2">) : </span><span class="s1">root</span><span class="s2">;</span>
+      <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s0">return this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">getStepResult</span><span class="s2">(</span><span class="s1">parentStepUuid</span><span class="s2">);</span>
+      <span class="s2">}</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_writeFixturesOfScope</span><span class="s2">, </span><span class="s1">_ref2 </span><span class="s2">=&gt; {</span>
+      <span class="s0">var </span><span class="s2">{</span>
+        <span class="s1">fixtures</span><span class="s2">,</span>
+        <span class="s1">tests</span>
+      <span class="s2">} = </span><span class="s1">_ref2</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">writtenFixtures </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Set</span><span class="s2">();</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">tests</span><span class="s2">.</span><span class="s1">length</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">wrappedFixture of fixtures</span><span class="s2">) {</span>
+          <span class="s0">if </span><span class="s2">(!</span><span class="s1">writtenFixtures</span><span class="s2">.</span><span class="s1">has</span><span class="s2">(</span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">uuid</span><span class="s2">)) {</span>
+            <span class="s1">_classPrivateFieldGet</span><span class="s2">(</span><span class="s1">_writeContainer</span><span class="s2">, </span><span class="s0">this</span><span class="s2">).</span><span class="s1">call</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">tests</span><span class="s2">, </span><span class="s1">wrappedFixture</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">state</span><span class="s2">.</span><span class="s1">deleteFixtureResult</span><span class="s2">(</span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">uuid</span><span class="s2">);</span>
+            <span class="s1">writtenFixtures</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">uuid</span><span class="s2">);</span>
+          <span class="s2">}</span>
+        <span class="s2">}</span>
+      <span class="s2">}</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_writeContainer</span><span class="s2">, (</span><span class="s1">tests</span><span class="s2">, </span><span class="s1">wrappedFixture</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">fixture </span><span class="s2">= </span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">value</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">befores </span><span class="s2">= </span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">type </span><span class="s2">=== </span><span class="s4">&quot;before&quot; </span><span class="s2">? [</span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">value</span><span class="s2">] : [];</span>
+      <span class="s0">var </span><span class="s1">afters </span><span class="s2">= </span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">type </span><span class="s2">=== </span><span class="s4">&quot;after&quot; </span><span class="s2">? [</span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">value</span><span class="s2">] : [];</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">writer</span><span class="s2">.</span><span class="s1">writeGroup</span><span class="s2">({</span>
+        <span class="s1">uuid</span><span class="s2">: </span><span class="s1">wrappedFixture</span><span class="s2">.</span><span class="s1">uuid</span><span class="s2">,</span>
+        <span class="s1">name</span><span class="s2">: </span><span class="s1">fixture</span><span class="s2">.</span><span class="s1">name</span><span class="s2">,</span>
+        <span class="s1">children</span><span class="s2">: [</span><span class="s1">...</span><span class="s0">new </span><span class="s1">Set</span><span class="s2">(</span><span class="s1">tests</span><span class="s2">)],</span>
+        <span class="s1">befores</span><span class="s2">,</span>
+        <span class="s1">afters</span>
+      <span class="s2">});</span>
+    <span class="s2">});</span>
+    <span class="s1">_classPrivateFieldInitSpec</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">_calculateTimings</span><span class="s2">, (</span><span class="s1">start</span><span class="s2">, </span><span class="s1">stop</span><span class="s2">, </span><span class="s1">duration</span><span class="s2">) =&gt; {</span>
+      <span class="s0">var </span><span class="s1">result </span><span class="s2">= {</span>
+        <span class="s1">start</span><span class="s2">,</span>
+        <span class="s1">stop</span>
+      <span class="s2">};</span>
+      <span class="s0">if </span><span class="s2">(</span><span class="s1">duration</span><span class="s2">) {</span>
+        <span class="s0">var </span><span class="s1">normalisedDuration </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">max</span><span class="s2">(</span><span class="s3">0</span><span class="s2">, </span><span class="s1">duration</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">!== </span><span class="s1">undefined</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">- </span><span class="s1">normalisedDuration</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">!== </span><span class="s1">undefined</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">= </span><span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">+ </span><span class="s1">normalisedDuration</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">- </span><span class="s1">normalisedDuration</span><span class="s2">;</span>
+        <span class="s2">}</span>
+      <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">=== </span><span class="s1">undefined</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">=== </span><span class="s1">undefined</span><span class="s2">) {</span>
+          <span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">result</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">;</span>
+        <span class="s2">}</span>
+      <span class="s2">}</span>
+      <span class="s0">return </span><span class="s2">{</span>
+        <span class="s1">start</span><span class="s2">: </span><span class="s1">result</span><span class="s2">.</span><span class="s1">start </span><span class="s2">? </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">round</span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">start</span><span class="s2">) : </span><span class="s1">undefined</span><span class="s2">,</span>
+        <span class="s1">stop</span><span class="s2">: </span><span class="s1">result</span><span class="s2">.</span><span class="s1">stop </span><span class="s2">? </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">round</span><span class="s2">(</span><span class="s1">result</span><span class="s2">.</span><span class="s1">stop</span><span class="s2">) : </span><span class="s1">undefined</span>
+      <span class="s2">};</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">writer </span><span class="s2">= </span><span class="s1">resolveWriter</span><span class="s2">(</span><span class="s1">writer</span><span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">notifier </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Notifier</span><span class="s2">({</span>
+      <span class="s1">listeners</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">categories </span><span class="s2">= </span><span class="s1">categories</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">environmentInfo </span><span class="s2">= </span><span class="s1">environmentInfo</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">linkConfig </span><span class="s2">= </span><span class="s1">_links</span><span class="s2">;</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">globalLabels</span><span class="s2">)) {</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">globalLabels </span><span class="s2">= </span><span class="s1">globalLabels</span><span class="s2">;</span>
+    <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">Object</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">(</span><span class="s1">globalLabels</span><span class="s2">).</span><span class="s1">length</span><span class="s2">) {</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">globalLabels </span><span class="s2">= </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">entries</span><span class="s2">(</span><span class="s1">globalLabels</span><span class="s2">).</span><span class="s1">flatMap</span><span class="s2">(</span><span class="s1">_ref3 </span><span class="s2">=&gt; {</span>
+        <span class="s0">var </span><span class="s2">[</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">] = </span><span class="s1">_ref3</span><span class="s2">;</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">value</span><span class="s2">)) {</span>
+          <span class="s0">return </span><span class="s1">value</span><span class="s2">.</span><span class="s1">map</span><span class="s2">(</span><span class="s1">v </span><span class="s2">=&gt; ({</span>
+            <span class="s1">name</span><span class="s2">,</span>
+            <span class="s1">value</span><span class="s2">: </span><span class="s1">v</span>
+          <span class="s2">}));</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s2">{</span>
+          <span class="s1">name</span><span class="s2">,</span>
+          <span class="s1">value</span>
+        <span class="s2">};</span>
+      <span class="s2">});</span>
+    <span class="s2">}</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+<span class="s5">//# sourceMappingURL=ReporterRuntime.js.map</span></pre>
+</body>
+</html>

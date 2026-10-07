@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>patch.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+patch.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+
+<span class="s0">// See https://github.com/nodejs/undici/issues/1740</span>
+
+<span class="s2">export </span><span class="s1">type DOMException </span><span class="s3">= </span><span class="s2">typeof </span><span class="s1">globalThis </span><span class="s2">extends </span><span class="s3">{ </span><span class="s1">DOMException</span><span class="s3">: </span><span class="s1">infer T </span><span class="s3">}</span>
+ <span class="s3">? </span><span class="s1">T</span>
+ <span class="s3">: </span><span class="s1">any</span>
+
+<span class="s2">export interface </span><span class="s1">EventInit </span><span class="s3">{</span>
+  <span class="s1">bubbles</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">cancelable</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">composed</span><span class="s3">?: </span><span class="s1">boolean</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">EventListenerOptions </span><span class="s3">{</span>
+  <span class="s1">capture</span><span class="s3">?: </span><span class="s1">boolean</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">AddEventListenerOptions </span><span class="s2">extends </span><span class="s1">EventListenerOptions </span><span class="s3">{</span>
+  <span class="s1">once</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">passive</span><span class="s3">?: </span><span class="s1">boolean</span>
+  <span class="s1">signal</span><span class="s3">?: </span><span class="s1">AbortSignal</span>
+<span class="s3">}</span>
+
+<span class="s2">export </span><span class="s1">type EventListenerOrEventListenerObject </span><span class="s3">= </span><span class="s1">EventListener </span><span class="s3">| </span><span class="s1">EventListenerObject</span>
+
+<span class="s2">export interface </span><span class="s1">EventListenerObject </span><span class="s3">{</span>
+  <span class="s1">handleEvent </span><span class="s3">(</span><span class="s1">object</span><span class="s3">: </span><span class="s1">Event</span><span class="s3">): </span><span class="s2">void</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">EventListener </span><span class="s3">{</span>
+  <span class="s3">(</span><span class="s1">evt</span><span class="s3">: </span><span class="s1">Event</span><span class="s3">): </span><span class="s2">void</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

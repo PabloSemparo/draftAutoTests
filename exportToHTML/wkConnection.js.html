@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>wkConnection.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+wkConnection.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">wkConnection_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">wkConnection_exports</span><span class="s1">, {</span>
+  <span class="s2">WKConnection</span><span class="s1">: () =&gt; </span><span class="s2">WKConnection</span><span class="s1">,</span>
+  <span class="s2">WKSession</span><span class="s1">: () =&gt; </span><span class="s2">WKSession</span><span class="s1">,</span>
+  <span class="s2">kBrowserCloseMessageId</span><span class="s1">: () =&gt; </span><span class="s2">kBrowserCloseMessageId</span><span class="s1">,</span>
+  <span class="s2">kPageProxyMessageReceived</span><span class="s1">: () =&gt; </span><span class="s2">kPageProxyMessageReceived</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">wkConnection_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_events </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;events&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_debugLogger </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/debugLogger&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_helper </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../helper&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_protocolError </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../protocolError&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">kBrowserCloseMessageId </span><span class="s1">= -</span><span class="s4">9999</span><span class="s1">;</span>
+<span class="s3">const </span><span class="s2">kPageProxyMessageReceived </span><span class="s1">= </span><span class="s2">Symbol</span><span class="s1">(</span><span class="s0">&quot;kPageProxyMessageReceived&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">WKConnection </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">transport</span><span class="s1">, </span><span class="s2">onDisconnect</span><span class="s1">, </span><span class="s2">protocolLogger</span><span class="s1">, </span><span class="s2">browserLogsCollector</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastId </span><span class="s1">= </span><span class="s4">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closed </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_transport </span><span class="s1">= </span><span class="s2">transport</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_onDisconnect </span><span class="s1">= </span><span class="s2">onDisconnect</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_protocolLogger </span><span class="s1">= </span><span class="s2">protocolLogger</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserLogsCollector </span><span class="s1">= </span><span class="s2">browserLogsCollector</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">browserSession </span><span class="s1">= </span><span class="s3">new </span><span class="s2">WKSession</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s0">&quot;&quot;</span><span class="s1">, (</span><span class="s2">message</span><span class="s1">) =&gt; {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">rawSend</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_transport</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatchMessage</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_transport</span><span class="s1">.</span><span class="s2">onclose </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onClose</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">nextMessageId</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s1">++</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastId</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">rawSend</span><span class="s1">(</span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_protocolLogger</span><span class="s1">(</span><span class="s0">&quot;send&quot;</span><span class="s1">, </span><span class="s2">message</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_transport</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_dispatchMessage</span><span class="s1">(</span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_protocolLogger</span><span class="s1">(</span><span class="s0">&quot;receive&quot;</span><span class="s1">, </span><span class="s2">message</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">message</span><span class="s1">.</span><span class="s2">id </span><span class="s1">=== </span><span class="s2">kBrowserCloseMessageId</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">message</span><span class="s1">.</span><span class="s2">pageProxyId</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">payload </span><span class="s1">= { </span><span class="s2">message</span><span class="s1">, </span><span class="s2">pageProxyId</span><span class="s1">: </span><span class="s2">message</span><span class="s1">.</span><span class="s2">pageProxyId </span><span class="s1">};</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">browserSession</span><span class="s1">.</span><span class="s2">dispatchMessage</span><span class="s1">({ </span><span class="s2">method</span><span class="s1">: </span><span class="s2">kPageProxyMessageReceived</span><span class="s1">, </span><span class="s2">params</span><span class="s1">: </span><span class="s2">payload </span><span class="s1">});</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">browserSession</span><span class="s1">.</span><span class="s2">dispatchMessage</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_onClose</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closed </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_transport</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= </span><span class="s3">void </span><span class="s4">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_transport</span><span class="s1">.</span><span class="s2">onclose </span><span class="s1">= </span><span class="s3">void </span><span class="s4">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserDisconnectedLogs </span><span class="s1">= </span><span class="s2">import_helper</span><span class="s1">.</span><span class="s2">helper</span><span class="s1">.</span><span class="s2">formatBrowserLogs</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browserLogsCollector</span><span class="s1">.</span><span class="s2">recentLogs</span><span class="s1">(), </span><span class="s2">reason</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">browserSession</span><span class="s1">.</span><span class="s2">dispose</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_onDisconnect</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">isClosed</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_closed</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">close</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closed</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_transport</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">WKSession </span><span class="s3">extends </span><span class="s2">import_events</span><span class="s1">.</span><span class="s2">EventEmitter </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">connection</span><span class="s1">, </span><span class="s2">sessionId</span><span class="s1">, </span><span class="s2">rawSend</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_disposed </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks </span><span class="s1">= </span><span class="s5">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_crashed </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">setMaxListeners</span><span class="s1">(</span><span class="s4">0</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">connection </span><span class="s1">= </span><span class="s2">connection</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">sessionId </span><span class="s1">= </span><span class="s2">sessionId</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_rawSend </span><span class="s1">= </span><span class="s2">rawSend</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">on </span><span class="s1">= </span><span class="s3">super</span><span class="s1">.</span><span class="s2">on</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">off </span><span class="s1">= </span><span class="s3">super</span><span class="s1">.</span><span class="s2">removeListener</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">addListener </span><span class="s1">= </span><span class="s3">super</span><span class="s1">.</span><span class="s2">addListener</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">removeListener </span><span class="s1">= </span><span class="s3">super</span><span class="s1">.</span><span class="s2">removeListener</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">once </span><span class="s1">= </span><span class="s3">super</span><span class="s1">.</span><span class="s2">once</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async send</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_crashed </span><span class="s1">|| </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_disposed </span><span class="s1">|| </span><span class="s3">this</span><span class="s1">.</span><span class="s2">connection</span><span class="s1">.</span><span class="s2">_browserDisconnectedLogs</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">import_protocolError</span><span class="s1">.</span><span class="s2">ProtocolError</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_crashed </span><span class="s1">? </span><span class="s0">&quot;crashed&quot; </span><span class="s1">: </span><span class="s0">&quot;closed&quot;</span><span class="s1">, </span><span class="s3">void </span><span class="s4">0</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">connection</span><span class="s1">.</span><span class="s2">_browserDisconnectedLogs</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">id </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">connection</span><span class="s1">.</span><span class="s2">nextMessageId</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">messageObj </span><span class="s1">= { </span><span class="s2">id</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s2">params </span><span class="s1">};</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_rawSend</span><span class="s1">(</span><span class="s2">messageObj</span><span class="s1">);</span>
+    <span class="s3">return new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">resolve</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">id</span><span class="s1">, { </span><span class="s2">resolve</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">, </span><span class="s2">error</span><span class="s1">: </span><span class="s3">new </span><span class="s2">import_protocolError</span><span class="s1">.</span><span class="s2">ProtocolError</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, </span><span class="s2">method</span><span class="s1">) });</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">sendMayFail</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">error</span><span class="s1">) =&gt; </span><span class="s2">import_debugLogger</span><span class="s1">.</span><span class="s2">debugLogger</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, </span><span class="s2">error</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">markAsCrashed</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_crashed </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">isDisposed</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_disposed</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">dispose</span><span class="s1">() {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">callback of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">values</span><span class="s1">()) {</span>
+      <span class="s2">callback</span><span class="s1">.</span><span class="s2">error</span><span class="s1">.</span><span class="s2">type </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_crashed </span><span class="s1">? </span><span class="s0">&quot;crashed&quot; </span><span class="s1">: </span><span class="s0">&quot;closed&quot;</span><span class="s1">;</span>
+      <span class="s2">callback</span><span class="s1">.</span><span class="s2">error</span><span class="s1">.</span><span class="s2">logs </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">connection</span><span class="s1">.</span><span class="s2">_browserDisconnectedLogs</span><span class="s1">;</span>
+      <span class="s2">callback</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s2">callback</span><span class="s1">.</span><span class="s2">error</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">clear</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_disposed </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">dispatchMessage</span><span class="s1">(</span><span class="s2">object</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id </span><span class="s1">&amp;&amp; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id</span><span class="s1">)) {</span>
+      <span class="s3">const </span><span class="s2">callback </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s2">callback</span><span class="s1">.</span><span class="s2">error</span><span class="s1">.</span><span class="s2">setMessage</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">error</span><span class="s1">.</span><span class="s2">message</span><span class="s1">);</span>
+        <span class="s2">callback</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s2">callback</span><span class="s1">.</span><span class="s2">error</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s2">callback</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">result</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id </span><span class="s1">&amp;&amp; !</span><span class="s2">object</span><span class="s1">.</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s1">(</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">assert</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">isDisposed</span><span class="s1">());</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">Promise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">().</span><span class="s2">then</span><span class="s1">(() =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">method</span><span class="s1">, </span><span class="s2">object</span><span class="s1">.</span><span class="s2">params</span><span class="s1">));</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s5">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s4">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">WKConnection</span><span class="s1">,</span>
+  <span class="s2">WKSession</span><span class="s1">,</span>
+  <span class="s2">kBrowserCloseMessageId</span><span class="s1">,</span>
+  <span class="s2">kPageProxyMessageReceived</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

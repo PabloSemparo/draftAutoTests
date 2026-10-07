@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>mock-agent.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+mock-agent.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Agent from </span><span class="s2">'./agent'</span>
+<span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s2">'./dispatcher'</span>
+<span class="s0">import </span><span class="s3">{ </span><span class="s1">Interceptable</span><span class="s3">, </span><span class="s1">MockInterceptor </span><span class="s3">} </span><span class="s1">from </span><span class="s2">'./mock-interceptor'</span>
+<span class="s0">import </span><span class="s1">MockDispatch </span><span class="s3">= </span><span class="s1">MockInterceptor</span><span class="s3">.</span><span class="s1">MockDispatch</span><span class="s3">;</span>
+
+<span class="s0">export default </span><span class="s1">MockAgent</span>
+
+<span class="s0">interface </span><span class="s1">PendingInterceptor </span><span class="s0">extends </span><span class="s1">MockDispatch </span><span class="s3">{</span>
+  <span class="s1">origin</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s4">/** A mocked Agent class that implements the Agent API. It allows one to intercept HTTP requests made through undici and return mocked responses instead. */</span>
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">MockAgent</span><span class="s3">&lt;</span><span class="s1">TMockAgentOptions </span><span class="s0">extends </span><span class="s1">MockAgent</span><span class="s3">.</span><span class="s1">Options </span><span class="s3">= </span><span class="s1">MockAgent</span><span class="s3">.</span><span class="s1">Options</span><span class="s3">&gt; </span><span class="s0">extends </span><span class="s1">Dispatcher </span><span class="s3">{</span>
+  <span class="s1">constructor</span><span class="s3">(</span><span class="s1">options</span><span class="s3">?: </span><span class="s1">MockAgent</span><span class="s3">.</span><span class="s1">Options</span><span class="s3">)</span>
+  <span class="s4">/** Creates and retrieves mock Dispatcher instances which can then be used to intercept HTTP requests. If the number of connections on the mock agent is set to 1, a MockClient instance is returned. Otherwise a MockPool instance is returned. */</span>
+  <span class="s1">get</span><span class="s3">&lt;</span><span class="s1">TInterceptable </span><span class="s0">extends </span><span class="s1">Interceptable</span><span class="s3">&gt;(</span><span class="s1">origin</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s1">TInterceptable</span><span class="s3">;</span>
+  <span class="s1">get</span><span class="s3">&lt;</span><span class="s1">TInterceptable </span><span class="s0">extends </span><span class="s1">Interceptable</span><span class="s3">&gt;(</span><span class="s1">origin</span><span class="s3">: </span><span class="s1">RegExp</span><span class="s3">): </span><span class="s1">TInterceptable</span><span class="s3">;</span>
+  <span class="s1">get</span><span class="s3">&lt;</span><span class="s1">TInterceptable </span><span class="s0">extends </span><span class="s1">Interceptable</span><span class="s3">&gt;(</span><span class="s1">origin</span><span class="s3">: ((</span><span class="s1">origin</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s1">boolean</span><span class="s3">)): </span><span class="s1">TInterceptable</span><span class="s3">;</span>
+  <span class="s4">/** Dispatches a mocked request. */</span>
+  <span class="s1">dispatch</span><span class="s3">(</span><span class="s1">options</span><span class="s3">: </span><span class="s1">Agent</span><span class="s3">.</span><span class="s1">DispatchOptions</span><span class="s3">, </span><span class="s1">handler</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchHandlers</span><span class="s3">): </span><span class="s1">boolean</span><span class="s3">;</span>
+  <span class="s4">/** Closes the mock agent and waits for registered mock pools and clients to also close before resolving. */</span>
+  <span class="s1">close</span><span class="s3">(): </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s0">void</span><span class="s3">&gt;;</span>
+  <span class="s4">/** Disables mocking in MockAgent. */</span>
+  <span class="s1">deactivate</span><span class="s3">(): </span><span class="s0">void</span><span class="s3">;</span>
+  <span class="s4">/** Enables mocking in a MockAgent instance. When instantiated, a MockAgent is automatically activated. Therefore, this method is only effective after `MockAgent.deactivate` has been called. */</span>
+  <span class="s1">activate</span><span class="s3">(): </span><span class="s0">void</span><span class="s3">;</span>
+  <span class="s4">/** Define host matchers so only matching requests that aren't intercepted by the mock dispatchers will be attempted. */</span>
+  <span class="s1">enableNetConnect</span><span class="s3">(): </span><span class="s0">void</span><span class="s3">;</span>
+  <span class="s1">enableNetConnect</span><span class="s3">(</span><span class="s1">host</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s0">void</span><span class="s3">;</span>
+  <span class="s1">enableNetConnect</span><span class="s3">(</span><span class="s1">host</span><span class="s3">: </span><span class="s1">RegExp</span><span class="s3">): </span><span class="s0">void</span><span class="s3">;</span>
+  <span class="s1">enableNetConnect</span><span class="s3">(</span><span class="s1">host</span><span class="s3">: ((</span><span class="s1">host</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) =&gt; </span><span class="s1">boolean</span><span class="s3">)): </span><span class="s0">void</span><span class="s3">;</span>
+  <span class="s4">/** Causes all requests to throw when requests are not matched in a MockAgent intercept. */</span>
+  <span class="s1">disableNetConnect</span><span class="s3">(): </span><span class="s0">void</span><span class="s3">;</span>
+  <span class="s1">pendingInterceptors</span><span class="s3">(): </span><span class="s1">PendingInterceptor</span><span class="s3">[];</span>
+  <span class="s1">assertNoPendingInterceptors</span><span class="s3">(</span><span class="s1">options</span><span class="s3">?: {</span>
+    <span class="s1">pendingInterceptorsFormatter</span><span class="s3">?: </span><span class="s1">PendingInterceptorsFormatter</span><span class="s3">;</span>
+  <span class="s3">}): </span><span class="s0">void</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s0">interface </span><span class="s1">PendingInterceptorsFormatter </span><span class="s3">{</span>
+  <span class="s1">format</span><span class="s3">(</span><span class="s1">pendingInterceptors</span><span class="s3">: </span><span class="s1">readonly PendingInterceptor</span><span class="s3">[]): </span><span class="s1">string</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s1">declare namespace MockAgent </span><span class="s3">{</span>
+  <span class="s4">/** MockAgent options. */</span>
+  <span class="s0">export interface </span><span class="s1">Options </span><span class="s0">extends </span><span class="s1">Agent</span><span class="s3">.</span><span class="s1">Options </span><span class="s3">{</span>
+    <span class="s4">/** A custom agent to be encapsulated by the MockAgent. */</span>
+    <span class="s1">agent</span><span class="s3">?: </span><span class="s1">Agent</span><span class="s3">;</span>
+  <span class="s3">}</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>
