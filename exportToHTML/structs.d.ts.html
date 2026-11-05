@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>structs.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #5f826b; font-style: italic;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+structs.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">/**</span>
+ <span class="s0">* Copyright (c) Microsoft Corporation.</span>
+ <span class="s0">*</span>
+ <span class="s0">* Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+ <span class="s0">* you may not use this file except in compliance with the License.</span>
+ <span class="s0">* You may obtain a copy of the License at</span>
+ <span class="s0">*</span>
+ <span class="s0">* http://www.apache.org/licenses/LICENSE-2.0</span>
+ <span class="s0">*</span>
+ <span class="s0">* Unless required by applicable law or agreed to in writing, software</span>
+ <span class="s0">* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+ <span class="s0">* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+ <span class="s0">* See the License for the specific language governing permissions and</span>
+ <span class="s0">* limitations under the License.</span>
+ <span class="s0">*/</span>
+
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">JSHandle</span><span class="s3">, </span><span class="s1">ElementHandle</span><span class="s3">, </span><span class="s1">Frame</span><span class="s3">, </span><span class="s1">Page</span><span class="s3">, </span><span class="s1">BrowserContext </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'./types'</span><span class="s3">;</span>
+
+<span class="s0">/**</span>
+ <span class="s0">* Can be converted to JSON</span>
+ <span class="s0">*/</span>
+<span class="s2">export </span><span class="s1">type Serializable </span><span class="s3">= </span><span class="s1">any</span><span class="s3">;</span>
+<span class="s0">/**</span>
+ <span class="s0">* Can be converted to JSON, but may also contain JSHandles.</span>
+ <span class="s0">*/</span>
+<span class="s2">export </span><span class="s1">type EvaluationArgument </span><span class="s3">= {};</span>
+
+<span class="s2">export </span><span class="s1">type NoHandles</span><span class="s3">&lt;</span><span class="s1">Arg</span><span class="s3">&gt; = </span><span class="s1">Arg </span><span class="s2">extends </span><span class="s1">JSHandle </span><span class="s3">? </span><span class="s1">never </span><span class="s3">: (</span><span class="s1">Arg </span><span class="s2">extends </span><span class="s1">object </span><span class="s3">? { [</span><span class="s1">Key </span><span class="s2">in </span><span class="s1">keyof Arg</span><span class="s3">]: </span><span class="s1">NoHandles</span><span class="s3">&lt;</span><span class="s1">Arg</span><span class="s3">[</span><span class="s1">Key</span><span class="s3">]&gt; } : </span><span class="s1">Arg</span><span class="s3">);</span>
+<span class="s2">export </span><span class="s1">type Unboxed</span><span class="s3">&lt;</span><span class="s1">Arg</span><span class="s3">&gt; =</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s1">ElementHandle</span><span class="s3">&lt;</span><span class="s1">infer T</span><span class="s3">&gt; ? </span><span class="s1">T </span><span class="s3">:</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s1">JSHandle</span><span class="s3">&lt;</span><span class="s1">infer T</span><span class="s3">&gt; ? </span><span class="s1">T </span><span class="s3">:</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s1">NoHandles</span><span class="s3">&lt;</span><span class="s1">Arg</span><span class="s3">&gt; ? </span><span class="s1">Arg </span><span class="s3">:</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s3">[</span><span class="s1">infer A0</span><span class="s3">] ? [</span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A0</span><span class="s3">&gt;] :</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s3">[</span><span class="s1">infer A0</span><span class="s3">, </span><span class="s1">infer A1</span><span class="s3">] ? [</span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A0</span><span class="s3">&gt;, </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A1</span><span class="s3">&gt;] :</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s3">[</span><span class="s1">infer A0</span><span class="s3">, </span><span class="s1">infer A1</span><span class="s3">, </span><span class="s1">infer A2</span><span class="s3">] ? [</span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A0</span><span class="s3">&gt;, </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A1</span><span class="s3">&gt;, </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A2</span><span class="s3">&gt;] :</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s3">[</span><span class="s1">infer A0</span><span class="s3">, </span><span class="s1">infer A1</span><span class="s3">, </span><span class="s1">infer A2</span><span class="s3">, </span><span class="s1">infer A3</span><span class="s3">] ? [</span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A0</span><span class="s3">&gt;, </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A1</span><span class="s3">&gt;, </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A2</span><span class="s3">&gt;, </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">A3</span><span class="s3">&gt;] :</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s1">Array</span><span class="s3">&lt;</span><span class="s1">infer T</span><span class="s3">&gt; ? </span><span class="s1">Array</span><span class="s3">&lt;</span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt;&gt; :</span>
+  <span class="s1">Arg </span><span class="s2">extends </span><span class="s1">object </span><span class="s3">? { [</span><span class="s1">Key </span><span class="s2">in </span><span class="s1">keyof Arg</span><span class="s3">]: </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">Arg</span><span class="s3">[</span><span class="s1">Key</span><span class="s3">]&gt; } :</span>
+  <span class="s1">Arg</span><span class="s3">;</span>
+<span class="s2">export </span><span class="s1">type PageFunction0</span><span class="s3">&lt;</span><span class="s1">R</span><span class="s3">&gt; = </span><span class="s1">string </span><span class="s3">| (() =&gt; </span><span class="s1">R </span><span class="s3">| </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">R</span><span class="s3">&gt;);</span>
+<span class="s2">export </span><span class="s1">type PageFunction</span><span class="s3">&lt;</span><span class="s1">Arg</span><span class="s3">, </span><span class="s1">R</span><span class="s3">&gt; = </span><span class="s1">string </span><span class="s3">| ((</span><span class="s1">arg</span><span class="s3">: </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">Arg</span><span class="s3">&gt;) =&gt; </span><span class="s1">R </span><span class="s3">| </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">R</span><span class="s3">&gt;);</span>
+<span class="s2">export </span><span class="s1">type PageFunctionOn</span><span class="s3">&lt;</span><span class="s1">On</span><span class="s3">, </span><span class="s1">Arg2</span><span class="s3">, </span><span class="s1">R</span><span class="s3">&gt; = </span><span class="s1">string </span><span class="s3">| ((</span><span class="s1">on</span><span class="s3">: </span><span class="s1">On</span><span class="s3">, </span><span class="s1">arg2</span><span class="s3">: </span><span class="s1">Unboxed</span><span class="s3">&lt;</span><span class="s1">Arg2</span><span class="s3">&gt;) =&gt; </span><span class="s1">R </span><span class="s3">| </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s1">R</span><span class="s3">&gt;);</span>
+<span class="s2">export </span><span class="s1">type SmartHandle</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt; = [</span><span class="s1">T</span><span class="s3">] </span><span class="s2">extends </span><span class="s3">[</span><span class="s1">Node</span><span class="s3">] ? </span><span class="s1">ElementHandle</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt; : </span><span class="s1">JSHandle</span><span class="s3">&lt;</span><span class="s1">T</span><span class="s3">&gt;;</span>
+<span class="s2">export </span><span class="s1">type ElementHandleForTag</span><span class="s3">&lt;</span><span class="s1">K </span><span class="s2">extends </span><span class="s1">keyof HTMLElementTagNameMap</span><span class="s3">&gt; = </span><span class="s1">ElementHandle</span><span class="s3">&lt;</span><span class="s1">HTMLElementTagNameMap</span><span class="s3">[</span><span class="s1">K</span><span class="s3">]&gt;;</span>
+<span class="s2">export </span><span class="s1">type BindingSource </span><span class="s3">= { </span><span class="s1">context</span><span class="s3">: </span><span class="s1">BrowserContext</span><span class="s3">, </span><span class="s1">page</span><span class="s3">: </span><span class="s1">Page</span><span class="s3">, </span><span class="s1">frame</span><span class="s3">: </span><span class="s1">Frame </span><span class="s3">};</span>
+</pre>
+</body>
+</html>

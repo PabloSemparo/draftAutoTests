@@ -1,0 +1,535 @@
+<html>
+<head>
+<title>globals.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #5f826b; font-style: italic;}
+.s6 { color: #67a37c; font-style: italic;}
+.s7 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+globals.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">export </span><span class="s2">{}; </span><span class="s3">// Make this a module</span>
+
+<span class="s3">// #region Fetch and friends</span>
+<span class="s3">// Conditional type aliases, used at the end of this file.</span>
+<span class="s3">// Will either be empty if lib.dom (or lib.webworker) is included, or the undici version otherwise.</span>
+<span class="s1">type _Request </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">Request</span><span class="s2">;</span>
+<span class="s1">type _Response </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">Response</span><span class="s2">;</span>
+<span class="s1">type _FormData </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">FormData</span><span class="s2">;</span>
+<span class="s1">type _Headers </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">Headers</span><span class="s2">;</span>
+<span class="s1">type _MessageEvent </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">MessageEvent</span><span class="s2">;</span>
+<span class="s1">type _RequestInit </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {}</span>
+    <span class="s2">: </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">RequestInit</span><span class="s2">;</span>
+<span class="s1">type _ResponseInit </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {}</span>
+    <span class="s2">: </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">ResponseInit</span><span class="s2">;</span>
+<span class="s1">type _WebSocket </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">WebSocket</span><span class="s2">;</span>
+<span class="s1">type _EventSource </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">EventSource</span><span class="s2">;</span>
+<span class="s3">// #endregion Fetch and friends</span>
+
+<span class="s3">// Conditional type definitions for webstorage interface, which conflicts with lib.dom otherwise.</span>
+<span class="s1">type _Storage </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onabort</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : {</span>
+    <span class="s5">/**</span>
+     <span class="s5">* Returns the number of key/value pairs.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Storage/length)</span>
+     <span class="s5">*/</span>
+    <span class="s1">readonly length</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s5">/**</span>
+     <span class="s5">* Removes all key/value pairs, if there are any.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Storage/clear)</span>
+     <span class="s5">*/</span>
+    <span class="s1">clear</span><span class="s2">(): </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s5">/**</span>
+     <span class="s5">* Returns the current value associated with the given key, or null if the given key does not exist.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Storage/getItem)</span>
+     <span class="s5">*/</span>
+    <span class="s1">getItem</span><span class="s2">(</span><span class="s1">key</span><span class="s2">: </span><span class="s1">string</span><span class="s2">): </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s5">/**</span>
+     <span class="s5">* Returns the name of the nth key, or null if n is greater than or equal to the number of key/value pairs.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Storage/key)</span>
+     <span class="s5">*/</span>
+    <span class="s1">key</span><span class="s2">(</span><span class="s1">index</span><span class="s2">: </span><span class="s1">number</span><span class="s2">): </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s5">/**</span>
+     <span class="s5">* Removes the key/value pair with the given key, if a key/value pair with the given key exists.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Storage/removeItem)</span>
+     <span class="s5">*/</span>
+    <span class="s1">removeItem</span><span class="s2">(</span><span class="s1">key</span><span class="s2">: </span><span class="s1">string</span><span class="s2">): </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s5">/**</span>
+     <span class="s5">* Sets the value of the pair identified by key to value, creating a new key/value pair if none existed for key previously.</span>
+     <span class="s5">*</span>
+     <span class="s5">* Throws a &quot;QuotaExceededError&quot; DOMException exception if the new value couldn't be set.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Storage/setItem)</span>
+     <span class="s5">*/</span>
+    <span class="s1">setItem</span><span class="s2">(</span><span class="s1">key</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">value</span><span class="s2">: </span><span class="s1">string</span><span class="s2">): </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s2">[</span><span class="s1">key</span><span class="s2">: </span><span class="s1">string</span><span class="s2">]: </span><span class="s1">any</span><span class="s2">;</span>
+<span class="s2">};</span>
+
+<span class="s3">// #region DOMException</span>
+<span class="s1">type _DOMException </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any </span><span class="s2">} ? {} : </span><span class="s1">NodeDOMException</span><span class="s2">;</span>
+<span class="s0">interface </span><span class="s1">NodeDOMException </span><span class="s0">extends </span><span class="s1">Error </span><span class="s2">{</span>
+    <span class="s5">/**</span>
+     <span class="s5">* </span><span class="s6">@deprecated</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/DOMException/code)</span>
+     <span class="s5">*/</span>
+    <span class="s1">readonly code</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s5">/** [MDN Reference](https://developer.mozilla.org/docs/Web/API/DOMException/message) */</span>
+    <span class="s1">readonly message</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s5">/** [MDN Reference](https://developer.mozilla.org/docs/Web/API/DOMException/name) */</span>
+    <span class="s1">readonly name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">readonly INDEX_SIZE_ERR</span><span class="s2">: </span><span class="s7">1</span><span class="s2">;</span>
+    <span class="s1">readonly DOMSTRING_SIZE_ERR</span><span class="s2">: </span><span class="s7">2</span><span class="s2">;</span>
+    <span class="s1">readonly HIERARCHY_REQUEST_ERR</span><span class="s2">: </span><span class="s7">3</span><span class="s2">;</span>
+    <span class="s1">readonly WRONG_DOCUMENT_ERR</span><span class="s2">: </span><span class="s7">4</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_CHARACTER_ERR</span><span class="s2">: </span><span class="s7">5</span><span class="s2">;</span>
+    <span class="s1">readonly NO_DATA_ALLOWED_ERR</span><span class="s2">: </span><span class="s7">6</span><span class="s2">;</span>
+    <span class="s1">readonly NO_MODIFICATION_ALLOWED_ERR</span><span class="s2">: </span><span class="s7">7</span><span class="s2">;</span>
+    <span class="s1">readonly NOT_FOUND_ERR</span><span class="s2">: </span><span class="s7">8</span><span class="s2">;</span>
+    <span class="s1">readonly NOT_SUPPORTED_ERR</span><span class="s2">: </span><span class="s7">9</span><span class="s2">;</span>
+    <span class="s1">readonly INUSE_ATTRIBUTE_ERR</span><span class="s2">: </span><span class="s7">10</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_STATE_ERR</span><span class="s2">: </span><span class="s7">11</span><span class="s2">;</span>
+    <span class="s1">readonly SYNTAX_ERR</span><span class="s2">: </span><span class="s7">12</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_MODIFICATION_ERR</span><span class="s2">: </span><span class="s7">13</span><span class="s2">;</span>
+    <span class="s1">readonly NAMESPACE_ERR</span><span class="s2">: </span><span class="s7">14</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_ACCESS_ERR</span><span class="s2">: </span><span class="s7">15</span><span class="s2">;</span>
+    <span class="s1">readonly VALIDATION_ERR</span><span class="s2">: </span><span class="s7">16</span><span class="s2">;</span>
+    <span class="s1">readonly TYPE_MISMATCH_ERR</span><span class="s2">: </span><span class="s7">17</span><span class="s2">;</span>
+    <span class="s1">readonly SECURITY_ERR</span><span class="s2">: </span><span class="s7">18</span><span class="s2">;</span>
+    <span class="s1">readonly NETWORK_ERR</span><span class="s2">: </span><span class="s7">19</span><span class="s2">;</span>
+    <span class="s1">readonly ABORT_ERR</span><span class="s2">: </span><span class="s7">20</span><span class="s2">;</span>
+    <span class="s1">readonly URL_MISMATCH_ERR</span><span class="s2">: </span><span class="s7">21</span><span class="s2">;</span>
+    <span class="s1">readonly QUOTA_EXCEEDED_ERR</span><span class="s2">: </span><span class="s7">22</span><span class="s2">;</span>
+    <span class="s1">readonly TIMEOUT_ERR</span><span class="s2">: </span><span class="s7">23</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_NODE_TYPE_ERR</span><span class="s2">: </span><span class="s7">24</span><span class="s2">;</span>
+    <span class="s1">readonly DATA_CLONE_ERR</span><span class="s2">: </span><span class="s7">25</span><span class="s2">;</span>
+<span class="s2">}</span>
+<span class="s0">interface </span><span class="s1">NodeDOMExceptionConstructor </span><span class="s2">{</span>
+    <span class="s1">prototype</span><span class="s2">: </span><span class="s1">DOMException</span><span class="s2">;</span>
+    <span class="s0">new</span><span class="s2">(</span><span class="s1">message</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">nameOrOptions</span><span class="s2">?: </span><span class="s1">string </span><span class="s2">| { </span><span class="s1">name</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">; </span><span class="s1">cause</span><span class="s2">?: </span><span class="s1">unknown </span><span class="s2">}): </span><span class="s1">DOMException</span><span class="s2">;</span>
+    <span class="s1">readonly INDEX_SIZE_ERR</span><span class="s2">: </span><span class="s7">1</span><span class="s2">;</span>
+    <span class="s1">readonly DOMSTRING_SIZE_ERR</span><span class="s2">: </span><span class="s7">2</span><span class="s2">;</span>
+    <span class="s1">readonly HIERARCHY_REQUEST_ERR</span><span class="s2">: </span><span class="s7">3</span><span class="s2">;</span>
+    <span class="s1">readonly WRONG_DOCUMENT_ERR</span><span class="s2">: </span><span class="s7">4</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_CHARACTER_ERR</span><span class="s2">: </span><span class="s7">5</span><span class="s2">;</span>
+    <span class="s1">readonly NO_DATA_ALLOWED_ERR</span><span class="s2">: </span><span class="s7">6</span><span class="s2">;</span>
+    <span class="s1">readonly NO_MODIFICATION_ALLOWED_ERR</span><span class="s2">: </span><span class="s7">7</span><span class="s2">;</span>
+    <span class="s1">readonly NOT_FOUND_ERR</span><span class="s2">: </span><span class="s7">8</span><span class="s2">;</span>
+    <span class="s1">readonly NOT_SUPPORTED_ERR</span><span class="s2">: </span><span class="s7">9</span><span class="s2">;</span>
+    <span class="s1">readonly INUSE_ATTRIBUTE_ERR</span><span class="s2">: </span><span class="s7">10</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_STATE_ERR</span><span class="s2">: </span><span class="s7">11</span><span class="s2">;</span>
+    <span class="s1">readonly SYNTAX_ERR</span><span class="s2">: </span><span class="s7">12</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_MODIFICATION_ERR</span><span class="s2">: </span><span class="s7">13</span><span class="s2">;</span>
+    <span class="s1">readonly NAMESPACE_ERR</span><span class="s2">: </span><span class="s7">14</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_ACCESS_ERR</span><span class="s2">: </span><span class="s7">15</span><span class="s2">;</span>
+    <span class="s1">readonly VALIDATION_ERR</span><span class="s2">: </span><span class="s7">16</span><span class="s2">;</span>
+    <span class="s1">readonly TYPE_MISMATCH_ERR</span><span class="s2">: </span><span class="s7">17</span><span class="s2">;</span>
+    <span class="s1">readonly SECURITY_ERR</span><span class="s2">: </span><span class="s7">18</span><span class="s2">;</span>
+    <span class="s1">readonly NETWORK_ERR</span><span class="s2">: </span><span class="s7">19</span><span class="s2">;</span>
+    <span class="s1">readonly ABORT_ERR</span><span class="s2">: </span><span class="s7">20</span><span class="s2">;</span>
+    <span class="s1">readonly URL_MISMATCH_ERR</span><span class="s2">: </span><span class="s7">21</span><span class="s2">;</span>
+    <span class="s1">readonly QUOTA_EXCEEDED_ERR</span><span class="s2">: </span><span class="s7">22</span><span class="s2">;</span>
+    <span class="s1">readonly TIMEOUT_ERR</span><span class="s2">: </span><span class="s7">23</span><span class="s2">;</span>
+    <span class="s1">readonly INVALID_NODE_TYPE_ERR</span><span class="s2">: </span><span class="s7">24</span><span class="s2">;</span>
+    <span class="s1">readonly DATA_CLONE_ERR</span><span class="s2">: </span><span class="s7">25</span><span class="s2">;</span>
+<span class="s2">}</span>
+<span class="s3">// #endregion DOMException</span>
+
+<span class="s1">declare global </span><span class="s2">{</span>
+    <span class="s3">// Declare &quot;static&quot; methods in Error</span>
+    <span class="s0">interface </span><span class="s1">ErrorConstructor </span><span class="s2">{</span>
+        <span class="s5">/** Create .stack property on a target object */</span>
+        <span class="s1">captureStackTrace</span><span class="s2">(</span><span class="s1">targetObject</span><span class="s2">: </span><span class="s1">object</span><span class="s2">, </span><span class="s1">constructorOpt</span><span class="s2">?: </span><span class="s1">Function</span><span class="s2">): </span><span class="s0">void</span><span class="s2">;</span>
+
+        <span class="s5">/**</span>
+         <span class="s5">* Optional override for formatting stack traces</span>
+         <span class="s5">*</span>
+         <span class="s5">* </span><span class="s6">@see </span><span class="s5">https://v8.dev/docs/stack-trace-api#customizing-stack-traces</span>
+         <span class="s5">*/</span>
+        <span class="s1">prepareStackTrace</span><span class="s2">?: ((</span><span class="s1">err</span><span class="s2">: </span><span class="s1">Error</span><span class="s2">, </span><span class="s1">stackTraces</span><span class="s2">: </span><span class="s1">NodeJS</span><span class="s2">.</span><span class="s1">CallSite</span><span class="s2">[]) =&gt; </span><span class="s1">any</span><span class="s2">) | </span><span class="s1">undefined</span><span class="s2">;</span>
+
+        <span class="s1">stackTraceLimit</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">/*-----------------------------------------------* 
+    *                                               * 
+    *                   GLOBAL                      * 
+    *                                               * 
+    ------------------------------------------------*/</span>
+
+    <span class="s0">var </span><span class="s1">global</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis</span><span class="s2">;</span>
+
+    <span class="s0">var </span><span class="s1">process</span><span class="s2">: </span><span class="s1">NodeJS</span><span class="s2">.</span><span class="s1">Process</span><span class="s2">;</span>
+    <span class="s0">var </span><span class="s1">console</span><span class="s2">: </span><span class="s1">Console</span><span class="s2">;</span>
+
+    <span class="s0">interface </span><span class="s1">GCFunction </span><span class="s2">{</span>
+        <span class="s2">(</span><span class="s1">options</span><span class="s2">: {</span>
+            <span class="s1">execution</span><span class="s2">?: </span><span class="s4">&quot;sync&quot;</span><span class="s2">;</span>
+            <span class="s1">flavor</span><span class="s2">?: </span><span class="s4">&quot;regular&quot; </span><span class="s2">| </span><span class="s4">&quot;last-resort&quot;</span><span class="s2">;</span>
+            <span class="s1">type</span><span class="s2">?: </span><span class="s4">&quot;major-snapshot&quot; </span><span class="s2">| </span><span class="s4">&quot;major&quot; </span><span class="s2">| </span><span class="s4">&quot;minor&quot;</span><span class="s2">;</span>
+            <span class="s1">filename</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">;</span>
+        <span class="s2">}): </span><span class="s0">void</span><span class="s2">;</span>
+        <span class="s2">(</span><span class="s1">options</span><span class="s2">: {</span>
+            <span class="s1">execution</span><span class="s2">: </span><span class="s4">&quot;async&quot;</span><span class="s2">;</span>
+            <span class="s1">flavor</span><span class="s2">?: </span><span class="s4">&quot;regular&quot; </span><span class="s2">| </span><span class="s4">&quot;last-resort&quot;</span><span class="s2">;</span>
+            <span class="s1">type</span><span class="s2">?: </span><span class="s4">&quot;major-snapshot&quot; </span><span class="s2">| </span><span class="s4">&quot;major&quot; </span><span class="s2">| </span><span class="s4">&quot;minor&quot;</span><span class="s2">;</span>
+            <span class="s1">filename</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">;</span>
+        <span class="s2">}): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;;</span>
+        <span class="s2">(</span><span class="s1">options</span><span class="s2">?: </span><span class="s1">boolean</span><span class="s2">): </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s5">/**</span>
+     <span class="s5">* Only available if `--expose-gc` is passed to the process.</span>
+     <span class="s5">*/</span>
+    <span class="s0">var </span><span class="s1">gc</span><span class="s2">: </span><span class="s1">undefined </span><span class="s2">| </span><span class="s1">GCFunction</span><span class="s2">;</span>
+
+    <span class="s3">// #region borrowed</span>
+    <span class="s3">// from https://github.com/microsoft/TypeScript/blob/38da7c600c83e7b31193a62495239a0fe478cb67/lib/lib.webworker.d.ts#L633 until moved to separate lib</span>
+    <span class="s5">/** A controller object that allows you to abort one or more DOM requests as and when desired. */</span>
+    <span class="s0">interface </span><span class="s1">AbortController </span><span class="s2">{</span>
+        <span class="s5">/**</span>
+         <span class="s5">* Returns the AbortSignal object associated with this object.</span>
+         <span class="s5">*/</span>
+
+        <span class="s1">readonly signal</span><span class="s2">: </span><span class="s1">AbortSignal</span><span class="s2">;</span>
+        <span class="s5">/**</span>
+         <span class="s5">* Invoking this method will set this object's AbortSignal's aborted flag and signal to any observers that the associated activity is to be aborted.</span>
+         <span class="s5">*/</span>
+        <span class="s1">abort</span><span class="s2">(</span><span class="s1">reason</span><span class="s2">?: </span><span class="s1">any</span><span class="s2">): </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s5">/** A signal object that allows you to communicate with a DOM request (such as a Fetch) and abort it if required via an AbortController object. */</span>
+    <span class="s0">interface </span><span class="s1">AbortSignal </span><span class="s0">extends </span><span class="s1">EventTarget </span><span class="s2">{</span>
+        <span class="s5">/**</span>
+         <span class="s5">* Returns true if this AbortSignal's AbortController has signaled to abort, and false otherwise.</span>
+         <span class="s5">*/</span>
+        <span class="s1">readonly aborted</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+        <span class="s1">readonly reason</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+        <span class="s1">onabort</span><span class="s2">: </span><span class="s0">null </span><span class="s2">| ((</span><span class="s0">this</span><span class="s2">: </span><span class="s1">AbortSignal</span><span class="s2">, </span><span class="s1">event</span><span class="s2">: </span><span class="s1">Event</span><span class="s2">) =&gt; </span><span class="s1">any</span><span class="s2">);</span>
+        <span class="s1">throwIfAborted</span><span class="s2">(): </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">var </span><span class="s1">AbortController</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">; </span><span class="s1">AbortController</span><span class="s2">: </span><span class="s1">infer T </span><span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: {</span>
+            <span class="s1">prototype</span><span class="s2">: </span><span class="s1">AbortController</span><span class="s2">;</span>
+            <span class="s0">new</span><span class="s2">(): </span><span class="s1">AbortController</span><span class="s2">;</span>
+        <span class="s2">};</span>
+
+    <span class="s0">var </span><span class="s1">AbortSignal</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">; </span><span class="s1">AbortSignal</span><span class="s2">: </span><span class="s1">infer T </span><span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: {</span>
+            <span class="s1">prototype</span><span class="s2">: </span><span class="s1">AbortSignal</span><span class="s2">;</span>
+            <span class="s0">new</span><span class="s2">(): </span><span class="s1">AbortSignal</span><span class="s2">;</span>
+            <span class="s1">abort</span><span class="s2">(</span><span class="s1">reason</span><span class="s2">?: </span><span class="s1">any</span><span class="s2">): </span><span class="s1">AbortSignal</span><span class="s2">;</span>
+            <span class="s1">timeout</span><span class="s2">(</span><span class="s1">milliseconds</span><span class="s2">: </span><span class="s1">number</span><span class="s2">): </span><span class="s1">AbortSignal</span><span class="s2">;</span>
+            <span class="s1">any</span><span class="s2">(</span><span class="s1">signals</span><span class="s2">: </span><span class="s1">AbortSignal</span><span class="s2">[]): </span><span class="s1">AbortSignal</span><span class="s2">;</span>
+        <span class="s2">};</span>
+    <span class="s3">// #endregion borrowed</span>
+
+    <span class="s3">// #region Storage</span>
+    <span class="s5">/**</span>
+     <span class="s5">* This Web Storage API interface provides access to a particular domain's session or local storage. It allows, for example, the addition, modification, or deletion of stored data items.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Storage)</span>
+     <span class="s5">*/</span>
+    <span class="s0">interface </span><span class="s1">Storage </span><span class="s0">extends </span><span class="s1">_Storage </span><span class="s2">{}</span>
+
+    <span class="s3">// Conditional on `onabort` rather than `onmessage`, in order to exclude lib.webworker</span>
+    <span class="s0">var </span><span class="s1">Storage</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onabort</span><span class="s2">: </span><span class="s1">any</span><span class="s2">; </span><span class="s1">Storage</span><span class="s2">: </span><span class="s1">infer T </span><span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: {</span>
+            <span class="s1">prototype</span><span class="s2">: </span><span class="s1">Storage</span><span class="s2">;</span>
+            <span class="s0">new</span><span class="s2">(): </span><span class="s1">Storage</span><span class="s2">;</span>
+        <span class="s2">};</span>
+
+    <span class="s5">/**</span>
+     <span class="s5">* A browser-compatible implementation of [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage). Data is stored</span>
+     <span class="s5">* unencrypted in the file specified by the `--localstorage-file` CLI flag.</span>
+     <span class="s5">* The maximum amount of data that can be stored is 10 MB.</span>
+     <span class="s5">* Any modification of this data outside of the Web Storage API is not supported.</span>
+     <span class="s5">* Enable this API with the `--experimental-webstorage` CLI flag.</span>
+     <span class="s5">* `localStorage` data is not stored per user or per request when used in the context</span>
+     <span class="s5">* of a server, it is shared across all users and requests.</span>
+     <span class="s5">* </span><span class="s6">@since </span><span class="s5">v22.4.0</span>
+     <span class="s5">*/</span>
+    <span class="s0">var </span><span class="s1">localStorage</span><span class="s2">: </span><span class="s1">Storage</span><span class="s2">;</span>
+
+    <span class="s5">/**</span>
+     <span class="s5">* A browser-compatible implementation of [`sessionStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage). Data is stored in</span>
+     <span class="s5">* memory, with a storage quota of 10 MB. `sessionStorage` data persists only within</span>
+     <span class="s5">* the currently running process, and is not shared between workers.</span>
+     <span class="s5">* </span><span class="s6">@since </span><span class="s5">v22.4.0</span>
+     <span class="s5">*/</span>
+    <span class="s0">var </span><span class="s1">sessionStorage</span><span class="s2">: </span><span class="s1">Storage</span><span class="s2">;</span>
+    <span class="s3">// #endregion Storage</span>
+
+    <span class="s5">/**</span>
+     <span class="s5">* </span><span class="s6">@since </span><span class="s5">v17.0.0</span>
+     <span class="s5">*</span>
+     <span class="s5">* Creates a deep clone of an object.</span>
+     <span class="s5">*/</span>
+    <span class="s0">function </span><span class="s1">structuredClone</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;(</span>
+        <span class="s1">value</span><span class="s2">: </span><span class="s1">T</span><span class="s2">,</span>
+        <span class="s1">transfer</span><span class="s2">?: { </span><span class="s1">transfer</span><span class="s2">: </span><span class="s1">ReadonlyArray</span><span class="s2">&lt;</span><span class="s0">import</span><span class="s2">(</span><span class="s4">&quot;worker_threads&quot;</span><span class="s2">).</span><span class="s1">TransferListItem</span><span class="s2">&gt; },</span>
+    <span class="s2">): </span><span class="s1">T</span><span class="s2">;</span>
+
+    <span class="s3">// #region DOMException</span>
+    <span class="s5">/**</span>
+     <span class="s5">* </span><span class="s6">@since </span><span class="s5">v17.0.0</span>
+     <span class="s5">* An abnormal event (called an exception) which occurs as a result of calling a method or accessing a property of a web API.</span>
+     <span class="s5">*</span>
+     <span class="s5">* [MDN Reference](https://developer.mozilla.org/docs/Web/API/DOMException)</span>
+     <span class="s5">*/</span>
+    <span class="s0">interface </span><span class="s1">DOMException </span><span class="s0">extends </span><span class="s1">_DOMException </span><span class="s2">{}</span>
+
+    <span class="s5">/**</span>
+     <span class="s5">* </span><span class="s6">@since </span><span class="s5">v17.0.0</span>
+     <span class="s5">*</span>
+     <span class="s5">* The WHATWG `DOMException` class. See [DOMException](https://developer.mozilla.org/docs/Web/API/DOMException) for more details.</span>
+     <span class="s5">*/</span>
+    <span class="s0">var </span><span class="s1">DOMException</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">; </span><span class="s1">DOMException</span><span class="s2">: </span><span class="s1">infer T </span><span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s1">NodeDOMExceptionConstructor</span><span class="s2">;</span>
+    <span class="s3">// #endregion DOMException</span>
+
+    <span class="s3">/*----------------------------------------------* 
+    *                                               * 
+    *               GLOBAL INTERFACES               * 
+    *                                               * 
+    *-----------------------------------------------*/</span>
+    <span class="s1">namespace NodeJS </span><span class="s2">{</span>
+        <span class="s0">interface </span><span class="s1">CallSite </span><span class="s2">{</span>
+            <span class="s5">/**</span>
+             <span class="s5">* Value of &quot;this&quot;</span>
+             <span class="s5">*/</span>
+            <span class="s1">getThis</span><span class="s2">(): </span><span class="s1">unknown</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Type of &quot;this&quot; as a string.</span>
+             <span class="s5">* This is the name of the function stored in the constructor field of</span>
+             <span class="s5">* &quot;this&quot;, if available.  Otherwise the object's [[Class]] internal</span>
+             <span class="s5">* property.</span>
+             <span class="s5">*/</span>
+            <span class="s1">getTypeName</span><span class="s2">(): </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Current function</span>
+             <span class="s5">*/</span>
+            <span class="s1">getFunction</span><span class="s2">(): </span><span class="s1">Function </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Name of the current function, typically its name property.</span>
+             <span class="s5">* If a name property is not available an attempt will be made to try</span>
+             <span class="s5">* to infer a name from the function's context.</span>
+             <span class="s5">*/</span>
+            <span class="s1">getFunctionName</span><span class="s2">(): </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Name of the property [of &quot;this&quot; or one of its prototypes] that holds</span>
+             <span class="s5">* the current function</span>
+             <span class="s5">*/</span>
+            <span class="s1">getMethodName</span><span class="s2">(): </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Name of the script [if this function was defined in a script]</span>
+             <span class="s5">*/</span>
+            <span class="s1">getFileName</span><span class="s2">(): </span><span class="s1">string </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Current line number [if this function was defined in a script]</span>
+             <span class="s5">*/</span>
+            <span class="s1">getLineNumber</span><span class="s2">(): </span><span class="s1">number </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Current column number [if this function was defined in a script]</span>
+             <span class="s5">*/</span>
+            <span class="s1">getColumnNumber</span><span class="s2">(): </span><span class="s1">number </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* A call site object representing the location where eval was called</span>
+             <span class="s5">* [if this function was created using a call to eval]</span>
+             <span class="s5">*/</span>
+            <span class="s1">getEvalOrigin</span><span class="s2">(): </span><span class="s1">string </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Is this a toplevel invocation, that is, is &quot;this&quot; the global object?</span>
+             <span class="s5">*/</span>
+            <span class="s1">isToplevel</span><span class="s2">(): </span><span class="s1">boolean</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Does this call take place in code defined by a call to eval?</span>
+             <span class="s5">*/</span>
+            <span class="s1">isEval</span><span class="s2">(): </span><span class="s1">boolean</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Is this call in native V8 code?</span>
+             <span class="s5">*/</span>
+            <span class="s1">isNative</span><span class="s2">(): </span><span class="s1">boolean</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* Is this a constructor call?</span>
+             <span class="s5">*/</span>
+            <span class="s1">isConstructor</span><span class="s2">(): </span><span class="s1">boolean</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* is this an async call (i.e. await, Promise.all(), or Promise.any())?</span>
+             <span class="s5">*/</span>
+            <span class="s1">isAsync</span><span class="s2">(): </span><span class="s1">boolean</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* is this an async call to Promise.all()?</span>
+             <span class="s5">*/</span>
+            <span class="s1">isPromiseAll</span><span class="s2">(): </span><span class="s1">boolean</span><span class="s2">;</span>
+
+            <span class="s5">/**</span>
+             <span class="s5">* returns the index of the promise element that was followed in</span>
+             <span class="s5">* Promise.all() or Promise.any() for async stack traces, or null</span>
+             <span class="s5">* if the CallSite is not an async</span>
+             <span class="s5">*/</span>
+            <span class="s1">getPromiseIndex</span><span class="s2">(): </span><span class="s1">number </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+
+            <span class="s1">getScriptNameOrSourceURL</span><span class="s2">(): </span><span class="s1">string</span><span class="s2">;</span>
+            <span class="s1">getScriptHash</span><span class="s2">(): </span><span class="s1">string</span><span class="s2">;</span>
+
+            <span class="s1">getEnclosingColumnNumber</span><span class="s2">(): </span><span class="s1">number</span><span class="s2">;</span>
+            <span class="s1">getEnclosingLineNumber</span><span class="s2">(): </span><span class="s1">number</span><span class="s2">;</span>
+            <span class="s1">getPosition</span><span class="s2">(): </span><span class="s1">number</span><span class="s2">;</span>
+
+            <span class="s1">toString</span><span class="s2">(): </span><span class="s1">string</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">interface </span><span class="s1">ErrnoException </span><span class="s0">extends </span><span class="s1">Error </span><span class="s2">{</span>
+            <span class="s1">errno</span><span class="s2">?: </span><span class="s1">number </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+            <span class="s1">code</span><span class="s2">?: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+            <span class="s1">path</span><span class="s2">?: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+            <span class="s1">syscall</span><span class="s2">?: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">interface </span><span class="s1">ReadableStream </span><span class="s0">extends </span><span class="s1">EventEmitter </span><span class="s2">{</span>
+            <span class="s1">readable</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+            <span class="s1">read</span><span class="s2">(</span><span class="s1">size</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">): </span><span class="s1">string </span><span class="s2">| </span><span class="s1">Buffer</span><span class="s2">;</span>
+            <span class="s1">setEncoding</span><span class="s2">(</span><span class="s1">encoding</span><span class="s2">: </span><span class="s1">BufferEncoding</span><span class="s2">): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s1">pause</span><span class="s2">(): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s1">resume</span><span class="s2">(): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s1">isPaused</span><span class="s2">(): </span><span class="s1">boolean</span><span class="s2">;</span>
+            <span class="s1">pipe</span><span class="s2">&lt;</span><span class="s1">T </span><span class="s0">extends </span><span class="s1">WritableStream</span><span class="s2">&gt;(</span><span class="s1">destination</span><span class="s2">: </span><span class="s1">T</span><span class="s2">, </span><span class="s1">options</span><span class="s2">?: { </span><span class="s1">end</span><span class="s2">?: </span><span class="s1">boolean </span><span class="s2">| </span><span class="s1">undefined </span><span class="s2">}): </span><span class="s1">T</span><span class="s2">;</span>
+            <span class="s1">unpipe</span><span class="s2">(</span><span class="s1">destination</span><span class="s2">?: </span><span class="s1">WritableStream</span><span class="s2">): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s1">unshift</span><span class="s2">(</span><span class="s1">chunk</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">Uint8Array</span><span class="s2">, </span><span class="s1">encoding</span><span class="s2">?: </span><span class="s1">BufferEncoding</span><span class="s2">): </span><span class="s0">void</span><span class="s2">;</span>
+            <span class="s1">wrap</span><span class="s2">(</span><span class="s1">oldStream</span><span class="s2">: </span><span class="s1">ReadableStream</span><span class="s2">): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s2">[</span><span class="s1">Symbol</span><span class="s2">.</span><span class="s1">asyncIterator</span><span class="s2">](): </span><span class="s1">NodeJS</span><span class="s2">.</span><span class="s1">AsyncIterator</span><span class="s2">&lt;</span><span class="s1">string </span><span class="s2">| </span><span class="s1">Buffer</span><span class="s2">&gt;;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">interface </span><span class="s1">WritableStream </span><span class="s0">extends </span><span class="s1">EventEmitter </span><span class="s2">{</span>
+            <span class="s1">writable</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+            <span class="s1">write</span><span class="s2">(</span><span class="s1">buffer</span><span class="s2">: </span><span class="s1">Uint8Array </span><span class="s2">| </span><span class="s1">string</span><span class="s2">, </span><span class="s1">cb</span><span class="s2">?: (</span><span class="s1">err</span><span class="s2">?: </span><span class="s1">Error </span><span class="s2">| </span><span class="s0">null</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">): </span><span class="s1">boolean</span><span class="s2">;</span>
+            <span class="s1">write</span><span class="s2">(</span><span class="s1">str</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">encoding</span><span class="s2">?: </span><span class="s1">BufferEncoding</span><span class="s2">, </span><span class="s1">cb</span><span class="s2">?: (</span><span class="s1">err</span><span class="s2">?: </span><span class="s1">Error </span><span class="s2">| </span><span class="s0">null</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">): </span><span class="s1">boolean</span><span class="s2">;</span>
+            <span class="s1">end</span><span class="s2">(</span><span class="s1">cb</span><span class="s2">?: () =&gt; </span><span class="s0">void</span><span class="s2">): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s1">end</span><span class="s2">(</span><span class="s1">data</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">Uint8Array</span><span class="s2">, </span><span class="s1">cb</span><span class="s2">?: () =&gt; </span><span class="s0">void</span><span class="s2">): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s1">end</span><span class="s2">(</span><span class="s1">str</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">encoding</span><span class="s2">?: </span><span class="s1">BufferEncoding</span><span class="s2">, </span><span class="s1">cb</span><span class="s2">?: () =&gt; </span><span class="s0">void</span><span class="s2">): </span><span class="s0">this</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">interface </span><span class="s1">ReadWriteStream </span><span class="s0">extends </span><span class="s1">ReadableStream</span><span class="s2">, </span><span class="s1">WritableStream </span><span class="s2">{}</span>
+
+        <span class="s0">interface </span><span class="s1">RefCounted </span><span class="s2">{</span>
+            <span class="s1">ref</span><span class="s2">(): </span><span class="s0">this</span><span class="s2">;</span>
+            <span class="s1">unref</span><span class="s2">(): </span><span class="s0">this</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">interface </span><span class="s1">Dict</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; {</span>
+            <span class="s2">[</span><span class="s1">key</span><span class="s2">: </span><span class="s1">string</span><span class="s2">]: </span><span class="s1">T </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">interface </span><span class="s1">ReadOnlyDict</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; {</span>
+            <span class="s1">readonly </span><span class="s2">[</span><span class="s1">key</span><span class="s2">: </span><span class="s1">string</span><span class="s2">]: </span><span class="s1">T </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s5">/** An iterable iterator returned by the Node.js API. */</span>
+        <span class="s3">// Default TReturn/TNext in v22 is `any`, for compatibility with the previously-used IterableIterator.</span>
+        <span class="s3">// TODO: In next major @types/node version, change default TReturn to undefined.</span>
+        <span class="s0">interface </span><span class="s1">Iterator</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">, </span><span class="s1">TReturn </span><span class="s2">= </span><span class="s1">any</span><span class="s2">, </span><span class="s1">TNext </span><span class="s2">= </span><span class="s1">any</span><span class="s2">&gt; </span><span class="s0">extends </span><span class="s1">IteratorObject</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">, </span><span class="s1">TReturn</span><span class="s2">, </span><span class="s1">TNext</span><span class="s2">&gt; {</span>
+            <span class="s2">[</span><span class="s1">Symbol</span><span class="s2">.</span><span class="s1">iterator</span><span class="s2">](): </span><span class="s1">NodeJS</span><span class="s2">.</span><span class="s1">Iterator</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">, </span><span class="s1">TReturn</span><span class="s2">, </span><span class="s1">TNext</span><span class="s2">&gt;;</span>
+        <span class="s2">}</span>
+
+        <span class="s5">/** An async iterable iterator returned by the Node.js API. */</span>
+        <span class="s3">// Default TReturn/TNext in v22 is `any`, for compatibility with the previously-used AsyncIterableIterator.</span>
+        <span class="s3">// TODO: In next major @types/node version, change default TReturn to undefined.</span>
+        <span class="s0">interface </span><span class="s1">AsyncIterator</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">, </span><span class="s1">TReturn </span><span class="s2">= </span><span class="s1">any</span><span class="s2">, </span><span class="s1">TNext </span><span class="s2">= </span><span class="s1">any</span><span class="s2">&gt; </span><span class="s0">extends </span><span class="s1">AsyncIteratorObject</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">, </span><span class="s1">TReturn</span><span class="s2">, </span><span class="s1">TNext</span><span class="s2">&gt; {</span>
+            <span class="s2">[</span><span class="s1">Symbol</span><span class="s2">.</span><span class="s1">asyncIterator</span><span class="s2">](): </span><span class="s1">NodeJS</span><span class="s2">.</span><span class="s1">AsyncIterator</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">, </span><span class="s1">TReturn</span><span class="s2">, </span><span class="s1">TNext</span><span class="s2">&gt;;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">interface </span><span class="s1">RequestInit </span><span class="s0">extends </span><span class="s1">_RequestInit </span><span class="s2">{}</span>
+
+    <span class="s0">function </span><span class="s1">fetch</span><span class="s2">(</span>
+        <span class="s1">input</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL </span><span class="s2">| </span><span class="s1">globalThis</span><span class="s2">.</span><span class="s1">Request</span><span class="s2">,</span>
+        <span class="s1">init</span><span class="s2">?: </span><span class="s1">RequestInit</span><span class="s2">,</span>
+    <span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Response</span><span class="s2">&gt;;</span>
+
+    <span class="s0">interface </span><span class="s1">Request </span><span class="s0">extends </span><span class="s1">_Request </span><span class="s2">{}</span>
+    <span class="s0">var </span><span class="s1">Request</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{</span>
+        <span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+        <span class="s1">Request</span><span class="s2">: </span><span class="s1">infer T</span><span class="s2">;</span>
+    <span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s0">typeof import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">Request</span><span class="s2">;</span>
+
+    <span class="s0">interface </span><span class="s1">ResponseInit </span><span class="s0">extends </span><span class="s1">_ResponseInit </span><span class="s2">{}</span>
+
+    <span class="s0">interface </span><span class="s1">Response </span><span class="s0">extends </span><span class="s1">_Response </span><span class="s2">{}</span>
+    <span class="s0">var </span><span class="s1">Response</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{</span>
+        <span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+        <span class="s1">Response</span><span class="s2">: </span><span class="s1">infer T</span><span class="s2">;</span>
+    <span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s0">typeof import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">Response</span><span class="s2">;</span>
+
+    <span class="s0">interface </span><span class="s1">FormData </span><span class="s0">extends </span><span class="s1">_FormData </span><span class="s2">{}</span>
+    <span class="s0">var </span><span class="s1">FormData</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{</span>
+        <span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+        <span class="s1">FormData</span><span class="s2">: </span><span class="s1">infer T</span><span class="s2">;</span>
+    <span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s0">typeof import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">FormData</span><span class="s2">;</span>
+
+    <span class="s0">interface </span><span class="s1">Headers </span><span class="s0">extends </span><span class="s1">_Headers </span><span class="s2">{}</span>
+    <span class="s0">var </span><span class="s1">Headers</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{</span>
+        <span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+        <span class="s1">Headers</span><span class="s2">: </span><span class="s1">infer T</span><span class="s2">;</span>
+    <span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s0">typeof import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">Headers</span><span class="s2">;</span>
+
+    <span class="s0">interface </span><span class="s1">MessageEvent </span><span class="s0">extends </span><span class="s1">_MessageEvent </span><span class="s2">{}</span>
+    <span class="s5">/**</span>
+     <span class="s5">* </span><span class="s6">@since </span><span class="s5">v15.0.0</span>
+     <span class="s5">*/</span>
+    <span class="s0">var </span><span class="s1">MessageEvent</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{</span>
+        <span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+        <span class="s1">MessageEvent</span><span class="s2">: </span><span class="s1">infer T</span><span class="s2">;</span>
+    <span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s0">typeof import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">MessageEvent</span><span class="s2">;</span>
+
+    <span class="s0">interface </span><span class="s1">WebSocket </span><span class="s0">extends </span><span class="s1">_WebSocket </span><span class="s2">{}</span>
+    <span class="s0">var </span><span class="s1">WebSocket</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">; </span><span class="s1">WebSocket</span><span class="s2">: </span><span class="s1">infer T </span><span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s0">typeof import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">WebSocket</span><span class="s2">;</span>
+
+    <span class="s0">interface </span><span class="s1">EventSource </span><span class="s0">extends </span><span class="s1">_EventSource </span><span class="s2">{}</span>
+    <span class="s5">/**</span>
+     <span class="s5">* Only available through the [--experimental-eventsource](https://nodejs.org/api/cli.html#--experimental-eventsource) flag.</span>
+     <span class="s5">*</span>
+     <span class="s5">* </span><span class="s6">@since </span><span class="s5">v22.3.0</span>
+     <span class="s5">*/</span>
+    <span class="s0">var </span><span class="s1">EventSource</span><span class="s2">: </span><span class="s0">typeof </span><span class="s1">globalThis </span><span class="s0">extends </span><span class="s2">{ </span><span class="s1">onmessage</span><span class="s2">: </span><span class="s1">any</span><span class="s2">; </span><span class="s1">EventSource</span><span class="s2">: </span><span class="s1">infer T </span><span class="s2">} ? </span><span class="s1">T</span>
+        <span class="s2">: </span><span class="s0">typeof import</span><span class="s2">(</span><span class="s4">&quot;undici-types&quot;</span><span class="s2">).</span><span class="s1">EventSource</span><span class="s2">;</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

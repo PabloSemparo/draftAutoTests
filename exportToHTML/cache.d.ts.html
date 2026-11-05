@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>cache.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+cache.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">type </span><span class="s2">{ </span><span class="s1">RequestInfo</span><span class="s2">, </span><span class="s1">Response</span><span class="s2">, </span><span class="s1">Request </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./fetch'</span>
+
+<span class="s0">export interface </span><span class="s1">CacheStorage </span><span class="s2">{</span>
+  <span class="s1">match </span><span class="s2">(</span><span class="s1">request</span><span class="s2">: </span><span class="s1">RequestInfo</span><span class="s2">, </span><span class="s1">options</span><span class="s2">?: </span><span class="s1">MultiCacheQueryOptions</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Response </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">&gt;,</span>
+  <span class="s1">has </span><span class="s2">(</span><span class="s1">cacheName</span><span class="s2">: </span><span class="s1">string</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">boolean</span><span class="s2">&gt;,</span>
+  <span class="s1">open </span><span class="s2">(</span><span class="s1">cacheName</span><span class="s2">: </span><span class="s1">string</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Cache</span><span class="s2">&gt;,</span>
+  <span class="s0">delete </span><span class="s2">(</span><span class="s1">cacheName</span><span class="s2">: </span><span class="s1">string</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">boolean</span><span class="s2">&gt;,</span>
+  <span class="s1">keys </span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">[]&gt;</span>
+<span class="s2">}</span>
+
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">CacheStorage</span><span class="s2">: {</span>
+  <span class="s1">prototype</span><span class="s2">: </span><span class="s1">CacheStorage</span>
+  <span class="s0">new</span><span class="s2">(): </span><span class="s1">CacheStorage</span>
+<span class="s2">}</span>
+
+<span class="s0">export interface </span><span class="s1">Cache </span><span class="s2">{</span>
+  <span class="s1">match </span><span class="s2">(</span><span class="s1">request</span><span class="s2">: </span><span class="s1">RequestInfo</span><span class="s2">, </span><span class="s1">options</span><span class="s2">?: </span><span class="s1">CacheQueryOptions</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Response </span><span class="s2">| </span><span class="s1">undefined</span><span class="s2">&gt;,</span>
+  <span class="s1">matchAll </span><span class="s2">(</span><span class="s1">request</span><span class="s2">?: </span><span class="s1">RequestInfo</span><span class="s2">, </span><span class="s1">options</span><span class="s2">?: </span><span class="s1">CacheQueryOptions</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">readonly Response</span><span class="s2">[]&gt;,</span>
+  <span class="s1">add </span><span class="s2">(</span><span class="s1">request</span><span class="s2">: </span><span class="s1">RequestInfo</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">undefined</span><span class="s2">&gt;,</span>
+  <span class="s1">addAll </span><span class="s2">(</span><span class="s1">requests</span><span class="s2">: </span><span class="s1">RequestInfo</span><span class="s2">[]): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">undefined</span><span class="s2">&gt;,</span>
+  <span class="s1">put </span><span class="s2">(</span><span class="s1">request</span><span class="s2">: </span><span class="s1">RequestInfo</span><span class="s2">, </span><span class="s1">response</span><span class="s2">: </span><span class="s1">Response</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">undefined</span><span class="s2">&gt;,</span>
+  <span class="s0">delete </span><span class="s2">(</span><span class="s1">request</span><span class="s2">: </span><span class="s1">RequestInfo</span><span class="s2">, </span><span class="s1">options</span><span class="s2">?: </span><span class="s1">CacheQueryOptions</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">boolean</span><span class="s2">&gt;,</span>
+  <span class="s1">keys </span><span class="s2">(</span><span class="s1">request</span><span class="s2">?: </span><span class="s1">RequestInfo</span><span class="s2">, </span><span class="s1">options</span><span class="s2">?: </span><span class="s1">CacheQueryOptions</span><span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">readonly Request</span><span class="s2">[]&gt;</span>
+<span class="s2">}</span>
+
+<span class="s0">export interface </span><span class="s1">CacheQueryOptions </span><span class="s2">{</span>
+  <span class="s1">ignoreSearch</span><span class="s2">?: </span><span class="s1">boolean</span><span class="s2">,</span>
+  <span class="s1">ignoreMethod</span><span class="s2">?: </span><span class="s1">boolean</span><span class="s2">,</span>
+  <span class="s1">ignoreVary</span><span class="s2">?: </span><span class="s1">boolean</span>
+<span class="s2">}</span>
+
+<span class="s0">export interface </span><span class="s1">MultiCacheQueryOptions </span><span class="s0">extends </span><span class="s1">CacheQueryOptions </span><span class="s2">{</span>
+  <span class="s1">cacheName</span><span class="s2">?: </span><span class="s1">string</span>
+<span class="s2">}</span>
+
+<span class="s0">export </span><span class="s1">declare </span><span class="s0">const </span><span class="s1">caches</span><span class="s2">: </span><span class="s1">CacheStorage</span>
+</pre>
+</body>
+</html>

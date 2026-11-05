@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>content-type.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+.s6 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+content-type.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+
+<span class="s2">interface </span><span class="s1">MIMEType </span><span class="s3">{</span>
+  <span class="s1">type</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">subtype</span><span class="s3">: </span><span class="s1">string</span>
+  <span class="s1">parameters</span><span class="s3">: </span><span class="s1">Map</span><span class="s3">&lt;</span><span class="s1">string</span><span class="s3">, </span><span class="s1">string</span><span class="s3">&gt;</span>
+  <span class="s1">essence</span><span class="s3">: </span><span class="s1">string</span>
+<span class="s3">}</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* Parse a string to a {</span><span class="s5">@link </span><span class="s4">MIMEType} object. Returns `failure` if the string</span>
+ <span class="s4">* couldn't be parsed.</span>
+ <span class="s4">* </span><span class="s5">@see </span><span class="s4">https://mimesniff.spec.whatwg.org/#parse-a-mime-type</span>
+ <span class="s4">*/</span>
+<span class="s2">export function </span><span class="s1">parseMIMEType </span><span class="s3">(</span><span class="s1">input</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s6">'failure' </span><span class="s3">| </span><span class="s1">MIMEType</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* Convert a MIMEType object to a string.</span>
+ <span class="s4">* </span><span class="s5">@see </span><span class="s4">https://mimesniff.spec.whatwg.org/#serialize-a-mime-type</span>
+ <span class="s4">*/</span>
+<span class="s2">export function </span><span class="s1">serializeAMimeType </span><span class="s3">(</span><span class="s1">mimeType</span><span class="s3">: </span><span class="s1">MIMEType</span><span class="s3">): </span><span class="s1">string</span>
+</pre>
+</body>
+</html>

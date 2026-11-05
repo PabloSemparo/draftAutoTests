@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>package.json</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+package.json</font>
+</center></td></tr></table>
+<pre><span class="s0">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="s0">: </span><span class="s2">&quot;json-schema-traverse&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="s0">: </span><span class="s2">&quot;1.0.0&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="s0">: </span><span class="s2">&quot;Traverse JSON Schema passing each schema object to callback&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;main&quot;</span><span class="s0">: </span><span class="s2">&quot;index.js&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;types&quot;</span><span class="s0">: </span><span class="s2">&quot;index.d.ts&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;scripts&quot;</span><span class="s0">: {</span>
+    <span class="s2">&quot;eslint&quot;</span><span class="s0">: </span><span class="s2">&quot;eslint index.js spec&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;test-spec&quot;</span><span class="s0">: </span><span class="s2">&quot;mocha spec -R spec&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;test&quot;</span><span class="s0">: </span><span class="s2">&quot;npm run eslint &amp;&amp; nyc npm run test-spec&quot;</span>
+  <span class="s0">},</span>
+  <span class="s2">&quot;repository&quot;</span><span class="s0">: {</span>
+    <span class="s2">&quot;type&quot;</span><span class="s0">: </span><span class="s2">&quot;git&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;url&quot;</span><span class="s0">: </span><span class="s2">&quot;git+https://github.com/epoberezkin/json-schema-traverse.git&quot;</span>
+  <span class="s0">},</span>
+  <span class="s2">&quot;keywords&quot;</span><span class="s0">: [</span>
+    <span class="s2">&quot;JSON-Schema&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;traverse&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;iterate&quot;</span>
+  <span class="s0">],</span>
+  <span class="s2">&quot;author&quot;</span><span class="s0">: </span><span class="s2">&quot;Evgeny Poberezkin&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;license&quot;</span><span class="s0">: </span><span class="s2">&quot;MIT&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;bugs&quot;</span><span class="s0">: {</span>
+    <span class="s2">&quot;url&quot;</span><span class="s0">: </span><span class="s2">&quot;https://github.com/epoberezkin/json-schema-traverse/issues&quot;</span>
+  <span class="s0">},</span>
+  <span class="s2">&quot;homepage&quot;</span><span class="s0">: </span><span class="s2">&quot;https://github.com/epoberezkin/json-schema-traverse#readme&quot;</span><span class="s0">,</span>
+  <span class="s2">&quot;devDependencies&quot;</span><span class="s0">: {</span>
+    <span class="s2">&quot;eslint&quot;</span><span class="s0">: </span><span class="s2">&quot;^7.3.1&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;mocha&quot;</span><span class="s0">: </span><span class="s2">&quot;^8.0.1&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;nyc&quot;</span><span class="s0">: </span><span class="s2">&quot;^15.0.0&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;pre-commit&quot;</span><span class="s0">: </span><span class="s2">&quot;^1.2.2&quot;</span>
+  <span class="s0">},</span>
+  <span class="s2">&quot;nyc&quot;</span><span class="s0">: {</span>
+    <span class="s2">&quot;exclude&quot;</span><span class="s0">: [</span>
+      <span class="s2">&quot;**/spec/**&quot;</span><span class="s0">,</span>
+      <span class="s2">&quot;node_modules&quot;</span>
+    <span class="s0">],</span>
+    <span class="s2">&quot;reporter&quot;</span><span class="s0">: [</span>
+      <span class="s2">&quot;lcov&quot;</span><span class="s0">,</span>
+      <span class="s2">&quot;text-summary&quot;</span>
+    <span class="s0">]</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+</pre>
+</body>
+</html>

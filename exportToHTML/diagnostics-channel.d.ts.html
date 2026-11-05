@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>diagnostics-channel.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+diagnostics-channel.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Socket </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;net&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">URL </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;url&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">Connector from </span><span class="s3">&quot;./connector&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s3">&quot;./dispatcher&quot;</span><span class="s2">;</span>
+
+<span class="s1">declare namespace DiagnosticsChannel </span><span class="s2">{</span>
+  <span class="s0">interface </span><span class="s1">Request </span><span class="s2">{</span>
+    <span class="s1">origin</span><span class="s2">?: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL</span><span class="s2">;</span>
+    <span class="s1">completed</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+    <span class="s1">method</span><span class="s2">?: </span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">HttpMethod</span><span class="s2">;</span>
+    <span class="s1">path</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">headers</span><span class="s2">: </span><span class="s1">any</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">interface </span><span class="s1">Response </span><span class="s2">{</span>
+    <span class="s1">statusCode</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s1">statusText</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">headers</span><span class="s2">: </span><span class="s1">Array</span><span class="s2">&lt;</span><span class="s1">Buffer</span><span class="s2">&gt;;</span>
+  <span class="s2">}</span>
+  <span class="s1">type Error </span><span class="s2">= </span><span class="s1">unknown</span><span class="s2">;</span>
+  <span class="s0">interface </span><span class="s1">ConnectParams </span><span class="s2">{</span>
+    <span class="s1">host</span><span class="s2">: </span><span class="s1">URL</span><span class="s2">[</span><span class="s3">&quot;host&quot;</span><span class="s2">];</span>
+    <span class="s1">hostname</span><span class="s2">: </span><span class="s1">URL</span><span class="s2">[</span><span class="s3">&quot;hostname&quot;</span><span class="s2">];</span>
+    <span class="s1">protocol</span><span class="s2">: </span><span class="s1">URL</span><span class="s2">[</span><span class="s3">&quot;protocol&quot;</span><span class="s2">];</span>
+    <span class="s1">port</span><span class="s2">: </span><span class="s1">URL</span><span class="s2">[</span><span class="s3">&quot;port&quot;</span><span class="s2">];</span>
+    <span class="s1">servername</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s0">null</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s1">type Connector </span><span class="s2">= </span><span class="s1">Connector</span><span class="s2">.</span><span class="s1">connector</span><span class="s2">;</span>
+  <span class="s0">export interface </span><span class="s1">RequestCreateMessage </span><span class="s2">{</span>
+    <span class="s1">request</span><span class="s2">: </span><span class="s1">Request</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">RequestBodySentMessage </span><span class="s2">{</span>
+    <span class="s1">request</span><span class="s2">: </span><span class="s1">Request</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">RequestHeadersMessage </span><span class="s2">{</span>
+    <span class="s1">request</span><span class="s2">: </span><span class="s1">Request</span><span class="s2">;</span>
+    <span class="s1">response</span><span class="s2">: </span><span class="s1">Response</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">RequestTrailersMessage </span><span class="s2">{</span>
+    <span class="s1">request</span><span class="s2">: </span><span class="s1">Request</span><span class="s2">;</span>
+    <span class="s1">trailers</span><span class="s2">: </span><span class="s1">Array</span><span class="s2">&lt;</span><span class="s1">Buffer</span><span class="s2">&gt;;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">RequestErrorMessage </span><span class="s2">{</span>
+    <span class="s1">request</span><span class="s2">: </span><span class="s1">Request</span><span class="s2">;</span>
+    <span class="s1">error</span><span class="s2">: </span><span class="s1">Error</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">ClientSendHeadersMessage </span><span class="s2">{</span>
+    <span class="s1">request</span><span class="s2">: </span><span class="s1">Request</span><span class="s2">;</span>
+    <span class="s1">headers</span><span class="s2">: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s1">socket</span><span class="s2">: </span><span class="s1">Socket</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">ClientBeforeConnectMessage </span><span class="s2">{</span>
+    <span class="s1">connectParams</span><span class="s2">: </span><span class="s1">ConnectParams</span><span class="s2">;</span>
+    <span class="s1">connector</span><span class="s2">: </span><span class="s1">Connector</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">ClientConnectedMessage </span><span class="s2">{</span>
+    <span class="s1">socket</span><span class="s2">: </span><span class="s1">Socket</span><span class="s2">;</span>
+    <span class="s1">connectParams</span><span class="s2">: </span><span class="s1">ConnectParams</span><span class="s2">;</span>
+    <span class="s1">connector</span><span class="s2">: </span><span class="s1">Connector</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">ClientConnectErrorMessage </span><span class="s2">{</span>
+    <span class="s1">error</span><span class="s2">: </span><span class="s1">Error</span><span class="s2">;</span>
+    <span class="s1">socket</span><span class="s2">: </span><span class="s1">Socket</span><span class="s2">;</span>
+    <span class="s1">connectParams</span><span class="s2">: </span><span class="s1">ConnectParams</span><span class="s2">;</span>
+    <span class="s1">connector</span><span class="s2">: </span><span class="s1">Connector</span><span class="s2">;</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

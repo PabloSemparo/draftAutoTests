@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>send-allure-report.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+send-allure-report.js</font>
+</center></td></tr></table>
+<pre><span class="s0">// scripts/send-allure-report.js</span>
+<span class="s2">const </span><span class="s1">nodemailer </span><span class="s3">= </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'nodemailer'</span><span class="s3">);</span>
+<span class="s2">const </span><span class="s1">fs </span><span class="s3">= </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'fs'</span><span class="s3">);</span>
+<span class="s2">const </span><span class="s1">path </span><span class="s3">= </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'path'</span><span class="s3">);</span>
+
+<span class="s1">async </span><span class="s2">function </span><span class="s1">sendAllureReport</span><span class="s3">() {</span>
+    <span class="s2">const </span><span class="s1">transporter </span><span class="s3">= </span><span class="s1">nodemailer</span><span class="s3">.</span><span class="s1">createTransport</span><span class="s3">({</span>
+        <span class="s1">host</span><span class="s3">: </span><span class="s4">'smtp.office365.com'</span><span class="s3">,</span>
+        <span class="s1">port</span><span class="s3">: </span><span class="s5">587</span><span class="s3">,</span>
+        <span class="s1">secure</span><span class="s3">: </span><span class="s2">false</span><span class="s3">,</span>
+        <span class="s1">auth</span><span class="s3">: {</span>
+            <span class="s1">user</span><span class="s3">: </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">OUTLOOK_EMAIL</span><span class="s3">,</span>
+            <span class="s1">pass</span><span class="s3">: </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">OUTLOOK_PASSWORD</span>
+        <span class="s3">}</span>
+    <span class="s3">});</span>
+
+    <span class="s0">// Читаем Allure отчет</span>
+    <span class="s2">const </span><span class="s1">reportPath </span><span class="s3">= </span><span class="s1">path</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s1">__dirname</span><span class="s3">, </span><span class="s4">'../test-results/index.html'</span><span class="s3">);</span>
+    <span class="s2">const </span><span class="s1">reportContent </span><span class="s3">= </span><span class="s1">fs</span><span class="s3">.</span><span class="s1">readFileSync</span><span class="s3">(</span><span class="s1">reportPath</span><span class="s3">, </span><span class="s4">'utf8'</span><span class="s3">);</span>
+
+    <span class="s2">const </span><span class="s1">mailOptions </span><span class="s3">= {</span>
+        <span class="s1">from</span><span class="s3">: </span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">OUTLOOK_EMAIL</span><span class="s3">,</span>
+        <span class="s1">to</span><span class="s3">: </span><span class="s4">'team@company.com'</span><span class="s3">,</span>
+        <span class="s1">subject</span><span class="s3">: </span><span class="s4">`Allure Report - API Tests - </span><span class="s1">$</span><span class="s3">{</span><span class="s2">new </span><span class="s1">Date</span><span class="s3">().</span><span class="s1">toLocaleDateString</span><span class="s3">()}</span><span class="s4">`</span><span class="s3">,</span>
+        <span class="s1">html</span><span class="s3">: </span><span class="s4">`</span>
+      <span class="s4">&lt;h2&gt;Allure Report - Результаты тестирования API&lt;/h2&gt; 
+      &lt;p&gt;Отчет тестирования API пакетов документов прикреплен к этому письму.&lt;/p&gt; 
+      &lt;p&gt;Для просмотра детальной информации откройте прикрепленный HTML файл в браузере.&lt;/p&gt; 
+    `</span><span class="s3">,</span>
+        <span class="s1">attachments</span><span class="s3">: [</span>
+            <span class="s3">{</span>
+                <span class="s1">filename</span><span class="s3">: </span><span class="s4">'allure-report.html'</span><span class="s3">,</span>
+                <span class="s1">content</span><span class="s3">: </span><span class="s1">reportContent</span>
+            <span class="s3">}</span>
+        <span class="s3">]</span>
+    <span class="s3">};</span>
+
+    <span class="s2">try </span><span class="s3">{</span>
+        <span class="s2">await </span><span class="s1">transporter</span><span class="s3">.</span><span class="s1">sendMail</span><span class="s3">(</span><span class="s1">mailOptions</span><span class="s3">);</span>
+        <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'Allure report отправлен на email'</span><span class="s3">);</span>
+    <span class="s3">} </span><span class="s2">catch </span><span class="s3">(</span><span class="s1">error</span><span class="s3">) {</span>
+        <span class="s1">console</span><span class="s3">.</span><span class="s1">error</span><span class="s3">(</span><span class="s4">'Ошибка отправки отчета:'</span><span class="s3">, </span><span class="s1">error</span><span class="s3">);</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+
+<span class="s1">sendAllureReport</span><span class="s3">();</span></pre>
+</body>
+</html>

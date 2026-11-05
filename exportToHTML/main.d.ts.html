@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>main.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #5f826b; font-style: italic;}
+.s6 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">// TypeScript Version: 3.0</span>
+<span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+<span class="s2">import </span><span class="s1">type </span><span class="s3">{ </span><span class="s1">URL </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'url'</span><span class="s3">;</span>
+
+<span class="s2">export interface </span><span class="s1">DotenvParseOutput </span><span class="s3">{</span>
+  <span class="s3">[</span><span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">]: </span><span class="s1">string</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s5">/**</span>
+ <span class="s5">* Parses a string or buffer in the .env file format into an object.</span>
+ <span class="s5">*</span>
+ <span class="s5">* See https://dotenvx.com/docs</span>
+ <span class="s5">*</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">src - contents to be parsed. example: `'DB_HOST=localhost'`</span>
+ <span class="s5">* </span><span class="s6">@returns </span><span class="s5">an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`</span>
+ <span class="s5">*/</span>
+<span class="s2">export function </span><span class="s1">parse</span><span class="s3">&lt;</span><span class="s1">T </span><span class="s2">extends </span><span class="s1">DotenvParseOutput </span><span class="s3">= </span><span class="s1">DotenvParseOutput</span><span class="s3">&gt;(</span>
+  <span class="s1">src</span><span class="s3">: </span><span class="s1">string </span><span class="s3">| </span><span class="s1">Buffer</span>
+<span class="s3">): </span><span class="s1">T</span><span class="s3">;</span>
+
+<span class="s2">export interface </span><span class="s1">DotenvConfigOptions </span><span class="s3">{</span>
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `path.resolve(process.cwd(), '.env')`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Specify a custom path if your file containing environment variables is located elsewhere.</span>
+   <span class="s5">* Can also be an array of strings, specifying multiple paths.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `require('dotenv').config({ path: '/custom/path/to/.env' })`</span>
+   <span class="s5">* example: `require('dotenv').config({ path: ['/path/to/first.env', '/path/to/second.env'] })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">path</span><span class="s3">?: </span><span class="s1">string </span><span class="s3">| </span><span class="s1">string</span><span class="s3">[] | </span><span class="s1">URL</span><span class="s3">;</span>
+
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `utf8`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Specify the encoding of your file containing environment variables.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `require('dotenv').config({ encoding: 'latin1' })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">encoding</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">;</span>
+
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `false`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Turn on logging to help debug why certain keys or values are not being set as you expect.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `require('dotenv').config({ debug: process.env.DEBUG })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">debug</span><span class="s3">?: </span><span class="s1">boolean</span><span class="s3">;</span>
+
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `false`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Override any environment variables that have already been set on your machine with values from your .env file.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `require('dotenv').config({ override: true })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">override</span><span class="s3">?: </span><span class="s1">boolean</span><span class="s3">;</span>
+
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `process.env`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Specify an object to write your secrets to. Defaults to process.env environment variables.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `const processEnv = {}; require('dotenv').config({ processEnv: processEnv })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">processEnv</span><span class="s3">?: </span><span class="s1">DotenvPopulateInput</span><span class="s3">;</span>
+
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `undefined`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Pass the DOTENV_KEY directly to config options. Defaults to looking for process.env.DOTENV_KEY environment variable. Note this only applies to decrypting .env.vault files. If passed as null or undefined, or not passed at all, dotenv falls back to its traditional job of parsing a .env file.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production' })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">DOTENV_KEY</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">DotenvConfigOutput </span><span class="s3">{</span>
+  <span class="s1">error</span><span class="s3">?: </span><span class="s1">Error</span><span class="s3">;</span>
+  <span class="s1">parsed</span><span class="s3">?: </span><span class="s1">DotenvParseOutput</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">DotenvPopulateOptions </span><span class="s3">{</span>
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `false`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Turn on logging to help debug why certain keys or values are not being set as you expect.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `require('dotenv').config({ debug: process.env.DEBUG })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">debug</span><span class="s3">?: </span><span class="s1">boolean</span><span class="s3">;</span>
+
+  <span class="s5">/**</span>
+   <span class="s5">* Default: `false`</span>
+   <span class="s5">*</span>
+   <span class="s5">* Override any environment variables that have already been set on your machine with values from your .env file.</span>
+   <span class="s5">*</span>
+   <span class="s5">* example: `require('dotenv').config({ override: true })`</span>
+   <span class="s5">*/</span>
+  <span class="s1">override</span><span class="s3">?: </span><span class="s1">boolean</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s2">export interface </span><span class="s1">DotenvPopulateInput </span><span class="s3">{</span>
+  <span class="s3">[</span><span class="s1">name</span><span class="s3">: </span><span class="s1">string</span><span class="s3">]: </span><span class="s1">string</span><span class="s3">;</span>
+<span class="s3">}</span>
+
+<span class="s5">/**</span>
+ <span class="s5">* Loads `.env` file contents into process.env by default. If `DOTENV_KEY` is present, it smartly attempts to load encrypted `.env.vault` file contents into process.env.</span>
+ <span class="s5">*</span>
+ <span class="s5">* See https://dotenvx.com/docs</span>
+ <span class="s5">*</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`</span>
+ <span class="s5">* </span><span class="s6">@returns </span><span class="s5">an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }</span>
+ <span class="s5">*</span>
+ <span class="s5">*/</span>
+<span class="s2">export function </span><span class="s1">config</span><span class="s3">(</span><span class="s1">options</span><span class="s3">?: </span><span class="s1">DotenvConfigOptions</span><span class="s3">): </span><span class="s1">DotenvConfigOutput</span><span class="s3">;</span>
+
+<span class="s5">/**</span>
+ <span class="s5">* Loads `.env` file contents into process.env.</span>
+ <span class="s5">*</span>
+ <span class="s5">* See https://dotenvx.com/docs</span>
+ <span class="s5">*</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`</span>
+ <span class="s5">* </span><span class="s6">@returns </span><span class="s5">an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }</span>
+ <span class="s5">*</span>
+ <span class="s5">*/</span>
+<span class="s2">export function </span><span class="s1">configDotenv</span><span class="s3">(</span><span class="s1">options</span><span class="s3">?: </span><span class="s1">DotenvConfigOptions</span><span class="s3">): </span><span class="s1">DotenvConfigOutput</span><span class="s3">;</span>
+
+<span class="s5">/**</span>
+ <span class="s5">* Loads `source` json contents into `target` like process.env.</span>
+ <span class="s5">*</span>
+ <span class="s5">* See https://dotenvx.com/docs</span>
+ <span class="s5">*</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">processEnv - the target JSON object. in most cases use process.env but you can also pass your own JSON object</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">parsed - the source JSON object</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">options - additional options. example: `{ debug: true, override: false }`</span>
+ <span class="s5">* </span><span class="s6">@returns </span><span class="s5">{void}</span>
+ <span class="s5">*</span>
+ <span class="s5">*/</span>
+<span class="s2">export function </span><span class="s1">populate</span><span class="s3">(</span><span class="s1">processEnv</span><span class="s3">: </span><span class="s1">DotenvPopulateInput</span><span class="s3">, </span><span class="s1">parsed</span><span class="s3">: </span><span class="s1">DotenvPopulateInput</span><span class="s3">, </span><span class="s1">options</span><span class="s3">?: </span><span class="s1">DotenvConfigOptions</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+
+<span class="s5">/**</span>
+ <span class="s5">* Decrypt ciphertext</span>
+ <span class="s5">*</span>
+ <span class="s5">* See https://dotenvx.com/docs</span>
+ <span class="s5">*</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">encrypted - the encrypted ciphertext string</span>
+ <span class="s5">* </span><span class="s6">@param </span><span class="s5">keyStr - the decryption key string</span>
+ <span class="s5">* </span><span class="s6">@returns </span><span class="s5">{string}</span>
+ <span class="s5">*</span>
+ <span class="s5">*/</span>
+<span class="s2">export function </span><span class="s1">decrypt</span><span class="s3">(</span><span class="s1">encrypted</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">keyStr</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s1">string</span><span class="s3">;</span>
+</pre>
+</body>
+</html>

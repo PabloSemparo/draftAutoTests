@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>inProcessFactory.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+inProcessFactory.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">inProcessFactory_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">inProcessFactory_exports</span><span class="s1">, {</span>
+  <span class="s2">createInProcessPlaywright</span><span class="s1">: () =&gt; </span><span class="s2">createInProcessPlaywright</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">inProcessFactory_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_androidServerImpl </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./androidServerImpl&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browserServerImpl </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./browserServerImpl&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_server </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./server&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_nodePlatform </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./server/utils/nodePlatform&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_connection </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./client/connection&quot;</span><span class="s1">);</span>
+<span class="s3">function </span><span class="s2">createInProcessPlaywright</span><span class="s1">() {</span>
+  <span class="s3">const </span><span class="s2">playwright </span><span class="s1">= (</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">createPlaywright</span><span class="s1">)({ </span><span class="s2">sdkLanguage</span><span class="s1">: </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PW_LANG_NAME </span><span class="s1">|| </span><span class="s0">&quot;javascript&quot; </span><span class="s1">});</span>
+  <span class="s3">const </span><span class="s2">clientConnection </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_connection</span><span class="s1">.</span><span class="s2">Connection</span><span class="s1">(</span><span class="s2">import_nodePlatform</span><span class="s1">.</span><span class="s2">nodePlatform</span><span class="s1">);</span>
+  <span class="s2">clientConnection</span><span class="s1">.</span><span class="s2">useRawBuffers</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">dispatcherConnection </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">DispatcherConnection</span><span class="s1">(</span>
+    <span class="s3">true</span>
+    <span class="s5">/* local */</span>
+  <span class="s1">);</span>
+  <span class="s2">dispatcherConnection</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= (</span><span class="s2">message</span><span class="s1">) =&gt; </span><span class="s2">clientConnection</span><span class="s1">.</span><span class="s2">dispatch</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s2">clientConnection</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= (</span><span class="s2">message</span><span class="s1">) =&gt; </span><span class="s2">dispatcherConnection</span><span class="s1">.</span><span class="s2">dispatch</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">rootScope </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">RootDispatcher</span><span class="s1">(</span><span class="s2">dispatcherConnection</span><span class="s1">);</span>
+  <span class="s3">new </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">PlaywrightDispatcher</span><span class="s1">(</span><span class="s2">rootScope</span><span class="s1">, </span><span class="s2">playwright</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">playwrightAPI </span><span class="s1">= </span><span class="s2">clientConnection</span><span class="s1">.</span><span class="s2">getObjectWithKnownName</span><span class="s1">(</span><span class="s0">&quot;Playwright&quot;</span><span class="s1">);</span>
+  <span class="s2">playwrightAPI</span><span class="s1">.</span><span class="s2">chromium</span><span class="s1">.</span><span class="s2">_serverLauncher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browserServerImpl</span><span class="s1">.</span><span class="s2">BrowserServerLauncherImpl</span><span class="s1">(</span><span class="s0">&quot;chromium&quot;</span><span class="s1">);</span>
+  <span class="s2">playwrightAPI</span><span class="s1">.</span><span class="s2">firefox</span><span class="s1">.</span><span class="s2">_serverLauncher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browserServerImpl</span><span class="s1">.</span><span class="s2">BrowserServerLauncherImpl</span><span class="s1">(</span><span class="s0">&quot;firefox&quot;</span><span class="s1">);</span>
+  <span class="s2">playwrightAPI</span><span class="s1">.</span><span class="s2">webkit</span><span class="s1">.</span><span class="s2">_serverLauncher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browserServerImpl</span><span class="s1">.</span><span class="s2">BrowserServerLauncherImpl</span><span class="s1">(</span><span class="s0">&quot;webkit&quot;</span><span class="s1">);</span>
+  <span class="s2">playwrightAPI</span><span class="s1">.</span><span class="s2">_android</span><span class="s1">.</span><span class="s2">_serverLauncher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_androidServerImpl</span><span class="s1">.</span><span class="s2">AndroidServerLauncherImpl</span><span class="s1">();</span>
+  <span class="s2">playwrightAPI</span><span class="s1">.</span><span class="s2">_bidiChromium</span><span class="s1">.</span><span class="s2">_serverLauncher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browserServerImpl</span><span class="s1">.</span><span class="s2">BrowserServerLauncherImpl</span><span class="s1">(</span><span class="s0">&quot;_bidiChromium&quot;</span><span class="s1">);</span>
+  <span class="s2">playwrightAPI</span><span class="s1">.</span><span class="s2">_bidiFirefox</span><span class="s1">.</span><span class="s2">_serverLauncher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_browserServerImpl</span><span class="s1">.</span><span class="s2">BrowserServerLauncherImpl</span><span class="s1">(</span><span class="s0">&quot;_bidiFirefox&quot;</span><span class="s1">);</span>
+  <span class="s2">dispatcherConnection</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= (</span><span class="s2">message</span><span class="s1">) =&gt; </span><span class="s2">setImmediate</span><span class="s1">(() =&gt; </span><span class="s2">clientConnection</span><span class="s1">.</span><span class="s2">dispatch</span><span class="s1">(</span><span class="s2">message</span><span class="s1">));</span>
+  <span class="s2">clientConnection</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= (</span><span class="s2">message</span><span class="s1">) =&gt; </span><span class="s2">setImmediate</span><span class="s1">(() =&gt; </span><span class="s2">dispatcherConnection</span><span class="s1">.</span><span class="s2">dispatch</span><span class="s1">(</span><span class="s2">message</span><span class="s1">));</span>
+  <span class="s2">clientConnection</span><span class="s1">.</span><span class="s2">toImpl </span><span class="s1">= (</span><span class="s2">x</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">x </span><span class="s3">instanceof </span><span class="s2">import_connection</span><span class="s1">.</span><span class="s2">Connection</span><span class="s1">)</span>
+      <span class="s3">return </span><span class="s2">x </span><span class="s1">=== </span><span class="s2">clientConnection </span><span class="s1">? </span><span class="s2">dispatcherConnection </span><span class="s1">: </span><span class="s3">void </span><span class="s4">0</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">x</span><span class="s1">)</span>
+      <span class="s3">return </span><span class="s2">dispatcherConnection</span><span class="s1">.</span><span class="s2">_dispatcherByGuid</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s0">&quot;&quot;</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">dispatcherConnection</span><span class="s1">.</span><span class="s2">_dispatcherByGuid</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">x</span><span class="s1">.</span><span class="s2">_guid</span><span class="s1">).</span><span class="s2">_object</span><span class="s1">;</span>
+  <span class="s1">};</span>
+  <span class="s3">return </span><span class="s2">playwrightAPI</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s5">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s4">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">createInProcessPlaywright</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

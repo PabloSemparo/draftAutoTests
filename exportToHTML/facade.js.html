@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>facade.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+facade.js</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">LabelName</span><span class="s2">, </span><span class="s1">LinkType </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./model.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">getGlobalTestRuntimeWithAutoconfig </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./sdk/runtime/runtime.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">isPromise </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./sdk/utils.js&quot;</span><span class="s2">;</span>
+<span class="s0">var </span><span class="s1">callRuntimeMethod </span><span class="s2">= </span><span class="s0">function </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s1">method</span><span class="s2">) {</span>
+  <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">_len </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s1">args </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Array</span><span class="s2">(</span><span class="s1">_len </span><span class="s2">&gt; </span><span class="s4">1 </span><span class="s2">? </span><span class="s1">_len </span><span class="s2">- </span><span class="s4">1 </span><span class="s2">: </span><span class="s4">0</span><span class="s2">), </span><span class="s1">_key </span><span class="s2">= </span><span class="s4">1</span><span class="s2">; </span><span class="s1">_key </span><span class="s2">&lt; </span><span class="s1">_len</span><span class="s2">; </span><span class="s1">_key</span><span class="s2">++) {</span>
+    <span class="s1">args</span><span class="s2">[</span><span class="s1">_key </span><span class="s2">- </span><span class="s4">1</span><span class="s2">] = </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">_key</span><span class="s2">];</span>
+  <span class="s2">}</span>
+  <span class="s0">var </span><span class="s1">runtime </span><span class="s2">= </span><span class="s1">getGlobalTestRuntimeWithAutoconfig</span><span class="s2">();</span>
+  <span class="s0">if </span><span class="s2">(!</span><span class="s1">isPromise</span><span class="s2">(</span><span class="s1">runtime</span><span class="s2">)) {</span>
+    <span class="s5">// @ts-ignore</span>
+    <span class="s0">return </span><span class="s1">runtime</span><span class="s2">[</span><span class="s1">method</span><span class="s2">](</span><span class="s1">...args</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s0">return </span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">then</span><span class="s2">(</span><span class="s1">testRuntime </span><span class="s2">=&gt; {</span>
+    <span class="s5">// @ts-ignore</span>
+    <span class="s0">return </span><span class="s1">testRuntime</span><span class="s2">[</span><span class="s1">method</span><span class="s2">](</span><span class="s1">...args</span><span class="s2">);</span>
+  <span class="s2">});</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">label </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">) =&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;labels&quot;</span><span class="s2">, {</span>
+    <span class="s1">name</span><span class="s2">,</span>
+    <span class="s1">value</span>
+  <span class="s2">});</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">labels </span><span class="s2">= </span><span class="s0">function </span><span class="s1">labels</span><span class="s2">() {</span>
+  <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">_len2 </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s1">labelsList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Array</span><span class="s2">(</span><span class="s1">_len2</span><span class="s2">), </span><span class="s1">_key2 </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">_key2 </span><span class="s2">&lt; </span><span class="s1">_len2</span><span class="s2">; </span><span class="s1">_key2</span><span class="s2">++) {</span>
+    <span class="s1">labelsList</span><span class="s2">[</span><span class="s1">_key2</span><span class="s2">] = </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">_key2</span><span class="s2">];</span>
+  <span class="s2">}</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;labels&quot;</span><span class="s2">, </span><span class="s1">...labelsList</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">link </span><span class="s2">= (</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">type</span><span class="s2">) =&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;links&quot;</span><span class="s2">, {</span>
+    <span class="s1">url</span><span class="s2">,</span>
+    <span class="s1">type</span><span class="s2">,</span>
+    <span class="s1">name</span>
+  <span class="s2">});</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">links </span><span class="s2">= </span><span class="s0">function </span><span class="s1">links</span><span class="s2">() {</span>
+  <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">_len3 </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s1">linksList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Array</span><span class="s2">(</span><span class="s1">_len3</span><span class="s2">), </span><span class="s1">_key3 </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">_key3 </span><span class="s2">&lt; </span><span class="s1">_len3</span><span class="s2">; </span><span class="s1">_key3</span><span class="s2">++) {</span>
+    <span class="s1">linksList</span><span class="s2">[</span><span class="s1">_key3</span><span class="s2">] = </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">_key3</span><span class="s2">];</span>
+  <span class="s2">}</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;links&quot;</span><span class="s2">, </span><span class="s1">...linksList</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">parameter </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) =&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;parameter&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">options</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">description </span><span class="s2">= </span><span class="s1">markdown </span><span class="s2">=&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;description&quot;</span><span class="s2">, </span><span class="s1">markdown</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">descriptionHtml </span><span class="s2">= </span><span class="s1">html </span><span class="s2">=&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;descriptionHtml&quot;</span><span class="s2">, </span><span class="s1">html</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">displayName </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;displayName&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">historyId </span><span class="s2">= </span><span class="s1">value </span><span class="s2">=&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;historyId&quot;</span><span class="s2">, </span><span class="s1">value</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">testCaseId </span><span class="s2">= </span><span class="s1">value </span><span class="s2">=&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;testCaseId&quot;</span><span class="s2">, </span><span class="s1">value</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">attachment </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">content</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) =&gt; {</span>
+  <span class="s0">var </span><span class="s1">opts </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">options </span><span class="s2">=== </span><span class="s3">&quot;string&quot; </span><span class="s2">? {</span>
+    <span class="s1">contentType</span><span class="s2">: </span><span class="s1">options</span>
+  <span class="s2">} : </span><span class="s1">options</span><span class="s2">;</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;attachment&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">content</span><span class="s2">, </span><span class="s1">opts</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">attachTrace </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">path</span><span class="s2">) =&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;attachmentFromPath&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">path</span><span class="s2">, {</span>
+    <span class="s1">contentType</span><span class="s2">: </span><span class="s3">&quot;application/vnd.allure.playwright-trace&quot;</span>
+  <span class="s2">});</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">attachmentPath </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">path</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) =&gt; {</span>
+  <span class="s0">var </span><span class="s1">opts </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">options </span><span class="s2">=== </span><span class="s3">&quot;string&quot; </span><span class="s2">? {</span>
+    <span class="s1">contentType</span><span class="s2">: </span><span class="s1">options</span>
+  <span class="s2">} : </span><span class="s1">options</span><span class="s2">;</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;attachmentFromPath&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">path</span><span class="s2">, </span><span class="s1">opts</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">var </span><span class="s1">stepContext </span><span class="s2">= () =&gt; ({</span>
+  <span class="s1">displayName</span><span class="s2">: </span><span class="s1">name </span><span class="s2">=&gt; {</span>
+    <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;stepDisplayName&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+  <span class="s2">},</span>
+  <span class="s1">parameter</span><span class="s2">: (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">mode</span><span class="s2">) =&gt; {</span>
+    <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;stepParameter&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">mode</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">});</span>
+<span class="s0">export var </span><span class="s1">logStep </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">status</span><span class="s2">, </span><span class="s1">error</span><span class="s2">) =&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;logStep&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">status</span><span class="s2">, </span><span class="s1">error</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">step </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">, </span><span class="s1">body</span><span class="s2">) =&gt; {</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;step&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, () =&gt; </span><span class="s1">body</span><span class="s2">(</span><span class="s1">stepContext</span><span class="s2">()));</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">issue </span><span class="s2">= (</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">) =&gt; </span><span class="s1">link</span><span class="s2">(</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">LinkType</span><span class="s2">.</span><span class="s1">ISSUE</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">tms </span><span class="s2">= (</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">) =&gt; </span><span class="s1">link</span><span class="s2">(</span><span class="s1">url</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">LinkType</span><span class="s2">.</span><span class="s1">TMS</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">allureId </span><span class="s2">= </span><span class="s1">value </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">ALLURE_ID</span><span class="s2">, </span><span class="s1">value</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">epic </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">EPIC</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">feature </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">FEATURE</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">story </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">STORY</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">suite </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">SUITE</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">parentSuite </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">PARENT_SUITE</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">subSuite </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">SUB_SUITE</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">owner </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">OWNER</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">severity </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">SEVERITY</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">layer </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">LAYER</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">tag </span><span class="s2">= </span><span class="s1">name </span><span class="s2">=&gt; </span><span class="s1">label</span><span class="s2">(</span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">TAG</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+<span class="s0">export var </span><span class="s1">tags </span><span class="s2">= </span><span class="s0">function </span><span class="s1">tags</span><span class="s2">() {</span>
+  <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">_len4 </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s1">tagsList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Array</span><span class="s2">(</span><span class="s1">_len4</span><span class="s2">), </span><span class="s1">_key4 </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">_key4 </span><span class="s2">&lt; </span><span class="s1">_len4</span><span class="s2">; </span><span class="s1">_key4</span><span class="s2">++) {</span>
+    <span class="s1">tagsList</span><span class="s2">[</span><span class="s1">_key4</span><span class="s2">] = </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">_key4</span><span class="s2">];</span>
+  <span class="s2">}</span>
+  <span class="s0">return </span><span class="s1">callRuntimeMethod</span><span class="s2">(</span><span class="s3">&quot;labels&quot;</span><span class="s2">, </span><span class="s1">...tagsList</span><span class="s2">.</span><span class="s1">map</span><span class="s2">(</span><span class="s1">value </span><span class="s2">=&gt; ({</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s1">LabelName</span><span class="s2">.</span><span class="s1">TAG</span><span class="s2">,</span>
+    <span class="s1">value</span>
+  <span class="s2">})));</span>
+<span class="s2">};</span>
+<span class="s5">//# sourceMappingURL=facade.js.map</span></pre>
+</body>
+</html>

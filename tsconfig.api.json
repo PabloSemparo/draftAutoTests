@@ -1,0 +1,42 @@
+{
+  // Конфиг для проверки типов API-тестов: npm run typecheck
+  // Намеренно НЕ extends корневой tsconfig.json: в нём указан
+  // ignoreDeprecations: "6.0", несовместимый с установленным TypeScript 5.x.
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    // Поддержка новых путей для fixtures и test-utils
+    "baseUrl": ".",
+    "paths": {
+      "@fixtures/*": ["API-Tests/fixtures/*"],
+      "@test-utils/*": ["API-Tests/test-utils/*"],
+      "@services/*": ["API-Tests/services/*"],
+      "@models/*": ["API-Tests/models/*"],
+      "@config/*": ["API-Tests/config/*"]
+    }
+  },
+  // Область проверки намеренно ограничена новым API-слоем (клиент, сервисы,
+  // модели, тестовые данные) и уже мигрированными спеками.
+  // Остальные наборы пока содержат предсуществующие ошибки типов —
+  // по мере их починки список include можно расширять.
+  "include": [
+    "API-Tests/utils/**/*.ts",
+    "API-Tests/services/**/*.ts",
+    "API-Tests/models/**/*.ts",
+    "API-Tests/tests-data/**/*.ts",
+    "API-Tests/fixtures/**/*.ts",
+    "API-Tests/test-utils/**/*.ts",
+    "API-Tests/config/**/*.ts",
+    "API-Tests/tests/eq-legal-collection/**/*.ts",
+    "API-Tests/tests/eq-dc-court/**/*.ts",
+    "API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contract-imports.spec.ts",
+    "API-Tests/tests/eq-dc-debt-importer/eq-dc-debt-importer-contractors.spec.ts",
+    "API-Tests/examples/**/*.ts"
+  ]
+}

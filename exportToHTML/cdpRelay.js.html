@@ -1,0 +1,374 @@
+<html>
+<head>
+<title>cdpRelay.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+cdpRelay.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">cdpRelay_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">cdpRelay_exports</span><span class="s1">, {</span>
+  <span class="s2">CDPRelayServer</span><span class="s1">: () =&gt; </span><span class="s2">CDPRelayServer</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">cdpRelay_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_child_process </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;child_process&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_registry </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/server/registry/index&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_http2 </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../sdk/http&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_log </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../log&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">protocol </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./protocol&quot;</span><span class="s1">));</span>
+<span class="s3">const </span><span class="s2">debugLogger </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">)(</span><span class="s0">&quot;pw:mcp:relay&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">CDPRelayServer </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">server</span><span class="s1">, </span><span class="s2">browserChannel</span><span class="s1">, </span><span class="s2">userDataDir</span><span class="s1">, </span><span class="s2">executablePath</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_nextSessionId </span><span class="s1">= </span><span class="s5">1</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_wsHost </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_http2</span><span class="s1">.</span><span class="s2">httpAddressToString</span><span class="s1">)(</span><span class="s2">server</span><span class="s1">.</span><span class="s2">address</span><span class="s1">()).</span><span class="s2">replace</span><span class="s1">(</span><span class="s6">/^http/</span><span class="s1">, </span><span class="s0">&quot;ws&quot;</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserChannel </span><span class="s1">= </span><span class="s2">browserChannel</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_userDataDir </span><span class="s1">= </span><span class="s2">userDataDir</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_executablePath </span><span class="s1">= </span><span class="s2">executablePath</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">uuid </span><span class="s1">= </span><span class="s2">crypto</span><span class="s1">.</span><span class="s2">randomUUID</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_cdpPath </span><span class="s1">= </span><span class="s0">`/cdp/</span><span class="s2">$</span><span class="s1">{</span><span class="s2">uuid</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionPath </span><span class="s1">= </span><span class="s0">`/extension/</span><span class="s2">$</span><span class="s1">{</span><span class="s2">uuid</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_resetExtensionConnection</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_wss </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">wsServer</span><span class="s1">({ </span><span class="s2">server </span><span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_wss</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;connection&quot;</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onConnection</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">cdpEndpoint</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_wsHost</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_cdpPath</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">extensionEndpoint</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_wsHost</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionPath</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async ensureExtensionConnectionForMCPContext</span><span class="s1">(</span><span class="s2">clientInfo</span><span class="s1">, </span><span class="s2">abortSignal</span><span class="s1">, </span><span class="s2">toolName</span><span class="s1">) {</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Ensuring extension connection for MCP context&quot;</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_connectBrowser</span><span class="s1">(</span><span class="s2">clientInfo</span><span class="s1">, </span><span class="s2">toolName</span><span class="s1">);</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Waiting for incoming extension connection&quot;</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">race</span><span class="s1">([</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnectionPromise</span><span class="s1">,</span>
+      <span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">_</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; </span><span class="s2">setTimeout</span><span class="s1">(() =&gt; {</span>
+        <span class="s2">reject</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Extension connection timeout. Make sure the &quot;Playwright MCP Bridge&quot; extension is installed. See https://github.com/microsoft/playwright-mcp/blob/main/extension/README.md for installation instructions.`</span><span class="s1">));</span>
+      <span class="s1">}, </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PWMCP_TEST_CONNECTION_TIMEOUT </span><span class="s1">? </span><span class="s2">parseInt</span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PWMCP_TEST_CONNECTION_TIMEOUT</span><span class="s1">, </span><span class="s5">10</span><span class="s1">) : </span><span class="s5">5e3</span><span class="s1">)),</span>
+      <span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">_</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; </span><span class="s2">abortSignal</span><span class="s1">.</span><span class="s2">addEventListener</span><span class="s1">(</span><span class="s0">&quot;abort&quot;</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">))</span>
+    <span class="s1">]);</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Extension connection established&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_connectBrowser</span><span class="s1">(</span><span class="s2">clientInfo</span><span class="s1">, </span><span class="s2">toolName</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">mcpRelayEndpoint </span><span class="s1">= </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_wsHost</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionPath</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">url </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s0">&quot;chrome-extension://jakfalbnbhgkpmoaakfflhflbfpkailf/connect.html&quot;</span><span class="s1">);</span>
+    <span class="s2">url</span><span class="s1">.</span><span class="s2">searchParams</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s0">&quot;mcpRelayUrl&quot;</span><span class="s1">, </span><span class="s2">mcpRelayEndpoint</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">client </span><span class="s1">= {</span>
+      <span class="s2">name</span><span class="s1">: </span><span class="s2">clientInfo</span><span class="s1">.</span><span class="s2">name</span><span class="s1">,</span>
+      <span class="s2">version</span><span class="s1">: </span><span class="s2">clientInfo</span><span class="s1">.</span><span class="s2">version</span>
+    <span class="s1">};</span>
+    <span class="s2">url</span><span class="s1">.</span><span class="s2">searchParams</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s0">&quot;client&quot;</span><span class="s1">, </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">client</span><span class="s1">));</span>
+    <span class="s2">url</span><span class="s1">.</span><span class="s2">searchParams</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s0">&quot;protocolVersion&quot;</span><span class="s1">, </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PWMCP_TEST_PROTOCOL_VERSION </span><span class="s1">?? </span><span class="s2">protocol</span><span class="s1">.</span><span class="s2">VERSION</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">());</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">toolName</span><span class="s1">)</span>
+      <span class="s2">url</span><span class="s1">.</span><span class="s2">searchParams</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s0">&quot;newTab&quot;</span><span class="s1">, </span><span class="s2">String</span><span class="s1">(</span><span class="s2">toolName </span><span class="s1">=== </span><span class="s0">&quot;browser_navigate&quot;</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">token </span><span class="s1">= </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PLAYWRIGHT_MCP_EXTENSION_TOKEN</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">token</span><span class="s1">)</span>
+      <span class="s2">url</span><span class="s1">.</span><span class="s2">searchParams</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s0">&quot;token&quot;</span><span class="s1">, </span><span class="s2">token</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">href </span><span class="s1">= </span><span class="s2">url</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">();</span>
+    <span class="s3">let </span><span class="s2">executablePath </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_executablePath</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">executablePath</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">executableInfo </span><span class="s1">= </span><span class="s2">import_registry</span><span class="s1">.</span><span class="s2">registry</span><span class="s1">.</span><span class="s2">findExecutable</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browserChannel</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">executableInfo</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Unsupported channel: &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browserChannel</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">);</span>
+      <span class="s2">executablePath </span><span class="s1">= </span><span class="s2">executableInfo</span><span class="s1">.</span><span class="s2">executablePath</span><span class="s1">(</span><span class="s0">&quot;javascript&quot;</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">executablePath</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browserChannel</span><span class="s1">}</span><span class="s0">&quot; executable not found. Make sure it is installed at a standard location.`</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">args </span><span class="s1">= [];</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_userDataDir</span><span class="s1">)</span>
+      <span class="s2">args</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s0">`--user-data-dir=</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_userDataDir</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s2">args</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">href</span><span class="s1">);</span>
+    <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_child_process</span><span class="s1">.</span><span class="s2">spawn</span><span class="s1">)(</span><span class="s2">executablePath</span><span class="s1">, </span><span class="s2">args</span><span class="s1">, {</span>
+      <span class="s2">windowsHide</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+      <span class="s2">detached</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+      <span class="s2">shell</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+      <span class="s2">stdio</span><span class="s1">: </span><span class="s0">&quot;ignore&quot;</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">stop</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">closeConnections</span><span class="s1">(</span><span class="s0">&quot;Server stopped&quot;</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_wss</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">closeConnections</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closePlaywrightConnection</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closeExtensionConnection</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_onConnection</span><span class="s1">(</span><span class="s2">ws2</span><span class="s1">, </span><span class="s2">request</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">url </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s0">`http://localhost</span><span class="s2">$</span><span class="s1">{</span><span class="s2">request</span><span class="s1">.</span><span class="s2">url</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">`New connection to </span><span class="s2">$</span><span class="s1">{</span><span class="s2">url</span><span class="s1">.</span><span class="s2">pathname</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">url</span><span class="s1">.</span><span class="s2">pathname </span><span class="s1">=== </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_cdpPath</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_handlePlaywrightConnection</span><span class="s1">(</span><span class="s2">ws2</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">url</span><span class="s1">.</span><span class="s2">pathname </span><span class="s1">=== </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionPath</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_handleExtensionConnection</span><span class="s1">(</span><span class="s2">ws2</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">`Invalid path: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">url</span><span class="s1">.</span><span class="s2">pathname</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s2">ws2</span><span class="s1">.</span><span class="s2">close</span><span class="s1">(</span><span class="s5">4004</span><span class="s1">, </span><span class="s0">&quot;Invalid path&quot;</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">_handlePlaywrightConnection</span><span class="s1">(</span><span class="s2">ws2</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection</span><span class="s1">) {</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Rejecting second Playwright connection&quot;</span><span class="s1">);</span>
+      <span class="s2">ws2</span><span class="s1">.</span><span class="s2">close</span><span class="s1">(</span><span class="s5">1e3</span><span class="s1">, </span><span class="s0">&quot;Another CDP client already connected&quot;</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection </span><span class="s1">= </span><span class="s2">ws2</span><span class="s1">;</span>
+    <span class="s2">ws2</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;message&quot;</span><span class="s1">, </span><span class="s2">async </span><span class="s1">(</span><span class="s2">data</span><span class="s1">) =&gt; {</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">const </span><span class="s2">message </span><span class="s1">= </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">());</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">_handlePlaywrightMessage</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">`Error while handling Playwright message 
+</span><span class="s2">$</span><span class="s1">{</span><span class="s2">data</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">()}</span>
+<span class="s0">`</span><span class="s1">, </span><span class="s2">error</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">});</span>
+    <span class="s2">ws2</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, () =&gt; {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection </span><span class="s1">!== </span><span class="s2">ws2</span><span class="s1">)</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_closeExtensionConnection</span><span class="s1">(</span><span class="s0">&quot;Playwright client disconnected&quot;</span><span class="s1">);</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Playwright WebSocket closed&quot;</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s2">ws2</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, (</span><span class="s2">error</span><span class="s1">) =&gt; {</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Playwright WebSocket error:&quot;</span><span class="s1">, </span><span class="s2">error</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Playwright MCP connected&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_closeExtensionConnection</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">?.</span><span class="s2">close</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnectionPromise</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_resetExtensionConnection</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">_resetExtensionConnection</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_connectedTabInfo </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnectionPromise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">ManualPromise</span><span class="s1">();</span>
+    <span class="s3">void this</span><span class="s1">.</span><span class="s2">_extensionConnectionPromise</span><span class="s1">.</span><span class="s2">catch</span><span class="s1">(</span><span class="s2">import_log</span><span class="s1">.</span><span class="s2">logUnhandledError</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_closePlaywrightConnection</span><span class="s1">(</span><span class="s2">reason</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection</span><span class="s1">?.</span><span class="s2">readyState </span><span class="s1">=== </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">ws</span><span class="s1">.</span><span class="s2">OPEN</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection</span><span class="s1">.</span><span class="s2">close</span><span class="s1">(</span><span class="s5">1e3</span><span class="s1">, </span><span class="s2">reason</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">_handleExtensionConnection</span><span class="s1">(</span><span class="s2">ws2</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">) {</span>
+      <span class="s2">ws2</span><span class="s1">.</span><span class="s2">close</span><span class="s1">(</span><span class="s5">1e3</span><span class="s1">, </span><span class="s0">&quot;Another extension connection already established&quot;</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection </span><span class="s1">= </span><span class="s3">new </span><span class="s2">ExtensionConnection</span><span class="s1">(</span><span class="s2">ws2</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">.</span><span class="s2">onclose </span><span class="s1">= (</span><span class="s2">c</span><span class="s1">, </span><span class="s2">reason</span><span class="s1">) =&gt; {</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Extension WebSocket closed:&quot;</span><span class="s1">, </span><span class="s2">reason</span><span class="s1">, </span><span class="s2">c </span><span class="s1">=== </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection </span><span class="s1">!== </span><span class="s2">c</span><span class="s1">)</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_resetExtensionConnection</span><span class="s1">();</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_closePlaywrightConnection</span><span class="s1">(</span><span class="s0">`Extension disconnected: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">reason</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s1">};</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">.</span><span class="s2">onmessage </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_handleExtensionMessage</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnectionPromise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">_handleExtensionMessage</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">switch </span><span class="s1">(</span><span class="s2">method</span><span class="s1">) {</span>
+      <span class="s3">case </span><span class="s0">&quot;forwardCDPEvent&quot;</span><span class="s1">:</span>
+        <span class="s3">const </span><span class="s2">sessionId </span><span class="s1">= </span><span class="s2">params</span><span class="s1">.</span><span class="s2">sessionId </span><span class="s1">|| </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_connectedTabInfo</span><span class="s1">?.</span><span class="s2">sessionId</span><span class="s1">;</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_sendToPlaywright</span><span class="s1">({</span>
+          <span class="s2">sessionId</span><span class="s1">,</span>
+          <span class="s2">method</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">method</span><span class="s1">,</span>
+          <span class="s2">params</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">params</span>
+        <span class="s1">});</span>
+        <span class="s3">break</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async _handlePlaywrightMessage</span><span class="s1">(</span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\u2190 </span><span class="s0">Playwright:&quot;</span><span class="s1">, </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">message</span><span class="s1">.</span><span class="s2">method</span><span class="s1">} </span><span class="s0">(id=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">message</span><span class="s1">.</span><span class="s2">id</span><span class="s1">}</span><span class="s0">)`</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">id</span><span class="s1">, </span><span class="s2">sessionId</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s2">params </span><span class="s1">} = </span><span class="s2">message</span><span class="s1">;</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_handleCDPCommand</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">sessionId</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_sendToPlaywright</span><span class="s1">({ </span><span class="s2">id</span><span class="s1">, </span><span class="s2">sessionId</span><span class="s1">, </span><span class="s2">result </span><span class="s1">});</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Error in the extension:&quot;</span><span class="s1">, </span><span class="s2">e</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_sendToPlaywright</span><span class="s1">({</span>
+        <span class="s2">id</span><span class="s1">,</span>
+        <span class="s2">sessionId</span><span class="s1">,</span>
+        <span class="s2">error</span><span class="s1">: { </span><span class="s2">message</span><span class="s1">: </span><span class="s2">e</span><span class="s1">.</span><span class="s2">message </span><span class="s1">}</span>
+      <span class="s1">});</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async _handleCDPCommand</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">sessionId</span><span class="s1">) {</span>
+    <span class="s3">switch </span><span class="s1">(</span><span class="s2">method</span><span class="s1">) {</span>
+      <span class="s3">case </span><span class="s0">&quot;Browser.getVersion&quot;</span><span class="s1">: {</span>
+        <span class="s3">return </span><span class="s1">{</span>
+          <span class="s2">protocolVersion</span><span class="s1">: </span><span class="s0">&quot;1.3&quot;</span><span class="s1">,</span>
+          <span class="s2">product</span><span class="s1">: </span><span class="s0">&quot;Chrome/Extension-Bridge&quot;</span><span class="s1">,</span>
+          <span class="s2">userAgent</span><span class="s1">: </span><span class="s0">&quot;CDP-Bridge-Server/1.0.0&quot;</span>
+        <span class="s1">};</span>
+      <span class="s1">}</span>
+      <span class="s3">case </span><span class="s0">&quot;Browser.setDownloadBehavior&quot;</span><span class="s1">: {</span>
+        <span class="s3">return </span><span class="s1">{};</span>
+      <span class="s1">}</span>
+      <span class="s3">case </span><span class="s0">&quot;Target.setAutoAttach&quot;</span><span class="s1">: {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">sessionId</span><span class="s1">)</span>
+          <span class="s3">break</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s1">{ </span><span class="s2">targetInfo </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;attachToTab&quot;</span><span class="s1">, {});</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_connectedTabInfo </span><span class="s1">= {</span>
+          <span class="s2">targetInfo</span><span class="s1">,</span>
+          <span class="s2">sessionId</span><span class="s1">: </span><span class="s0">`pw-tab-</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_nextSessionId</span><span class="s1">++}</span><span class="s0">`</span>
+        <span class="s1">};</span>
+        <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;Simulating auto-attach&quot;</span><span class="s1">);</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_sendToPlaywright</span><span class="s1">({</span>
+          <span class="s2">method</span><span class="s1">: </span><span class="s0">&quot;Target.attachedToTarget&quot;</span><span class="s1">,</span>
+          <span class="s2">params</span><span class="s1">: {</span>
+            <span class="s2">sessionId</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_connectedTabInfo</span><span class="s1">.</span><span class="s2">sessionId</span><span class="s1">,</span>
+            <span class="s2">targetInfo</span><span class="s1">: {</span>
+              <span class="s2">...</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_connectedTabInfo</span><span class="s1">.</span><span class="s2">targetInfo</span><span class="s1">,</span>
+              <span class="s2">attached</span><span class="s1">: </span><span class="s3">true</span>
+            <span class="s1">},</span>
+            <span class="s2">waitingForDebugger</span><span class="s1">: </span><span class="s3">false</span>
+          <span class="s1">}</span>
+        <span class="s1">});</span>
+        <span class="s3">return </span><span class="s1">{};</span>
+      <span class="s1">}</span>
+      <span class="s3">case </span><span class="s0">&quot;Target.getTargetInfo&quot;</span><span class="s1">: {</span>
+        <span class="s3">return this</span><span class="s1">.</span><span class="s2">_connectedTabInfo</span><span class="s1">?.</span><span class="s2">targetInfo</span><span class="s1">;</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s3">return await this</span><span class="s1">.</span><span class="s2">_forwardToExtension</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">sessionId</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async _forwardToExtension</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">sessionId</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Extension not connected&quot;</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_connectedTabInfo</span><span class="s1">?.</span><span class="s2">sessionId </span><span class="s1">=== </span><span class="s2">sessionId</span><span class="s1">)</span>
+      <span class="s2">sessionId </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">return await this</span><span class="s1">.</span><span class="s2">_extensionConnection</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s0">&quot;forwardCDPCommand&quot;</span><span class="s1">, { </span><span class="s2">sessionId</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s2">params </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">_sendToPlaywright</span><span class="s1">(</span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\u2192 </span><span class="s0">Playwright:&quot;</span><span class="s1">, </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">message</span><span class="s1">.</span><span class="s2">method </span><span class="s1">?? </span><span class="s0">`response(id=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">message</span><span class="s1">.</span><span class="s2">id</span><span class="s1">}</span><span class="s0">)`</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightConnection</span><span class="s1">?.</span><span class="s2">send</span><span class="s1">(</span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">message</span><span class="s1">));</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">ExtensionConnection </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">ws2</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastId </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws </span><span class="s1">= </span><span class="s2">ws2</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;message&quot;</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onMessage</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onClose</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onError</span><span class="s1">.</span><span class="s2">bind</span><span class="s1">(</span><span class="s3">this</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">async send</span><span class="s1">(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">readyState </span><span class="s1">!== </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">ws</span><span class="s1">.</span><span class="s2">OPEN</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Unexpected WebSocket state: </span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">readyState</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">id </span><span class="s1">= ++</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastId</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">send</span><span class="s1">(</span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">({ </span><span class="s2">id</span><span class="s1">, </span><span class="s2">method</span><span class="s1">, </span><span class="s2">params </span><span class="s1">}));</span>
+    <span class="s3">const </span><span class="s2">error </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Protocol error: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">method</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">return new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">resolve</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">id</span><span class="s1">, { </span><span class="s2">resolve</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">, </span><span class="s2">error </span><span class="s1">});</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">close</span><span class="s1">(</span><span class="s2">message</span><span class="s1">) {</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;closing extension connection:&quot;</span><span class="s1">, </span><span class="s2">message</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">readyState </span><span class="s1">=== </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">ws</span><span class="s1">.</span><span class="s2">OPEN</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">(</span><span class="s5">1e3</span><span class="s1">, </span><span class="s2">message</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_onMessage</span><span class="s1">(</span><span class="s2">event</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">eventData </span><span class="s1">= </span><span class="s2">event</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">();</span>
+    <span class="s3">let </span><span class="s2">parsedJson</span><span class="s1">;</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s2">parsedJson </span><span class="s1">= </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s2">eventData</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">`&lt;closing ws&gt; Closing websocket due to malformed JSON. eventData=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">eventData</span><span class="s1">} </span><span class="s0">e=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">e</span><span class="s1">?.</span><span class="s2">message</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_handleParsedMessage</span><span class="s1">(</span><span class="s2">parsedJson</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">`&lt;closing ws&gt; Closing websocket due to failed onmessage callback. eventData=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">eventData</span><span class="s1">} </span><span class="s0">e=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">e</span><span class="s1">?.</span><span class="s2">message</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_ws</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">_handleParsedMessage</span><span class="s1">(</span><span class="s2">object</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id </span><span class="s1">&amp;&amp; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id</span><span class="s1">)) {</span>
+      <span class="s3">const </span><span class="s2">callback </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">error</span><span class="s1">) {</span>
+        <span class="s3">const </span><span class="s2">error </span><span class="s1">= </span><span class="s2">callback</span><span class="s1">.</span><span class="s2">error</span><span class="s1">;</span>
+        <span class="s2">error</span><span class="s1">.</span><span class="s2">message </span><span class="s1">= </span><span class="s2">object</span><span class="s1">.</span><span class="s2">error</span><span class="s1">;</span>
+        <span class="s2">callback</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s2">error</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s2">callback</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">result</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">id</span><span class="s1">) {</span>
+      <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\u2190 </span><span class="s0">Extension: unexpected response&quot;</span><span class="s1">, </span><span class="s2">object</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">onmessage</span><span class="s1">?.(</span><span class="s2">object</span><span class="s1">.</span><span class="s2">method</span><span class="s1">, </span><span class="s2">object</span><span class="s1">.</span><span class="s2">params</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">_onClose</span><span class="s1">(</span><span class="s2">event</span><span class="s1">) {</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">`&lt;ws closed&gt; code=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">code</span><span class="s1">} </span><span class="s0">reason=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_dispose</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">onclose</span><span class="s1">?.(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">event</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_onError</span><span class="s1">(</span><span class="s2">event</span><span class="s1">) {</span>
+    <span class="s2">debugLogger</span><span class="s1">(</span><span class="s0">`&lt;ws error&gt; message=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">message</span><span class="s1">} </span><span class="s0">type=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">type</span><span class="s1">} </span><span class="s0">target=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">.</span><span class="s2">target</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_dispose</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">_dispose</span><span class="s1">() {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">callback of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">values</span><span class="s1">())</span>
+      <span class="s2">callback</span><span class="s1">.</span><span class="s2">reject</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;WebSocket closed&quot;</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_callbacks</span><span class="s1">.</span><span class="s2">clear</span><span class="s1">();</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">CDPRelayServer</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

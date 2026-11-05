@@ -1,0 +1,212 @@
+<html>
+<head>
+<title>postman-to-playwright-converter.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+postman-to-playwright-converter.js</font>
+</center></td></tr></table>
+<pre><span class="s0">// postman-to-playwright-converter.js</span>
+<span class="s2">const </span><span class="s1">fs </span><span class="s3">= </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'fs'</span><span class="s3">);</span>
+<span class="s2">const </span><span class="s1">path </span><span class="s3">= </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'path'</span><span class="s3">);</span>
+
+<span class="s2">class </span><span class="s1">PostmanToPlaywrightConverter </span><span class="s3">{</span>
+    <span class="s1">constructor</span><span class="s3">(</span><span class="s1">postmanCollection</span><span class="s3">) {</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">collection </span><span class="s3">= </span><span class="s1">postmanCollection</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">playwrightTests </span><span class="s3">= [];</span>
+    <span class="s3">}</span>
+
+    <span class="s1">convert</span><span class="s3">() {</span>
+        <span class="s2">const </span><span class="s3">{ </span><span class="s1">info</span><span class="s3">, </span><span class="s1">item </span><span class="s3">} = </span><span class="s2">this</span><span class="s3">.</span><span class="s1">collection</span><span class="s3">;</span>
+
+        <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">`Конвертируем коллекцию: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">info</span><span class="s3">.</span><span class="s1">name</span><span class="s3">}</span><span class="s4">`</span><span class="s3">);</span>
+
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">playwrightTests</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s2">this</span><span class="s3">.</span><span class="s1">generateImports</span><span class="s3">());</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">playwrightTests</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s2">this</span><span class="s3">.</span><span class="s1">generateTestSuite</span><span class="s3">(</span><span class="s1">info</span><span class="s3">.</span><span class="s1">name</span><span class="s3">));</span>
+
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">processItems</span><span class="s3">(</span><span class="s1">item</span><span class="s3">);</span>
+
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">playwrightTests</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'});'</span><span class="s3">); </span><span class="s0">// закрытие test.describe</span>
+
+        <span class="s2">return this</span><span class="s3">.</span><span class="s1">playwrightTests</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s3">);</span>
+    <span class="s3">}</span>
+
+    <span class="s1">generateImports</span><span class="s3">() {</span>
+        <span class="s2">return </span><span class="s4">`import { test, expect } from '@playwright/test';</span><span class="s2">\n</span><span class="s4">`</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s1">generateTestSuite</span><span class="s3">(</span><span class="s1">suiteName</span><span class="s3">) {</span>
+        <span class="s2">return </span><span class="s4">`test.describe('</span><span class="s1">$</span><span class="s3">{</span><span class="s2">this</span><span class="s3">.</span><span class="s1">escapeString</span><span class="s3">(</span><span class="s1">suiteName</span><span class="s3">)}</span><span class="s4">', () =&gt; {`</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s1">processItems</span><span class="s3">(</span><span class="s1">items</span><span class="s3">, </span><span class="s1">parentName </span><span class="s3">= </span><span class="s4">''</span><span class="s3">) {</span>
+        <span class="s1">items</span><span class="s3">.</span><span class="s1">forEach</span><span class="s3">(</span><span class="s1">item </span><span class="s3">=&gt; {</span>
+            <span class="s2">if </span><span class="s3">(</span><span class="s1">item</span><span class="s3">.</span><span class="s1">request</span><span class="s3">) {</span>
+                <span class="s0">// Это API запрос</span>
+                <span class="s2">this</span><span class="s3">.</span><span class="s1">generateTestFromRequest</span><span class="s3">(</span><span class="s1">item</span><span class="s3">, </span><span class="s1">parentName</span><span class="s3">);</span>
+            <span class="s3">} </span><span class="s2">else if </span><span class="s3">(</span><span class="s1">item</span><span class="s3">.</span><span class="s1">item</span><span class="s3">) {</span>
+                <span class="s0">// Это папка с вложенными запросами</span>
+                <span class="s2">const </span><span class="s1">folderName </span><span class="s3">= </span><span class="s1">parentName </span><span class="s3">? </span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">parentName</span><span class="s3">} </span><span class="s4">- </span><span class="s1">$</span><span class="s3">{</span><span class="s1">item</span><span class="s3">.</span><span class="s1">name</span><span class="s3">}</span><span class="s4">` </span><span class="s3">: </span><span class="s1">item</span><span class="s3">.</span><span class="s1">name</span><span class="s3">;</span>
+                <span class="s2">this</span><span class="s3">.</span><span class="s1">processItems</span><span class="s3">(</span><span class="s1">item</span><span class="s3">.</span><span class="s1">item</span><span class="s3">, </span><span class="s1">folderName</span><span class="s3">);</span>
+            <span class="s3">}</span>
+        <span class="s3">});</span>
+    <span class="s3">}</span>
+
+    <span class="s1">generateTestFromRequest</span><span class="s3">(</span><span class="s1">item</span><span class="s3">, </span><span class="s1">parentName</span><span class="s3">) {</span>
+        <span class="s2">const </span><span class="s3">{ </span><span class="s1">name</span><span class="s3">, </span><span class="s1">request </span><span class="s3">} = </span><span class="s1">item</span><span class="s3">;</span>
+        <span class="s2">const </span><span class="s1">testName </span><span class="s3">= </span><span class="s1">parentName </span><span class="s3">? </span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">parentName</span><span class="s3">} </span><span class="s4">- </span><span class="s1">$</span><span class="s3">{</span><span class="s1">name</span><span class="s3">}</span><span class="s4">` </span><span class="s3">: </span><span class="s1">name</span><span class="s3">;</span>
+
+        <span class="s2">const </span><span class="s1">testCode </span><span class="s3">= [</span>
+            <span class="s4">`    test('</span><span class="s1">$</span><span class="s3">{</span><span class="s2">this</span><span class="s3">.</span><span class="s1">escapeString</span><span class="s3">(</span><span class="s1">testName</span><span class="s3">)}</span><span class="s4">', async ({ request }) =&gt; {`</span><span class="s3">,</span>
+            <span class="s1">...</span><span class="s2">this</span><span class="s3">.</span><span class="s1">generateRequestCode</span><span class="s3">(</span><span class="s1">request</span><span class="s3">),</span>
+            <span class="s4">'    });'</span>
+        <span class="s3">].</span><span class="s1">join</span><span class="s3">(</span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s3">);</span>
+
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">playwrightTests</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s1">testCode</span><span class="s3">);</span>
+    <span class="s3">}</span>
+
+    <span class="s1">generateRequestCode</span><span class="s3">(</span><span class="s1">request</span><span class="s3">) {</span>
+        <span class="s2">const </span><span class="s1">lines </span><span class="s3">= [];</span>
+        <span class="s2">const </span><span class="s3">{ </span><span class="s1">method</span><span class="s3">, </span><span class="s1">url</span><span class="s3">, </span><span class="s1">header</span><span class="s3">, </span><span class="s1">body </span><span class="s3">} = </span><span class="s1">request</span><span class="s3">;</span>
+
+        <span class="s0">// URL</span>
+        <span class="s2">const </span><span class="s1">fullUrl </span><span class="s3">= </span><span class="s2">this</span><span class="s3">.</span><span class="s1">buildUrl</span><span class="s3">(</span><span class="s1">url</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">`        const url = '</span><span class="s1">$</span><span class="s3">{</span><span class="s1">fullUrl</span><span class="s3">}</span><span class="s4">';`</span><span class="s3">);</span>
+
+        <span class="s0">// Headers</span>
+        <span class="s2">const </span><span class="s1">headers </span><span class="s3">= </span><span class="s2">this</span><span class="s3">.</span><span class="s1">buildHeaders</span><span class="s3">(</span><span class="s1">header</span><span class="s3">);</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">Object</span><span class="s3">.</span><span class="s1">keys</span><span class="s3">(</span><span class="s1">headers</span><span class="s3">).</span><span class="s1">length </span><span class="s3">&gt; </span><span class="s5">0</span><span class="s3">) {</span>
+            <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">`        const headers = </span><span class="s1">$</span><span class="s3">{</span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">headers</span><span class="s3">, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">12</span><span class="s3">)}</span><span class="s4">;`</span><span class="s3">);</span>
+        <span class="s3">}</span>
+
+        <span class="s0">// Body</span>
+        <span class="s2">let </span><span class="s1">requestBody </span><span class="s3">= </span><span class="s4">''</span><span class="s3">;</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">body </span><span class="s3">&amp;&amp; </span><span class="s1">body</span><span class="s3">.</span><span class="s1">mode </span><span class="s3">=== </span><span class="s4">'raw'</span><span class="s3">) {</span>
+            <span class="s1">requestBody </span><span class="s3">= </span><span class="s2">this</span><span class="s3">.</span><span class="s1">parseRequestBody</span><span class="s3">(</span><span class="s1">body</span><span class="s3">.</span><span class="s1">raw</span><span class="s3">);</span>
+        <span class="s3">}</span>
+
+        <span class="s0">// Request</span>
+        <span class="s2">const </span><span class="s1">requestOptions </span><span class="s3">= [];</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">Object</span><span class="s3">.</span><span class="s1">keys</span><span class="s3">(</span><span class="s1">headers</span><span class="s3">).</span><span class="s1">length </span><span class="s3">&gt; </span><span class="s5">0</span><span class="s3">) {</span>
+            <span class="s1">requestOptions</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'headers'</span><span class="s3">);</span>
+        <span class="s3">}</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">requestBody</span><span class="s3">) {</span>
+            <span class="s1">requestOptions</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'data: requestBody'</span><span class="s3">);</span>
+        <span class="s3">}</span>
+
+        <span class="s2">const </span><span class="s1">optionsString </span><span class="s3">= </span><span class="s1">requestOptions</span><span class="s3">.</span><span class="s1">length </span><span class="s3">&gt; </span><span class="s5">0 </span><span class="s3">?</span>
+            <span class="s4">`, { </span><span class="s1">$</span><span class="s3">{</span><span class="s1">requestOptions</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s4">', '</span><span class="s3">)} </span><span class="s4">}` </span><span class="s3">: </span><span class="s4">''</span><span class="s3">;</span>
+
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">''</span><span class="s3">);</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">requestBody</span><span class="s3">) {</span>
+            <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">`        const requestBody = </span><span class="s1">$</span><span class="s3">{</span><span class="s1">requestBody</span><span class="s3">}</span><span class="s4">;`</span><span class="s3">);</span>
+        <span class="s3">}</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">`        const response = await request.</span><span class="s1">$</span><span class="s3">{</span><span class="s1">method</span><span class="s3">.</span><span class="s1">toLowerCase</span><span class="s3">()}</span><span class="s4">(url</span><span class="s1">$</span><span class="s3">{</span><span class="s1">optionsString</span><span class="s3">}</span><span class="s4">);`</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">''</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'        // Basic assertions'</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'        expect(response.status()).toBe(200);'</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'        expect(response.headers()[</span><span class="s2">\'</span><span class="s4">content-type</span><span class="s2">\'</span><span class="s4">]).toContain(</span><span class="s2">\'</span><span class="s4">application/json</span><span class="s2">\'</span><span class="s4">);'</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">''</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'        // Add your specific assertions here'</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'        const responseBody = await response.json();'</span><span class="s3">);</span>
+        <span class="s1">lines</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s4">'        // expect(responseBody).toHaveProperty(</span><span class="s2">\'</span><span class="s4">id</span><span class="s2">\'</span><span class="s4">);'</span><span class="s3">);</span>
+
+        <span class="s2">return </span><span class="s1">lines</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s1">buildUrl</span><span class="s3">(</span><span class="s1">url</span><span class="s3">) {</span>
+        <span class="s2">if </span><span class="s3">(</span><span class="s2">typeof </span><span class="s1">url </span><span class="s3">=== </span><span class="s4">'string'</span><span class="s3">) {</span>
+            <span class="s2">return </span><span class="s1">url</span><span class="s3">;</span>
+        <span class="s3">}</span>
+
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">url</span><span class="s3">.</span><span class="s1">raw</span><span class="s3">) {</span>
+            <span class="s2">return </span><span class="s1">url</span><span class="s3">.</span><span class="s1">raw</span><span class="s3">;</span>
+        <span class="s3">}</span>
+
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">url</span><span class="s3">.</span><span class="s1">protocol </span><span class="s3">&amp;&amp; </span><span class="s1">url</span><span class="s3">.</span><span class="s1">host </span><span class="s3">&amp;&amp; </span><span class="s1">url</span><span class="s3">.</span><span class="s1">path</span><span class="s3">) {</span>
+            <span class="s2">const </span><span class="s1">protocol </span><span class="s3">= </span><span class="s1">url</span><span class="s3">.</span><span class="s1">protocol </span><span class="s3">|| </span><span class="s4">'https'</span><span class="s3">;</span>
+            <span class="s2">const </span><span class="s1">host </span><span class="s3">= </span><span class="s1">url</span><span class="s3">.</span><span class="s1">host</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s4">'.'</span><span class="s3">);</span>
+            <span class="s2">const </span><span class="s1">path </span><span class="s3">= </span><span class="s1">url</span><span class="s3">.</span><span class="s1">path</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s4">'/'</span><span class="s3">);</span>
+            <span class="s2">return </span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s1">protocol</span><span class="s3">}</span><span class="s4">://</span><span class="s1">$</span><span class="s3">{</span><span class="s1">host</span><span class="s3">}</span><span class="s4">/</span><span class="s1">$</span><span class="s3">{</span><span class="s1">path</span><span class="s3">}</span><span class="s4">`</span><span class="s3">;</span>
+        <span class="s3">}</span>
+
+        <span class="s2">return </span><span class="s4">'https://api.example.com/endpoint'</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s1">buildHeaders</span><span class="s3">(</span><span class="s1">headers</span><span class="s3">) {</span>
+        <span class="s2">if </span><span class="s3">(!</span><span class="s1">headers </span><span class="s3">|| !</span><span class="s1">Array</span><span class="s3">.</span><span class="s1">isArray</span><span class="s3">(</span><span class="s1">headers</span><span class="s3">)) {</span>
+            <span class="s2">return </span><span class="s3">{};</span>
+        <span class="s3">}</span>
+
+        <span class="s2">const </span><span class="s1">headerObj </span><span class="s3">= {};</span>
+        <span class="s1">headers</span><span class="s3">.</span><span class="s1">forEach</span><span class="s3">(</span><span class="s1">header </span><span class="s3">=&gt; {</span>
+            <span class="s2">if </span><span class="s3">(</span><span class="s1">header</span><span class="s3">.</span><span class="s1">key </span><span class="s3">&amp;&amp; </span><span class="s1">header</span><span class="s3">.</span><span class="s1">value</span><span class="s3">) {</span>
+                <span class="s1">headerObj</span><span class="s3">[</span><span class="s1">header</span><span class="s3">.</span><span class="s1">key</span><span class="s3">] = </span><span class="s1">header</span><span class="s3">.</span><span class="s1">value</span><span class="s3">;</span>
+            <span class="s3">}</span>
+        <span class="s3">});</span>
+
+        <span class="s2">return </span><span class="s1">headerObj</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s1">parseRequestBody</span><span class="s3">(</span><span class="s1">rawBody</span><span class="s3">) {</span>
+        <span class="s2">if </span><span class="s3">(!</span><span class="s1">rawBody</span><span class="s3">) {</span>
+            <span class="s2">return </span><span class="s4">''</span><span class="s3">;</span>
+        <span class="s3">}</span>
+
+        <span class="s2">try </span><span class="s3">{</span>
+            <span class="s2">const </span><span class="s1">parsed </span><span class="s3">= </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">parse</span><span class="s3">(</span><span class="s1">rawBody</span><span class="s3">);</span>
+            <span class="s2">return </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">stringify</span><span class="s3">(</span><span class="s1">parsed</span><span class="s3">, </span><span class="s2">null</span><span class="s3">, </span><span class="s5">8</span><span class="s3">);</span>
+        <span class="s3">} </span><span class="s2">catch </span><span class="s3">(</span><span class="s1">e</span><span class="s3">) {</span>
+            <span class="s0">// Если не JSON, возвращаем как строку</span>
+            <span class="s2">return </span><span class="s4">`'</span><span class="s1">$</span><span class="s3">{</span><span class="s2">this</span><span class="s3">.</span><span class="s1">escapeString</span><span class="s3">(</span><span class="s1">rawBody</span><span class="s3">)}</span><span class="s4">'`</span><span class="s3">;</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+
+    <span class="s1">escapeString</span><span class="s3">(</span><span class="s1">str</span><span class="s3">) {</span>
+        <span class="s2">return </span><span class="s1">str</span><span class="s3">.</span><span class="s1">replace</span><span class="s3">(</span><span class="s6">/'/g</span><span class="s3">, </span><span class="s4">&quot;</span><span class="s2">\\</span><span class="s4">'&quot;</span><span class="s3">).</span><span class="s1">replace</span><span class="s3">(</span><span class="s6">/\n/g</span><span class="s3">, </span><span class="s4">'</span><span class="s2">\\</span><span class="s4">n'</span><span class="s3">);</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+
+<span class="s0">// Функция для использования</span>
+<span class="s2">function </span><span class="s1">convertPostmanToPlaywright</span><span class="s3">(</span><span class="s1">postmanCollectionPath</span><span class="s3">, </span><span class="s1">outputPath</span><span class="s3">) {</span>
+    <span class="s2">try </span><span class="s3">{</span>
+        <span class="s0">// Читаем Postman коллекцию</span>
+        <span class="s2">const </span><span class="s1">postmanData </span><span class="s3">= </span><span class="s1">JSON</span><span class="s3">.</span><span class="s1">parse</span><span class="s3">(</span><span class="s1">fs</span><span class="s3">.</span><span class="s1">readFileSync</span><span class="s3">(</span><span class="s1">postmanCollectionPath</span><span class="s3">, </span><span class="s4">'utf8'</span><span class="s3">));</span>
+
+        <span class="s0">// Конвертируем</span>
+        <span class="s2">const </span><span class="s1">converter </span><span class="s3">= </span><span class="s2">new </span><span class="s1">PostmanToPlaywrightConverter</span><span class="s3">(</span><span class="s1">postmanData</span><span class="s3">);</span>
+        <span class="s2">const </span><span class="s1">playwrightCode </span><span class="s3">= </span><span class="s1">converter</span><span class="s3">.</span><span class="s1">convert</span><span class="s3">();</span>
+
+        <span class="s0">// Сохраняем результат</span>
+        <span class="s1">fs</span><span class="s3">.</span><span class="s1">writeFileSync</span><span class="s3">(</span><span class="s1">outputPath</span><span class="s3">, </span><span class="s1">playwrightCode</span><span class="s3">, </span><span class="s4">'utf8'</span><span class="s3">);</span>
+
+        <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">`✅ Успешно сконвертировано! Файл сохранен: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">outputPath</span><span class="s3">}</span><span class="s4">`</span><span class="s3">);</span>
+
+    <span class="s3">} </span><span class="s2">catch </span><span class="s3">(</span><span class="s1">error</span><span class="s3">) {</span>
+        <span class="s1">console</span><span class="s3">.</span><span class="s1">error</span><span class="s3">(</span><span class="s4">'❌ Ошибка конвертации:'</span><span class="s3">, </span><span class="s1">error</span><span class="s3">.</span><span class="s1">message</span><span class="s3">);</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+
+<span class="s0">// Использование</span>
+<span class="s2">if </span><span class="s3">(</span><span class="s1">require</span><span class="s3">.</span><span class="s1">main </span><span class="s3">=== </span><span class="s1">module</span><span class="s3">) {</span>
+    <span class="s2">const </span><span class="s1">postmanFile </span><span class="s3">= </span><span class="s1">process</span><span class="s3">.</span><span class="s1">argv</span><span class="s3">[</span><span class="s5">2</span><span class="s3">] || </span><span class="s4">'./postman-collection.json'</span><span class="s3">;</span>
+    <span class="s2">const </span><span class="s1">outputFile </span><span class="s3">= </span><span class="s1">process</span><span class="s3">.</span><span class="s1">argv</span><span class="s3">[</span><span class="s5">3</span><span class="s3">] || </span><span class="s4">'./playwright-api-tests.spec.js'</span><span class="s3">;</span>
+
+    <span class="s1">convertPostmanToPlaywright</span><span class="s3">(</span><span class="s1">postmanFile</span><span class="s3">, </span><span class="s1">outputFile</span><span class="s3">);</span>
+<span class="s3">}</span>
+
+<span class="s1">module</span><span class="s3">.</span><span class="s1">exports </span><span class="s3">= { </span><span class="s1">PostmanToPlaywrightConverter</span><span class="s3">, </span><span class="s1">convertPostmanToPlaywright </span><span class="s3">};</span></pre>
+</body>
+</html>

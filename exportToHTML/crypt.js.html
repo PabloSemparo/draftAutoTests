@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>crypt.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+crypt.js</font>
+</center></td></tr></table>
+<pre><span class="s0">(</span><span class="s1">function</span><span class="s0">() {</span>
+  <span class="s1">var </span><span class="s2">base64map</span>
+      <span class="s0">= </span><span class="s3">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span><span class="s0">,</span>
+
+  <span class="s2">crypt </span><span class="s0">= {</span>
+    <span class="s4">// Bit-wise rotation left</span>
+    <span class="s2">rotl</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">n</span><span class="s0">, </span><span class="s2">b</span><span class="s0">) {</span>
+      <span class="s1">return </span><span class="s0">(</span><span class="s2">n </span><span class="s0">&lt;&lt; </span><span class="s2">b</span><span class="s0">) | (</span><span class="s2">n </span><span class="s0">&gt;&gt;&gt; (</span><span class="s5">32 </span><span class="s0">- </span><span class="s2">b</span><span class="s0">));</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Bit-wise rotation right</span>
+    <span class="s2">rotr</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">n</span><span class="s0">, </span><span class="s2">b</span><span class="s0">) {</span>
+      <span class="s1">return </span><span class="s0">(</span><span class="s2">n </span><span class="s0">&lt;&lt; (</span><span class="s5">32 </span><span class="s0">- </span><span class="s2">b</span><span class="s0">)) | (</span><span class="s2">n </span><span class="s0">&gt;&gt;&gt; </span><span class="s2">b</span><span class="s0">);</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Swap big-endian to little-endian and vice versa</span>
+    <span class="s2">endian</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">n</span><span class="s0">) {</span>
+      <span class="s4">// If number given, swap endian</span>
+      <span class="s1">if </span><span class="s0">(</span><span class="s2">n</span><span class="s0">.</span><span class="s2">constructor </span><span class="s0">== </span><span class="s2">Number</span><span class="s0">) {</span>
+        <span class="s1">return </span><span class="s2">crypt</span><span class="s0">.</span><span class="s2">rotl</span><span class="s0">(</span><span class="s2">n</span><span class="s0">, </span><span class="s5">8</span><span class="s0">) &amp; </span><span class="s5">0x00FF00FF </span><span class="s0">| </span><span class="s2">crypt</span><span class="s0">.</span><span class="s2">rotl</span><span class="s0">(</span><span class="s2">n</span><span class="s0">, </span><span class="s5">24</span><span class="s0">) &amp; </span><span class="s5">0xFF00FF00</span><span class="s0">;</span>
+      <span class="s0">}</span>
+
+      <span class="s4">// Else, assume array and swap all items</span>
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">i </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">i </span><span class="s0">&lt; </span><span class="s2">n</span><span class="s0">.</span><span class="s2">length</span><span class="s0">; </span><span class="s2">i</span><span class="s0">++)</span>
+        <span class="s2">n</span><span class="s0">[</span><span class="s2">i</span><span class="s0">] = </span><span class="s2">crypt</span><span class="s0">.</span><span class="s2">endian</span><span class="s0">(</span><span class="s2">n</span><span class="s0">[</span><span class="s2">i</span><span class="s0">]);</span>
+      <span class="s1">return </span><span class="s2">n</span><span class="s0">;</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Generate an array of any length of random bytes</span>
+    <span class="s2">randomBytes</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">n</span><span class="s0">) {</span>
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">bytes </span><span class="s0">= []; </span><span class="s2">n </span><span class="s0">&gt; </span><span class="s5">0</span><span class="s0">; </span><span class="s2">n</span><span class="s0">--)</span>
+        <span class="s2">bytes</span><span class="s0">.</span><span class="s2">push</span><span class="s0">(</span><span class="s2">Math</span><span class="s0">.</span><span class="s2">floor</span><span class="s0">(</span><span class="s2">Math</span><span class="s0">.</span><span class="s2">random</span><span class="s0">() * </span><span class="s5">256</span><span class="s0">));</span>
+      <span class="s1">return </span><span class="s2">bytes</span><span class="s0">;</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Convert a byte array to big-endian 32-bit words</span>
+    <span class="s2">bytesToWords</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">bytes</span><span class="s0">) {</span>
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">words </span><span class="s0">= [], </span><span class="s2">i </span><span class="s0">= </span><span class="s5">0</span><span class="s0">, </span><span class="s2">b </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">i </span><span class="s0">&lt; </span><span class="s2">bytes</span><span class="s0">.</span><span class="s2">length</span><span class="s0">; </span><span class="s2">i</span><span class="s0">++, </span><span class="s2">b </span><span class="s0">+= </span><span class="s5">8</span><span class="s0">)</span>
+        <span class="s2">words</span><span class="s0">[</span><span class="s2">b </span><span class="s0">&gt;&gt;&gt; </span><span class="s5">5</span><span class="s0">] |= </span><span class="s2">bytes</span><span class="s0">[</span><span class="s2">i</span><span class="s0">] &lt;&lt; (</span><span class="s5">24 </span><span class="s0">- </span><span class="s2">b </span><span class="s0">% </span><span class="s5">32</span><span class="s0">);</span>
+      <span class="s1">return </span><span class="s2">words</span><span class="s0">;</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Convert big-endian 32-bit words to a byte array</span>
+    <span class="s2">wordsToBytes</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">words</span><span class="s0">) {</span>
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">bytes </span><span class="s0">= [], </span><span class="s2">b </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">b </span><span class="s0">&lt; </span><span class="s2">words</span><span class="s0">.</span><span class="s2">length </span><span class="s0">* </span><span class="s5">32</span><span class="s0">; </span><span class="s2">b </span><span class="s0">+= </span><span class="s5">8</span><span class="s0">)</span>
+        <span class="s2">bytes</span><span class="s0">.</span><span class="s2">push</span><span class="s0">((</span><span class="s2">words</span><span class="s0">[</span><span class="s2">b </span><span class="s0">&gt;&gt;&gt; </span><span class="s5">5</span><span class="s0">] &gt;&gt;&gt; (</span><span class="s5">24 </span><span class="s0">- </span><span class="s2">b </span><span class="s0">% </span><span class="s5">32</span><span class="s0">)) &amp; </span><span class="s5">0xFF</span><span class="s0">);</span>
+      <span class="s1">return </span><span class="s2">bytes</span><span class="s0">;</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Convert a byte array to a hex string</span>
+    <span class="s2">bytesToHex</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">bytes</span><span class="s0">) {</span>
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">hex </span><span class="s0">= [], </span><span class="s2">i </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">i </span><span class="s0">&lt; </span><span class="s2">bytes</span><span class="s0">.</span><span class="s2">length</span><span class="s0">; </span><span class="s2">i</span><span class="s0">++) {</span>
+        <span class="s2">hex</span><span class="s0">.</span><span class="s2">push</span><span class="s0">((</span><span class="s2">bytes</span><span class="s0">[</span><span class="s2">i</span><span class="s0">] &gt;&gt;&gt; </span><span class="s5">4</span><span class="s0">).</span><span class="s2">toString</span><span class="s0">(</span><span class="s5">16</span><span class="s0">));</span>
+        <span class="s2">hex</span><span class="s0">.</span><span class="s2">push</span><span class="s0">((</span><span class="s2">bytes</span><span class="s0">[</span><span class="s2">i</span><span class="s0">] &amp; </span><span class="s5">0xF</span><span class="s0">).</span><span class="s2">toString</span><span class="s0">(</span><span class="s5">16</span><span class="s0">));</span>
+      <span class="s0">}</span>
+      <span class="s1">return </span><span class="s2">hex</span><span class="s0">.</span><span class="s2">join</span><span class="s0">(</span><span class="s3">''</span><span class="s0">);</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Convert a hex string to a byte array</span>
+    <span class="s2">hexToBytes</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">hex</span><span class="s0">) {</span>
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">bytes </span><span class="s0">= [], </span><span class="s2">c </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">c </span><span class="s0">&lt; </span><span class="s2">hex</span><span class="s0">.</span><span class="s2">length</span><span class="s0">; </span><span class="s2">c </span><span class="s0">+= </span><span class="s5">2</span><span class="s0">)</span>
+        <span class="s2">bytes</span><span class="s0">.</span><span class="s2">push</span><span class="s0">(</span><span class="s2">parseInt</span><span class="s0">(</span><span class="s2">hex</span><span class="s0">.</span><span class="s2">substr</span><span class="s0">(</span><span class="s2">c</span><span class="s0">, </span><span class="s5">2</span><span class="s0">), </span><span class="s5">16</span><span class="s0">));</span>
+      <span class="s1">return </span><span class="s2">bytes</span><span class="s0">;</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Convert a byte array to a base-64 string</span>
+    <span class="s2">bytesToBase64</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">bytes</span><span class="s0">) {</span>
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">base64 </span><span class="s0">= [], </span><span class="s2">i </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">i </span><span class="s0">&lt; </span><span class="s2">bytes</span><span class="s0">.</span><span class="s2">length</span><span class="s0">; </span><span class="s2">i </span><span class="s0">+= </span><span class="s5">3</span><span class="s0">) {</span>
+        <span class="s1">var </span><span class="s2">triplet </span><span class="s0">= (</span><span class="s2">bytes</span><span class="s0">[</span><span class="s2">i</span><span class="s0">] &lt;&lt; </span><span class="s5">16</span><span class="s0">) | (</span><span class="s2">bytes</span><span class="s0">[</span><span class="s2">i </span><span class="s0">+ </span><span class="s5">1</span><span class="s0">] &lt;&lt; </span><span class="s5">8</span><span class="s0">) | </span><span class="s2">bytes</span><span class="s0">[</span><span class="s2">i </span><span class="s0">+ </span><span class="s5">2</span><span class="s0">];</span>
+        <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">j </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">j </span><span class="s0">&lt; </span><span class="s5">4</span><span class="s0">; </span><span class="s2">j</span><span class="s0">++)</span>
+          <span class="s1">if </span><span class="s0">(</span><span class="s2">i </span><span class="s0">* </span><span class="s5">8 </span><span class="s0">+ </span><span class="s2">j </span><span class="s0">* </span><span class="s5">6 </span><span class="s0">&lt;= </span><span class="s2">bytes</span><span class="s0">.</span><span class="s2">length </span><span class="s0">* </span><span class="s5">8</span><span class="s0">)</span>
+            <span class="s2">base64</span><span class="s0">.</span><span class="s2">push</span><span class="s0">(</span><span class="s2">base64map</span><span class="s0">.</span><span class="s2">charAt</span><span class="s0">((</span><span class="s2">triplet </span><span class="s0">&gt;&gt;&gt; </span><span class="s5">6 </span><span class="s0">* (</span><span class="s5">3 </span><span class="s0">- </span><span class="s2">j</span><span class="s0">)) &amp; </span><span class="s5">0x3F</span><span class="s0">));</span>
+          <span class="s1">else</span>
+            <span class="s2">base64</span><span class="s0">.</span><span class="s2">push</span><span class="s0">(</span><span class="s3">'='</span><span class="s0">);</span>
+      <span class="s0">}</span>
+      <span class="s1">return </span><span class="s2">base64</span><span class="s0">.</span><span class="s2">join</span><span class="s0">(</span><span class="s3">''</span><span class="s0">);</span>
+    <span class="s0">},</span>
+
+    <span class="s4">// Convert a base-64 string to a byte array</span>
+    <span class="s2">base64ToBytes</span><span class="s0">: </span><span class="s1">function</span><span class="s0">(</span><span class="s2">base64</span><span class="s0">) {</span>
+      <span class="s4">// Remove non-base-64 characters</span>
+      <span class="s2">base64 </span><span class="s0">= </span><span class="s2">base64</span><span class="s0">.</span><span class="s2">replace</span><span class="s0">(</span><span class="s6">/[^A-Z0-9+\/]/ig</span><span class="s0">, </span><span class="s3">''</span><span class="s0">);</span>
+
+      <span class="s1">for </span><span class="s0">(</span><span class="s1">var </span><span class="s2">bytes </span><span class="s0">= [], </span><span class="s2">i </span><span class="s0">= </span><span class="s5">0</span><span class="s0">, </span><span class="s2">imod4 </span><span class="s0">= </span><span class="s5">0</span><span class="s0">; </span><span class="s2">i </span><span class="s0">&lt; </span><span class="s2">base64</span><span class="s0">.</span><span class="s2">length</span><span class="s0">;</span>
+          <span class="s2">imod4 </span><span class="s0">= ++</span><span class="s2">i </span><span class="s0">% </span><span class="s5">4</span><span class="s0">) {</span>
+        <span class="s1">if </span><span class="s0">(</span><span class="s2">imod4 </span><span class="s0">== </span><span class="s5">0</span><span class="s0">) </span><span class="s1">continue</span><span class="s0">;</span>
+        <span class="s2">bytes</span><span class="s0">.</span><span class="s2">push</span><span class="s0">(((</span><span class="s2">base64map</span><span class="s0">.</span><span class="s2">indexOf</span><span class="s0">(</span><span class="s2">base64</span><span class="s0">.</span><span class="s2">charAt</span><span class="s0">(</span><span class="s2">i </span><span class="s0">- </span><span class="s5">1</span><span class="s0">))</span>
+            <span class="s0">&amp; (</span><span class="s2">Math</span><span class="s0">.</span><span class="s2">pow</span><span class="s0">(</span><span class="s5">2</span><span class="s0">, -</span><span class="s5">2 </span><span class="s0">* </span><span class="s2">imod4 </span><span class="s0">+ </span><span class="s5">8</span><span class="s0">) - </span><span class="s5">1</span><span class="s0">)) &lt;&lt; (</span><span class="s2">imod4 </span><span class="s0">* </span><span class="s5">2</span><span class="s0">))</span>
+            <span class="s0">| (</span><span class="s2">base64map</span><span class="s0">.</span><span class="s2">indexOf</span><span class="s0">(</span><span class="s2">base64</span><span class="s0">.</span><span class="s2">charAt</span><span class="s0">(</span><span class="s2">i</span><span class="s0">)) &gt;&gt;&gt; (</span><span class="s5">6 </span><span class="s0">- </span><span class="s2">imod4 </span><span class="s0">* </span><span class="s5">2</span><span class="s0">)));</span>
+      <span class="s0">}</span>
+      <span class="s1">return </span><span class="s2">bytes</span><span class="s0">;</span>
+    <span class="s0">}</span>
+  <span class="s0">};</span>
+
+  <span class="s2">module</span><span class="s0">.</span><span class="s2">exports </span><span class="s0">= </span><span class="s2">crypt</span><span class="s0">;</span>
+<span class="s0">})();</span>
+</pre>
+</body>
+</html>

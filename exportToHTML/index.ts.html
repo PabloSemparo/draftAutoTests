@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>index.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+index.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{</span>
+  <span class="s1">DefinedFormats</span><span class="s2">,</span>
+  <span class="s1">FormatMode</span><span class="s2">,</span>
+  <span class="s1">FormatName</span><span class="s2">,</span>
+  <span class="s1">formatNames</span><span class="s2">,</span>
+  <span class="s1">fastFormats</span><span class="s2">,</span>
+  <span class="s1">fullFormats</span><span class="s2">,</span>
+<span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./formats&quot;</span>
+<span class="s0">import </span><span class="s1">formatLimit from </span><span class="s3">&quot;./limit&quot;</span>
+<span class="s0">import </span><span class="s1">type Ajv from </span><span class="s3">&quot;ajv&quot;</span>
+<span class="s0">import </span><span class="s1">type </span><span class="s2">{</span><span class="s1">Plugin</span><span class="s2">, </span><span class="s1">Format</span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;ajv&quot;</span>
+<span class="s0">import </span><span class="s2">{</span><span class="s1">_</span><span class="s2">, </span><span class="s1">Name</span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;ajv/dist/compile/codegen&quot;</span>
+
+<span class="s0">export </span><span class="s2">{</span><span class="s1">FormatMode</span><span class="s2">, </span><span class="s1">FormatName</span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./formats&quot;</span>
+<span class="s0">export </span><span class="s2">{</span><span class="s1">LimitFormatError</span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./limit&quot;</span>
+<span class="s0">export interface </span><span class="s1">FormatOptions </span><span class="s2">{</span>
+  <span class="s1">mode</span><span class="s2">?: </span><span class="s1">FormatMode</span>
+  <span class="s1">formats</span><span class="s2">?: </span><span class="s1">FormatName</span><span class="s2">[]</span>
+  <span class="s1">keywords</span><span class="s2">?: </span><span class="s1">boolean</span>
+<span class="s2">}</span>
+
+<span class="s0">export </span><span class="s1">type FormatsPluginOptions </span><span class="s2">= </span><span class="s1">FormatName</span><span class="s2">[] | </span><span class="s1">FormatOptions</span>
+
+<span class="s0">export interface </span><span class="s1">FormatsPlugin </span><span class="s0">extends </span><span class="s1">Plugin</span><span class="s2">&lt;</span><span class="s1">FormatsPluginOptions</span><span class="s2">&gt; {</span>
+  <span class="s1">get</span><span class="s2">: (</span><span class="s1">format</span><span class="s2">: </span><span class="s1">FormatName</span><span class="s2">, </span><span class="s1">mode</span><span class="s2">?: </span><span class="s1">FormatMode</span><span class="s2">) =&gt; </span><span class="s1">Format</span>
+<span class="s2">}</span>
+
+<span class="s0">const </span><span class="s1">fullName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Name</span><span class="s2">(</span><span class="s3">&quot;fullFormats&quot;</span><span class="s2">)</span>
+<span class="s0">const </span><span class="s1">fastName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Name</span><span class="s2">(</span><span class="s3">&quot;fastFormats&quot;</span><span class="s2">)</span>
+
+<span class="s0">const </span><span class="s1">formatsPlugin</span><span class="s2">: </span><span class="s1">FormatsPlugin </span><span class="s2">= (</span>
+  <span class="s1">ajv</span><span class="s2">: </span><span class="s1">Ajv</span><span class="s2">,</span>
+  <span class="s1">opts</span><span class="s2">: </span><span class="s1">FormatsPluginOptions </span><span class="s2">= {</span><span class="s1">keywords</span><span class="s2">: </span><span class="s0">true</span><span class="s2">}</span>
+<span class="s2">): </span><span class="s1">Ajv </span><span class="s2">=&gt; {</span>
+  <span class="s0">if </span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">opts</span><span class="s2">)) {</span>
+    <span class="s1">addFormats</span><span class="s2">(</span><span class="s1">ajv</span><span class="s2">, </span><span class="s1">opts</span><span class="s2">, </span><span class="s1">fullFormats</span><span class="s2">, </span><span class="s1">fullName</span><span class="s2">)</span>
+    <span class="s0">return </span><span class="s1">ajv</span>
+  <span class="s2">}</span>
+  <span class="s0">const </span><span class="s2">[</span><span class="s1">formats</span><span class="s2">, </span><span class="s1">exportName</span><span class="s2">] =</span>
+    <span class="s1">opts</span><span class="s2">.</span><span class="s1">mode </span><span class="s2">=== </span><span class="s3">&quot;fast&quot; </span><span class="s2">? [</span><span class="s1">fastFormats</span><span class="s2">, </span><span class="s1">fastName</span><span class="s2">] : [</span><span class="s1">fullFormats</span><span class="s2">, </span><span class="s1">fullName</span><span class="s2">]</span>
+  <span class="s0">const </span><span class="s1">list </span><span class="s2">= </span><span class="s1">opts</span><span class="s2">.</span><span class="s1">formats </span><span class="s2">|| </span><span class="s1">formatNames</span>
+  <span class="s1">addFormats</span><span class="s2">(</span><span class="s1">ajv</span><span class="s2">, </span><span class="s1">list</span><span class="s2">, </span><span class="s1">formats</span><span class="s2">, </span><span class="s1">exportName</span><span class="s2">)</span>
+  <span class="s0">if </span><span class="s2">(</span><span class="s1">opts</span><span class="s2">.</span><span class="s1">keywords</span><span class="s2">) </span><span class="s1">formatLimit</span><span class="s2">(</span><span class="s1">ajv</span><span class="s2">)</span>
+  <span class="s0">return </span><span class="s1">ajv</span>
+<span class="s2">}</span>
+
+<span class="s1">formatsPlugin</span><span class="s2">.</span><span class="s1">get </span><span class="s2">= (</span><span class="s1">name</span><span class="s2">: </span><span class="s1">FormatName</span><span class="s2">, </span><span class="s1">mode</span><span class="s2">: </span><span class="s1">FormatMode </span><span class="s2">= </span><span class="s3">&quot;full&quot;</span><span class="s2">): </span><span class="s1">Format </span><span class="s2">=&gt; {</span>
+  <span class="s0">const </span><span class="s1">formats </span><span class="s2">= </span><span class="s1">mode </span><span class="s2">=== </span><span class="s3">&quot;fast&quot; </span><span class="s2">? </span><span class="s1">fastFormats </span><span class="s2">: </span><span class="s1">fullFormats</span>
+  <span class="s0">const </span><span class="s1">f </span><span class="s2">= </span><span class="s1">formats</span><span class="s2">[</span><span class="s1">name</span><span class="s2">]</span>
+  <span class="s0">if </span><span class="s2">(!</span><span class="s1">f</span><span class="s2">) </span><span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span><span class="s3">`Unknown format &quot;</span><span class="s1">$</span><span class="s2">{</span><span class="s1">name</span><span class="s2">}</span><span class="s3">&quot;`</span><span class="s2">)</span>
+  <span class="s0">return </span><span class="s1">f</span>
+<span class="s2">}</span>
+
+<span class="s0">function </span><span class="s1">addFormats</span><span class="s2">(</span><span class="s1">ajv</span><span class="s2">: </span><span class="s1">Ajv</span><span class="s2">, </span><span class="s1">list</span><span class="s2">: </span><span class="s1">FormatName</span><span class="s2">[], </span><span class="s1">fs</span><span class="s2">: </span><span class="s1">DefinedFormats</span><span class="s2">, </span><span class="s1">exportName</span><span class="s2">: </span><span class="s1">Name</span><span class="s2">): </span><span class="s0">void </span><span class="s2">{</span>
+  <span class="s1">ajv</span><span class="s2">.</span><span class="s1">opts</span><span class="s2">.</span><span class="s1">code</span><span class="s2">.</span><span class="s1">formats </span><span class="s2">??= </span><span class="s1">_</span><span class="s3">`require(&quot;ajv-formats/dist/formats&quot;).</span><span class="s1">$</span><span class="s2">{</span><span class="s1">exportName</span><span class="s2">}</span><span class="s3">`</span>
+  <span class="s0">for </span><span class="s2">(</span><span class="s0">const </span><span class="s1">f of list</span><span class="s2">) </span><span class="s1">ajv</span><span class="s2">.</span><span class="s1">addFormat</span><span class="s2">(</span><span class="s1">f</span><span class="s2">, </span><span class="s1">fs</span><span class="s2">[</span><span class="s1">f</span><span class="s2">])</span>
+<span class="s2">}</span>
+
+<span class="s1">module</span><span class="s2">.</span><span class="s1">exports </span><span class="s2">= </span><span class="s1">exports </span><span class="s2">= </span><span class="s1">formatsPlugin</span>
+<span class="s1">Object</span><span class="s2">.</span><span class="s1">defineProperty</span><span class="s2">(</span><span class="s1">exports</span><span class="s2">, </span><span class="s3">&quot;__esModule&quot;</span><span class="s2">, {</span><span class="s1">value</span><span class="s2">: </span><span class="s0">true</span><span class="s2">})</span>
+
+<span class="s0">export default </span><span class="s1">formatsPlugin</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>eq-dc-debt-importer-contractors.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-dc-debt-importer-contractors.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">contractorData from </span><span class="s3">'../Test</span><span class="s0">\'</span><span class="s3">s Data/contractorData.json'</span><span class="s2">;</span>
+<span class="s0">const </span><span class="s1">API_URL </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">API_URL </span><span class="s2">|| </span><span class="s3">'http://eq-dc-debt-importer.test2.mmk.local/admin/v1/contractors'</span><span class="s2">;</span>
+<span class="s0">const </span><span class="s1">AUTH_TOKEN </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">AUTH_TOKEN </span><span class="s2">|| </span><span class="s3">''</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Тесты API создания контрагентов'</span><span class="s2">, () =&gt; {</span>
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'POST /contractors - Создание контрагента с валидными данными'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s1">API_URL</span><span class="s2">, {</span>
+                <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">`</span><span class="s2">},</span>
+            <span class="s1">data</span><span class="s2">: </span><span class="s1">contractorData</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">201</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'POST /contractors - Должен возвращать ошибку при невалидном токене [401 CODE]'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s1">API_URL</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: {</span>
+                <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Authorization'</span><span class="s2">: </span><span class="s3">'invalid_token'</span>
+            <span class="s2">},</span>
+            <span class="s1">data</span><span class="s2">: {</span>
+                <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Быстроденги&quot;</span><span class="s2">,</span>
+                <span class="s1">inn</span><span class="s2">: </span><span class="s3">&quot;5544332219&quot;</span><span class="s2">,</span>
+                <span class="s1">status</span><span class="s2">: </span><span class="s3">&quot;DRAFT&quot;</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">401</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'POST /contractors - Должен возвращать ошибку при отсутствии обязательных полей'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s1">API_URL</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: {</span>
+                <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Authorization'</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">`</span>
+            <span class="s2">},</span>
+            <span class="s1">data</span><span class="s2">: {</span>
+                <span class="s5">// Отсутствуют обязательные поля name и inn</span>
+                <span class="s1">status</span><span class="s2">: </span><span class="s3">&quot;DRAFT&quot;</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">400</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'errors'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">).</span><span class="s1">toContainEqual</span><span class="s2">(</span>
+            <span class="s1">expect</span><span class="s2">.</span><span class="s1">objectContaining</span><span class="s2">({</span>
+                <span class="s1">code</span><span class="s2">: </span><span class="s3">&quot;FIELD_REQUIRED&quot;</span><span class="s2">,</span>
+                <span class="s1">description</span><span class="s2">: </span><span class="s3">&quot;Отсутствует обязательное поле name&quot;</span><span class="s2">,</span>
+                <span class="s1">key</span><span class="s2">: </span><span class="s3">&quot;name&quot;</span>
+        <span class="s2">}));</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">).</span><span class="s1">toContainEqual</span><span class="s2">(</span>
+            <span class="s1">expect</span><span class="s2">.</span><span class="s1">objectContaining</span><span class="s2">({</span>
+                <span class="s1">code</span><span class="s2">: </span><span class="s3">&quot;FIELD_REQUIRED&quot;</span><span class="s2">,</span>
+                <span class="s1">description</span><span class="s2">: </span><span class="s3">&quot;Отсутствует обязательное поле name&quot;</span><span class="s2">,</span>
+                <span class="s1">key</span><span class="s2">: </span><span class="s3">&quot;name&quot;</span>
+        <span class="s2">}));</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'POST /contractors - Должен возвращать ошибку при неверном формате ИНН'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s1">API_URL</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: {</span>
+                <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Authorization'</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">`</span>
+            <span class="s2">},</span>
+            <span class="s1">data</span><span class="s2">: {</span>
+                <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Быстроденги&quot;</span><span class="s2">,</span>
+                <span class="s1">inn</span><span class="s2">: </span><span class="s3">&quot;invalid_inn&quot;</span><span class="s2">,</span>
+                <span class="s1">status</span><span class="s2">: </span><span class="s3">&quot;DRAFT&quot;</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">400</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'errors'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">).</span><span class="s1">toContainEqual</span><span class="s2">(</span>
+            <span class="s1">expect</span><span class="s2">.</span><span class="s1">objectContaining</span><span class="s2">({</span>
+                <span class="s1">code</span><span class="s2">: </span><span class="s3">&quot;FIELD_REQUIRED&quot;</span><span class="s2">,</span>
+                <span class="s1">description</span><span class="s2">: </span><span class="s3">&quot;Отсутствует обязательное поле description&quot;</span><span class="s2">,</span>
+                <span class="s1">key</span><span class="s2">: </span><span class="s3">&quot;description&quot;</span>
+        <span class="s2">}));</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'POST /contractors - Должен возвращать ошибку при невалидном статусе'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s1">API_URL</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: {</span>
+                <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+                <span class="s3">'Authorization'</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">`</span>
+            <span class="s2">},</span>
+            <span class="s1">data</span><span class="s2">: {</span>
+                <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Быстроденги&quot;</span><span class="s2">,</span>
+                <span class="s1">inn</span><span class="s2">: </span><span class="s3">&quot;5544332219&quot;</span><span class="s2">,</span>
+                <span class="s1">status</span><span class="s2">: </span><span class="s3">&quot;INVALID_STATUS&quot;</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">400</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'errors'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">).</span><span class="s1">toContainEqual</span><span class="s2">(</span>
+            <span class="s1">expect</span><span class="s2">.</span><span class="s1">objectContaining</span><span class="s2">({</span>
+                <span class="s1">code</span><span class="s2">: </span><span class="s3">&quot;INVALID_FIELD_FORMAT&quot;</span><span class="s2">,</span>
+                <span class="s1">description</span><span class="s2">: </span><span class="s3">&quot;Поле status должно иметь тип class ru.bd.eq.dc.debt.importer.entity.ContractorDetail$Status&quot;</span><span class="s2">,</span>
+                <span class="s1">key</span><span class="s2">: </span><span class="s3">&quot;status&quot;</span>
+        <span class="s2">}));</span>
+    <span class="s2">});</span>
+<span class="s2">})</span>
+</pre>
+</body>
+</html>

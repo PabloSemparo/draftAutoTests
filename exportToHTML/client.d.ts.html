@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>client.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #7a7e85;}
+.s6 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+client.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">URL </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'url'</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">TlsOptions </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'tls'</span>
+<span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s3">'./dispatcher'</span>
+<span class="s0">import </span><span class="s1">buildConnector from </span><span class="s3">&quot;./connector&quot;</span><span class="s2">;</span>
+
+<span class="s1">type ClientConnectOptions </span><span class="s2">= </span><span class="s1">Omit</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">ConnectOptions</span><span class="s2">, </span><span class="s3">&quot;origin&quot;</span><span class="s2">&gt;;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* A basic HTTP/1.1 client, mapped on top a single TCP/TLS connection. Pipelining is disabled by default.</span>
+ <span class="s4">*/</span>
+<span class="s0">export class </span><span class="s1">Client </span><span class="s0">extends </span><span class="s1">Dispatcher </span><span class="s2">{</span>
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">url</span><span class="s2">: </span><span class="s1">string </span><span class="s2">| </span><span class="s1">URL</span><span class="s2">, </span><span class="s1">options</span><span class="s2">?: </span><span class="s1">Client</span><span class="s2">.</span><span class="s1">Options</span><span class="s2">);</span>
+  <span class="s4">/** Property to get and set the pipelining factor. */</span>
+  <span class="s1">pipelining</span><span class="s2">: </span><span class="s1">number</span><span class="s2">;</span>
+  <span class="s4">/** `true` after `client.close()` has been called. */</span>
+  <span class="s1">closed</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+  <span class="s4">/** `true` after `client.destroyed()` has been called or `client.close()` has been called and the client shutdown has completed. */</span>
+  <span class="s1">destroyed</span><span class="s2">: </span><span class="s1">boolean</span><span class="s2">;</span>
+
+  <span class="s5">// Override dispatcher APIs.</span>
+  <span class="s1">override connect</span><span class="s2">(</span>
+    <span class="s1">options</span><span class="s2">: </span><span class="s1">ClientConnectOptions</span>
+  <span class="s2">): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">ConnectData</span><span class="s2">&gt;;</span>
+  <span class="s1">override connect</span><span class="s2">(</span>
+    <span class="s1">options</span><span class="s2">: </span><span class="s1">ClientConnectOptions</span><span class="s2">,</span>
+    <span class="s1">callback</span><span class="s2">: (</span><span class="s1">err</span><span class="s2">: </span><span class="s1">Error </span><span class="s2">| </span><span class="s0">null</span><span class="s2">, </span><span class="s1">data</span><span class="s2">: </span><span class="s1">Dispatcher</span><span class="s2">.</span><span class="s1">ConnectData</span><span class="s2">) =&gt; </span><span class="s0">void</span>
+  <span class="s2">): </span><span class="s0">void</span><span class="s2">;</span>
+<span class="s2">}</span>
+
+<span class="s0">export </span><span class="s1">declare namespace Client </span><span class="s2">{</span>
+  <span class="s0">export interface </span><span class="s1">OptionsInterceptors </span><span class="s2">{</span>
+    <span class="s1">Client</span><span class="s2">: </span><span class="s1">readonly Dispatcher</span><span class="s2">.</span><span class="s1">DispatchInterceptor</span><span class="s2">[];</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">Options </span><span class="s2">{</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">interceptors</span><span class="s2">?: </span><span class="s1">OptionsInterceptors</span><span class="s2">;</span>
+    <span class="s4">/** The maximum length of request headers in bytes. Default: Node.js' `--max-http-header-size` or `16384` (16KiB). */</span>
+    <span class="s1">maxHeaderSize</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** The amount of time, in milliseconds, the parser will wait to receive the complete HTTP headers (Node 14 and above only). Default: `300e3` milliseconds (300s). */</span>
+    <span class="s1">headersTimeout</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** </span><span class="s6">@deprecated </span><span class="s4">unsupported socketTimeout, use headersTimeout &amp; bodyTimeout instead */</span>
+    <span class="s1">socketTimeout</span><span class="s2">?: </span><span class="s1">never</span><span class="s2">;</span>
+    <span class="s4">/** </span><span class="s6">@deprecated </span><span class="s4">unsupported requestTimeout, use headersTimeout &amp; bodyTimeout instead */</span>
+    <span class="s1">requestTimeout</span><span class="s2">?: </span><span class="s1">never</span><span class="s2">;</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">connectTimeout</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** The timeout after which a request will time out, in milliseconds. Monitors time between receiving body data. Use `0` to disable it entirely. Default: `300e3` milliseconds (300s). */</span>
+    <span class="s1">bodyTimeout</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** </span><span class="s6">@deprecated </span><span class="s4">unsupported idleTimeout, use keepAliveTimeout instead */</span>
+    <span class="s1">idleTimeout</span><span class="s2">?: </span><span class="s1">never</span><span class="s2">;</span>
+    <span class="s4">/** </span><span class="s6">@deprecated </span><span class="s4">unsupported keepAlive, use pipelining=0 instead */</span>
+    <span class="s1">keepAlive</span><span class="s2">?: </span><span class="s1">never</span><span class="s2">;</span>
+    <span class="s4">/** the timeout, in milliseconds, after which a socket without active requests will time out. Monitors time between activity on a connected socket. This value may be overridden by *keep-alive* hints from the server. Default: `4e3` milliseconds (4s). */</span>
+    <span class="s1">keepAliveTimeout</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** </span><span class="s6">@deprecated </span><span class="s4">unsupported maxKeepAliveTimeout, use keepAliveMaxTimeout instead */</span>
+    <span class="s1">maxKeepAliveTimeout</span><span class="s2">?: </span><span class="s1">never</span><span class="s2">;</span>
+    <span class="s4">/** the maximum allowed `idleTimeout`, in milliseconds, when overridden by *keep-alive* hints from the server. Default: `600e3` milliseconds (10min). */</span>
+    <span class="s1">keepAliveMaxTimeout</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** A number of milliseconds subtracted from server *keep-alive* hints when overriding `idleTimeout` to account for timing inaccuracies caused by e.g. transport latency. Default: `1e3` milliseconds (1s). */</span>
+    <span class="s1">keepAliveTimeoutThreshold</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">socketPath</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s4">/** The amount of concurrent requests to be sent over the single TCP/TLS connection according to [RFC7230](https://tools.ietf.org/html/rfc7230#section-6.3.2). Default: `1`. */</span>
+    <span class="s1">pipelining</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** </span><span class="s6">@deprecated </span><span class="s4">use the connect option instead */</span>
+    <span class="s1">tls</span><span class="s2">?: </span><span class="s1">never</span><span class="s2">;</span>
+    <span class="s4">/** If `true`, an error is thrown when the request content-length header doesn't match the length of the request body. Default: `true`. */</span>
+    <span class="s1">strictContentLength</span><span class="s2">?: </span><span class="s1">boolean</span><span class="s2">;</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">maxCachedSessions</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">maxRedirections</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">connect</span><span class="s2">?: </span><span class="s1">buildConnector</span><span class="s2">.</span><span class="s1">BuildOptions </span><span class="s2">| </span><span class="s1">buildConnector</span><span class="s2">.</span><span class="s1">connector</span><span class="s2">;</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">maxRequestsPerClient</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** TODO */</span>
+    <span class="s1">localAddress</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">;</span>
+    <span class="s4">/** Max response body size in bytes, -1 is disabled */</span>
+    <span class="s1">maxResponseSize</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/** Enables a family autodetection algorithm that loosely implements section 5 of RFC 8305. */</span>
+    <span class="s1">autoSelectFamily</span><span class="s2">?: </span><span class="s1">boolean</span><span class="s2">;</span>
+    <span class="s4">/** The amount of time in milliseconds to wait for a connection attempt to finish before trying the next address when using the `autoSelectFamily` option. */</span>
+    <span class="s1">autoSelectFamilyAttemptTimeout</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s6">@description </span><span class="s4">Enables support for H2 if the server has assigned bigger priority to it through ALPN negotiation.</span>
+     <span class="s4">* </span><span class="s6">@default </span><span class="s4">false</span>
+    <span class="s4">*/</span>
+    <span class="s1">allowH2</span><span class="s2">?: </span><span class="s1">boolean</span><span class="s2">;</span>
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s6">@description </span><span class="s4">Dictates the maximum number of concurrent streams for a single H2 session. It can be overridden by a SETTINGS remote frame.</span>
+     <span class="s4">* </span><span class="s6">@default </span><span class="s4">100</span>
+    <span class="s4">*/</span>
+    <span class="s1">maxConcurrentStreams</span><span class="s2">?: </span><span class="s1">number</span>
+  <span class="s2">}</span>
+  <span class="s0">export interface </span><span class="s1">SocketInfo </span><span class="s2">{</span>
+    <span class="s1">localAddress</span><span class="s2">?: </span><span class="s1">string</span>
+    <span class="s1">localPort</span><span class="s2">?: </span><span class="s1">number</span>
+    <span class="s1">remoteAddress</span><span class="s2">?: </span><span class="s1">string</span>
+    <span class="s1">remotePort</span><span class="s2">?: </span><span class="s1">number</span>
+    <span class="s1">remoteFamily</span><span class="s2">?: </span><span class="s1">string</span>
+    <span class="s1">timeout</span><span class="s2">?: </span><span class="s1">number</span>
+    <span class="s1">bytesWritten</span><span class="s2">?: </span><span class="s1">number</span>
+    <span class="s1">bytesRead</span><span class="s2">?: </span><span class="s1">number</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">export default </span><span class="s1">Client</span><span class="s2">;</span>
+</pre>
+</body>
+</html>

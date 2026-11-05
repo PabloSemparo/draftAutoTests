@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>package-with-helpers.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+package-with-helpers.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">assertIsObject</span><span class="s2">, </span><span class="s1">assertIsStringOrNull</span><span class="s2">, </span><span class="s1">assertIsValidDate </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'../../../../utils/custom-matchers'</span><span class="s2">;</span>
+
+<span class="s1">test</span><span class="s2">(</span><span class="s3">'Валидация с кастомными хелперами'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+    <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">'/v1/packages/019a113e-58c5-79fe-8672-f4fea9cdc7dd'</span><span class="s2">);</span>
+
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+
+    <span class="s0">const </span><span class="s1">responseData </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+    <span class="s5">// Используем кастомные хелперы</span>
+    <span class="s1">assertIsObject</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s3">'Response should be a valid object'</span><span class="s2">);</span>
+    <span class="s1">assertIsValidDate</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">createdAt</span><span class="s2">, </span><span class="s3">'createdAt should be a valid date'</span><span class="s2">);</span>
+
+    <span class="s5">// Проверка responsibleLawyerId</span>
+    <span class="s1">assertIsStringOrNull</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">responsibleLawyerId</span><span class="s2">, </span><span class="s3">'responsibleLawyerId should be string or null'</span><span class="s2">);</span>
+
+    <span class="s5">// Стандартные проверки</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">number</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'number'</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">typeId</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">statusCode</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">)).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+    <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">).</span><span class="s1">not</span><span class="s2">.</span><span class="s1">toBeNull</span><span class="s2">();</span>
+
+    <span class="s5">// Проверка элементов массива</span>
+    <span class="s1">responseData</span><span class="s2">.</span><span class="s1">includedContracts</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">((</span><span class="s1">contract</span><span class="s2">: </span><span class="s1">any</span><span class="s2">, </span><span class="s1">index</span><span class="s2">: </span><span class="s1">number</span><span class="s2">) =&gt; {</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">contract</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

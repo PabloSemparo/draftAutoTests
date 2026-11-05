@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>eq-dc-court-all-test.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-dc-court-all-test.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+
+<span class="s0">const </span><span class="s1">API_BASE_URL </span><span class="s2">= </span><span class="s3">'http://eq-dc-court.test2.mmk.local/v1'</span><span class="s2">;</span>
+<span class="s0">const </span><span class="s1">API_KEY </span><span class="s2">= </span><span class="s3">'55298707-117c-44a5-8434-162fb9d2e4c5'</span><span class="s2">; </span><span class="s4">// Замените на реальный API ключ</span>
+
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'API Тесты'</span><span class="s2">, () =&gt; {</span>
+    <span class="s4">// Общая конфигурация для всех тестов - добавляем API ключ в заголовки</span>
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">use</span><span class="s2">({</span>
+        <span class="s1">extraHTTPHeaders</span><span class="s2">: {</span>
+            <span class="s3">'X-API-KEY'</span><span class="s2">: </span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_KEY</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+            <span class="s4">// Или, если используется X-API-Key:</span>
+            <span class="s4">// 'X-API-Key': API_KEY,</span>
+        <span class="s2">},</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Проверка на банкротство [CODE 200]'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">params </span><span class="s2">= </span><span class="s0">new </span><span class="s1">URLSearchParams</span><span class="s2">({</span>
+            <span class="s1">inn</span><span class="s2">: </span><span class="s3">'614334131355'</span><span class="s2">,</span>
+            <span class="s1">fio</span><span class="s2">: </span><span class="s3">'Старченко Владислав Владимирович'</span><span class="s2">,</span>
+            <span class="s1">birthDate</span><span class="s2">: </span><span class="s3">'1996-11-26'</span>
+        <span class="s2">});</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_BASE_URL</span><span class="s2">}</span><span class="s3">/bankrupts/check?</span><span class="s1">$</span><span class="s2">{</span><span class="s1">params</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+        <span class="s4">// Проверка статуса кода</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+        <span class="s4">// Проверка заголовка Content-Type</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">()[</span><span class="s3">'content-type'</span><span class="s2">]).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+        <span class="s4">// Проверка наличия и типа поля status</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'status'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">status</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Поиск судов возвращает суд по валиданому адресу [CODE 200]'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_BASE_URL</span><span class="s2">}</span><span class="s3">/courts/search?address=Ульяновск, проспект ульяновский 2`</span><span class="s2">);</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+
+        <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s5">0</span><span class="s2">) {</span>
+            <span class="s0">const </span><span class="s1">court </span><span class="s2">= </span><span class="s1">responseBody</span><span class="s2">[</span><span class="s5">0</span><span class="s2">];</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">court</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'id'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">court</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'name'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">court</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'address'</span><span class="s2">);</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">court</span><span class="s2">.</span><span class="s1">hasOwnProperty</span><span class="s2">(</span><span class="s3">'dutyAmount'</span><span class="s2">)) {</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">Number</span><span class="s2">.</span><span class="s1">isInteger</span><span class="s2">(</span><span class="s1">court</span><span class="s2">.</span><span class="s1">dutyAmount</span><span class="s2">)).</span><span class="s1">toBeTruthy</span><span class="s2">();</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">court</span><span class="s2">.</span><span class="s1">dutyAmount</span><span class="s2">).</span><span class="s1">toBeGreaterThanOrEqual</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Запрос без API ключа'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_BASE_URL</span><span class="s2">}</span><span class="s3">/bankrupts/check`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: {} </span><span class="s4">// Переопределяем заголовки, удаляя авторизацию</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">422</span><span class="s2">);</span>
+
+
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'Получаем ошибку, если отсутствует обязательное поле [400 CODE]'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s4">// Делаем запрос без обязательных параметров</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_BASE_URL</span><span class="s2">}</span><span class="s3">/bankrupts/check`</span><span class="s2">);</span>
+
+            <span class="s4">// Проверяем статус код (ожидаем 400 Bad Request или 422 Unprocessable Entity)</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBeGreaterThanOrEqual</span><span class="s2">(</span><span class="s5">400</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s5">500</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s4">// Проверяем структуру ответа</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toEqual</span><span class="s2">({</span>
+                <span class="s1">status</span><span class="s2">: {</span>
+                    <span class="s1">code</span><span class="s2">: </span><span class="s3">&quot;VALIDATION&quot;</span><span class="s2">,</span>
+                    <span class="s1">description</span><span class="s2">: </span><span class="s3">&quot;Для проверки банкротства должно быть заполнено inn или fio + birthDate&quot;</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s4">// Альтернативный вариант с поэтапной проверкой</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'status'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">status</span><span class="s2">).</span><span class="s1">toEqual</span><span class="s2">(</span><span class="s1">expect</span><span class="s2">.</span><span class="s1">objectContaining</span><span class="s2">({</span>
+                <span class="s1">code</span><span class="s2">: </span><span class="s3">&quot;VALIDATION&quot;</span><span class="s2">,</span>
+                <span class="s1">description</span><span class="s2">: </span><span class="s3">&quot;Для проверки банкротства должно быть заполнено inn или fio + birthDate&quot;</span>
+            <span class="s2">}));</span>
+        <span class="s2">});</span>
+
+<span class="s4">// Дополнительные тесты для разных комбинаций параметров</span>
+        <span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Проверки валидации'</span><span class="s2">, () =&gt; {</span>
+            <span class="s0">const </span><span class="s1">testCases </span><span class="s2">= [</span>
+                <span class="s2">{</span>
+                    <span class="s1">name</span><span class="s2">: </span><span class="s3">'Пропущена все поля'</span><span class="s2">,</span>
+                    <span class="s1">params</span><span class="s2">: {},</span>
+                    <span class="s1">expectedError</span><span class="s2">: </span><span class="s3">&quot;Для проверки банкротства должно быть заполнено inn или fio + birthDate&quot;</span>
+                <span class="s2">},</span>
+                <span class="s2">{</span>
+                    <span class="s1">name</span><span class="s2">: </span><span class="s3">'Перадано только ФИО'</span><span class="s2">,</span>
+                    <span class="s1">params</span><span class="s2">: { </span><span class="s1">fio</span><span class="s2">: </span><span class="s3">'Иванов Иван Иванович' </span><span class="s2">},</span>
+                    <span class="s1">expectedError</span><span class="s2">: </span><span class="s3">&quot;Для проверки банкротства должно быть заполнено inn или fio + birthDate&quot;</span>
+                <span class="s2">},</span>
+                <span class="s2">{</span>
+                    <span class="s1">name</span><span class="s2">: </span><span class="s3">'Только дата рождения без ФИО'</span><span class="s2">,</span>
+                    <span class="s1">params</span><span class="s2">: { </span><span class="s1">birthDate</span><span class="s2">: </span><span class="s3">'1990-01-01' </span><span class="s2">},</span>
+                    <span class="s1">expectedError</span><span class="s2">: </span><span class="s3">&quot;Для проверки банкротства должно быть заполнено inn или fio + birthDate&quot;</span>
+                <span class="s2">}</span>
+            <span class="s2">];</span>
+
+            <span class="s1">testCases</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(({ </span><span class="s1">name</span><span class="s2">, </span><span class="s1">params</span><span class="s2">, </span><span class="s1">expectedError </span><span class="s2">}) =&gt; {</span>
+                <span class="s1">test</span><span class="s2">(</span><span class="s3">`Validation: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">name</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+                    <span class="s0">const </span><span class="s1">query </span><span class="s2">= </span><span class="s0">new </span><span class="s1">URLSearchParams</span><span class="s2">(</span><span class="s1">params</span><span class="s2">);</span>
+                    <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_BASE_URL</span><span class="s2">}</span><span class="s3">/bankrupts/check?</span><span class="s1">$</span><span class="s2">{</span><span class="s1">query</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBeGreaterThanOrEqual</span><span class="s2">(</span><span class="s5">400</span><span class="s2">);</span>
+
+                    <span class="s0">const </span><span class="s1">responseBody </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+                    <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseBody</span><span class="s2">.</span><span class="s1">status</span><span class="s2">.</span><span class="s1">description</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s1">expectedError</span><span class="s2">);</span>
+    <span class="s2">});</span>
+<span class="s2">});})})</span></pre>
+</body>
+</html>

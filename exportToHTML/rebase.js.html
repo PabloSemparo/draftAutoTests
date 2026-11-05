@@ -1,0 +1,212 @@
+<html>
+<head>
+<title>rebase.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+rebase.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">rebase_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">rebase_exports</span><span class="s1">, {</span>
+  <span class="s2">addSuggestedRebaseline</span><span class="s1">: () =&gt; </span><span class="s2">addSuggestedRebaseline</span><span class="s1">,</span>
+  <span class="s2">applySuggestedRebaselines</span><span class="s1">: () =&gt; </span><span class="s2">applySuggestedRebaselines</span><span class="s1">,</span>
+  <span class="s2">clearSuggestedRebaselines</span><span class="s1">: () =&gt; </span><span class="s2">clearSuggestedRebaselines</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">rebase_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils2 </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_projectUtils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./projectUtils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_babelBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../transform/babelBundle&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">t </span><span class="s1">= </span><span class="s2">import_babelBundle</span><span class="s1">.</span><span class="s2">types</span><span class="s1">;</span>
+<span class="s3">const </span><span class="s2">suggestedRebaselines </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">MultiMap</span><span class="s1">();</span>
+<span class="s3">function </span><span class="s2">addSuggestedRebaseline</span><span class="s1">(</span><span class="s2">location</span><span class="s1">, </span><span class="s2">suggestedRebaseline</span><span class="s1">) {</span>
+  <span class="s2">suggestedRebaselines</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">location</span><span class="s1">.</span><span class="s2">file</span><span class="s1">, { </span><span class="s2">location</span><span class="s1">, </span><span class="s2">code</span><span class="s1">: </span><span class="s2">suggestedRebaseline </span><span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">clearSuggestedRebaselines</span><span class="s1">() {</span>
+  <span class="s2">suggestedRebaselines</span><span class="s1">.</span><span class="s2">clear</span><span class="s1">();</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">applySuggestedRebaselines</span><span class="s1">(</span><span class="s2">config</span><span class="s1">, </span><span class="s2">reporter</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">updateSnapshots </span><span class="s1">=== </span><span class="s0">&quot;none&quot;</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">suggestedRebaselines</span><span class="s1">.</span><span class="s2">size</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s1">[</span><span class="s2">project</span><span class="s1">] = (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_projectUtils</span><span class="s1">.</span><span class="s2">filterProjects</span><span class="s1">)(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">projects</span><span class="s1">, </span><span class="s2">config</span><span class="s1">.</span><span class="s2">cliProjectFilter</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">project</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">patches </span><span class="s1">= [];</span>
+  <span class="s3">const </span><span class="s2">files </span><span class="s1">= [];</span>
+  <span class="s3">const </span><span class="s2">gitCache </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">patchFile </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">outputDir</span><span class="s1">, </span><span class="s0">&quot;rebaselines.patch&quot;</span><span class="s1">);</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">fileName of </span><span class="s1">[</span><span class="s2">...suggestedRebaselines</span><span class="s1">.</span><span class="s2">keys</span><span class="s1">()].</span><span class="s2">sort</span><span class="s1">()) {</span>
+    <span class="s3">const </span><span class="s2">source </span><span class="s1">= </span><span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">readFile</span><span class="s1">(</span><span class="s2">fileName</span><span class="s1">, </span><span class="s0">&quot;utf8&quot;</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">lines </span><span class="s1">= </span><span class="s2">source</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">replacements </span><span class="s1">= </span><span class="s2">suggestedRebaselines</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">fileName</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">fileNode </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_babelBundle</span><span class="s1">.</span><span class="s2">babelParse</span><span class="s1">)(</span><span class="s2">source</span><span class="s1">, </span><span class="s2">fileName</span><span class="s1">, </span><span class="s3">true</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">ranges </span><span class="s1">= [];</span>
+    <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_babelBundle</span><span class="s1">.</span><span class="s2">traverse</span><span class="s1">)(</span><span class="s2">fileNode</span><span class="s1">, {</span>
+      <span class="s2">CallExpression</span><span class="s1">: (</span><span class="s2">path2</span><span class="s1">) =&gt; {</span>
+        <span class="s3">const </span><span class="s2">node </span><span class="s1">= </span><span class="s2">path2</span><span class="s1">.</span><span class="s2">node</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">node</span><span class="s1">.</span><span class="s2">arguments</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&lt; </span><span class="s5">1</span><span class="s1">)</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">t</span><span class="s1">.</span><span class="s2">isMemberExpression</span><span class="s1">(</span><span class="s2">node</span><span class="s1">.</span><span class="s2">callee</span><span class="s1">))</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">argument </span><span class="s1">= </span><span class="s2">node</span><span class="s1">.</span><span class="s2">arguments</span><span class="s1">[</span><span class="s5">0</span><span class="s1">];</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">t</span><span class="s1">.</span><span class="s2">isStringLiteral</span><span class="s1">(</span><span class="s2">argument</span><span class="s1">) &amp;&amp; !</span><span class="s2">t</span><span class="s1">.</span><span class="s2">isTemplateLiteral</span><span class="s1">(</span><span class="s2">argument</span><span class="s1">))</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">prop </span><span class="s1">= </span><span class="s2">node</span><span class="s1">.</span><span class="s2">callee</span><span class="s1">.</span><span class="s2">property</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">prop</span><span class="s1">.</span><span class="s2">loc </span><span class="s1">|| !</span><span class="s2">argument</span><span class="s1">.</span><span class="s2">start </span><span class="s1">|| !</span><span class="s2">argument</span><span class="s1">.</span><span class="s2">end</span><span class="s1">)</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">replacement of replacements</span><span class="s1">) {</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">prop</span><span class="s1">.</span><span class="s2">loc</span><span class="s1">.</span><span class="s2">start</span><span class="s1">.</span><span class="s2">line </span><span class="s1">!== </span><span class="s2">replacement</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">line</span><span class="s1">)</span>
+            <span class="s3">continue</span><span class="s1">;</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">prop</span><span class="s1">.</span><span class="s2">loc</span><span class="s1">.</span><span class="s2">start</span><span class="s1">.</span><span class="s2">column </span><span class="s1">+ </span><span class="s5">1 </span><span class="s1">!== </span><span class="s2">replacement</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">column</span><span class="s1">)</span>
+            <span class="s3">continue</span><span class="s1">;</span>
+          <span class="s3">const </span><span class="s2">indent </span><span class="s1">= </span><span class="s2">lines</span><span class="s1">[</span><span class="s2">prop</span><span class="s1">.</span><span class="s2">loc</span><span class="s1">.</span><span class="s2">start</span><span class="s1">.</span><span class="s2">line </span><span class="s1">- </span><span class="s5">1</span><span class="s1">].</span><span class="s2">match</span><span class="s1">(</span><span class="s6">/^\s*/</span><span class="s1">)[</span><span class="s5">0</span><span class="s1">];</span>
+          <span class="s3">const </span><span class="s2">newText </span><span class="s1">= </span><span class="s2">replacement</span><span class="s1">.</span><span class="s2">code</span><span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s6">/\{indent\}/g</span><span class="s1">, </span><span class="s2">indent</span><span class="s1">);</span>
+          <span class="s2">ranges</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">start</span><span class="s1">: </span><span class="s2">argument</span><span class="s1">.</span><span class="s2">start</span><span class="s1">, </span><span class="s2">end</span><span class="s1">: </span><span class="s2">argument</span><span class="s1">.</span><span class="s2">end</span><span class="s1">, </span><span class="s2">oldText</span><span class="s1">: </span><span class="s2">source</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s2">argument</span><span class="s1">.</span><span class="s2">start</span><span class="s1">, </span><span class="s2">argument</span><span class="s1">.</span><span class="s2">end</span><span class="s1">), </span><span class="s2">newText </span><span class="s1">});</span>
+          <span class="s3">break</span><span class="s1">;</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+    <span class="s1">});</span>
+    <span class="s2">ranges</span><span class="s1">.</span><span class="s2">sort</span><span class="s1">((</span><span class="s2">a</span><span class="s1">, </span><span class="s2">b</span><span class="s1">) =&gt; </span><span class="s2">b</span><span class="s1">.</span><span class="s2">start </span><span class="s1">- </span><span class="s2">a</span><span class="s1">.</span><span class="s2">start</span><span class="s1">);</span>
+    <span class="s3">let </span><span class="s2">result </span><span class="s1">= </span><span class="s2">source</span><span class="s1">;</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">range of ranges</span><span class="s1">)</span>
+      <span class="s2">result </span><span class="s1">= </span><span class="s2">result</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">range</span><span class="s1">.</span><span class="s2">start</span><span class="s1">) + </span><span class="s2">range</span><span class="s1">.</span><span class="s2">newText </span><span class="s1">+ </span><span class="s2">result</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s2">range</span><span class="s1">.</span><span class="s2">end</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">relativeName </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">relative</span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">cwd</span><span class="s1">(), </span><span class="s2">fileName</span><span class="s1">);</span>
+    <span class="s2">files</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">relativeName</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">updateSourceMethod </span><span class="s1">=== </span><span class="s0">&quot;overwrite&quot;</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">writeFile</span><span class="s1">(</span><span class="s2">fileName</span><span class="s1">, </span><span class="s2">result</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">updateSourceMethod </span><span class="s1">=== </span><span class="s0">&quot;3way&quot;</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">writeFile</span><span class="s1">(</span><span class="s2">fileName</span><span class="s1">, </span><span class="s2">applyPatchWithConflictMarkers</span><span class="s1">(</span><span class="s2">source</span><span class="s1">, </span><span class="s2">result</span><span class="s1">));</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">gitFolder </span><span class="s1">= </span><span class="s2">findGitRoot</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">fileName</span><span class="s1">), </span><span class="s2">gitCache</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">relativeToGit </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">relative</span><span class="s1">(</span><span class="s2">gitFolder </span><span class="s1">|| </span><span class="s2">process</span><span class="s1">.</span><span class="s2">cwd</span><span class="s1">(), </span><span class="s2">fileName</span><span class="s1">);</span>
+      <span class="s2">patches</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">createPatch</span><span class="s1">(</span><span class="s2">relativeToGit</span><span class="s1">, </span><span class="s2">source</span><span class="s1">, </span><span class="s2">result</span><span class="s1">));</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">fileList </span><span class="s1">= </span><span class="s2">files</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">file</span><span class="s1">) =&gt; </span><span class="s0">&quot;  &quot; </span><span class="s1">+ </span><span class="s2">import_utils2</span><span class="s1">.</span><span class="s2">colors</span><span class="s1">.</span><span class="s2">dim</span><span class="s1">(</span><span class="s2">file</span><span class="s1">)).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+  <span class="s2">reporter</span><span class="s1">.</span><span class="s2">onStdErr</span><span class="s1">(</span><span class="s0">`</span>
+<span class="s0">New baselines created for: 
+ 
+</span><span class="s2">$</span><span class="s1">{</span><span class="s2">fileList</span><span class="s1">}</span>
+<span class="s0">`</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">updateSourceMethod </span><span class="s1">=== </span><span class="s0">&quot;patch&quot;</span><span class="s1">) {</span>
+    <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">mkdir</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">patchFile</span><span class="s1">), { </span><span class="s2">recursive</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+    <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">writeFile</span><span class="s1">(</span><span class="s2">patchFile</span><span class="s1">, </span><span class="s2">patches</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">));</span>
+    <span class="s2">reporter</span><span class="s1">.</span><span class="s2">onStdErr</span><span class="s1">(</span><span class="s0">`</span>
+  <span class="s0">` </span><span class="s1">+ </span><span class="s2">import_utils2</span><span class="s1">.</span><span class="s2">colors</span><span class="s1">.</span><span class="s2">cyan</span><span class="s1">(</span><span class="s0">&quot;git apply &quot; </span><span class="s1">+ </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">relative</span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">cwd</span><span class="s1">(), </span><span class="s2">patchFile</span><span class="s1">)) + </span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">createPatch</span><span class="s1">(</span><span class="s2">fileName</span><span class="s1">, </span><span class="s2">before</span><span class="s1">, </span><span class="s2">after</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">file </span><span class="s1">= </span><span class="s2">fileName</span><span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s6">/\\/g</span><span class="s1">, </span><span class="s0">&quot;/&quot;</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">text </span><span class="s1">= </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">diff</span><span class="s1">.</span><span class="s2">createPatch</span><span class="s1">(</span><span class="s2">file</span><span class="s1">, </span><span class="s2">before</span><span class="s1">, </span><span class="s2">after</span><span class="s1">, </span><span class="s3">void </span><span class="s5">0</span><span class="s1">, </span><span class="s3">void </span><span class="s5">0</span><span class="s1">, { </span><span class="s2">context</span><span class="s1">: </span><span class="s5">3 </span><span class="s1">});</span>
+  <span class="s3">return </span><span class="s1">[</span>
+    <span class="s0">&quot;diff --git a/&quot; </span><span class="s1">+ </span><span class="s2">file </span><span class="s1">+ </span><span class="s0">&quot; b/&quot; </span><span class="s1">+ </span><span class="s2">file</span><span class="s1">,</span>
+    <span class="s0">&quot;--- a/&quot; </span><span class="s1">+ </span><span class="s2">file</span><span class="s1">,</span>
+    <span class="s0">&quot;+++ b/&quot; </span><span class="s1">+ </span><span class="s2">file</span><span class="s1">,</span>
+    <span class="s2">...text</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">).</span><span class="s2">slice</span><span class="s1">(</span><span class="s5">4</span><span class="s1">)</span>
+  <span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">findGitRoot</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s2">cache</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s2">cache</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">result </span><span class="s1">!== </span><span class="s3">void </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">gitPath </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s0">&quot;.git&quot;</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">existsSync</span><span class="s1">(</span><span class="s2">gitPath</span><span class="s1">) &amp;&amp; </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">lstatSync</span><span class="s1">(</span><span class="s2">gitPath</span><span class="s1">).</span><span class="s2">isDirectory</span><span class="s1">()) {</span>
+    <span class="s2">cache</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s2">dir</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">dir</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">parentDir </span><span class="s1">= </span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">dir </span><span class="s1">=== </span><span class="s2">parentDir</span><span class="s1">) {</span>
+    <span class="s2">cache</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s3">null</span><span class="s1">);</span>
+    <span class="s3">return null</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">parentResult </span><span class="s1">= </span><span class="s2">findGitRoot</span><span class="s1">(</span><span class="s2">parentDir</span><span class="s1">, </span><span class="s2">cache</span><span class="s1">);</span>
+  <span class="s2">cache</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, </span><span class="s2">parentResult</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">parentResult</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">applyPatchWithConflictMarkers</span><span class="s1">(</span><span class="s2">oldText</span><span class="s1">, </span><span class="s2">newText</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">diffResult </span><span class="s1">= </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">diff</span><span class="s1">.</span><span class="s2">diffLines</span><span class="s1">(</span><span class="s2">oldText</span><span class="s1">, </span><span class="s2">newText</span><span class="s1">);</span>
+  <span class="s3">let </span><span class="s2">result </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">conflict </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+  <span class="s2">diffResult</span><span class="s1">.</span><span class="s2">forEach</span><span class="s1">((</span><span class="s2">part</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">added</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">conflict</span><span class="s1">) {</span>
+        <span class="s2">result </span><span class="s1">+= </span><span class="s2">part</span><span class="s1">.</span><span class="s2">value</span><span class="s1">;</span>
+        <span class="s2">result </span><span class="s1">+= </span><span class="s0">&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt; SNAPSHOT</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+        <span class="s2">conflict </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s2">result </span><span class="s1">+= </span><span class="s0">&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+        <span class="s2">result </span><span class="s1">+= </span><span class="s2">part</span><span class="s1">.</span><span class="s2">value</span><span class="s1">;</span>
+        <span class="s2">result </span><span class="s1">+= </span><span class="s0">&quot;=======</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+        <span class="s2">conflict </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">removed</span><span class="s1">) {</span>
+      <span class="s2">result </span><span class="s1">+= </span><span class="s0">&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+      <span class="s2">result </span><span class="s1">+= </span><span class="s2">part</span><span class="s1">.</span><span class="s2">value</span><span class="s1">;</span>
+      <span class="s2">result </span><span class="s1">+= </span><span class="s0">&quot;=======</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+      <span class="s2">conflict </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">conflict</span><span class="s1">) {</span>
+        <span class="s2">result </span><span class="s1">+= </span><span class="s0">&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt; SNAPSHOT</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+        <span class="s2">conflict </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s2">result </span><span class="s1">+= </span><span class="s2">part</span><span class="s1">.</span><span class="s2">value</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">});</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">conflict</span><span class="s1">)</span>
+    <span class="s2">result </span><span class="s1">+= </span><span class="s0">&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt; SNAPSHOT</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">addSuggestedRebaseline</span><span class="s1">,</span>
+  <span class="s2">applySuggestedRebaselines</span><span class="s1">,</span>
+  <span class="s2">clearSuggestedRebaselines</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

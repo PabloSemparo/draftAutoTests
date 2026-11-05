@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>reinstall_chrome_beta_mac.sh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4; font-weight: bold;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+reinstall_chrome_beta_mac.sh</font>
+</center></td></tr></table>
+<pre><span class="s0">#!/usr/bin/env bash</span>
+<span class="s1">set -e</span>
+<span class="s1">set -x</span>
+
+<span class="s1">rm -rf </span><span class="s2">&quot;/Applications/Google Chrome Beta.app&quot;</span>
+<span class="s1">cd /tmp</span>
+<span class="s1">curl --retry </span><span class="s3">3 </span><span class="s1">-o ./googlechromebeta.dmg https://dl.google.com/chrome/mac/universal/beta/googlechromebeta.dmg</span>
+<span class="s1">hdiutil attach -nobrowse -quiet -noautofsck -noautoopen -mountpoint /Volumes/googlechromebeta.dmg ./googlechromebeta.dmg</span>
+<span class="s1">cp -pR </span><span class="s2">&quot;/Volumes/googlechromebeta.dmg/Google Chrome Beta.app&quot; </span><span class="s1">/Applications</span>
+<span class="s1">hdiutil detach /Volumes/googlechromebeta.dmg</span>
+<span class="s1">rm -rf /tmp/googlechromebeta.dmg</span>
+
+<span class="s1">/Applications/Google\ Chrome\ Beta.app/Contents/MacOS/Google\ Chrome\ Beta --version</span>
+</pre>
+</body>
+</html>

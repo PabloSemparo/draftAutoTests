@@ -1,0 +1,3383 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Сервис для работы с пакетами документов по взысканию",
+    "description": "Api пакетов документов",
+    "contact": {
+      "name": "Миронюк О.В.",
+      "url": "tg://simanovan",
+      "email": "omironyuk@eqvantalab.ru"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://eq-debt-collection-stage.bdengi.ru",
+      "description": "CURRENT"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "LOCAL"
+    },
+    {
+      "url": "https://eq-debt-collection-test.bdengi.ru",
+      "description": "TEST"
+    },
+    {
+      "url": "https://eq-debt-collection.preprod.mmk.local",
+      "description": "PREPROD"
+    },
+    {
+      "url": "https://eq-debt-collection.mmk.local",
+      "description": "PROD"
+    }
+  ],
+  "paths": {
+    "/v1/facsimiles/{id}": {
+      "put": {
+        "tags": [
+          "4. Факсимиле"
+        ],
+        "summary": "Обновить факсимиле сотрудника по id факсимиле",
+        "operationId": "updateById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacsimileCreateUpdateDtoRq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "4. Факсимиле"
+        ],
+        "summary": "Удалить запись о факсимиле сотрудника",
+        "operationId": "deleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/facsimiles/by-lawyer/{lawyerId}": {
+      "put": {
+        "tags": [
+          "4. Факсимиле"
+        ],
+        "summary": "Обновить или добавить новую факсимиле сотрудника по id сотрудника",
+        "operationId": "upsertByLawyerId",
+        "parameters": [
+          {
+            "name": "lawyerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacsimileUpdateByLawyerIdDtoRq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacsimileDetailDtoRs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages": {
+      "get": {
+        "tags": [
+          "1. Пакеты документов"
+        ],
+        "summary": "Список, отсортированный по дате создания в убывающем порядке",
+        "operationId": "findAll",
+        "parameters": [
+          {
+            "name": "statusCode",
+            "in": "query",
+            "description": "Код статуса пакета документов",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FORMATION",
+                "FORMED",
+                "SENT"
+              ],
+              "title": "DocumentPackageStatus"
+            },
+            "example": "FORMATION"
+          },
+          {
+            "name": "documentPackageTypeId",
+            "in": "query",
+            "description": "Идентификатор типа пакета документов",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "responsibleLawyerId",
+            "in": "query",
+            "description": "Идентификатор ответственного ЮК",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "description": "Номер пакета документов",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            },
+            "example": 123
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "Номер страницы результата, минимальное значение 0, значение по умолчанию 0",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы результата, минимальное значение 1, максимальное значение 100, значение по умолчанию 25",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendedPageDtoRsDocumentPackageDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "1. Пакеты документов"
+        ],
+        "summary": "Создать пакет документов по выбранному набору контрактов от лица юрис. консультанта",
+        "operationId": "createDocumentPackage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocPackageCreationDtoRq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocPackageCreationDtoRs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{packageId}/documents/{documentId}": {
+      "post": {
+        "tags": [
+          "2. Документы внутри пакетов"
+        ],
+        "summary": "Обновить идентификатор файла для документа внутри пакета",
+        "operationId": "updateFileInfo",
+        "parameters": [
+          {
+            "name": "packageId",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Идентификатор документа",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentFileDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "2. Документы внутри пакетов"
+        ],
+        "summary": "Исключить документ из пакета документов",
+        "operationId": "excludeDocumentFromPackage",
+        "parameters": [
+          {
+            "name": "packageId",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Идентификатор документа внутри пакета",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{packageId}/documents/gas/convert": {
+      "post": {
+        "tags": [
+          "2. Документы внутри пакетов"
+        ],
+        "summary": "Конвертировать один документ пакета в PDF для отправки в ГАС",
+        "operationId": "convertGasDocument",
+        "parameters": [
+          {
+            "name": "packageId",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDocumentSingleCommandDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}/recreate": {
+      "post": {
+        "tags": [
+          "1. Пакеты документов"
+        ],
+        "summary": "Пересоздать документы для пакета",
+        "operationId": "recreatePackageDocuments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}/print": {
+      "post": {
+        "tags": [
+          "1. Пакеты документов"
+        ],
+        "summary": "Отправить документ пакета на печать",
+        "operationId": "printPackage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDocumentCommandDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}/convert": {
+      "post": {
+        "tags": [
+          "1. Пакеты документов"
+        ],
+        "summary": "Конвертировать документы пакета в PDF для отправки в ГАС",
+        "operationId": "prepareForGas",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDocumentCommandDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/facsimiles": {
+      "get": {
+        "tags": [
+          "4. Факсимиле"
+        ],
+        "summary": "Получить детальную информацию о факсимиле",
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Идентификатор факсимиле",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "lawyerId",
+            "in": "query",
+            "description": "Идентификатор сотрудника",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "0198cc3e-63f5-7baa-819a-a0e33a88c212"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacsimileDetailDtoRs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "4. Факсимиле"
+        ],
+        "summary": "Создать запись о факсимиле для сотрудника",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacsimileCreateUpdateDtoRq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacsimileCreateDtoRs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/court-proceedings/loans/confirmation-receipt/tbank": {
+      "post": {
+        "tags": [
+          "API Просуживания"
+        ],
+        "summary": "Получение справки от Т-Банка о выдаче займа клиенту",
+        "operationId": "getLoanConfirmationReceiptTBank",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TBankLoanConfirmationReceiptDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contracts/{contractId}/packages/{packageId}/documents/recreate": {
+      "post": {
+        "tags": [
+          "3. Документы договора"
+        ],
+        "summary": "Пересоздать документы для конкретного договора внутри пакета документов",
+        "operationId": "recreateDocumentsForSingleContractInPackage",
+        "parameters": [
+          {
+            "name": "contractId",
+            "in": "path",
+            "description": "Идентификатор договора",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "packageId",
+            "in": "path",
+            "description": "Идентификатор пакета",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "a06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}": {
+      "get": {
+        "tags": [
+          "1. Пакеты документов"
+        ],
+        "summary": "Получить описание пакета документов по его ID",
+        "operationId": "getPackage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPackageDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}/documents": {
+      "get": {
+        "tags": [
+          "2. Документы внутри пакетов"
+        ],
+        "summary": "Получить документы пакета по его ID",
+        "operationId": "getPackageDocuments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "Отбирать документы в статусе",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ATTACHED",
+                  "MISSING",
+                  "GENERATION_REQUESTED",
+                  "GENERATION_ERROR",
+                  "EXCLUDED"
+                ],
+                "title": "PackageDocumentStatus"
+              },
+              "title": "Set",
+              "uniqueItems": true
+            },
+            "example": "ATTACHED"
+          },
+          {
+            "name": "excludeStatuses",
+            "in": "query",
+            "description": "Исключить документы в статусе",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ATTACHED",
+                  "MISSING",
+                  "GENERATION_REQUESTED",
+                  "GENERATION_ERROR",
+                  "EXCLUDED"
+                ],
+                "title": "PackageDocumentStatus"
+              },
+              "title": "Set",
+              "uniqueItems": true
+            },
+            "example": "ATTACHED"
+          },
+          {
+            "name": "contractNumberContains",
+            "in": "query",
+            "description": "Фильтр по вхождению в номер договора. Элементы не менее 6 символов длинной",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "title": "Set",
+              "uniqueItems": true
+            },
+            "example": 12074219
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "Номер страницы результата, минимальное значение 0, значение по умолчанию 0",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы результата, минимальное значение 1, максимальное значение 100, значение по умолчанию 25",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendedPageDtoRsPackageDocumentDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}/documents/gas": {
+      "get": {
+        "tags": [
+          "2. Документы внутри пакетов"
+        ],
+        "summary": "Получить документы пакета подготовленные для ГАС по его ID",
+        "operationId": "getPackageGasDocuments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "Отбирать документы в статусе",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ATTACHED",
+                  "MISSING",
+                  "GENERATION_REQUESTED",
+                  "GENERATION_ERROR",
+                  "EXCLUDED"
+                ],
+                "title": "PackageDocumentStatus"
+              },
+              "title": "Set",
+              "uniqueItems": true
+            },
+            "example": "ATTACHED"
+          },
+          {
+            "name": "excludeStatuses",
+            "in": "query",
+            "description": "Исключить документы в статусе",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ATTACHED",
+                  "MISSING",
+                  "GENERATION_REQUESTED",
+                  "GENERATION_ERROR",
+                  "EXCLUDED"
+                ],
+                "title": "PackageDocumentStatus"
+              },
+              "title": "Set",
+              "uniqueItems": true
+            },
+            "example": "ATTACHED"
+          },
+          {
+            "name": "contractNumberContains",
+            "in": "query",
+            "description": "Фильтр по вхождению в номер договора. Элементы не менее 6 символов длинной",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "title": "Set",
+              "uniqueItems": true
+            },
+            "example": 12074219
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "Номер страницы результата, минимальное значение 0, значение по умолчанию 0",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы результата, минимальное значение 1, максимальное значение 100, значение по умолчанию 25",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendedPageDtoRsGasDocumentDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}/documents/gas/files/ids": {
+      "get": {
+        "tags": [
+          "2. Документы внутри пакетов"
+        ],
+        "summary": "Получить идентификаторы файлов документов пакета подготовленных для ГАС по его ID",
+        "operationId": "getPackageGasDocumentsIds",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "title": "List"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packages/{id}/documents/files/ids": {
+      "get": {
+        "tags": [
+          "2. Документы внутри пакетов"
+        ],
+        "summary": "Получить идентификаторы файлов документов пакета по его ID",
+        "operationId": "getDocumentFileIds",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пакета документов",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "title": "List"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contracts/{id}/packages": {
+      "get": {
+        "tags": [
+          "3. Документы договора"
+        ],
+        "summary": "Получить описание последнего пакета созданного для контракта",
+        "operationId": "getLastPackage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор договора",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contracts/{id}/documents/gas": {
+      "get": {
+        "tags": [
+          "3. Документы договора"
+        ],
+        "summary": "Получить документы подготовленные для ГАС из последнего пакета созданного для контракта",
+        "operationId": "getContractGasDocuments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор договора",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "Номер страницы результата, минимальное значение 0, значение по умолчанию 0",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы результата, минимальное значение 1, максимальное значение 100, значение по умолчанию 25",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contracts/{id}/documents/gas/files/ids": {
+      "get": {
+        "tags": [
+          "3. Документы договора"
+        ],
+        "summary": "Получить идентификаторы файлов документов подготовленных для ГАС из последнего пакета созданного для контракта",
+        "operationId": "getContractGasDocumentsIds",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор договора",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "c06c8900-9183-4e88-a60e-46eb15528a6c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDtoRs"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FacsimileCreateUpdateDtoRq": {
+        "type": "object",
+        "description": "Создание/обновление записи о факсимиле сотрудника (запрос)",
+        "properties": {
+          "lawyerId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор сотрудника",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "fileId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор файла",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          }
+        },
+        "required": [
+          "fileId",
+          "lawyerId"
+        ],
+        "title": "FacsimileCreateUpdateDtoRq"
+      },
+      "FacsimileUpdateByLawyerIdDtoRq": {
+        "type": "object",
+        "description": "Создание записи о факсимиле сотрудника (запрос)",
+        "properties": {
+          "fileId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор файла",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          }
+        },
+        "required": [
+          "fileId"
+        ],
+        "title": "FacsimileUpdateByLawyerIdDtoRq"
+      },
+      "FacsimileDetailDtoRs": {
+        "type": "object",
+        "description": "Детальная информация записи о факсимиле сотрудника",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор факсимиле",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "lawyerId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор сотрудника",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "fileId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор файла",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Дата создания, формат ISO.DATE_TIME",
+            "example": "2025-05-12T12:49:09.672123"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Дата обновления, формат ISO.DATE_TIME",
+            "example": "2025-05-12T12:49:09.672123"
+          }
+        },
+        "required": [
+          "createdAt",
+          "fileId",
+          "id",
+          "lawyerId",
+          "updatedAt"
+        ],
+        "title": "FacsimileDetailDtoRs"
+      },
+      "Contract": {
+        "type": "object",
+        "description": "Информация о договоре",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор договора",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "courtLawyerId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор ответственного юриста",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          }
+        },
+        "required": [
+          "courtLawyerId",
+          "id"
+        ],
+        "title": "Contract"
+      },
+      "DocPackageCreationDtoRq": {
+        "type": "object",
+        "description": "  Тело запроса на формирование пакета документов",
+        "properties": {
+          "courtLawyerId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор пользователя запрашивающего операцию",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "packageTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор типа пакета документов",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "contracts": {
+            "type": "array",
+            "description": "Информация о договорах, по которым нужно сформировать пакет документов",
+            "items": {
+              "$ref": "#/components/schemas/Contract"
+            },
+            "title": "List"
+          }
+        },
+        "required": [
+          "contracts",
+          "courtLawyerId",
+          "packageTypeId"
+        ],
+        "title": "DocPackageCreationDtoRq"
+      },
+      "DocPackageCreationDtoRs": {
+        "type": "object",
+        "description": "Тело ответа на запрос создания пакета документов",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор типа пакета документов",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "DocPackageCreationDtoRs"
+      },
+      "DocumentFileDto": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fullFilename": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fileId",
+          "fullFilename"
+        ],
+        "title": "DocumentFileDto"
+      },
+      "UserDocumentSingleCommandDto": {
+        "type": "object",
+        "properties": {
+          "courtLawyerId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор пользователя запрашивающего операцию",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "documentId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "courtLawyerId",
+          "documentId"
+        ],
+        "title": "UserDocumentSingleCommandDto"
+      },
+      "UserDocumentCommandDto": {
+        "type": "object",
+        "properties": {
+          "courtLawyerId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор пользователя запрашивающего операцию",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          "documentIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "title": "List"
+          }
+        },
+        "required": [
+          "courtLawyerId",
+          "documentIds"
+        ],
+        "title": "UserDocumentCommandDto"
+      },
+      "FacsimileCreateDtoRs": {
+        "type": "object",
+        "description": "Создание записи о факсимиле сотрудника (ответ)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор факсимиле",
+            "example": "01899c74-7f8c-7012-bcfc-097dc8a5d3b7",
+            "maxLength": 36,
+            "minLength": 36
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "FacsimileCreateDtoRs"
+      },
+      "TBankLoanConfirmationReceiptDto": {
+        "type": "object",
+        "properties": {
+          "PaymentId": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          }
+        },
+        "title": "TBankLoanConfirmationReceiptDto"
+      },
+      "DocumentPackageDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "typeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statusCode": {
+            "type": "string",
+            "enum": [
+              "FORMATION",
+              "FORMED",
+              "SENT"
+            ],
+            "title": "DocumentPackageStatus"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "responsibleLawyerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "includedContracts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contract"
+            },
+            "title": "List"
+          }
+        },
+        "required": [
+          "createdAt",
+          "id",
+          "includedContracts",
+          "number",
+          "responsibleLawyerId",
+          "statusCode",
+          "typeId"
+        ],
+        "title": "DocumentPackageDto"
+      },
+      "ExtendedPageDtoRsDocumentPackageDto": {
+        "type": "object",
+        "description": "Расширенная страница пагинации",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Набор элементов на текущей странице",
+            "items": {
+              "$ref": "#/components/schemas/DocumentPackageDto"
+            },
+            "title": "List"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Номер страницы",
+            "example": 0,
+            "maximum": 999999999,
+            "minimum": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Кол-во элементов на странице",
+            "example": 25,
+            "maximum": 999999999,
+            "minimum": 0
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Признак наличия оставшихся страниц"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Общее кол-во просматриваемых элементов"
+          }
+        },
+        "required": [
+          "hasMore",
+          "items",
+          "pageNumber",
+          "pageSize",
+          "totalItems"
+        ],
+        "title": "ExtendedPageDtoRs"
+      },
+      "ExtendedPageDtoRsPackageDocumentDto": {
+        "type": "object",
+        "description": "Расширенная страница пагинации",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Набор элементов на текущей странице",
+            "items": {
+              "$ref": "#/components/schemas/PackageDocumentDto"
+            },
+            "title": "List"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Номер страницы",
+            "example": 0,
+            "maximum": 999999999,
+            "minimum": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Кол-во элементов на странице",
+            "example": 25,
+            "maximum": 999999999,
+            "minimum": 0
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Признак наличия оставшихся страниц"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Общее кол-во просматриваемых элементов"
+          }
+        },
+        "required": [
+          "hasMore",
+          "items",
+          "pageNumber",
+          "pageSize",
+          "totalItems"
+        ],
+        "title": "ExtendedPageDtoRs"
+      },
+      "PackageDocumentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "packageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contractId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "settingsPackageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "generalType": {
+            "type": "string",
+            "enum": [
+              "CONTRACT",
+              "CONTRACT_GROUP",
+              "CLIENT",
+              "COMPANY",
+              "EMPLOYEE",
+              "METADATA"
+            ],
+            "title": "DocumentType"
+          },
+          "typeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fullFileName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ATTACHED",
+              "MISSING",
+              "GENERATION_REQUESTED",
+              "GENERATION_ERROR",
+              "EXCLUDED"
+            ],
+            "title": "PackageDocumentStatus"
+          }
+        },
+        "required": [
+          "contractId",
+          "generalType",
+          "id",
+          "packageId",
+          "settingsPackageId",
+          "status",
+          "typeId"
+        ],
+        "title": "PackageDocumentDto"
+      },
+      "ExtendedPageDtoRsGasDocumentDto": {
+        "type": "object",
+        "description": "Расширенная страница пагинации",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Набор элементов на текущей странице",
+            "items": {
+              "$ref": "#/components/schemas/GasDocumentDto"
+            },
+            "title": "List"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Номер страницы",
+            "example": 0,
+            "maximum": 999999999,
+            "minimum": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Кол-во элементов на странице",
+            "example": 25,
+            "maximum": 999999999,
+            "minimum": 0
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Признак наличия оставшихся страниц"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Общее кол-во просматриваемых элементов"
+          }
+        },
+        "required": [
+          "hasMore",
+          "items",
+          "pageNumber",
+          "pageSize",
+          "totalItems"
+        ],
+        "title": "ExtendedPageDtoRs"
+      },
+      "GasDocumentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "packageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contractId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "settingsPackageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "generalType": {
+            "type": "string",
+            "enum": [
+              "CONTRACT",
+              "CONTRACT_GROUP",
+              "CLIENT",
+              "COMPANY",
+              "EMPLOYEE",
+              "METADATA"
+            ],
+            "title": "DocumentType"
+          },
+          "typeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fullFileName": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ATTACHED",
+              "MISSING",
+              "GENERATION_REQUESTED",
+              "GENERATION_ERROR",
+              "EXCLUDED"
+            ],
+            "title": "PackageDocumentStatus"
+          }
+        },
+        "required": [
+          "createdAt",
+          "generalType",
+          "id",
+          "packageId",
+          "status",
+          "typeId"
+        ],
+        "title": "GasDocumentDto"
+      },
+      "ErrorDtoRs": {
+        "description": "Ответ с ошибкой",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusDto"
+          },
+          "errors": {
+            "type": "array",
+            "description": "Ошибочные поля",
+            "items": {
+              "$ref": "#/components/schemas/ErrorFieldDto"
+            }
+          },
+          "details": {
+            "type": "object",
+            "description": "Дополнительная информация по ошибке"
+          }
+        }
+      },
+      "ErrorFieldDto": {
+        "description": "Ошибочное поле",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Ключ ошибочного поля",
+            "example": "name"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код ошибки",
+            "example": "EMPTY"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание ошибки",
+            "example": "Поле не может быть пустым"
+          }
+        }
+      },
+      "StatusDto": {
+        "description": "Статус",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Код статуса",
+            "example": "VALIDATION"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание кода статуса",
+            "example": "Ошибка валидации запроса"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "in": "header",
+        "scheme": "basic"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "in": "header",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

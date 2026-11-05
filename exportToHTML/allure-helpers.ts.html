@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>allure-helpers.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+allure-helpers.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">allure </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'allure-playwright'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">APIResponse </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">AllureHelpers </span><span class="s2">{</span>
+    <span class="s0">static </span><span class="s1">async attachApiResponse</span><span class="s2">(</span><span class="s1">response</span><span class="s2">: </span><span class="s1">APIResponse</span><span class="s2">, </span><span class="s1">name</span><span class="s2">: </span><span class="s1">string </span><span class="s2">= </span><span class="s3">'API Response'</span><span class="s2">) {</span>
+        <span class="s0">const </span><span class="s1">status </span><span class="s2">= </span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">();</span>
+        <span class="s0">const </span><span class="s1">headers </span><span class="s2">= </span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">();</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">text</span><span class="s2">();</span>
+
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span>
+            <span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">name</span><span class="s2">} </span><span class="s3">- Status`</span><span class="s2">,</span>
+            <span class="s3">`Status: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">status</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">URL: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">response</span><span class="s2">.</span><span class="s1">url</span><span class="s2">()}</span><span class="s3">`</span><span class="s2">,</span>
+            <span class="s3">'text/plain'</span>
+        <span class="s2">);</span>
+
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span>
+            <span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">name</span><span class="s2">} </span><span class="s3">- Headers`</span><span class="s2">,</span>
+            <span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">headers</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">),</span>
+            <span class="s3">'application/json'</span>
+        <span class="s2">);</span>
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">const </span><span class="s1">jsonBody </span><span class="s2">= </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s1">body</span><span class="s2">);</span>
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span>
+                <span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">name</span><span class="s2">} </span><span class="s3">- Body`</span><span class="s2">,</span>
+                <span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">jsonBody</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">),</span>
+                <span class="s3">'application/json'</span>
+            <span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">{</span>
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">name</span><span class="s2">} </span><span class="s3">- Body`</span><span class="s2">, </span><span class="s1">body</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">attachEnvironmentInfo</span><span class="s2">() {</span>
+        <span class="s0">const </span><span class="s1">envInfo </span><span class="s2">= {</span>
+            <span class="s1">timestamp</span><span class="s2">: </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">().</span><span class="s1">toISOString</span><span class="s2">(),</span>
+            <span class="s1">node_version</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">version</span><span class="s2">,</span>
+            <span class="s1">platform</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">platform</span><span class="s2">,</span>
+            <span class="s1">base_url</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">BASE_URL</span><span class="s2">,</span>
+            <span class="s1">test_env</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">TEST_ENV </span><span class="s2">|| </span><span class="s3">'stage'</span>
+        <span class="s2">};</span>
+
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Environment Info'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">envInfo</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">static </span><span class="s1">startTest</span><span class="s2">(</span><span class="s1">name</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">description</span><span class="s2">?: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s1">allure</span><span class="s2">.</span><span class="s1">displayName</span><span class="s2">(</span><span class="s1">name</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">description</span><span class="s2">) {</span>
+            <span class="s1">allure</span><span class="s2">.</span><span class="s1">description</span><span class="s2">(</span><span class="s1">description</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

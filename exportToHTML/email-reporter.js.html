@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>email-reporter.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+email-reporter.js</font>
+</center></td></tr></table>
+<pre><span class="s0">//email-reporter/email-reporter.js</span>
+<span class="s2">const </span><span class="s1">EmailReporter </span><span class="s3">= </span><span class="s1">require</span><span class="s3">(</span><span class="s4">'../utils/email-reporter'</span><span class="s3">);</span>
+
+<span class="s2">class </span><span class="s1">CustomEmailReporter </span><span class="s3">{</span>
+    <span class="s1">constructor</span><span class="s3">(</span><span class="s1">options </span><span class="s3">= {}) {</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">emailReporter </span><span class="s3">= </span><span class="s2">new </span><span class="s1">EmailReporter</span><span class="s3">();</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">results </span><span class="s3">= {</span>
+            <span class="s1">total</span><span class="s3">: </span><span class="s5">0</span><span class="s3">,</span>
+            <span class="s1">passed</span><span class="s3">: </span><span class="s5">0</span><span class="s3">,</span>
+            <span class="s1">failed</span><span class="s3">: </span><span class="s5">0</span><span class="s3">,</span>
+            <span class="s1">tests</span><span class="s3">: [],</span>
+            <span class="s1">startTime</span><span class="s3">: </span><span class="s2">null</span><span class="s3">,</span>
+            <span class="s1">duration</span><span class="s3">: </span><span class="s5">0</span>
+        <span class="s3">};</span>
+    <span class="s3">}</span>
+
+    <span class="s1">onBegin</span><span class="s3">(</span><span class="s1">config</span><span class="s3">, </span><span class="s1">suite</span><span class="s3">) {</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">.</span><span class="s1">startTime </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">();</span>
+        <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">`Запуск тестов: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">suite</span><span class="s3">.</span><span class="s1">allTests</span><span class="s3">().</span><span class="s1">length</span><span class="s3">} </span><span class="s4">тестов`</span><span class="s3">);</span>
+    <span class="s3">}</span>
+
+    <span class="s1">onTestBegin</span><span class="s3">(</span><span class="s1">test</span><span class="s3">) {</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">.</span><span class="s1">total</span><span class="s3">++;</span>
+    <span class="s3">}</span>
+
+    <span class="s1">onTestEnd</span><span class="s3">(</span><span class="s1">test</span><span class="s3">, </span><span class="s1">result</span><span class="s3">) {</span>
+        <span class="s2">const </span><span class="s1">testResult </span><span class="s3">= {</span>
+            <span class="s1">title</span><span class="s3">: </span><span class="s1">test</span><span class="s3">.</span><span class="s1">title</span><span class="s3">,</span>
+            <span class="s1">status</span><span class="s3">: </span><span class="s1">result</span><span class="s3">.</span><span class="s1">status</span><span class="s3">,</span>
+            <span class="s1">duration</span><span class="s3">: </span><span class="s1">result</span><span class="s3">.</span><span class="s1">duration</span><span class="s3">,</span>
+            <span class="s1">error</span><span class="s3">: </span><span class="s1">result</span><span class="s3">.</span><span class="s1">error </span><span class="s3">? </span><span class="s1">result</span><span class="s3">.</span><span class="s1">error</span><span class="s3">.</span><span class="s1">message </span><span class="s3">: </span><span class="s2">null</span>
+        <span class="s3">};</span>
+
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">.</span><span class="s1">tests</span><span class="s3">.</span><span class="s1">push</span><span class="s3">(</span><span class="s1">testResult</span><span class="s3">);</span>
+
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">result</span><span class="s3">.</span><span class="s1">status </span><span class="s3">=== </span><span class="s4">'passed'</span><span class="s3">) {</span>
+            <span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">.</span><span class="s1">passed</span><span class="s3">++;</span>
+        <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+            <span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">.</span><span class="s1">failed</span><span class="s3">++;</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+
+    <span class="s1">onEnd</span><span class="s3">(</span><span class="s1">result</span><span class="s3">) {</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">.</span><span class="s1">duration </span><span class="s3">= </span><span class="s1">Date</span><span class="s3">.</span><span class="s1">now</span><span class="s3">() - </span><span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">.</span><span class="s1">startTime</span><span class="s3">;</span>
+
+        <span class="s0">// Отправляем email с результатами</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">emailReporter</span><span class="s3">.</span><span class="s1">sendTestResults</span><span class="s3">(</span><span class="s2">this</span><span class="s3">.</span><span class="s1">results</span><span class="s3">);</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+
+<span class="s1">module</span><span class="s3">.</span><span class="s1">exports </span><span class="s3">= </span><span class="s1">CustomEmailReporter</span><span class="s3">;</span></pre>
+</body>
+</html>

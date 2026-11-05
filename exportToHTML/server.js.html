@@ -1,0 +1,212 @@
+<html>
+<head>
+<title>server.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+server.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">server_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">server_exports</span><span class="s1">, {</span>
+  <span class="s2">connect</span><span class="s1">: () =&gt; </span><span class="s2">connect</span><span class="s1">,</span>
+  <span class="s2">createServer</span><span class="s1">: () =&gt; </span><span class="s2">createServer</span><span class="s1">,</span>
+  <span class="s2">firstRootPath</span><span class="s1">: () =&gt; </span><span class="s2">firstRootPath</span><span class="s1">,</span>
+  <span class="s2">start</span><span class="s1">: () =&gt; </span><span class="s2">start</span><span class="s1">,</span>
+  <span class="s2">wrapInProcess</span><span class="s1">: () =&gt; </span><span class="s2">wrapInProcess</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">server_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_url </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;url&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">mcpBundle </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./bundle&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_http </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./http&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_inProcessTransport </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./inProcessTransport&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">serverDebug </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">)(</span><span class="s0">&quot;pw:mcp:server&quot;</span><span class="s1">);</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">connect</span><span class="s1">(</span><span class="s2">factory</span><span class="s1">, </span><span class="s2">transport</span><span class="s1">, </span><span class="s2">runHeartbeat</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">server </span><span class="s1">= </span><span class="s2">createServer</span><span class="s1">(</span><span class="s2">factory</span><span class="s1">.</span><span class="s2">name</span><span class="s1">, </span><span class="s2">factory</span><span class="s1">.</span><span class="s2">version</span><span class="s1">, </span><span class="s2">factory</span><span class="s1">.</span><span class="s2">create</span><span class="s1">(), </span><span class="s2">runHeartbeat</span><span class="s1">);</span>
+  <span class="s3">await </span><span class="s2">server</span><span class="s1">.</span><span class="s2">connect</span><span class="s1">(</span><span class="s2">transport</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">wrapInProcess</span><span class="s1">(</span><span class="s2">backend</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">server </span><span class="s1">= </span><span class="s2">createServer</span><span class="s1">(</span><span class="s0">&quot;Internal&quot;</span><span class="s1">, </span><span class="s0">&quot;0.0.0&quot;</span><span class="s1">, </span><span class="s2">backend</span><span class="s1">, </span><span class="s3">false</span><span class="s1">);</span>
+  <span class="s3">return new </span><span class="s2">import_inProcessTransport</span><span class="s1">.</span><span class="s2">InProcessTransport</span><span class="s1">(</span><span class="s2">server</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">createServer</span><span class="s1">(</span><span class="s2">name</span><span class="s1">, </span><span class="s2">version</span><span class="s1">, </span><span class="s2">backend</span><span class="s1">, </span><span class="s2">runHeartbeat</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">server </span><span class="s1">= </span><span class="s3">new </span><span class="s2">mcpBundle</span><span class="s1">.</span><span class="s2">Server</span><span class="s1">({ </span><span class="s2">name</span><span class="s1">, </span><span class="s2">version </span><span class="s1">}, {</span>
+    <span class="s2">capabilities</span><span class="s1">: {</span>
+      <span class="s2">tools</span><span class="s1">: {}</span>
+    <span class="s1">}</span>
+  <span class="s1">});</span>
+  <span class="s2">server</span><span class="s1">.</span><span class="s2">setRequestHandler</span><span class="s1">(</span><span class="s2">mcpBundle</span><span class="s1">.</span><span class="s2">ListToolsRequestSchema</span><span class="s1">, </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+    <span class="s2">serverDebug</span><span class="s1">(</span><span class="s0">&quot;listTools&quot;</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">tools </span><span class="s1">= </span><span class="s3">await </span><span class="s2">backend</span><span class="s1">.</span><span class="s2">listTools</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">tools </span><span class="s1">};</span>
+  <span class="s1">});</span>
+  <span class="s3">let </span><span class="s2">initializePromise</span><span class="s1">;</span>
+  <span class="s2">server</span><span class="s1">.</span><span class="s2">setRequestHandler</span><span class="s1">(</span><span class="s2">mcpBundle</span><span class="s1">.</span><span class="s2">CallToolRequestSchema</span><span class="s1">, </span><span class="s2">async </span><span class="s1">(</span><span class="s2">request</span><span class="s1">, </span><span class="s2">extra</span><span class="s1">) =&gt; {</span>
+    <span class="s2">serverDebug</span><span class="s1">(</span><span class="s0">&quot;callTool&quot;</span><span class="s1">, </span><span class="s2">request</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">progressToken </span><span class="s1">= </span><span class="s2">request</span><span class="s1">.</span><span class="s2">params</span><span class="s1">.</span><span class="s2">_meta</span><span class="s1">?.</span><span class="s2">progressToken</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">progressCounter </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">progress </span><span class="s1">= </span><span class="s2">progressToken </span><span class="s1">? (</span><span class="s2">params</span><span class="s1">) =&gt; {</span>
+      <span class="s2">extra</span><span class="s1">.</span><span class="s2">sendNotification</span><span class="s1">({</span>
+        <span class="s2">method</span><span class="s1">: </span><span class="s0">&quot;notifications/progress&quot;</span><span class="s1">,</span>
+        <span class="s2">params</span><span class="s1">: {</span>
+          <span class="s2">progressToken</span><span class="s1">,</span>
+          <span class="s2">progress</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">progress </span><span class="s1">?? ++</span><span class="s2">progressCounter</span><span class="s1">,</span>
+          <span class="s2">total</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">total</span><span class="s1">,</span>
+          <span class="s2">message</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">message</span>
+        <span class="s1">}</span>
+      <span class="s1">}).</span><span class="s2">catch</span><span class="s1">(</span><span class="s2">serverDebug</span><span class="s1">);</span>
+    <span class="s1">} : () =&gt; {</span>
+    <span class="s1">};</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">initializePromise</span><span class="s1">)</span>
+        <span class="s2">initializePromise </span><span class="s1">= </span><span class="s2">initializeServer</span><span class="s1">(</span><span class="s2">server</span><span class="s1">, </span><span class="s2">backend</span><span class="s1">, </span><span class="s2">runHeartbeat</span><span class="s1">);</span>
+      <span class="s3">await </span><span class="s2">initializePromise</span><span class="s1">;</span>
+      <span class="s3">return </span><span class="s2">mergeTextParts</span><span class="s1">(</span><span class="s3">await </span><span class="s2">backend</span><span class="s1">.</span><span class="s2">callTool</span><span class="s1">(</span><span class="s2">request</span><span class="s1">.</span><span class="s2">params</span><span class="s1">.</span><span class="s2">name</span><span class="s1">, </span><span class="s2">request</span><span class="s1">.</span><span class="s2">params</span><span class="s1">.</span><span class="s2">arguments </span><span class="s1">|| {}, </span><span class="s2">progress</span><span class="s1">));</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">return </span><span class="s1">{</span>
+        <span class="s2">content</span><span class="s1">: [{ </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;text&quot;</span><span class="s1">, </span><span class="s2">text</span><span class="s1">: </span><span class="s0">&quot;### Result</span><span class="s3">\n</span><span class="s0">&quot; </span><span class="s1">+ </span><span class="s2">String</span><span class="s1">(</span><span class="s2">error</span><span class="s1">) }],</span>
+        <span class="s2">isError</span><span class="s1">: </span><span class="s3">true</span>
+      <span class="s1">};</span>
+    <span class="s1">}</span>
+  <span class="s1">});</span>
+  <span class="s2">addServerListener</span><span class="s1">(</span><span class="s2">server</span><span class="s1">, </span><span class="s0">&quot;close&quot;</span><span class="s1">, () =&gt; </span><span class="s2">backend</span><span class="s1">.</span><span class="s2">serverClosed</span><span class="s1">?.(</span><span class="s2">server</span><span class="s1">));</span>
+  <span class="s3">return </span><span class="s2">server</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">initializeServer </span><span class="s1">= </span><span class="s2">async </span><span class="s1">(</span><span class="s2">server</span><span class="s1">, </span><span class="s2">backend</span><span class="s1">, </span><span class="s2">runHeartbeat</span><span class="s1">) =&gt; {</span>
+  <span class="s3">const </span><span class="s2">capabilities </span><span class="s1">= </span><span class="s2">server</span><span class="s1">.</span><span class="s2">getClientCapabilities</span><span class="s1">();</span>
+  <span class="s3">let </span><span class="s2">clientRoots </span><span class="s1">= [];</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">capabilities</span><span class="s1">?.</span><span class="s2">roots</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">roots </span><span class="s1">} = </span><span class="s3">await </span><span class="s2">server</span><span class="s1">.</span><span class="s2">listRoots</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; {</span>
+      <span class="s2">serverDebug</span><span class="s1">(</span><span class="s2">e</span><span class="s1">);</span>
+      <span class="s3">return </span><span class="s1">{ </span><span class="s2">roots</span><span class="s1">: [] };</span>
+    <span class="s1">});</span>
+    <span class="s2">clientRoots </span><span class="s1">= </span><span class="s2">roots</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">clientInfo </span><span class="s1">= {</span>
+    <span class="s2">name</span><span class="s1">: </span><span class="s2">server</span><span class="s1">.</span><span class="s2">getClientVersion</span><span class="s1">()?.</span><span class="s2">name </span><span class="s1">?? </span><span class="s0">&quot;unknown&quot;</span><span class="s1">,</span>
+    <span class="s2">version</span><span class="s1">: </span><span class="s2">server</span><span class="s1">.</span><span class="s2">getClientVersion</span><span class="s1">()?.</span><span class="s2">version </span><span class="s1">?? </span><span class="s0">&quot;unknown&quot;</span><span class="s1">,</span>
+    <span class="s2">roots</span><span class="s1">: </span><span class="s2">clientRoots</span><span class="s1">,</span>
+    <span class="s2">timestamp</span><span class="s1">: </span><span class="s2">Date</span><span class="s1">.</span><span class="s2">now</span><span class="s1">()</span>
+  <span class="s1">};</span>
+  <span class="s3">await </span><span class="s2">backend</span><span class="s1">.</span><span class="s2">initialize</span><span class="s1">?.(</span><span class="s2">server</span><span class="s1">, </span><span class="s2">clientInfo</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">runHeartbeat</span><span class="s1">)</span>
+    <span class="s2">startHeartbeat</span><span class="s1">(</span><span class="s2">server</span><span class="s1">);</span>
+<span class="s1">};</span>
+<span class="s3">const </span><span class="s2">startHeartbeat </span><span class="s1">= (</span><span class="s2">server</span><span class="s1">) =&gt; {</span>
+  <span class="s3">const </span><span class="s2">beat </span><span class="s1">= () =&gt; {</span>
+    <span class="s2">Promise</span><span class="s1">.</span><span class="s2">race</span><span class="s1">([</span>
+      <span class="s2">server</span><span class="s1">.</span><span class="s2">ping</span><span class="s1">(),</span>
+      <span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">_</span><span class="s1">, </span><span class="s2">reject</span><span class="s1">) =&gt; </span><span class="s2">setTimeout</span><span class="s1">(() =&gt; </span><span class="s2">reject</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;ping timeout&quot;</span><span class="s1">)), </span><span class="s5">5e3</span><span class="s1">))</span>
+    <span class="s1">]).</span><span class="s2">then</span><span class="s1">(() =&gt; {</span>
+      <span class="s2">setTimeout</span><span class="s1">(</span><span class="s2">beat</span><span class="s1">, </span><span class="s5">3e3</span><span class="s1">);</span>
+    <span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s3">void </span><span class="s2">server</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+    <span class="s1">});</span>
+  <span class="s1">};</span>
+  <span class="s2">beat</span><span class="s1">();</span>
+<span class="s1">};</span>
+<span class="s3">function </span><span class="s2">addServerListener</span><span class="s1">(</span><span class="s2">server</span><span class="s1">, </span><span class="s2">event</span><span class="s1">, </span><span class="s2">listener</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">oldListener </span><span class="s1">= </span><span class="s2">server</span><span class="s1">[</span><span class="s0">`on</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">}</span><span class="s0">`</span><span class="s1">];</span>
+  <span class="s2">server</span><span class="s1">[</span><span class="s0">`on</span><span class="s2">$</span><span class="s1">{</span><span class="s2">event</span><span class="s1">}</span><span class="s0">`</span><span class="s1">] = () =&gt; {</span>
+    <span class="s2">oldListener</span><span class="s1">?.();</span>
+    <span class="s2">listener</span><span class="s1">();</span>
+  <span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">start</span><span class="s1">(</span><span class="s2">serverBackendFactory</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">port </span><span class="s1">=== </span><span class="s3">void </span><span class="s5">0</span><span class="s1">) {</span>
+    <span class="s3">await </span><span class="s2">connect</span><span class="s1">(</span><span class="s2">serverBackendFactory</span><span class="s1">, </span><span class="s3">new </span><span class="s2">mcpBundle</span><span class="s1">.</span><span class="s2">StdioServerTransport</span><span class="s1">(), </span><span class="s3">false</span><span class="s1">);</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">httpServer </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_http</span><span class="s1">.</span><span class="s2">startHttpServer</span><span class="s1">)(</span><span class="s2">options</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">url </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_http</span><span class="s1">.</span><span class="s2">httpAddressToString</span><span class="s1">)(</span><span class="s2">httpServer</span><span class="s1">.</span><span class="s2">address</span><span class="s1">());</span>
+  <span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_http</span><span class="s1">.</span><span class="s2">installHttpTransport</span><span class="s1">)(</span><span class="s2">httpServer</span><span class="s1">, </span><span class="s2">serverBackendFactory</span><span class="s1">, </span><span class="s2">options</span><span class="s1">.</span><span class="s2">allowedHosts</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">mcpConfig </span><span class="s1">= { </span><span class="s2">mcpServers</span><span class="s1">: {} };</span>
+  <span class="s2">mcpConfig</span><span class="s1">.</span><span class="s2">mcpServers</span><span class="s1">[</span><span class="s2">serverBackendFactory</span><span class="s1">.</span><span class="s2">nameInConfig</span><span class="s1">] = {</span>
+    <span class="s2">url</span><span class="s1">: </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">url</span><span class="s1">}</span><span class="s0">/mcp`</span>
+  <span class="s1">};</span>
+  <span class="s3">const </span><span class="s2">message </span><span class="s1">= [</span>
+    <span class="s0">`Listening on </span><span class="s2">$</span><span class="s1">{</span><span class="s2">url</span><span class="s1">}</span><span class="s0">`</span><span class="s1">,</span>
+    <span class="s0">&quot;Put this in your client config:&quot;</span><span class="s1">,</span>
+    <span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">mcpConfig</span><span class="s1">, </span><span class="s3">void </span><span class="s5">0</span><span class="s1">, </span><span class="s5">2</span><span class="s1">),</span>
+    <span class="s0">&quot;For legacy SSE transport support, you can use the /sse endpoint instead.&quot;</span>
+  <span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+  <span class="s2">console</span><span class="s1">.</span><span class="s2">error</span><span class="s1">(</span><span class="s2">message</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">firstRootPath</span><span class="s1">(</span><span class="s2">clientInfo</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">clientInfo</span><span class="s1">.</span><span class="s2">roots</span><span class="s1">.</span><span class="s2">length </span><span class="s1">=== </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s3">return void </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">firstRootUri </span><span class="s1">= </span><span class="s2">clientInfo</span><span class="s1">.</span><span class="s2">roots</span><span class="s1">[</span><span class="s5">0</span><span class="s1">]?.</span><span class="s2">uri</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">url </span><span class="s1">= </span><span class="s2">firstRootUri </span><span class="s1">? </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s2">firstRootUri</span><span class="s1">) : </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">return </span><span class="s2">url </span><span class="s1">? (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_url</span><span class="s1">.</span><span class="s2">fileURLToPath</span><span class="s1">)(</span><span class="s2">url</span><span class="s1">) : </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">mergeTextParts</span><span class="s1">(</span><span class="s2">result</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">content </span><span class="s1">= [];</span>
+  <span class="s3">const </span><span class="s2">testParts </span><span class="s1">= [];</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">part of result</span><span class="s1">.</span><span class="s2">content</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;text&quot;</span><span class="s1">) {</span>
+      <span class="s2">testParts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">text</span><span class="s1">);</span>
+      <span class="s3">continue</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">testParts</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&gt; </span><span class="s5">0</span><span class="s1">) {</span>
+      <span class="s2">content</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;text&quot;</span><span class="s1">, </span><span class="s2">text</span><span class="s1">: </span><span class="s2">testParts</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">) });</span>
+      <span class="s2">testParts</span><span class="s1">.</span><span class="s2">length </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">content</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">part</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">testParts</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&gt; </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s2">content</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;text&quot;</span><span class="s1">, </span><span class="s2">text</span><span class="s1">: </span><span class="s2">testParts</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">) });</span>
+  <span class="s3">return </span><span class="s1">{</span>
+    <span class="s2">...result</span><span class="s1">,</span>
+    <span class="s2">content</span>
+  <span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">connect</span><span class="s1">,</span>
+  <span class="s2">createServer</span><span class="s1">,</span>
+  <span class="s2">firstRootPath</span><span class="s1">,</span>
+  <span class="s2">start</span><span class="s1">,</span>
+  <span class="s2">wrapInProcess</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

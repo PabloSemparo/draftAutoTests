@@ -1,0 +1,159 @@
+<html>
+<head>
+<title>api.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+api.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">api_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">api_exports</span><span class="s1">, {</span>
+  <span class="s2">APIRequest</span><span class="s1">: () =&gt; </span><span class="s2">import_fetch</span><span class="s1">.</span><span class="s2">APIRequest</span><span class="s1">,</span>
+  <span class="s2">APIRequestContext</span><span class="s1">: () =&gt; </span><span class="s2">import_fetch</span><span class="s1">.</span><span class="s2">APIRequestContext</span><span class="s1">,</span>
+  <span class="s2">APIResponse</span><span class="s1">: () =&gt; </span><span class="s2">import_fetch</span><span class="s1">.</span><span class="s2">APIResponse</span><span class="s1">,</span>
+  <span class="s2">Accessibility</span><span class="s1">: () =&gt; </span><span class="s2">import_accessibility</span><span class="s1">.</span><span class="s2">Accessibility</span><span class="s1">,</span>
+  <span class="s2">Android</span><span class="s1">: () =&gt; </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">Android</span><span class="s1">,</span>
+  <span class="s2">AndroidDevice</span><span class="s1">: () =&gt; </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">AndroidDevice</span><span class="s1">,</span>
+  <span class="s2">AndroidInput</span><span class="s1">: () =&gt; </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">AndroidInput</span><span class="s1">,</span>
+  <span class="s2">AndroidSocket</span><span class="s1">: () =&gt; </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">AndroidSocket</span><span class="s1">,</span>
+  <span class="s2">AndroidWebView</span><span class="s1">: () =&gt; </span><span class="s2">import_android</span><span class="s1">.</span><span class="s2">AndroidWebView</span><span class="s1">,</span>
+  <span class="s2">Browser</span><span class="s1">: () =&gt; </span><span class="s2">import_browser</span><span class="s1">.</span><span class="s2">Browser</span><span class="s1">,</span>
+  <span class="s2">BrowserContext</span><span class="s1">: () =&gt; </span><span class="s2">import_browserContext</span><span class="s1">.</span><span class="s2">BrowserContext</span><span class="s1">,</span>
+  <span class="s2">BrowserType</span><span class="s1">: () =&gt; </span><span class="s2">import_browserType</span><span class="s1">.</span><span class="s2">BrowserType</span><span class="s1">,</span>
+  <span class="s2">CDPSession</span><span class="s1">: () =&gt; </span><span class="s2">import_cdpSession</span><span class="s1">.</span><span class="s2">CDPSession</span><span class="s1">,</span>
+  <span class="s2">Clock</span><span class="s1">: () =&gt; </span><span class="s2">import_clock</span><span class="s1">.</span><span class="s2">Clock</span><span class="s1">,</span>
+  <span class="s2">ConsoleMessage</span><span class="s1">: () =&gt; </span><span class="s2">import_consoleMessage</span><span class="s1">.</span><span class="s2">ConsoleMessage</span><span class="s1">,</span>
+  <span class="s2">Coverage</span><span class="s1">: () =&gt; </span><span class="s2">import_coverage</span><span class="s1">.</span><span class="s2">Coverage</span><span class="s1">,</span>
+  <span class="s2">Dialog</span><span class="s1">: () =&gt; </span><span class="s2">import_dialog</span><span class="s1">.</span><span class="s2">Dialog</span><span class="s1">,</span>
+  <span class="s2">Download</span><span class="s1">: () =&gt; </span><span class="s2">import_download</span><span class="s1">.</span><span class="s2">Download</span><span class="s1">,</span>
+  <span class="s2">Electron</span><span class="s1">: () =&gt; </span><span class="s2">import_electron</span><span class="s1">.</span><span class="s2">Electron</span><span class="s1">,</span>
+  <span class="s2">ElectronApplication</span><span class="s1">: () =&gt; </span><span class="s2">import_electron</span><span class="s1">.</span><span class="s2">ElectronApplication</span><span class="s1">,</span>
+  <span class="s2">ElementHandle</span><span class="s1">: () =&gt; </span><span class="s2">import_elementHandle</span><span class="s1">.</span><span class="s2">ElementHandle</span><span class="s1">,</span>
+  <span class="s2">FileChooser</span><span class="s1">: () =&gt; </span><span class="s2">import_fileChooser</span><span class="s1">.</span><span class="s2">FileChooser</span><span class="s1">,</span>
+  <span class="s2">Frame</span><span class="s1">: () =&gt; </span><span class="s2">import_frame</span><span class="s1">.</span><span class="s2">Frame</span><span class="s1">,</span>
+  <span class="s2">FrameLocator</span><span class="s1">: () =&gt; </span><span class="s2">import_locator</span><span class="s1">.</span><span class="s2">FrameLocator</span><span class="s1">,</span>
+  <span class="s2">JSHandle</span><span class="s1">: () =&gt; </span><span class="s2">import_jsHandle</span><span class="s1">.</span><span class="s2">JSHandle</span><span class="s1">,</span>
+  <span class="s2">Keyboard</span><span class="s1">: () =&gt; </span><span class="s2">import_input</span><span class="s1">.</span><span class="s2">Keyboard</span><span class="s1">,</span>
+  <span class="s2">Locator</span><span class="s1">: () =&gt; </span><span class="s2">import_locator</span><span class="s1">.</span><span class="s2">Locator</span><span class="s1">,</span>
+  <span class="s2">Mouse</span><span class="s1">: () =&gt; </span><span class="s2">import_input</span><span class="s1">.</span><span class="s2">Mouse</span><span class="s1">,</span>
+  <span class="s2">Page</span><span class="s1">: () =&gt; </span><span class="s2">import_page</span><span class="s1">.</span><span class="s2">Page</span><span class="s1">,</span>
+  <span class="s2">Playwright</span><span class="s1">: () =&gt; </span><span class="s2">import_playwright</span><span class="s1">.</span><span class="s2">Playwright</span><span class="s1">,</span>
+  <span class="s2">Request</span><span class="s1">: () =&gt; </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">Request</span><span class="s1">,</span>
+  <span class="s2">Response</span><span class="s1">: () =&gt; </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">Response</span><span class="s1">,</span>
+  <span class="s2">Route</span><span class="s1">: () =&gt; </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">Route</span><span class="s1">,</span>
+  <span class="s2">Selectors</span><span class="s1">: () =&gt; </span><span class="s2">import_selectors</span><span class="s1">.</span><span class="s2">Selectors</span><span class="s1">,</span>
+  <span class="s2">TimeoutError</span><span class="s1">: () =&gt; </span><span class="s2">import_errors</span><span class="s1">.</span><span class="s2">TimeoutError</span><span class="s1">,</span>
+  <span class="s2">Touchscreen</span><span class="s1">: () =&gt; </span><span class="s2">import_input</span><span class="s1">.</span><span class="s2">Touchscreen</span><span class="s1">,</span>
+  <span class="s2">Tracing</span><span class="s1">: () =&gt; </span><span class="s2">import_tracing</span><span class="s1">.</span><span class="s2">Tracing</span><span class="s1">,</span>
+  <span class="s2">Video</span><span class="s1">: () =&gt; </span><span class="s2">import_video</span><span class="s1">.</span><span class="s2">Video</span><span class="s1">,</span>
+  <span class="s2">WebError</span><span class="s1">: () =&gt; </span><span class="s2">import_webError</span><span class="s1">.</span><span class="s2">WebError</span><span class="s1">,</span>
+  <span class="s2">WebSocket</span><span class="s1">: () =&gt; </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">WebSocket</span><span class="s1">,</span>
+  <span class="s2">WebSocketRoute</span><span class="s1">: () =&gt; </span><span class="s2">import_network</span><span class="s1">.</span><span class="s2">WebSocketRoute</span><span class="s1">,</span>
+  <span class="s2">Worker</span><span class="s1">: () =&gt; </span><span class="s2">import_worker</span><span class="s1">.</span><span class="s2">Worker</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">api_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_accessibility </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./accessibility&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_android </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./android&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browser </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./browser&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browserContext </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./browserContext&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_browserType </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./browserType&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_clock </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./clock&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_consoleMessage </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./consoleMessage&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_coverage </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./coverage&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_dialog </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./dialog&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_download </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./download&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_electron </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./electron&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_locator </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./locator&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_elementHandle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./elementHandle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fileChooser </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./fileChooser&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_errors </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./errors&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_frame </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./frame&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_input </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./input&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_jsHandle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./jsHandle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_network </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./network&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fetch </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./fetch&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_page </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./page&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_selectors </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./selectors&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_tracing </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./tracing&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_video </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./video&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_worker </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./worker&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_cdpSession </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./cdpSession&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_playwright </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./playwright&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_webError </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./webError&quot;</span><span class="s1">);</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">APIRequest</span><span class="s1">,</span>
+  <span class="s2">APIRequestContext</span><span class="s1">,</span>
+  <span class="s2">APIResponse</span><span class="s1">,</span>
+  <span class="s2">Accessibility</span><span class="s1">,</span>
+  <span class="s2">Android</span><span class="s1">,</span>
+  <span class="s2">AndroidDevice</span><span class="s1">,</span>
+  <span class="s2">AndroidInput</span><span class="s1">,</span>
+  <span class="s2">AndroidSocket</span><span class="s1">,</span>
+  <span class="s2">AndroidWebView</span><span class="s1">,</span>
+  <span class="s2">Browser</span><span class="s1">,</span>
+  <span class="s2">BrowserContext</span><span class="s1">,</span>
+  <span class="s2">BrowserType</span><span class="s1">,</span>
+  <span class="s2">CDPSession</span><span class="s1">,</span>
+  <span class="s2">Clock</span><span class="s1">,</span>
+  <span class="s2">ConsoleMessage</span><span class="s1">,</span>
+  <span class="s2">Coverage</span><span class="s1">,</span>
+  <span class="s2">Dialog</span><span class="s1">,</span>
+  <span class="s2">Download</span><span class="s1">,</span>
+  <span class="s2">Electron</span><span class="s1">,</span>
+  <span class="s2">ElectronApplication</span><span class="s1">,</span>
+  <span class="s2">ElementHandle</span><span class="s1">,</span>
+  <span class="s2">FileChooser</span><span class="s1">,</span>
+  <span class="s2">Frame</span><span class="s1">,</span>
+  <span class="s2">FrameLocator</span><span class="s1">,</span>
+  <span class="s2">JSHandle</span><span class="s1">,</span>
+  <span class="s2">Keyboard</span><span class="s1">,</span>
+  <span class="s2">Locator</span><span class="s1">,</span>
+  <span class="s2">Mouse</span><span class="s1">,</span>
+  <span class="s2">Page</span><span class="s1">,</span>
+  <span class="s2">Playwright</span><span class="s1">,</span>
+  <span class="s2">Request</span><span class="s1">,</span>
+  <span class="s2">Response</span><span class="s1">,</span>
+  <span class="s2">Route</span><span class="s1">,</span>
+  <span class="s2">Selectors</span><span class="s1">,</span>
+  <span class="s2">TimeoutError</span><span class="s1">,</span>
+  <span class="s2">Touchscreen</span><span class="s1">,</span>
+  <span class="s2">Tracing</span><span class="s1">,</span>
+  <span class="s2">Video</span><span class="s1">,</span>
+  <span class="s2">WebError</span><span class="s1">,</span>
+  <span class="s2">WebSocket</span><span class="s1">,</span>
+  <span class="s2">WebSocketRoute</span><span class="s1">,</span>
+  <span class="s2">Worker</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

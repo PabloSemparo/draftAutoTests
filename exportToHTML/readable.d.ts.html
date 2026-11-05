@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>readable.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+readable.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Readable </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;stream&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">Blob </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'buffer'</span>
+
+<span class="s0">export default </span><span class="s1">BodyReadable</span>
+
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">BodyReadable </span><span class="s0">extends </span><span class="s1">Readable </span><span class="s2">{</span>
+  <span class="s1">constructor</span><span class="s2">(</span>
+    <span class="s1">resume</span><span class="s2">?: (</span><span class="s0">this</span><span class="s2">: </span><span class="s1">Readable</span><span class="s2">, </span><span class="s1">size</span><span class="s2">: </span><span class="s1">number</span><span class="s2">) =&gt; </span><span class="s0">void </span><span class="s2">| </span><span class="s0">null</span><span class="s2">,</span>
+    <span class="s1">abort</span><span class="s2">?: () =&gt; </span><span class="s0">void </span><span class="s2">| </span><span class="s0">null</span><span class="s2">,</span>
+    <span class="s1">contentType</span><span class="s2">?: </span><span class="s1">string</span>
+  <span class="s2">)</span>
+
+  <span class="s4">/** Consumes and returns the body as a string</span>
+   <span class="s4">*  https://fetch.spec.whatwg.org/#dom-body-text</span>
+   <span class="s4">*/</span>
+  <span class="s1">text</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">string</span><span class="s2">&gt;</span>
+
+  <span class="s4">/** Consumes and returns the body as a JavaScript Object</span>
+   <span class="s4">*  https://fetch.spec.whatwg.org/#dom-body-json</span>
+   <span class="s4">*/</span>
+  <span class="s1">json</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">unknown</span><span class="s2">&gt;</span>
+
+  <span class="s4">/** Consumes and returns the body as a Blob</span>
+   <span class="s4">*  https://fetch.spec.whatwg.org/#dom-body-blob</span>
+   <span class="s4">*/</span>
+  <span class="s1">blob</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">Blob</span><span class="s2">&gt;</span>
+
+  <span class="s4">/** Consumes and returns the body as an ArrayBuffer</span>
+   <span class="s4">*  https://fetch.spec.whatwg.org/#dom-body-arraybuffer</span>
+   <span class="s4">*/</span>
+  <span class="s1">arrayBuffer</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">ArrayBuffer</span><span class="s2">&gt;</span>
+
+  <span class="s4">/** Not implemented</span>
+   <span class="s4">*</span>
+   <span class="s4">*  https://fetch.spec.whatwg.org/#dom-body-formdata</span>
+   <span class="s4">*/</span>
+  <span class="s1">formData</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">never</span><span class="s2">&gt;</span>
+
+  <span class="s4">/** Returns true if the body is not null and the body has been consumed</span>
+   <span class="s4">*</span>
+   <span class="s4">*  Otherwise, returns false</span>
+   <span class="s4">*</span>
+   <span class="s4">* https://fetch.spec.whatwg.org/#dom-body-bodyused</span>
+   <span class="s4">*/</span>
+  <span class="s1">readonly bodyUsed</span><span class="s2">: </span><span class="s1">boolean</span>
+
+  <span class="s4">/** </span>
+   <span class="s4">* If body is null, it should return null as the body</span>
+   <span class="s4">*</span>
+   <span class="s4">*  If body is not null, should return the body as a ReadableStream</span>
+   <span class="s4">*</span>
+   <span class="s4">*  https://fetch.spec.whatwg.org/#dom-body-body</span>
+   <span class="s4">*/</span>
+  <span class="s1">readonly body</span><span class="s2">: </span><span class="s1">never </span><span class="s2">| </span><span class="s1">undefined</span>
+
+  <span class="s4">/** Dumps the response body by reading `limit` number of bytes.</span>
+   <span class="s4">* </span><span class="s5">@param </span><span class="s4">opts.limit Number of bytes to read (optional) - Default: 262144</span>
+   <span class="s4">*/</span>
+  <span class="s1">dump</span><span class="s2">(</span><span class="s1">opts</span><span class="s2">?: { </span><span class="s1">limit</span><span class="s2">: </span><span class="s1">number </span><span class="s2">}): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s0">void</span><span class="s2">&gt;</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

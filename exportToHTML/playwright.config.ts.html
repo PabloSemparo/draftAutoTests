@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>playwright.config.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+playwright.config.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">defineConfig</span><span class="s2">, </span><span class="s1">devices </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">* as </span><span class="s1">dotenv from </span><span class="s3">'dotenv'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">* as </span><span class="s1">path from </span><span class="s3">'path'</span><span class="s2">;</span>
+
+<span class="s4">// ✅ Загружаем env-переменные из правильного файла</span>
+<span class="s1">dotenv</span><span class="s2">.</span><span class="s1">config</span><span class="s2">({ </span><span class="s1">path</span><span class="s2">: </span><span class="s1">path</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">__dirname</span><span class="s2">, </span><span class="s3">&quot;env_settings/.env.stage&quot;</span><span class="s2">) });</span>
+<span class="s4">// Allure репортер</span>
+
+<span class="s4">// Конфигурация окружения после загрузки .env</span>
+<span class="s0">const </span><span class="s1">env </span><span class="s2">= {</span>
+  <span class="s1">BASE_URL</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">BASE_URL </span><span class="s2">|| </span><span class="s3">'https://eq-debt-collection-stage.bdengi.ru'</span><span class="s2">,</span>
+  <span class="s1">STAGING_BASE_URL</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">STAGING_BASE_URL</span><span class="s2">,</span>
+  <span class="s1">PRODUCTION_BASE_URL</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">PRODUCTION_BASE_URL</span><span class="s2">,</span>
+  <span class="s1">HEADLESS</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">HEADLESS </span><span class="s2">!== </span><span class="s3">'false'</span><span class="s2">,</span>
+  <span class="s1">SLOW_MO</span><span class="s2">: </span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">SLOW_MO </span><span class="s2">|| </span><span class="s3">'0'</span><span class="s2">),</span>
+  <span class="s1">ENV</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">NODE_ENV </span><span class="s2">|| </span><span class="s3">'development'</span><span class="s2">,</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">environment </span><span class="s2">= </span><span class="s1">env</span><span class="s2">.</span><span class="s1">ENV</span><span class="s2">;</span>
+
+<span class="s0">const </span><span class="s1">environmentConfigs </span><span class="s2">= {</span>
+  <span class="s1">development</span><span class="s2">: {</span>
+    <span class="s1">baseURL</span><span class="s2">: </span><span class="s1">env</span><span class="s2">.</span><span class="s1">BASE_URL</span><span class="s2">,</span>
+    <span class="s1">trace</span><span class="s2">: </span><span class="s3">'on' </span><span class="s2">as </span><span class="s0">const</span><span class="s2">,</span>
+    <span class="s1">video</span><span class="s2">: </span><span class="s3">'on' </span><span class="s2">as </span><span class="s0">const</span><span class="s2">,</span>
+  <span class="s2">},</span>
+  <span class="s1">staging</span><span class="s2">: {</span>
+    <span class="s1">baseURL</span><span class="s2">: </span><span class="s1">env</span><span class="s2">.</span><span class="s1">STAGING_BASE_URL </span><span class="s2">|| </span><span class="s1">env</span><span class="s2">.</span><span class="s1">BASE_URL</span><span class="s2">,</span>
+    <span class="s1">trace</span><span class="s2">: </span><span class="s3">'on-first-retry' </span><span class="s2">as </span><span class="s0">const</span><span class="s2">,</span>
+    <span class="s1">video</span><span class="s2">: </span><span class="s3">'on-first-retry' </span><span class="s2">as </span><span class="s0">const</span><span class="s2">,</span>
+  <span class="s2">},</span>
+  <span class="s1">production</span><span class="s2">: {</span>
+    <span class="s1">baseURL</span><span class="s2">: </span><span class="s1">env</span><span class="s2">.</span><span class="s1">PRODUCTION_BASE_URL </span><span class="s2">|| </span><span class="s1">env</span><span class="s2">.</span><span class="s1">BASE_URL</span><span class="s2">,</span>
+    <span class="s1">trace</span><span class="s2">: </span><span class="s3">'retain-on-failure' </span><span class="s2">as </span><span class="s0">const</span><span class="s2">,</span>
+    <span class="s1">video</span><span class="s2">: </span><span class="s3">'retain-on-failure' </span><span class="s2">as </span><span class="s0">const</span><span class="s2">,</span>
+  <span class="s2">},</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">currentConfig </span><span class="s2">= </span><span class="s1">environmentConfigs</span><span class="s2">[</span><span class="s1">environment </span><span class="s2">as </span><span class="s1">keyof </span><span class="s0">typeof </span><span class="s1">environmentConfigs</span><span class="s2">] || </span><span class="s1">environmentConfigs</span><span class="s2">.</span><span class="s1">development</span><span class="s2">;</span>
+
+<span class="s4">// ✅ Единственный default export</span>
+<span class="s0">export default </span><span class="s1">defineConfig</span><span class="s2">({</span>
+  <span class="s1">testDir</span><span class="s2">: </span><span class="s3">'./API-Tests'</span><span class="s2">,</span>
+  <span class="s1">testMatch</span><span class="s2">: [</span><span class="s3">'**/*.spec.ts'</span><span class="s2">],</span>
+  <span class="s1">timeout</span><span class="s2">: </span><span class="s5">1200000</span><span class="s2">, </span><span class="s4">// 20 минут на тест</span>
+  <span class="s1">fullyParallel</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+
+  <span class="s4">// ✅ Отчёты</span>
+  <span class="s1">reporter</span><span class="s2">: [</span>
+    <span class="s2">[</span><span class="s3">'html'</span><span class="s2">, { </span><span class="s1">outputFolder</span><span class="s2">: </span><span class="s3">'playwright-report' </span><span class="s2">}],</span>
+    <span class="s2">[</span><span class="s3">'json'</span><span class="s2">, { </span><span class="s1">outputFile</span><span class="s2">: </span><span class="s3">'test-results.json' </span><span class="s2">}],</span>
+    <span class="s2">[</span><span class="s3">'allure-playwright'</span><span class="s2">, {</span>
+      <span class="s1">outputFolder</span><span class="s2">: </span><span class="s3">'allure-results'</span><span class="s2">,</span>
+      <span class="s1">detail</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+      <span class="s1">suiteTitle</span><span class="s2">: </span><span class="s0">false</span><span class="s2">,</span>
+      <span class="s1">environmentInfo</span><span class="s2">: {</span>
+        <span class="s1">OS</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">platform</span><span class="s2">,</span>
+        <span class="s1">NODE_VERSION</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">version</span><span class="s2">,</span>
+        <span class="s1">TEST_ENV</span><span class="s2">: </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">TEST_ENV </span><span class="s2">|| </span><span class="s3">'stage'</span>
+      <span class="s2">}</span>
+    <span class="s2">}]</span>
+  <span class="s2">],</span>
+
+  <span class="s4">// ✅ Глобальная настройка</span>
+  <span class="s1">globalSetup</span><span class="s2">: </span><span class="s3">'./tests/global-setup.ts'</span><span class="s2">,</span>
+  <span class="s1">globalTeardown</span><span class="s2">: </span><span class="s3">'./tests/global-teardown.ts'</span><span class="s2">,</span>
+
+  <span class="s1">use</span><span class="s2">: {</span>
+    <span class="s1">...currentConfig</span><span class="s2">,</span>
+    <span class="s1">trace</span><span class="s2">: </span><span class="s3">'on-first-retry'</span><span class="s2">,</span>
+    <span class="s1">ignoreHTTPSErrors</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+    <span class="s1">headless</span><span class="s2">: </span><span class="s1">env</span><span class="s2">.</span><span class="s1">HEADLESS</span><span class="s2">,</span>
+    <span class="s1">storageState</span><span class="s2">: </span><span class="s3">'tests/storageState.json'</span><span class="s2">,</span>
+    <span class="s1">launchOptions</span><span class="s2">: {</span>
+      <span class="s1">slowMo</span><span class="s2">: </span><span class="s1">env</span><span class="s2">.</span><span class="s1">SLOW_MO</span><span class="s2">,</span>
+    <span class="s2">},</span>
+  <span class="s2">},</span>
+
+  <span class="s4">// ✅ Конфигурация проектов</span>
+  <span class="s1">projects</span><span class="s2">: [</span>
+    <span class="s2">{</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">'setup'</span><span class="s2">,</span>
+      <span class="s1">testMatch</span><span class="s2">: </span><span class="s6">/.*\.setup\.js/</span><span class="s2">,</span>
+    <span class="s2">},</span>
+    <span class="s2">{</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">'chromium'</span><span class="s2">,</span>
+      <span class="s1">use</span><span class="s2">: {</span>
+        <span class="s1">...devices</span><span class="s2">[</span><span class="s3">'Desktop Chrome'</span><span class="s2">],</span>
+      <span class="s2">},</span>
+      <span class="s1">dependencies</span><span class="s2">: [</span><span class="s3">'setup'</span><span class="s2">],</span>
+    <span class="s2">},</span>
+  <span class="s2">],</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

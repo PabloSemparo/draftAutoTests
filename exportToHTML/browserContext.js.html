@@ -1,0 +1,718 @@
+<html>
+<head>
+<title>browserContext.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+browserContext.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">browserContext_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">browserContext_exports</span><span class="s1">, {</span>
+  <span class="s2">BrowserContext</span><span class="s1">: () =&gt; </span><span class="s2">BrowserContext</span><span class="s1">,</span>
+  <span class="s2">normalizeProxySettings</span><span class="s1">: () =&gt; </span><span class="s2">normalizeProxySettings</span><span class="s1">,</span>
+  <span class="s2">validateBrowserContextOptions</span><span class="s1">: () =&gt; </span><span class="s2">validateBrowserContextOptions</span><span class="s1">,</span>
+  <span class="s2">verifyClientCertificates</span><span class="s1">: () =&gt; </span><span class="s2">verifyClientCertificates</span><span class="s1">,</span>
+  <span class="s2">verifyGeolocation</span><span class="s1">: () =&gt; </span><span class="s2">verifyGeolocation</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">browserContext_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_crypto </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./utils/crypto&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_debug </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./utils/debug&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_clock </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./clock&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_debugger </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./debugger&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_dialog </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./dialog&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fetch </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./fetch&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fileUtils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./utils/fileUtils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_stackTrace </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/isomorphic/stackTrace&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_harRecorder </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./har/harRecorder&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_helper </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./helper&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_instrumentation </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./instrumentation&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">network </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./network&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_page </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./page&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_page2 </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./page&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_recorderApp </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./recorder/recorderApp&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_selectors </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./selectors&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_tracing </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./trace/recorder/tracing&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">rawStorageSource </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../generated/storageScriptSource&quot;</span><span class="s1">));</span>
+<span class="s3">class </span><span class="s2">BrowserContext </span><span class="s3">extends </span><span class="s2">import_instrumentation</span><span class="s1">.</span><span class="s2">SdkObject </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">browser</span><span class="s1">, </span><span class="s2">options</span><span class="s1">, </span><span class="s2">browserContextId</span><span class="s1">) {</span>
+    <span class="s3">super</span><span class="s1">(</span><span class="s2">browser</span><span class="s1">, </span><span class="s0">&quot;browser-context&quot;</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_pageBindings </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">requestInterceptors </span><span class="s1">= [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closedStatus </span><span class="s1">= </span><span class="s0">&quot;open&quot;</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_permissions </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_downloads </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_origins </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_harRecorders </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_tempDirs </span><span class="s1">= [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_creatingStorageStatePage </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">initScripts </span><span class="s1">= [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_routesInFlight </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightBindingExposed </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">attribution</span><span class="s1">.</span><span class="s2">context </span><span class="s1">= </span><span class="s3">this</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browser </span><span class="s1">= </span><span class="s2">browser</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_options </span><span class="s1">= </span><span class="s2">options</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextId </span><span class="s1">= </span><span class="s2">browserContextId</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_isPersistentContext </span><span class="s1">= !</span><span class="s2">browserContextId</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closePromise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">fulfill</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closePromiseFulfill </span><span class="s1">= </span><span class="s2">fulfill</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_selectors </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_selectors</span><span class="s1">.</span><span class="s2">Selectors</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">selectorEngines </span><span class="s1">|| [], </span><span class="s2">options</span><span class="s1">.</span><span class="s2">testIdAttributeName</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">fetchRequest </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_fetch</span><span class="s1">.</span><span class="s2">BrowserContextAPIRequestContext</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">tracing </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_tracing</span><span class="s1">.</span><span class="s2">Tracing</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">browser</span><span class="s1">.</span><span class="s2">options</span><span class="s1">.</span><span class="s2">tracesDir</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">clock </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_clock</span><span class="s1">.</span><span class="s2">Clock</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">dialogManager </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_dialog</span><span class="s1">.</span><span class="s2">DialogManager</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">instrumentation</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s1">{</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">Events </span><span class="s1">= {</span>
+      <span class="s2">Console</span><span class="s1">: </span><span class="s0">&quot;console&quot;</span><span class="s1">,</span>
+      <span class="s2">Close</span><span class="s1">: </span><span class="s0">&quot;close&quot;</span><span class="s1">,</span>
+      <span class="s2">Page</span><span class="s1">: </span><span class="s0">&quot;page&quot;</span><span class="s1">,</span>
+      <span class="s4">// Can't use just 'error' due to node.js special treatment of error events.</span>
+      <span class="s4">// @see https://nodejs.org/api/events.html#events_error_events</span>
+      <span class="s2">PageError</span><span class="s1">: </span><span class="s0">&quot;pageerror&quot;</span><span class="s1">,</span>
+      <span class="s2">Request</span><span class="s1">: </span><span class="s0">&quot;request&quot;</span><span class="s1">,</span>
+      <span class="s2">Response</span><span class="s1">: </span><span class="s0">&quot;response&quot;</span><span class="s1">,</span>
+      <span class="s2">RequestFailed</span><span class="s1">: </span><span class="s0">&quot;requestfailed&quot;</span><span class="s1">,</span>
+      <span class="s2">RequestFinished</span><span class="s1">: </span><span class="s0">&quot;requestfinished&quot;</span><span class="s1">,</span>
+      <span class="s2">RequestAborted</span><span class="s1">: </span><span class="s0">&quot;requestaborted&quot;</span><span class="s1">,</span>
+      <span class="s2">RequestFulfilled</span><span class="s1">: </span><span class="s0">&quot;requestfulfilled&quot;</span><span class="s1">,</span>
+      <span class="s2">RequestContinued</span><span class="s1">: </span><span class="s0">&quot;requestcontinued&quot;</span><span class="s1">,</span>
+      <span class="s2">BeforeClose</span><span class="s1">: </span><span class="s0">&quot;beforeclose&quot;</span><span class="s1">,</span>
+      <span class="s2">VideoStarted</span><span class="s1">: </span><span class="s0">&quot;videostarted&quot;</span><span class="s1">,</span>
+      <span class="s2">RecorderEvent</span><span class="s1">: </span><span class="s0">&quot;recorderevent&quot;</span>
+    <span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">isPersistentContext</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_isPersistentContext</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">selectors</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_selectors</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _initialize</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">attribution</span><span class="s1">.</span><span class="s2">playwright</span><span class="s1">.</span><span class="s2">options</span><span class="s1">.</span><span class="s2">isInternalPlaywright</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_debugger </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_debugger</span><span class="s1">.</span><span class="s2">Debugger</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_debug</span><span class="s1">.</span><span class="s2">debugMode</span><span class="s1">)() === </span><span class="s0">&quot;inspector&quot;</span><span class="s1">)</span>
+      <span class="s3">await </span><span class="s2">import_recorderApp</span><span class="s1">.</span><span class="s2">RecorderApp</span><span class="s1">.</span><span class="s2">show</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, { </span><span class="s2">pauseOnNextStatement</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_debugger</span><span class="s1">.</span><span class="s2">isPaused</span><span class="s1">())</span>
+      <span class="s2">import_recorderApp</span><span class="s1">.</span><span class="s2">RecorderApp</span><span class="s1">.</span><span class="s2">showInspectorNoReply</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_debugger</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s2">import_debugger</span><span class="s1">.</span><span class="s2">Debugger</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">PausedStateChanged</span><span class="s1">, () =&gt; {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_debugger</span><span class="s1">.</span><span class="s2">isPaused</span><span class="s1">())</span>
+        <span class="s2">import_recorderApp</span><span class="s1">.</span><span class="s2">RecorderApp</span><span class="s1">.</span><span class="s2">showInspectorNoReply</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_debug</span><span class="s1">.</span><span class="s2">debugMode</span><span class="s1">)() === </span><span class="s0">&quot;console&quot;</span><span class="s1">) {</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">extendInjectedScript</span><span class="s1">(</span><span class="s0">`</span>
+        <span class="s0">function installConsoleApi(injectedScript) { injectedScript.consoleApi.install(); } 
+        module.exports = { default: () =&gt; installConsoleApi }; 
+      `</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">serviceWorkers </span><span class="s1">=== </span><span class="s0">&quot;block&quot;</span><span class="s1">)</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">addInitScript</span><span class="s1">(</span><span class="s3">void </span><span class="s5">0</span><span class="s1">, </span><span class="s0">`</span>
+<span class="s0">if (navigator.serviceWorker) navigator.serviceWorker.register = async () =&gt; { console.warn('Service Worker registration blocked by Playwright'); }; 
+`</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">permissions</span><span class="s1">)</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">grantPermissions</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">permissions</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">debugger</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_debugger</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _ensureVideosPath</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">)</span>
+      <span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_fileUtils</span><span class="s1">.</span><span class="s2">mkdirIfNeeded</span><span class="s1">)(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">.</span><span class="s2">dir</span><span class="s1">, </span><span class="s0">&quot;dummy&quot;</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">canResetForReuse</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closedStatus </span><span class="s1">!== </span><span class="s0">&quot;open&quot;</span><span class="s1">)</span>
+      <span class="s3">return false</span><span class="s1">;</span>
+    <span class="s3">return true</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s2">reusableContextHash</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">paramsCopy </span><span class="s1">= { </span><span class="s2">...params </span><span class="s1">};</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">paramsCopy</span><span class="s1">.</span><span class="s2">selectorEngines</span><span class="s1">?.</span><span class="s2">length </span><span class="s1">=== </span><span class="s5">0</span><span class="s1">)</span>
+      <span class="s3">delete </span><span class="s2">paramsCopy</span><span class="s1">.</span><span class="s2">selectorEngines</span><span class="s1">;</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">k of Object</span><span class="s1">.</span><span class="s2">keys</span><span class="s1">(</span><span class="s2">paramsCopy</span><span class="s1">)) {</span>
+      <span class="s3">const </span><span class="s2">key </span><span class="s1">= </span><span class="s2">k</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">paramsCopy</span><span class="s1">[</span><span class="s2">key</span><span class="s1">] === </span><span class="s2">defaultNewContextParamValues</span><span class="s1">[</span><span class="s2">key</span><span class="s1">])</span>
+        <span class="s3">delete </span><span class="s2">paramsCopy</span><span class="s1">[</span><span class="s2">key</span><span class="s1">];</span>
+    <span class="s1">}</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">key of paramsThatAllowContextReuse</span><span class="s1">)</span>
+      <span class="s3">delete </span><span class="s2">paramsCopy</span><span class="s1">[</span><span class="s2">key</span><span class="s1">];</span>
+    <span class="s3">return </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">paramsCopy</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async resetForReuse</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">tracing</span><span class="s1">.</span><span class="s2">resetForReuse</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">key of paramsThatAllowContextReuse</span><span class="s1">)</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">[</span><span class="s2">key</span><span class="s1">] = </span><span class="s2">params</span><span class="s1">[</span><span class="s2">key</span><span class="s1">];</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">testIdAttributeName</span><span class="s1">)</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">selectors</span><span class="s1">().</span><span class="s2">setTestIdAttributeName</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">testIdAttributeName</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">let </span><span class="s2">page </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">()[</span><span class="s5">0</span><span class="s1">];</span>
+    <span class="s3">const </span><span class="s2">otherPages </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">possiblyUninitializedPages</span><span class="s1">().</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; </span><span class="s2">p </span><span class="s1">!== </span><span class="s2">page</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">p of otherPages</span><span class="s1">)</span>
+      <span class="s3">await </span><span class="s2">p</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">page </span><span class="s1">&amp;&amp; </span><span class="s2">page</span><span class="s1">.</span><span class="s2">hasCrashed</span><span class="s1">()) {</span>
+      <span class="s3">await </span><span class="s2">page</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+      <span class="s2">page </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">await </span><span class="s2">page</span><span class="s1">?.</span><span class="s2">mainFrame</span><span class="s1">().</span><span class="s2">gotoImpl</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s0">&quot;about:blank&quot;</span><span class="s1">, {});</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">clock</span><span class="s1">.</span><span class="s2">uninstall</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">setUserAgent</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">userAgent</span><span class="s1">));</span>
+    <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">doUpdateDefaultEmulatedMedia</span><span class="s1">());</span>
+    <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">doUpdateDefaultViewport</span><span class="s1">());</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">setStorageState</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">storageState</span><span class="s1">, </span><span class="s0">&quot;resetForReuse&quot;</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">page</span><span class="s1">?.</span><span class="s2">resetForReuse</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_browserClosed</span><span class="s1">() {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">page of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">())</span>
+      <span class="s2">page</span><span class="s1">.</span><span class="s2">_didClose</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_didCloseInternal</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">_didCloseInternal</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closedStatus </span><span class="s1">=== </span><span class="s0">&quot;closed&quot;</span><span class="s1">) {</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_clientCertificatesProxy</span><span class="s1">?.</span><span class="s2">close</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">tracing</span><span class="s1">.</span><span class="s2">abort</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_isPersistentContext</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">onClosePersistent</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closePromiseFulfill</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Context closed&quot;</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s2">BrowserContext</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">Close</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">pages</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">possiblyUninitializedPages</span><span class="s1">().</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">page</span><span class="s1">) =&gt; </span><span class="s2">page</span><span class="s1">.</span><span class="s2">initializedOrUndefined</span><span class="s1">());</span>
+  <span class="s1">}</span>
+  <span class="s2">async cookies</span><span class="s1">(</span><span class="s2">urls </span><span class="s1">= []) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">urls </span><span class="s1">&amp;&amp; !</span><span class="s2">Array</span><span class="s1">.</span><span class="s2">isArray</span><span class="s1">(</span><span class="s2">urls</span><span class="s1">))</span>
+      <span class="s2">urls </span><span class="s1">= [</span><span class="s2">urls</span><span class="s1">];</span>
+    <span class="s3">return await this</span><span class="s1">.</span><span class="s2">doGetCookies</span><span class="s1">(</span><span class="s2">urls</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async clearCookies</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">currentCookies </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">cookies</span><span class="s1">();</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doClearCookies</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">matches </span><span class="s1">= (</span><span class="s2">cookie</span><span class="s1">, </span><span class="s2">prop</span><span class="s1">, </span><span class="s2">value</span><span class="s1">) =&gt; {</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">value</span><span class="s1">)</span>
+        <span class="s3">return true</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">value </span><span class="s3">instanceof </span><span class="s2">RegExp</span><span class="s1">) {</span>
+        <span class="s2">value</span><span class="s1">.</span><span class="s2">lastIndex </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+        <span class="s3">return </span><span class="s2">value</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s2">cookie</span><span class="s1">[</span><span class="s2">prop</span><span class="s1">]);</span>
+      <span class="s1">}</span>
+      <span class="s3">return </span><span class="s2">cookie</span><span class="s1">[</span><span class="s2">prop</span><span class="s1">] === </span><span class="s2">value</span><span class="s1">;</span>
+    <span class="s1">};</span>
+    <span class="s3">const </span><span class="s2">cookiesToReadd </span><span class="s1">= </span><span class="s2">currentCookies</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">cookie</span><span class="s1">) =&gt; {</span>
+      <span class="s3">return </span><span class="s1">!</span><span class="s2">matches</span><span class="s1">(</span><span class="s2">cookie</span><span class="s1">, </span><span class="s0">&quot;name&quot;</span><span class="s1">, </span><span class="s2">options</span><span class="s1">.</span><span class="s2">name</span><span class="s1">) || !</span><span class="s2">matches</span><span class="s1">(</span><span class="s2">cookie</span><span class="s1">, </span><span class="s0">&quot;domain&quot;</span><span class="s1">, </span><span class="s2">options</span><span class="s1">.</span><span class="s2">domain</span><span class="s1">) || !</span><span class="s2">matches</span><span class="s1">(</span><span class="s2">cookie</span><span class="s1">, </span><span class="s0">&quot;path&quot;</span><span class="s1">, </span><span class="s2">options</span><span class="s1">.</span><span class="s2">path</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">addCookies</span><span class="s1">(</span><span class="s2">cookiesToReadd</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">setHTTPCredentials</span><span class="s1">(</span><span class="s2">httpCredentials</span><span class="s1">) {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">doSetHTTPCredentials</span><span class="s1">(</span><span class="s2">httpCredentials</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">getBindingClient</span><span class="s1">(</span><span class="s2">name</span><span class="s1">) {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_pageBindings</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">name</span><span class="s1">)?.</span><span class="s2">forClient</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async exposePlaywrightBindingIfNeeded</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightBindingExposed</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_playwrightBindingExposed </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doExposePlaywrightBinding</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">bindingsInitScript </span><span class="s1">= </span><span class="s2">import_page2</span><span class="s1">.</span><span class="s2">PageBinding</span><span class="s1">.</span><span class="s2">createInitScript</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">initScripts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">bindingsInitScript</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doAddInitScript</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">bindingsInitScript</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">safeNonStallingEvaluateInAllFrames</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">bindingsInitScript</span><span class="s1">.</span><span class="s2">source</span><span class="s1">, </span><span class="s0">&quot;main&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">needsPlaywrightBinding</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_playwrightBindingExposed</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async exposeBinding</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, </span><span class="s2">needsHandle</span><span class="s1">, </span><span class="s2">playwrightBinding</span><span class="s1">, </span><span class="s2">forClient</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pageBindings</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">name</span><span class="s1">))</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Function &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">name</span><span class="s1">}</span><span class="s0">&quot; has been already registered`</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">page of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">()) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">page</span><span class="s1">.</span><span class="s2">getBinding</span><span class="s1">(</span><span class="s2">name</span><span class="s1">))</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Function &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">name</span><span class="s1">}</span><span class="s0">&quot; has been already registered in one of the pages`</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">exposePlaywrightBindingIfNeeded</span><span class="s1">());</span>
+    <span class="s3">const </span><span class="s2">binding </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_page2</span><span class="s1">.</span><span class="s2">PageBinding</span><span class="s1">(</span><span class="s2">name</span><span class="s1">, </span><span class="s2">playwrightBinding</span><span class="s1">, </span><span class="s2">needsHandle</span><span class="s1">);</span>
+    <span class="s2">binding</span><span class="s1">.</span><span class="s2">forClient </span><span class="s1">= </span><span class="s2">forClient</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_pageBindings</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">name</span><span class="s1">, </span><span class="s2">binding</span><span class="s1">);</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">doAddInitScript</span><span class="s1">(</span><span class="s2">binding</span><span class="s1">.</span><span class="s2">initScript</span><span class="s1">));</span>
+      <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">safeNonStallingEvaluateInAllFrames</span><span class="s1">(</span><span class="s2">binding</span><span class="s1">.</span><span class="s2">initScript</span><span class="s1">.</span><span class="s2">source</span><span class="s1">, </span><span class="s0">&quot;main&quot;</span><span class="s1">));</span>
+      <span class="s3">return </span><span class="s2">binding</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_pageBindings</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">name</span><span class="s1">);</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async removeExposedBindings</span><span class="s1">(</span><span class="s2">bindings</span><span class="s1">) {</span>
+    <span class="s2">bindings </span><span class="s1">= </span><span class="s2">bindings</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">binding</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pageBindings</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">binding</span><span class="s1">.</span><span class="s2">name</span><span class="s1">) === </span><span class="s2">binding</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">binding of bindings</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_pageBindings</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">binding</span><span class="s1">.</span><span class="s2">name</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doRemoveInitScripts</span><span class="s1">(</span><span class="s2">bindings</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">binding</span><span class="s1">) =&gt; </span><span class="s2">binding</span><span class="s1">.</span><span class="s2">initScript</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">cleanup </span><span class="s1">= </span><span class="s2">bindings</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">binding</span><span class="s1">) =&gt; </span><span class="s0">`{ </span><span class="s2">$</span><span class="s1">{</span><span class="s2">binding</span><span class="s1">.</span><span class="s2">cleanupScript</span><span class="s1">} </span><span class="s0">}; 
+`</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;&quot;</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">safeNonStallingEvaluateInAllFrames</span><span class="s1">(</span><span class="s2">cleanup</span><span class="s1">, </span><span class="s0">&quot;main&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async grantPermissions</span><span class="s1">(</span><span class="s2">permissions</span><span class="s1">, </span><span class="s2">origin</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">resolvedOrigin </span><span class="s1">= </span><span class="s0">&quot;*&quot;</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">origin</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">url </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">);</span>
+      <span class="s2">resolvedOrigin </span><span class="s1">= </span><span class="s2">url</span><span class="s1">.</span><span class="s2">origin</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">existing </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_permissions</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">resolvedOrigin</span><span class="s1">) || []);</span>
+    <span class="s2">permissions</span><span class="s1">.</span><span class="s2">forEach</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; </span><span class="s2">existing</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">p</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s2">list </span><span class="s1">= [</span><span class="s2">...existing</span><span class="s1">.</span><span class="s2">values</span><span class="s1">()];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_permissions</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">resolvedOrigin</span><span class="s1">, </span><span class="s2">list</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doGrantPermissions</span><span class="s1">(</span><span class="s2">resolvedOrigin</span><span class="s1">, </span><span class="s2">list</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async clearPermissions</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_permissions</span><span class="s1">.</span><span class="s2">clear</span><span class="s1">();</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doClearPermissions</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async setExtraHTTPHeaders</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">headers</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">oldHeaders </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">extraHTTPHeaders</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">extraHTTPHeaders </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">;</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">doUpdateExtraHTTPHeaders</span><span class="s1">());</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">extraHTTPHeaders </span><span class="s1">= </span><span class="s2">oldHeaders</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">doUpdateExtraHTTPHeaders</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async setOffline</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">offline</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">oldOffline </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">offline</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">offline </span><span class="s1">= </span><span class="s2">offline</span><span class="s1">;</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">doUpdateOffline</span><span class="s1">());</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">offline </span><span class="s1">= </span><span class="s2">oldOffline</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">doUpdateOffline</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async _loadDefaultContextAsIs</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">possiblyUninitializedPages</span><span class="s1">().</span><span class="s2">length</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">waitForEvent </span><span class="s1">= </span><span class="s2">import_helper</span><span class="s1">.</span><span class="s2">helper</span><span class="s1">.</span><span class="s2">waitForEvent</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s3">this</span><span class="s1">, </span><span class="s2">BrowserContext</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">Page</span><span class="s1">);</span>
+      <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">race</span><span class="s1">([</span><span class="s2">waitForEvent</span><span class="s1">.</span><span class="s2">promise</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closePromise</span><span class="s1">]);</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">page </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">possiblyUninitializedPages</span><span class="s1">()[</span><span class="s5">0</span><span class="s1">];</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">page</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">pageOrError </span><span class="s1">= </span><span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">page</span><span class="s1">.</span><span class="s2">waitForInitializedOrError</span><span class="s1">());</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">pageOrError </span><span class="s3">instanceof </span><span class="s2">Error</span><span class="s1">)</span>
+      <span class="s3">throw </span><span class="s2">pageOrError</span><span class="s1">;</span>
+    <span class="s3">await </span><span class="s2">page</span><span class="s1">.</span><span class="s2">mainFrame</span><span class="s1">().</span><span class="s2">_waitForLoadState</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s0">&quot;load&quot;</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">page</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _loadDefaultContext</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">defaultPage </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_loadDefaultContextAsIs</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">defaultPage</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">browserName </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browser</span><span class="s1">.</span><span class="s2">options</span><span class="s1">.</span><span class="s2">name</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">isMobile </span><span class="s1">&amp;&amp; </span><span class="s2">browserName </span><span class="s1">=== </span><span class="s0">&quot;chromium&quot; </span><span class="s1">|| </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">locale </span><span class="s1">&amp;&amp; </span><span class="s2">browserName </span><span class="s1">=== </span><span class="s0">&quot;webkit&quot;</span><span class="s1">) {</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">newPage</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">);</span>
+      <span class="s3">await </span><span class="s2">defaultPage</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">_authenticateProxyViaHeader</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">proxy </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">proxy </span><span class="s1">|| </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browser</span><span class="s1">.</span><span class="s2">options</span><span class="s1">.</span><span class="s2">proxy </span><span class="s1">|| { </span><span class="s2">username</span><span class="s1">: </span><span class="s3">void </span><span class="s5">0</span><span class="s1">, </span><span class="s2">password</span><span class="s1">: </span><span class="s3">void </span><span class="s5">0 </span><span class="s1">};</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">username</span><span class="s1">, </span><span class="s2">password </span><span class="s1">} = </span><span class="s2">proxy</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">username</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">httpCredentials </span><span class="s1">= { </span><span class="s2">username</span><span class="s1">, </span><span class="s2">password </span><span class="s1">};</span>
+      <span class="s3">const </span><span class="s2">token </span><span class="s1">= </span><span class="s2">Buffer</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">username</span><span class="s1">}</span><span class="s0">:</span><span class="s2">$</span><span class="s1">{</span><span class="s2">password</span><span class="s1">}</span><span class="s0">`</span><span class="s1">).</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">&quot;base64&quot;</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">extraHTTPHeaders </span><span class="s1">= </span><span class="s2">network</span><span class="s1">.</span><span class="s2">mergeHeaders</span><span class="s1">([</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">extraHTTPHeaders</span><span class="s1">,</span>
+        <span class="s2">network</span><span class="s1">.</span><span class="s2">singleHeader</span><span class="s1">(</span><span class="s0">&quot;Proxy-Authorization&quot;</span><span class="s1">, </span><span class="s0">`Basic </span><span class="s2">$</span><span class="s1">{</span><span class="s2">token</span><span class="s1">}</span><span class="s0">`</span><span class="s1">)</span>
+      <span class="s1">]);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">_authenticateProxyViaCredentials</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">proxy </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">proxy </span><span class="s1">|| </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browser</span><span class="s1">.</span><span class="s2">options</span><span class="s1">.</span><span class="s2">proxy</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">proxy</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">username</span><span class="s1">, </span><span class="s2">password </span><span class="s1">} = </span><span class="s2">proxy</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">username</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">httpCredentials </span><span class="s1">= { </span><span class="s2">username</span><span class="s1">, </span><span class="s2">password</span><span class="s1">: </span><span class="s2">password </span><span class="s1">|| </span><span class="s0">&quot;&quot; </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async addInitScript</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">source</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">initScript </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_page</span><span class="s1">.</span><span class="s2">InitScript</span><span class="s1">(</span><span class="s2">source</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">initScripts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">initScript</span><span class="s1">);</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">promise </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">doAddInitScript</span><span class="s1">(</span><span class="s2">initScript</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">progress</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">promise</span><span class="s1">);</span>
+      <span class="s3">else</span>
+        <span class="s3">await </span><span class="s2">promise</span><span class="s1">;</span>
+      <span class="s3">return </span><span class="s2">initScript</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">removeInitScripts</span><span class="s1">([</span><span class="s2">initScript</span><span class="s1">]).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async removeInitScripts</span><span class="s1">(</span><span class="s2">initScripts</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">set </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">(</span><span class="s2">initScripts</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">initScripts </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">initScripts</span><span class="s1">.</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">script</span><span class="s1">) =&gt; !</span><span class="s2">set</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">script</span><span class="s1">));</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doRemoveInitScripts</span><span class="s1">(</span><span class="s2">initScripts</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async addRequestInterceptor</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">handler</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">requestInterceptors</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doUpdateRequestInterception</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async removeRequestInterceptor</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">index </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">requestInterceptors</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">index </span><span class="s1">=== -</span><span class="s5">1</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">requestInterceptors</span><span class="s1">.</span><span class="s2">splice</span><span class="s1">(</span><span class="s2">index</span><span class="s1">, </span><span class="s5">1</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">notifyRoutesInFlightAboutRemovedHandler</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">doUpdateRequestInterception</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">isClosingOrClosed</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_closedStatus </span><span class="s1">!== </span><span class="s0">&quot;open&quot;</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _deleteAllDownloads</span><span class="s1">() {</span>
+    <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">Array</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_downloads</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">download</span><span class="s1">) =&gt; </span><span class="s2">download</span><span class="s1">.</span><span class="s2">artifact</span><span class="s1">.</span><span class="s2">deleteOnContextClose</span><span class="s1">()));</span>
+  <span class="s1">}</span>
+  <span class="s2">async _deleteAllTempDirs</span><span class="s1">() {</span>
+    <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tempDirs</span><span class="s1">.</span><span class="s2">map</span><span class="s1">(</span><span class="s2">async </span><span class="s1">(</span><span class="s2">dir</span><span class="s1">) =&gt; </span><span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">unlink</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; {</span>
+    <span class="s1">})));</span>
+  <span class="s1">}</span>
+  <span class="s2">setCustomCloseHandler</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_customCloseHandler </span><span class="s1">= </span><span class="s2">handler</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async close</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closedStatus </span><span class="s1">=== </span><span class="s0">&quot;open&quot;</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">)</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_closeReason </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">;</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">emit</span><span class="s1">(</span><span class="s2">BrowserContext</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">BeforeClose</span><span class="s1">);</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_closedStatus </span><span class="s1">= </span><span class="s0">&quot;closing&quot;</span><span class="s1">;</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">harRecorder of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_harRecorders</span><span class="s1">.</span><span class="s2">values</span><span class="s1">())</span>
+        <span class="s3">await </span><span class="s2">harRecorder</span><span class="s1">.</span><span class="s2">flush</span><span class="s1">();</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">tracing</span><span class="s1">.</span><span class="s2">flush</span><span class="s1">();</span>
+      <span class="s3">const </span><span class="s2">promises </span><span class="s1">= [];</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s1">{ </span><span class="s2">context</span><span class="s1">, </span><span class="s2">artifact </span><span class="s1">} </span><span class="s2">of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browser</span><span class="s1">.</span><span class="s2">_idToVideo</span><span class="s1">.</span><span class="s2">values</span><span class="s1">()) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">context </span><span class="s1">=== </span><span class="s3">this</span><span class="s1">)</span>
+          <span class="s2">promises</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">artifact</span><span class="s1">.</span><span class="s2">finishedPromise</span><span class="s1">());</span>
+      <span class="s1">}</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_customCloseHandler</span><span class="s1">) {</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">_customCloseHandler</span><span class="s1">();</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">doClose</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">reason</span><span class="s1">);</span>
+      <span class="s1">}</span>
+      <span class="s2">promises</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_deleteAllDownloads</span><span class="s1">());</span>
+      <span class="s2">promises</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_deleteAllTempDirs</span><span class="s1">());</span>
+      <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">promises</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_customCloseHandler</span><span class="s1">)</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_didCloseInternal</span><span class="s1">();</span>
+    <span class="s1">}</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_closePromise</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async newPage</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">forStorageState</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">page</span><span class="s1">;</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_creatingStorageStatePage </span><span class="s1">= !!</span><span class="s2">forStorageState</span><span class="s1">;</span>
+      <span class="s2">page </span><span class="s1">= </span><span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">doCreateNewPage</span><span class="s1">());</span>
+      <span class="s3">const </span><span class="s2">pageOrError </span><span class="s1">= </span><span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">page</span><span class="s1">.</span><span class="s2">waitForInitializedOrError</span><span class="s1">());</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">pageOrError </span><span class="s3">instanceof </span><span class="s2">import_page2</span><span class="s1">.</span><span class="s2">Page</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">pageOrError</span><span class="s1">.</span><span class="s2">isClosed</span><span class="s1">())</span>
+          <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Page has been closed.&quot;</span><span class="s1">);</span>
+        <span class="s3">return </span><span class="s2">pageOrError</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">throw </span><span class="s2">pageOrError</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s2">page</span><span class="s1">?.</span><span class="s2">close</span><span class="s1">({ </span><span class="s2">reason</span><span class="s1">: </span><span class="s0">&quot;Failed to create page&quot; </span><span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+      <span class="s1">});</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_creatingStorageStatePage </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">addVisitedOrigin</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_origins</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async storageState</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">indexedDB </span><span class="s1">= </span><span class="s3">false</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= {</span>
+      <span class="s2">cookies</span><span class="s1">: </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">cookies</span><span class="s1">(),</span>
+      <span class="s2">origins</span><span class="s1">: []</span>
+    <span class="s1">};</span>
+    <span class="s3">const </span><span class="s2">originsToSave </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_origins</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">collectScript </span><span class="s1">= </span><span class="s0">`(() =&gt; { 
+      const module = {}; 
+      </span><span class="s2">$</span><span class="s1">{</span><span class="s2">rawStorageSource</span><span class="s1">.</span><span class="s2">source</span><span class="s1">}</span>
+      <span class="s0">const script = new (module.exports.StorageScript())(</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browser</span><span class="s1">.</span><span class="s2">options</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;firefox&quot;</span><span class="s1">}</span><span class="s0">); 
+      return script.collect(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">indexedDB</span><span class="s1">}</span><span class="s0">); 
+    })()`</span><span class="s1">;</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">page of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">()) {</span>
+      <span class="s3">const </span><span class="s2">origin </span><span class="s1">= </span><span class="s2">page</span><span class="s1">.</span><span class="s2">mainFrame</span><span class="s1">().</span><span class="s2">origin</span><span class="s1">();</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">origin </span><span class="s1">|| !</span><span class="s2">originsToSave</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">))</span>
+        <span class="s3">continue</span><span class="s1">;</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">const </span><span class="s2">storage </span><span class="s1">= </span><span class="s3">await </span><span class="s2">page</span><span class="s1">.</span><span class="s2">mainFrame</span><span class="s1">().</span><span class="s2">nonStallingEvaluateInExistingContext</span><span class="s1">(</span><span class="s2">collectScript</span><span class="s1">, </span><span class="s0">&quot;utility&quot;</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">storage</span><span class="s1">.</span><span class="s2">localStorage</span><span class="s1">.</span><span class="s2">length </span><span class="s1">|| </span><span class="s2">storage</span><span class="s1">.</span><span class="s2">indexedDB</span><span class="s1">?.</span><span class="s2">length</span><span class="s1">)</span>
+          <span class="s2">result</span><span class="s1">.</span><span class="s2">origins</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">origin</span><span class="s1">, </span><span class="s2">localStorage</span><span class="s1">: </span><span class="s2">storage</span><span class="s1">.</span><span class="s2">localStorage</span><span class="s1">, </span><span class="s2">indexedDB</span><span class="s1">: </span><span class="s2">storage</span><span class="s1">.</span><span class="s2">indexedDB </span><span class="s1">});</span>
+        <span class="s2">originsToSave</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">{</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">originsToSave</span><span class="s1">.</span><span class="s2">size</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">page </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">newPage</span><span class="s1">(</span>
+        <span class="s2">progress</span><span class="s1">,</span>
+        <span class="s3">true</span>
+        <span class="s4">/* forStorageState */</span>
+      <span class="s1">);</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">await </span><span class="s2">page</span><span class="s1">.</span><span class="s2">addRequestInterceptor</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, (</span><span class="s2">route</span><span class="s1">) =&gt; {</span>
+          <span class="s2">route</span><span class="s1">.</span><span class="s2">fulfill</span><span class="s1">({ </span><span class="s2">body</span><span class="s1">: </span><span class="s0">&quot;&lt;html&gt;&lt;/html&gt;&quot; </span><span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+          <span class="s1">});</span>
+        <span class="s1">}, </span><span class="s0">&quot;prepend&quot;</span><span class="s1">);</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">origin of originsToSave</span><span class="s1">) {</span>
+          <span class="s3">const </span><span class="s2">frame </span><span class="s1">= </span><span class="s2">page</span><span class="s1">.</span><span class="s2">mainFrame</span><span class="s1">();</span>
+          <span class="s3">await </span><span class="s2">frame</span><span class="s1">.</span><span class="s2">gotoImpl</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">origin</span><span class="s1">, {});</span>
+          <span class="s3">const </span><span class="s2">storage </span><span class="s1">= </span><span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">frame</span><span class="s1">.</span><span class="s2">evaluateExpression</span><span class="s1">(</span><span class="s2">collectScript</span><span class="s1">, { </span><span class="s2">world</span><span class="s1">: </span><span class="s0">&quot;utility&quot; </span><span class="s1">}));</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">storage</span><span class="s1">.</span><span class="s2">localStorage</span><span class="s1">.</span><span class="s2">length </span><span class="s1">|| </span><span class="s2">storage</span><span class="s1">.</span><span class="s2">indexedDB</span><span class="s1">?.</span><span class="s2">length</span><span class="s1">)</span>
+            <span class="s2">result</span><span class="s1">.</span><span class="s2">origins</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">origin</span><span class="s1">, </span><span class="s2">localStorage</span><span class="s1">: </span><span class="s2">storage</span><span class="s1">.</span><span class="s2">localStorage</span><span class="s1">, </span><span class="s2">indexedDB</span><span class="s1">: </span><span class="s2">storage</span><span class="s1">.</span><span class="s2">indexedDB </span><span class="s1">});</span>
+        <span class="s1">}</span>
+      <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+        <span class="s3">await </span><span class="s2">page</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">isCreatingStorageStatePage</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_creatingStorageStatePage</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async setStorageState</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">state</span><span class="s1">, </span><span class="s2">mode</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">page</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">interceptor</span><span class="s1">;</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">mode </span><span class="s1">!== </span><span class="s0">&quot;initial&quot;</span><span class="s1">) {</span>
+        <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">clearCache</span><span class="s1">());</span>
+        <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">doClearCookies</span><span class="s1">());</span>
+      <span class="s1">}</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">state</span><span class="s1">?.</span><span class="s2">cookies</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">addCookies</span><span class="s1">(</span><span class="s2">state</span><span class="s1">.</span><span class="s2">cookies</span><span class="s1">));</span>
+      <span class="s3">const </span><span class="s2">newOrigins </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">(</span><span class="s2">state</span><span class="s1">?.</span><span class="s2">origins</span><span class="s1">?.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; [</span><span class="s2">p</span><span class="s1">.</span><span class="s2">origin</span><span class="s1">, </span><span class="s2">p</span><span class="s1">]) || []);</span>
+      <span class="s3">const </span><span class="s2">allOrigins </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">([</span><span class="s2">...</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_origins</span><span class="s1">, </span><span class="s2">...newOrigins</span><span class="s1">.</span><span class="s2">keys</span><span class="s1">()]);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">allOrigins</span><span class="s1">.</span><span class="s2">size</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">mode </span><span class="s1">=== </span><span class="s0">&quot;resetForReuse&quot;</span><span class="s1">)</span>
+          <span class="s2">page </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">()[</span><span class="s5">0</span><span class="s1">];</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">page</span><span class="s1">)</span>
+          <span class="s2">page </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">newPage</span><span class="s1">(</span>
+            <span class="s2">progress</span><span class="s1">,</span>
+            <span class="s2">mode </span><span class="s1">!== </span><span class="s0">&quot;resetForReuse&quot;</span>
+            <span class="s4">/* forStorageState */</span>
+          <span class="s1">);</span>
+        <span class="s2">interceptor </span><span class="s1">= (</span><span class="s2">route</span><span class="s1">) =&gt; {</span>
+          <span class="s2">route</span><span class="s1">.</span><span class="s2">fulfill</span><span class="s1">({ </span><span class="s2">body</span><span class="s1">: </span><span class="s0">&quot;&lt;html&gt;&lt;/html&gt;&quot; </span><span class="s1">}).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+          <span class="s1">});</span>
+        <span class="s1">};</span>
+        <span class="s3">await </span><span class="s2">page</span><span class="s1">.</span><span class="s2">addRequestInterceptor</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">interceptor</span><span class="s1">, </span><span class="s0">&quot;prepend&quot;</span><span class="s1">);</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">origin of allOrigins</span><span class="s1">) {</span>
+          <span class="s3">const </span><span class="s2">frame </span><span class="s1">= </span><span class="s2">page</span><span class="s1">.</span><span class="s2">mainFrame</span><span class="s1">();</span>
+          <span class="s3">await </span><span class="s2">frame</span><span class="s1">.</span><span class="s2">gotoImpl</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">origin</span><span class="s1">, {});</span>
+          <span class="s3">const </span><span class="s2">restoreScript </span><span class="s1">= </span><span class="s0">`(() =&gt; { 
+            const module = {}; 
+            </span><span class="s2">$</span><span class="s1">{</span><span class="s2">rawStorageSource</span><span class="s1">.</span><span class="s2">source</span><span class="s1">}</span>
+            <span class="s0">const script = new (module.exports.StorageScript())(</span><span class="s2">$</span><span class="s1">{</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browser</span><span class="s1">.</span><span class="s2">options</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;firefox&quot;</span><span class="s1">}</span><span class="s0">); 
+            return script.restore(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">stringify</span><span class="s1">(</span><span class="s2">newOrigins</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">))}</span><span class="s0">); 
+          })()`</span><span class="s1">;</span>
+          <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">race</span><span class="s1">(</span><span class="s2">frame</span><span class="s1">.</span><span class="s2">evaluateExpression</span><span class="s1">(</span><span class="s2">restoreScript</span><span class="s1">, { </span><span class="s2">world</span><span class="s1">: </span><span class="s0">&quot;utility&quot; </span><span class="s1">}));</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_origins </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">([</span><span class="s2">...newOrigins</span><span class="s1">.</span><span class="s2">keys</span><span class="s1">()]);</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) {</span>
+      <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_stackTrace</span><span class="s1">.</span><span class="s2">rewriteErrorMessage</span><span class="s1">)(</span><span class="s2">error</span><span class="s1">, </span><span class="s0">`Error setting storage state: 
+` </span><span class="s1">+ </span><span class="s2">error</span><span class="s1">.</span><span class="s2">message</span><span class="s1">);</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">mode </span><span class="s1">!== </span><span class="s0">&quot;resetForReuse&quot;</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">page</span><span class="s1">?.</span><span class="s2">close</span><span class="s1">();</span>
+      <span class="s3">else if </span><span class="s1">(</span><span class="s2">interceptor</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">page</span><span class="s1">?.</span><span class="s2">removeRequestInterceptor</span><span class="s1">(</span><span class="s2">interceptor</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async extendInjectedScript</span><span class="s1">(</span><span class="s2">source</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">installInFrame </span><span class="s1">= (</span><span class="s2">frame</span><span class="s1">) =&gt; </span><span class="s2">frame</span><span class="s1">.</span><span class="s2">extendInjectedScript</span><span class="s1">(</span><span class="s2">source</span><span class="s1">, </span><span class="s2">arg</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+    <span class="s1">});</span>
+    <span class="s3">const </span><span class="s2">installInPage </span><span class="s1">= (</span><span class="s2">page</span><span class="s1">) =&gt; {</span>
+      <span class="s2">page</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s2">import_page2</span><span class="s1">.</span><span class="s2">Page</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">InternalFrameNavigatedToNewDocument</span><span class="s1">, </span><span class="s2">installInFrame</span><span class="s1">);</span>
+      <span class="s3">return </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">page</span><span class="s1">.</span><span class="s2">frames</span><span class="s1">().</span><span class="s2">map</span><span class="s1">(</span><span class="s2">installInFrame</span><span class="s1">));</span>
+    <span class="s1">};</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s2">BrowserContext</span><span class="s1">.</span><span class="s2">Events</span><span class="s1">.</span><span class="s2">Page</span><span class="s1">, </span><span class="s2">installInPage</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">().</span><span class="s2">map</span><span class="s1">(</span><span class="s2">installInPage</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">async safeNonStallingEvaluateInAllFrames</span><span class="s1">(</span><span class="s2">expression</span><span class="s1">, </span><span class="s2">world</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">().</span><span class="s2">map</span><span class="s1">((</span><span class="s2">page</span><span class="s1">) =&gt; </span><span class="s2">page</span><span class="s1">.</span><span class="s2">safeNonStallingEvaluateInAllFrames</span><span class="s1">(</span><span class="s2">expression</span><span class="s1">, </span><span class="s2">world</span><span class="s1">, </span><span class="s2">options</span><span class="s1">)));</span>
+  <span class="s1">}</span>
+  <span class="s2">harStart</span><span class="s1">(</span><span class="s2">page</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">harId </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_crypto</span><span class="s1">.</span><span class="s2">createGuid</span><span class="s1">)();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_harRecorders</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">harId</span><span class="s1">, </span><span class="s3">new </span><span class="s2">import_harRecorder</span><span class="s1">.</span><span class="s2">HarRecorder</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">page</span><span class="s1">, </span><span class="s2">options</span><span class="s1">));</span>
+    <span class="s3">return </span><span class="s2">harId</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async harExport</span><span class="s1">(</span><span class="s2">harId</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">recorder </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_harRecorders</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">harId </span><span class="s1">|| </span><span class="s0">&quot;&quot;</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">recorder</span><span class="s1">.</span><span class="s2">export</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">addRouteInFlight</span><span class="s1">(</span><span class="s2">route</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_routesInFlight</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">route</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">removeRouteInFlight</span><span class="s1">(</span><span class="s2">route</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_routesInFlight</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">route</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async notifyRoutesInFlightAboutRemovedHandler</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">) {</span>
+    <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">([</span><span class="s2">...</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_routesInFlight</span><span class="s1">].</span><span class="s2">map</span><span class="s1">((</span><span class="s2">route</span><span class="s1">) =&gt; </span><span class="s2">route</span><span class="s1">.</span><span class="s2">removeHandler</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">)));</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">validateBrowserContextOptions</span><span class="s1">(</span><span class="s2">options</span><span class="s1">, </span><span class="s2">browserOptions</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">noDefaultViewport </span><span class="s1">&amp;&amp; </span><span class="s2">options</span><span class="s1">.</span><span class="s2">deviceScaleFactor </span><span class="s1">!== </span><span class="s3">void </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`&quot;deviceScaleFactor&quot; option is not supported with null &quot;viewport&quot;`</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">noDefaultViewport </span><span class="s1">&amp;&amp; !!</span><span class="s2">options</span><span class="s1">.</span><span class="s2">isMobile</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`&quot;isMobile&quot; option is not supported with null &quot;viewport&quot;`</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">acceptDownloads </span><span class="s1">=== </span><span class="s3">void </span><span class="s5">0 </span><span class="s1">&amp;&amp; </span><span class="s2">browserOptions</span><span class="s1">.</span><span class="s2">name </span><span class="s1">!== </span><span class="s0">&quot;electron&quot;</span><span class="s1">)</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">acceptDownloads </span><span class="s1">= </span><span class="s0">&quot;accept&quot;</span><span class="s1">;</span>
+  <span class="s3">else if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">acceptDownloads </span><span class="s1">=== </span><span class="s3">void </span><span class="s5">0 </span><span class="s1">&amp;&amp; </span><span class="s2">browserOptions</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;electron&quot;</span><span class="s1">)</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">acceptDownloads </span><span class="s1">= </span><span class="s0">&quot;internal-browser-default&quot;</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">options</span><span class="s1">.</span><span class="s2">viewport </span><span class="s1">&amp;&amp; !</span><span class="s2">options</span><span class="s1">.</span><span class="s2">noDefaultViewport</span><span class="s1">)</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">viewport </span><span class="s1">= { </span><span class="s2">width</span><span class="s1">: </span><span class="s5">1280</span><span class="s1">, </span><span class="s2">height</span><span class="s1">: </span><span class="s5">720 </span><span class="s1">};</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">.</span><span class="s2">size</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">noDefaultViewport</span><span class="s1">) {</span>
+        <span class="s2">options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">.</span><span class="s2">size </span><span class="s1">= { </span><span class="s2">width</span><span class="s1">: </span><span class="s5">800</span><span class="s1">, </span><span class="s2">height</span><span class="s1">: </span><span class="s5">600 </span><span class="s1">};</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s3">const </span><span class="s2">size </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">viewport</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">scale </span><span class="s1">= </span><span class="s2">Math</span><span class="s1">.</span><span class="s2">min</span><span class="s1">(</span><span class="s5">1</span><span class="s1">, </span><span class="s5">800 </span><span class="s1">/ </span><span class="s2">Math</span><span class="s1">.</span><span class="s2">max</span><span class="s1">(</span><span class="s2">size</span><span class="s1">.</span><span class="s2">width</span><span class="s1">, </span><span class="s2">size</span><span class="s1">.</span><span class="s2">height</span><span class="s1">));</span>
+        <span class="s2">options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">.</span><span class="s2">size </span><span class="s1">= {</span>
+          <span class="s2">width</span><span class="s1">: </span><span class="s2">Math</span><span class="s1">.</span><span class="s2">floor</span><span class="s1">(</span><span class="s2">size</span><span class="s1">.</span><span class="s2">width </span><span class="s1">* </span><span class="s2">scale</span><span class="s1">),</span>
+          <span class="s2">height</span><span class="s1">: </span><span class="s2">Math</span><span class="s1">.</span><span class="s2">floor</span><span class="s1">(</span><span class="s2">size</span><span class="s1">.</span><span class="s2">height </span><span class="s1">* </span><span class="s2">scale</span><span class="s1">)</span>
+        <span class="s1">};</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">.</span><span class="s2">size</span><span class="s1">.</span><span class="s2">width </span><span class="s1">&amp;= ~</span><span class="s5">1</span><span class="s1">;</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">recordVideo</span><span class="s1">.</span><span class="s2">size</span><span class="s1">.</span><span class="s2">height </span><span class="s1">&amp;= ~</span><span class="s5">1</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">proxy</span><span class="s1">)</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">proxy </span><span class="s1">= </span><span class="s2">normalizeProxySettings</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">proxy</span><span class="s1">);</span>
+  <span class="s2">verifyGeolocation</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">geolocation</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">verifyGeolocation</span><span class="s1">(</span><span class="s2">geolocation</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">geolocation</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s2">geolocation</span><span class="s1">.</span><span class="s2">accuracy </span><span class="s1">= </span><span class="s2">geolocation</span><span class="s1">.</span><span class="s2">accuracy </span><span class="s1">|| </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s1">{ </span><span class="s2">longitude</span><span class="s1">, </span><span class="s2">latitude</span><span class="s1">, </span><span class="s2">accuracy </span><span class="s1">} = </span><span class="s2">geolocation</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">longitude </span><span class="s1">&lt; -</span><span class="s5">180 </span><span class="s1">|| </span><span class="s2">longitude </span><span class="s1">&gt; </span><span class="s5">180</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`geolocation.longitude: precondition -180 &lt;= LONGITUDE &lt;= 180 failed.`</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">latitude </span><span class="s1">&lt; -</span><span class="s5">90 </span><span class="s1">|| </span><span class="s2">latitude </span><span class="s1">&gt; </span><span class="s5">90</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`geolocation.latitude: precondition -90 &lt;= LATITUDE &lt;= 90 failed.`</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">accuracy </span><span class="s1">&lt; </span><span class="s5">0</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`geolocation.accuracy: precondition 0 &lt;= ACCURACY failed.`</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">verifyClientCertificates</span><span class="s1">(</span><span class="s2">clientCertificates</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">clientCertificates</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">cert of clientCertificates</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">origin</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`clientCertificates.origin is required`</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">cert </span><span class="s1">&amp;&amp; !</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">key </span><span class="s1">&amp;&amp; !</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">passphrase </span><span class="s1">&amp;&amp; !</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">pfx</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;None of cert, key, passphrase or pfx is specified&quot;</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">cert </span><span class="s1">&amp;&amp; !</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">key</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;cert is specified without key&quot;</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">cert </span><span class="s1">&amp;&amp; </span><span class="s2">cert</span><span class="s1">.</span><span class="s2">key</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;key is specified without cert&quot;</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">pfx </span><span class="s1">&amp;&amp; (</span><span class="s2">cert</span><span class="s1">.</span><span class="s2">cert </span><span class="s1">|| </span><span class="s2">cert</span><span class="s1">.</span><span class="s2">key</span><span class="s1">))</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;pfx is specified together with cert, key or passphrase&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">normalizeProxySettings</span><span class="s1">(</span><span class="s2">proxy</span><span class="s1">) {</span>
+  <span class="s3">let </span><span class="s1">{ </span><span class="s2">server</span><span class="s1">, </span><span class="s2">bypass </span><span class="s1">} = </span><span class="s2">proxy</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">url</span><span class="s1">;</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s2">url </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s2">server</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">url</span><span class="s1">.</span><span class="s2">host </span><span class="s1">|| !</span><span class="s2">url</span><span class="s1">.</span><span class="s2">protocol</span><span class="s1">)</span>
+      <span class="s2">url </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s0">&quot;http://&quot; </span><span class="s1">+ </span><span class="s2">server</span><span class="s1">);</span>
+  <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+    <span class="s2">url </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s0">&quot;http://&quot; </span><span class="s1">+ </span><span class="s2">server</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">url</span><span class="s1">.</span><span class="s2">protocol </span><span class="s1">=== </span><span class="s0">&quot;socks4:&quot; </span><span class="s1">&amp;&amp; (</span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">username </span><span class="s1">|| </span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">password</span><span class="s1">))</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Socks4 proxy protocol does not support authentication`</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">url</span><span class="s1">.</span><span class="s2">protocol </span><span class="s1">=== </span><span class="s0">&quot;socks5:&quot; </span><span class="s1">&amp;&amp; (</span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">username </span><span class="s1">|| </span><span class="s2">proxy</span><span class="s1">.</span><span class="s2">password</span><span class="s1">))</span>
+    <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Browser does not support socks5 proxy authentication`</span><span class="s1">);</span>
+  <span class="s2">server </span><span class="s1">= </span><span class="s2">url</span><span class="s1">.</span><span class="s2">protocol </span><span class="s1">+ </span><span class="s0">&quot;//&quot; </span><span class="s1">+ </span><span class="s2">url</span><span class="s1">.</span><span class="s2">host</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">bypass</span><span class="s1">)</span>
+    <span class="s2">bypass </span><span class="s1">= </span><span class="s2">bypass</span><span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">&quot;,&quot;</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">t</span><span class="s1">) =&gt; </span><span class="s2">t</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">()).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;,&quot;</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s1">{ </span><span class="s2">...proxy</span><span class="s1">, </span><span class="s2">server</span><span class="s1">, </span><span class="s2">bypass </span><span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">paramsThatAllowContextReuse </span><span class="s1">= [</span>
+  <span class="s0">&quot;colorScheme&quot;</span><span class="s1">,</span>
+  <span class="s0">&quot;forcedColors&quot;</span><span class="s1">,</span>
+  <span class="s0">&quot;reducedMotion&quot;</span><span class="s1">,</span>
+  <span class="s0">&quot;contrast&quot;</span><span class="s1">,</span>
+  <span class="s0">&quot;screen&quot;</span><span class="s1">,</span>
+  <span class="s0">&quot;userAgent&quot;</span><span class="s1">,</span>
+  <span class="s0">&quot;viewport&quot;</span><span class="s1">,</span>
+  <span class="s0">&quot;testIdAttributeName&quot;</span>
+<span class="s1">];</span>
+<span class="s3">const </span><span class="s2">defaultNewContextParamValues </span><span class="s1">= {</span>
+  <span class="s2">noDefaultViewport</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+  <span class="s2">ignoreHTTPSErrors</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+  <span class="s2">javaScriptEnabled</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+  <span class="s2">bypassCSP</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+  <span class="s2">offline</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+  <span class="s2">isMobile</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+  <span class="s2">hasTouch</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+  <span class="s2">acceptDownloads</span><span class="s1">: </span><span class="s0">&quot;accept&quot;</span><span class="s1">,</span>
+  <span class="s2">strictSelectors</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+  <span class="s2">serviceWorkers</span><span class="s1">: </span><span class="s0">&quot;allow&quot;</span><span class="s1">,</span>
+  <span class="s2">locale</span><span class="s1">: </span><span class="s0">&quot;en-US&quot;</span>
+<span class="s1">};</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">BrowserContext</span><span class="s1">,</span>
+  <span class="s2">normalizeProxySettings</span><span class="s1">,</span>
+  <span class="s2">validateBrowserContextOptions</span><span class="s1">,</span>
+  <span class="s2">verifyClientCertificates</span><span class="s1">,</span>
+  <span class="s2">verifyGeolocation</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

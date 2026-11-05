@@ -1,0 +1,279 @@
+<html>
+<head>
+<title>MessageTestRuntime.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MessageTestRuntime.js</font>
+</center></td></tr></table>
+<pre><span class="s0">function </span><span class="s1">ownKeys</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">t </span><span class="s2">= </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">(</span><span class="s1">e</span><span class="s2">); </span><span class="s0">if </span><span class="s2">(</span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertySymbols</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">o </span><span class="s2">= </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertySymbols</span><span class="s2">(</span><span class="s1">e</span><span class="s2">); </span><span class="s1">r </span><span class="s2">&amp;&amp; (</span><span class="s1">o </span><span class="s2">= </span><span class="s1">o</span><span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s0">function </span><span class="s2">(</span><span class="s1">r</span><span class="s2">) { </span><span class="s0">return </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptor</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">).</span><span class="s1">enumerable</span><span class="s2">; })), </span><span class="s1">t</span><span class="s2">.</span><span class="s1">push</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">o</span><span class="s2">); } </span><span class="s0">return </span><span class="s1">t</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_objectSpread</span><span class="s2">(</span><span class="s1">e</span><span class="s2">) { </span><span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">r </span><span class="s2">= </span><span class="s3">1</span><span class="s2">; </span><span class="s1">r </span><span class="s2">&lt; </span><span class="s1">arguments</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">r</span><span class="s2">++) { </span><span class="s0">var </span><span class="s1">t </span><span class="s2">= </span><span class="s0">null </span><span class="s2">!= </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">r</span><span class="s2">] ? </span><span class="s1">arguments</span><span class="s2">[</span><span class="s1">r</span><span class="s2">] : {}; </span><span class="s1">r </span><span class="s2">% </span><span class="s3">2 </span><span class="s2">? </span><span class="s1">ownKeys</span><span class="s2">(</span><span class="s1">Object</span><span class="s2">(</span><span class="s1">t</span><span class="s2">), !</span><span class="s3">0</span><span class="s2">).</span><span class="s1">forEach</span><span class="s2">(</span><span class="s0">function </span><span class="s2">(</span><span class="s1">r</span><span class="s2">) { </span><span class="s1">_defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">t</span><span class="s2">[</span><span class="s1">r</span><span class="s2">]); }) : </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptors </span><span class="s2">? </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">defineProperties</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptors</span><span class="s2">(</span><span class="s1">t</span><span class="s2">)) : </span><span class="s1">ownKeys</span><span class="s2">(</span><span class="s1">Object</span><span class="s2">(</span><span class="s1">t</span><span class="s2">)).</span><span class="s1">forEach</span><span class="s2">(</span><span class="s0">function </span><span class="s2">(</span><span class="s1">r</span><span class="s2">) { </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">getOwnPropertyDescriptor</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">r</span><span class="s2">)); }); } </span><span class="s0">return </span><span class="s1">e</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">t</span><span class="s2">) { </span><span class="s0">return </span><span class="s2">(</span><span class="s1">r </span><span class="s2">= </span><span class="s1">_toPropertyKey</span><span class="s2">(</span><span class="s1">r</span><span class="s2">)) </span><span class="s0">in </span><span class="s1">e </span><span class="s2">? </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">defineProperty</span><span class="s2">(</span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, { </span><span class="s1">value</span><span class="s2">: </span><span class="s1">t</span><span class="s2">, </span><span class="s1">enumerable</span><span class="s2">: !</span><span class="s3">0</span><span class="s2">, </span><span class="s1">configurable</span><span class="s2">: !</span><span class="s3">0</span><span class="s2">, </span><span class="s1">writable</span><span class="s2">: !</span><span class="s3">0 </span><span class="s2">}) : </span><span class="s1">e</span><span class="s2">[</span><span class="s1">r</span><span class="s2">] = </span><span class="s1">t</span><span class="s2">, </span><span class="s1">e</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_toPropertyKey</span><span class="s2">(</span><span class="s1">t</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s1">_toPrimitive</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s4">&quot;string&quot;</span><span class="s2">); </span><span class="s0">return </span><span class="s4">&quot;symbol&quot; </span><span class="s2">== </span><span class="s0">typeof </span><span class="s1">i </span><span class="s2">? </span><span class="s1">i </span><span class="s2">: </span><span class="s1">i </span><span class="s2">+ </span><span class="s4">&quot;&quot;</span><span class="s2">; }</span>
+<span class="s0">function </span><span class="s1">_toPrimitive</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">r</span><span class="s2">) { </span><span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;object&quot; </span><span class="s2">!= </span><span class="s0">typeof </span><span class="s1">t </span><span class="s2">|| !</span><span class="s1">t</span><span class="s2">) </span><span class="s0">return </span><span class="s1">t</span><span class="s2">; </span><span class="s0">var </span><span class="s1">e </span><span class="s2">= </span><span class="s1">t</span><span class="s2">[</span><span class="s1">Symbol</span><span class="s2">.</span><span class="s1">toPrimitive</span><span class="s2">]; </span><span class="s0">if </span><span class="s2">(</span><span class="s0">void </span><span class="s3">0 </span><span class="s2">!== </span><span class="s1">e</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s1">e</span><span class="s2">.</span><span class="s1">call</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">r </span><span class="s2">|| </span><span class="s4">&quot;default&quot;</span><span class="s2">); </span><span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;object&quot; </span><span class="s2">!= </span><span class="s0">typeof </span><span class="s1">i</span><span class="s2">) </span><span class="s0">return </span><span class="s1">i</span><span class="s2">; </span><span class="s0">throw new </span><span class="s1">TypeError</span><span class="s2">(</span><span class="s4">&quot;@@toPrimitive must return a primitive value.&quot;</span><span class="s2">); } </span><span class="s0">return </span><span class="s2">(</span><span class="s4">&quot;string&quot; </span><span class="s2">=== </span><span class="s1">r </span><span class="s2">? </span><span class="s1">String </span><span class="s2">: </span><span class="s1">Number</span><span class="s2">)(</span><span class="s1">t</span><span class="s2">); }</span>
+<span class="s0">function </span><span class="s1">asyncGeneratorStep</span><span class="s2">(</span><span class="s1">n</span><span class="s2">, </span><span class="s1">t</span><span class="s2">, </span><span class="s1">e</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">o</span><span class="s2">, </span><span class="s1">a</span><span class="s2">, </span><span class="s1">c</span><span class="s2">) { </span><span class="s0">try </span><span class="s2">{ </span><span class="s0">var </span><span class="s1">i </span><span class="s2">= </span><span class="s1">n</span><span class="s2">[</span><span class="s1">a</span><span class="s2">](</span><span class="s1">c</span><span class="s2">), </span><span class="s1">u </span><span class="s2">= </span><span class="s1">i</span><span class="s2">.</span><span class="s1">value</span><span class="s2">; } </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">n</span><span class="s2">) { </span><span class="s0">return void </span><span class="s1">e</span><span class="s2">(</span><span class="s1">n</span><span class="s2">); } </span><span class="s1">i</span><span class="s2">.</span><span class="s1">done </span><span class="s2">? </span><span class="s1">t</span><span class="s2">(</span><span class="s1">u</span><span class="s2">) : </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">resolve</span><span class="s2">(</span><span class="s1">u</span><span class="s2">).</span><span class="s1">then</span><span class="s2">(</span><span class="s1">r</span><span class="s2">, </span><span class="s1">o</span><span class="s2">); }</span>
+<span class="s0">function </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s1">n</span><span class="s2">) { </span><span class="s0">return function </span><span class="s2">() { </span><span class="s0">var </span><span class="s1">t </span><span class="s2">= </span><span class="s0">this</span><span class="s2">, </span><span class="s1">e </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">; </span><span class="s0">return new </span><span class="s1">Promise</span><span class="s2">(</span><span class="s0">function </span><span class="s2">(</span><span class="s1">r</span><span class="s2">, </span><span class="s1">o</span><span class="s2">) { </span><span class="s0">var </span><span class="s1">a </span><span class="s2">= </span><span class="s1">n</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">(</span><span class="s1">t</span><span class="s2">, </span><span class="s1">e</span><span class="s2">); </span><span class="s0">function </span><span class="s1">_next</span><span class="s2">(</span><span class="s1">n</span><span class="s2">) { </span><span class="s1">asyncGeneratorStep</span><span class="s2">(</span><span class="s1">a</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">o</span><span class="s2">, </span><span class="s1">_next</span><span class="s2">, </span><span class="s1">_throw</span><span class="s2">, </span><span class="s4">&quot;next&quot;</span><span class="s2">, </span><span class="s1">n</span><span class="s2">); } </span><span class="s0">function </span><span class="s1">_throw</span><span class="s2">(</span><span class="s1">n</span><span class="s2">) { </span><span class="s1">asyncGeneratorStep</span><span class="s2">(</span><span class="s1">a</span><span class="s2">, </span><span class="s1">r</span><span class="s2">, </span><span class="s1">o</span><span class="s2">, </span><span class="s1">_next</span><span class="s2">, </span><span class="s1">_throw</span><span class="s2">, </span><span class="s4">&quot;throw&quot;</span><span class="s2">, </span><span class="s1">n</span><span class="s2">); } </span><span class="s1">_next</span><span class="s2">(</span><span class="s0">void </span><span class="s3">0</span><span class="s2">); }); }; }</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">Status </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;../../model.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">getMessageAndTraceFromError</span><span class="s2">, </span><span class="s1">getStatusFromError </span><span class="s2">} </span><span class="s1">from </span><span class="s4">&quot;../utils.js&quot;</span><span class="s2">;</span>
+<span class="s0">export class </span><span class="s1">MessageTestRuntime </span><span class="s2">{</span>
+  <span class="s1">label</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">labels</span><span class="s2">: [{</span>
+            <span class="s1">name</span><span class="s2">,</span>
+            <span class="s1">value</span>
+          <span class="s2">}]</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">labels</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">_arguments </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">,</span>
+      <span class="s1">_this2 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">_len </span><span class="s2">= </span><span class="s1">_arguments</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s1">labels </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Array</span><span class="s2">(</span><span class="s1">_len</span><span class="s2">), </span><span class="s1">_key </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">_key </span><span class="s2">&lt; </span><span class="s1">_len</span><span class="s2">; </span><span class="s1">_key</span><span class="s2">++) {</span>
+        <span class="s1">labels</span><span class="s2">[</span><span class="s1">_key</span><span class="s2">] = </span><span class="s1">_arguments</span><span class="s2">[</span><span class="s1">_key</span><span class="s2">];</span>
+      <span class="s2">}</span>
+      <span class="s0">yield </span><span class="s1">_this2</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">labels</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">link</span><span class="s2">(</span><span class="s1">url</span><span class="s2">, </span><span class="s1">type</span><span class="s2">, </span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this3 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this3</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">links</span><span class="s2">: [{</span>
+            <span class="s1">type</span><span class="s2">,</span>
+            <span class="s1">url</span><span class="s2">,</span>
+            <span class="s1">name</span>
+          <span class="s2">}]</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">links</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">_arguments2 </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">,</span>
+      <span class="s1">_this4 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">for </span><span class="s2">(</span><span class="s0">var </span><span class="s1">_len2 </span><span class="s2">= </span><span class="s1">_arguments2</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s1">links </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Array</span><span class="s2">(</span><span class="s1">_len2</span><span class="s2">), </span><span class="s1">_key2 </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">_key2 </span><span class="s2">&lt; </span><span class="s1">_len2</span><span class="s2">; </span><span class="s1">_key2</span><span class="s2">++) {</span>
+        <span class="s1">links</span><span class="s2">[</span><span class="s1">_key2</span><span class="s2">] = </span><span class="s1">_arguments2</span><span class="s2">[</span><span class="s1">_key2</span><span class="s2">];</span>
+      <span class="s2">}</span>
+      <span class="s0">yield </span><span class="s1">_this4</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">links</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">parameter</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this5 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this5</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">parameters</span><span class="s2">: [</span><span class="s1">_objectSpread</span><span class="s2">({</span>
+            <span class="s1">name</span><span class="s2">,</span>
+            <span class="s1">value</span>
+          <span class="s2">}, </span><span class="s1">options</span><span class="s2">)]</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">description</span><span class="s2">(</span><span class="s1">markdown</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this6 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this6</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">description</span><span class="s2">: </span><span class="s1">markdown</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">descriptionHtml</span><span class="s2">(</span><span class="s1">html</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this7 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this7</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">descriptionHtml</span><span class="s2">: </span><span class="s1">html</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">displayName</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this8 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this8</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">displayName</span><span class="s2">: </span><span class="s1">name</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">historyId</span><span class="s2">(</span><span class="s1">value</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this9 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this9</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">historyId</span><span class="s2">: </span><span class="s1">value</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">testCaseId</span><span class="s2">(</span><span class="s1">value</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this0 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this0</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">testCaseId</span><span class="s2">: </span><span class="s1">value</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">attachment</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">content</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this1 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">var </span><span class="s1">bufferContent </span><span class="s2">= </span><span class="s0">typeof </span><span class="s1">content </span><span class="s2">=== </span><span class="s4">&quot;string&quot; </span><span class="s2">? </span><span class="s1">Buffer</span><span class="s2">.</span><span class="s1">from</span><span class="s2">(</span><span class="s1">content</span><span class="s2">, </span><span class="s1">options</span><span class="s2">.</span><span class="s1">encoding</span><span class="s2">) : </span><span class="s1">content</span><span class="s2">;</span>
+      <span class="s0">yield </span><span class="s1">_this1</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;attachment_content&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">name</span><span class="s2">,</span>
+          <span class="s1">content</span><span class="s2">: </span><span class="s1">bufferContent</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s4">&quot;base64&quot;</span><span class="s2">),</span>
+          <span class="s1">encoding</span><span class="s2">: </span><span class="s4">&quot;base64&quot;</span><span class="s2">,</span>
+          <span class="s1">contentType</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">contentType</span><span class="s2">,</span>
+          <span class="s1">fileExtension</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">,</span>
+          <span class="s1">wrapInStep</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+          <span class="s1">timestamp</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">attachmentFromPath</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">path</span><span class="s2">, </span><span class="s1">options</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this10 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this10</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;attachment_path&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">name</span><span class="s2">,</span>
+          <span class="s1">path</span><span class="s2">,</span>
+          <span class="s1">contentType</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">contentType</span><span class="s2">,</span>
+          <span class="s1">fileExtension</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">,</span>
+          <span class="s1">wrapInStep</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+          <span class="s1">timestamp</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">logStep</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_arguments3 </span><span class="s2">= </span><span class="s1">arguments</span><span class="s2">,</span>
+      <span class="s1">_this11 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">var </span><span class="s1">status </span><span class="s2">= </span><span class="s1">_arguments3</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s3">1 </span><span class="s2">&amp;&amp; </span><span class="s1">_arguments3</span><span class="s2">[</span><span class="s3">1</span><span class="s2">] !== </span><span class="s1">undefined </span><span class="s2">? </span><span class="s1">_arguments3</span><span class="s2">[</span><span class="s3">1</span><span class="s2">] : </span><span class="s1">Status</span><span class="s2">.</span><span class="s1">PASSED</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">error </span><span class="s2">= </span><span class="s1">_arguments3</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s3">2 </span><span class="s2">? </span><span class="s1">_arguments3</span><span class="s2">[</span><span class="s3">2</span><span class="s2">] : </span><span class="s1">undefined</span><span class="s2">;</span>
+      <span class="s0">var </span><span class="s1">timestamp </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+      <span class="s0">yield </span><span class="s1">_this11</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;step_start&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">name</span><span class="s2">,</span>
+          <span class="s1">start</span><span class="s2">: </span><span class="s1">timestamp</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+      <span class="s0">yield </span><span class="s1">_this11</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;step_stop&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">status</span><span class="s2">: </span><span class="s1">status</span><span class="s2">,</span>
+          <span class="s1">stop</span><span class="s2">: </span><span class="s1">timestamp</span><span class="s2">,</span>
+          <span class="s1">statusDetails</span><span class="s2">: </span><span class="s1">error </span><span class="s2">? </span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">getMessageAndTraceFromError</span><span class="s2">(</span><span class="s1">error</span><span class="s2">)) : </span><span class="s1">undefined</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">step</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">body</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this12 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this12</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;step_start&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">name</span><span class="s2">,</span>
+          <span class="s1">start</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+      <span class="s0">try </span><span class="s2">{</span>
+        <span class="s0">var </span><span class="s1">result </span><span class="s2">= </span><span class="s0">yield </span><span class="s1">body</span><span class="s2">();</span>
+        <span class="s0">yield </span><span class="s1">_this12</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+          <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;step_stop&quot;</span><span class="s2">,</span>
+          <span class="s1">data</span><span class="s2">: {</span>
+            <span class="s1">status</span><span class="s2">: </span><span class="s1">Status</span><span class="s2">.</span><span class="s1">PASSED</span><span class="s2">,</span>
+            <span class="s1">stop</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">()</span>
+          <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s0">return </span><span class="s1">result</span><span class="s2">;</span>
+      <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">err</span><span class="s2">) {</span>
+        <span class="s0">var </span><span class="s1">details </span><span class="s2">= </span><span class="s1">getMessageAndTraceFromError</span><span class="s2">(</span><span class="s1">err</span><span class="s2">);</span>
+        <span class="s0">yield </span><span class="s1">_this12</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+          <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;step_stop&quot;</span><span class="s2">,</span>
+          <span class="s1">data</span><span class="s2">: {</span>
+            <span class="s1">status</span><span class="s2">: </span><span class="s1">getStatusFromError</span><span class="s2">(</span><span class="s1">err</span><span class="s2">),</span>
+            <span class="s1">stop</span><span class="s2">: </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">(),</span>
+            <span class="s1">statusDetails</span><span class="s2">: </span><span class="s1">_objectSpread</span><span class="s2">({}, </span><span class="s1">details</span><span class="s2">)</span>
+          <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s0">throw </span><span class="s1">err</span><span class="s2">;</span>
+      <span class="s2">}</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">stepDisplayName</span><span class="s2">(</span><span class="s1">name</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this13 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this13</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;step_metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">name</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+  <span class="s1">stepParameter</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">value</span><span class="s2">, </span><span class="s1">mode</span><span class="s2">) {</span>
+    <span class="s0">var </span><span class="s1">_this14 </span><span class="s2">= </span><span class="s0">this</span><span class="s2">;</span>
+    <span class="s0">return </span><span class="s1">_asyncToGenerator</span><span class="s2">(</span><span class="s0">function</span><span class="s2">* () {</span>
+      <span class="s0">yield </span><span class="s1">_this14</span><span class="s2">.</span><span class="s1">sendMessage</span><span class="s2">({</span>
+        <span class="s1">type</span><span class="s2">: </span><span class="s4">&quot;step_metadata&quot;</span><span class="s2">,</span>
+        <span class="s1">data</span><span class="s2">: {</span>
+          <span class="s1">parameters</span><span class="s2">: [{</span>
+            <span class="s1">name</span><span class="s2">,</span>
+            <span class="s1">value</span><span class="s2">,</span>
+            <span class="s1">mode</span>
+          <span class="s2">}]</span>
+        <span class="s2">}</span>
+      <span class="s2">});</span>
+    <span class="s2">})();</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+<span class="s5">//# sourceMappingURL=MessageTestRuntime.js.map</span></pre>
+</body>
+</html>

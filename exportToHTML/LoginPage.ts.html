@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>LoginPage.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LoginPage.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Page</span><span class="s2">, </span><span class="s1">Locator </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;@playwright/test&quot;</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">LoginPage </span><span class="s2">{</span>
+  <span class="s0">private </span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">usernameInput</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">passwordInput</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">loginButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">) {</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">page </span><span class="s2">= </span><span class="s1">page</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">usernameInput </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">'textbox'</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">'* Логин' </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">passwordInput </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">'textbox'</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">'* Пароль' </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">loginButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;button.el-button--primary:has-text('Войти')&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async login</span><span class="s2">(</span><span class="s1">username</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">password</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Вход в систему...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">goto</span><span class="s2">(</span><span class="s3">&quot;https://lc.test5.mmk.local/auth&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">usernameInput</span><span class="s2">.</span><span class="s1">fill</span><span class="s2">(</span><span class="s1">username</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">passwordInput</span><span class="s2">.</span><span class="s1">fill</span><span class="s2">(</span><span class="s1">password</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">loginButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

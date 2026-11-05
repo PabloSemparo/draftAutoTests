@@ -1,0 +1,885 @@
+<html>
+<head>
+<title>index.d.cts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+index.d.cts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">F </span><span class="s2">as </span><span class="s1">Faker</span><span class="s2">, </span><span class="s1">L </span><span class="s2">as </span><span class="s1">LocaleDefinition</span><span class="s2">, </span><span class="s1">R </span><span class="s2">as </span><span class="s1">Randomizer </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./airline-BUL6NtOJ.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">r </span><span class="s2">as </span><span class="s1">Aircraft</span><span class="s2">, </span><span class="s1">s </span><span class="s2">as </span><span class="s1">AircraftType</span><span class="s2">, </span><span class="s1">A </span><span class="s2">as </span><span class="s1">AirlineDefinition</span><span class="s2">, </span><span class="s1">t </span><span class="s2">as </span><span class="s1">AirlineModule</span><span class="s2">, </span><span class="s1">a </span><span class="s2">as </span><span class="s1">AnimalDefinition</span><span class="s2">, </span><span class="s1">u </span><span class="s2">as </span><span class="s1">AnimalModule</span><span class="s2">, </span><span class="s1">$ </span><span class="s2">as </span><span class="s1">BitcoinAddressFamily</span><span class="s2">, </span><span class="s1">a1 </span><span class="s2">as </span><span class="s1">BitcoinAddressFamilyType</span><span class="s2">, </span><span class="s1">a0 </span><span class="s2">as </span><span class="s1">BitcoinNetwork</span><span class="s2">, </span><span class="s1">a2 </span><span class="s2">as </span><span class="s1">BitcoinNetworkType</span><span class="s2">, </span><span class="s1">B </span><span class="s2">as </span><span class="s1">BookDefinition</span><span class="s2">, </span><span class="s1">v </span><span class="s2">as </span><span class="s1">BookModule</span><span class="s2">, </span><span class="s1">y </span><span class="s2">as </span><span class="s1">Casing</span><span class="s2">, </span><span class="s1">ak </span><span class="s2">as </span><span class="s1">ChemicalElement</span><span class="s2">, </span><span class="s1">C </span><span class="s2">as </span><span class="s1">ColorDefinition</span><span class="s2">, </span><span class="s1">z </span><span class="s2">as </span><span class="s1">ColorFormat</span><span class="s2">, </span><span class="s1">E </span><span class="s2">as </span><span class="s1">ColorModule</span><span class="s2">, </span><span class="s1">b </span><span class="s2">as </span><span class="s1">CommerceDefinition</span><span class="s2">, </span><span class="s1">O </span><span class="s2">as </span><span class="s1">CommerceModule</span><span class="s2">, </span><span class="s1">c </span><span class="s2">as </span><span class="s1">CommerceProductNameDefinition</span><span class="s2">, </span><span class="s1">d </span><span class="s2">as </span><span class="s1">CompanyDefinition</span><span class="s2">, </span><span class="s1">Q </span><span class="s2">as </span><span class="s1">CompanyModule</span><span class="s2">, </span><span class="s1">w </span><span class="s2">as </span><span class="s1">CssFunction</span><span class="s2">, </span><span class="s1">G </span><span class="s2">as </span><span class="s1">CssFunctionType</span><span class="s2">, </span><span class="s1">x </span><span class="s2">as </span><span class="s1">CssSpace</span><span class="s2">, </span><span class="s1">J </span><span class="s2">as </span><span class="s1">CssSpaceType</span><span class="s2">, </span><span class="s1">Z </span><span class="s2">as </span><span class="s1">Currency</span><span class="s2">, </span><span class="s1">D </span><span class="s2">as </span><span class="s1">DatabaseDefinition</span><span class="s2">, </span><span class="s1">T </span><span class="s2">as </span><span class="s1">DatabaseModule</span><span class="s2">, </span><span class="s1">U </span><span class="s2">as </span><span class="s1">DatatypeModule</span><span class="s2">, </span><span class="s1">e </span><span class="s2">as </span><span class="s1">DateDefinition</span><span class="s2">, </span><span class="s1">f </span><span class="s2">as </span><span class="s1">DateEntryDefinition</span><span class="s2">, </span><span class="s1">X </span><span class="s2">as </span><span class="s1">DateModule</span><span class="s2">, </span><span class="s1">q </span><span class="s2">as </span><span class="s1">FakerOptions</span><span class="s2">, </span><span class="s1">g </span><span class="s2">as </span><span class="s1">FinanceDefinition</span><span class="s2">, </span><span class="s1">_ </span><span class="s2">as </span><span class="s1">FinanceModule</span><span class="s2">, </span><span class="s1">h </span><span class="s2">as </span><span class="s1">FoodDefinition</span><span class="s2">, </span><span class="s1">a3 </span><span class="s2">as </span><span class="s1">FoodModule</span><span class="s2">, </span><span class="s1">a4 </span><span class="s2">as </span><span class="s1">GitModule</span><span class="s2">, </span><span class="s1">H </span><span class="s2">as </span><span class="s1">HackerDefinition</span><span class="s2">, </span><span class="s1">a5 </span><span class="s2">as </span><span class="s1">HackerModule</span><span class="s2">, </span><span class="s1">a6 </span><span class="s2">as </span><span class="s1">HelpersModule</span><span class="s2">, </span><span class="s1">a9 </span><span class="s2">as </span><span class="s1">IPv4Network</span><span class="s2">, </span><span class="s1">aa </span><span class="s2">as </span><span class="s1">IPv4NetworkType</span><span class="s2">, </span><span class="s1">a8 </span><span class="s2">as </span><span class="s1">ImageModule</span><span class="s2">, </span><span class="s1">I </span><span class="s2">as </span><span class="s1">InternetDefinition</span><span class="s2">, </span><span class="s1">ab </span><span class="s2">as </span><span class="s1">InternetModule</span><span class="s2">, </span><span class="s1">i </span><span class="s2">as </span><span class="s1">LocaleEntry</span><span class="s2">, </span><span class="s1">j </span><span class="s2">as </span><span class="s1">LocationDefinition</span><span class="s2">, </span><span class="s1">ac </span><span class="s2">as </span><span class="s1">LocationModule</span><span class="s2">, </span><span class="s1">k </span><span class="s2">as </span><span class="s1">LoremDefinition</span><span class="s2">, </span><span class="s1">ad </span><span class="s2">as </span><span class="s1">LoremModule</span><span class="s2">, </span><span class="s1">M </span><span class="s2">as </span><span class="s1">MetadataDefinition</span><span class="s2">, </span><span class="s1">l </span><span class="s2">as </span><span class="s1">MusicDefinition</span><span class="s2">, </span><span class="s1">ae </span><span class="s2">as </span><span class="s1">MusicModule</span><span class="s2">, </span><span class="s1">N </span><span class="s2">as </span><span class="s1">NumberColorFormat</span><span class="s2">, </span><span class="s1">af </span><span class="s2">as </span><span class="s1">NumberModule</span><span class="s2">, </span><span class="s1">P </span><span class="s2">as </span><span class="s1">PersonDefinition</span><span class="s2">, </span><span class="s1">m </span><span class="s2">as </span><span class="s1">PersonEntryDefinition</span><span class="s2">, </span><span class="s1">ah </span><span class="s2">as </span><span class="s1">PersonModule</span><span class="s2">, </span><span class="s1">aj </span><span class="s2">as </span><span class="s1">PhoneModule</span><span class="s2">, </span><span class="s1">n </span><span class="s2">as </span><span class="s1">PhoneNumberDefinition</span><span class="s2">, </span><span class="s1">S </span><span class="s2">as </span><span class="s1">ScienceDefinition</span><span class="s2">, </span><span class="s1">al </span><span class="s2">as </span><span class="s1">ScienceModule</span><span class="s2">, </span><span class="s1">ag </span><span class="s2">as </span><span class="s1">Sex</span><span class="s2">, </span><span class="s1">ai </span><span class="s2">as </span><span class="s1">SexType</span><span class="s2">, </span><span class="s1">Y </span><span class="s2">as </span><span class="s1">SimpleDateModule</span><span class="s2">, </span><span class="s1">ar </span><span class="s2">as </span><span class="s1">SimpleFaker</span><span class="s2">, </span><span class="s1">a7 </span><span class="s2">as </span><span class="s1">SimpleHelpersModule</span><span class="s2">, </span><span class="s1">K </span><span class="s2">as </span><span class="s1">StringColorFormat</span><span class="s2">, </span><span class="s1">an </span><span class="s2">as </span><span class="s1">StringModule</span><span class="s2">, </span><span class="s1">o </span><span class="s2">as </span><span class="s1">SystemDefinition</span><span class="s2">, </span><span class="s1">p </span><span class="s2">as </span><span class="s1">SystemMimeTypeEntryDefinition</span><span class="s2">, </span><span class="s1">ao </span><span class="s2">as </span><span class="s1">SystemModule</span><span class="s2">, </span><span class="s1">am </span><span class="s2">as </span><span class="s1">Unit</span><span class="s2">, </span><span class="s1">V </span><span class="s2">as </span><span class="s1">VehicleDefinition</span><span class="s2">, </span><span class="s1">ap </span><span class="s2">as </span><span class="s1">VehicleModule</span><span class="s2">, </span><span class="s1">W </span><span class="s2">as </span><span class="s1">WordDefinition</span><span class="s2">, </span><span class="s1">aq </span><span class="s2">as </span><span class="s1">WordModule</span><span class="s2">, as as </span><span class="s1">simpleFaker </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./airline-BUL6NtOJ.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker</span><span class="s2">, </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerAF_ZA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/af_ZA.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerAR </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ar.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerAZ </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/az.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerBASE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/base.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerBN_BD </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/bn_BD.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerCS_CZ </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/cs_CZ.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerCY </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/cy.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerDA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/da.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerDE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/de.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerDE_AT </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/de_AT.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerDE_CH </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/de_CH.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerDV </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/dv.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEL </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/el.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_AU </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_AU.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_AU_ocker </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_AU_ocker.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_BORK </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_BORK.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_CA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_CA.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_GB </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_GB.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_GH </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_GH.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_HK </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_HK.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_IE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_IE.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_IN </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_IN.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_NG </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_NG.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_US </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_US.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEN_ZA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/en_ZA.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerEO </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/eo.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerES </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/es.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerES_MX </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/es_MX.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fa.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFI </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fi.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFR </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fr.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFR_BE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fr_BE.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFR_CA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fr_CA.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFR_CH </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fr_CH.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFR_LU </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fr_LU.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerFR_SN </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/fr_SN.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerHE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/he.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerHR </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/hr.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerHU </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/hu.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerHY </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/hy.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerID_ID </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/id_ID.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerIT </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/it.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerJA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ja.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerKA_GE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ka_GE.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerKO </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ko.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerLV </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/lv.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerMK </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/mk.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerNB_NO </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/nb_NO.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerNE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ne.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerNL </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/nl.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerNL_BE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/nl_BE.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerPL </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/pl.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerPT_BR </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/pt_BR.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerPT_PT </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/pt_PT.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerRO </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ro.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerRO_MD </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ro_MD.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerRU </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ru.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerSK </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/sk.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerSR_RS_latin </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/sr_RS_latin.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerSV </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/sv.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerTA_IN </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ta_IN.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerTH </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/th.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerTR </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/tr.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerUK </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/uk.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerUR </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/ur.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerUZ_UZ_latin </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/uz_UZ_latin.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerVI </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/vi.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerYO_NG </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/yo_NG.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerZH_CN </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/zh_CN.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerZH_TW </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/zh_TW.cjs'</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">faker </span><span class="s2">as </span><span class="s1">fakerZU_ZA </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'./locale/zu_ZA.cjs'</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* An error instance that will be thrown by faker.</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">FakerError </span><span class="s0">extends </span><span class="s1">Error </span><span class="s2">{</span>
+<span class="s2">}</span>
+
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">allFakers</span><span class="s2">: {</span>
+    <span class="s1">readonly af_ZA</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ar</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly az</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly base</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly bn_BD</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly cs_CZ</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly cy</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly da</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly de</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly de_AT</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly de_CH</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly dv</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly el</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_AU</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_AU_ocker</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_BORK</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_CA</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_GB</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_GH</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_HK</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_IE</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_IN</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_NG</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_US</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly en_ZA</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly eo</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly es</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly es_MX</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fa</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fi</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fr</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fr_BE</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fr_CA</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fr_CH</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fr_LU</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly fr_SN</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly he</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly hr</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly hu</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly hy</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly id_ID</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly it</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ja</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ka_GE</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ko</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly lv</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly mk</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly nb_NO</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ne</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly nl</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly nl_BE</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly pl</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly pt_BR</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly pt_PT</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ro</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ro_MD</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ru</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly sk</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly sr_RS_latin</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly sv</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ta_IN</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly th</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly tr</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly uk</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly ur</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly uz_UZ_latin</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly vi</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly yo_NG</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly zh_CN</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly zh_TW</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+    <span class="s1">readonly zu_ZA</span><span class="s2">: </span><span class="s1">Faker</span><span class="s2">;</span>
+<span class="s2">};</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `af_ZA` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Afrikaans (South Africa)</span>
+ <span class="s4">* - Endonym: Afrikaans (Suid-Afrika)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">af_ZA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ar` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Arabic</span>
+ <span class="s4">* - Endonym: اَلْعَرَبِيَّةُ</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ar</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `az` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Azerbaijani</span>
+ <span class="s4">* - Endonym: azərbaycan dili</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">az</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `base` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* The base locale contains data that is shared across all locales such as ISO codes, time zones, and more.</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">base</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `bn_BD` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Bengali (Bangladesh)</span>
+ <span class="s4">* - Endonym: বাংলা (বাংলাদেশ)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">bn_BD</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `cs_CZ` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Czech (Czechia)</span>
+ <span class="s4">* - Endonym: čeština (Česká republika)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">cs_CZ</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `cy` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Welsh</span>
+ <span class="s4">* - Endonym: Cymraeg</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">cy</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `da` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Danish</span>
+ <span class="s4">* - Endonym: Dansk</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">da</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `de` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: German</span>
+ <span class="s4">* - Endonym: Deutsch</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">de</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `de_AT` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: German (Austria)</span>
+ <span class="s4">* - Endonym: Deutsch (Österreich)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">de_AT</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `de_CH` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: German (Switzerland)</span>
+ <span class="s4">* - Endonym: Deutsch (Schweiz)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">de_CH</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `dv` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Maldivian</span>
+ <span class="s4">* - Endonym: ދިވެހި</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">dv</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `el` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Greek</span>
+ <span class="s4">* - Endonym: Ελληνικά</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">el</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English</span>
+ <span class="s4">* - Endonym: English</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_AU` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Australia)</span>
+ <span class="s4">* - Endonym: English (Australia)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_AU</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_AU_ocker` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Australia Ocker)</span>
+ <span class="s4">* - Endonym: English (Australia)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_AU_ocker</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_BORK` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Bork)</span>
+ <span class="s4">* - Endonym: English (Bork)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_BORK</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_CA` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Canada)</span>
+ <span class="s4">* - Endonym: English (Canada)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_CA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_GB` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Great Britain)</span>
+ <span class="s4">* - Endonym: English (Great Britain)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_GB</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_GH` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Ghana)</span>
+ <span class="s4">* - Endonym: English (Ghana)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_GH</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_HK` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Hong Kong)</span>
+ <span class="s4">* - Endonym: English (Hong Kong)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_HK</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_IE` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Ireland)</span>
+ <span class="s4">* - Endonym: English (Ireland)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_IE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_IN` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (India)</span>
+ <span class="s4">* - Endonym: English (India)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_IN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_NG` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (Nigeria)</span>
+ <span class="s4">* - Endonym: English (Nigeria)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_NG</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_US` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (United States)</span>
+ <span class="s4">* - Endonym: English (United States)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_US</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `en_ZA` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: English (South Africa)</span>
+ <span class="s4">* - Endonym: English (South Africa)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">en_ZA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `eo` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Esperanto</span>
+ <span class="s4">* - Endonym: Esperanto</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">eo</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `es` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Spanish</span>
+ <span class="s4">* - Endonym: Español</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">es</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `es_MX` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Spanish (Mexico)</span>
+ <span class="s4">* - Endonym: Español (México)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">es_MX</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fa` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Farsi/Persian</span>
+ <span class="s4">* - Endonym: فارسی</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fa</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fi` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Finnish</span>
+ <span class="s4">* - Endonym: suomi</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fi</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fr` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: French</span>
+ <span class="s4">* - Endonym: Français</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fr</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fr_BE` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: French (Belgium)</span>
+ <span class="s4">* - Endonym: Français (Belgique)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fr_BE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fr_CA` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: French (Canada)</span>
+ <span class="s4">* - Endonym: Français (Canada)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fr_CA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fr_CH` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: French (Switzerland)</span>
+ <span class="s4">* - Endonym: Français (Suisse)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fr_CH</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fr_LU` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: French (Luxembourg)</span>
+ <span class="s4">* - Endonym: Français (Luxembourg)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fr_LU</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `fr_SN` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: French (Senegal)</span>
+ <span class="s4">* - Endonym: Français (Sénégal)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">fr_SN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `he` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Hebrew</span>
+ <span class="s4">* - Endonym: עברית</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">he</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `hr` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Croatian</span>
+ <span class="s4">* - Endonym: Hrvatski</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">hr</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `hu` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Hungarian</span>
+ <span class="s4">* - Endonym: magyar</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">hu</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `hy` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Armenian</span>
+ <span class="s4">* - Endonym: Հայերեն</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">hy</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `id_ID` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Indonesian (Indonesia)</span>
+ <span class="s4">* - Endonym: Bahasa Indonesia (Indonesia)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">id_ID</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `it` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Italian</span>
+ <span class="s4">* - Endonym: Italiano</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">it</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ja` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Japanese</span>
+ <span class="s4">* - Endonym: 日本語</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ja</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ka_GE` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Georgian (Georgia)</span>
+ <span class="s4">* - Endonym: ქართული (საქართველო)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ka_GE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ko` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Korean</span>
+ <span class="s4">* - Endonym: 한국어</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ko</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `lv` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Latvian</span>
+ <span class="s4">* - Endonym: latviešu valoda</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">lv</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `mk` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Macedonian</span>
+ <span class="s4">* - Endonym: македонски јазик</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">mk</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `nb_NO` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Norwegian (Norway)</span>
+ <span class="s4">* - Endonym: Norsk bokmål (Norge)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">nb_NO</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ne` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Nepali</span>
+ <span class="s4">* - Endonym: नेपाली</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ne</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `nl` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Dutch</span>
+ <span class="s4">* - Endonym: Nederlands</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">nl</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `nl_BE` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Dutch (Belgium)</span>
+ <span class="s4">* - Endonym: Nederlands (België)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">nl_BE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `pl` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Polish</span>
+ <span class="s4">* - Endonym: Polski</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">pl</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `pt_BR` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Portuguese (Brazil)</span>
+ <span class="s4">* - Endonym: Português (Brasil)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">pt_BR</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `pt_PT` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Portuguese (Portugal)</span>
+ <span class="s4">* - Endonym: Português (Portugal)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">pt_PT</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ro` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Romanian</span>
+ <span class="s4">* - Endonym: Română</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ro</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ro_MD` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Romanian (Moldova)</span>
+ <span class="s4">* - Endonym: Română (Moldova)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ro_MD</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ru` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Russian</span>
+ <span class="s4">* - Endonym: Русский</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ru</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `sk` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Slovak</span>
+ <span class="s4">* - Endonym: slovenčina</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">sk</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `sr_RS_latin` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Serbian (Serbia, Latin)</span>
+ <span class="s4">* - Endonym: srpski (Srbija, latinica)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">sr_RS_latin</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `sv` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Swedish</span>
+ <span class="s4">* - Endonym: Svenska</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">sv</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ta_IN` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Tamil (India)</span>
+ <span class="s4">* - Endonym: தமிழ் (இந்தியா)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ta_IN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `th` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Thai</span>
+ <span class="s4">* - Endonym: ไทย</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">th</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `tr` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Turkish</span>
+ <span class="s4">* - Endonym: Türkçe</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">tr</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `uk` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Ukrainian</span>
+ <span class="s4">* - Endonym: Українська</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">uk</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `ur` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Urdu</span>
+ <span class="s4">* - Endonym: اردو</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">ur</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `uz_UZ_latin` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Uzbek (Uzbekistan, Latin)</span>
+ <span class="s4">* - Endonym: O'zbekcha</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">uz_UZ_latin</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `vi` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Vietnamese</span>
+ <span class="s4">* - Endonym: Tiếng Việt</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">vi</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `yo_NG` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Yoruba (Nigeria)</span>
+ <span class="s4">* - Endonym: Yoruba (Naijiria)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">yo_NG</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `zh_CN` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Chinese (China)</span>
+ <span class="s4">* - Endonym: 中文 (中国)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">zh_CN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `zh_TW` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Chinese (Taiwan)</span>
+ <span class="s4">* - Endonym: 中文 (臺灣)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">zh_TW</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* The locale data for the `zu_ZA` locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* - Language: Zulu (South Africa)</span>
+ <span class="s4">* - Endonym: isiZulu (Iningizimu Afrika)</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">zu_ZA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s1">declare </span><span class="s0">const </span><span class="s1">allLocales</span><span class="s2">: {</span>
+    <span class="s1">readonly af_ZA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ar</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly az</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly base</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly bn_BD</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly cs_CZ</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly cy</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly da</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly de</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly de_AT</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly de_CH</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly dv</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly el</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_AU</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_AU_ocker</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_BORK</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_CA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_GB</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_GH</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_HK</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_IE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_IN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_NG</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_US</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly en_ZA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly eo</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly es</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly es_MX</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fa</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fi</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fr</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fr_BE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fr_CA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fr_CH</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fr_LU</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly fr_SN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly he</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly hr</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly hu</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly hy</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly id_ID</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly it</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ja</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ka_GE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ko</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly lv</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly mk</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly nb_NO</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ne</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly nl</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly nl_BE</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly pl</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly pt_BR</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly pt_PT</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ro</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ro_MD</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ru</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly sk</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly sr_RS_latin</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly sv</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ta_IN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly th</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly tr</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly uk</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly ur</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly uz_UZ_latin</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly vi</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly yo_NG</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly zh_CN</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly zh_TW</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+    <span class="s1">readonly zu_ZA</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+<span class="s2">};</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* Merges the given locales into one locale.</span>
+ <span class="s4">* The locales are merged in the order they are given.</span>
+ <span class="s4">* The first locale that provides an entry for a category will be used for that.</span>
+ <span class="s4">* Mutating the category entries in the returned locale will also mutate the entries in the respective source locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">locales The locales to merge.</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@returns </span><span class="s4">The newly merged locale.</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@example</span>
+ <span class="s4">* import { de_CH, de, en, mergeLocales } from '@faker-js/faker';</span>
+ <span class="s4">*</span>
+ <span class="s4">* const de_CH_with_fallbacks = mergeLocales([ de_CH, de, en ]);</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@since </span><span class="s4">8.0.0</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">mergeLocales</span><span class="s2">(</span><span class="s1">locales</span><span class="s2">: </span><span class="s1">LocaleDefinition</span><span class="s2">[]): </span><span class="s1">LocaleDefinition</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* Generates a MersenneTwister19937 randomizer with 32 bits of precision.</span>
+ <span class="s4">* This is the default randomizer used by faker prior to v9.0.</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">seed The initial seed to use. Defaults to a random number.</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@example</span>
+ <span class="s4">* import { de, en, generateMersenne32Randomizer, Faker } from '@faker-js/faker';</span>
+ <span class="s4">*</span>
+ <span class="s4">* const randomizer = generateMersenne32Randomizer();</span>
+ <span class="s4">* randomizer.seed(42);</span>
+ <span class="s4">* // Share the same randomizer between multiple instances</span>
+ <span class="s4">* const customFaker1 = new Faker({ locale: de, randomizer });</span>
+ <span class="s4">* const customFaker2 = new Faker({ locale: en, randomizer });</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@since </span><span class="s4">8.2.0</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">generateMersenne32Randomizer</span><span class="s2">(</span><span class="s1">seed</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">): </span><span class="s1">Randomizer</span><span class="s2">;</span>
+<span class="s4">/**</span>
+ <span class="s4">* Generates a MersenneTwister19937 randomizer with 53 bits of precision.</span>
+ <span class="s4">* This is the default randomizer used by faker starting with v9.0.</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">seed The initial seed to use. Defaults to a random number.</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@example</span>
+ <span class="s4">* import { de, en, generateMersenne53Randomizer, Faker } from '@faker-js/faker';</span>
+ <span class="s4">*</span>
+ <span class="s4">* const randomizer = generateMersenne53Randomizer();</span>
+ <span class="s4">* randomizer.seed(42);</span>
+ <span class="s4">* // Share the same randomizer between multiple instances</span>
+ <span class="s4">* const customFaker1 = new Faker({ locale: de, randomizer });</span>
+ <span class="s4">* const customFaker2 = new Faker({ locale: en, randomizer });</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@since </span><span class="s4">9.0.0</span>
+ <span class="s4">*/</span>
+<span class="s1">declare </span><span class="s0">function </span><span class="s1">generateMersenne53Randomizer</span><span class="s2">(</span><span class="s1">seed</span><span class="s2">?: </span><span class="s1">number</span><span class="s2">): </span><span class="s1">Randomizer</span><span class="s2">;</span>
+
+<span class="s0">export </span><span class="s2">{ </span><span class="s1">Faker</span><span class="s2">, </span><span class="s1">FakerError</span><span class="s2">, </span><span class="s1">LocaleDefinition</span><span class="s2">, </span><span class="s1">Randomizer</span><span class="s2">, </span><span class="s1">af_ZA</span><span class="s2">, </span><span class="s1">allFakers</span><span class="s2">, </span><span class="s1">allLocales</span><span class="s2">, </span><span class="s1">ar</span><span class="s2">, </span><span class="s1">az</span><span class="s2">, </span><span class="s1">base</span><span class="s2">, </span><span class="s1">bn_BD</span><span class="s2">, </span><span class="s1">cs_CZ</span><span class="s2">, </span><span class="s1">cy</span><span class="s2">, </span><span class="s1">da</span><span class="s2">, </span><span class="s1">de</span><span class="s2">, </span><span class="s1">de_AT</span><span class="s2">, </span><span class="s1">de_CH</span><span class="s2">, </span><span class="s1">dv</span><span class="s2">, </span><span class="s1">el</span><span class="s2">, </span><span class="s1">en</span><span class="s2">, </span><span class="s1">en_AU</span><span class="s2">, </span><span class="s1">en_AU_ocker</span><span class="s2">, </span><span class="s1">en_BORK</span><span class="s2">, </span><span class="s1">en_CA</span><span class="s2">, </span><span class="s1">en_GB</span><span class="s2">, </span><span class="s1">en_GH</span><span class="s2">, </span><span class="s1">en_HK</span><span class="s2">, </span><span class="s1">en_IE</span><span class="s2">, </span><span class="s1">en_IN</span><span class="s2">, </span><span class="s1">en_NG</span><span class="s2">, </span><span class="s1">en_US</span><span class="s2">, </span><span class="s1">en_ZA</span><span class="s2">, </span><span class="s1">eo</span><span class="s2">, </span><span class="s1">es</span><span class="s2">, </span><span class="s1">es_MX</span><span class="s2">, </span><span class="s1">fa</span><span class="s2">, </span><span class="s1">fi</span><span class="s2">, </span><span class="s1">fr</span><span class="s2">, </span><span class="s1">fr_BE</span><span class="s2">, </span><span class="s1">fr_CA</span><span class="s2">, </span><span class="s1">fr_CH</span><span class="s2">, </span><span class="s1">fr_LU</span><span class="s2">, </span><span class="s1">fr_SN</span><span class="s2">, </span><span class="s1">generateMersenne32Randomizer</span><span class="s2">, </span><span class="s1">generateMersenne53Randomizer</span><span class="s2">, </span><span class="s1">he</span><span class="s2">, </span><span class="s1">hr</span><span class="s2">, </span><span class="s1">hu</span><span class="s2">, </span><span class="s1">hy</span><span class="s2">, </span><span class="s1">id_ID</span><span class="s2">, </span><span class="s1">it</span><span class="s2">, </span><span class="s1">ja</span><span class="s2">, </span><span class="s1">ka_GE</span><span class="s2">, </span><span class="s1">ko</span><span class="s2">, </span><span class="s1">lv</span><span class="s2">, </span><span class="s1">mergeLocales</span><span class="s2">, </span><span class="s1">mk</span><span class="s2">, </span><span class="s1">nb_NO</span><span class="s2">, </span><span class="s1">ne</span><span class="s2">, </span><span class="s1">nl</span><span class="s2">, </span><span class="s1">nl_BE</span><span class="s2">, </span><span class="s1">pl</span><span class="s2">, </span><span class="s1">pt_BR</span><span class="s2">, </span><span class="s1">pt_PT</span><span class="s2">, </span><span class="s1">ro</span><span class="s2">, </span><span class="s1">ro_MD</span><span class="s2">, </span><span class="s1">ru</span><span class="s2">, </span><span class="s1">sk</span><span class="s2">, </span><span class="s1">sr_RS_latin</span><span class="s2">, </span><span class="s1">sv</span><span class="s2">, </span><span class="s1">ta_IN</span><span class="s2">, </span><span class="s1">th</span><span class="s2">, </span><span class="s1">tr</span><span class="s2">, </span><span class="s1">uk</span><span class="s2">, </span><span class="s1">ur</span><span class="s2">, </span><span class="s1">uz_UZ_latin</span><span class="s2">, </span><span class="s1">vi</span><span class="s2">, </span><span class="s1">yo_NG</span><span class="s2">, </span><span class="s1">zh_CN</span><span class="s2">, </span><span class="s1">zh_TW</span><span class="s2">, </span><span class="s1">zu_ZA </span><span class="s2">};</span>
+</pre>
+</body>
+</html>

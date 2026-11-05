@@ -1,0 +1,306 @@
+<html>
+<head>
+<title>context.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+context.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">context_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">context_exports</span><span class="s1">, {</span>
+  <span class="s2">Context</span><span class="s1">: () =&gt; </span><span class="s2">Context</span><span class="s1">,</span>
+  <span class="s2">InputRecorder</span><span class="s1">: () =&gt; </span><span class="s2">InputRecorder</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">context_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_log </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../log&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_tab </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./tab&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_config </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./config&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">codegen </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./codegen&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./tools/utils&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">testDebug </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">)(</span><span class="s0">&quot;pw:mcp:test&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">Context </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs </span><span class="s1">= [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_abortController </span><span class="s1">= </span><span class="s3">new </span><span class="s2">AbortController</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">config </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">config</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">sessionLog </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">sessionLog</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">options </span><span class="s1">= </span><span class="s2">options</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextFactory </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">browserContextFactory</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_clientInfo </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">clientInfo</span><span class="s1">;</span>
+    <span class="s2">testDebug</span><span class="s1">(</span><span class="s0">&quot;create context&quot;</span><span class="s1">);</span>
+    <span class="s2">Context</span><span class="s1">.</span><span class="s2">_allContexts</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s1">{</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_allContexts </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s2">async disposeAll</span><span class="s1">() {</span>
+    <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">([</span><span class="s2">...Context</span><span class="s1">.</span><span class="s2">_allContexts</span><span class="s1">].</span><span class="s2">map</span><span class="s1">((</span><span class="s2">context</span><span class="s1">) =&gt; </span><span class="s2">context</span><span class="s1">.</span><span class="s2">dispose</span><span class="s1">()));</span>
+  <span class="s1">}</span>
+  <span class="s2">tabs</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">currentTab</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_currentTab</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">currentTabOrDie</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">'No open pages available. Use the &quot;browser_navigate&quot; tool to navigate to a page first.'</span><span class="s1">);</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_currentTab</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async newTab</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">browserContext </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_ensureBrowserContext</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">page </span><span class="s1">= </span><span class="s3">await </span><span class="s2">browserContext</span><span class="s1">.</span><span class="s2">newPage</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">.</span><span class="s2">find</span><span class="s1">((</span><span class="s2">t</span><span class="s1">) =&gt; </span><span class="s2">t</span><span class="s1">.</span><span class="s2">page </span><span class="s1">=== </span><span class="s2">page</span><span class="s1">);</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_currentTab</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async selectTab</span><span class="s1">(</span><span class="s2">index</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">tab </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">[</span><span class="s2">index</span><span class="s1">];</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">tab</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Tab </span><span class="s2">$</span><span class="s1">{</span><span class="s2">index</span><span class="s1">} </span><span class="s0">not found`</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">tab</span><span class="s1">.</span><span class="s2">page</span><span class="s1">.</span><span class="s2">bringToFront</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab </span><span class="s1">= </span><span class="s2">tab</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s2">tab</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async ensureTab</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">browserContext </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_ensureBrowserContext</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab</span><span class="s1">)</span>
+      <span class="s3">await </span><span class="s2">browserContext</span><span class="s1">.</span><span class="s2">newPage</span><span class="s1">();</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_currentTab</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async closeTab</span><span class="s1">(</span><span class="s2">index</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">tab </span><span class="s1">= </span><span class="s2">index </span><span class="s1">=== </span><span class="s3">void </span><span class="s5">0 </span><span class="s1">? </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab </span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">[</span><span class="s2">index</span><span class="s1">];</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">tab</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">`Tab </span><span class="s2">$</span><span class="s1">{</span><span class="s2">index</span><span class="s1">} </span><span class="s0">not found`</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">url </span><span class="s1">= </span><span class="s2">tab</span><span class="s1">.</span><span class="s2">page</span><span class="s1">.</span><span class="s2">url</span><span class="s1">();</span>
+    <span class="s3">await </span><span class="s2">tab</span><span class="s1">.</span><span class="s2">page</span><span class="s1">.</span><span class="s2">close</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s2">url</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async outputFile</span><span class="s1">(</span><span class="s2">fileName</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">return </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_config</span><span class="s1">.</span><span class="s2">outputFile</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_clientInfo</span><span class="s1">, </span><span class="s2">fileName</span><span class="s1">, </span><span class="s2">options</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_onPageCreated</span><span class="s1">(</span><span class="s2">page</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">tab </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_tab</span><span class="s1">.</span><span class="s2">Tab</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">page</span><span class="s1">, (</span><span class="s2">tab2</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onPageClosed</span><span class="s1">(</span><span class="s2">tab2</span><span class="s1">));</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">tab</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab </span><span class="s1">= </span><span class="s2">tab</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">_onPageClosed</span><span class="s1">(</span><span class="s2">tab</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">index </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s2">tab</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">index </span><span class="s1">=== -</span><span class="s5">1</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">.</span><span class="s2">splice</span><span class="s1">(</span><span class="s2">index</span><span class="s1">, </span><span class="s5">1</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab </span><span class="s1">=== </span><span class="s2">tab</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_currentTab </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">[</span><span class="s2">Math</span><span class="s1">.</span><span class="s2">min</span><span class="s1">(</span><span class="s2">index</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">)];</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_tabs</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+      <span class="s3">void this</span><span class="s1">.</span><span class="s2">closeBrowserContext</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async closeBrowserContext</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closeBrowserContextPromise</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_closeBrowserContextPromise </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closeBrowserContextImpl</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">(</span><span class="s2">import_log</span><span class="s1">.</span><span class="s2">logUnhandledError</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_closeBrowserContextPromise</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closeBrowserContextPromise </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">isRunningTool</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_runningToolName </span><span class="s1">!== </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">setRunningTool</span><span class="s1">(</span><span class="s2">name</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_runningToolName </span><span class="s1">= </span><span class="s2">name</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _closeBrowserContextImpl</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextPromise</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s2">testDebug</span><span class="s1">(</span><span class="s0">&quot;close context&quot;</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">promise </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextPromise</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextPromise </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">await </span><span class="s2">promise</span><span class="s1">.</span><span class="s2">then</span><span class="s1">(</span><span class="s2">async </span><span class="s1">({ </span><span class="s2">browserContext</span><span class="s1">, </span><span class="s2">close </span><span class="s1">}) =&gt; {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">saveTrace</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">browserContext</span><span class="s1">.</span><span class="s2">tracing</span><span class="s1">.</span><span class="s2">stop</span><span class="s1">();</span>
+      <span class="s3">const </span><span class="s2">videos </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">saveVideo </span><span class="s1">? </span><span class="s2">browserContext</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">().</span><span class="s2">map</span><span class="s1">((</span><span class="s2">page</span><span class="s1">) =&gt; </span><span class="s2">page</span><span class="s1">.</span><span class="s2">video</span><span class="s1">()).</span><span class="s2">filter</span><span class="s1">((</span><span class="s2">video</span><span class="s1">) =&gt; !!</span><span class="s2">video</span><span class="s1">) : [];</span>
+      <span class="s3">await </span><span class="s2">close</span><span class="s1">(</span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">video of videos</span><span class="s1">) {</span>
+          <span class="s3">const </span><span class="s2">name </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">outputFile</span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">dateAsFileName</span><span class="s1">)(</span><span class="s0">&quot;webm&quot;</span><span class="s1">), { </span><span class="s2">origin</span><span class="s1">: </span><span class="s0">&quot;code&quot;</span><span class="s1">, </span><span class="s2">reason</span><span class="s1">: </span><span class="s0">&quot;Saving video&quot; </span><span class="s1">});</span>
+          <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">mkdir</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">dirname</span><span class="s1">(</span><span class="s2">name</span><span class="s1">), { </span><span class="s2">recursive</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+          <span class="s3">const </span><span class="s2">p </span><span class="s1">= </span><span class="s3">await </span><span class="s2">video</span><span class="s1">.</span><span class="s2">path</span><span class="s1">();</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">existsSync</span><span class="s1">(</span><span class="s2">p</span><span class="s1">)) {</span>
+            <span class="s3">try </span><span class="s1">{</span>
+              <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">rename</span><span class="s1">(</span><span class="s2">p</span><span class="s1">, </span><span class="s2">name</span><span class="s1">);</span>
+            <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+              <span class="s3">if </span><span class="s1">(</span><span class="s2">e</span><span class="s1">.</span><span class="s2">code </span><span class="s1">!== </span><span class="s0">&quot;EXDEV&quot;</span><span class="s1">)</span>
+                <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_log</span><span class="s1">.</span><span class="s2">logUnhandledError</span><span class="s1">)(</span><span class="s2">e</span><span class="s1">);</span>
+              <span class="s3">try </span><span class="s1">{</span>
+                <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">copyFile</span><span class="s1">(</span><span class="s2">p</span><span class="s1">, </span><span class="s2">name</span><span class="s1">);</span>
+                <span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">unlink</span><span class="s1">(</span><span class="s2">p</span><span class="s1">);</span>
+              <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e2</span><span class="s1">) {</span>
+                <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_log</span><span class="s1">.</span><span class="s2">logUnhandledError</span><span class="s1">)(</span><span class="s2">e2</span><span class="s1">);</span>
+              <span class="s1">}</span>
+            <span class="s1">}</span>
+          <span class="s1">}</span>
+        <span class="s1">}</span>
+      <span class="s1">});</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">async dispose</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_abortController</span><span class="s1">.</span><span class="s2">abort</span><span class="s1">(</span><span class="s0">&quot;MCP context disposed&quot;</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">closeBrowserContext</span><span class="s1">();</span>
+    <span class="s2">Context</span><span class="s1">.</span><span class="s2">_allContexts</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s3">this</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async _setupRequestInterception</span><span class="s1">(</span><span class="s2">context</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">network</span><span class="s1">?.</span><span class="s2">allowedOrigins</span><span class="s1">?.</span><span class="s2">length</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s2">context</span><span class="s1">.</span><span class="s2">route</span><span class="s1">(</span><span class="s0">&quot;**&quot;</span><span class="s1">, (</span><span class="s2">route</span><span class="s1">) =&gt; </span><span class="s2">route</span><span class="s1">.</span><span class="s2">abort</span><span class="s1">(</span><span class="s0">&quot;blockedbyclient&quot;</span><span class="s1">));</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">origin of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">network</span><span class="s1">.</span><span class="s2">allowedOrigins</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">context</span><span class="s1">.</span><span class="s2">route</span><span class="s1">(</span><span class="s2">originOrHostGlob</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">), (</span><span class="s2">route</span><span class="s1">) =&gt; </span><span class="s2">route</span><span class="s1">.</span><span class="s2">continue</span><span class="s1">());</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">network</span><span class="s1">?.</span><span class="s2">blockedOrigins</span><span class="s1">?.</span><span class="s2">length</span><span class="s1">) {</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">origin of </span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">network</span><span class="s1">.</span><span class="s2">blockedOrigins</span><span class="s1">)</span>
+        <span class="s3">await </span><span class="s2">context</span><span class="s1">.</span><span class="s2">route</span><span class="s1">(</span><span class="s2">originOrHostGlob</span><span class="s1">(</span><span class="s2">origin</span><span class="s1">), (</span><span class="s2">route</span><span class="s1">) =&gt; </span><span class="s2">route</span><span class="s1">.</span><span class="s2">abort</span><span class="s1">(</span><span class="s0">&quot;blockedbyclient&quot;</span><span class="s1">));</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async ensureBrowserContext</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">browserContext </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_ensureBrowserContext</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s2">browserContext</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">_ensureBrowserContext</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextPromise</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextPromise </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_setupBrowserContext</span><span class="s1">();</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextPromise</span><span class="s1">.</span><span class="s2">catch</span><span class="s1">(() =&gt; {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContextPromise </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+      <span class="s1">});</span>
+    <span class="s1">}</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_browserContextPromise</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _setupBrowserContext</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closeBrowserContextPromise</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Another browser context is being closed.&quot;</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_browserContextFactory</span><span class="s1">.</span><span class="s2">createContext</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_clientInfo</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_abortController</span><span class="s1">.</span><span class="s2">signal</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_runningToolName</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">browserContext </span><span class="s1">} = </span><span class="s2">result</span><span class="s1">;</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_setupRequestInterception</span><span class="s1">(</span><span class="s2">browserContext</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">sessionLog</span><span class="s1">)</span>
+      <span class="s3">await </span><span class="s2">InputRecorder</span><span class="s1">.</span><span class="s2">create</span><span class="s1">(</span><span class="s3">this</span><span class="s1">, </span><span class="s2">browserContext</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">page of browserContext</span><span class="s1">.</span><span class="s2">pages</span><span class="s1">())</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_onPageCreated</span><span class="s1">(</span><span class="s2">page</span><span class="s1">);</span>
+    <span class="s2">browserContext</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;page&quot;</span><span class="s1">, (</span><span class="s2">page</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_onPageCreated</span><span class="s1">(</span><span class="s2">page</span><span class="s1">));</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">saveTrace</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s2">browserContext</span><span class="s1">.</span><span class="s2">tracing</span><span class="s1">.</span><span class="s2">start</span><span class="s1">({</span>
+        <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;trace-&quot; </span><span class="s1">+ </span><span class="s2">Date</span><span class="s1">.</span><span class="s2">now</span><span class="s1">(),</span>
+        <span class="s2">screenshots</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+        <span class="s2">snapshots</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+        <span class="s2">_live</span><span class="s1">: </span><span class="s3">true</span>
+      <span class="s1">});</span>
+    <span class="s1">}</span>
+    <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">lookupSecret</span><span class="s1">(</span><span class="s2">secretName</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">secrets</span><span class="s1">?.[</span><span class="s2">secretName</span><span class="s1">])</span>
+      <span class="s3">return </span><span class="s1">{ </span><span class="s2">value</span><span class="s1">: </span><span class="s2">secretName</span><span class="s1">, </span><span class="s2">code</span><span class="s1">: </span><span class="s2">codegen</span><span class="s1">.</span><span class="s2">quote</span><span class="s1">(</span><span class="s2">secretName</span><span class="s1">) };</span>
+    <span class="s3">return </span><span class="s1">{</span>
+      <span class="s2">value</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">config</span><span class="s1">.</span><span class="s2">secrets</span><span class="s1">[</span><span class="s2">secretName</span><span class="s1">],</span>
+      <span class="s2">code</span><span class="s1">: </span><span class="s0">`process.env['</span><span class="s2">$</span><span class="s1">{</span><span class="s2">secretName</span><span class="s1">}</span><span class="s0">']`</span>
+    <span class="s1">};</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">originOrHostGlob</span><span class="s1">(</span><span class="s2">originOrHost</span><span class="s1">) {</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s3">const </span><span class="s2">url </span><span class="s1">= </span><span class="s3">new </span><span class="s2">URL</span><span class="s1">(</span><span class="s2">originOrHost</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">url</span><span class="s1">.</span><span class="s2">origin </span><span class="s1">!== </span><span class="s0">&quot;null&quot;</span><span class="s1">)</span>
+      <span class="s3">return </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">url</span><span class="s1">.</span><span class="s2">origin</span><span class="s1">}</span><span class="s0">/**`</span><span class="s1">;</span>
+  <span class="s1">} </span><span class="s3">catch </span><span class="s1">{</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s0">`*://</span><span class="s2">$</span><span class="s1">{</span><span class="s2">originOrHost</span><span class="s1">}</span><span class="s0">/**`</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">InputRecorder </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">context</span><span class="s1">, </span><span class="s2">browserContext</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_context </span><span class="s1">= </span><span class="s2">context</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_browserContext </span><span class="s1">= </span><span class="s2">browserContext</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">static </span><span class="s2">async create</span><span class="s1">(</span><span class="s2">context</span><span class="s1">, </span><span class="s2">browserContext</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">recorder </span><span class="s1">= </span><span class="s3">new </span><span class="s2">InputRecorder</span><span class="s1">(</span><span class="s2">context</span><span class="s1">, </span><span class="s2">browserContext</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">recorder</span><span class="s1">.</span><span class="s2">_initialize</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s2">recorder</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async _initialize</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">sessionLog </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_context</span><span class="s1">.</span><span class="s2">sessionLog</span><span class="s1">;</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_browserContext</span><span class="s1">.</span><span class="s2">_enableRecorder</span><span class="s1">({</span>
+      <span class="s2">mode</span><span class="s1">: </span><span class="s0">&quot;recording&quot;</span><span class="s1">,</span>
+      <span class="s2">recorderMode</span><span class="s1">: </span><span class="s0">&quot;api&quot;</span>
+    <span class="s1">}, {</span>
+      <span class="s2">actionAdded</span><span class="s1">: (</span><span class="s2">page</span><span class="s1">, </span><span class="s2">data</span><span class="s1">, </span><span class="s2">code</span><span class="s1">) =&gt; {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_context</span><span class="s1">.</span><span class="s2">isRunningTool</span><span class="s1">())</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">tab </span><span class="s1">= </span><span class="s2">import_tab</span><span class="s1">.</span><span class="s2">Tab</span><span class="s1">.</span><span class="s2">forPage</span><span class="s1">(</span><span class="s2">page</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">tab</span><span class="s1">)</span>
+          <span class="s2">sessionLog</span><span class="s1">.</span><span class="s2">logUserAction</span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">action</span><span class="s1">, </span><span class="s2">tab</span><span class="s1">, </span><span class="s2">code</span><span class="s1">, </span><span class="s3">false</span><span class="s1">);</span>
+      <span class="s1">},</span>
+      <span class="s2">actionUpdated</span><span class="s1">: (</span><span class="s2">page</span><span class="s1">, </span><span class="s2">data</span><span class="s1">, </span><span class="s2">code</span><span class="s1">) =&gt; {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_context</span><span class="s1">.</span><span class="s2">isRunningTool</span><span class="s1">())</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">tab </span><span class="s1">= </span><span class="s2">import_tab</span><span class="s1">.</span><span class="s2">Tab</span><span class="s1">.</span><span class="s2">forPage</span><span class="s1">(</span><span class="s2">page</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">tab</span><span class="s1">)</span>
+          <span class="s2">sessionLog</span><span class="s1">.</span><span class="s2">logUserAction</span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">action</span><span class="s1">, </span><span class="s2">tab</span><span class="s1">, </span><span class="s2">code</span><span class="s1">, </span><span class="s3">true</span><span class="s1">);</span>
+      <span class="s1">},</span>
+      <span class="s2">signalAdded</span><span class="s1">: (</span><span class="s2">page</span><span class="s1">, </span><span class="s2">data</span><span class="s1">) =&gt; {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_context</span><span class="s1">.</span><span class="s2">isRunningTool</span><span class="s1">())</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">data</span><span class="s1">.</span><span class="s2">signal</span><span class="s1">.</span><span class="s2">name </span><span class="s1">!== </span><span class="s0">&quot;navigation&quot;</span><span class="s1">)</span>
+          <span class="s3">return</span><span class="s1">;</span>
+        <span class="s3">const </span><span class="s2">tab </span><span class="s1">= </span><span class="s2">import_tab</span><span class="s1">.</span><span class="s2">Tab</span><span class="s1">.</span><span class="s2">forPage</span><span class="s1">(</span><span class="s2">page</span><span class="s1">);</span>
+        <span class="s3">const </span><span class="s2">navigateAction </span><span class="s1">= {</span>
+          <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;navigate&quot;</span><span class="s1">,</span>
+          <span class="s2">url</span><span class="s1">: </span><span class="s2">data</span><span class="s1">.</span><span class="s2">signal</span><span class="s1">.</span><span class="s2">url</span><span class="s1">,</span>
+          <span class="s2">signals</span><span class="s1">: []</span>
+        <span class="s1">};</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">tab</span><span class="s1">)</span>
+          <span class="s2">sessionLog</span><span class="s1">.</span><span class="s2">logUserAction</span><span class="s1">(</span><span class="s2">navigateAction</span><span class="s1">, </span><span class="s2">tab</span><span class="s1">, </span><span class="s0">`await page.goto('</span><span class="s2">$</span><span class="s1">{</span><span class="s2">data</span><span class="s1">.</span><span class="s2">signal</span><span class="s1">.</span><span class="s2">url</span><span class="s1">}</span><span class="s0">');`</span><span class="s1">, </span><span class="s3">false</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">Context</span><span class="s1">,</span>
+  <span class="s2">InputRecorder</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

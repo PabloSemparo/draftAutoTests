@@ -1,0 +1,409 @@
+<html>
+<head>
+<title>selectorParser.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+.s6 { color: #42c3d4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+selectorParser.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">selectorParser_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">selectorParser_exports</span><span class="s1">, {</span>
+  <span class="s2">InvalidSelectorError</span><span class="s1">: () =&gt; </span><span class="s2">import_cssParser2</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">,</span>
+  <span class="s2">customCSSNames</span><span class="s1">: () =&gt; </span><span class="s2">customCSSNames</span><span class="s1">,</span>
+  <span class="s2">isInvalidSelectorError</span><span class="s1">: () =&gt; </span><span class="s2">import_cssParser2</span><span class="s1">.</span><span class="s2">isInvalidSelectorError</span><span class="s1">,</span>
+  <span class="s2">parseAttributeSelector</span><span class="s1">: () =&gt; </span><span class="s2">parseAttributeSelector</span><span class="s1">,</span>
+  <span class="s2">parseSelector</span><span class="s1">: () =&gt; </span><span class="s2">parseSelector</span><span class="s1">,</span>
+  <span class="s2">splitSelectorByFrame</span><span class="s1">: () =&gt; </span><span class="s2">splitSelectorByFrame</span><span class="s1">,</span>
+  <span class="s2">stringifySelector</span><span class="s1">: () =&gt; </span><span class="s2">stringifySelector</span><span class="s1">,</span>
+  <span class="s2">visitAllSelectorParts</span><span class="s1">: () =&gt; </span><span class="s2">visitAllSelectorParts</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">selectorParser_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_cssParser </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./cssParser&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_cssParser2 </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./cssParser&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">kNestedSelectorNames </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">([</span><span class="s0">&quot;internal:has&quot;</span><span class="s1">, </span><span class="s0">&quot;internal:has-not&quot;</span><span class="s1">, </span><span class="s0">&quot;internal:and&quot;</span><span class="s1">, </span><span class="s0">&quot;internal:or&quot;</span><span class="s1">, </span><span class="s0">&quot;internal:chain&quot;</span><span class="s1">, </span><span class="s0">&quot;left-of&quot;</span><span class="s1">, </span><span class="s0">&quot;right-of&quot;</span><span class="s1">, </span><span class="s0">&quot;above&quot;</span><span class="s1">, </span><span class="s0">&quot;below&quot;</span><span class="s1">, </span><span class="s0">&quot;near&quot;</span><span class="s1">]);</span>
+<span class="s3">const </span><span class="s2">kNestedSelectorNamesWithDistance </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">([</span><span class="s0">&quot;left-of&quot;</span><span class="s1">, </span><span class="s0">&quot;right-of&quot;</span><span class="s1">, </span><span class="s0">&quot;above&quot;</span><span class="s1">, </span><span class="s0">&quot;below&quot;</span><span class="s1">, </span><span class="s0">&quot;near&quot;</span><span class="s1">]);</span>
+<span class="s3">const </span><span class="s2">customCSSNames </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">([</span><span class="s0">&quot;not&quot;</span><span class="s1">, </span><span class="s0">&quot;is&quot;</span><span class="s1">, </span><span class="s0">&quot;where&quot;</span><span class="s1">, </span><span class="s0">&quot;has&quot;</span><span class="s1">, </span><span class="s0">&quot;scope&quot;</span><span class="s1">, </span><span class="s0">&quot;light&quot;</span><span class="s1">, </span><span class="s0">&quot;visible&quot;</span><span class="s1">, </span><span class="s0">&quot;text&quot;</span><span class="s1">, </span><span class="s0">&quot;text-matches&quot;</span><span class="s1">, </span><span class="s0">&quot;text-is&quot;</span><span class="s1">, </span><span class="s0">&quot;has-text&quot;</span><span class="s1">, </span><span class="s0">&quot;above&quot;</span><span class="s1">, </span><span class="s0">&quot;below&quot;</span><span class="s1">, </span><span class="s0">&quot;right-of&quot;</span><span class="s1">, </span><span class="s0">&quot;left-of&quot;</span><span class="s1">, </span><span class="s0">&quot;near&quot;</span><span class="s1">, </span><span class="s0">&quot;nth-match&quot;</span><span class="s1">]);</span>
+<span class="s3">function </span><span class="s2">parseSelector</span><span class="s1">(</span><span class="s2">selector</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">parsedStrings </span><span class="s1">= </span><span class="s2">parseSelectorString</span><span class="s1">(</span><span class="s2">selector</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">parts </span><span class="s1">= [];</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">part of parsedStrings</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;css&quot; </span><span class="s1">|| </span><span class="s2">part</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;css:light&quot;</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;css:light&quot;</span><span class="s1">)</span>
+        <span class="s2">part</span><span class="s1">.</span><span class="s2">body </span><span class="s1">= </span><span class="s0">&quot;:light(&quot; </span><span class="s1">+ </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body </span><span class="s1">+ </span><span class="s0">&quot;)&quot;</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">parsedCSS </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">parseCSS</span><span class="s1">)(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">body</span><span class="s1">, </span><span class="s2">customCSSNames</span><span class="s1">);</span>
+      <span class="s2">parts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({</span>
+        <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;css&quot;</span><span class="s1">,</span>
+        <span class="s2">body</span><span class="s1">: </span><span class="s2">parsedCSS</span><span class="s1">.</span><span class="s2">selector</span><span class="s1">,</span>
+        <span class="s2">source</span><span class="s1">: </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body</span>
+      <span class="s1">});</span>
+      <span class="s3">continue</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">kNestedSelectorNames</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name</span><span class="s1">)) {</span>
+      <span class="s3">let </span><span class="s2">innerSelector</span><span class="s1">;</span>
+      <span class="s3">let </span><span class="s2">distance</span><span class="s1">;</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">const </span><span class="s2">unescaped </span><span class="s1">= </span><span class="s2">JSON</span><span class="s1">.</span><span class="s2">parse</span><span class="s1">(</span><span class="s0">&quot;[&quot; </span><span class="s1">+ </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body </span><span class="s1">+ </span><span class="s0">&quot;]&quot;</span><span class="s1">);</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">Array</span><span class="s1">.</span><span class="s2">isArray</span><span class="s1">(</span><span class="s2">unescaped</span><span class="s1">) || </span><span class="s2">unescaped</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&lt; </span><span class="s5">1 </span><span class="s1">|| </span><span class="s2">unescaped</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&gt; </span><span class="s5">2 </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">unescaped</span><span class="s1">[</span><span class="s5">0</span><span class="s1">] !== </span><span class="s0">&quot;string&quot;</span><span class="s1">)</span>
+          <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Malformed selector: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name</span><span class="s1">}</span><span class="s0">=` </span><span class="s1">+ </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body</span><span class="s1">);</span>
+        <span class="s2">innerSelector </span><span class="s1">= </span><span class="s2">unescaped</span><span class="s1">[</span><span class="s5">0</span><span class="s1">];</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">unescaped</span><span class="s1">.</span><span class="s2">length </span><span class="s1">=== </span><span class="s5">2</span><span class="s1">) {</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s3">typeof </span><span class="s2">unescaped</span><span class="s1">[</span><span class="s5">1</span><span class="s1">] !== </span><span class="s0">&quot;number&quot; </span><span class="s1">|| !</span><span class="s2">kNestedSelectorNamesWithDistance</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name</span><span class="s1">))</span>
+            <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Malformed selector: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name</span><span class="s1">}</span><span class="s0">=` </span><span class="s1">+ </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body</span><span class="s1">);</span>
+          <span class="s2">distance </span><span class="s1">= </span><span class="s2">unescaped</span><span class="s1">[</span><span class="s5">1</span><span class="s1">];</span>
+        <span class="s1">}</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+        <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Malformed selector: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name</span><span class="s1">}</span><span class="s0">=` </span><span class="s1">+ </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body</span><span class="s1">);</span>
+      <span class="s1">}</span>
+      <span class="s3">const </span><span class="s2">nested </span><span class="s1">= { </span><span class="s2">name</span><span class="s1">: </span><span class="s2">part</span><span class="s1">.</span><span class="s2">name</span><span class="s1">, </span><span class="s2">source</span><span class="s1">: </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body</span><span class="s1">, </span><span class="s2">body</span><span class="s1">: { </span><span class="s2">parsed</span><span class="s1">: </span><span class="s2">parseSelector</span><span class="s1">(</span><span class="s2">innerSelector</span><span class="s1">), </span><span class="s2">distance </span><span class="s1">} };</span>
+      <span class="s3">const </span><span class="s2">lastFrame </span><span class="s1">= [</span><span class="s2">...nested</span><span class="s1">.</span><span class="s2">body</span><span class="s1">.</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">].</span><span class="s2">reverse</span><span class="s1">().</span><span class="s2">find</span><span class="s1">((</span><span class="s2">part2</span><span class="s1">) =&gt; </span><span class="s2">part2</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;internal:control&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">part2</span><span class="s1">.</span><span class="s2">body </span><span class="s1">=== </span><span class="s0">&quot;enter-frame&quot;</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">lastFrameIndex </span><span class="s1">= </span><span class="s2">lastFrame </span><span class="s1">? </span><span class="s2">nested</span><span class="s1">.</span><span class="s2">body</span><span class="s1">.</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s2">lastFrame</span><span class="s1">) : -</span><span class="s5">1</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">lastFrameIndex </span><span class="s1">!== -</span><span class="s5">1 </span><span class="s1">&amp;&amp; </span><span class="s2">selectorPartsEqual</span><span class="s1">(</span><span class="s2">nested</span><span class="s1">.</span><span class="s2">body</span><span class="s1">.</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">lastFrameIndex </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">), </span><span class="s2">parts</span><span class="s1">.</span><span class="s2">slice</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">lastFrameIndex </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">)))</span>
+        <span class="s2">nested</span><span class="s1">.</span><span class="s2">body</span><span class="s1">.</span><span class="s2">parsed</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">splice</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">lastFrameIndex </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">);</span>
+      <span class="s2">parts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">nested</span><span class="s1">);</span>
+      <span class="s3">continue</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">parts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">...part</span><span class="s1">, </span><span class="s2">source</span><span class="s1">: </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">kNestedSelectorNames</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">parts</span><span class="s1">[</span><span class="s5">0</span><span class="s1">].</span><span class="s2">name</span><span class="s1">))</span>
+    <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`&quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">parts</span><span class="s1">[</span><span class="s5">0</span><span class="s1">].</span><span class="s2">name</span><span class="s1">}</span><span class="s0">&quot; selector cannot be first`</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s1">{</span>
+    <span class="s2">capture</span><span class="s1">: </span><span class="s2">parsedStrings</span><span class="s1">.</span><span class="s2">capture</span><span class="s1">,</span>
+    <span class="s2">parts</span>
+  <span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">splitSelectorByFrame</span><span class="s1">(</span><span class="s2">selectorText</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">selector </span><span class="s1">= </span><span class="s2">parseSelector</span><span class="s1">(</span><span class="s2">selectorText</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= [];</span>
+  <span class="s3">let </span><span class="s2">chunk </span><span class="s1">= {</span>
+    <span class="s2">parts</span><span class="s1">: []</span>
+  <span class="s1">};</span>
+  <span class="s3">let </span><span class="s2">chunkStartIndex </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">0</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; ++</span><span class="s2">i</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">part </span><span class="s1">= </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">[</span><span class="s2">i</span><span class="s1">];</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;internal:control&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">part</span><span class="s1">.</span><span class="s2">body </span><span class="s1">=== </span><span class="s0">&quot;enter-frame&quot;</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">&quot;Selector cannot start with entering frame, select the iframe first&quot;</span><span class="s1">);</span>
+      <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+      <span class="s2">chunk </span><span class="s1">= { </span><span class="s2">parts</span><span class="s1">: [] };</span>
+      <span class="s2">chunkStartIndex </span><span class="s1">= </span><span class="s2">i </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">;</span>
+      <span class="s3">continue</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">selector</span><span class="s1">.</span><span class="s2">capture </span><span class="s1">=== </span><span class="s2">i</span><span class="s1">)</span>
+      <span class="s2">chunk</span><span class="s1">.</span><span class="s2">capture </span><span class="s1">= </span><span class="s2">i </span><span class="s1">- </span><span class="s2">chunkStartIndex</span><span class="s1">;</span>
+    <span class="s2">chunk</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">part</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Selector cannot end with entering frame, while parsing selector </span><span class="s2">$</span><span class="s1">{</span><span class="s2">selectorText</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+  <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">chunk</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s3">typeof </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">capture </span><span class="s1">=== </span><span class="s0">&quot;number&quot; </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">result</span><span class="s1">[</span><span class="s2">result</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">].</span><span class="s2">capture </span><span class="s1">!== </span><span class="s0">&quot;number&quot;</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Can not capture the selector before diving into the frame. Only use * after the last frame has been selected`</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">selectorPartsEqual</span><span class="s1">(</span><span class="s2">list1</span><span class="s1">, </span><span class="s2">list2</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s2">stringifySelector</span><span class="s1">({ </span><span class="s2">parts</span><span class="s1">: </span><span class="s2">list1 </span><span class="s1">}) === </span><span class="s2">stringifySelector</span><span class="s1">({ </span><span class="s2">parts</span><span class="s1">: </span><span class="s2">list2 </span><span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">stringifySelector</span><span class="s1">(</span><span class="s2">selector</span><span class="s1">, </span><span class="s2">forceEngineName</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s3">typeof </span><span class="s2">selector </span><span class="s1">=== </span><span class="s0">&quot;string&quot;</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s2">selector</span><span class="s1">;</span>
+  <span class="s3">return </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">p</span><span class="s1">, </span><span class="s2">i</span><span class="s1">) =&gt; {</span>
+    <span class="s3">let </span><span class="s2">includeEngine </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">forceEngineName </span><span class="s1">&amp;&amp; </span><span class="s2">i </span><span class="s1">!== </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">capture</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">p</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;css&quot;</span><span class="s1">)</span>
+        <span class="s2">includeEngine </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+      <span class="s3">else if </span><span class="s1">(</span><span class="s2">p</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;xpath&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">p</span><span class="s1">.</span><span class="s2">source</span><span class="s1">.</span><span class="s2">startsWith</span><span class="s1">(</span><span class="s0">&quot;//&quot;</span><span class="s1">) || </span><span class="s2">p</span><span class="s1">.</span><span class="s2">source</span><span class="s1">.</span><span class="s2">startsWith</span><span class="s1">(</span><span class="s0">&quot;..&quot;</span><span class="s1">))</span>
+        <span class="s2">includeEngine </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">prefix </span><span class="s1">= </span><span class="s2">includeEngine </span><span class="s1">? </span><span class="s2">p</span><span class="s1">.</span><span class="s2">name </span><span class="s1">+ </span><span class="s0">&quot;=&quot; </span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s0">`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">i </span><span class="s1">=== </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">capture </span><span class="s1">? </span><span class="s0">&quot;*&quot; </span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{</span><span class="s2">prefix</span><span class="s1">}</span><span class="s2">$</span><span class="s1">{</span><span class="s2">p</span><span class="s1">.</span><span class="s2">source</span><span class="s1">}</span><span class="s0">`</span><span class="s1">;</span>
+  <span class="s1">}).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot; &gt;&gt; &quot;</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">visitAllSelectorParts</span><span class="s1">(</span><span class="s2">selector</span><span class="s1">, </span><span class="s2">visitor</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">visit </span><span class="s1">= (</span><span class="s2">selector2</span><span class="s1">, </span><span class="s2">nested</span><span class="s1">) =&gt; {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">part of selector2</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">) {</span>
+      <span class="s2">visitor</span><span class="s1">(</span><span class="s2">part</span><span class="s1">, </span><span class="s2">nested</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">kNestedSelectorNames</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">name</span><span class="s1">))</span>
+        <span class="s2">visit</span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">body</span><span class="s1">.</span><span class="s2">parsed</span><span class="s1">, </span><span class="s3">true</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">};</span>
+  <span class="s2">visit</span><span class="s1">(</span><span class="s2">selector</span><span class="s1">, </span><span class="s3">false</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">parseSelectorString</span><span class="s1">(</span><span class="s2">selector</span><span class="s1">) {</span>
+  <span class="s3">let </span><span class="s2">index </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">quote</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">start </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= { </span><span class="s2">parts</span><span class="s1">: [] };</span>
+  <span class="s3">const </span><span class="s2">append </span><span class="s1">= () =&gt; {</span>
+    <span class="s3">const </span><span class="s2">part </span><span class="s1">= </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s2">start</span><span class="s1">, </span><span class="s2">index</span><span class="s1">).</span><span class="s2">trim</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">eqIndex </span><span class="s1">= </span><span class="s2">part</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s0">&quot;=&quot;</span><span class="s1">);</span>
+    <span class="s3">let </span><span class="s2">name</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">body</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">eqIndex </span><span class="s1">!== -</span><span class="s5">1 </span><span class="s1">&amp;&amp; </span><span class="s2">part</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">eqIndex</span><span class="s1">).</span><span class="s2">trim</span><span class="s1">().</span><span class="s2">match</span><span class="s1">(</span><span class="s6">/^[a-zA-Z_0-9-+:*]+$/</span><span class="s1">)) {</span>
+      <span class="s2">name </span><span class="s1">= </span><span class="s2">part</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">eqIndex</span><span class="s1">).</span><span class="s2">trim</span><span class="s1">();</span>
+      <span class="s2">body </span><span class="s1">= </span><span class="s2">part</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s2">eqIndex </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&gt; </span><span class="s5">1 </span><span class="s1">&amp;&amp; </span><span class="s2">part</span><span class="s1">[</span><span class="s5">0</span><span class="s1">] === </span><span class="s0">'&quot;' </span><span class="s1">&amp;&amp; </span><span class="s2">part</span><span class="s1">[</span><span class="s2">part</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">] === </span><span class="s0">'&quot;'</span><span class="s1">) {</span>
+      <span class="s2">name </span><span class="s1">= </span><span class="s0">&quot;text&quot;</span><span class="s1">;</span>
+      <span class="s2">body </span><span class="s1">= </span><span class="s2">part</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">part</span><span class="s1">.</span><span class="s2">length </span><span class="s1">&gt; </span><span class="s5">1 </span><span class="s1">&amp;&amp; </span><span class="s2">part</span><span class="s1">[</span><span class="s5">0</span><span class="s1">] === </span><span class="s0">&quot;'&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">part</span><span class="s1">[</span><span class="s2">part</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">] === </span><span class="s0">&quot;'&quot;</span><span class="s1">) {</span>
+      <span class="s2">name </span><span class="s1">= </span><span class="s0">&quot;text&quot;</span><span class="s1">;</span>
+      <span class="s2">body </span><span class="s1">= </span><span class="s2">part</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s6">/^\(*\/\//</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s2">part</span><span class="s1">) || </span><span class="s2">part</span><span class="s1">.</span><span class="s2">startsWith</span><span class="s1">(</span><span class="s0">&quot;..&quot;</span><span class="s1">)) {</span>
+      <span class="s2">name </span><span class="s1">= </span><span class="s0">&quot;xpath&quot;</span><span class="s1">;</span>
+      <span class="s2">body </span><span class="s1">= </span><span class="s2">part</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">name </span><span class="s1">= </span><span class="s0">&quot;css&quot;</span><span class="s1">;</span>
+      <span class="s2">body </span><span class="s1">= </span><span class="s2">part</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">let </span><span class="s2">capture </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">name</span><span class="s1">[</span><span class="s5">0</span><span class="s1">] === </span><span class="s0">&quot;*&quot;</span><span class="s1">) {</span>
+      <span class="s2">capture </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s2">name </span><span class="s1">= </span><span class="s2">name</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s5">1</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">name</span><span class="s1">, </span><span class="s2">body </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">capture</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">capture </span><span class="s1">!== </span><span class="s3">void </span><span class="s5">0</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Only one of the selectors can capture using * modifier`</span><span class="s1">);</span>
+      <span class="s2">result</span><span class="s1">.</span><span class="s2">capture </span><span class="s1">= </span><span class="s2">result</span><span class="s1">.</span><span class="s2">parts</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">};</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">selector</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s0">&quot;&gt;&gt;&quot;</span><span class="s1">)) {</span>
+    <span class="s2">index </span><span class="s1">= </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+    <span class="s2">append</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">shouldIgnoreTextSelectorQuote </span><span class="s1">= () =&gt; {</span>
+    <span class="s3">const </span><span class="s2">prefix </span><span class="s1">= </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">substring</span><span class="s1">(</span><span class="s2">start</span><span class="s1">, </span><span class="s2">index</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">match </span><span class="s1">= </span><span class="s2">prefix</span><span class="s1">.</span><span class="s2">match</span><span class="s1">(</span><span class="s6">/^\s*text\s*=(.*)$/</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s1">!!</span><span class="s2">match </span><span class="s1">&amp;&amp; !!</span><span class="s2">match</span><span class="s1">[</span><span class="s5">1</span><span class="s1">];</span>
+  <span class="s1">};</span>
+  <span class="s3">while </span><span class="s1">(</span><span class="s2">index </span><span class="s1">&lt; </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">length</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">c </span><span class="s1">= </span><span class="s2">selector</span><span class="s1">[</span><span class="s2">index</span><span class="s1">];</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">c </span><span class="s1">=== </span><span class="s0">&quot;</span><span class="s3">\\</span><span class="s0">&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">index </span><span class="s1">+ </span><span class="s5">1 </span><span class="s1">&lt; </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">length</span><span class="s1">) {</span>
+      <span class="s2">index </span><span class="s1">+= </span><span class="s5">2</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">c </span><span class="s1">=== </span><span class="s2">quote</span><span class="s1">) {</span>
+      <span class="s2">quote </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+      <span class="s2">index</span><span class="s1">++;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(!</span><span class="s2">quote </span><span class="s1">&amp;&amp; (</span><span class="s2">c </span><span class="s1">=== </span><span class="s0">'&quot;' </span><span class="s1">|| </span><span class="s2">c </span><span class="s1">=== </span><span class="s0">&quot;'&quot; </span><span class="s1">|| </span><span class="s2">c </span><span class="s1">=== </span><span class="s0">&quot;`&quot;</span><span class="s1">) &amp;&amp; !</span><span class="s2">shouldIgnoreTextSelectorQuote</span><span class="s1">()) {</span>
+      <span class="s2">quote </span><span class="s1">= </span><span class="s2">c</span><span class="s1">;</span>
+      <span class="s2">index</span><span class="s1">++;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(!</span><span class="s2">quote </span><span class="s1">&amp;&amp; </span><span class="s2">c </span><span class="s1">=== </span><span class="s0">&quot;&gt;&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">selector</span><span class="s1">[</span><span class="s2">index </span><span class="s1">+ </span><span class="s5">1</span><span class="s1">] === </span><span class="s0">&quot;&gt;&quot;</span><span class="s1">) {</span>
+      <span class="s2">append</span><span class="s1">();</span>
+      <span class="s2">index </span><span class="s1">+= </span><span class="s5">2</span><span class="s1">;</span>
+      <span class="s2">start </span><span class="s1">= </span><span class="s2">index</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">index</span><span class="s1">++;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">append</span><span class="s1">();</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">parseAttributeSelector</span><span class="s1">(</span><span class="s2">selector</span><span class="s1">, </span><span class="s2">allowUnquotedStrings</span><span class="s1">) {</span>
+  <span class="s3">let </span><span class="s2">wp </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">EOL </span><span class="s1">= </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">length </span><span class="s1">=== </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">next </span><span class="s1">= () =&gt; </span><span class="s2">selector</span><span class="s1">[</span><span class="s2">wp</span><span class="s1">] || </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+  <span class="s3">const </span><span class="s2">eat1 </span><span class="s1">= () =&gt; {</span>
+    <span class="s3">const </span><span class="s2">result2 </span><span class="s1">= </span><span class="s2">next</span><span class="s1">();</span>
+    <span class="s1">++</span><span class="s2">wp</span><span class="s1">;</span>
+    <span class="s2">EOL </span><span class="s1">= </span><span class="s2">wp </span><span class="s1">&gt;= </span><span class="s2">selector</span><span class="s1">.</span><span class="s2">length</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s2">result2</span><span class="s1">;</span>
+  <span class="s1">};</span>
+  <span class="s3">const </span><span class="s2">syntaxError </span><span class="s1">= (</span><span class="s2">stage</span><span class="s1">) =&gt; {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">EOL</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Unexpected end of selector while parsing selector </span><span class="s3">\`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">selector</span><span class="s1">}</span><span class="s3">\`</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Error while parsing selector </span><span class="s3">\`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">selector</span><span class="s1">}</span><span class="s3">\` </span><span class="s0">- unexpected symbol &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">next</span><span class="s1">()}</span><span class="s0">&quot; at position </span><span class="s2">$</span><span class="s1">{</span><span class="s2">wp</span><span class="s1">}</span><span class="s0">` </span><span class="s1">+ (</span><span class="s2">stage </span><span class="s1">? </span><span class="s0">&quot; during &quot; </span><span class="s1">+ </span><span class="s2">stage </span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">));</span>
+  <span class="s1">};</span>
+  <span class="s3">function </span><span class="s2">skipSpaces</span><span class="s1">() {</span>
+    <span class="s3">while </span><span class="s1">(!</span><span class="s2">EOL </span><span class="s1">&amp;&amp; </span><span class="s6">/\s/</span><span class="s1">.</span><span class="s2">test</span><span class="s1">(</span><span class="s2">next</span><span class="s1">()))</span>
+      <span class="s2">eat1</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">isCSSNameChar</span><span class="s1">(</span><span class="s2">char</span><span class="s1">) {</span>
+    <span class="s3">return </span><span class="s2">char </span><span class="s1">&gt;= </span><span class="s0">&quot;</span><span class="s3">\x80</span><span class="s0">&quot; </span><span class="s1">|| </span><span class="s2">char </span><span class="s1">&gt;= </span><span class="s0">&quot;0&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">char </span><span class="s1">&lt;= </span><span class="s0">&quot;9&quot; </span><span class="s1">|| </span><span class="s2">char </span><span class="s1">&gt;= </span><span class="s0">&quot;A&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">char </span><span class="s1">&lt;= </span><span class="s0">&quot;Z&quot; </span><span class="s1">|| </span><span class="s2">char </span><span class="s1">&gt;= </span><span class="s0">&quot;a&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">char </span><span class="s1">&lt;= </span><span class="s0">&quot;z&quot; </span><span class="s1">|| </span><span class="s2">char </span><span class="s1">&gt;= </span><span class="s0">&quot;0&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">char </span><span class="s1">&lt;= </span><span class="s0">&quot;9&quot; </span><span class="s1">|| </span><span class="s2">char </span><span class="s1">=== </span><span class="s0">&quot;_&quot; </span><span class="s1">|| </span><span class="s2">char </span><span class="s1">=== </span><span class="s0">&quot;-&quot;</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">readIdentifier</span><span class="s1">() {</span>
+    <span class="s3">let </span><span class="s2">result2 </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s2">skipSpaces</span><span class="s1">();</span>
+    <span class="s3">while </span><span class="s1">(!</span><span class="s2">EOL </span><span class="s1">&amp;&amp; </span><span class="s2">isCSSNameChar</span><span class="s1">(</span><span class="s2">next</span><span class="s1">()))</span>
+      <span class="s2">result2 </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s2">result2</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">readQuotedString</span><span class="s1">(</span><span class="s2">quote</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">result2 </span><span class="s1">= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">result2 </span><span class="s1">!== </span><span class="s2">quote</span><span class="s1">)</span>
+      <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing quoted string&quot;</span><span class="s1">);</span>
+    <span class="s3">while </span><span class="s1">(!</span><span class="s2">EOL </span><span class="s1">&amp;&amp; </span><span class="s2">next</span><span class="s1">() !== </span><span class="s2">quote</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;</span><span class="s3">\\</span><span class="s0">&quot;</span><span class="s1">)</span>
+        <span class="s2">eat1</span><span class="s1">();</span>
+      <span class="s2">result2 </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() !== </span><span class="s2">quote</span><span class="s1">)</span>
+      <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing quoted string&quot;</span><span class="s1">);</span>
+    <span class="s2">result2 </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s2">result2</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">readRegularExpression</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">eat1</span><span class="s1">() !== </span><span class="s0">&quot;/&quot;</span><span class="s1">)</span>
+      <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing regular expression&quot;</span><span class="s1">);</span>
+    <span class="s3">let </span><span class="s2">source </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">inClass </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">while </span><span class="s1">(!</span><span class="s2">EOL</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;</span><span class="s3">\\</span><span class="s0">&quot;</span><span class="s1">) {</span>
+        <span class="s2">source </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">EOL</span><span class="s1">)</span>
+          <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing regular expression&quot;</span><span class="s1">);</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">inClass </span><span class="s1">&amp;&amp; </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;]&quot;</span><span class="s1">) {</span>
+        <span class="s2">inClass </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(!</span><span class="s2">inClass </span><span class="s1">&amp;&amp; </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;[&quot;</span><span class="s1">) {</span>
+        <span class="s2">inClass </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(!</span><span class="s2">inClass </span><span class="s1">&amp;&amp; </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;/&quot;</span><span class="s1">) {</span>
+        <span class="s3">break</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s2">source </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">eat1</span><span class="s1">() !== </span><span class="s0">&quot;/&quot;</span><span class="s1">)</span>
+      <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing regular expression&quot;</span><span class="s1">);</span>
+    <span class="s3">let </span><span class="s2">flags </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s3">while </span><span class="s1">(!</span><span class="s2">EOL </span><span class="s1">&amp;&amp; </span><span class="s2">next</span><span class="s1">().</span><span class="s2">match</span><span class="s1">(</span><span class="s6">/[dgimsuy]/</span><span class="s1">))</span>
+      <span class="s2">flags </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">try </span><span class="s1">{</span>
+      <span class="s3">return new </span><span class="s2">RegExp</span><span class="s1">(</span><span class="s2">source</span><span class="s1">, </span><span class="s2">flags</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+      <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Error while parsing selector </span><span class="s3">\`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">selector</span><span class="s1">}</span><span class="s3">\`</span><span class="s0">: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">e</span><span class="s1">.</span><span class="s2">message</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">readAttributeToken</span><span class="s1">() {</span>
+    <span class="s3">let </span><span class="s2">token </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s2">skipSpaces</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">`'` </span><span class="s1">|| </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">`&quot;`</span><span class="s1">)</span>
+      <span class="s2">token </span><span class="s1">= </span><span class="s2">readQuotedString</span><span class="s1">(</span><span class="s2">next</span><span class="s1">()).</span><span class="s2">slice</span><span class="s1">(</span><span class="s5">1</span><span class="s1">, -</span><span class="s5">1</span><span class="s1">);</span>
+    <span class="s3">else</span>
+      <span class="s2">token </span><span class="s1">= </span><span class="s2">readIdentifier</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">token</span><span class="s1">)</span>
+      <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing property path&quot;</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">token</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">readOperator</span><span class="s1">() {</span>
+    <span class="s2">skipSpaces</span><span class="s1">();</span>
+    <span class="s3">let </span><span class="s2">op </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">EOL</span><span class="s1">)</span>
+      <span class="s2">op </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">EOL </span><span class="s1">&amp;&amp; </span><span class="s2">op </span><span class="s1">!== </span><span class="s0">&quot;=&quot;</span><span class="s1">)</span>
+      <span class="s2">op </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(![</span><span class="s0">&quot;=&quot;</span><span class="s1">, </span><span class="s0">&quot;*=&quot;</span><span class="s1">, </span><span class="s0">&quot;^=&quot;</span><span class="s1">, </span><span class="s0">&quot;$=&quot;</span><span class="s1">, </span><span class="s0">&quot;|=&quot;</span><span class="s1">, </span><span class="s0">&quot;~=&quot;</span><span class="s1">].</span><span class="s2">includes</span><span class="s1">(</span><span class="s2">op</span><span class="s1">))</span>
+      <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing operator&quot;</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">op</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">readAttribute</span><span class="s1">() {</span>
+    <span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">jsonPath </span><span class="s1">= [];</span>
+    <span class="s2">jsonPath</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">readAttributeToken</span><span class="s1">());</span>
+    <span class="s2">skipSpaces</span><span class="s1">();</span>
+    <span class="s3">while </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;.&quot;</span><span class="s1">) {</span>
+      <span class="s2">eat1</span><span class="s1">();</span>
+      <span class="s2">jsonPath</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">readAttributeToken</span><span class="s1">());</span>
+      <span class="s2">skipSpaces</span><span class="s1">();</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;]&quot;</span><span class="s1">) {</span>
+      <span class="s2">eat1</span><span class="s1">();</span>
+      <span class="s3">return </span><span class="s1">{ </span><span class="s2">name</span><span class="s1">: </span><span class="s2">jsonPath</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;.&quot;</span><span class="s1">), </span><span class="s2">jsonPath</span><span class="s1">, </span><span class="s2">op</span><span class="s1">: </span><span class="s0">&quot;&lt;truthy&gt;&quot;</span><span class="s1">, </span><span class="s2">value</span><span class="s1">: </span><span class="s3">null</span><span class="s1">, </span><span class="s2">caseSensitive</span><span class="s1">: </span><span class="s3">false </span><span class="s1">};</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">operator </span><span class="s1">= </span><span class="s2">readOperator</span><span class="s1">();</span>
+    <span class="s3">let </span><span class="s2">value </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">caseSensitive </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s2">skipSpaces</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;/&quot;</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">operator </span><span class="s1">!== </span><span class="s0">&quot;=&quot;</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Error while parsing selector </span><span class="s3">\`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">selector</span><span class="s1">}</span><span class="s3">\` </span><span class="s0">- cannot use </span><span class="s2">$</span><span class="s1">{</span><span class="s2">operator</span><span class="s1">} </span><span class="s0">in attribute with regular expression`</span><span class="s1">);</span>
+      <span class="s2">value </span><span class="s1">= </span><span class="s2">readRegularExpression</span><span class="s1">();</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">`'` </span><span class="s1">|| </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">`&quot;`</span><span class="s1">) {</span>
+      <span class="s2">value </span><span class="s1">= </span><span class="s2">readQuotedString</span><span class="s1">(</span><span class="s2">next</span><span class="s1">()).</span><span class="s2">slice</span><span class="s1">(</span><span class="s5">1</span><span class="s1">, -</span><span class="s5">1</span><span class="s1">);</span>
+      <span class="s2">skipSpaces</span><span class="s1">();</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;i&quot; </span><span class="s1">|| </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;I&quot;</span><span class="s1">) {</span>
+        <span class="s2">caseSensitive </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+        <span class="s2">eat1</span><span class="s1">();</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;s&quot; </span><span class="s1">|| </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;S&quot;</span><span class="s1">) {</span>
+        <span class="s2">caseSensitive </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+        <span class="s2">eat1</span><span class="s1">();</span>
+      <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">value </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+      <span class="s3">while </span><span class="s1">(!</span><span class="s2">EOL </span><span class="s1">&amp;&amp; (</span><span class="s2">isCSSNameChar</span><span class="s1">(</span><span class="s2">next</span><span class="s1">()) || </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;+&quot; </span><span class="s1">|| </span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;.&quot;</span><span class="s1">))</span>
+        <span class="s2">value </span><span class="s1">+= </span><span class="s2">eat1</span><span class="s1">();</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">value </span><span class="s1">=== </span><span class="s0">&quot;true&quot;</span><span class="s1">) {</span>
+        <span class="s2">value </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">value </span><span class="s1">=== </span><span class="s0">&quot;false&quot;</span><span class="s1">) {</span>
+        <span class="s2">value </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s3">if </span><span class="s1">(!</span><span class="s2">allowUnquotedStrings</span><span class="s1">) {</span>
+          <span class="s2">value </span><span class="s1">= +</span><span class="s2">value</span><span class="s1">;</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">Number</span><span class="s1">.</span><span class="s2">isNaN</span><span class="s1">(</span><span class="s2">value</span><span class="s1">))</span>
+            <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing attribute value&quot;</span><span class="s1">);</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s2">skipSpaces</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() !== </span><span class="s0">&quot;]&quot;</span><span class="s1">)</span>
+      <span class="s2">syntaxError</span><span class="s1">(</span><span class="s0">&quot;parsing attribute value&quot;</span><span class="s1">);</span>
+    <span class="s2">eat1</span><span class="s1">();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">operator </span><span class="s1">!== </span><span class="s0">&quot;=&quot; </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">value </span><span class="s1">!== </span><span class="s0">&quot;string&quot;</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Error while parsing selector </span><span class="s3">\`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">selector</span><span class="s1">}</span><span class="s3">\` </span><span class="s0">- cannot use </span><span class="s2">$</span><span class="s1">{</span><span class="s2">operator</span><span class="s1">} </span><span class="s0">in attribute with non-string matching value - </span><span class="s2">$</span><span class="s1">{</span><span class="s2">value</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">name</span><span class="s1">: </span><span class="s2">jsonPath</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;.&quot;</span><span class="s1">), </span><span class="s2">jsonPath</span><span class="s1">, </span><span class="s2">op</span><span class="s1">: </span><span class="s2">operator</span><span class="s1">, </span><span class="s2">value</span><span class="s1">, </span><span class="s2">caseSensitive </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= {</span>
+    <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;&quot;</span><span class="s1">,</span>
+    <span class="s2">attributes</span><span class="s1">: []</span>
+  <span class="s1">};</span>
+  <span class="s2">result</span><span class="s1">.</span><span class="s2">name </span><span class="s1">= </span><span class="s2">readIdentifier</span><span class="s1">();</span>
+  <span class="s2">skipSpaces</span><span class="s1">();</span>
+  <span class="s3">while </span><span class="s1">(</span><span class="s2">next</span><span class="s1">() === </span><span class="s0">&quot;[&quot;</span><span class="s1">) {</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">attributes</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">readAttribute</span><span class="s1">());</span>
+    <span class="s2">skipSpaces</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">EOL</span><span class="s1">)</span>
+    <span class="s2">syntaxError</span><span class="s1">(</span><span class="s3">void </span><span class="s5">0</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">result</span><span class="s1">.</span><span class="s2">name </span><span class="s1">&amp;&amp; !</span><span class="s2">result</span><span class="s1">.</span><span class="s2">attributes</span><span class="s1">.</span><span class="s2">length</span><span class="s1">)</span>
+    <span class="s3">throw new </span><span class="s2">import_cssParser</span><span class="s1">.</span><span class="s2">InvalidSelectorError</span><span class="s1">(</span><span class="s0">`Error while parsing selector </span><span class="s3">\`</span><span class="s2">$</span><span class="s1">{</span><span class="s2">selector</span><span class="s1">}</span><span class="s3">\` </span><span class="s0">- selector cannot be empty`</span><span class="s1">);</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">InvalidSelectorError</span><span class="s1">,</span>
+  <span class="s2">customCSSNames</span><span class="s1">,</span>
+  <span class="s2">isInvalidSelectorError</span><span class="s1">,</span>
+  <span class="s2">parseAttributeSelector</span><span class="s1">,</span>
+  <span class="s2">parseSelector</span><span class="s1">,</span>
+  <span class="s2">splitSelectorByFrame</span><span class="s1">,</span>
+  <span class="s2">stringifySelector</span><span class="s1">,</span>
+  <span class="s2">visitAllSelectorParts</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

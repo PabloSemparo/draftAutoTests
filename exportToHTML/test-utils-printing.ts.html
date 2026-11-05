@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>test-utils-printing.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+test-utils-printing.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">// test-utils.ts</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">APIRequestContext </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'@playwright/test'</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">ApiResponse</span><span class="s3">, </span><span class="s1">PrintRequest </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'./types'</span><span class="s3">;</span>
+
+<span class="s2">export class </span><span class="s1">PackagePrintAPI </span><span class="s3">{</span>
+    <span class="s1">constructor</span><span class="s3">(</span><span class="s2">private </span><span class="s1">request</span><span class="s3">: </span><span class="s1">APIRequestContext</span><span class="s3">, </span><span class="s2">private </span><span class="s1">baseUrl</span><span class="s3">: </span><span class="s1">string</span><span class="s3">) {}</span>
+
+    <span class="s1">async sendPrintRequest</span><span class="s3">(</span>
+        <span class="s1">packageId</span><span class="s3">: </span><span class="s1">string</span><span class="s3">,</span>
+        <span class="s1">requestBody</span><span class="s3">: </span><span class="s1">PrintRequest</span><span class="s3">,</span>
+        <span class="s1">expectedStatus</span><span class="s3">: </span><span class="s1">number </span><span class="s3">= </span><span class="s5">200</span>
+    <span class="s3">): </span><span class="s1">Promise</span><span class="s3">&lt;{ </span><span class="s1">response</span><span class="s3">: </span><span class="s1">any</span><span class="s3">; </span><span class="s1">body</span><span class="s3">: </span><span class="s1">ApiResponse </span><span class="s3">| </span><span class="s1">string </span><span class="s3">}&gt; {</span>
+
+        <span class="s2">const </span><span class="s1">response </span><span class="s3">= </span><span class="s2">await this</span><span class="s3">.</span><span class="s1">request</span><span class="s3">.</span><span class="s1">post</span><span class="s3">(</span><span class="s4">`</span><span class="s1">$</span><span class="s3">{</span><span class="s2">this</span><span class="s3">.</span><span class="s1">baseUrl</span><span class="s3">}</span><span class="s4">/v1/packages/</span><span class="s1">$</span><span class="s3">{</span><span class="s1">packageId</span><span class="s3">}</span><span class="s4">/print`</span><span class="s3">, {</span>
+            <span class="s1">headers</span><span class="s3">: {</span>
+                <span class="s4">'Accept'</span><span class="s3">: </span><span class="s4">'application/json'</span><span class="s3">,</span>
+                <span class="s4">'Content-Type'</span><span class="s3">: </span><span class="s4">'application/json'</span>
+            <span class="s3">},</span>
+            <span class="s1">data</span><span class="s3">: </span><span class="s1">requestBody</span>
+        <span class="s3">});</span>
+
+        <span class="s2">let </span><span class="s1">responseBody</span><span class="s3">: </span><span class="s1">ApiResponse </span><span class="s3">| </span><span class="s1">string</span><span class="s3">;</span>
+
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">response</span><span class="s3">.</span><span class="s1">headers</span><span class="s3">()[</span><span class="s4">'content-type'</span><span class="s3">]?.</span><span class="s1">includes</span><span class="s3">(</span><span class="s4">'application/json'</span><span class="s3">)) {</span>
+            <span class="s1">responseBody </span><span class="s3">= </span><span class="s2">await </span><span class="s1">response</span><span class="s3">.</span><span class="s1">json</span><span class="s3">();</span>
+        <span class="s3">} </span><span class="s2">else </span><span class="s3">{</span>
+            <span class="s1">responseBody </span><span class="s3">= </span><span class="s2">await </span><span class="s1">response</span><span class="s3">.</span><span class="s1">text</span><span class="s3">();</span>
+        <span class="s3">}</span>
+
+        <span class="s2">return </span><span class="s3">{ </span><span class="s1">response</span><span class="s3">, </span><span class="s1">body</span><span class="s3">: </span><span class="s1">responseBody </span><span class="s3">};</span>
+    <span class="s3">}</span>
+
+    <span class="s1">validateErrorResponse</span><span class="s3">(</span><span class="s1">body</span><span class="s3">: </span><span class="s1">ApiResponse</span><span class="s3">, </span><span class="s1">expectedErrorCount</span><span class="s3">: </span><span class="s1">number </span><span class="s3">= </span><span class="s5">1</span><span class="s3">) {</span>
+        <span class="s1">expect</span><span class="s3">(</span><span class="s1">body</span><span class="s3">.</span><span class="s1">status</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+        <span class="s1">expect</span><span class="s3">(</span><span class="s1">body</span><span class="s3">.</span><span class="s1">status</span><span class="s3">.</span><span class="s1">code</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+        <span class="s1">expect</span><span class="s3">(</span><span class="s1">body</span><span class="s3">.</span><span class="s1">status</span><span class="s3">.</span><span class="s1">description</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+
+        <span class="s2">if </span><span class="s3">(</span><span class="s1">expectedErrorCount </span><span class="s3">&gt; </span><span class="s5">0</span><span class="s3">) {</span>
+            <span class="s1">expect</span><span class="s3">(</span><span class="s1">body</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">).</span><span class="s1">toHaveLength</span><span class="s3">(</span><span class="s1">expectedErrorCount</span><span class="s3">);</span>
+            <span class="s1">body</span><span class="s3">.</span><span class="s1">errors</span><span class="s3">!.</span><span class="s1">forEach</span><span class="s3">(</span><span class="s1">error </span><span class="s3">=&gt; {</span>
+                <span class="s1">expect</span><span class="s3">(</span><span class="s1">error</span><span class="s3">.</span><span class="s1">key</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+                <span class="s1">expect</span><span class="s3">(</span><span class="s1">error</span><span class="s3">.</span><span class="s1">code</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+                <span class="s1">expect</span><span class="s3">(</span><span class="s1">error</span><span class="s3">.</span><span class="s1">description</span><span class="s3">).</span><span class="s1">toBeDefined</span><span class="s3">();</span>
+            <span class="s3">});</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+<span class="s3">}</span></pre>
+</body>
+</html>

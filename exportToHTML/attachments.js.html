@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>attachments.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+attachments.js</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">randomUuid </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../utils.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">EXTENSIONS_BY_TYPE </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./extensions.js&quot;</span><span class="s2">;</span>
+<span class="s0">export var </span><span class="s1">typeToExtension </span><span class="s2">= </span><span class="s1">options </span><span class="s2">=&gt; {</span>
+  <span class="s0">if </span><span class="s2">(</span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">.</span><span class="s1">startsWith</span><span class="s2">(</span><span class="s3">&quot;.&quot;</span><span class="s2">) ? </span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension </span><span class="s2">: </span><span class="s3">&quot;.&quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">);</span>
+  <span class="s2">}</span>
+  <span class="s0">return </span><span class="s1">EXTENSIONS_BY_TYPE</span><span class="s2">[</span><span class="s1">options</span><span class="s2">.</span><span class="s1">contentType</span><span class="s2">] || </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">buildAttachmentFileName </span><span class="s2">= </span><span class="s1">options </span><span class="s2">=&gt; {</span>
+  <span class="s0">var </span><span class="s1">attachmentUuid </span><span class="s2">= </span><span class="s1">randomUuid</span><span class="s2">();</span>
+  <span class="s0">var </span><span class="s1">attachmentExtension </span><span class="s2">= </span><span class="s1">typeToExtension</span><span class="s2">({</span>
+    <span class="s1">fileExtension</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">fileExtension</span><span class="s2">,</span>
+    <span class="s1">contentType</span><span class="s2">: </span><span class="s1">options</span><span class="s2">.</span><span class="s1">contentType</span>
+  <span class="s2">});</span>
+  <span class="s0">return </span><span class="s3">&quot;&quot;</span><span class="s2">.</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">attachmentUuid</span><span class="s2">, </span><span class="s3">&quot;-attachment&quot;</span><span class="s2">).</span><span class="s1">concat</span><span class="s2">(</span><span class="s1">attachmentExtension</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s4">//# sourceMappingURL=attachments.js.map</span></pre>
+</body>
+</html>

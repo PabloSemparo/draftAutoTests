@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>global-setup.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+global-setup.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">// tests/global-setup.ts</span>
+<span class="s2">import </span><span class="s3">{ </span><span class="s1">FullConfig </span><span class="s3">} </span><span class="s1">from </span><span class="s4">'@playwright/test'</span><span class="s3">;</span>
+
+<span class="s1">async </span><span class="s2">function </span><span class="s1">globalSetup</span><span class="s3">(</span><span class="s1">config</span><span class="s3">: </span><span class="s1">FullConfig</span><span class="s3">) {</span>
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'🌐 Глобальная настройка тестовой среды'</span><span class="s3">);</span>
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">`📍 Base URL: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">BASE_URL </span><span class="s3">|| </span><span class="s4">'https://eq-debt-collection-stage.bdengi.ru'</span><span class="s3">}</span><span class="s4">`</span><span class="s3">);</span>
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">`🧪 Количество тестовых проектов: </span><span class="s1">$</span><span class="s3">{</span><span class="s1">config</span><span class="s3">.</span><span class="s1">projects</span><span class="s3">.</span><span class="s1">length</span><span class="s3">}</span><span class="s4">`</span><span class="s3">);</span>
+
+  <span class="s0">// Инициализация глобальных переменных или подготовка данных</span>
+  <span class="s1">process</span><span class="s3">.</span><span class="s1">env</span><span class="s3">.</span><span class="s1">TEST_START_TIME </span><span class="s3">= </span><span class="s2">new </span><span class="s1">Date</span><span class="s3">().</span><span class="s1">toISOString</span><span class="s3">();</span>
+
+  <span class="s1">console</span><span class="s3">.</span><span class="s1">log</span><span class="s3">(</span><span class="s4">'🚀 Тестовая среда готова к запуску'</span><span class="s3">);</span>
+<span class="s3">}</span>
+
+<span class="s2">export default </span><span class="s1">globalSetup</span><span class="s3">;</span></pre>
+</body>
+</html>

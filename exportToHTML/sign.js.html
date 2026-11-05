@@ -1,0 +1,142 @@
+<html>
+<head>
+<title>sign.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #67a37c; font-style: italic;}
+.s6 { color: #7a7e85;}
+.s7 { color: #42c3d4;}
+.s8 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+sign.js</font>
+</center></td></tr></table>
+<pre><span class="s0">'use strict'</span><span class="s1">;</span>
+
+<span class="s3">const </span><span class="s2">punycode </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'../punycode'</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">mimeFuncs </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'../mime-funcs'</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">crypto </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">'crypto'</span><span class="s1">);</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* Returns DKIM signature header line</span>
+ <span class="s4">*</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">{Object} headers Parsed headers object from MessageParser</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">{String} bodyHash Base64 encoded hash of the message</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">{Object} options DKIM options</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">{String} options.domainName Domain name to be signed for</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">{String} options.keySelector DKIM key selector to use</span>
+ <span class="s4">* </span><span class="s5">@param </span><span class="s4">{String} options.privateKey DKIM private key to use</span>
+ <span class="s4">* </span><span class="s5">@return </span><span class="s4">{String} Complete header line</span>
+ <span class="s4">*/</span>
+
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= (</span><span class="s2">headers</span><span class="s1">, </span><span class="s2">hashAlgo</span><span class="s1">, </span><span class="s2">bodyHash</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) =&gt; {</span>
+    <span class="s2">options </span><span class="s1">= </span><span class="s2">options </span><span class="s1">|| {};</span>
+
+    <span class="s6">// all listed fields from RFC4871 #5.5</span>
+    <span class="s3">let </span><span class="s2">defaultFieldNames </span><span class="s1">=</span>
+        <span class="s0">'From:Sender:Reply-To:Subject:Date:Message-ID:To:' </span><span class="s1">+</span>
+        <span class="s0">'Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:' </span><span class="s1">+</span>
+        <span class="s0">'Content-Description:Resent-Date:Resent-From:Resent-Sender:' </span><span class="s1">+</span>
+        <span class="s0">'Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:' </span><span class="s1">+</span>
+        <span class="s0">'List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:' </span><span class="s1">+</span>
+        <span class="s0">'List-Owner:List-Archive'</span><span class="s1">;</span>
+
+    <span class="s3">let </span><span class="s2">fieldNames </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">headerFieldNames </span><span class="s1">|| </span><span class="s2">defaultFieldNames</span><span class="s1">;</span>
+
+    <span class="s3">let </span><span class="s2">canonicalizedHeaderData </span><span class="s1">= </span><span class="s2">relaxedHeaders</span><span class="s1">(</span><span class="s2">headers</span><span class="s1">, </span><span class="s2">fieldNames</span><span class="s1">, </span><span class="s2">options</span><span class="s1">.</span><span class="s2">skipFields</span><span class="s1">);</span>
+    <span class="s3">let </span><span class="s2">dkimHeader </span><span class="s1">= </span><span class="s2">generateDKIMHeader</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">domainName</span><span class="s1">, </span><span class="s2">options</span><span class="s1">.</span><span class="s2">keySelector</span><span class="s1">, </span><span class="s2">canonicalizedHeaderData</span><span class="s1">.</span><span class="s2">fieldNames</span><span class="s1">, </span><span class="s2">hashAlgo</span><span class="s1">, </span><span class="s2">bodyHash</span><span class="s1">);</span>
+
+    <span class="s3">let </span><span class="s2">signer</span><span class="s1">, </span><span class="s2">signature</span><span class="s1">;</span>
+
+    <span class="s2">canonicalizedHeaderData</span><span class="s1">.</span><span class="s2">headers </span><span class="s1">+= </span><span class="s0">'dkim-signature:' </span><span class="s1">+ </span><span class="s2">relaxedHeaderLine</span><span class="s1">(</span><span class="s2">dkimHeader</span><span class="s1">);</span>
+
+    <span class="s2">signer </span><span class="s1">= </span><span class="s2">crypto</span><span class="s1">.</span><span class="s2">createSign</span><span class="s1">((</span><span class="s0">'rsa-' </span><span class="s1">+ </span><span class="s2">hashAlgo</span><span class="s1">).</span><span class="s2">toUpperCase</span><span class="s1">());</span>
+    <span class="s2">signer</span><span class="s1">.</span><span class="s2">update</span><span class="s1">(</span><span class="s2">canonicalizedHeaderData</span><span class="s1">.</span><span class="s2">headers</span><span class="s1">);</span>
+    <span class="s3">try </span><span class="s1">{</span>
+        <span class="s2">signature </span><span class="s1">= </span><span class="s2">signer</span><span class="s1">.</span><span class="s2">sign</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">privateKey</span><span class="s1">, </span><span class="s0">'base64'</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">_E</span><span class="s1">) {</span>
+        <span class="s3">return false</span><span class="s1">;</span>
+    <span class="s1">}</span>
+
+    <span class="s3">return </span><span class="s2">dkimHeader </span><span class="s1">+ </span><span class="s2">signature</span><span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s7">/(^.{73}|.{75}(?!\r?\n|\r))/g</span><span class="s1">, </span><span class="s0">'$&amp;</span><span class="s3">\r\n </span><span class="s0">'</span><span class="s1">).</span><span class="s2">trim</span><span class="s1">();</span>
+<span class="s1">};</span>
+
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports</span><span class="s1">.</span><span class="s2">relaxedHeaders </span><span class="s1">= </span><span class="s2">relaxedHeaders</span><span class="s1">;</span>
+
+<span class="s3">function </span><span class="s2">generateDKIMHeader</span><span class="s1">(</span><span class="s2">domainName</span><span class="s1">, </span><span class="s2">keySelector</span><span class="s1">, </span><span class="s2">fieldNames</span><span class="s1">, </span><span class="s2">hashAlgo</span><span class="s1">, </span><span class="s2">bodyHash</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">dkim </span><span class="s1">= [</span>
+        <span class="s0">'v=1'</span><span class="s1">,</span>
+        <span class="s0">'a=rsa-' </span><span class="s1">+ </span><span class="s2">hashAlgo</span><span class="s1">,</span>
+        <span class="s0">'c=relaxed/relaxed'</span><span class="s1">,</span>
+        <span class="s0">'d=' </span><span class="s1">+ </span><span class="s2">punycode</span><span class="s1">.</span><span class="s2">toASCII</span><span class="s1">(</span><span class="s2">domainName</span><span class="s1">),</span>
+        <span class="s0">'q=dns/txt'</span><span class="s1">,</span>
+        <span class="s0">'s=' </span><span class="s1">+ </span><span class="s2">keySelector</span><span class="s1">,</span>
+        <span class="s0">'bh=' </span><span class="s1">+ </span><span class="s2">bodyHash</span><span class="s1">,</span>
+        <span class="s0">'h=' </span><span class="s1">+ </span><span class="s2">fieldNames</span>
+    <span class="s1">].</span><span class="s2">join</span><span class="s1">(</span><span class="s0">'; '</span><span class="s1">);</span>
+
+    <span class="s3">return </span><span class="s2">mimeFuncs</span><span class="s1">.</span><span class="s2">foldLines</span><span class="s1">(</span><span class="s0">'DKIM-Signature: ' </span><span class="s1">+ </span><span class="s2">dkim</span><span class="s1">, </span><span class="s8">76</span><span class="s1">) + </span><span class="s0">';</span><span class="s3">\r\n </span><span class="s0">b='</span><span class="s1">;</span>
+<span class="s1">}</span>
+
+<span class="s3">function </span><span class="s2">relaxedHeaders</span><span class="s1">(</span><span class="s2">headers</span><span class="s1">, </span><span class="s2">fieldNames</span><span class="s1">, </span><span class="s2">skipFields</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">includedFields </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">let </span><span class="s2">skip </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">let </span><span class="s2">headerFields </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+
+    <span class="s1">(</span><span class="s2">skipFields </span><span class="s1">|| </span><span class="s0">''</span><span class="s1">)</span>
+        <span class="s1">.</span><span class="s2">toLowerCase</span><span class="s1">()</span>
+        <span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">':'</span><span class="s1">)</span>
+        <span class="s1">.</span><span class="s2">forEach</span><span class="s1">(</span><span class="s2">field </span><span class="s1">=&gt; {</span>
+            <span class="s2">skip</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">field</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">());</span>
+        <span class="s1">});</span>
+
+    <span class="s1">(</span><span class="s2">fieldNames </span><span class="s1">|| </span><span class="s0">''</span><span class="s1">)</span>
+        <span class="s1">.</span><span class="s2">toLowerCase</span><span class="s1">()</span>
+        <span class="s1">.</span><span class="s2">split</span><span class="s1">(</span><span class="s0">':'</span><span class="s1">)</span>
+        <span class="s1">.</span><span class="s2">filter</span><span class="s1">(</span><span class="s2">field </span><span class="s1">=&gt; !</span><span class="s2">skip</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">field</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">()))</span>
+        <span class="s1">.</span><span class="s2">forEach</span><span class="s1">(</span><span class="s2">field </span><span class="s1">=&gt; {</span>
+            <span class="s2">includedFields</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">field</span><span class="s1">.</span><span class="s2">trim</span><span class="s1">());</span>
+        <span class="s1">});</span>
+
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s8">1</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&gt;= </span><span class="s8">0</span><span class="s1">; </span><span class="s2">i</span><span class="s1">--) {</span>
+        <span class="s3">let </span><span class="s2">line </span><span class="s1">= </span><span class="s2">headers</span><span class="s1">[</span><span class="s2">i</span><span class="s1">];</span>
+        <span class="s6">// only include the first value from bottom to top</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">includedFields</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">line</span><span class="s1">.</span><span class="s2">key</span><span class="s1">) &amp;&amp; !</span><span class="s2">headerFields</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">line</span><span class="s1">.</span><span class="s2">key</span><span class="s1">)) {</span>
+            <span class="s2">headerFields</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">line</span><span class="s1">.</span><span class="s2">key</span><span class="s1">, </span><span class="s2">relaxedHeaderLine</span><span class="s1">(</span><span class="s2">line</span><span class="s1">.</span><span class="s2">line</span><span class="s1">));</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s3">let </span><span class="s2">headersList </span><span class="s1">= [];</span>
+    <span class="s3">let </span><span class="s2">fields </span><span class="s1">= [];</span>
+    <span class="s2">includedFields</span><span class="s1">.</span><span class="s2">forEach</span><span class="s1">(</span><span class="s2">field </span><span class="s1">=&gt; {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">headerFields</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">field</span><span class="s1">)) {</span>
+            <span class="s2">fields</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">field</span><span class="s1">);</span>
+            <span class="s2">headersList</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">field </span><span class="s1">+ </span><span class="s0">':' </span><span class="s1">+ </span><span class="s2">headerFields</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">field</span><span class="s1">));</span>
+        <span class="s1">}</span>
+    <span class="s1">});</span>
+
+    <span class="s3">return </span><span class="s1">{</span>
+        <span class="s2">headers</span><span class="s1">: </span><span class="s2">headersList</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">'</span><span class="s3">\r\n</span><span class="s0">'</span><span class="s1">) + </span><span class="s0">'</span><span class="s3">\r\n</span><span class="s0">'</span><span class="s1">,</span>
+        <span class="s2">fieldNames</span><span class="s1">: </span><span class="s2">fields</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">':'</span><span class="s1">)</span>
+    <span class="s1">};</span>
+<span class="s1">}</span>
+
+<span class="s3">function </span><span class="s2">relaxedHeaderLine</span><span class="s1">(</span><span class="s2">line</span><span class="s1">) {</span>
+    <span class="s3">return </span><span class="s2">line</span>
+        <span class="s1">.</span><span class="s2">substr</span><span class="s1">(</span><span class="s2">line</span><span class="s1">.</span><span class="s2">indexOf</span><span class="s1">(</span><span class="s0">':'</span><span class="s1">) + </span><span class="s8">1</span><span class="s1">)</span>
+        <span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s7">/\r?\n/g</span><span class="s1">, </span><span class="s0">''</span><span class="s1">)</span>
+        <span class="s1">.</span><span class="s2">replace</span><span class="s1">(</span><span class="s7">/\s+/g</span><span class="s1">, </span><span class="s0">' '</span><span class="s1">)</span>
+        <span class="s1">.</span><span class="s2">trim</span><span class="s1">();</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

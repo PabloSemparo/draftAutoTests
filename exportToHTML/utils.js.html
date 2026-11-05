@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>utils.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #42c3d4;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+utils.js</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Status </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;allure-js-commons&quot;</span><span class="s2">;</span>
+<span class="s0">export var </span><span class="s1">AFTER_HOOKS_ROOT_STEP_TITLE </span><span class="s2">= </span><span class="s3">&quot;After Hooks&quot;</span><span class="s2">;</span>
+<span class="s0">export var </span><span class="s1">BEFORE_HOOKS_ROOT_STEP_TITLE </span><span class="s2">= </span><span class="s3">&quot;Before Hooks&quot;</span><span class="s2">;</span>
+<span class="s0">export var </span><span class="s1">statusToAllureStats </span><span class="s2">= </span><span class="s0">function </span><span class="s1">statusToAllureStats</span><span class="s2">(</span><span class="s1">status</span><span class="s2">, </span><span class="s1">expectedStatus</span><span class="s2">) {</span>
+  <span class="s0">if </span><span class="s2">(</span><span class="s1">status </span><span class="s2">=== </span><span class="s3">&quot;skipped&quot;</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Status</span><span class="s2">.</span><span class="s1">SKIPPED</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">if </span><span class="s2">(</span><span class="s1">status </span><span class="s2">=== </span><span class="s3">&quot;timedOut&quot;</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Status</span><span class="s2">.</span><span class="s1">BROKEN</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">if </span><span class="s2">(</span><span class="s1">status </span><span class="s2">=== </span><span class="s1">expectedStatus</span><span class="s2">) {</span>
+    <span class="s0">return </span><span class="s1">Status</span><span class="s2">.</span><span class="s1">PASSED</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">return </span><span class="s1">Status</span><span class="s2">.</span><span class="s1">FAILED</span><span class="s2">;</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">isDescendantOfStepWithTitle </span><span class="s2">= </span><span class="s0">function </span><span class="s1">isDescendantOfStepWithTitle</span><span class="s2">(</span><span class="s1">step</span><span class="s2">, </span><span class="s1">title</span><span class="s2">) {</span>
+  <span class="s0">var </span><span class="s1">parent </span><span class="s2">= </span><span class="s1">step</span><span class="s2">.</span><span class="s1">parent</span><span class="s2">;</span>
+  <span class="s0">while </span><span class="s2">(</span><span class="s1">parent</span><span class="s2">) {</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">parent</span><span class="s2">.</span><span class="s1">title </span><span class="s2">=== </span><span class="s1">title</span><span class="s2">) {</span>
+      <span class="s0">return true</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s1">parent </span><span class="s2">= </span><span class="s1">parent</span><span class="s2">.</span><span class="s1">parent</span><span class="s2">;</span>
+  <span class="s2">}</span>
+  <span class="s0">return false</span><span class="s2">;</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">isAfterHookStep </span><span class="s2">= </span><span class="s0">function </span><span class="s1">isAfterHookStep</span><span class="s2">(</span><span class="s1">step</span><span class="s2">) {</span>
+  <span class="s0">return </span><span class="s1">isDescendantOfStepWithTitle</span><span class="s2">(</span><span class="s1">step</span><span class="s2">, </span><span class="s1">AFTER_HOOKS_ROOT_STEP_TITLE</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">isBeforeHookStep </span><span class="s2">= </span><span class="s0">function </span><span class="s1">isBeforeHookStep</span><span class="s2">(</span><span class="s1">step</span><span class="s2">) {</span>
+  <span class="s0">return </span><span class="s1">isDescendantOfStepWithTitle</span><span class="s2">(</span><span class="s1">step</span><span class="s2">, </span><span class="s1">BEFORE_HOOKS_ROOT_STEP_TITLE</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s0">export var </span><span class="s1">diffEndRegexp </span><span class="s2">= </span><span class="s4">/-((expected)|(diff)|(actual))\.png$/</span><span class="s2">;</span>
+<span class="s0">export var </span><span class="s1">normalizeHookTitle </span><span class="s2">= </span><span class="s0">function </span><span class="s1">normalizeHookTitle</span><span class="s2">(</span><span class="s1">title</span><span class="s2">) {</span>
+  <span class="s0">return </span><span class="s1">title</span><span class="s2">.</span><span class="s1">replace</span><span class="s2">(</span><span class="s4">/^[aA]ttach\s&quot;(.+)&quot;$/</span><span class="s2">, </span><span class="s3">&quot;$1&quot;</span><span class="s2">);</span>
+<span class="s2">};</span>
+<span class="s5">//# sourceMappingURL=utils.js.map</span></pre>
+</body>
+</html>

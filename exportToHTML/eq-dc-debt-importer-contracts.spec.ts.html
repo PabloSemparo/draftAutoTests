@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>eq-dc-debt-importer-contracts.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-dc-debt-importer-contracts.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">contractorData from </span><span class="s3">'../Test</span><span class="s0">\'</span><span class="s3">s Data/contractorData.json'</span><span class="s2">;</span>
+<span class="s0">const </span><span class="s1">API_URL </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">API_URL </span><span class="s2">|| </span><span class="s3">'http://eq-dc-debt-importer.test2.mmk.local'</span><span class="s2">;</span>
+<span class="s0">const </span><span class="s1">AUTH_TOKEN </span><span class="s2">= </span><span class="s1">process</span><span class="s2">.</span><span class="s1">env</span><span class="s2">.</span><span class="s1">AUTH_TOKEN </span><span class="s2">|| </span><span class="s3">''</span><span class="s2">;</span>
+
+<span class="s4">// Тесты для работы с договорами</span>
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'Тесты для работы с договорами [Contracts API]'</span><span class="s2">, () =&gt; {</span>
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contracts - должен вернуть список договоров'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contracts?contractImportId=55298707-117c-44a5-8434-162fb9d2e4c5&amp;status=VALID&amp;pageNumber=0&amp;pageSize=25`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">200</span><span class="s2">);</span>
+        <span class="s0">const </span><span class="s1">body </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'items'</span><span class="s2">);</span>
+        <span class="s1">expect</span><span class="s2">(</span><span class="s1">body</span><span class="s2">.</span><span class="s1">items</span><span class="s2">).</span><span class="s1">toBeInstanceOf</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s1">test</span><span class="s2">(</span><span class="s3">'GET /admin/v1/contracts/{id} - должен вернуть детали по договору'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+        <span class="s4">// В реальном тесте здесь нужно было бы создать тестовый договор</span>
+        <span class="s4">// Для примера просто проверяем что эндпоинт существует</span>
+        <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">`</span><span class="s1">$</span><span class="s2">{</span><span class="s1">API_URL</span><span class="s2">}</span><span class="s3">/admin/v1/contracts/55298707-117c-44a5-8434-162fb9d2e4c5`</span><span class="s2">, {</span>
+            <span class="s1">headers</span><span class="s2">: { </span><span class="s1">Authorization</span><span class="s2">: </span><span class="s3">`Bearer </span><span class="s1">$</span><span class="s2">{</span><span class="s1">AUTH_TOKEN</span><span class="s2">}</span><span class="s3">` </span><span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s4">// Ожидаем 404 или 200 в зависимости от наличия тестовых данных</span>
+        <span class="s1">expect</span><span class="s2">([</span><span class="s5">200</span><span class="s2">, </span><span class="s5">404</span><span class="s2">]).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">());</span>
+    <span class="s2">});</span>
+<span class="s2">});</span>
+</pre>
+</body>
+</html>

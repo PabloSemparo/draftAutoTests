@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>verify.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+verify.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">verify_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">verify_exports</span><span class="s1">, {</span>
+  <span class="s3">default</span><span class="s1">: () =&gt; </span><span class="s2">verify_default</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">verify_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_bundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../sdk/bundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_tool </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./tool&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">javascript </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../codegen&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./utils&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">verifyElement </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_tool</span><span class="s1">.</span><span class="s2">defineTabTool</span><span class="s1">)({</span>
+  <span class="s2">capability</span><span class="s1">: </span><span class="s0">&quot;testing&quot;</span><span class="s1">,</span>
+  <span class="s2">schema</span><span class="s1">: {</span>
+    <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;browser_verify_element_visible&quot;</span><span class="s1">,</span>
+    <span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;Verify element visible&quot;</span><span class="s1">,</span>
+    <span class="s2">description</span><span class="s1">: </span><span class="s0">&quot;Verify element is visible on the page&quot;</span><span class="s1">,</span>
+    <span class="s2">inputSchema</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">object</span><span class="s1">({</span>
+      <span class="s2">role</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">'ROLE of the element. Can be found in the snapshot like this: `- {ROLE} &quot;Accessible Name&quot;:`'</span><span class="s1">),</span>
+      <span class="s2">accessibleName</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">'ACCESSIBLE_NAME of the element. Can be found in the snapshot like this: `- role &quot;{ACCESSIBLE_NAME}&quot;`'</span><span class="s1">)</span>
+    <span class="s1">}),</span>
+    <span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;assertion&quot;</span>
+  <span class="s1">},</span>
+  <span class="s2">handle</span><span class="s1">: </span><span class="s2">async </span><span class="s1">(</span><span class="s2">tab</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">response</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">locator </span><span class="s1">= </span><span class="s2">tab</span><span class="s1">.</span><span class="s2">page</span><span class="s1">.</span><span class="s2">getByRole</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">role</span><span class="s1">, { </span><span class="s2">name</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">accessibleName </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">await </span><span class="s2">locator</span><span class="s1">.</span><span class="s2">count</span><span class="s1">() === </span><span class="s5">0</span><span class="s1">) {</span>
+      <span class="s2">response</span><span class="s1">.</span><span class="s2">addError</span><span class="s1">(</span><span class="s0">`Element with role &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">params</span><span class="s1">.</span><span class="s2">role</span><span class="s1">}</span><span class="s0">&quot; and accessible name &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">params</span><span class="s1">.</span><span class="s2">accessibleName</span><span class="s1">}</span><span class="s0">&quot; not found`</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">response</span><span class="s1">.</span><span class="s2">addCode</span><span class="s1">(</span><span class="s0">`await expect(page.getByRole(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">javascript</span><span class="s1">.</span><span class="s2">escapeWithQuotes</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">role</span><span class="s1">)}</span><span class="s0">, { name: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">javascript</span><span class="s1">.</span><span class="s2">escapeWithQuotes</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">accessibleName</span><span class="s1">)} </span><span class="s0">})).toBeVisible();`</span><span class="s1">);</span>
+    <span class="s2">response</span><span class="s1">.</span><span class="s2">addResult</span><span class="s1">(</span><span class="s0">&quot;Done&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">});</span>
+<span class="s3">const </span><span class="s2">verifyText </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_tool</span><span class="s1">.</span><span class="s2">defineTabTool</span><span class="s1">)({</span>
+  <span class="s2">capability</span><span class="s1">: </span><span class="s0">&quot;testing&quot;</span><span class="s1">,</span>
+  <span class="s2">schema</span><span class="s1">: {</span>
+    <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;browser_verify_text_visible&quot;</span><span class="s1">,</span>
+    <span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;Verify text visible&quot;</span><span class="s1">,</span>
+    <span class="s2">description</span><span class="s1">: </span><span class="s0">`Verify text is visible on the page. Prefer </span><span class="s2">$</span><span class="s1">{</span><span class="s2">verifyElement</span><span class="s1">.</span><span class="s2">schema</span><span class="s1">.</span><span class="s2">name</span><span class="s1">} </span><span class="s0">if possible.`</span><span class="s1">,</span>
+    <span class="s2">inputSchema</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">object</span><span class="s1">({</span>
+      <span class="s2">text</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">'TEXT to verify. Can be found in the snapshot like this: `- role &quot;Accessible Name&quot;: {TEXT}` or like this: `- text: {TEXT}`'</span><span class="s1">)</span>
+    <span class="s1">}),</span>
+    <span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;assertion&quot;</span>
+  <span class="s1">},</span>
+  <span class="s2">handle</span><span class="s1">: </span><span class="s2">async </span><span class="s1">(</span><span class="s2">tab</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">response</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">locator </span><span class="s1">= </span><span class="s2">tab</span><span class="s1">.</span><span class="s2">page</span><span class="s1">.</span><span class="s2">getByText</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">text</span><span class="s1">).</span><span class="s2">filter</span><span class="s1">({ </span><span class="s2">visible</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">await </span><span class="s2">locator</span><span class="s1">.</span><span class="s2">count</span><span class="s1">() === </span><span class="s5">0</span><span class="s1">) {</span>
+      <span class="s2">response</span><span class="s1">.</span><span class="s2">addError</span><span class="s1">(</span><span class="s0">&quot;Text not found&quot;</span><span class="s1">);</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">response</span><span class="s1">.</span><span class="s2">addCode</span><span class="s1">(</span><span class="s0">`await expect(page.getByText(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">javascript</span><span class="s1">.</span><span class="s2">escapeWithQuotes</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">text</span><span class="s1">)}</span><span class="s0">)).toBeVisible();`</span><span class="s1">);</span>
+    <span class="s2">response</span><span class="s1">.</span><span class="s2">addResult</span><span class="s1">(</span><span class="s0">&quot;Done&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">});</span>
+<span class="s3">const </span><span class="s2">verifyList </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_tool</span><span class="s1">.</span><span class="s2">defineTabTool</span><span class="s1">)({</span>
+  <span class="s2">capability</span><span class="s1">: </span><span class="s0">&quot;testing&quot;</span><span class="s1">,</span>
+  <span class="s2">schema</span><span class="s1">: {</span>
+    <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;browser_verify_list_visible&quot;</span><span class="s1">,</span>
+    <span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;Verify list visible&quot;</span><span class="s1">,</span>
+    <span class="s2">description</span><span class="s1">: </span><span class="s0">&quot;Verify list is visible on the page&quot;</span><span class="s1">,</span>
+    <span class="s2">inputSchema</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">object</span><span class="s1">({</span>
+      <span class="s2">element</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">&quot;Human-readable list description&quot;</span><span class="s1">),</span>
+      <span class="s2">ref</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">&quot;Exact target element reference that points to the list&quot;</span><span class="s1">),</span>
+      <span class="s2">items</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">array</span><span class="s1">(</span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">()).</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">&quot;Items to verify&quot;</span><span class="s1">)</span>
+    <span class="s1">}),</span>
+    <span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;assertion&quot;</span>
+  <span class="s1">},</span>
+  <span class="s2">handle</span><span class="s1">: </span><span class="s2">async </span><span class="s1">(</span><span class="s2">tab</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">response</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">locator </span><span class="s1">= </span><span class="s3">await </span><span class="s2">tab</span><span class="s1">.</span><span class="s2">refLocator</span><span class="s1">({ </span><span class="s2">ref</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">ref</span><span class="s1">, </span><span class="s2">element</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">element </span><span class="s1">});</span>
+    <span class="s3">const </span><span class="s2">itemTexts </span><span class="s1">= [];</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">item of params</span><span class="s1">.</span><span class="s2">items</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">itemLocator </span><span class="s1">= </span><span class="s2">locator</span><span class="s1">.</span><span class="s2">getByText</span><span class="s1">(</span><span class="s2">item</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s3">await </span><span class="s2">itemLocator</span><span class="s1">.</span><span class="s2">count</span><span class="s1">() === </span><span class="s5">0</span><span class="s1">) {</span>
+        <span class="s2">response</span><span class="s1">.</span><span class="s2">addError</span><span class="s1">(</span><span class="s0">`Item &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">item</span><span class="s1">}</span><span class="s0">&quot; not found`</span><span class="s1">);</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s2">itemTexts</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">await </span><span class="s2">itemLocator</span><span class="s1">.</span><span class="s2">textContent</span><span class="s1">());</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">ariaSnapshot </span><span class="s1">= </span><span class="s0">`</span><span class="s3">\`</span>
+<span class="s0">- list: 
+</span><span class="s2">$</span><span class="s1">{</span><span class="s2">itemTexts</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">t</span><span class="s1">) =&gt; </span><span class="s0">`  - listitem: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">javascript</span><span class="s1">.</span><span class="s2">escapeWithQuotes</span><span class="s1">(</span><span class="s2">t</span><span class="s1">, </span><span class="s0">'&quot;'</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">)}</span>
+<span class="s3">\`</span><span class="s0">`</span><span class="s1">;</span>
+    <span class="s2">response</span><span class="s1">.</span><span class="s2">addCode</span><span class="s1">(</span><span class="s0">`await expect(page.locator('body')).toMatchAriaSnapshot(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">ariaSnapshot</span><span class="s1">}</span><span class="s0">);`</span><span class="s1">);</span>
+    <span class="s2">response</span><span class="s1">.</span><span class="s2">addResult</span><span class="s1">(</span><span class="s0">&quot;Done&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">});</span>
+<span class="s3">const </span><span class="s2">verifyValue </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_tool</span><span class="s1">.</span><span class="s2">defineTabTool</span><span class="s1">)({</span>
+  <span class="s2">capability</span><span class="s1">: </span><span class="s0">&quot;testing&quot;</span><span class="s1">,</span>
+  <span class="s2">schema</span><span class="s1">: {</span>
+    <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;browser_verify_value&quot;</span><span class="s1">,</span>
+    <span class="s2">title</span><span class="s1">: </span><span class="s0">&quot;Verify value&quot;</span><span class="s1">,</span>
+    <span class="s2">description</span><span class="s1">: </span><span class="s0">&quot;Verify element value&quot;</span><span class="s1">,</span>
+    <span class="s2">inputSchema</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">object</span><span class="s1">({</span>
+      <span class="s2">type</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">enum</span><span class="s1">([</span><span class="s0">&quot;textbox&quot;</span><span class="s1">, </span><span class="s0">&quot;checkbox&quot;</span><span class="s1">, </span><span class="s0">&quot;radio&quot;</span><span class="s1">, </span><span class="s0">&quot;combobox&quot;</span><span class="s1">, </span><span class="s0">&quot;slider&quot;</span><span class="s1">]).</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">&quot;Type of the element&quot;</span><span class="s1">),</span>
+      <span class="s2">element</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">&quot;Human-readable element description&quot;</span><span class="s1">),</span>
+      <span class="s2">ref</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">&quot;Exact target element reference that points to the element&quot;</span><span class="s1">),</span>
+      <span class="s2">value</span><span class="s1">: </span><span class="s2">import_bundle</span><span class="s1">.</span><span class="s2">z</span><span class="s1">.</span><span class="s2">string</span><span class="s1">().</span><span class="s2">describe</span><span class="s1">(</span><span class="s0">'Value to verify. For checkbox, use &quot;true&quot; or &quot;false&quot;.'</span><span class="s1">)</span>
+    <span class="s1">}),</span>
+    <span class="s2">type</span><span class="s1">: </span><span class="s0">&quot;assertion&quot;</span>
+  <span class="s1">},</span>
+  <span class="s2">handle</span><span class="s1">: </span><span class="s2">async </span><span class="s1">(</span><span class="s2">tab</span><span class="s1">, </span><span class="s2">params</span><span class="s1">, </span><span class="s2">response</span><span class="s1">) =&gt; {</span>
+    <span class="s3">const </span><span class="s2">locator </span><span class="s1">= </span><span class="s3">await </span><span class="s2">tab</span><span class="s1">.</span><span class="s2">refLocator</span><span class="s1">({ </span><span class="s2">ref</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">ref</span><span class="s1">, </span><span class="s2">element</span><span class="s1">: </span><span class="s2">params</span><span class="s1">.</span><span class="s2">element </span><span class="s1">});</span>
+    <span class="s3">const </span><span class="s2">locatorSource </span><span class="s1">= </span><span class="s0">`page.</span><span class="s2">$</span><span class="s1">{</span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">generateLocator</span><span class="s1">)(</span><span class="s2">locator</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;textbox&quot; </span><span class="s1">|| </span><span class="s2">params</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;slider&quot; </span><span class="s1">|| </span><span class="s2">params</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;combobox&quot;</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">value </span><span class="s1">= </span><span class="s3">await </span><span class="s2">locator</span><span class="s1">.</span><span class="s2">inputValue</span><span class="s1">();</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">value </span><span class="s1">!== </span><span class="s2">params</span><span class="s1">.</span><span class="s2">value</span><span class="s1">) {</span>
+        <span class="s2">response</span><span class="s1">.</span><span class="s2">addError</span><span class="s1">(</span><span class="s0">`Expected value &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">params</span><span class="s1">.</span><span class="s2">value</span><span class="s1">}</span><span class="s0">&quot;, but got &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">value</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">);</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s2">response</span><span class="s1">.</span><span class="s2">addCode</span><span class="s1">(</span><span class="s0">`await expect(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">locatorSource</span><span class="s1">}</span><span class="s0">).toHaveValue(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">javascript</span><span class="s1">.</span><span class="s2">quote</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">value</span><span class="s1">)}</span><span class="s0">);`</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;checkbox&quot; </span><span class="s1">|| </span><span class="s2">params</span><span class="s1">.</span><span class="s2">type </span><span class="s1">=== </span><span class="s0">&quot;radio&quot;</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">value </span><span class="s1">= </span><span class="s3">await </span><span class="s2">locator</span><span class="s1">.</span><span class="s2">isChecked</span><span class="s1">();</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">value </span><span class="s1">!== (</span><span class="s2">params</span><span class="s1">.</span><span class="s2">value </span><span class="s1">=== </span><span class="s0">&quot;true&quot;</span><span class="s1">)) {</span>
+        <span class="s2">response</span><span class="s1">.</span><span class="s2">addError</span><span class="s1">(</span><span class="s0">`Expected value &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">params</span><span class="s1">.</span><span class="s2">value</span><span class="s1">}</span><span class="s0">&quot;, but got &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">value</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">);</span>
+        <span class="s3">return</span><span class="s1">;</span>
+      <span class="s1">}</span>
+      <span class="s3">const </span><span class="s2">matcher </span><span class="s1">= </span><span class="s2">value </span><span class="s1">? </span><span class="s0">&quot;toBeChecked&quot; </span><span class="s1">: </span><span class="s0">&quot;not.toBeChecked&quot;</span><span class="s1">;</span>
+      <span class="s2">response</span><span class="s1">.</span><span class="s2">addCode</span><span class="s1">(</span><span class="s0">`await expect(</span><span class="s2">$</span><span class="s1">{</span><span class="s2">locatorSource</span><span class="s1">}</span><span class="s0">).</span><span class="s2">$</span><span class="s1">{</span><span class="s2">matcher</span><span class="s1">}</span><span class="s0">();`</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s2">response</span><span class="s1">.</span><span class="s2">addResult</span><span class="s1">(</span><span class="s0">&quot;Done&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">});</span>
+<span class="s3">var </span><span class="s2">verify_default </span><span class="s1">= [</span>
+  <span class="s2">verifyElement</span><span class="s1">,</span>
+  <span class="s2">verifyText</span><span class="s1">,</span>
+  <span class="s2">verifyList</span><span class="s1">,</span>
+  <span class="s2">verifyValue</span>
+<span class="s1">];</span>
+</pre>
+</body>
+</html>

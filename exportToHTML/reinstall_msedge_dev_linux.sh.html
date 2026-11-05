@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>reinstall_msedge_dev_linux.sh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4; font-weight: bold;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+reinstall_msedge_dev_linux.sh</font>
+</center></td></tr></table>
+<pre><span class="s0">#!/usr/bin/env bash</span>
+
+<span class="s1">set -e</span>
+<span class="s1">set -x</span>
+
+<span class="s2">if [[ $</span><span class="s3">(</span><span class="s1">arch</span><span class="s3">) </span><span class="s2">== </span><span class="s4">&quot;aarch64&quot; </span><span class="s2">]]</span><span class="s1">; </span><span class="s2">then</span>
+  <span class="s1">echo </span><span class="s4">&quot;ERROR: not supported on Linux Arm64&quot;</span>
+  <span class="s1">exit </span><span class="s5">1</span>
+<span class="s2">fi</span>
+
+<span class="s2">if </span><span class="s3">[ </span><span class="s1">-z </span><span class="s4">&quot;</span><span class="s3">$PLAYWRIGHT_HOST_PLATFORM_OVERRIDE</span><span class="s4">&quot; </span><span class="s3">]</span><span class="s1">; </span><span class="s2">then</span>
+  <span class="s2">if [[ ! </span><span class="s1">-f </span><span class="s4">&quot;/etc/os-release&quot; </span><span class="s2">]]</span><span class="s1">; </span><span class="s2">then</span>
+    <span class="s1">echo </span><span class="s4">&quot;ERROR: cannot install on unknown linux distribution (/etc/os-release is missing)&quot;</span>
+    <span class="s1">exit </span><span class="s5">1</span>
+  <span class="s2">fi</span>
+
+  <span class="s1">ID=</span><span class="s2">$</span><span class="s3">(</span><span class="s1">bash -c </span><span class="s4">'source /etc/os-release &amp;&amp; echo $ID'</span><span class="s3">)</span>
+  <span class="s2">if [[ </span><span class="s4">&quot;</span><span class="s2">$</span><span class="s3">{</span><span class="s1">ID</span><span class="s3">}</span><span class="s4">&quot; </span><span class="s1">!= </span><span class="s4">&quot;ubuntu&quot; </span><span class="s2">&amp;&amp; </span><span class="s4">&quot;</span><span class="s2">$</span><span class="s3">{</span><span class="s1">ID</span><span class="s3">}</span><span class="s4">&quot; </span><span class="s1">!= </span><span class="s4">&quot;debian&quot; </span><span class="s2">]]</span><span class="s1">; </span><span class="s2">then</span>
+    <span class="s1">echo </span><span class="s4">&quot;ERROR: cannot install on </span><span class="s3">$ID </span><span class="s4">distribution - only Ubuntu and Debian are supported&quot;</span>
+    <span class="s1">exit </span><span class="s5">1</span>
+  <span class="s2">fi</span>
+<span class="s2">fi</span>
+
+<span class="s6"># 1. make sure to remove old dev if any.</span>
+<span class="s2">if </span><span class="s1">dpkg --get-selections | grep -q </span><span class="s4">&quot;^microsoft-edge-dev[[:space:]]*install$&quot; </span><span class="s2">&gt;</span><span class="s1">/dev/null; </span><span class="s2">then</span>
+  <span class="s1">apt-get remove -y microsoft-edge-dev</span>
+<span class="s2">fi</span>
+
+<span class="s6"># 2. Install curl to download Microsoft gpg key</span>
+<span class="s2">if ! </span><span class="s1">command -v curl </span><span class="s2">&gt;</span><span class="s1">/dev/null; </span><span class="s2">then</span>
+  <span class="s1">apt-get update</span>
+  <span class="s1">apt-get install -y curl</span>
+<span class="s2">fi</span>
+
+<span class="s6"># GnuPG is not preinstalled in slim images</span>
+<span class="s2">if ! </span><span class="s1">command -v gpg </span><span class="s2">&gt;</span><span class="s1">/dev/null; </span><span class="s2">then</span>
+  <span class="s1">apt-get update</span>
+  <span class="s1">apt-get install -y gpg</span>
+<span class="s2">fi</span>
+
+<span class="s6"># 3. Add the GPG key, the apt repo, update the apt cache, and install the package</span>
+<span class="s1">curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor </span><span class="s2">&gt; </span><span class="s1">/tmp/microsoft.gpg</span>
+<span class="s1">install -o root -g root -m </span><span class="s5">644 </span><span class="s1">/tmp/microsoft.gpg /etc/apt/trusted.gpg.d/</span>
+<span class="s1">sh -c </span><span class="s4">'echo &quot;deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main&quot; &gt; /etc/apt/sources.list.d/microsoft-edge-dev.list'</span>
+<span class="s1">rm /tmp/microsoft.gpg</span>
+<span class="s1">apt-get update </span><span class="s2">&amp;&amp; </span><span class="s1">apt-get install -y microsoft-edge-dev</span>
+
+<span class="s1">microsoft-edge-dev --version</span>
+</pre>
+</body>
+</html>

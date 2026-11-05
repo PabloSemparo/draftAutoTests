@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>recorderSignalProcessor.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+recorderSignalProcessor.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">recorderSignalProcessor_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">recorderSignalProcessor_exports</span><span class="s1">, {</span>
+  <span class="s2">RecorderSignalProcessor</span><span class="s1">: () =&gt; </span><span class="s2">RecorderSignalProcessor</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">recorderSignalProcessor_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_debug </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils/debug&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_time </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../utils/isomorphic/time&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_recorderUtils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./recorderUtils&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">RecorderSignalProcessor </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">actionSink</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastAction </span><span class="s1">= </span><span class="s3">null</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_delegate </span><span class="s1">= </span><span class="s2">actionSink</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">addAction</span><span class="s1">(</span><span class="s2">actionInContext</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastAction </span><span class="s1">= </span><span class="s2">actionInContext</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_delegate</span><span class="s1">.</span><span class="s2">addAction</span><span class="s1">(</span><span class="s2">actionInContext</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">signal</span><span class="s1">(</span><span class="s2">pageAlias</span><span class="s1">, </span><span class="s2">frame</span><span class="s1">, </span><span class="s2">signal</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">timestamp </span><span class="s1">= (</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_time</span><span class="s1">.</span><span class="s2">monotonicTime</span><span class="s1">)();</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">signal</span><span class="s1">.</span><span class="s2">name </span><span class="s1">=== </span><span class="s0">&quot;navigation&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">frame</span><span class="s1">.</span><span class="s2">_page</span><span class="s1">.</span><span class="s2">mainFrame</span><span class="s1">() === </span><span class="s2">frame</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">lastAction </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastAction</span><span class="s1">;</span>
+      <span class="s3">const </span><span class="s2">signalThreshold </span><span class="s1">= (</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_debug</span><span class="s1">.</span><span class="s2">isUnderTest</span><span class="s1">)() ? </span><span class="s4">500 </span><span class="s1">: </span><span class="s4">5e3</span><span class="s1">;</span>
+      <span class="s3">let </span><span class="s2">generateGoto </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">lastAction</span><span class="s1">)</span>
+        <span class="s2">generateGoto </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s3">else if </span><span class="s1">(</span><span class="s2">lastAction</span><span class="s1">.</span><span class="s2">action</span><span class="s1">.</span><span class="s2">name </span><span class="s1">!== </span><span class="s0">&quot;click&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">lastAction</span><span class="s1">.</span><span class="s2">action</span><span class="s1">.</span><span class="s2">name </span><span class="s1">!== </span><span class="s0">&quot;press&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">lastAction</span><span class="s1">.</span><span class="s2">action</span><span class="s1">.</span><span class="s2">name </span><span class="s1">!== </span><span class="s0">&quot;fill&quot;</span><span class="s1">)</span>
+        <span class="s2">generateGoto </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s3">else if </span><span class="s1">(</span><span class="s2">timestamp </span><span class="s1">- </span><span class="s2">lastAction</span><span class="s1">.</span><span class="s2">startTime </span><span class="s1">&gt; </span><span class="s2">signalThreshold</span><span class="s1">)</span>
+        <span class="s2">generateGoto </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">generateGoto</span><span class="s1">) {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">addAction</span><span class="s1">({</span>
+          <span class="s2">frame</span><span class="s1">: {</span>
+            <span class="s2">pageGuid</span><span class="s1">: </span><span class="s2">frame</span><span class="s1">.</span><span class="s2">_page</span><span class="s1">.</span><span class="s2">guid</span><span class="s1">,</span>
+            <span class="s2">pageAlias</span><span class="s1">,</span>
+            <span class="s2">framePath</span><span class="s1">: []</span>
+          <span class="s1">},</span>
+          <span class="s2">action</span><span class="s1">: {</span>
+            <span class="s2">name</span><span class="s1">: </span><span class="s0">&quot;navigate&quot;</span><span class="s1">,</span>
+            <span class="s2">url</span><span class="s1">: </span><span class="s2">frame</span><span class="s1">.</span><span class="s2">url</span><span class="s1">(),</span>
+            <span class="s2">signals</span><span class="s1">: []</span>
+          <span class="s1">},</span>
+          <span class="s2">startTime</span><span class="s1">: </span><span class="s2">timestamp</span><span class="s1">,</span>
+          <span class="s2">endTime</span><span class="s1">: </span><span class="s2">timestamp</span>
+        <span class="s1">});</span>
+      <span class="s1">}</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s1">(</span><span class="s4">0</span><span class="s1">, </span><span class="s2">import_recorderUtils</span><span class="s1">.</span><span class="s2">generateFrameSelector</span><span class="s1">)(</span><span class="s2">frame</span><span class="s1">).</span><span class="s2">then</span><span class="s1">((</span><span class="s2">framePath</span><span class="s1">) =&gt; {</span>
+      <span class="s3">const </span><span class="s2">signalInContext </span><span class="s1">= {</span>
+        <span class="s2">frame</span><span class="s1">: {</span>
+          <span class="s2">pageGuid</span><span class="s1">: </span><span class="s2">frame</span><span class="s1">.</span><span class="s2">_page</span><span class="s1">.</span><span class="s2">guid</span><span class="s1">,</span>
+          <span class="s2">pageAlias</span><span class="s1">,</span>
+          <span class="s2">framePath</span>
+        <span class="s1">},</span>
+        <span class="s2">signal</span><span class="s1">,</span>
+        <span class="s2">timestamp</span>
+      <span class="s1">};</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_delegate</span><span class="s1">.</span><span class="s2">addSignal</span><span class="s1">(</span><span class="s2">signalInContext</span><span class="s1">);</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s5">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s4">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">RecorderSignalProcessor</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

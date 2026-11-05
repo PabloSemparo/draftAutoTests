@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>FileSystemWriter.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+FileSystemWriter.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">/// &lt;reference types=&quot;node&quot; /&gt;</span>
+<span class="s2">import </span><span class="s1">type </span><span class="s3">{ </span><span class="s1">TestResult</span><span class="s3">, </span><span class="s1">TestResultContainer </span><span class="s3">} </span><span class="s1">from </span><span class="s4">&quot;../../../model.js&quot;</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">type </span><span class="s3">{ </span><span class="s1">Category</span><span class="s3">, </span><span class="s1">EnvironmentInfo </span><span class="s3">} </span><span class="s1">from </span><span class="s4">&quot;../../types.js&quot;</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">type </span><span class="s3">{ </span><span class="s1">Writer </span><span class="s3">} </span><span class="s1">from </span><span class="s4">&quot;../types.js&quot;</span><span class="s3">;</span>
+<span class="s2">export </span><span class="s1">declare </span><span class="s2">class </span><span class="s1">FileSystemWriter </span><span class="s2">implements </span><span class="s1">Writer </span><span class="s3">{</span>
+    <span class="s2">private </span><span class="s1">config</span><span class="s3">;</span>
+    <span class="s1">constructor</span><span class="s3">(</span><span class="s1">config</span><span class="s3">: {</span>
+        <span class="s1">resultsDir</span><span class="s3">: </span><span class="s1">string</span><span class="s3">;</span>
+    <span class="s3">});</span>
+    <span class="s1">writeAttachment</span><span class="s3">(</span><span class="s1">distFileName</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">content</span><span class="s3">: </span><span class="s1">Buffer</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeAttachmentFromPath</span><span class="s3">(</span><span class="s1">distFileName</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">from</span><span class="s3">: </span><span class="s1">string</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeEnvironmentInfo</span><span class="s3">(</span><span class="s1">info</span><span class="s3">: </span><span class="s1">EnvironmentInfo</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeCategoriesDefinitions</span><span class="s3">(</span><span class="s1">categories</span><span class="s3">: </span><span class="s1">Category</span><span class="s3">[]): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeGroup</span><span class="s3">(</span><span class="s1">result</span><span class="s3">: </span><span class="s1">TestResultContainer</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s1">writeResult</span><span class="s3">(</span><span class="s1">result</span><span class="s3">: </span><span class="s1">TestResult</span><span class="s3">): </span><span class="s2">void</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">buildPath</span><span class="s3">;</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

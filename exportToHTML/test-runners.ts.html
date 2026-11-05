@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>test-runners.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+test-runners.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">execSync </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'child_process'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">fs from </span><span class="s3">'fs'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">path from </span><span class="s3">'path'</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">TestRunner </span><span class="s2">{</span>
+    <span class="s0">static </span><span class="s1">async runTestsWithReport</span><span class="s2">(): </span><span class="s1">Promise</span><span class="s2">&lt;</span><span class="s1">boolean</span><span class="s2">&gt; {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'🧪 Running API tests...'</span><span class="s2">);</span>
+
+            <span class="s4">// Запускаем тесты</span>
+            <span class="s1">execSync</span><span class="s2">(</span><span class="s3">'npx playwright test --reporter=allure-playwright'</span><span class="s2">, {</span>
+                <span class="s1">stdio</span><span class="s2">: </span><span class="s3">'inherit'</span><span class="s2">,</span>
+                <span class="s1">encoding</span><span class="s2">: </span><span class="s3">'utf-8'</span>
+            <span class="s2">});</span>
+
+            <span class="s4">// Генерируем отчет</span>
+            <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'📊 Generating Allure report...'</span><span class="s2">);</span>
+            <span class="s1">execSync</span><span class="s2">(</span><span class="s3">'npx allure generate allure-results --clean -o allure-report'</span><span class="s2">, {</span>
+                <span class="s1">stdio</span><span class="s2">: </span><span class="s3">'inherit'</span>
+            <span class="s2">});</span>
+
+            <span class="s4">// Проверяем существует ли отчет</span>
+            <span class="s0">const </span><span class="s1">reportPath </span><span class="s2">= </span><span class="s1">path</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s1">process</span><span class="s2">.</span><span class="s1">cwd</span><span class="s2">(), </span><span class="s3">'allure-report'</span><span class="s2">, </span><span class="s3">'index.html'</span><span class="s2">);</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">fs</span><span class="s2">.</span><span class="s1">existsSync</span><span class="s2">(</span><span class="s1">reportPath</span><span class="s2">)) {</span>
+                <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'✅ Allure report generated successfully'</span><span class="s2">);</span>
+                <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`📋 Report location: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">reportPath</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+                <span class="s4">// Автоматически открываем в браузере</span>
+                <span class="s0">this</span><span class="s2">.</span><span class="s1">openReportInBrowser</span><span class="s2">(</span><span class="s1">reportPath</span><span class="s2">);</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'❌ Allure report generation failed'</span><span class="s2">);</span>
+                <span class="s0">return false</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+            <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'❌ Tests failed, but report will be generated'</span><span class="s2">);</span>
+
+            <span class="s4">// Все равно генерируем отчет для анализа ошибок</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">execSync</span><span class="s2">(</span><span class="s3">'npx allure generate allure-results --clean -o allure-report'</span><span class="s2">, {</span>
+                    <span class="s1">stdio</span><span class="s2">: </span><span class="s3">'inherit'</span>
+                <span class="s2">});</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">reportError</span><span class="s2">) {</span>
+                <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'❌ Failed to generate error report'</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">openReportInBrowser</span><span class="s2">(</span><span class="s1">reportPath</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">const </span><span class="s1">open </span><span class="s2">= </span><span class="s1">require</span><span class="s2">(</span><span class="s3">'open'</span><span class="s2">);</span>
+            <span class="s1">open</span><span class="s2">(</span><span class="s1">reportPath</span><span class="s2">);</span>
+            <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'🌐 Opening Allure report in browser...'</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+            <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">'💡 Please open the report manually:'</span><span class="s2">, </span><span class="s1">reportPath</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

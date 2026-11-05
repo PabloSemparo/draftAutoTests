@@ -1,0 +1,198 @@
+<html>
+<head>
+<title>testContext.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+testContext.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">testContext_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">testContext_exports</span><span class="s1">, {</span>
+  <span class="s2">GeneratorJournal</span><span class="s1">: () =&gt; </span><span class="s2">GeneratorJournal</span><span class="s1">,</span>
+  <span class="s2">TestContext</span><span class="s1">: () =&gt; </span><span class="s2">TestContext</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">testContext_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_path </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;path&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_base </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../reporters/base&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_list </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../reporters/list&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_streams </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./streams&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_util </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../util&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_testRunner </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../runner/testRunner&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_seed </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./seed&quot;</span><span class="s1">);</span>
+<span class="s3">class </span><span class="s2">GeneratorJournal </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">rootPath</span><span class="s1">, </span><span class="s2">plan</span><span class="s1">, </span><span class="s2">seed</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_rootPath </span><span class="s1">= </span><span class="s2">rootPath</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_plan </span><span class="s1">= </span><span class="s2">plan</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_seed </span><span class="s1">= </span><span class="s2">seed</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_steps </span><span class="s1">= [];</span>
+  <span class="s1">}</span>
+  <span class="s2">logStep</span><span class="s1">(</span><span class="s2">title</span><span class="s1">, </span><span class="s2">code</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">title</span><span class="s1">)</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_steps</span><span class="s1">.</span><span class="s2">push</span><span class="s1">({ </span><span class="s2">title</span><span class="s1">, </span><span class="s2">code </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">journal</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= [];</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s0">`# Plan`</span><span class="s1">);</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_plan</span><span class="s1">);</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s0">`# Seed file: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">relative</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_rootPath</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_seed</span><span class="s1">.</span><span class="s2">file</span><span class="s1">)}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s0">&quot;```ts&quot;</span><span class="s1">);</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_seed</span><span class="s1">.</span><span class="s2">content</span><span class="s1">);</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s0">&quot;```&quot;</span><span class="s1">);</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s0">`# Steps`</span><span class="s1">);</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_steps</span><span class="s1">.</span><span class="s2">map</span><span class="s1">((</span><span class="s2">step</span><span class="s1">) =&gt; </span><span class="s0">`### </span><span class="s2">$</span><span class="s1">{</span><span class="s2">step</span><span class="s1">.</span><span class="s2">title</span><span class="s1">}</span>
+<span class="s3">\`\`\`</span><span class="s0">ts 
+</span><span class="s2">$</span><span class="s1">{</span><span class="s2">step</span><span class="s1">.</span><span class="s2">code</span><span class="s1">}</span>
+<span class="s3">\`\`\`</span><span class="s0">`</span><span class="s1">).</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n\n</span><span class="s0">&quot;</span><span class="s1">));</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">bestPracticesMarkdown</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s2">result</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot;</span><span class="s3">\n\n</span><span class="s0">&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">TestContext </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">options </span><span class="s1">= </span><span class="s2">options</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">initialize</span><span class="s1">(</span><span class="s2">rootPath</span><span class="s1">, </span><span class="s2">configLocation</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">configLocation </span><span class="s1">= </span><span class="s2">configLocation</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">rootPath </span><span class="s1">= </span><span class="s2">rootPath </span><span class="s1">|| </span><span class="s2">configLocation</span><span class="s1">.</span><span class="s2">configDir</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">existingTestRunner</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async createTestRunner</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">)</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">stopTests</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">testRunner </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_testRunner</span><span class="s1">.</span><span class="s2">TestRunner</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">configLocation</span><span class="s1">, {});</span>
+    <span class="s3">await </span><span class="s2">testRunner</span><span class="s1">.</span><span class="s2">initialize</span><span class="s1">({});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner </span><span class="s1">= </span><span class="s2">testRunner</span><span class="s1">;</span>
+    <span class="s2">testRunner</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s2">import_testRunner</span><span class="s1">.</span><span class="s2">TestRunnerEvent</span><span class="s1">.</span><span class="s2">TestFilesChanged</span><span class="s1">, (</span><span class="s2">testFiles</span><span class="s1">) =&gt; {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">?.</span><span class="s2">emit</span><span class="s1">(</span><span class="s2">import_testRunner</span><span class="s1">.</span><span class="s2">TestRunnerEvent</span><span class="s1">.</span><span class="s2">TestFilesChanged</span><span class="s1">, </span><span class="s2">testFiles</span><span class="s1">);</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner </span><span class="s1">= </span><span class="s2">testRunner</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s2">testRunner</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async getOrCreateSeedFile</span><span class="s1">(</span><span class="s2">seedFile</span><span class="s1">, </span><span class="s2">projectName</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">configDir </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">configLocation</span><span class="s1">.</span><span class="s2">configDir</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">testRunner </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">createTestRunner</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">config </span><span class="s1">= </span><span class="s3">await </span><span class="s2">testRunner</span><span class="s1">.</span><span class="s2">loadConfig</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">project </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_seed</span><span class="s1">.</span><span class="s2">seedProject</span><span class="s1">)(</span><span class="s2">config</span><span class="s1">, </span><span class="s2">projectName</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">seedFile</span><span class="s1">) {</span>
+      <span class="s2">seedFile </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_seed</span><span class="s1">.</span><span class="s2">ensureSeedTest</span><span class="s1">)(</span><span class="s2">project</span><span class="s1">, </span><span class="s3">false</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">candidateFiles </span><span class="s1">= [];</span>
+      <span class="s3">const </span><span class="s2">testDir </span><span class="s1">= </span><span class="s2">project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">testDir</span><span class="s1">;</span>
+      <span class="s2">candidateFiles</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">testDir</span><span class="s1">, </span><span class="s2">seedFile</span><span class="s1">));</span>
+      <span class="s2">candidateFiles</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s2">configDir</span><span class="s1">, </span><span class="s2">seedFile</span><span class="s1">));</span>
+      <span class="s2">candidateFiles</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">import_path</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">rootPath</span><span class="s1">, </span><span class="s2">seedFile</span><span class="s1">));</span>
+      <span class="s3">let </span><span class="s2">resolvedSeedFile</span><span class="s1">;</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">candidateFile of candidateFiles</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">fileExistsAsync</span><span class="s1">)(</span><span class="s2">candidateFile</span><span class="s1">)) {</span>
+          <span class="s2">resolvedSeedFile </span><span class="s1">= </span><span class="s2">candidateFile</span><span class="s1">;</span>
+          <span class="s3">break</span><span class="s1">;</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">resolvedSeedFile</span><span class="s1">)</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;seed test not found.&quot;</span><span class="s1">);</span>
+      <span class="s2">seedFile </span><span class="s1">= </span><span class="s2">resolvedSeedFile</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">seedFileContent </span><span class="s1">= </span><span class="s3">await </span><span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">promises</span><span class="s1">.</span><span class="s2">readFile</span><span class="s1">(</span><span class="s2">seedFile</span><span class="s1">, </span><span class="s0">&quot;utf8&quot;</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s1">{</span>
+      <span class="s2">file</span><span class="s1">: </span><span class="s2">seedFile</span><span class="s1">,</span>
+      <span class="s2">content</span><span class="s1">: </span><span class="s2">seedFileContent</span><span class="s1">,</span>
+      <span class="s2">projectName</span><span class="s1">: </span><span class="s2">project</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">name</span>
+    <span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async runSeedTest</span><span class="s1">(</span><span class="s2">seedFile</span><span class="s1">, </span><span class="s2">projectName</span><span class="s1">, </span><span class="s2">progress</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">screen </span><span class="s1">} = </span><span class="s3">this</span><span class="s1">.</span><span class="s2">createScreen</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">configDir </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">configLocation</span><span class="s1">.</span><span class="s2">configDir</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">reporter </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_list</span><span class="s1">.</span><span class="s2">default</span><span class="s1">({ </span><span class="s2">configDir</span><span class="s1">, </span><span class="s2">screen </span><span class="s1">});</span>
+    <span class="s3">const </span><span class="s2">testRunner </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">createTestRunner</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s3">await </span><span class="s2">testRunner</span><span class="s1">.</span><span class="s2">runTests</span><span class="s1">(</span><span class="s2">reporter</span><span class="s1">, {</span>
+      <span class="s2">headed</span><span class="s1">: !</span><span class="s3">this</span><span class="s1">.</span><span class="s2">options</span><span class="s1">?.</span><span class="s2">headless</span><span class="s1">,</span>
+      <span class="s2">locations</span><span class="s1">: [</span><span class="s0">&quot;/&quot; </span><span class="s1">+ (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">escapeRegExp</span><span class="s1">)(</span><span class="s2">seedFile</span><span class="s1">) + </span><span class="s0">&quot;/&quot;</span><span class="s1">],</span>
+      <span class="s2">projects</span><span class="s1">: [</span><span class="s2">projectName</span><span class="s1">],</span>
+      <span class="s2">timeout</span><span class="s1">: </span><span class="s5">0</span><span class="s1">,</span>
+      <span class="s2">workers</span><span class="s1">: </span><span class="s5">1</span><span class="s1">,</span>
+      <span class="s2">pauseAtEnd</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+      <span class="s2">disableConfigReporters</span><span class="s1">: </span><span class="s3">true</span><span class="s1">,</span>
+      <span class="s2">failOnLoadErrors</span><span class="s1">: </span><span class="s3">true</span>
+    <span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">status </span><span class="s1">=== </span><span class="s0">&quot;passed&quot; </span><span class="s1">&amp;&amp; !</span><span class="s2">reporter</span><span class="s1">.</span><span class="s2">suite</span><span class="s1">?.</span><span class="s2">allTests</span><span class="s1">().</span><span class="s2">length</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;seed test not found.&quot;</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">result</span><span class="s1">.</span><span class="s2">status </span><span class="s1">!== </span><span class="s0">&quot;passed&quot;</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Errors while running the seed test.&quot;</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">createScreen</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">stream </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_streams</span><span class="s1">.</span><span class="s2">StringWriteStream</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">screen </span><span class="s1">= {</span>
+      <span class="s2">...import_base</span><span class="s1">.</span><span class="s2">terminalScreen</span><span class="s1">,</span>
+      <span class="s2">isTTY</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+      <span class="s2">colors</span><span class="s1">: </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">noColors</span><span class="s1">,</span>
+      <span class="s2">stdout</span><span class="s1">: </span><span class="s2">stream</span><span class="s1">,</span>
+      <span class="s2">stderr</span><span class="s1">: </span><span class="s2">stream</span>
+    <span class="s1">};</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">screen</span><span class="s1">, </span><span class="s2">stream </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async close</span><span class="s1">() {</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">bestPracticesMarkdown </span><span class="s1">= </span><span class="s0">`</span>
+<span class="s0"># Best practices 
+- Do not improvise, do not add directives that were not asked for 
+- Use clear, descriptive assertions to validate the expected behavior 
+- Use reliable locators from this log 
+- Use local variables for locators that are used multiple times 
+- Use Playwright waiting assertions and best practices from this log 
+- NEVER! use page.waitForLoadState() 
+- NEVER! use page.waitForNavigation() 
+- NEVER! use page.waitForTimeout() 
+- NEVER! use page.evaluate() 
+`</span><span class="s1">;</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">GeneratorJournal</span><span class="s1">,</span>
+  <span class="s2">TestContext</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

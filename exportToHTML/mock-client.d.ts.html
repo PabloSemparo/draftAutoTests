@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>mock-client.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+mock-client.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Client from </span><span class="s2">'./client'</span>
+<span class="s0">import </span><span class="s1">Dispatcher from </span><span class="s2">'./dispatcher'</span>
+<span class="s0">import </span><span class="s1">MockAgent from </span><span class="s2">'./mock-agent'</span>
+<span class="s0">import </span><span class="s3">{ </span><span class="s1">MockInterceptor</span><span class="s3">, </span><span class="s1">Interceptable </span><span class="s3">} </span><span class="s1">from </span><span class="s2">'./mock-interceptor'</span>
+
+<span class="s0">export default </span><span class="s1">MockClient</span>
+
+<span class="s4">/** MockClient extends the Client API and allows one to mock requests. */</span>
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">MockClient </span><span class="s0">extends </span><span class="s1">Client </span><span class="s0">implements </span><span class="s1">Interceptable </span><span class="s3">{</span>
+  <span class="s1">constructor</span><span class="s3">(</span><span class="s1">origin</span><span class="s3">: </span><span class="s1">string</span><span class="s3">, </span><span class="s1">options</span><span class="s3">: </span><span class="s1">MockClient</span><span class="s3">.</span><span class="s1">Options</span><span class="s3">);</span>
+  <span class="s4">/** Intercepts any matching requests that use the same origin as this mock client. */</span>
+  <span class="s1">intercept</span><span class="s3">(</span><span class="s1">options</span><span class="s3">: </span><span class="s1">MockInterceptor</span><span class="s3">.</span><span class="s1">Options</span><span class="s3">): </span><span class="s1">MockInterceptor</span><span class="s3">;</span>
+  <span class="s4">/** Dispatches a mocked request. */</span>
+  <span class="s1">dispatch</span><span class="s3">(</span><span class="s1">options</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchOptions</span><span class="s3">, </span><span class="s1">handlers</span><span class="s3">: </span><span class="s1">Dispatcher</span><span class="s3">.</span><span class="s1">DispatchHandlers</span><span class="s3">): </span><span class="s1">boolean</span><span class="s3">;</span>
+  <span class="s4">/** Closes the mock client and gracefully waits for enqueued requests to complete. */</span>
+  <span class="s1">close</span><span class="s3">(): </span><span class="s1">Promise</span><span class="s3">&lt;</span><span class="s0">void</span><span class="s3">&gt;;</span>
+<span class="s3">}</span>
+
+<span class="s1">declare namespace MockClient </span><span class="s3">{</span>
+  <span class="s4">/** MockClient options. */</span>
+  <span class="s0">export interface </span><span class="s1">Options </span><span class="s0">extends </span><span class="s1">Client</span><span class="s3">.</span><span class="s1">Options </span><span class="s3">{</span>
+    <span class="s4">/** The agent to associate this MockClient with. */</span>
+    <span class="s1">agent</span><span class="s3">: </span><span class="s1">MockAgent</span><span class="s3">;</span>
+  <span class="s3">}</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

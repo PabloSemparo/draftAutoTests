@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>ContractsPage.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ContractsPage.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Page</span><span class="s2">, </span><span class="s1">Locator</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;@playwright/test&quot;</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">ContractsPage </span><span class="s2">{</span>
+  <span class="s0">private </span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">contractsTable</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">columnFilter</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">contractNumberOption</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">valueInput</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">applyFilterButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">) {</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">page </span><span class="s2">= </span><span class="s1">page</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">contractsTable </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;.el-table__row td:nth-child(3) a&quot;</span><span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">columnFilter </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Колонка&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">contractNumberOption </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;option&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Номер договора&quot;</span><span class="s2">,</span>
+      <span class="s1">exact</span><span class="s2">: </span><span class="s0">true</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">valueInput </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;textbox&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Значение&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">applyFilterButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Применить&quot; </span><span class="s2">});</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async verifyContractIsNotInStrategy</span><span class="s2">() {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Проверяем, что договор исчез из 'Стратегии взыскания'...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">reload</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+
+    <span class="s0">if </span><span class="s2">(</span><span class="s0">await this</span><span class="s2">.</span><span class="s1">contractsTable</span><span class="s2">.</span><span class="s1">isVisible</span><span class="s2">()) {</span>
+      <span class="s0">return </span><span class="s2">!(</span><span class="s0">await this</span><span class="s2">.</span><span class="s1">contractsTable</span><span class="s2">.</span><span class="s1">textContent</span><span class="s2">())?.</span><span class="s1">includes</span><span class="s2">(</span>
+        <span class="s3">&quot;Выбранный договор&quot;</span>
+      <span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">return true</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async searchContractByNumber</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">goto</span><span class="s2">(</span><span class="s3">&quot;https://lc.test5.mmk.local/contracts&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+
+    <span class="s4">// Открываем фильтр</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">columnFilter</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">contractNumberOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s4">// Ввод номера договора</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">valueInput</span><span class="s2">.</span><span class="s1">fill</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">applyFilterButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForTimeout</span><span class="s2">(</span><span class="s5">2000</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async verifyContractIsLoaded</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span>
+      <span class="s3">`🔹 Ищем договор с номером: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">} </span><span class="s3">на странице 'Договоры'...`</span>
+    <span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">searchContractByNumber</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">);</span>
+
+    <span class="s4">// ищем конкретную ссылку по тексту номера договора</span>
+    <span class="s0">const </span><span class="s1">contractLocator </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;link&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s1">contractNumber</span><span class="s2">,</span>
+    <span class="s2">});</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span>
+      <span class="s3">`🔹 Проверка: есть ли договор </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">} </span><span class="s3">на странице...`</span>
+    <span class="s2">);</span>
+
+    <span class="s4">//  ✅ Ожидаем появления договора</span>
+    <span class="s0">await </span><span class="s1">expect</span><span class="s2">(</span><span class="s1">contractLocator</span><span class="s2">).</span><span class="s1">toBeVisible</span><span class="s2">({ </span><span class="s1">timeout</span><span class="s2">: </span><span class="s5">15000 </span><span class="s2">});</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`✅ Договор </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">} </span><span class="s3">успешно найден!`</span><span class="s2">);</span>
+    <span class="s0">return true</span><span class="s2">;</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async selectContractAndOpen</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`🔹 Ищем договор по номеру: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">}</span><span class="s3">...`</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">searchContractByNumber</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">applyFilterButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;✅ Фильтр применён!&quot;</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForTimeout</span><span class="s2">(</span><span class="s5">500</span><span class="s2">);</span>
+
+    <span class="s4">// 🔹 Находим ссылку на договор и кликаем по ней</span>
+    <span class="s0">const </span><span class="s1">contractLink </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;link&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s1">contractNumber </span><span class="s2">});</span>
+
+    <span class="s0">if </span><span class="s2">((</span><span class="s0">await </span><span class="s1">contractLink</span><span class="s2">.</span><span class="s1">count</span><span class="s2">()) &gt; </span><span class="s5">0</span><span class="s2">) {</span>
+      <span class="s0">await </span><span class="s1">contractLink</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+      <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`✅ Перешли в карточку договора </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+      <span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span><span class="s3">`❌ Ошибка: Договор </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">} </span><span class="s3">не найден!`</span><span class="s2">);</span>
+    <span class="s2">}</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

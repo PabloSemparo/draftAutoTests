@@ -1,0 +1,403 @@
+<html>
+<head>
+<title>eq-debt-collection-packages.spec-v2-refactor.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+eq-debt-collection-packages.spec-v2-refactor.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">test</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'@playwright/test'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s2">{ </span><span class="s1">epic</span><span class="s2">, </span><span class="s1">feature</span><span class="s2">, </span><span class="s1">owner</span><span class="s2">, </span><span class="s1">tag</span><span class="s2">, </span><span class="s1">story</span><span class="s2">, </span><span class="s1">severity</span><span class="s2">, </span><span class="s1">description</span><span class="s2">, </span><span class="s1">step</span><span class="s2">, </span><span class="s1">attachment </span><span class="s2">} </span><span class="s1">from </span><span class="s3">'allure-js-commons'</span><span class="s2">;</span>
+
+<span class="s4">// Константы и конфигурация</span>
+<span class="s0">const </span><span class="s1">BASE_CONFIG </span><span class="s2">= {</span>
+    <span class="s1">baseURL</span><span class="s2">: </span><span class="s3">'https://eq-debt-collection-stage.bdengi.ru'</span><span class="s2">,</span>
+    <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s3">'96f007da-441e-4dfd-9be0-36ccefe6e58b'</span><span class="s2">,</span>
+    <span class="s1">defaultHeaders</span><span class="s2">: {</span>
+        <span class="s3">'Content-Type'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+        <span class="s3">'Accept'</span><span class="s2">: </span><span class="s3">'application/json'</span><span class="s2">,</span>
+        <span class="s3">'Cache-Control'</span><span class="s2">: </span><span class="s3">'no-cache'</span><span class="s2">,</span>
+        <span class="s3">'Accept-Encoding'</span><span class="s2">: </span><span class="s3">'gzip, deflate, br'</span><span class="s2">,</span>
+        <span class="s3">'Connection'</span><span class="s2">: </span><span class="s3">'keep-alive'</span>
+    <span class="s2">}</span>
+<span class="s2">};</span>
+
+<span class="s4">// Тестовые данные</span>
+<span class="s0">const </span><span class="s1">TEST_CASES </span><span class="s2">= {</span>
+    <span class="s1">success</span><span class="s2">: [</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Суд указан'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a1c067b4-9f2a-400b-a280-c15d48957785'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'127ee508-8acb-4993-82be-e01869241c64'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета DISTRICT с указанным судом'</span>
+        <span class="s2">},</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Тестовый_NEED_FOR_GAS_IS_FALSE (DISTRICT) Дефолтный'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a1c067b4-9f2a-400b-a280-c15d48957785'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'000090ee-c2f9-41d7-a223-e6a97b95768c'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета DISTRICT с дефолтным судом'</span>
+        <span class="s2">},</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Суд указан'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'893592f1-e26a-4d96-a230-66767c26e77a'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'00004a4d-358e-46e5-8ac5-33a4956f33b0'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета MAGISTRATE с указанным судом'</span>
+        <span class="s2">},</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Тестовый_NEED_FOR_GAS_IS_FALSE (MAGISTRATE) Дефолтный'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'893592f1-e26a-4d96-a230-66767c26e77a'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'000090ee-c2f9-41d7-a223-e6a97b95768c'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета MAGISTRATE с дефолтным судом'</span>
+        <span class="s2">},</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'7be90c4b-487a-4366-9af4-35c1d8f7c937'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'5077f0d5-dc9d-48bb-bcfa-f579ccf78c35'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета районного суда ФЭ с указанным судом'</span>
+        <span class="s2">},</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Районный суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'7be90c4b-487a-4366-9af4-35c1d8f7c937'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'127ee508-8acb-4993-82be-e01869241c64'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета районного суда ФЭ с дефолтным судом'</span>
+        <span class="s2">},</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Суд указан'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a7d7af33-a42d-4a66-bb8a-40eb9c1bd21c'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'00004a4d-358e-46e5-8ac5-33a4956f33b0'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета мирового суда ФЭ с указанным судом'</span>
+        <span class="s2">},</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Мировой суд ФЭ на печать_NEED_FOR_GAS_IS_TRUE Дефолтный'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'a7d7af33-a42d-4a66-bb8a-40eb9c1bd21c'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span><span class="s3">'0000cf37-d804-4fe7-a725-58fa4567bfb4'</span><span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">201</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">5000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'critical'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Создание пакета мирового суда ФЭ с дефолтным судом'</span>
+        <span class="s2">}</span>
+    <span class="s2">],</span>
+    <span class="s1">error</span><span class="s2">: [</span>
+        <span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s3">'Не найдены контракты'</span><span class="s2">,</span>
+            <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s3">'893592f1-e26a-4d96-a230-66767c26e77a'</span><span class="s2">,</span>
+            <span class="s1">contractIds</span><span class="s2">: [</span>
+                <span class="s3">'06246991-37b4-42e9-8869-ee8265f6bdd5'</span><span class="s2">,</span>
+                <span class="s3">'b5b0256a-f654-4fd1-bb3d-b2e84a8611d2'</span><span class="s2">,</span>
+                <span class="s3">'0f607876-11db-48fc-ad7a-fa54e62dbc3b'</span>
+            <span class="s2">],</span>
+            <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s5">404</span><span class="s2">,</span>
+            <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s5">2000</span><span class="s2">,</span>
+            <span class="s1">severity</span><span class="s2">: </span><span class="s3">'normal'</span><span class="s2">,</span>
+            <span class="s1">story</span><span class="s2">: </span><span class="s3">'Ошибка при создании пакета с несуществующими контрактами'</span>
+        <span class="s2">}</span>
+    <span class="s2">]</span>
+<span class="s2">};</span>
+
+<span class="s4">// Вспомогательные функции с обработкой ошибок</span>
+<span class="s0">const </span><span class="s1">safeObjectEntries </span><span class="s2">= (</span><span class="s1">obj</span><span class="s2">) =&gt; {</span>
+    <span class="s0">if </span><span class="s2">(!</span><span class="s1">obj </span><span class="s2">|| </span><span class="s0">typeof </span><span class="s1">obj </span><span class="s2">!== </span><span class="s3">'object' </span><span class="s2">|| </span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">obj</span><span class="s2">)) {</span>
+        <span class="s0">return </span><span class="s2">[];</span>
+    <span class="s2">}</span>
+    <span class="s0">return </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">entries</span><span class="s2">(</span><span class="s1">obj</span><span class="s2">);</span>
+<span class="s2">};</span>
+
+<span class="s4">// Безопасное преобразование headers в объект</span>
+<span class="s0">const </span><span class="s1">safeHeadersToObject </span><span class="s2">= (</span><span class="s1">headers</span><span class="s2">) =&gt; {</span>
+    <span class="s0">try </span><span class="s2">{</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">headers</span><span class="s2">) </span><span class="s0">return </span><span class="s2">{};</span>
+
+        <span class="s4">// Если headers уже объект</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">headers </span><span class="s2">=== </span><span class="s3">'object' </span><span class="s2">&amp;&amp; !</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">headers</span><span class="s2">)) {</span>
+            <span class="s0">return </span><span class="s1">headers</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s4">// Если headers имеет метод entries (как в Playwright)</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">headers</span><span class="s2">.</span><span class="s1">entries </span><span class="s2">&amp;&amp; </span><span class="s0">typeof </span><span class="s1">headers</span><span class="s2">.</span><span class="s1">entries </span><span class="s2">=== </span><span class="s3">'function'</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">fromEntries</span><span class="s2">(</span><span class="s1">headers</span><span class="s2">.</span><span class="s1">entries</span><span class="s2">());</span>
+        <span class="s2">}</span>
+
+        <span class="s4">// Если headers - Map или подобное</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">headers </span><span class="s0">instanceof </span><span class="s1">Map</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s1">Object</span><span class="s2">.</span><span class="s1">fromEntries</span><span class="s2">(</span><span class="s1">headers</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s2">{};</span>
+    <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+        <span class="s1">console</span><span class="s2">.</span><span class="s1">warn</span><span class="s2">(</span><span class="s3">'Error converting headers to object:'</span><span class="s2">, </span><span class="s1">error</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s2">{};</span>
+    <span class="s2">}</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">makeApiRequest </span><span class="s2">= </span><span class="s1">async </span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">requestBody</span><span class="s2">, </span><span class="s1">testName</span><span class="s2">) =&gt; {</span>
+    <span class="s0">return await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">`Отправка POST запроса для создания пакета: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">const </span><span class="s1">startTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+            <span class="s0">const </span><span class="s1">response </span><span class="s2">= </span><span class="s0">await </span><span class="s1">request</span><span class="s2">.</span><span class="s1">post</span><span class="s2">(</span><span class="s3">'v1/packages'</span><span class="s2">, {</span>
+                <span class="s1">data</span><span class="s2">: </span><span class="s1">requestBody</span><span class="s2">,</span>
+                <span class="s1">headers</span><span class="s2">: </span><span class="s1">BASE_CONFIG</span><span class="s2">.</span><span class="s1">defaultHeaders</span>
+            <span class="s2">});</span>
+            <span class="s0">const </span><span class="s1">responseTime </span><span class="s2">= </span><span class="s1">Date</span><span class="s2">.</span><span class="s1">now</span><span class="s2">() - </span><span class="s1">startTime</span><span class="s2">;</span>
+
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Request Body'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">requestBody</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s5">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Performance Metrics'</span><span class="s2">,</span>
+                <span class="s3">`Response Time: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseTime</span><span class="s2">}</span><span class="s3">ms</span><span class="s0">\n</span><span class="s3">Status Code: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">()}</span><span class="s3">`</span><span class="s2">,</span>
+                <span class="s3">'text/plain'</span>
+            <span class="s2">);</span>
+
+            <span class="s0">return </span><span class="s2">{ </span><span class="s1">response</span><span class="s2">, </span><span class="s1">responseTime </span><span class="s2">};</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Request Error'</span><span class="s2">, </span><span class="s3">`Ошибка при выполнении запроса: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s0">throw </span><span class="s1">error</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">validateSuccessResponse </span><span class="s2">= </span><span class="s1">async </span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">responseTime</span><span class="s2">, </span><span class="s1">maxResponseTime</span><span class="s2">, </span><span class="s1">testName</span><span class="s2">) =&gt; {</span>
+    <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">`Валидация успешного ответа: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s4">// 1. Status code</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">(), </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Status code should be 201`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">201</span><span class="s2">);</span>
+
+            <span class="s4">// 2. Response time</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Response time </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseTime</span><span class="s2">}</span><span class="s3">ms should be less than </span><span class="s1">$</span><span class="s2">{</span><span class="s1">maxResponseTime</span><span class="s2">}</span><span class="s3">ms`</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s1">maxResponseTime</span><span class="s2">);</span>
+
+            <span class="s4">// 3. Content-Type - безопасное получение headers</span>
+            <span class="s0">const </span><span class="s1">headers </span><span class="s2">= </span><span class="s1">safeHeadersToObject</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">());</span>
+            <span class="s0">const </span><span class="s1">contentType </span><span class="s2">= </span><span class="s1">headers</span><span class="s2">[</span><span class="s3">'content-type'</span><span class="s2">];</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">contentType</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Content-Type should be application/json`</span><span class="s2">).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Response Headers'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">headers</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s5">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Validation Error'</span><span class="s2">, </span><span class="s3">`Ошибка валидации ответа: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s0">throw </span><span class="s1">error</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">validateErrorResponse </span><span class="s2">= </span><span class="s1">async </span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">responseTime</span><span class="s2">, </span><span class="s1">maxResponseTime</span><span class="s2">, </span><span class="s1">testName</span><span class="s2">) =&gt; {</span>
+    <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">`Валидация ошибочного ответа: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s4">// 1. Status code</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">(), </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Status code should be 404`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s5">404</span><span class="s2">);</span>
+
+            <span class="s4">// 2. Response time</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseTime</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Response time </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseTime</span><span class="s2">}</span><span class="s3">ms should be less than </span><span class="s1">$</span><span class="s2">{</span><span class="s1">maxResponseTime</span><span class="s2">}</span><span class="s3">ms`</span><span class="s2">).</span><span class="s1">toBeLessThan</span><span class="s2">(</span><span class="s1">maxResponseTime</span><span class="s2">);</span>
+
+            <span class="s4">// 3. Content-Type - безопасное получение headers</span>
+            <span class="s0">const </span><span class="s1">headers </span><span class="s2">= </span><span class="s1">safeHeadersToObject</span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">headers</span><span class="s2">());</span>
+            <span class="s0">const </span><span class="s1">contentType </span><span class="s2">= </span><span class="s1">headers</span><span class="s2">[</span><span class="s3">'content-type'</span><span class="s2">];</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">contentType</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Content-Type should be application/json`</span><span class="s2">).</span><span class="s1">toContain</span><span class="s2">(</span><span class="s3">'application/json'</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Response Headers'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">headers</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s5">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Validation Error'</span><span class="s2">, </span><span class="s3">`Ошибка валидации ответа: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s0">throw </span><span class="s1">error</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">validateResponseId </span><span class="s2">= </span><span class="s1">async </span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">testName</span><span class="s2">) =&gt; {</span>
+    <span class="s0">return await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">`Валидация ID созданного пакета: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">const </span><span class="s1">responseData </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s4">// Проверяем что responseData - объект</span>
+            <span class="s0">if </span><span class="s2">(!</span><span class="s1">responseData </span><span class="s2">|| </span><span class="s0">typeof </span><span class="s1">responseData </span><span class="s2">!== </span><span class="s3">'object'</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span><span class="s3">`Response data is not a valid object. Type: </span><span class="s1">$</span><span class="s2">{</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Response body should contain id`</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] ID should be a string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] ID should not be empty`</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Response Body'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s5">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Package ID'</span><span class="s2">, </span><span class="s3">`Создан пакет с ID: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">id</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+
+            <span class="s0">return </span><span class="s1">responseData</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'ID Validation Error'</span><span class="s2">, </span><span class="s3">`Ошибка валидации ID: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s0">throw </span><span class="s1">error</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">validateErrorResponseBody </span><span class="s2">= </span><span class="s1">async </span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">testName</span><span class="s2">) =&gt; {</span>
+    <span class="s0">return await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">`Валидация тела ошибочного ответа: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">const </span><span class="s1">responseData </span><span class="s2">= </span><span class="s0">await </span><span class="s1">response</span><span class="s2">.</span><span class="s1">json</span><span class="s2">();</span>
+
+            <span class="s4">// Проверяем что responseData - объект</span>
+            <span class="s0">if </span><span class="s2">(!</span><span class="s1">responseData </span><span class="s2">|| </span><span class="s0">typeof </span><span class="s1">responseData </span><span class="s2">!== </span><span class="s3">'object'</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span><span class="s3">`Response data is not a valid object. Type: </span><span class="s1">$</span><span class="s2">{</span><span class="s0">typeof </span><span class="s1">responseData</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s4">// 4. Response has status object</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">status</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Response should have status object`</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">status</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Status should have code property`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'code'</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">status</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Status should have description property`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'description'</span><span class="s2">);</span>
+
+            <span class="s4">// 5. Response has errors array</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Response should have errors array`</span><span class="s2">).</span><span class="s1">toBeDefined</span><span class="s2">();</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">Array</span><span class="s2">.</span><span class="s1">isArray</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">), </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Errors should be an array`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s1">expect</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Errors array should not be empty`</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+
+            <span class="s4">// Проверка каждой ошибки в массиве</span>
+            <span class="s1">responseData</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">((</span><span class="s1">error</span><span class="s2">, </span><span class="s1">index</span><span class="s2">) =&gt; {</span>
+                <span class="s0">if </span><span class="s2">(!</span><span class="s1">error </span><span class="s2">|| </span><span class="s0">typeof </span><span class="s1">error </span><span class="s2">!== </span><span class="s3">'object'</span><span class="s2">) {</span>
+                    <span class="s0">throw new </span><span class="s1">Error</span><span class="s2">(</span><span class="s3">`Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">is not a valid object`</span><span class="s2">);</span>
+                <span class="s2">}</span>
+
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">error</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have key`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'key'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">error</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have code`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'code'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">error</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">should have description`</span><span class="s2">).</span><span class="s1">toHaveProperty</span><span class="s2">(</span><span class="s3">'description'</span><span class="s2">);</span>
+
+                <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">error</span><span class="s2">.</span><span class="s1">key</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">key should be string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">error</span><span class="s2">.</span><span class="s1">code</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">code should be string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s0">typeof </span><span class="s1">error</span><span class="s2">.</span><span class="s1">description</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">description should be string`</span><span class="s2">).</span><span class="s1">toBe</span><span class="s2">(</span><span class="s3">'string'</span><span class="s2">);</span>
+
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">error</span><span class="s2">.</span><span class="s1">key</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">key should not be empty`</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">error</span><span class="s2">.</span><span class="s1">code</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">code should not be empty`</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+                <span class="s1">expect</span><span class="s2">(</span><span class="s1">error</span><span class="s2">.</span><span class="s1">description</span><span class="s2">.</span><span class="s1">length</span><span class="s2">, </span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testName</span><span class="s2">}</span><span class="s3">] Error </span><span class="s1">$</span><span class="s2">{</span><span class="s1">index</span><span class="s2">} </span><span class="s3">description should not be empty`</span><span class="s2">).</span><span class="s1">toBeGreaterThan</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Error Response Body'</span><span class="s2">, </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">responseData</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s5">2</span><span class="s2">), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Errors Summary'</span><span class="s2">,</span>
+                <span class="s3">`Найдено ошибок: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">errors</span><span class="s2">.</span><span class="s1">length</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Код статуса: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">status</span><span class="s2">?.</span><span class="s1">code</span><span class="s2">}</span><span class="s0">\n</span><span class="s3">Описание: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">responseData</span><span class="s2">.</span><span class="s1">status</span><span class="s2">?.</span><span class="s1">description</span><span class="s2">}</span><span class="s3">`</span><span class="s2">,</span>
+                <span class="s3">'text/plain'</span>
+            <span class="s2">);</span>
+
+            <span class="s0">return </span><span class="s1">responseData</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+            <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Error Body Validation Error'</span><span class="s2">, </span><span class="s3">`Ошибка валидации тела ошибки: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+            <span class="s0">throw </span><span class="s1">error</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+<span class="s2">};</span>
+
+<span class="s0">const </span><span class="s1">safeJSONStringify </span><span class="s2">= (</span><span class="s1">obj</span><span class="s2">, </span><span class="s1">space </span><span class="s2">= </span><span class="s5">2</span><span class="s2">) =&gt; {</span>
+    <span class="s0">try </span><span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">JSON</span><span class="s2">.</span><span class="s1">stringify</span><span class="s2">(</span><span class="s1">obj</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">space</span><span class="s2">);</span>
+    <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s3">`Ошибка сериализации JSON: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">};</span>
+
+<span class="s4">// Основной тестовый блок</span>
+<span class="s1">test</span><span class="s2">.</span><span class="s1">describe</span><span class="s2">(</span><span class="s3">'API Tests - Создание пакетов документов'</span><span class="s2">, () =&gt; {</span>
+    <span class="s1">test</span><span class="s2">.</span><span class="s1">beforeEach</span><span class="s2">(() =&gt; {</span>
+        <span class="s1">epic</span><span class="s2">(</span><span class="s3">'EqvaCollection API'</span><span class="s2">);</span>
+        <span class="s1">feature</span><span class="s2">(</span><span class="s3">'Создание пакетов документов'</span><span class="s2">);</span>
+        <span class="s1">owner</span><span class="s2">(</span><span class="s3">'API Team'</span><span class="s2">);</span>
+        <span class="s1">tag</span><span class="s2">(</span><span class="s3">'package-creation'</span><span class="s2">);</span>
+        <span class="s1">tag</span><span class="s2">(</span><span class="s3">'smoke'</span><span class="s2">);</span>
+        <span class="s1">tag</span><span class="s2">(</span><span class="s3">'regression'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s4">// Тесты для успешных сценариев</span>
+    <span class="s1">TEST_CASES</span><span class="s2">.</span><span class="s1">success</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">testCase </span><span class="s2">=&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">`[201 CODE] Пакет документов успешно создан (</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">}</span><span class="s3">)`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s4">// Allure метаданные для теста</span>
+            <span class="s1">story</span><span class="s2">(</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">story</span><span class="s2">);</span>
+            <span class="s1">severity</span><span class="s2">(</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">);</span>
+            <span class="s1">description</span><span class="s2">(</span><span class="s3">`Создание пакета документов типа </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">packageTypeId</span><span class="s2">} </span><span class="s3">с контрактами: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">contractIds</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">', '</span><span class="s2">)}</span><span class="s3">`</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">requestBody </span><span class="s2">= {</span>
+                <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s1">BASE_CONFIG</span><span class="s2">.</span><span class="s1">courtLawyerId</span><span class="s2">,</span>
+                <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">packageTypeId</span><span class="s2">,</span>
+                <span class="s1">contractIds</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">contractIds</span>
+            <span class="s2">};</span>
+
+            <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Подготовка тестовых данных'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Test Case Details'</span><span class="s2">, </span><span class="s1">safeJSONStringify</span><span class="s2">({</span>
+                        <span class="s1">name</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">,</span>
+                        <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">packageTypeId</span><span class="s2">,</span>
+                        <span class="s1">contractIds</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">contractIds</span><span class="s2">,</span>
+                        <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">expectedStatus</span><span class="s2">,</span>
+                        <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">maxResponseTime</span>
+                    <span class="s2">}), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+                    <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Preparation Error'</span><span class="s2">, </span><span class="s3">`Ошибка подготовки данных: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+                    <span class="s0">throw </span><span class="s1">error</span><span class="s2">;</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s2">{ </span><span class="s1">response</span><span class="s2">, </span><span class="s1">responseTime </span><span class="s2">} = </span><span class="s0">await </span><span class="s1">makeApiRequest</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">requestBody</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">validateSuccessResponse</span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">responseTime</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">maxResponseTime</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">validateResponseId</span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+
+    <span class="s4">// Тесты для ошибочных сценариев</span>
+    <span class="s1">TEST_CASES</span><span class="s2">.</span><span class="s1">error</span><span class="s2">.</span><span class="s1">forEach</span><span class="s2">(</span><span class="s1">testCase </span><span class="s2">=&gt; {</span>
+        <span class="s1">test</span><span class="s2">(</span><span class="s3">`[</span><span class="s1">$</span><span class="s2">{</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">expectedStatus</span><span class="s2">} </span><span class="s3">CODE] </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s1">async </span><span class="s2">({ </span><span class="s1">request </span><span class="s2">}) =&gt; {</span>
+            <span class="s4">// Allure метаданные для теста</span>
+            <span class="s1">story</span><span class="s2">(</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">story</span><span class="s2">);</span>
+            <span class="s1">severity</span><span class="s2">(</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">severity</span><span class="s2">);</span>
+            <span class="s1">description</span><span class="s2">(</span><span class="s3">`Попытка создания пакета с несуществующими контрактами: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">contractIds</span><span class="s2">.</span><span class="s1">join</span><span class="s2">(</span><span class="s3">', '</span><span class="s2">)}</span><span class="s3">`</span><span class="s2">);</span>
+
+            <span class="s0">const </span><span class="s1">requestBody </span><span class="s2">= {</span>
+                <span class="s1">courtLawyerId</span><span class="s2">: </span><span class="s1">BASE_CONFIG</span><span class="s2">.</span><span class="s1">courtLawyerId</span><span class="s2">,</span>
+                <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">packageTypeId</span><span class="s2">,</span>
+                <span class="s1">contractIds</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">contractIds</span>
+            <span class="s2">};</span>
+
+            <span class="s0">await </span><span class="s1">step</span><span class="s2">(</span><span class="s3">'Подготовка тестовых данных для негативного сценария'</span><span class="s2">, </span><span class="s1">async </span><span class="s2">() =&gt; {</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Negative Test Case Details'</span><span class="s2">, </span><span class="s1">safeJSONStringify</span><span class="s2">({</span>
+                        <span class="s1">name</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">,</span>
+                        <span class="s1">packageTypeId</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">packageTypeId</span><span class="s2">,</span>
+                        <span class="s1">contractIds</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">contractIds</span><span class="s2">,</span>
+                        <span class="s1">expectedStatus</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">expectedStatus</span><span class="s2">,</span>
+                        <span class="s1">maxResponseTime</span><span class="s2">: </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">maxResponseTime</span>
+                    <span class="s2">}), </span><span class="s3">'application/json'</span><span class="s2">);</span>
+                    <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Expected Behavior'</span><span class="s2">, </span><span class="s3">'Ожидается ошибка 404 с детальной информацией о не найденных контрактах'</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">error</span><span class="s2">) {</span>
+                    <span class="s0">await </span><span class="s1">attachment</span><span class="s2">(</span><span class="s3">'Preparation Error'</span><span class="s2">, </span><span class="s3">`Ошибка подготовки данных: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">error</span><span class="s2">.</span><span class="s1">message</span><span class="s2">}</span><span class="s3">`</span><span class="s2">, </span><span class="s3">'text/plain'</span><span class="s2">);</span>
+                    <span class="s0">throw </span><span class="s1">error</span><span class="s2">;</span>
+                <span class="s2">}</span>
+            <span class="s2">});</span>
+
+            <span class="s0">const </span><span class="s2">{ </span><span class="s1">response</span><span class="s2">, </span><span class="s1">responseTime </span><span class="s2">} = </span><span class="s0">await </span><span class="s1">makeApiRequest</span><span class="s2">(</span><span class="s1">request</span><span class="s2">, </span><span class="s1">requestBody</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">);</span>
+
+            <span class="s0">await </span><span class="s1">validateErrorResponse</span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">responseTime</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">maxResponseTime</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">);</span>
+            <span class="s0">await </span><span class="s1">validateErrorResponseBody</span><span class="s2">(</span><span class="s1">response</span><span class="s2">, </span><span class="s1">testCase</span><span class="s2">.</span><span class="s1">name</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">});</span>
+<span class="s2">});</span></pre>
+</body>
+</html>

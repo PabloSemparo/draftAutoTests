@@ -1,0 +1,934 @@
+<html>
+<head>
+<title>CHANGELOG.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #56a8f5;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CHANGELOG.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">CHANGELOG</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.10</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.9...v7.0.10</span><span class="s1">) (</span><span class="s2">2025-10-23</span><span class="s1">)</span>
+
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">* </span><span class="s2">Increase data URI size limit from 100KB to 50MB and preserve content type </span><span class="s1">([</span><span class="s2">28dbf3f</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/28dbf3fe129653f5756c150a98dc40593bfb2cfe</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.9</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.8...v7.0.9</span><span class="s1">) (</span><span class="s2">2025-10-07</span><span class="s1">)</span>
+
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">* </span><span class="s1">**</span><span class="s2">release</span><span class="s1">:** </span><span class="s2">Trying to fix release proecess by upgrading Node version in runner </span><span class="s1">([</span><span class="s2">579fce4</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/579fce4683eb588891613a6c9a00d8092e8c62d1</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.8</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.7...v7.0.8</span><span class="s1">) (</span><span class="s2">2025-10-07</span><span class="s1">)</span>
+
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">* </span><span class="s1">**</span><span class="s2">addressparser</span><span class="s1">:** </span><span class="s2">flatten nested groups per RFC 5322 </span><span class="s1">([</span><span class="s2">8f8a77c</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/8f8a77c67f0ba94ddf4e16c68f604a5920fb5d26</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.7</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.6...v7.0.7</span><span class="s1">) (</span><span class="s2">2025-10-05</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">addressparser</span><span class="s1">:** </span><span class="s2">Fixed addressparser handling of quoted nested email addresses </span><span class="s1">([</span><span class="s2">1150d99</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/1150d99fba77280df2cfb1885c43df23109a8626</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">dns</span><span class="s1">:** </span><span class="s2">add memory leak prevention for DNS cache </span><span class="s1">([</span><span class="s2">0240d67</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/0240d6795ded6d8008d102161a729f120b6d786a</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">linter</span><span class="s1">:** </span><span class="s2">Updated eslint and created prettier formatting task </span><span class="s1">([</span><span class="s2">df13b74</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/df13b7487e368acded35e45d0887d23c89c9177a</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s2">refresh expired DNS cache on error </span><span class="s1">([</span><span class="s2">#1759</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1759</span><span class="s1">)) ([</span><span class="s2">ea0fc5a</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/ea0fc5a6633a3546f4b00fcf2f428e9ca732cdb6</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s2">resolve linter errors in DNS cache tests </span><span class="s1">([</span><span class="s2">3b8982c</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/3b8982c1f24508089a8757b74039000a4498b158</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.6</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.5...v7.0.6</span><span class="s1">) (</span><span class="s2">2025-08-27</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">encoder</span><span class="s1">:** </span><span class="s2">avoid silent data loss by properly flushing trailing base64 </span><span class="s1">([</span><span class="s2">#1747</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1747</span><span class="s1">)) ([</span><span class="s2">01ae76f</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/01ae76f2cfe991c0c3fe80170f236da60531496b</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s2">handle multiple XOAUTH2 token requests correctly </span><span class="s1">([</span><span class="s2">#1754</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1754</span><span class="s1">)) ([</span><span class="s2">dbe0028</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/dbe00286351cddf012726a41a96ae613d30a34ee</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s2">ReDoS vulnerability in parseDataURI and \_processDataUrl </span><span class="s1">([</span><span class="s2">#1755</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1755</span><span class="s1">)) ([</span><span class="s2">90b3e24</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/90b3e24d23929ebf9f4e16261049b40ee4055a39</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.5</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.4...v7.0.5</span><span class="s1">) (</span><span class="s2">2025-07-07</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s2">updated well known delivery service list </span><span class="s1">([</span><span class="s2">fa2724b</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/fa2724b337eb8d8fdcdd788fe903980b061316b8</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.4</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.3...v7.0.4</span><span class="s1">) (</span><span class="s2">2025-06-29</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">pools</span><span class="s1">:** </span><span class="s2">Emit </span><span class="s1">'</span><span class="s2">clear' once transporter is idle and all connections are closed </span><span class="s1">([</span><span class="s2">839e286</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/839e28634c9a93ae4321f399a8c893bf487a09fa</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">smtp-connection</span><span class="s1">:** </span><span class="s2">jsdoc public annotation for socket </span><span class="s1">([</span><span class="s2">#1741</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1741</span><span class="s1">)) ([</span><span class="s2">c45c84f</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/c45c84fe9b8e2ec5e0615ab02d4197473911ab3e</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">well-known-services</span><span class="s1">:** </span><span class="s2">Added AliyunQiye </span><span class="s1">([</span><span class="s2">bb9e6da</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/bb9e6daffb632d7d8f969359859f88a138de3a48</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.3</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.2...v7.0.3</span><span class="s1">) (</span><span class="s2">2025-05-08</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">attachments</span><span class="s1">:** </span><span class="s2">Set the default transfer encoding for message/rfc822 attachments as </span><span class="s1">'</span><span class="s2">7bit' </span><span class="s1">([</span><span class="s2">007d5f3</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/007d5f3f40908c588f1db46c76de8b64ff429327</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.2</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.1...v7.0.2</span><span class="s1">) (</span><span class="s2">2025-05-04</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">ses</span><span class="s1">:** </span><span class="s2">Fixed structured from header </span><span class="s1">([</span><span class="s2">faa9a5e</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/faa9a5eafaacbaf85de3540466a04636e12729b3</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.1</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v7.0.0...v7.0.1</span><span class="s1">) (</span><span class="s2">2025-05-04</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">ses</span><span class="s1">:** </span><span class="s2">Use formatted FromEmailAddress for SES emails </span><span class="s1">([</span><span class="s2">821cd09</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/821cd09002f16c20369cc728b9414c7eb99e4113</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">7.0.0</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.10.1...v7.0.0</span><span class="s1">) (</span><span class="s2">2025-05-03</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">⚠ BREAKING CHANGES</span>
+
+<span class="s0">- </span><span class="s2">SESv2 SDK support, removed older SES SDK v2 and v3 , removed SES rate limiting and idling features</span>
+
+<span class="s0">### </span><span class="s2">Features</span>
+
+<span class="s0">- </span><span class="s2">SESv2 SDK support, removed older SES SDK v2 and v3 , removed SES rate limiting and idling features </span><span class="s1">([</span><span class="s2">15db667</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/15db667af2d0a5ed835281cfdbab16ee73b5edce</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.10.1</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.10.0...v6.10.1</span><span class="s1">) (</span><span class="s2">2025-02-06</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s2">close correct socket </span><span class="s1">([</span><span class="s2">a18062c</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/a18062c04d0e05ca4357fbe8f0a59b690fa5391e</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.10.0</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.16...v6.10.0</span><span class="s1">) (</span><span class="s2">2025-01-23</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Features</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">services</span><span class="s1">:** </span><span class="s2">add Seznam email service configuration </span><span class="s1">([</span><span class="s2">#1695</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1695</span><span class="s1">)) ([</span><span class="s2">d1ae0a8</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/d1ae0a86883ba6011a49a5bbdf076098e2e3637a</span><span class="s1">))</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">proxy</span><span class="s1">:** </span><span class="s2">Set error and timeout errors for proxied sockets </span><span class="s1">([</span><span class="s2">aa0c99c</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/aa0c99c8f25440bb3dc91f4f3448777c800604d7</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.16</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.15...v6.9.16</span><span class="s1">) (</span><span class="s2">2024-10-28</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">addressparser</span><span class="s1">:** </span><span class="s2">Correctly detect if user local part is attached to domain part </span><span class="s1">([</span><span class="s2">f2096c5</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/f2096c51b92a69ecfbcc15884c28cb2c2f00b826</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.15</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.14...v6.9.15</span><span class="s1">) (</span><span class="s2">2024-08-08</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s2">Fix memory leak </span><span class="s1">([</span><span class="s2">#1667</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1667</span><span class="s1">)) ([</span><span class="s2">baa28f6</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/baa28f659641a4bc30360633673d851618f8e8bd</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">mime</span><span class="s1">:** </span><span class="s2">Added GeoJSON closes </span><span class="s1">[</span><span class="s2">#1637</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1637</span><span class="s1">) ([</span><span class="s2">#1665</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1665</span><span class="s1">)) ([</span><span class="s2">79b8293</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/79b8293ad557d36f066b4675e649dd80362fd45b</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.14</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.13...v6.9.14</span><span class="s1">) (</span><span class="s2">2024-06-19</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">api</span><span class="s1">:** </span><span class="s2">Added support for Ethereal authentication </span><span class="s1">([</span><span class="s2">56b2205</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/56b22052a98de9e363f6c4d26d1512925349c3f3</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">services.json</span><span class="s1">:** </span><span class="s2">Add Email Services Provider Feishu Mail </span><span class="s1">(</span><span class="s2">CN</span><span class="s1">) ([</span><span class="s2">#1648</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1648</span><span class="s1">)) ([</span><span class="s2">e9e9ecc</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/e9e9ecc99b352948a912868c7912b280a05178c6</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">services.json</span><span class="s1">:** </span><span class="s2">update Mailtrap host and port in well known </span><span class="s1">([</span><span class="s2">#1652</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1652</span><span class="s1">)) ([</span><span class="s2">fc2c9ea</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/fc2c9ea0b4c4f4e514143d2a138c9a23095fc827</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">well-known-services</span><span class="s1">:** </span><span class="s2">Add Loopia in well known services </span><span class="s1">([</span><span class="s2">#1655</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1655</span><span class="s1">)) ([</span><span class="s2">21a28a1</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/21a28a18fc9fdf8e0e86ddd846e54641395b2cb6</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.13</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.12...v6.9.13</span><span class="s1">) (</span><span class="s2">2024-03-20</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">tls</span><span class="s1">:** </span><span class="s2">Ensure servername for SMTP </span><span class="s1">([</span><span class="s2">d66fdd3</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/d66fdd3dccacc4bc79d697fe9009204cc8d4bde0</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.12</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.11...v6.9.12</span><span class="s1">) (</span><span class="s2">2024-03-08</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">message-generation</span><span class="s1">:** </span><span class="s2">Escape single quote in address names </span><span class="s1">([</span><span class="s2">4ae5fad</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/4ae5fadeaac70ba91abf529fcaae65f829a39101</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.11</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.10...v6.9.11</span><span class="s1">) (</span><span class="s2">2024-02-29</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">headers</span><span class="s1">:** </span><span class="s2">Ensure that Content-type is the bottom header </span><span class="s1">([</span><span class="s2">c7cf97e</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/c7cf97e5ecc83f8eee773359951df995c9945446</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.10</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.9...v6.9.10</span><span class="s1">) (</span><span class="s2">2024-02-22</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">data-uri</span><span class="s1">:** </span><span class="s2">Do not use regular expressions for parsing data URI schemes </span><span class="s1">([</span><span class="s2">12e65e9</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/12e65e975d80efe6bafe6de4590829b3b5ebb492</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">data-uri</span><span class="s1">:** </span><span class="s2">Moved all data-uri regexes to use the non-regex parseDataUri method </span><span class="s1">([</span><span class="s2">edd5dfe</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/edd5dfe5ce9b725f8b8ae2830797f65b2a2b0a33</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.9</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.8...v6.9.9</span><span class="s1">) (</span><span class="s2">2024-02-01</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">security</span><span class="s1">:** </span><span class="s2">Fix issues described in GHSA-9h6g-pr28-7cqp. Do not use eternal matching pattern if only a few occurences are expected </span><span class="s1">([</span><span class="s2">dd8f5e8</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/dd8f5e8a4ddc99992e31df76bcff9c590035cd4a</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">tests</span><span class="s1">:** </span><span class="s2">Use native node test runner, added code coverage support, removed grunt </span><span class="s1">([</span><span class="s2">#1604</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1604</span><span class="s1">)) ([</span><span class="s2">be45c1b</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/be45c1b299d012358d69247019391a02734d70af</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.8</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.7...v6.9.8</span><span class="s1">) (</span><span class="s2">2023-12-30</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">punycode</span><span class="s1">:** </span><span class="s2">do not use native punycode module </span><span class="s1">([</span><span class="s2">b4d0e0c</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/b4d0e0c7cc4b15bc4d9e287f91d1bcaca87508b0</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.7</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.6...v6.9.7</span><span class="s1">) (</span><span class="s2">2023-10-22</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">customAuth</span><span class="s1">:** </span><span class="s2">Do not require user and pass to be set for custom authentication schemes </span><span class="s1">(</span><span class="s2">fixes </span><span class="s1">[</span><span class="s2">#1584</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/issues/1584</span><span class="s1">)) ([</span><span class="s2">41d482c</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/41d482c3f01e26111b06f3e46351b193db3fb5cb</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.6</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.5...v6.9.6</span><span class="s1">) (</span><span class="s2">2023-10-09</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">inline</span><span class="s1">:** </span><span class="s2">Use </span><span class="s1">'</span><span class="s2">inline' as the default Content Dispostion value for embedded images </span><span class="s1">([</span><span class="s2">db32c93</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/db32c93fefee527bcc239f13056e5d9181a4d8af</span><span class="s1">))</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">tests</span><span class="s1">:** </span><span class="s2">Removed Node v12 from test matrix as it is not compatible with the test framework anymore </span><span class="s1">([</span><span class="s2">7fe0a60</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/7fe0a608ed6bcb70dc6b2de543ebfc3a30abf984</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s1">[</span><span class="s2">6.9.5</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/compare/v6.9.4...v6.9.5</span><span class="s1">) (</span><span class="s2">2023-09-06</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Bug Fixes</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">license</span><span class="s1">:** </span><span class="s2">Updated license year </span><span class="s1">([</span><span class="s2">da4744e</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/commit/da4744e491f3a68f4f68e4073684370592630e01</span><span class="s1">))</span>
+
+<span class="s0">## </span><span class="s2">6.9.4 2023-07-19</span>
+
+<span class="s0">- </span><span class="s2">Renamed SendinBlue to Brevo</span>
+
+<span class="s0">## </span><span class="s2">6.9.3 2023-05-29</span>
+
+<span class="s0">- </span><span class="s2">Specified license identifier </span><span class="s1">(</span><span class="s2">was defined as MIT, actual value MIT-0</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">If SMTP server disconnects with a message, process it and include as part of the response error</span>
+
+<span class="s0">## </span><span class="s2">6.9.2 2023-05-11</span>
+
+<span class="s0">- </span><span class="s2">Fix uncaught exception on invalid attachment content payload</span>
+
+<span class="s0">## </span><span class="s2">6.9.1 2023-01-27</span>
+
+<span class="s0">- </span><span class="s2">Fix base64 encoding for emoji bytes in encoded words</span>
+
+<span class="s0">## </span><span class="s2">6.9.0 2023-01-12</span>
+
+<span class="s0">- </span><span class="s2">Do not throw if failed to resolve IPv4 addresses</span>
+<span class="s0">- </span><span class="s2">Include EHLO extensions in the send response</span>
+<span class="s0">- </span><span class="s2">fix sendMail function</span><span class="s1">: </span><span class="s2">callback should be optional</span>
+
+<span class="s0">## </span><span class="s2">6.8.0 2022-09-28</span>
+
+<span class="s0">- </span><span class="s2">Add DNS timeout </span><span class="s1">(</span><span class="s2">huksley</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">add dns.REFUSED </span><span class="s1">(</span><span class="s2">lucagianfelici</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">6.7.8 2022-08-11</span>
+
+<span class="s0">- </span><span class="s2">Allow to use multiple Reply-To addresses</span>
+
+<span class="s0">## </span><span class="s2">6.7.7 2022-07-06</span>
+
+<span class="s0">- </span><span class="s2">Resolver fixes</span>
+
+<span class="s0">## </span><span class="s2">6.7.5 2022-05-04</span>
+
+<span class="s0">- </span><span class="s2">No changes, pushing a new README to npmjs.org</span>
+
+<span class="s0">## </span><span class="s2">6.7.4 2022-04-29</span>
+
+<span class="s0">- </span><span class="s2">Ensure compatibility with Node 18</span>
+<span class="s0">- </span><span class="s2">Replaced Travis with Github Actions</span>
+
+<span class="s0">## </span><span class="s2">6.7.3 2022-03-21</span>
+
+<span class="s0">- </span><span class="s2">Typo fixes</span>
+<span class="s0">- </span><span class="s2">Added stale issue automation fir Github</span>
+<span class="s0">- </span><span class="s2">Add Infomaniak config to well known service </span><span class="s1">(</span><span class="s2">popod</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Update Outlook/Hotmail host in well known services </span><span class="s1">(</span><span class="s2">popod</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">fix</span><span class="s1">: </span><span class="s2">DSN recipient gets ignored </span><span class="s1">(</span><span class="s2">KornKalle</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">6.7.2 2021-11-26</span>
+
+<span class="s0">- </span><span class="s2">Fix proxies for account verification</span>
+
+<span class="s0">## </span><span class="s2">6.7.1 2021-11-15</span>
+
+<span class="s0">- </span><span class="s2">fix verify on ses-transport </span><span class="s1">(</span><span class="s2">stanofsky</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">6.7.0 2021-10-11</span>
+
+<span class="s0">- </span><span class="s2">Updated DNS resolving logic. If there are multiple responses for a A/AAAA record, then loop these randomly instead of only caching the first one</span>
+
+<span class="s0">## </span><span class="s2">6.6.5 2021-09-23</span>
+
+<span class="s0">- </span><span class="s2">Replaced Object.values</span><span class="s1">() </span><span class="s2">and Array.flat</span><span class="s1">() </span><span class="s2">with polyfills to allow using Nodemailer in Node v6+</span>
+
+<span class="s0">## </span><span class="s2">6.6.4 2021-09-22</span>
+
+<span class="s0">- </span><span class="s2">Better compatibility with IPv6-only SMTP hosts </span><span class="s1">(</span><span class="s2">oxzi</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Fix ses verify for sdk v3 </span><span class="s1">(</span><span class="s2">hannesvdvreken</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Added SECURITY.txt for contact info</span>
+
+<span class="s0">## </span><span class="s2">6.6.3 2021-07-14</span>
+
+<span class="s0">- </span><span class="s2">Do not show passwords in SMTP transaction logs. All passwords used in logging are replaced by `</span><span class="s1">&quot;</span><span class="s2">/</span><span class="s1">* </span><span class="s2">secret </span><span class="s1">*</span><span class="s2">/</span><span class="s1">&quot;</span><span class="s2">`</span>
+
+<span class="s0">## </span><span class="s2">6.6.1 2021-05-23</span>
+
+<span class="s0">- </span><span class="s2">Fixed address formatting issue where newlines in an email address, if provided via address object, were not properly removed. Reported by tmazeika </span><span class="s1">(</span><span class="s2">#1289</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">6.6.0 2021-04-28</span>
+
+<span class="s0">- </span><span class="s2">Added new option `newline` for MailComposer</span>
+<span class="s0">- </span><span class="s2">aws ses connection verification </span><span class="s1">(</span><span class="s2">Ognjen Jevremovic</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">6.5.0 2021-02-26</span>
+
+<span class="s0">- </span><span class="s2">Pass through textEncoding to subnodes</span>
+<span class="s0">- </span><span class="s2">Added support for AWS SES v3 SDK</span>
+<span class="s0">- </span><span class="s2">Fixed tests</span>
+
+<span class="s0">## </span><span class="s2">6.4.18 2021-02-11</span>
+
+<span class="s0">- </span><span class="s2">Updated README</span>
+
+<span class="s0">## </span><span class="s2">6.4.17 2020-12-11</span>
+
+<span class="s0">- </span><span class="s2">Allow mixing attachments with caendar alternatives</span>
+
+<span class="s0">## </span><span class="s2">6.4.16 2020-11-12</span>
+
+<span class="s0">- </span><span class="s2">Applied updated prettier formating rules</span>
+
+<span class="s0">## </span><span class="s2">6.4.15 2020-11-06</span>
+
+<span class="s0">- </span><span class="s2">Minor changes in header key casing</span>
+
+<span class="s0">## </span><span class="s2">6.4.14 2020-10-14</span>
+
+<span class="s0">- </span><span class="s2">Disabled postinstall script</span>
+
+<span class="s0">## </span><span class="s2">6.4.13 2020-10-02</span>
+
+<span class="s0">- </span><span class="s2">Fix normalizeHeaderKey method for single node messages</span>
+
+<span class="s0">## </span><span class="s2">6.4.12 2020-09-30</span>
+
+<span class="s0">- </span><span class="s2">Better handling of attachment filenames that include quote symbols</span>
+<span class="s0">- </span><span class="s2">Includes all information from the oath2 error response in the error message </span><span class="s1">(</span><span class="s2">Normal Gaussian</span><span class="s1">) [</span><span class="s2">1787f227</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">6.4.11 2020-07-29</span>
+
+<span class="s0">- </span><span class="s2">Fixed escape sequence handling in address parsing</span>
+
+<span class="s0">## </span><span class="s2">6.4.10 2020-06-17</span>
+
+<span class="s0">- </span><span class="s2">Fixed RFC822 output for MailComposer when using invalid content-type value. Mostly relevant if message attachments have stragne content-type values set.</span>
+
+<span class="s0">## </span><span class="s2">6.4.7 2020-05-28</span>
+
+<span class="s0">- </span><span class="s2">Always set charset=utf-8 for Content-Type headers</span>
+<span class="s0">- </span><span class="s2">Catch error when using invalid crypto.sign input</span>
+
+<span class="s0">## </span><span class="s2">6.4.6 2020-03-20</span>
+
+<span class="s0">- </span><span class="s2">fix</span><span class="s1">: </span><span class="s2">`requeueAttempts=n` should requeue `n` times </span><span class="s1">(</span><span class="s2">Patrick Malouin</span><span class="s1">) [</span><span class="s2">a27ed2f7</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">6.4.4 2020-03-01</span>
+
+<span class="s0">- </span><span class="s2">Add `options.forceAuth` for SMTP </span><span class="s1">(</span><span class="s2">Patrick Malouin</span><span class="s1">) [</span><span class="s2">a27ed2f7</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">6.4.3 2020-02-22</span>
+
+<span class="s0">- </span><span class="s2">Added an option to specify max number of requeues when connection closes unexpectedly </span><span class="s1">(</span><span class="s2">Igor Sechyn</span><span class="s1">) [</span><span class="s2">8a927f5a</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">6.4.2 2019-12-11</span>
+
+<span class="s0">- </span><span class="s2">Fixed bug where array item was used with a potentially empty array</span>
+
+<span class="s0">## </span><span class="s2">6.4.1 2019-12-07</span>
+
+<span class="s0">- </span><span class="s2">Fix processing server output with unterminated responses</span>
+
+<span class="s0">## </span><span class="s2">6.4.0 2019-12-04</span>
+
+<span class="s0">- </span><span class="s2">Do not use auth if server does not advertise AUTH support </span><span class="s1">[</span><span class="s2">f419b09d</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">add dns.CONNREFUSED </span><span class="s1">(</span><span class="s2">Hiroyuki Okada</span><span class="s1">) [</span><span class="s2">5c4c8ca8</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">6.3.1 2019-10-09</span>
+
+<span class="s0">- </span><span class="s2">Ignore </span><span class="s1">&quot;</span><span class="s2">end</span><span class="s1">&quot; </span><span class="s2">events because it might be </span><span class="s1">&quot;</span><span class="s2">error</span><span class="s1">&quot; </span><span class="s2">after it </span><span class="s1">(</span><span class="s2">dex4er</span><span class="s1">) [</span><span class="s2">72bade9</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Set username and password on the connection proxy object correctly </span><span class="s1">(</span><span class="s2">UsamaAshraf</span><span class="s1">) [</span><span class="s2">250b1a8</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Support more DNS errors </span><span class="s1">(</span><span class="s2">madarche</span><span class="s1">) [</span><span class="s2">2391aa4</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">6.3.0 2019-07-14</span>
+
+<span class="s0">- </span><span class="s2">Added new option to pass a set of httpHeaders to be sent when fetching attachments. See </span><span class="s1">[</span><span class="s2">PR #1034</span><span class="s1">](</span><span class="s3">https://github.com/nodemailer/nodemailer/pull/1034</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">6.2.1 2019-05-24</span>
+
+<span class="s0">- </span><span class="s2">No changes. It is the same as 6.2.0 that was accidentally published as 6.2.1 to npm</span>
+
+<span class="s0">## </span><span class="s2">6.2.0 2019-05-24</span>
+
+<span class="s0">- </span><span class="s2">Added new option for addressparser</span><span class="s1">: </span><span class="s2">`flatten`. If true then ignores group names and returns a single list of all addresses</span>
+
+<span class="s0">## </span><span class="s2">6.1.1 2019-04-20</span>
+
+<span class="s0">- </span><span class="s2">Fixed regression bug with missing smtp `authMethod` property</span>
+
+<span class="s0">## </span><span class="s2">6.1.0 2019-04-06</span>
+
+<span class="s0">- </span><span class="s2">Added new message property `amp` for providing AMP4EMAIL content</span>
+
+<span class="s0">## </span><span class="s2">6.0.0 2019-03-25</span>
+
+<span class="s0">- </span><span class="s2">SMTPConnection</span><span class="s1">: </span><span class="s2">use removeListener instead of removeAllListeners </span><span class="s1">(</span><span class="s2">xr0master</span><span class="s1">) [</span><span class="s2">ddc4af15</span><span class="s1">]</span>
+  <span class="s2">Using removeListener should fix memory leak with Node.js streams</span>
+
+<span class="s0">## </span><span class="s2">5.1.1 2019-01-09</span>
+
+<span class="s0">- </span><span class="s2">Added missing option argument for custom auth</span>
+
+<span class="s0">## </span><span class="s2">5.1.0 2019-01-09</span>
+
+<span class="s0">- </span><span class="s2">Official support for custom authentication methods and examples </span><span class="s1">(</span><span class="s2">examples/custom-auth-async.js and examples/custom-auth-cb.js</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">5.0.1 2019-01-09</span>
+
+<span class="s0">- </span><span class="s2">Fixed regression error to support Node versions lower than 6.11</span>
+<span class="s0">- </span><span class="s2">Added expiremental custom authentication support</span>
+
+<span class="s0">## </span><span class="s2">5.0.0 2018-12-28</span>
+
+<span class="s0">- </span><span class="s2">Start using dns.resolve</span><span class="s1">() </span><span class="s2">instead of dns.lookup</span><span class="s1">() </span><span class="s2">for resolving SMTP hostnames. Might be breaking change on some environments so upgrade with care</span>
+<span class="s0">- </span><span class="s2">Show more logs for renewing OAuth2 tokens, previously it was not possible to see what actually failed</span>
+
+<span class="s0">## </span><span class="s2">4.7.0 2018-11-19</span>
+
+<span class="s0">- </span><span class="s2">Cleaned up List-\* header generation</span>
+<span class="s0">- </span><span class="s2">Fixed </span><span class="s1">'</span><span class="s2">full' return option for DSN </span><span class="s1">(</span><span class="s2">klaronix</span><span class="s1">) [</span><span class="s2">23b93a3b</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Support promises `for mailcomposer.build</span><span class="s1">()</span><span class="s2">`</span>
+
+<span class="s0">## </span><span class="s2">4.6.8 2018-08-15</span>
+
+<span class="s0">- </span><span class="s2">Use first IP address from DNS resolution when using a proxy </span><span class="s1">(</span><span class="s2">Limbozz</span><span class="s1">) [</span><span class="s2">d4ca847c</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Return raw email from SES transport </span><span class="s1">(</span><span class="s2">gabegorelick</span><span class="s1">) [</span><span class="s2">3aa08967</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">4.6.7 2018-06-15</span>
+
+<span class="s0">- </span><span class="s2">Added option `skipEncoding` to JSONTransport</span>
+
+<span class="s0">## </span><span class="s2">4.6.6 2018-06-10</span>
+
+<span class="s0">- </span><span class="s2">Fixes mime encoded-word compatibility issue with invalid clients like Zimbra</span>
+
+<span class="s0">## </span><span class="s2">4.6.5 2018-05-23</span>
+
+<span class="s0">- </span><span class="s2">Fixed broken DKIM stream in Node.js v10</span>
+<span class="s0">- </span><span class="s2">Updated error messages for SMTP responses to not include a newline</span>
+
+<span class="s0">## </span><span class="s2">4.6.4 2018-03-31</span>
+
+<span class="s0">- </span><span class="s2">Readded logo author link to README that was accidentally removed a while ago</span>
+
+<span class="s0">## </span><span class="s2">4.6.3 2018-03-13</span>
+
+<span class="s0">- </span><span class="s2">Removed unneeded dependency</span>
+
+<span class="s0">## </span><span class="s2">4.6.2 2018-03-06</span>
+
+<span class="s0">- </span><span class="s2">When redirecting URL calls then do not include original POST content</span>
+
+<span class="s0">## </span><span class="s2">4.6.1 2018-03-06</span>
+
+<span class="s0">- </span><span class="s2">Fixed Smtp connection freezing, when trying to send after close / quit </span><span class="s1">(</span><span class="s2">twawszczak</span><span class="s1">) [</span><span class="s2">73d3911c</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">4.6.0 2018-02-22</span>
+
+<span class="s0">- </span><span class="s2">Support socks module v2 in addition to v1 </span><span class="s1">[</span><span class="s2">e228bcb2</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Fixed invalid promise return value when using createTestAccount </span><span class="s1">[</span><span class="s2">5524e627</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Allow using local addresses </span><span class="s1">[</span><span class="s2">8f6fa35f</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">4.5.0 2018-02-21</span>
+
+<span class="s0">- </span><span class="s2">Added new message transport option `normalizeHeaderKey</span><span class="s1">(</span><span class="s2">key</span><span class="s1">)</span><span class="s2">=</span><span class="s1">&gt;</span><span class="s2">normalizedKey` for custom header formatting</span>
+
+<span class="s0">## </span><span class="s2">4.4.2 2018-01-20</span>
+
+<span class="s0">- </span><span class="s2">Added sponsors section to README</span>
+<span class="s0">- </span><span class="s2">enclose encodeURIComponent in try..catch to handle invalid urls</span>
+
+<span class="s0">## </span><span class="s2">4.4.1 2017-12-08</span>
+
+<span class="s0">- </span><span class="s2">Better handling of unexpectedly dropping connections</span>
+
+<span class="s0">## </span><span class="s2">4.4.0 2017-11-10</span>
+
+<span class="s0">- </span><span class="s2">Changed default behavior for attachment option contentTransferEncoding. If it is unset then base64 encoding is used for the attachment. If it is set to false then previous default applies </span><span class="s1">(</span><span class="s2">base64 for most, 7bit for text</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">4.3.1 2017-10-25</span>
+
+<span class="s0">- </span><span class="s2">Fixed a confict with Electron.js where timers do not have unref method</span>
+
+<span class="s0">## </span><span class="s2">4.3.0 2017-10-23</span>
+
+<span class="s0">- </span><span class="s2">Added new mail object method `mail.normalize</span><span class="s1">(</span><span class="s2">cb</span><span class="s1">)</span><span class="s2">` that should make creating HTTP API based transports much easier</span>
+
+<span class="s0">## </span><span class="s2">4.2.0 2017-10-13</span>
+
+<span class="s0">- </span><span class="s2">Expose streamed messages size and timers in info response</span>
+
+<span class="s0">## </span><span class="s2">v4.1.3 2017-10-06</span>
+
+<span class="s0">- </span><span class="s2">Allow generating preview links without calling createTestAccount first</span>
+
+<span class="s0">## </span><span class="s2">v4.1.2 2017-10-03</span>
+
+<span class="s0">- </span><span class="s2">No actual changes. Needed to push updated README to npmjs</span>
+
+<span class="s0">## </span><span class="s2">v4.1.1 2017-09-25</span>
+
+<span class="s0">- </span><span class="s2">Fixed JSONTransport attachment handling</span>
+
+<span class="s0">## </span><span class="s2">v4.1.0 2017-08-28</span>
+
+<span class="s0">- </span><span class="s2">Added new methods `createTestAccount` and `getTestMessageUrl` to use autogenerated email accounts from </span><span class="s3">https://Ethereal.email</span>
+
+<span class="s0">## </span><span class="s2">v4.0.1 2017-04-13</span>
+
+<span class="s0">- </span><span class="s2">Fixed issue with LMTP and STARTTLS</span>
+
+<span class="s0">## </span><span class="s2">v4.0.0 2017-04-06</span>
+
+<span class="s0">- </span><span class="s2">License changed from EUPLv1.1 to MIT</span>
+
+<span class="s0">## </span><span class="s2">v3.1.8 2017-03-21</span>
+
+<span class="s0">- </span><span class="s2">Fixed invalid List-\* header generation</span>
+
+<span class="s0">## </span><span class="s2">v3.1.7 2017-03-14</span>
+
+<span class="s0">- </span><span class="s2">Emit an error if STARTTLS ends with connection being closed</span>
+
+<span class="s0">## </span><span class="s2">v3.1.6 2017-03-14</span>
+
+<span class="s0">- </span><span class="s2">Expose last server response for smtpConnection</span>
+
+<span class="s0">## </span><span class="s2">v3.1.5 2017-03-08</span>
+
+<span class="s0">- </span><span class="s2">Fixed SES transport, added missing `response` value</span>
+
+<span class="s0">## </span><span class="s2">v3.1.4 2017-02-26</span>
+
+<span class="s0">- </span><span class="s2">Fixed DKIM calculation for empty body</span>
+<span class="s0">- </span><span class="s2">Ensure linebreak after message content. This fixes DKIM signatures for non-multipart messages where input did not end with a newline</span>
+
+<span class="s0">## </span><span class="s2">v3.1.3 2017-02-17</span>
+
+<span class="s0">- </span><span class="s2">Fixed missing `transport.verify</span><span class="s1">()</span><span class="s2">` methods for SES transport</span>
+
+<span class="s0">## </span><span class="s2">v3.1.2 2017-02-17</span>
+
+<span class="s0">- </span><span class="s2">Added missing error handlers for Sendmail, SES and Stream transports. If a messages contained an invalid URL as attachment then these transports threw an uncatched error</span>
+
+<span class="s0">## </span><span class="s2">v3.1.1 2017-02-13</span>
+
+<span class="s0">- </span><span class="s2">Fixed missing `transport.on</span><span class="s1">('</span><span class="s2">idle'</span><span class="s1">)</span><span class="s2">` and `transport.isIdle</span><span class="s1">()</span><span class="s2">` methods for SES transports</span>
+
+<span class="s0">## </span><span class="s2">v3.1.0 2017-02-13</span>
+
+<span class="s0">- </span><span class="s2">Added built-in transport for AWS SES. </span><span class="s1">[</span><span class="s2">Docs</span><span class="s1">](</span><span class="s3">http://localhost:1313/transports/ses/</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Updated stream transport to allow building JSON strings. </span><span class="s1">[</span><span class="s2">Docs</span><span class="s1">](</span><span class="s3">http://localhost:1313/transports/stream/#json-transport</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Added new method </span><span class="s1">_</span><span class="s2">mail.resolveAll</span><span class="s1">_ </span><span class="s2">that fetches all attachments and such to be able to more easily build API-based transports</span>
+
+<span class="s0">## </span><span class="s2">v3.0.2 2017-02-04</span>
+
+<span class="s0">- </span><span class="s2">Fixed a bug with OAuth2 login where error callback was fired twice if getToken was not available.</span>
+
+<span class="s0">## </span><span class="s2">v3.0.1 2017-02-03</span>
+
+<span class="s0">- </span><span class="s2">Fixed a bug where Nodemailer threw an exception if `disableFileAccess` option was used</span>
+<span class="s0">- </span><span class="s2">Added FLOSS </span><span class="s1">[</span><span class="s2">exception declaration</span><span class="s1">](</span><span class="s2">FLOSS_EXCEPTIONS.md</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">v3.0.0 2017-01-31</span>
+
+<span class="s0">- </span><span class="s2">Initial version of Nodemailer 3</span>
+
+<span class="s2">This update brings a lot of breaking changes</span><span class="s1">:</span>
+
+<span class="s0">- </span><span class="s2">License changed from MIT to </span><span class="s1">**</span><span class="s2">EUPL-1.1</span><span class="s1">**</span><span class="s2">. This was possible as the new version of Nodemailer is a major rewrite. The features I don't have ownership for, were removed or reimplemented. If there's still some snippets in the code that have vague ownership then notify </span><span class="s1">&lt;</span><span class="s3">mailto:andris@kreata.ee</span><span class="s1">&gt; </span><span class="s2">about the conflicting code and I'll fix it.</span>
+<span class="s0">- </span><span class="s2">Requires </span><span class="s1">**</span><span class="s2">Node.js v6+</span><span class="s1">**</span>
+<span class="s0">- </span><span class="s2">All </span><span class="s1">**</span><span class="s2">templating is gone</span><span class="s1">**</span><span class="s2">. It was too confusing to use and to be really universal a huge list of different renderers would be required. Nodemailer is about email, not about parsing different template syntaxes</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">No NTLM authentication</span><span class="s1">**</span><span class="s2">. It was too difficult to re-implement. If you still need it then it would be possible to introduce a pluggable SASL interface where you could load the NTLM module in your own code and pass it to Nodemailer. Currently this is not possible.</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">OAuth2 authentication</span><span class="s1">** </span><span class="s2">is built in and has a different </span><span class="s1">[</span><span class="s2">configuration</span><span class="s1">](</span><span class="s3">https://nodemailer.com/smtp/oauth2/</span><span class="s1">)</span><span class="s2">. You can use both user </span><span class="s1">(</span><span class="s2">3LO</span><span class="s1">) </span><span class="s2">and service </span><span class="s1">(</span><span class="s2">2LO</span><span class="s1">) </span><span class="s2">accounts to generate access tokens from Nodemailer. Additionally there's a new feature to authenticate differently for every message – useful if your application sends on behalf of different users instead of a single sender.</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Improved Calendaring</span><span class="s1">**</span><span class="s2">. Provide an ical file to Nodemailer to send out </span><span class="s1">[</span><span class="s2">calendar events</span><span class="s1">](</span><span class="s3">https://nodemailer.com/message/calendar-events/</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s2">And also some non-breaking changes</span><span class="s1">:</span>
+
+<span class="s0">- </span><span class="s2">All </span><span class="s1">**</span><span class="s2">dependencies were dropped</span><span class="s1">**</span><span class="s2">. There is exactly 0 dependencies needed to use Nodemailer. This brings the installation time of Nodemailer from NPM down to less than 2 seconds</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Delivery status notifications</span><span class="s1">** </span><span class="s2">added to Nodemailer</span>
+<span class="s0">- </span><span class="s2">Improved and built-in </span><span class="s1">**</span><span class="s2">DKIM</span><span class="s1">** </span><span class="s2">signing of messages. Previously you needed an external module for this and it did quite a lousy job with larger messages</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Stream transport</span><span class="s1">** </span><span class="s2">to return a RFC822 formatted message as a stream. Useful if you want to use Nodemailer as a preprocessor and not for actual delivery.</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Sendmail</span><span class="s1">** </span><span class="s2">transport built-in, no need for external transport plugin</span>
+
+<span class="s2">See </span><span class="s1">[</span><span class="s2">Nodemailer.com</span><span class="s1">](</span><span class="s3">https://nodemailer.com/</span><span class="s1">) </span><span class="s2">for full documentation</span>
+
+<span class="s0">## </span><span class="s2">2.7.0 2016-12-08</span>
+
+<span class="s0">- </span><span class="s2">Bumped mailcomposer that generates encoded-words differently which might break some tests</span>
+
+<span class="s0">## </span><span class="s2">2.6.0 2016-09-05</span>
+
+<span class="s0">- </span><span class="s2">Added new options disableFileAccess and disableUrlAccess</span>
+<span class="s0">- </span><span class="s2">Fixed envelope handling where cc/bcc fields were ignored in the envelope object</span>
+
+<span class="s0">## </span><span class="s2">2.4.2 2016-05-25</span>
+
+<span class="s0">- </span><span class="s2">Removed shrinkwrap file. Seemed to cause more trouble than help</span>
+
+<span class="s0">## </span><span class="s2">2.4.1 2016-05-12</span>
+
+<span class="s0">- </span><span class="s2">Fixed outdated shrinkwrap file</span>
+
+<span class="s0">## </span><span class="s2">2.4.0 2016-05-11</span>
+
+<span class="s0">- </span><span class="s2">Bumped mailcomposer module to allow using `false` as attachment filename </span><span class="s1">(</span><span class="s2">suppresses filename usage</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Added NTLM authentication support</span>
+
+<span class="s0">## </span><span class="s2">2.3.2 2016-04-11</span>
+
+<span class="s0">- </span><span class="s2">Bumped smtp transport modules to get newest smtp-connection that fixes SMTPUTF8 support for internationalized email addresses</span>
+
+<span class="s0">## </span><span class="s2">2.3.1 2016-04-08</span>
+
+<span class="s0">- </span><span class="s2">Bumped mailcomposer to have better support for message/822 attachments</span>
+
+<span class="s0">## </span><span class="s2">2.3.0 2016-03-03</span>
+
+<span class="s0">- </span><span class="s2">Fixed a bug with attachment filename that contains mixed unicode and dashes</span>
+<span class="s0">- </span><span class="s2">Added built-in support for proxies by providing a new SMTP option `proxy` that takes a proxy configuration url as its value</span>
+<span class="s0">- </span><span class="s2">Added option `transport` to dynamically load transport plugins</span>
+<span class="s0">- </span><span class="s2">Do not require globally installed grunt-cli</span>
+
+<span class="s0">## </span><span class="s2">2.2.1 2016-02-20</span>
+
+<span class="s0">- </span><span class="s2">Fixed a bug in SMTP requireTLS option that was broken</span>
+
+<span class="s0">## </span><span class="s2">2.2.0 2016-02-18</span>
+
+<span class="s0">- </span><span class="s2">Removed the need to use `clone` dependency</span>
+<span class="s0">- </span><span class="s2">Added new method `verify` to check SMTP configuration</span>
+<span class="s0">- </span><span class="s2">Direct transport uses STARTTLS by default, fallbacks to plaintext if STARTTLS fails</span>
+<span class="s0">- </span><span class="s2">Added new message option `list` for setting List-\* headers</span>
+<span class="s0">- </span><span class="s2">Add simple proxy support with `getSocket` method</span>
+<span class="s0">- </span><span class="s2">Added new message option `textEncoding`. If `textEncoding` is not set then detect best encoding automatically</span>
+<span class="s0">- </span><span class="s2">Added new message option `icalEvent` to embed iCalendar events. Example </span><span class="s1">[</span><span class="s2">here</span><span class="s1">](</span><span class="s2">examples/ical-event.js</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Added new attachment option `raw` to use prepared MIME contents instead of generating a new one. This might be useful when you want to handcraft some parts of the message yourself, for example if you want to inject a PGP encrypted message as the contents of a MIME node</span>
+<span class="s0">- </span><span class="s2">Added new message option `raw` to use an existing MIME message instead of generating a new one</span>
+
+<span class="s0">## </span><span class="s2">2.1.0 2016-02-01</span>
+
+<span class="s2">Republishing 2.1.0-rc.1 as stable. To recap, here's the notable changes between v2.0 and v2.1</span><span class="s1">:</span>
+
+<span class="s0">- </span><span class="s2">Implemented templating support. You can either use a simple built-in renderer or some external advanced renderer, eg. </span><span class="s1">[</span><span class="s2">node-email-templates</span><span class="s1">](</span><span class="s3">https://github.com/niftylettuce/node-email-templates</span><span class="s1">)</span><span class="s2">. Templating </span><span class="s1">[</span><span class="s2">docs</span><span class="s1">](</span><span class="s3">http://nodemailer.com/2-0-0-beta/templating/</span><span class="s1">)</span><span class="s2">.</span>
+<span class="s0">- </span><span class="s2">Updated smtp-pool to emit </span><span class="s1">'</span><span class="s2">idle' events in order to handle message queue more effectively</span>
+<span class="s0">- </span><span class="s2">Updated custom header handling, works everywhere the same now, no differences between adding custom headers to the message or to an attachment</span>
+
+<span class="s0">## </span><span class="s2">2.1.0-rc.1 2016-01-25</span>
+
+<span class="s2">Sneaked in some new features even though it is already rc</span>
+
+<span class="s0">- </span><span class="s2">If a SMTP pool is closed while there are still messages in a queue, the message callbacks are invoked with an error</span>
+<span class="s0">- </span><span class="s2">In case of SMTP pool the transporter emits </span><span class="s1">'</span><span class="s2">idle' when there is a free connection slot available</span>
+<span class="s0">- </span><span class="s2">Added method `isIdle</span><span class="s1">()</span><span class="s2">` that checks if a pool has still some free connection slots available</span>
+
+<span class="s0">## </span><span class="s2">2.1.0-rc.0 2016-01-20</span>
+
+<span class="s0">- </span><span class="s2">Bumped dependency versions</span>
+
+<span class="s0">## </span><span class="s2">2.1.0-beta.3 2016-01-20</span>
+
+<span class="s0">- </span><span class="s2">Added support for node-email-templates templating in addition to the built-in renderer</span>
+
+<span class="s0">## </span><span class="s2">2.1.0-beta.2 2016-01-20</span>
+
+<span class="s0">- </span><span class="s2">Implemented simple templating feature</span>
+
+<span class="s0">## </span><span class="s2">2.1.0-beta.1 2016-01-20</span>
+
+<span class="s0">- </span><span class="s2">Allow using prepared header values that are not folded or encoded by Nodemailer</span>
+
+<span class="s0">## </span><span class="s2">2.1.0-beta.0 2016-01-20</span>
+
+<span class="s0">- </span><span class="s2">Use the same header custom structure for message root, attachments and alternatives</span>
+<span class="s0">- </span><span class="s2">Ensure that Message-Id exists when accessing message</span>
+<span class="s0">- </span><span class="s2">Allow using array values for custom headers </span><span class="s1">(</span><span class="s2">inserts every value in its own row</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">2.0.0 2016-01-11</span>
+
+<span class="s0">- </span><span class="s2">Released rc.2 as stable</span>
+
+<span class="s0">## </span><span class="s2">2.0.0-rc.2 2016-01-04</span>
+
+<span class="s0">- </span><span class="s2">Locked dependencies</span>
+
+<span class="s0">## </span><span class="s2">2.0.0-beta.2 2016-01-04</span>
+
+<span class="s0">- </span><span class="s2">Updated documentation to reflect changes with SMTP handling</span>
+<span class="s0">- </span><span class="s2">Use beta versions for smtp/pool/direct transports</span>
+<span class="s0">- </span><span class="s2">Updated logging</span>
+
+<span class="s0">## </span><span class="s2">2.0.0-beta.1 2016-01-03</span>
+
+<span class="s0">- </span><span class="s2">Use bunyan compatible logger instead of the emit</span><span class="s1">('</span><span class="s2">log'</span><span class="s1">) </span><span class="s2">style</span>
+<span class="s0">- </span><span class="s2">Outsourced some reusable methods to nodemailer-shared</span>
+<span class="s0">- </span><span class="s2">Support setting direct/smtp/pool with the default configuration</span>
+
+<span class="s0">## </span><span class="s2">2.0.0-beta.0 2015-12-31</span>
+
+<span class="s0">- </span><span class="s2">Stream errors are not silently swallowed</span>
+<span class="s0">- </span><span class="s2">Do not use format=flowed</span>
+<span class="s0">- </span><span class="s2">Use nodemailer-fetch to fetch URL streams</span>
+<span class="s0">- </span><span class="s2">jshint replaced by eslint</span>
+
+<span class="s0">## </span><span class="s2">v1.11.0 2015-12-28</span>
+
+<span class="s2">Allow connection url based SMTP configurations</span>
+
+<span class="s0">## </span><span class="s2">v1.10.0 2015-11-13</span>
+
+<span class="s2">Added `defaults` argument for `createTransport` to predefine commonn values </span><span class="s1">(</span><span class="s2">eg. `from` address</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">v1.9.0 2015-11-09</span>
+
+<span class="s2">Returns a Promise for `sendMail` if callback is not defined</span>
+
+<span class="s0">## </span><span class="s2">v1.8.0 2015-10-08</span>
+
+<span class="s2">Added priority option </span><span class="s1">(</span><span class="s2">high, normal, low</span><span class="s1">) </span><span class="s2">for setting Importance header</span>
+
+<span class="s0">## </span><span class="s2">v1.7.0 2015-10-06</span>
+
+<span class="s2">Replaced hyperquest with needle. Fixes issues with compressed data and redirects</span>
+
+<span class="s0">## </span><span class="s2">v1.6.0 2015-10-05</span>
+
+<span class="s2">Maintenance release. Bumped dependencies to get support for unicode filenames for QQ webmail and to support emoji in filenames</span>
+
+<span class="s0">## </span><span class="s2">v1.5.0 2015-09-24</span>
+
+<span class="s2">Use mailcomposer instead of built in solution to generate message sources. Bumped libmime gives better quoted-printable handling.</span>
+
+<span class="s0">## </span><span class="s2">v1.4.0 2015-06-27</span>
+
+<span class="s2">Added new message option `watchHtml` to specify Apple Watch specific HTML part of the message. See </span><span class="s1">[</span><span class="s2">this post</span><span class="s1">](</span><span class="s3">https://litmus.com/blog/how-to-send-hidden-version-email-apple-watch</span><span class="s1">) </span><span class="s2">for details</span>
+
+<span class="s0">## </span><span class="s2">v1.3.4 2015-04-25</span>
+
+<span class="s2">Maintenance release, bumped buildmail version to get fixed format=flowed handling</span>
+
+<span class="s0">## </span><span class="s2">v1.3.3 2015-04-25</span>
+
+<span class="s2">Maintenance release, bumped dependencies</span>
+
+<span class="s0">## </span><span class="s2">v1.3.2 2015-03-09</span>
+
+<span class="s2">Maintenance release, upgraded dependencies. Replaced simplesmtp based tests with smtp-server based ones.</span>
+
+<span class="s0">## </span><span class="s2">v1.3.0 2014-09-12</span>
+
+<span class="s2">Maintenance release, upgrades buildmail and libmime. Allows using functions as transform plugins and fixes issue with unicode filenames in Gmail.</span>
+
+<span class="s0">## </span><span class="s2">v1.2.2 2014-09-05</span>
+
+<span class="s2">Proper handling of data uris as attachments. Attachment `path` property can also be defined as a data uri, not just regular url or file path.</span>
+
+<span class="s0">## </span><span class="s2">v1.2.1 2014-08-21</span>
+
+<span class="s2">Bumped libmime and mailbuild versions to properly handle filenames with spaces </span><span class="s1">(</span><span class="s2">short ascii only filenames with spaces were left unquoted</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s0">## </span><span class="s2">v1.2.0 2014-08-18</span>
+
+<span class="s2">Allow using encoded strings as attachments. Added new property `encoding` which defines the encoding used for a `content` string. If encoding is set, the content value is converted to a Buffer value using the defined encoding before usage. Useful for including binary attachemnts in JSON formatted email objects.</span>
+
+<span class="s0">## </span><span class="s2">v1.1.2 2014-08-18</span>
+
+<span class="s2">Return deprecatin error for v0.x style configuration</span>
+
+<span class="s0">## </span><span class="s2">v1.1.1 2014-07-30</span>
+
+<span class="s2">Bumped nodemailer-direct-transport dependency. Updated version includes a bugfix for Stream nodes handling. Important only if use direct-transport with Streams </span><span class="s1">(</span><span class="s2">not file paths or urls</span><span class="s1">) </span><span class="s2">as attachment content.</span>
+
+<span class="s0">## </span><span class="s2">v1.1.0 2014-07-29</span>
+
+<span class="s2">Added new method `resolveContent</span><span class="s1">()</span><span class="s2">` to get the html/text/attachment content as a String or Buffer.</span>
+
+<span class="s0">## </span><span class="s2">v1.0.4 2014-07-23</span>
+
+<span class="s2">Bugfix release. HTML node was instered twice if the message consisted of a HTML content </span><span class="s1">(</span><span class="s2">but no text content</span><span class="s1">) </span><span class="s2">+ at least one attachment with CID + at least one attachment without CID. In this case the HTML node was inserted both to the root level multipart/mixed section and to the multipart/related sub section</span>
+
+<span class="s0">## </span><span class="s2">v1.0.3 2014-07-16</span>
+
+<span class="s2">Fixed a bug where Nodemailer crashed if the message content type was multipart/related</span>
+
+<span class="s0">## </span><span class="s2">v1.0.2 2014-07-16</span>
+
+<span class="s2">Upgraded nodemailer-smtp-transport to 0.1.11\. The docs state that for SSL you should use </span><span class="s1">'</span><span class="s2">secure' option but the underlying smtp-connection module used </span><span class="s1">'</span><span class="s2">secureConnection' for this purpose. Fixed smpt-connection to match the docs.</span>
+
+<span class="s0">## </span><span class="s2">v1.0.1 2014-07-15</span>
+
+<span class="s2">Implemented missing #close method that is passed to the underlying transport object. Required by the smtp pool.</span>
+
+<span class="s0">## </span><span class="s2">v1.0.0 2014-07-15</span>
+
+<span class="s2">Total rewrite. See migration guide here</span><span class="s1">: &lt;</span><span class="s3">http://www.andrisreinman.com/nodemailer-v1-0/#migrationguide</span><span class="s1">&gt;</span>
+
+<span class="s0">## </span><span class="s2">v0.7.1 2014-07-09</span>
+
+<span class="s0">- </span><span class="s2">Upgraded aws-sdk to 2.0.5</span>
+
+<span class="s0">## </span><span class="s2">v0.7.0 2014-06-17</span>
+
+<span class="s0">- </span><span class="s2">Bumped version to v0.7.0</span>
+<span class="s0">- </span><span class="s2">Fix AWS-SES usage </span><span class="s1">[</span><span class="s2">5b6bc144</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Replace current SES with new SES using AWS-SDK </span><span class="s1">(</span><span class="s2">Elanorr</span><span class="s1">) [</span><span class="s2">c79d797a</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Updated README.md about Node Email Templates </span><span class="s1">(</span><span class="s2">niftylettuce</span><span class="s1">) [</span><span class="s2">e52bef81</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.6.5 2014-05-15</span>
+
+<span class="s0">- </span><span class="s2">Bumped version to v0.6.5</span>
+<span class="s0">- </span><span class="s2">Use tildes instead of carets for dependency listing </span><span class="s1">[</span><span class="s2">5296ce41</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Allow clients to set a custom identityString </span><span class="s1">(</span><span class="s2">venables</span><span class="s1">) [</span><span class="s2">5373287d</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">bugfix </span><span class="s1">(</span><span class="s2">adding </span><span class="s1">&quot;</span><span class="s2">-i</span><span class="s1">&quot; </span><span class="s2">to sendmail command line for each new mail</span><span class="s1">) </span><span class="s2">by copying this.args </span><span class="s1">(</span><span class="s2">vrodic</span><span class="s1">) [</span><span class="s2">05a8a9a3</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">update copyright </span><span class="s1">(</span><span class="s2">gdi2290</span><span class="s1">) [</span><span class="s2">3a6cba3a</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.6.4 2014-05-13</span>
+
+<span class="s0">- </span><span class="s2">Bumped version to v0.6.4</span>
+<span class="s0">- </span><span class="s2">added npmignore, bumped dependencies </span><span class="s1">[</span><span class="s2">21bddcd9</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Add AOL to well-known services </span><span class="s1">(</span><span class="s2">msouce</span><span class="s1">) [</span><span class="s2">da7dd3b7</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.6.3 2014-04-16</span>
+
+<span class="s0">- </span><span class="s2">Bumped version to v0.6.3</span>
+<span class="s0">- </span><span class="s2">Upgraded simplesmtp dependency </span><span class="s1">[</span><span class="s2">dd367f59</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.6.2 2014-04-09</span>
+
+<span class="s0">- </span><span class="s2">Bumped version to v0.6.2</span>
+<span class="s0">- </span><span class="s2">Added error option to Stub transport </span><span class="s1">[</span><span class="s2">c423acad</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Use SVG npm badge </span><span class="s1">(</span><span class="s2">t3chnoboy</span><span class="s1">) [</span><span class="s2">677117b7</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">add SendCloud to well known services </span><span class="s1">(</span><span class="s2">haio</span><span class="s1">) [</span><span class="s2">43c358e0</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">High-res build-passing and NPM module badges </span><span class="s1">(</span><span class="s2">sahat</span><span class="s1">) [</span><span class="s2">9fdc37cd</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.6.1 2014-01-26</span>
+
+<span class="s0">- </span><span class="s2">Bumped version to v0.6.1</span>
+<span class="s0">- </span><span class="s2">Do not throw on multiple errors from sendmail command </span><span class="s1">[</span><span class="s2">c6e2cd12</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Do not require callback for pickup, fixes #238 </span><span class="s1">[</span><span class="s2">93eb3214</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Added AWSSecurityToken information to README, fixes #235 </span><span class="s1">[</span><span class="s2">58e921d1</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Added Nodemailer logo </span><span class="s1">[</span><span class="s2">06b7d1a8</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.6.0 2013-12-30</span>
+
+<span class="s0">- </span><span class="s2">Bumped version to v0.6.0</span>
+<span class="s0">- </span><span class="s2">Allow defining custom transport methods </span><span class="s1">[</span><span class="s2">ec5b48ce</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Return messageId with responseObject for all built in transport methods </span><span class="s1">[</span><span class="s2">74445cec</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Bumped dependency versions for mailcomposer and readable-stream </span><span class="s1">[</span><span class="s2">9a034c34</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Changed pickup argument name to </span><span class="s1">'</span><span class="s2">directory' </span><span class="s1">[</span><span class="s2">01c3ea53</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Added support for IIS pickup directory with PICKUP transport </span><span class="s1">(</span><span class="s2">philipproplesch</span><span class="s1">) [</span><span class="s2">36940b59..360a2878</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Applied common styles </span><span class="s1">[</span><span class="s2">9e93a409</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Updated readme </span><span class="s1">[</span><span class="s2">c78075e7</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.15 2013-12-13</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.15</span>
+<span class="s0">- </span><span class="s2">Updated README, added global options info for setting uo transports </span><span class="s1">[</span><span class="s2">554bb0e5</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Resolve public hostname, if resolveHostname property for a transport object is set to `true` </span><span class="s1">[</span><span class="s2">9023a6e1..4c66b819</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.14 2013-12-05</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.14</span>
+<span class="s0">- </span><span class="s2">Expose status for direct messages </span><span class="s1">[</span><span class="s2">f0312df6</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Allow to skip the X-Mailer header if xMailer value is set to </span><span class="s1">'</span><span class="s2">false' </span><span class="s1">[</span><span class="s2">f2c20a68</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.13 2013-12-03</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.13</span>
+<span class="s0">- </span><span class="s2">Use the name property from the transport object to use for the domain part of message-id values </span><span class="s1">(</span><span class="s2">1598eee9</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">v0.5.12 2013-12-02</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.12</span>
+<span class="s0">- </span><span class="s2">Expose transport method and transport module version if available </span><span class="s1">[</span><span class="s2">a495106e</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Added </span><span class="s1">'</span><span class="s2">he' module instead of using custom html entity decoding </span><span class="s1">[</span><span class="s2">c197d102</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Added xMailer property for transport configuration object to override X-Mailer value </span><span class="s1">[</span><span class="s2">e8733a61</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Updated README, added description for </span><span class="s1">'</span><span class="s2">mail' method </span><span class="s1">[</span><span class="s2">e1f5f3a6</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.11 2013-11-28</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.11</span>
+<span class="s0">- </span><span class="s2">Updated mailcomposer version. Replaces ent with he </span><span class="s1">[</span><span class="s2">6a45b790e</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.10 2013-11-26</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.10</span>
+<span class="s0">- </span><span class="s2">added shorthand function mail</span><span class="s1">() </span><span class="s2">for direct transport type </span><span class="s1">[</span><span class="s2">88129bd7</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">minor tweaks and typo fixes </span><span class="s1">[</span><span class="s2">f797409e..ceac0ca4</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.9 2013-11-25</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.9</span>
+<span class="s0">- </span><span class="s2">Update for </span><span class="s1">'</span><span class="s2">direct' handling </span><span class="s1">[</span><span class="s2">77b84e2f</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">do not require callback to be provided for </span><span class="s1">'</span><span class="s2">direct' type </span><span class="s1">[</span><span class="s2">ec51c79f</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.8 2013-11-22</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.8</span>
+<span class="s0">- </span><span class="s2">Added support for </span><span class="s1">'</span><span class="s2">direct' transport </span><span class="s1">[</span><span class="s2">826f226d..0dbbcbbc</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.7 2013-11-18</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.7</span>
+<span class="s0">- </span><span class="s2">Replace \r\n by \n in Sendmail transport </span><span class="s1">(</span><span class="s2">rolftimmermans</span><span class="s1">) [</span><span class="s2">fed2089e..616ec90c</span><span class="s1">] </span><span class="s2">A lot of sendmail implementations choke on \r\n newlines and require \n This commit addresses this by transforming all \r\n sequences passed to the sendmail command with \n</span>
+
+<span class="s0">## </span><span class="s2">v0.5.6 2013-11-15</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.6</span>
+<span class="s0">- </span><span class="s2">Upgraded mailcomposer dependency to 0.2.4 </span><span class="s1">[</span><span class="s2">e5ff9c40</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Removed noCR option </span><span class="s1">[</span><span class="s2">e810d1b8</span><span class="s1">]</span>
+<span class="s0">- </span><span class="s2">Update wellknown.js, added FastMail </span><span class="s1">(</span><span class="s2">k-j-kleist</span><span class="s1">) [</span><span class="s2">cf930f6d</span><span class="s1">]</span>
+
+<span class="s0">## </span><span class="s2">v0.5.5 2013-10-30</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.5</span>
+<span class="s0">- </span><span class="s2">Updated mailcomposer dependnecy version to 0.2.3</span>
+<span class="s0">- </span><span class="s2">Remove legacy code - node v0.4 is not supported anymore anyway</span>
+<span class="s0">- </span><span class="s2">Use hostname </span><span class="s1">(</span><span class="s2">autodetected or from the options.name property</span><span class="s1">) </span><span class="s2">for Message-Id instead of </span><span class="s1">&quot;</span><span class="s2">Nodemailer</span><span class="s1">&quot; (</span><span class="s2">helps a bit when messages are identified as spam</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Added maxMessages info to README</span>
+
+<span class="s0">## </span><span class="s2">v0.5.4 2013-10-29</span>
+
+<span class="s0">- </span><span class="s2">bumped version to v0.5.4</span>
+<span class="s0">- </span><span class="s2">added </span><span class="s1">&quot;</span><span class="s2">use strict</span><span class="s1">&quot; </span><span class="s2">statements</span>
+<span class="s0">- </span><span class="s2">Added DSN info to README</span>
+<span class="s0">- </span><span class="s2">add support for QQ enterprise email </span><span class="s1">(</span><span class="s2">coderhaoxin</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Add a Bitdeli Badge to README</span>
+<span class="s0">- </span><span class="s2">DSN options Passthrought into simplesmtp. </span><span class="s1">(</span><span class="s2">irvinzz</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">v0.5.3 2013-10-03</span>
+
+<span class="s0">- </span><span class="s2">bumped version v0.5.3</span>
+<span class="s0">- </span><span class="s2">Using a stub transport to prevent sendmail from being called during a test. </span><span class="s1">(</span><span class="s2">jsdevel</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">closes #78</span><span class="s1">: </span><span class="s2">sendmail transport does not work correctly on Unix machines. </span><span class="s1">(</span><span class="s2">jsdevel</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Updated PaaS Support list to include Modulus. </span><span class="s1">(</span><span class="s2">fiveisprime</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Translate self closing break tags to newline </span><span class="s1">(</span><span class="s2">kosmasgiannis</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">fix typos </span><span class="s1">(</span><span class="s2">aeosynth</span><span class="s1">)</span>
+
+<span class="s0">## </span><span class="s2">v0.5.2 2013-07-25</span>
+
+<span class="s0">- </span><span class="s2">bumped version v0.5.2</span>
+<span class="s0">- </span><span class="s2">Merge pull request #177 from MrSwitch/master Fixing Amazon SES, fatal error caused by bad connection</span>
+</pre>
+</body>
+</html>

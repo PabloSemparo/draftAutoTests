@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>pool-stats.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+pool-stats.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Pool from </span><span class="s2">&quot;./pool&quot;</span>
+
+<span class="s0">export default </span><span class="s1">PoolStats</span>
+
+<span class="s1">declare </span><span class="s0">class </span><span class="s1">PoolStats </span><span class="s3">{</span>
+  <span class="s1">constructor</span><span class="s3">(</span><span class="s1">pool</span><span class="s3">: </span><span class="s1">Pool</span><span class="s3">);</span>
+  <span class="s4">/** Number of open socket connections in this pool. */</span>
+  <span class="s1">connected</span><span class="s3">: </span><span class="s1">number</span><span class="s3">;</span>
+  <span class="s4">/** Number of open socket connections in this pool that do not have an active request. */</span>
+  <span class="s1">free</span><span class="s3">: </span><span class="s1">number</span><span class="s3">;</span>
+  <span class="s4">/** Number of pending requests across all clients in this pool. */</span>
+  <span class="s1">pending</span><span class="s3">: </span><span class="s1">number</span><span class="s3">;</span>
+  <span class="s4">/** Number of queued requests across all clients in this pool. */</span>
+  <span class="s1">queued</span><span class="s3">: </span><span class="s1">number</span><span class="s3">;</span>
+  <span class="s4">/** Number of currently active requests across all clients in this pool. */</span>
+  <span class="s1">running</span><span class="s3">: </span><span class="s1">number</span><span class="s3">;</span>
+  <span class="s4">/** Number of active, pending, or queued requests across all clients in this pool. */</span>
+  <span class="s1">size</span><span class="s3">: </span><span class="s1">number</span><span class="s3">;</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

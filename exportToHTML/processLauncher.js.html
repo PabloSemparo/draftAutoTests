@@ -1,0 +1,263 @@
+<html>
+<head>
+<title>processLauncher.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+processLauncher.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">processLauncher_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">processLauncher_exports</span><span class="s1">, {</span>
+  <span class="s2">envArrayToObject</span><span class="s1">: () =&gt; </span><span class="s2">envArrayToObject</span><span class="s1">,</span>
+  <span class="s2">gracefullyCloseAll</span><span class="s1">: () =&gt; </span><span class="s2">gracefullyCloseAll</span><span class="s1">,</span>
+  <span class="s2">gracefullyCloseSet</span><span class="s1">: () =&gt; </span><span class="s2">gracefullyCloseSet</span><span class="s1">,</span>
+  <span class="s2">gracefullyProcessExitDoNotHang</span><span class="s1">: () =&gt; </span><span class="s2">gracefullyProcessExitDoNotHang</span><span class="s1">,</span>
+  <span class="s2">launchProcess</span><span class="s1">: () =&gt; </span><span class="s2">launchProcess</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">processLauncher_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">childProcess </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;child_process&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_fs </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;fs&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">readline </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;readline&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_fileUtils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./fileUtils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../../utils&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">gracefullyCloseSet </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+<span class="s3">const </span><span class="s2">killSet </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">gracefullyCloseAll</span><span class="s1">() {</span>
+  <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">Array</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s2">gracefullyCloseSet</span><span class="s1">).</span><span class="s2">map</span><span class="s1">((</span><span class="s2">gracefullyClose</span><span class="s1">) =&gt; </span><span class="s2">gracefullyClose</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; {</span>
+  <span class="s1">})));</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">gracefullyProcessExitDoNotHang</span><span class="s1">(</span><span class="s2">code</span><span class="s1">) {</span>
+  <span class="s2">setTimeout</span><span class="s1">(() =&gt; </span><span class="s2">process</span><span class="s1">.</span><span class="s2">exit</span><span class="s1">(</span><span class="s2">code</span><span class="s1">), </span><span class="s5">3e4</span><span class="s1">);</span>
+  <span class="s2">gracefullyCloseAll</span><span class="s1">().</span><span class="s2">then</span><span class="s1">(() =&gt; {</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">exit</span><span class="s1">(</span><span class="s2">code</span><span class="s1">);</span>
+  <span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">exitHandler</span><span class="s1">() {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">kill of killSet</span><span class="s1">)</span>
+    <span class="s2">kill</span><span class="s1">();</span>
+<span class="s1">}</span>
+<span class="s3">let </span><span class="s2">sigintHandlerCalled </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+<span class="s3">function </span><span class="s2">sigintHandler</span><span class="s1">() {</span>
+  <span class="s3">const </span><span class="s2">exitWithCode130 </span><span class="s1">= () =&gt; {</span>
+    <span class="s3">if </span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">isUnderTest</span><span class="s1">)()) {</span>
+      <span class="s2">setTimeout</span><span class="s1">(() =&gt; </span><span class="s2">process</span><span class="s1">.</span><span class="s2">exit</span><span class="s1">(</span><span class="s5">130</span><span class="s1">), </span><span class="s5">1e3</span><span class="s1">);</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">process</span><span class="s1">.</span><span class="s2">exit</span><span class="s1">(</span><span class="s5">130</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">};</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">sigintHandlerCalled</span><span class="s1">) {</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">off</span><span class="s1">(</span><span class="s0">&quot;SIGINT&quot;</span><span class="s1">, </span><span class="s2">sigintHandler</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">kill of killSet</span><span class="s1">)</span>
+      <span class="s2">kill</span><span class="s1">();</span>
+    <span class="s2">exitWithCode130</span><span class="s1">();</span>
+  <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+    <span class="s2">sigintHandlerCalled </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s2">gracefullyCloseAll</span><span class="s1">().</span><span class="s2">then</span><span class="s1">(() =&gt; </span><span class="s2">exitWithCode130</span><span class="s1">());</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">sigtermHandler</span><span class="s1">() {</span>
+  <span class="s2">gracefullyCloseAll</span><span class="s1">();</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">sighupHandler</span><span class="s1">() {</span>
+  <span class="s2">gracefullyCloseAll</span><span class="s1">();</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">installedHandlers </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+<span class="s3">const </span><span class="s2">processHandlers </span><span class="s1">= {</span>
+  <span class="s2">exit</span><span class="s1">: </span><span class="s2">exitHandler</span><span class="s1">,</span>
+  <span class="s2">SIGINT</span><span class="s1">: </span><span class="s2">sigintHandler</span><span class="s1">,</span>
+  <span class="s2">SIGTERM</span><span class="s1">: </span><span class="s2">sigtermHandler</span><span class="s1">,</span>
+  <span class="s2">SIGHUP</span><span class="s1">: </span><span class="s2">sighupHandler</span>
+<span class="s1">};</span>
+<span class="s3">function </span><span class="s2">addProcessHandlerIfNeeded</span><span class="s1">(</span><span class="s2">name</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">installedHandlers</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">name</span><span class="s1">)) {</span>
+    <span class="s2">installedHandlers</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">name</span><span class="s1">);</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s2">name</span><span class="s1">, </span><span class="s2">processHandlers</span><span class="s1">[</span><span class="s2">name</span><span class="s1">]);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">removeProcessHandlersIfNeeded</span><span class="s1">() {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">killSet</span><span class="s1">.</span><span class="s2">size</span><span class="s1">)</span>
+    <span class="s3">return</span><span class="s1">;</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">handler of installedHandlers</span><span class="s1">)</span>
+    <span class="s2">process</span><span class="s1">.</span><span class="s2">off</span><span class="s1">(</span><span class="s2">handler</span><span class="s1">, </span><span class="s2">processHandlers</span><span class="s1">[</span><span class="s2">handler</span><span class="s1">]);</span>
+  <span class="s2">installedHandlers</span><span class="s1">.</span><span class="s2">clear</span><span class="s1">();</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">launchProcess</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">stdio </span><span class="s1">= </span><span class="s2">options</span><span class="s1">.</span><span class="s2">stdio </span><span class="s1">=== </span><span class="s0">&quot;pipe&quot; </span><span class="s1">? [</span><span class="s0">&quot;ignore&quot;</span><span class="s1">, </span><span class="s0">&quot;pipe&quot;</span><span class="s1">, </span><span class="s0">&quot;pipe&quot;</span><span class="s1">, </span><span class="s0">&quot;pipe&quot;</span><span class="s1">, </span><span class="s0">&quot;pipe&quot;</span><span class="s1">] : [</span><span class="s0">&quot;pipe&quot;</span><span class="s1">, </span><span class="s0">&quot;pipe&quot;</span><span class="s1">, </span><span class="s0">&quot;pipe&quot;</span><span class="s1">];</span>
+  <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;launching&gt; </span><span class="s2">$</span><span class="s1">{</span><span class="s2">options</span><span class="s1">.</span><span class="s2">command</span><span class="s1">} </span><span class="s2">$</span><span class="s1">{</span><span class="s2">options</span><span class="s1">.</span><span class="s2">args </span><span class="s1">? </span><span class="s2">options</span><span class="s1">.</span><span class="s2">args</span><span class="s1">.</span><span class="s2">join</span><span class="s1">(</span><span class="s0">&quot; &quot;</span><span class="s1">) : </span><span class="s0">&quot;&quot;</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">spawnOptions </span><span class="s1">= {</span>
+    <span class="s4">// On non-windows platforms, `detached: true` makes child process a leader of a new</span>
+    <span class="s4">// process group, making it possible to kill child process tree with `.kill(-pid)` command.</span>
+    <span class="s4">// @see https://nodejs.org/api/child_process.html#child_process_options_detached</span>
+    <span class="s2">detached</span><span class="s1">: </span><span class="s2">process</span><span class="s1">.</span><span class="s2">platform </span><span class="s1">!== </span><span class="s0">&quot;win32&quot;</span><span class="s1">,</span>
+    <span class="s2">env</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">env</span><span class="s1">,</span>
+    <span class="s2">cwd</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">cwd</span><span class="s1">,</span>
+    <span class="s2">shell</span><span class="s1">: </span><span class="s2">options</span><span class="s1">.</span><span class="s2">shell</span><span class="s1">,</span>
+    <span class="s2">stdio</span>
+  <span class="s1">};</span>
+  <span class="s3">const </span><span class="s2">spawnedProcess </span><span class="s1">= </span><span class="s2">childProcess</span><span class="s1">.</span><span class="s2">spawn</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">command</span><span class="s1">, </span><span class="s2">options</span><span class="s1">.</span><span class="s2">args </span><span class="s1">|| [], </span><span class="s2">spawnOptions</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">cleanup </span><span class="s1">= </span><span class="s2">async </span><span class="s1">() =&gt; {</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid </span><span class="s1">|| </span><span class="s0">&quot;N/A&quot;</span><span class="s1">}</span><span class="s0">] starting temporary directories cleanup`</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">errors </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_fileUtils</span><span class="s1">.</span><span class="s2">removeFolders</span><span class="s1">)(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">tempDirectories</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">0</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">options</span><span class="s1">.</span><span class="s2">tempDirectories</span><span class="s1">.</span><span class="s2">length</span><span class="s1">; ++</span><span class="s2">i</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">errors</span><span class="s1">[</span><span class="s2">i</span><span class="s1">])</span>
+        <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid </span><span class="s1">|| </span><span class="s0">&quot;N/A&quot;</span><span class="s1">}</span><span class="s0">] exception while removing </span><span class="s2">$</span><span class="s1">{</span><span class="s2">options</span><span class="s1">.</span><span class="s2">tempDirectories</span><span class="s1">[</span><span class="s2">i</span><span class="s1">]}</span><span class="s0">: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">errors</span><span class="s1">[</span><span class="s2">i</span><span class="s1">]}</span><span class="s0">`</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid </span><span class="s1">|| </span><span class="s0">&quot;N/A&quot;</span><span class="s1">}</span><span class="s0">] finished temporary directories cleanup`</span><span class="s1">);</span>
+  <span class="s1">};</span>
+  <span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, () =&gt; {</span>
+  <span class="s1">});</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">) {</span>
+    <span class="s3">let </span><span class="s2">failed</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">failedPromise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">f</span><span class="s1">, </span><span class="s2">r</span><span class="s1">) =&gt; </span><span class="s2">failed </span><span class="s1">= </span><span class="s2">f</span><span class="s1">);</span>
+    <span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">once</span><span class="s1">(</span><span class="s0">&quot;error&quot;</span><span class="s1">, (</span><span class="s2">error</span><span class="s1">) =&gt; {</span>
+      <span class="s2">failed</span><span class="s1">(</span><span class="s3">new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Failed to launch: &quot; </span><span class="s1">+ </span><span class="s2">error</span><span class="s1">));</span>
+    <span class="s1">});</span>
+    <span class="s3">return </span><span class="s2">failedPromise</span><span class="s1">.</span><span class="s2">then</span><span class="s1">(</span><span class="s2">async </span><span class="s1">(</span><span class="s2">error</span><span class="s1">) =&gt; {</span>
+      <span class="s3">await </span><span class="s2">cleanup</span><span class="s1">();</span>
+      <span class="s3">throw </span><span class="s2">error</span><span class="s1">;</span>
+    <span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`&lt;launched&gt; pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">stdout </span><span class="s1">= </span><span class="s2">readline</span><span class="s1">.</span><span class="s2">createInterface</span><span class="s1">({ </span><span class="s2">input</span><span class="s1">: </span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">stdout </span><span class="s1">});</span>
+  <span class="s2">stdout</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;line&quot;</span><span class="s1">, (</span><span class="s2">data</span><span class="s1">) =&gt; {</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">][out] ` </span><span class="s1">+ </span><span class="s2">data</span><span class="s1">);</span>
+  <span class="s1">});</span>
+  <span class="s3">const </span><span class="s2">stderr </span><span class="s1">= </span><span class="s2">readline</span><span class="s1">.</span><span class="s2">createInterface</span><span class="s1">({ </span><span class="s2">input</span><span class="s1">: </span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">stderr </span><span class="s1">});</span>
+  <span class="s2">stderr</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;line&quot;</span><span class="s1">, (</span><span class="s2">data</span><span class="s1">) =&gt; {</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">][err] ` </span><span class="s1">+ </span><span class="s2">data</span><span class="s1">);</span>
+  <span class="s1">});</span>
+  <span class="s3">let </span><span class="s2">processClosed </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+  <span class="s3">let </span><span class="s2">fulfillCleanup </span><span class="s1">= () =&gt; {</span>
+  <span class="s1">};</span>
+  <span class="s3">const </span><span class="s2">waitForCleanup </span><span class="s1">= </span><span class="s3">new </span><span class="s2">Promise</span><span class="s1">((</span><span class="s2">f</span><span class="s1">) =&gt; </span><span class="s2">fulfillCleanup </span><span class="s1">= </span><span class="s2">f</span><span class="s1">);</span>
+  <span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">once</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, (</span><span class="s2">exitCode</span><span class="s1">, </span><span class="s2">signal</span><span class="s1">) =&gt; {</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] &lt;process did exit: exitCode=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">exitCode</span><span class="s1">}</span><span class="s0">, signal=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">signal</span><span class="s1">}</span><span class="s0">&gt;`</span><span class="s1">);</span>
+    <span class="s2">processClosed </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s2">gracefullyCloseSet</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">gracefullyClose</span><span class="s1">);</span>
+    <span class="s2">killSet</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">killProcessAndCleanup</span><span class="s1">);</span>
+    <span class="s2">removeProcessHandlersIfNeeded</span><span class="s1">();</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">onExit</span><span class="s1">(</span><span class="s2">exitCode</span><span class="s1">, </span><span class="s2">signal</span><span class="s1">);</span>
+    <span class="s2">cleanup</span><span class="s1">().</span><span class="s2">then</span><span class="s1">(</span><span class="s2">fulfillCleanup</span><span class="s1">);</span>
+  <span class="s1">});</span>
+  <span class="s2">addProcessHandlerIfNeeded</span><span class="s1">(</span><span class="s0">&quot;exit&quot;</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">handleSIGINT</span><span class="s1">)</span>
+    <span class="s2">addProcessHandlerIfNeeded</span><span class="s1">(</span><span class="s0">&quot;SIGINT&quot;</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">handleSIGTERM</span><span class="s1">)</span>
+    <span class="s2">addProcessHandlerIfNeeded</span><span class="s1">(</span><span class="s0">&quot;SIGTERM&quot;</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">handleSIGHUP</span><span class="s1">)</span>
+    <span class="s2">addProcessHandlerIfNeeded</span><span class="s1">(</span><span class="s0">&quot;SIGHUP&quot;</span><span class="s1">);</span>
+  <span class="s2">gracefullyCloseSet</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">gracefullyClose</span><span class="s1">);</span>
+  <span class="s2">killSet</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">killProcessAndCleanup</span><span class="s1">);</span>
+  <span class="s3">let </span><span class="s2">gracefullyClosing </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+  <span class="s2">async </span><span class="s3">function </span><span class="s2">gracefullyClose</span><span class="s1">() {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">gracefullyClosing</span><span class="s1">) {</span>
+      <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] &lt;forcefully close&gt;`</span><span class="s1">);</span>
+      <span class="s2">killProcess</span><span class="s1">();</span>
+      <span class="s3">await </span><span class="s2">waitForCleanup</span><span class="s1">;</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">gracefullyClosing </span><span class="s1">= </span><span class="s3">true</span><span class="s1">;</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] &lt;gracefully close start&gt;`</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">options</span><span class="s1">.</span><span class="s2">attemptToGracefullyClose</span><span class="s1">().</span><span class="s2">catch</span><span class="s1">(() =&gt; </span><span class="s2">killProcess</span><span class="s1">());</span>
+    <span class="s3">await </span><span class="s2">waitForCleanup</span><span class="s1">;</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] &lt;gracefully close end&gt;`</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">killProcess</span><span class="s1">() {</span>
+    <span class="s2">gracefullyCloseSet</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">gracefullyClose</span><span class="s1">);</span>
+    <span class="s2">killSet</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">killProcessAndCleanup</span><span class="s1">);</span>
+    <span class="s2">removeProcessHandlersIfNeeded</span><span class="s1">();</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] &lt;kill&gt;`</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid </span><span class="s1">&amp;&amp; !</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">killed </span><span class="s1">&amp;&amp; !</span><span class="s2">processClosed</span><span class="s1">) {</span>
+      <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] &lt;will force kill&gt;`</span><span class="s1">);</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">platform </span><span class="s1">=== </span><span class="s0">&quot;win32&quot;</span><span class="s1">) {</span>
+          <span class="s3">const </span><span class="s2">taskkillProcess </span><span class="s1">= </span><span class="s2">childProcess</span><span class="s1">.</span><span class="s2">spawnSync</span><span class="s1">(</span><span class="s0">`taskkill /pid </span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">} </span><span class="s0">/T /F`</span><span class="s1">, { </span><span class="s2">shell</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+          <span class="s3">const </span><span class="s1">[</span><span class="s2">stdout2</span><span class="s1">, </span><span class="s2">stderr2</span><span class="s1">] = [</span><span class="s2">taskkillProcess</span><span class="s1">.</span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">(), </span><span class="s2">taskkillProcess</span><span class="s1">.</span><span class="s2">stderr</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">()];</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">stdout2</span><span class="s1">)</span>
+            <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] taskkill stdout: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">stdout2</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+          <span class="s3">if </span><span class="s1">(</span><span class="s2">stderr2</span><span class="s1">)</span>
+            <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] taskkill stderr: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">stderr2</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+          <span class="s2">process</span><span class="s1">.</span><span class="s2">kill</span><span class="s1">(-</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">, </span><span class="s0">&quot;SIGKILL&quot;</span><span class="s1">);</span>
+        <span class="s1">}</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+        <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] exception while trying to kill process: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">e</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid</span><span class="s1">}</span><span class="s0">] &lt;skipped force kill spawnedProcess.killed=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">killed</span><span class="s1">} </span><span class="s0">processClosed=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">processClosed</span><span class="s1">}</span><span class="s0">&gt;`</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">killProcessAndCleanup</span><span class="s1">() {</span>
+    <span class="s2">killProcess</span><span class="s1">();</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid </span><span class="s1">|| </span><span class="s0">&quot;N/A&quot;</span><span class="s1">}</span><span class="s0">] starting temporary directories cleanup`</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">dir of options</span><span class="s1">.</span><span class="s2">tempDirectories</span><span class="s1">) {</span>
+      <span class="s3">try </span><span class="s1">{</span>
+        <span class="s2">import_fs</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">rmSync</span><span class="s1">(</span><span class="s2">dir</span><span class="s1">, { </span><span class="s2">force</span><span class="s1">: </span><span class="s3">true</span><span class="s1">, </span><span class="s2">recursive</span><span class="s1">: </span><span class="s3">true</span><span class="s1">, </span><span class="s2">maxRetries</span><span class="s1">: </span><span class="s5">5 </span><span class="s1">});</span>
+      <span class="s1">} </span><span class="s3">catch </span><span class="s1">(</span><span class="s2">e</span><span class="s1">) {</span>
+        <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid </span><span class="s1">|| </span><span class="s0">&quot;N/A&quot;</span><span class="s1">}</span><span class="s0">] exception while removing </span><span class="s2">$</span><span class="s1">{</span><span class="s2">dir</span><span class="s1">}</span><span class="s0">: </span><span class="s2">$</span><span class="s1">{</span><span class="s2">e</span><span class="s1">}</span><span class="s0">`</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s2">options</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">`[pid=</span><span class="s2">$</span><span class="s1">{</span><span class="s2">spawnedProcess</span><span class="s1">.</span><span class="s2">pid </span><span class="s1">|| </span><span class="s0">&quot;N/A&quot;</span><span class="s1">}</span><span class="s0">] finished temporary directories cleanup`</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s3">function </span><span class="s2">killAndWait</span><span class="s1">() {</span>
+    <span class="s2">killProcess</span><span class="s1">();</span>
+    <span class="s3">return </span><span class="s2">waitForCleanup</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s1">{ </span><span class="s2">launchedProcess</span><span class="s1">: </span><span class="s2">spawnedProcess</span><span class="s1">, </span><span class="s2">gracefullyClose</span><span class="s1">, </span><span class="s2">kill</span><span class="s1">: </span><span class="s2">killAndWait </span><span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">envArrayToObject</span><span class="s1">(</span><span class="s2">env</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= {};</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s1">{ </span><span class="s2">name</span><span class="s1">, </span><span class="s2">value </span><span class="s1">} </span><span class="s2">of env</span><span class="s1">)</span>
+    <span class="s2">result</span><span class="s1">[</span><span class="s2">name</span><span class="s1">] = </span><span class="s2">value</span><span class="s1">;</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">envArrayToObject</span><span class="s1">,</span>
+  <span class="s2">gracefullyCloseAll</span><span class="s1">,</span>
+  <span class="s2">gracefullyCloseSet</span><span class="s1">,</span>
+  <span class="s2">gracefullyProcessExitDoNotHang</span><span class="s1">,</span>
+  <span class="s2">launchProcess</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

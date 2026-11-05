@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>mock-errors.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+mock-errors.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Errors from </span><span class="s2">'./errors'</span>
+
+<span class="s0">export default </span><span class="s1">MockErrors</span>
+
+<span class="s1">declare namespace MockErrors </span><span class="s3">{</span>
+  <span class="s4">/** The request does not match any registered mock dispatches. */</span>
+  <span class="s0">export class </span><span class="s1">MockNotMatchedError </span><span class="s0">extends </span><span class="s1">Errors</span><span class="s3">.</span><span class="s1">UndiciError </span><span class="s3">{</span>
+    <span class="s1">constructor</span><span class="s3">(</span><span class="s1">message</span><span class="s3">?: </span><span class="s1">string</span><span class="s3">);</span>
+    <span class="s1">name</span><span class="s3">: </span><span class="s2">'MockNotMatchedError'</span><span class="s3">;</span>
+    <span class="s1">code</span><span class="s3">: </span><span class="s2">'UND_MOCK_ERR_MOCK_NOT_MATCHED'</span><span class="s3">;</span>
+  <span class="s3">}</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

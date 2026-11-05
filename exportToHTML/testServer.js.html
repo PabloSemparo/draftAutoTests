@@ -1,0 +1,286 @@
+<html>
+<head>
+<title>testServer.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+testServer.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">testServer_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">testServer_exports</span><span class="s1">, {</span>
+  <span class="s2">TestServerDispatcher</span><span class="s1">: () =&gt; </span><span class="s2">TestServerDispatcher</span><span class="s1">,</span>
+  <span class="s2">runTestServer</span><span class="s1">: () =&gt; </span><span class="s2">runTestServer</span><span class="s1">,</span>
+  <span class="s2">runUIMode</span><span class="s1">: () =&gt; </span><span class="s2">runUIMode</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">testServer_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_util </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;util&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_server </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/server&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utilsBundle </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;playwright-core/lib/utilsBundle&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_configLoader </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../common/configLoader&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_list </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../reporters/list&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_reporters </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./reporters&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_sigIntWatcher </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./sigIntWatcher&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_testRunner </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./testRunner&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">originalDebugLog </span><span class="s1">= </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">.</span><span class="s2">log</span><span class="s1">;</span>
+<span class="s3">const </span><span class="s2">originalStdoutWrite </span><span class="s1">= </span><span class="s2">process</span><span class="s1">.</span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">write</span><span class="s1">;</span>
+<span class="s3">const </span><span class="s2">originalStderrWrite </span><span class="s1">= </span><span class="s2">process</span><span class="s1">.</span><span class="s2">stderr</span><span class="s1">.</span><span class="s2">write</span><span class="s1">;</span>
+<span class="s3">class </span><span class="s2">TestServer </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_configLocation </span><span class="s1">= </span><span class="s2">configLocation</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_configCLIOverrides </span><span class="s1">= </span><span class="s2">configCLIOverrides</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async start</span><span class="s1">(</span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatcher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">TestServerDispatcher</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_configLocation</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_configCLIOverrides</span><span class="s1">);</span>
+    <span class="s3">return await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">startTraceViewerServer</span><span class="s1">)({ </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">transport</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatcher</span><span class="s1">.</span><span class="s2">transport </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s2">async stop</span><span class="s1">() {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_dispatcher</span><span class="s1">?.</span><span class="s2">stop</span><span class="s1">();</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">TestServerDispatcher </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_serializer </span><span class="s1">= </span><span class="s2">require</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s0">&quot;./uiModeReporter&quot;</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closeOnDisconnect </span><span class="s1">= </span><span class="s3">false</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_testRunner</span><span class="s1">.</span><span class="s2">TestRunner</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">transport </span><span class="s1">= {</span>
+      <span class="s2">onconnect</span><span class="s1">: () =&gt; {</span>
+      <span class="s1">},</span>
+      <span class="s2">dispatch</span><span class="s1">: (</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">[</span><span class="s2">method</span><span class="s1">](</span><span class="s2">params</span><span class="s1">),</span>
+      <span class="s2">onclose</span><span class="s1">: () =&gt; {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_closeOnDisconnect</span><span class="s1">)</span>
+          <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">gracefullyProcessExitDoNotHang</span><span class="s1">)(</span><span class="s5">0</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">};</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatchEvent </span><span class="s1">= (</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">transport</span><span class="s1">.</span><span class="s2">sendEvent</span><span class="s1">?.(</span><span class="s2">method</span><span class="s1">, </span><span class="s2">params</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s2">import_testRunner</span><span class="s1">.</span><span class="s2">TestRunnerEvent</span><span class="s1">.</span><span class="s2">TestFilesChanged</span><span class="s1">, (</span><span class="s2">testFiles</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;testFilesChanged&quot;</span><span class="s1">, { </span><span class="s2">testFiles </span><span class="s1">}));</span>
+  <span class="s1">}</span>
+  <span class="s2">async _wireReporter</span><span class="s1">(</span><span class="s2">messageSink</span><span class="s1">) {</span>
+    <span class="s3">return await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_reporters</span><span class="s1">.</span><span class="s2">createReporterForTestServer</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_serializer</span><span class="s1">, </span><span class="s2">messageSink</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async _collectingReporter</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s2">report </span><span class="s1">= [];</span>
+    <span class="s3">return </span><span class="s1">{</span>
+      <span class="s2">reporter</span><span class="s1">: </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_reporters</span><span class="s1">.</span><span class="s2">createReporterForTestServer</span><span class="s1">)(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_serializer</span><span class="s1">, (</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s2">report</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">e</span><span class="s1">)),</span>
+      <span class="s2">report</span>
+    <span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async initialize</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_serializer </span><span class="s1">= </span><span class="s2">params</span><span class="s1">.</span><span class="s2">serializer </span><span class="s1">|| </span><span class="s2">require</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">(</span><span class="s0">&quot;./uiModeReporter&quot;</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_closeOnDisconnect </span><span class="s1">= !!</span><span class="s2">params</span><span class="s1">.</span><span class="s2">closeOnDisconnect</span><span class="s1">;</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">initialize</span><span class="s1">({</span>
+      <span class="s2">...params</span>
+    <span class="s1">});</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_setInterceptStdio</span><span class="s1">(!!</span><span class="s2">params</span><span class="s1">.</span><span class="s2">interceptStdio</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async ping</span><span class="s1">() {</span>
+  <span class="s1">}</span>
+  <span class="s2">async open</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">((</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">isUnderTest</span><span class="s1">)())</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">open</span><span class="s1">)(</span><span class="s0">&quot;vscode://file/&quot; </span><span class="s1">+ </span><span class="s2">params</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">file </span><span class="s1">+ </span><span class="s0">&quot;:&quot; </span><span class="s1">+ </span><span class="s2">params</span><span class="s1">.</span><span class="s2">location</span><span class="s1">.</span><span class="s2">line</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s2">console</span><span class="s1">.</span><span class="s2">error</span><span class="s1">(</span><span class="s2">e</span><span class="s1">));</span>
+  <span class="s1">}</span>
+  <span class="s2">async resizeTerminal</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">resizeTerminal</span><span class="s1">(</span><span class="s2">params</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async checkBrowsers</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">hasBrowsers</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">hasSomeBrowsers</span><span class="s1">() };</span>
+  <span class="s1">}</span>
+  <span class="s2">async installBrowsers</span><span class="s1">() {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">installBrowsers</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async runGlobalSetup</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">runGlobalTeardown</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">reporter</span><span class="s1">, </span><span class="s2">report </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_collectingReporter</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_globalSetupReport </span><span class="s1">= </span><span class="s2">report</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">runGlobalSetup</span><span class="s1">([</span><span class="s2">reporter</span><span class="s1">, </span><span class="s3">new </span><span class="s2">import_list</span><span class="s1">.</span><span class="s2">default</span><span class="s1">()]);</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">report</span><span class="s1">, </span><span class="s2">status </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async runGlobalTeardown</span><span class="s1">() {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">runGlobalTeardown</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">report </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_globalSetupReport </span><span class="s1">|| [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_globalSetupReport </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">status</span><span class="s1">, </span><span class="s2">report </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async startDevServer</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">stopDevServer</span><span class="s1">({});</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">reporter</span><span class="s1">, </span><span class="s2">report </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_collectingReporter</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">startDevServer</span><span class="s1">(</span><span class="s2">reporter</span><span class="s1">, </span><span class="s0">&quot;out-of-process&quot;</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">report</span><span class="s1">, </span><span class="s2">status </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async stopDevServer</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">stopDevServer</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s2">report </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_devServerReport </span><span class="s1">|| [];</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_devServerReport </span><span class="s1">= </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">status</span><span class="s1">, </span><span class="s2">report </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async clearCache</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">clearCache</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async listFiles</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">reporter</span><span class="s1">, </span><span class="s2">report </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_collectingReporter</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">listFiles</span><span class="s1">(</span><span class="s2">reporter</span><span class="s1">, </span><span class="s2">params</span><span class="s1">.</span><span class="s2">projects</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">report</span><span class="s1">, </span><span class="s2">status </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async listTests</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">reporter</span><span class="s1">, </span><span class="s2">report </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_collectingReporter</span><span class="s1">();</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">listTests</span><span class="s1">(</span><span class="s2">reporter</span><span class="s1">, </span><span class="s2">params</span><span class="s1">);</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">report</span><span class="s1">, </span><span class="s2">status </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async runTests</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">wireReporter </span><span class="s1">= </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_wireReporter</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;report&quot;</span><span class="s1">, </span><span class="s2">e</span><span class="s1">));</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">} = </span><span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">runTests</span><span class="s1">(</span><span class="s2">wireReporter</span><span class="s1">, {</span>
+      <span class="s2">...params</span><span class="s1">,</span>
+      <span class="s2">doNotRunDepsOutsideProjectFilter</span><span class="s1">: </span><span class="s3">true</span>
+    <span class="s1">});</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">status </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async watch</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">watch</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">fileNames</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async findRelatedTestFiles</span><span class="s1">(</span><span class="s2">params</span><span class="s1">) {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">findRelatedTestFiles</span><span class="s1">(</span><span class="s2">params</span><span class="s1">.</span><span class="s2">files</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async stopTests</span><span class="s1">() {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">stopTests</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async stop</span><span class="s1">() {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_setInterceptStdio</span><span class="s1">(</span><span class="s3">false</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">stop</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">async closeGracefully</span><span class="s1">() {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_testRunner</span><span class="s1">.</span><span class="s2">closeGracefully</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s2">_setInterceptStdio</span><span class="s1">(</span><span class="s2">interceptStdio</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PWTEST_DEBUG</span><span class="s1">)</span>
+      <span class="s3">return</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">interceptStdio</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">.</span><span class="s2">log </span><span class="s1">=== </span><span class="s2">originalDebugLog</span><span class="s1">) {</span>
+        <span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">.</span><span class="s2">log </span><span class="s1">= (</span><span class="s2">...args</span><span class="s1">) =&gt; {</span>
+          <span class="s3">const </span><span class="s2">string </span><span class="s1">= </span><span class="s2">import_util</span><span class="s1">.</span><span class="s2">default</span><span class="s1">.</span><span class="s2">format</span><span class="s1">(</span><span class="s2">...args</span><span class="s1">) + </span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">;</span>
+          <span class="s3">return </span><span class="s2">originalStderrWrite</span><span class="s1">.</span><span class="s2">apply</span><span class="s1">(</span><span class="s2">process</span><span class="s1">.</span><span class="s2">stderr</span><span class="s1">, [</span><span class="s2">string</span><span class="s1">]);</span>
+        <span class="s1">};</span>
+      <span class="s1">}</span>
+      <span class="s3">const </span><span class="s2">stdoutWrite </span><span class="s1">= (</span><span class="s2">chunk</span><span class="s1">) =&gt; {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;stdio&quot;</span><span class="s1">, </span><span class="s2">chunkToPayload</span><span class="s1">(</span><span class="s0">&quot;stdout&quot;</span><span class="s1">, </span><span class="s2">chunk</span><span class="s1">));</span>
+        <span class="s3">return true</span><span class="s1">;</span>
+      <span class="s1">};</span>
+      <span class="s3">const </span><span class="s2">stderrWrite </span><span class="s1">= (</span><span class="s2">chunk</span><span class="s1">) =&gt; {</span>
+        <span class="s3">this</span><span class="s1">.</span><span class="s2">_dispatchEvent</span><span class="s1">(</span><span class="s0">&quot;stdio&quot;</span><span class="s1">, </span><span class="s2">chunkToPayload</span><span class="s1">(</span><span class="s0">&quot;stderr&quot;</span><span class="s1">, </span><span class="s2">chunk</span><span class="s1">));</span>
+        <span class="s3">return true</span><span class="s1">;</span>
+      <span class="s1">};</span>
+      <span class="s2">process</span><span class="s1">.</span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">write </span><span class="s1">= </span><span class="s2">stdoutWrite</span><span class="s1">;</span>
+      <span class="s2">process</span><span class="s1">.</span><span class="s2">stderr</span><span class="s1">.</span><span class="s2">write </span><span class="s1">= </span><span class="s2">stderrWrite</span><span class="s1">;</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s2">import_utilsBundle</span><span class="s1">.</span><span class="s2">debug</span><span class="s1">.</span><span class="s2">log </span><span class="s1">= </span><span class="s2">originalDebugLog</span><span class="s1">;</span>
+      <span class="s2">process</span><span class="s1">.</span><span class="s2">stdout</span><span class="s1">.</span><span class="s2">write </span><span class="s1">= </span><span class="s2">originalStdoutWrite</span><span class="s1">;</span>
+      <span class="s2">process</span><span class="s1">.</span><span class="s2">stderr</span><span class="s1">.</span><span class="s2">write </span><span class="s1">= </span><span class="s2">originalStderrWrite</span><span class="s1">;</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">runUIMode</span><span class="s1">(</span><span class="s2">configFile</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">configLocation </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_configLoader</span><span class="s1">.</span><span class="s2">resolveConfigLocation</span><span class="s1">)(</span><span class="s2">configFile</span><span class="s1">);</span>
+  <span class="s3">return await </span><span class="s2">innerRunTestServer</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">, </span><span class="s2">options</span><span class="s1">, </span><span class="s2">async </span><span class="s1">(</span><span class="s2">server</span><span class="s1">, </span><span class="s2">cancelPromise</span><span class="s1">) =&gt; {</span>
+    <span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">installRootRedirect</span><span class="s1">)(</span><span class="s2">server</span><span class="s1">, [], { </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">webApp</span><span class="s1">: </span><span class="s0">&quot;uiMode.html&quot; </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">host </span><span class="s1">!== </span><span class="s3">void </span><span class="s5">0 </span><span class="s1">|| </span><span class="s2">options</span><span class="s1">.</span><span class="s2">port </span><span class="s1">!== </span><span class="s3">void </span><span class="s5">0</span><span class="s1">) {</span>
+      <span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">openTraceInBrowser</span><span class="s1">)(</span><span class="s2">server</span><span class="s1">.</span><span class="s2">urlPrefix</span><span class="s1">(</span><span class="s0">&quot;human-readable&quot;</span><span class="s1">));</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">channel </span><span class="s1">= </span><span class="s3">await </span><span class="s2">installedChromiumChannelForUI</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">page </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_server</span><span class="s1">.</span><span class="s2">openTraceViewerApp</span><span class="s1">)(</span><span class="s2">server</span><span class="s1">.</span><span class="s2">urlPrefix</span><span class="s1">(</span><span class="s0">&quot;precise&quot;</span><span class="s1">), </span><span class="s0">&quot;chromium&quot;</span><span class="s1">, {</span>
+        <span class="s2">headless</span><span class="s1">: (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">isUnderTest</span><span class="s1">)() &amp;&amp; </span><span class="s2">process</span><span class="s1">.</span><span class="s2">env</span><span class="s1">.</span><span class="s2">PWTEST_HEADED_FOR_TEST </span><span class="s1">!== </span><span class="s0">&quot;1&quot;</span><span class="s1">,</span>
+        <span class="s2">persistentContextOptions</span><span class="s1">: {</span>
+          <span class="s2">handleSIGINT</span><span class="s1">: </span><span class="s3">false</span><span class="s1">,</span>
+          <span class="s2">channel</span>
+        <span class="s1">}</span>
+      <span class="s1">});</span>
+      <span class="s2">page</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, () =&gt; </span><span class="s2">cancelPromise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">());</span>
+    <span class="s1">}</span>
+  <span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">installedChromiumChannelForUI</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">config </span><span class="s1">= </span><span class="s3">await </span><span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_configLoader</span><span class="s1">.</span><span class="s2">loadConfig</span><span class="s1">)(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">).</span><span class="s2">catch</span><span class="s1">((</span><span class="s2">e</span><span class="s1">) =&gt; </span><span class="s3">null</span><span class="s1">);</span>
+  <span class="s3">if </span><span class="s1">(!</span><span class="s2">config</span><span class="s1">)</span>
+    <span class="s3">return void </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">projects</span><span class="s1">.</span><span class="s2">some</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; (!</span><span class="s2">p</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">use</span><span class="s1">.</span><span class="s2">browserName </span><span class="s1">|| </span><span class="s2">p</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">use</span><span class="s1">.</span><span class="s2">browserName </span><span class="s1">=== </span><span class="s0">&quot;chromium&quot;</span><span class="s1">) &amp;&amp; !</span><span class="s2">p</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">use</span><span class="s1">.</span><span class="s2">channel</span><span class="s1">))</span>
+    <span class="s3">return void </span><span class="s5">0</span><span class="s1">;</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">channel of </span><span class="s1">[</span><span class="s0">&quot;chromium&quot;</span><span class="s1">, </span><span class="s0">&quot;chrome&quot;</span><span class="s1">, </span><span class="s0">&quot;msedge&quot;</span><span class="s1">]) {</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">config</span><span class="s1">.</span><span class="s2">projects</span><span class="s1">.</span><span class="s2">some</span><span class="s1">((</span><span class="s2">p</span><span class="s1">) =&gt; </span><span class="s2">p</span><span class="s1">.</span><span class="s2">project</span><span class="s1">.</span><span class="s2">use</span><span class="s1">.</span><span class="s2">channel </span><span class="s1">=== </span><span class="s2">channel</span><span class="s1">))</span>
+      <span class="s3">return </span><span class="s2">channel</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s3">return void </span><span class="s5">0</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">runTestServer</span><span class="s1">(</span><span class="s2">configFile</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">configLocation </span><span class="s1">= (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_configLoader</span><span class="s1">.</span><span class="s2">resolveConfigLocation</span><span class="s1">)(</span><span class="s2">configFile</span><span class="s1">);</span>
+  <span class="s3">return await </span><span class="s2">innerRunTestServer</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">, </span><span class="s2">options</span><span class="s1">, </span><span class="s2">async </span><span class="s1">(</span><span class="s2">server</span><span class="s1">) =&gt; {</span>
+    <span class="s2">console</span><span class="s1">.</span><span class="s2">log</span><span class="s1">(</span><span class="s0">&quot;Listening on &quot; </span><span class="s1">+ </span><span class="s2">server</span><span class="s1">.</span><span class="s2">urlPrefix</span><span class="s1">(</span><span class="s0">&quot;precise&quot;</span><span class="s1">).</span><span class="s2">replace</span><span class="s1">(</span><span class="s0">&quot;http:&quot;</span><span class="s1">, </span><span class="s0">&quot;ws:&quot;</span><span class="s1">) + </span><span class="s0">&quot;/&quot; </span><span class="s1">+ </span><span class="s2">server</span><span class="s1">.</span><span class="s2">wsGuid</span><span class="s1">());</span>
+  <span class="s1">});</span>
+<span class="s1">}</span>
+<span class="s2">async </span><span class="s3">function </span><span class="s2">innerRunTestServer</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">, </span><span class="s2">options</span><span class="s1">, </span><span class="s2">openUI</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">testServer </span><span class="s1">= </span><span class="s3">new </span><span class="s2">TestServer</span><span class="s1">(</span><span class="s2">configLocation</span><span class="s1">, </span><span class="s2">configCLIOverrides</span><span class="s1">);</span>
+  <span class="s3">const </span><span class="s2">cancelPromise </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">ManualPromise</span><span class="s1">();</span>
+  <span class="s3">const </span><span class="s2">sigintWatcher </span><span class="s1">= </span><span class="s3">new </span><span class="s2">import_sigIntWatcher</span><span class="s1">.</span><span class="s2">SigIntWatcher</span><span class="s1">();</span>
+  <span class="s2">process</span><span class="s1">.</span><span class="s2">stdin</span><span class="s1">.</span><span class="s2">on</span><span class="s1">(</span><span class="s0">&quot;close&quot;</span><span class="s1">, () =&gt; (</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">gracefullyProcessExitDoNotHang</span><span class="s1">)(</span><span class="s5">0</span><span class="s1">));</span>
+  <span class="s3">void </span><span class="s2">sigintWatcher</span><span class="s1">.</span><span class="s2">promise</span><span class="s1">().</span><span class="s2">then</span><span class="s1">(() =&gt; </span><span class="s2">cancelPromise</span><span class="s1">.</span><span class="s2">resolve</span><span class="s1">());</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s3">const </span><span class="s2">server </span><span class="s1">= </span><span class="s3">await </span><span class="s2">testServer</span><span class="s1">.</span><span class="s2">start</span><span class="s1">(</span><span class="s2">options</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">openUI</span><span class="s1">(</span><span class="s2">server</span><span class="s1">, </span><span class="s2">cancelPromise</span><span class="s1">);</span>
+    <span class="s3">await </span><span class="s2">cancelPromise</span><span class="s1">;</span>
+  <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+    <span class="s3">await </span><span class="s2">testServer</span><span class="s1">.</span><span class="s2">stop</span><span class="s1">();</span>
+    <span class="s2">sigintWatcher</span><span class="s1">.</span><span class="s2">disarm</span><span class="s1">();</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">sigintWatcher</span><span class="s1">.</span><span class="s2">hadSignal</span><span class="s1">() ? </span><span class="s0">&quot;interrupted&quot; </span><span class="s1">: </span><span class="s0">&quot;passed&quot;</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">chunkToPayload</span><span class="s1">(</span><span class="s2">type</span><span class="s1">, </span><span class="s2">chunk</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">chunk </span><span class="s3">instanceof </span><span class="s2">Uint8Array</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">type</span><span class="s1">, </span><span class="s2">buffer</span><span class="s1">: </span><span class="s2">chunk</span><span class="s1">.</span><span class="s2">toString</span><span class="s1">(</span><span class="s0">&quot;base64&quot;</span><span class="s1">) };</span>
+  <span class="s3">return </span><span class="s1">{ </span><span class="s2">type</span><span class="s1">, </span><span class="s2">text</span><span class="s1">: </span><span class="s2">chunk </span><span class="s1">};</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">TestServerDispatcher</span><span class="s1">,</span>
+  <span class="s2">runTestServer</span><span class="s1">,</span>
+  <span class="s2">runUIMode</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

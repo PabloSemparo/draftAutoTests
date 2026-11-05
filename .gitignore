@@ -5,3 +5,11 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Локальное окружение с секретами — в репозитории хранится только env_settings/.env.example
+env_settings/.env.stage
+
+# Артефакты прогонов
+test-results.json
+allure-results/
+allure-report/

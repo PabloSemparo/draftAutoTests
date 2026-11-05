@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>reinstall_msedge_dev_mac.sh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4; font-weight: bold;}
+.s1 { color: #bcbec4;}
+.s2 { color: #2aacb8;}
+.s3 { color: #6aab73;}
+.s4 { color: #bcbec4;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+reinstall_msedge_dev_mac.sh</font>
+</center></td></tr></table>
+<pre><span class="s0">#!/usr/bin/env bash</span>
+<span class="s1">set -e</span>
+<span class="s1">set -x</span>
+
+<span class="s1">cd /tmp</span>
+<span class="s1">curl --retry </span><span class="s2">3 </span><span class="s1">-o ./msedge_dev.pkg </span><span class="s3">&quot;</span><span class="s4">$1</span><span class="s3">&quot;</span>
+<span class="s5"># Note: there's no way to uninstall previously installed MSEdge.</span>
+<span class="s5"># However, running PKG again seems to update installation.</span>
+<span class="s1">sudo installer -pkg /tmp/msedge_dev.pkg -target /</span>
+<span class="s1">rm -rf /tmp/msedge_dev.pkg</span>
+<span class="s1">/Applications/Microsoft\ Edge\ Dev.app/Contents/MacOS/Microsoft\ Edge\ Dev --version</span>
+</pre>
+</body>
+</html>

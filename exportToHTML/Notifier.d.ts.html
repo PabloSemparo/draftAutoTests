@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Notifier.d.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Notifier.d.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">type </span><span class="s2">{ </span><span class="s1">StepResult</span><span class="s2">, </span><span class="s1">TestResult </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;../../model.js&quot;</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">type </span><span class="s2">{ </span><span class="s1">LifecycleListener </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;./types.js&quot;</span><span class="s2">;</span>
+<span class="s0">export </span><span class="s1">declare </span><span class="s0">class </span><span class="s1">Notifier </span><span class="s0">implements </span><span class="s1">LifecycleListener </span><span class="s2">{</span>
+    <span class="s1">listeners</span><span class="s2">: </span><span class="s1">LifecycleListener</span><span class="s2">[];</span>
+    <span class="s1">constructor</span><span class="s2">({ </span><span class="s1">listeners </span><span class="s2">}: {</span>
+        <span class="s1">listeners</span><span class="s2">: </span><span class="s1">LifecycleListener</span><span class="s2">[];</span>
+    <span class="s2">});</span>
+    <span class="s0">private </span><span class="s1">callListeners</span><span class="s2">;</span>
+    <span class="s1">beforeTestResultStart</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">afterTestResultStart</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">beforeTestResultStop</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">afterTestResultStop</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">beforeTestResultUpdate</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">afterTestResultUpdate</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">beforeTestResultWrite</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">afterTestResultWrite</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">TestResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">beforeStepStop</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">StepResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+    <span class="s1">afterStepStop</span><span class="s2">: (</span><span class="s1">result</span><span class="s2">: </span><span class="s1">StepResult</span><span class="s2">) =&gt; </span><span class="s0">void</span><span class="s2">;</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

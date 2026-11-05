@@ -1,0 +1,295 @@
+<html>
+<head>
+<title>input.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #6aab73;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+input.js</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;use strict&quot;</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__create </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">create</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__defProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">defineProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropDesc </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyDescriptor</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getOwnPropNames </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getOwnPropertyNames</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__getProtoOf </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">getPrototypeOf</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__hasOwnProp </span><span class="s1">= </span><span class="s2">Object</span><span class="s1">.</span><span class="s2">prototype</span><span class="s1">.</span><span class="s2">hasOwnProperty</span><span class="s1">;</span>
+<span class="s3">var </span><span class="s2">__export </span><span class="s1">= (</span><span class="s2">target</span><span class="s1">, </span><span class="s2">all</span><span class="s1">) =&gt; {</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">var </span><span class="s2">name </span><span class="s3">in </span><span class="s2">all</span><span class="s1">)</span>
+    <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s2">name</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: </span><span class="s2">all</span><span class="s1">[</span><span class="s2">name</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__copyProps </span><span class="s1">= (</span><span class="s2">to</span><span class="s1">, </span><span class="s2">from</span><span class="s1">, </span><span class="s2">except</span><span class="s1">, </span><span class="s2">desc</span><span class="s1">) =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">from </span><span class="s1">&amp;&amp; </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;object&quot; </span><span class="s1">|| </span><span class="s3">typeof </span><span class="s2">from </span><span class="s1">=== </span><span class="s0">&quot;function&quot;</span><span class="s1">) {</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">key of __getOwnPropNames</span><span class="s1">(</span><span class="s2">from</span><span class="s1">))</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">__hasOwnProp</span><span class="s1">.</span><span class="s2">call</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) &amp;&amp; </span><span class="s2">key </span><span class="s1">!== </span><span class="s2">except</span><span class="s1">)</span>
+        <span class="s2">__defProp</span><span class="s1">(</span><span class="s2">to</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, { </span><span class="s2">get</span><span class="s1">: () =&gt; </span><span class="s2">from</span><span class="s1">[</span><span class="s2">key</span><span class="s1">], </span><span class="s2">enumerable</span><span class="s1">: !(</span><span class="s2">desc </span><span class="s1">= </span><span class="s2">__getOwnPropDesc</span><span class="s1">(</span><span class="s2">from</span><span class="s1">, </span><span class="s2">key</span><span class="s1">)) || </span><span class="s2">desc</span><span class="s1">.</span><span class="s2">enumerable </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">to</span><span class="s1">;</span>
+<span class="s1">};</span>
+<span class="s3">var </span><span class="s2">__toESM </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">, </span><span class="s2">isNodeMode</span><span class="s1">, </span><span class="s2">target</span><span class="s1">) =&gt; (</span><span class="s2">target </span><span class="s1">= </span><span class="s2">mod </span><span class="s1">!= </span><span class="s3">null </span><span class="s1">? </span><span class="s2">__create</span><span class="s1">(</span><span class="s2">__getProtoOf</span><span class="s1">(</span><span class="s2">mod</span><span class="s1">)) : {}, </span><span class="s2">__copyProps</span><span class="s1">(</span>
+  <span class="s4">// If the importer is in node compatibility mode or this is not an ESM</span>
+  <span class="s4">// file that has been converted to a CommonJS file using a Babel-</span>
+  <span class="s4">// compatible transform (i.e. &quot;__esModule&quot; has not been set), then set</span>
+  <span class="s4">// &quot;default&quot; to the CommonJS &quot;module.exports&quot; for node compatibility.</span>
+  <span class="s2">isNodeMode </span><span class="s1">|| !</span><span class="s2">mod </span><span class="s1">|| !</span><span class="s2">mod</span><span class="s1">.</span><span class="s2">__esModule </span><span class="s1">? </span><span class="s2">__defProp</span><span class="s1">(</span><span class="s2">target</span><span class="s1">, </span><span class="s0">&quot;default&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s2">mod</span><span class="s1">, </span><span class="s2">enumerable</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}) : </span><span class="s2">target</span><span class="s1">,</span>
+  <span class="s2">mod</span>
+<span class="s1">));</span>
+<span class="s3">var </span><span class="s2">__toCommonJS </span><span class="s1">= (</span><span class="s2">mod</span><span class="s1">) =&gt; </span><span class="s2">__copyProps</span><span class="s1">(</span><span class="s2">__defProp</span><span class="s1">({}, </span><span class="s0">&quot;__esModule&quot;</span><span class="s1">, { </span><span class="s2">value</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}), </span><span class="s2">mod</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">input_exports </span><span class="s1">= {};</span>
+<span class="s2">__export</span><span class="s1">(</span><span class="s2">input_exports</span><span class="s1">, {</span>
+  <span class="s2">Keyboard</span><span class="s1">: () =&gt; </span><span class="s2">Keyboard</span><span class="s1">,</span>
+  <span class="s2">Mouse</span><span class="s1">: () =&gt; </span><span class="s2">Mouse</span><span class="s1">,</span>
+  <span class="s2">Touchscreen</span><span class="s1">: () =&gt; </span><span class="s2">Touchscreen</span><span class="s1">,</span>
+  <span class="s2">keypadLocation</span><span class="s1">: () =&gt; </span><span class="s2">keypadLocation</span><span class="s1">,</span>
+  <span class="s2">resolveSmartModifier</span><span class="s1">: () =&gt; </span><span class="s2">resolveSmartModifier</span><span class="s1">,</span>
+  <span class="s2">resolveSmartModifierString</span><span class="s1">: () =&gt; </span><span class="s2">resolveSmartModifierString</span>
+<span class="s1">});</span>
+<span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= </span><span class="s2">__toCommonJS</span><span class="s1">(</span><span class="s2">input_exports</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">import_utils </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;../utils&quot;</span><span class="s1">);</span>
+<span class="s3">var </span><span class="s2">keyboardLayout </span><span class="s1">= </span><span class="s2">__toESM</span><span class="s1">(</span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./usKeyboardLayout&quot;</span><span class="s1">));</span>
+<span class="s3">var </span><span class="s2">import_dom </span><span class="s1">= </span><span class="s2">require</span><span class="s1">(</span><span class="s0">&quot;./dom&quot;</span><span class="s1">);</span>
+<span class="s3">const </span><span class="s2">keypadLocation </span><span class="s1">= </span><span class="s2">keyboardLayout</span><span class="s1">.</span><span class="s2">keypadLocation</span><span class="s1">;</span>
+<span class="s3">const </span><span class="s2">kModifiers </span><span class="s1">= [</span><span class="s0">&quot;Alt&quot;</span><span class="s1">, </span><span class="s0">&quot;Control&quot;</span><span class="s1">, </span><span class="s0">&quot;Meta&quot;</span><span class="s1">, </span><span class="s0">&quot;Shift&quot;</span><span class="s1">];</span>
+<span class="s3">class </span><span class="s2">Keyboard </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">raw</span><span class="s1">, </span><span class="s2">page</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedKeys </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_raw </span><span class="s1">= </span><span class="s2">raw</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_page </span><span class="s1">= </span><span class="s2">page</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">description </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_keyDescriptionForString</span><span class="s1">(</span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">autoRepeat </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedKeys</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">code</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedKeys</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">code</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">kModifiers</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">key</span><span class="s1">))</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">keydown</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, </span><span class="s2">description</span><span class="s1">, </span><span class="s2">autoRepeat</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">_keyDescriptionForString</span><span class="s1">(</span><span class="s2">str</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">keyString </span><span class="s1">= </span><span class="s2">resolveSmartModifierString</span><span class="s1">(</span><span class="s2">str</span><span class="s1">);</span>
+    <span class="s3">let </span><span class="s2">description </span><span class="s1">= </span><span class="s2">usKeyboardLayout</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">keyString</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s2">description</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">import_dom</span><span class="s1">.</span><span class="s2">NonRecoverableDOMError</span><span class="s1">(</span><span class="s0">`Unknown key: &quot;</span><span class="s2">$</span><span class="s1">{</span><span class="s2">keyString</span><span class="s1">}</span><span class="s0">&quot;`</span><span class="s1">);</span>
+    <span class="s3">const </span><span class="s2">shift </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s0">&quot;Shift&quot;</span><span class="s1">);</span>
+    <span class="s2">description </span><span class="s1">= </span><span class="s2">shift </span><span class="s1">&amp;&amp; </span><span class="s2">description</span><span class="s1">.</span><span class="s2">shifted </span><span class="s1">? </span><span class="s2">description</span><span class="s1">.</span><span class="s2">shifted </span><span class="s1">: </span><span class="s2">description</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">.</span><span class="s2">size </span><span class="s1">&gt; </span><span class="s5">1 </span><span class="s1">|| !</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s0">&quot;Shift&quot;</span><span class="s1">) &amp;&amp; </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">.</span><span class="s2">size </span><span class="s1">=== </span><span class="s5">1</span><span class="s1">)</span>
+      <span class="s3">return </span><span class="s1">{ </span><span class="s2">...description</span><span class="s1">, </span><span class="s2">text</span><span class="s1">: </span><span class="s0">&quot;&quot; </span><span class="s1">};</span>
+    <span class="s3">return </span><span class="s2">description</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">key</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">description </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_keyDescriptionForString</span><span class="s1">(</span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">kModifiers</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">key</span><span class="s1">))</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedKeys</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">code</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">keyup</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, </span><span class="s2">description</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async insertText</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">text</span><span class="s1">) {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">sendText</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">text</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async type</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">text</span><span class="s1">, </span><span class="s2">options</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">delay </span><span class="s1">= </span><span class="s2">options </span><span class="s1">&amp;&amp; </span><span class="s2">options</span><span class="s1">.</span><span class="s2">delay </span><span class="s1">|| </span><span class="s3">void </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">char of text</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">usKeyboardLayout</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">char</span><span class="s1">)) {</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">press</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">char</span><span class="s1">, { </span><span class="s2">delay </span><span class="s1">});</span>
+      <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">delay</span><span class="s1">)</span>
+          <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">wait</span><span class="s1">(</span><span class="s2">delay</span><span class="s1">);</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">insertText</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">char</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async press</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">key</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">function </span><span class="s2">split</span><span class="s1">(</span><span class="s2">keyString</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">keys </span><span class="s1">= [];</span>
+      <span class="s3">let </span><span class="s2">building </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">char of keyString</span><span class="s1">) {</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">char </span><span class="s1">=== </span><span class="s0">&quot;+&quot; </span><span class="s1">&amp;&amp; </span><span class="s2">building</span><span class="s1">) {</span>
+          <span class="s2">keys</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">building</span><span class="s1">);</span>
+          <span class="s2">building </span><span class="s1">= </span><span class="s0">&quot;&quot;</span><span class="s1">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+          <span class="s2">building </span><span class="s1">+= </span><span class="s2">char</span><span class="s1">;</span>
+        <span class="s1">}</span>
+      <span class="s1">}</span>
+      <span class="s2">keys</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s2">building</span><span class="s1">);</span>
+      <span class="s3">return </span><span class="s2">keys</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">tokens </span><span class="s1">= </span><span class="s2">split</span><span class="s1">(</span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s2">key </span><span class="s1">= </span><span class="s2">tokens</span><span class="s1">[</span><span class="s2">tokens</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">];</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">0</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">tokens</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">1</span><span class="s1">; ++</span><span class="s2">i</span><span class="s1">)</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">tokens</span><span class="s1">[</span><span class="s2">i</span><span class="s1">]);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">delay</span><span class="s1">)</span>
+      <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">wait</span><span class="s1">(</span><span class="s2">options</span><span class="s1">.</span><span class="s2">delay</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s2">tokens</span><span class="s1">.</span><span class="s2">length </span><span class="s1">- </span><span class="s5">2</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&gt;= </span><span class="s5">0</span><span class="s1">; --</span><span class="s2">i</span><span class="s1">)</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">tokens</span><span class="s1">[</span><span class="s2">i</span><span class="s1">]);</span>
+  <span class="s1">}</span>
+  <span class="s2">async ensureModifiers</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">mm</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">modifiers </span><span class="s1">= </span><span class="s2">mm</span><span class="s1">.</span><span class="s2">map</span><span class="s1">(</span><span class="s2">resolveSmartModifier</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">modifier of modifiers</span><span class="s1">) {</span>
+      <span class="s3">if </span><span class="s1">(!</span><span class="s2">kModifiers</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s2">modifier</span><span class="s1">))</span>
+        <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;Unknown modifier &quot; </span><span class="s1">+ </span><span class="s2">modifier</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">const </span><span class="s2">restore </span><span class="s1">= </span><span class="s2">Array</span><span class="s1">.</span><span class="s2">from</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">);</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">key of kModifiers</span><span class="s1">) {</span>
+      <span class="s3">const </span><span class="s2">needDown </span><span class="s1">= </span><span class="s2">modifiers</span><span class="s1">.</span><span class="s2">includes</span><span class="s1">(</span><span class="s2">key</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">isDown </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">key</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">needDown </span><span class="s1">&amp;&amp; !</span><span class="s2">isDown</span><span class="s1">)</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">key</span><span class="s1">);</span>
+      <span class="s3">else if </span><span class="s1">(!</span><span class="s2">needDown </span><span class="s1">&amp;&amp; </span><span class="s2">isDown</span><span class="s1">)</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">key</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">return </span><span class="s2">restore</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">_modifiers</span><span class="s1">() {</span>
+    <span class="s3">return this</span><span class="s1">.</span><span class="s2">_pressedModifiers</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">resolveSmartModifierString</span><span class="s1">(</span><span class="s2">key</span><span class="s1">) {</span>
+  <span class="s3">if </span><span class="s1">(</span><span class="s2">key </span><span class="s1">=== </span><span class="s0">&quot;ControlOrMeta&quot;</span><span class="s1">)</span>
+    <span class="s3">return </span><span class="s2">process</span><span class="s1">.</span><span class="s2">platform </span><span class="s1">=== </span><span class="s0">&quot;darwin&quot; </span><span class="s1">? </span><span class="s0">&quot;Meta&quot; </span><span class="s1">: </span><span class="s0">&quot;Control&quot;</span><span class="s1">;</span>
+  <span class="s3">return </span><span class="s2">key</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">function </span><span class="s2">resolveSmartModifier</span><span class="s1">(</span><span class="s2">m</span><span class="s1">) {</span>
+  <span class="s3">return </span><span class="s2">resolveSmartModifierString</span><span class="s1">(</span><span class="s2">m</span><span class="s1">);</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">Mouse </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">raw</span><span class="s1">, </span><span class="s2">page</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_x </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_y </span><span class="s1">= </span><span class="s5">0</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastButton </span><span class="s1">= </span><span class="s0">&quot;none&quot;</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_buttons </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Set</span><span class="s1">();</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_raw </span><span class="s1">= </span><span class="s2">raw</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_page </span><span class="s1">= </span><span class="s2">page</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_keyboard </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_page</span><span class="s1">.</span><span class="s2">keyboard</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">currentPoint</span><span class="s1">() {</span>
+    <span class="s3">return </span><span class="s1">{ </span><span class="s2">x</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_x</span><span class="s1">, </span><span class="s2">y</span><span class="s1">: </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_y </span><span class="s1">};</span>
+  <span class="s1">}</span>
+  <span class="s2">async move</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">x</span><span class="s1">, </span><span class="s2">y</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">steps </span><span class="s1">= </span><span class="s5">1 </span><span class="s1">} = </span><span class="s2">options</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">fromX </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_x</span><span class="s1">;</span>
+    <span class="s3">const </span><span class="s2">fromY </span><span class="s1">= </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_y</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_x </span><span class="s1">= </span><span class="s2">x</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_y </span><span class="s1">= </span><span class="s2">y</span><span class="s1">;</span>
+    <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">i </span><span class="s1">= </span><span class="s5">1</span><span class="s1">; </span><span class="s2">i </span><span class="s1">&lt;= </span><span class="s2">steps</span><span class="s1">; </span><span class="s2">i</span><span class="s1">++) {</span>
+      <span class="s3">const </span><span class="s2">middleX </span><span class="s1">= </span><span class="s2">fromX </span><span class="s1">+ (</span><span class="s2">x </span><span class="s1">- </span><span class="s2">fromX</span><span class="s1">) * (</span><span class="s2">i </span><span class="s1">/ </span><span class="s2">steps</span><span class="s1">);</span>
+      <span class="s3">const </span><span class="s2">middleY </span><span class="s1">= </span><span class="s2">fromY </span><span class="s1">+ (</span><span class="s2">y </span><span class="s1">- </span><span class="s2">fromY</span><span class="s1">) * (</span><span class="s2">i </span><span class="s1">/ </span><span class="s2">steps</span><span class="s1">);</span>
+      <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">move</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">middleX</span><span class="s1">, </span><span class="s2">middleY</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastButton</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_buttons</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_keyboard</span><span class="s1">.</span><span class="s2">_modifiers</span><span class="s1">(), !!</span><span class="s2">options</span><span class="s1">.</span><span class="s2">forClick</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">button </span><span class="s1">= </span><span class="s0">&quot;left&quot;</span><span class="s1">, </span><span class="s2">clickCount </span><span class="s1">= </span><span class="s5">1 </span><span class="s1">} = </span><span class="s2">options</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastButton </span><span class="s1">= </span><span class="s2">button</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_buttons</span><span class="s1">.</span><span class="s2">add</span><span class="s1">(</span><span class="s2">button</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_x</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_y</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_lastButton</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_buttons</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_keyboard</span><span class="s1">.</span><span class="s2">_modifiers</span><span class="s1">(), </span><span class="s2">clickCount</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">button </span><span class="s1">= </span><span class="s0">&quot;left&quot;</span><span class="s1">, </span><span class="s2">clickCount </span><span class="s1">= </span><span class="s5">1 </span><span class="s1">} = </span><span class="s2">options</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_lastButton </span><span class="s1">= </span><span class="s0">&quot;none&quot;</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_buttons</span><span class="s1">.</span><span class="s2">delete</span><span class="s1">(</span><span class="s2">button</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_x</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_y</span><span class="s1">, </span><span class="s2">button</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_buttons</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_keyboard</span><span class="s1">.</span><span class="s2">_modifiers</span><span class="s1">(), </span><span class="s2">clickCount</span><span class="s1">);</span>
+  <span class="s1">}</span>
+  <span class="s2">async click</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">x</span><span class="s1">, </span><span class="s2">y</span><span class="s1">, </span><span class="s2">options </span><span class="s1">= {}) {</span>
+    <span class="s3">const </span><span class="s1">{ </span><span class="s2">delay </span><span class="s1">= </span><span class="s3">null</span><span class="s1">, </span><span class="s2">clickCount </span><span class="s1">= </span><span class="s5">1 </span><span class="s1">} = </span><span class="s2">options</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">delay</span><span class="s1">) {</span>
+      <span class="s3">this</span><span class="s1">.</span><span class="s2">move</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">x</span><span class="s1">, </span><span class="s2">y</span><span class="s1">, { </span><span class="s2">forClick</span><span class="s1">: </span><span class="s3">true </span><span class="s1">});</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">cc </span><span class="s1">= </span><span class="s5">1</span><span class="s1">; </span><span class="s2">cc </span><span class="s1">&lt;= </span><span class="s2">clickCount</span><span class="s1">; ++</span><span class="s2">cc</span><span class="s1">) {</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, { </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">clickCount</span><span class="s1">: </span><span class="s2">cc </span><span class="s1">});</span>
+        <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">wait</span><span class="s1">(</span><span class="s2">delay</span><span class="s1">);</span>
+        <span class="s3">await this</span><span class="s1">.</span><span class="s2">up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, { </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">clickCount</span><span class="s1">: </span><span class="s2">cc </span><span class="s1">});</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s2">cc </span><span class="s1">&lt; </span><span class="s2">clickCount</span><span class="s1">)</span>
+          <span class="s3">await </span><span class="s2">progress</span><span class="s1">.</span><span class="s2">wait</span><span class="s1">(</span><span class="s2">delay</span><span class="s1">);</span>
+      <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+      <span class="s3">const </span><span class="s2">promises </span><span class="s1">= [];</span>
+      <span class="s2">promises</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">move</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">x</span><span class="s1">, </span><span class="s2">y</span><span class="s1">, { </span><span class="s2">forClick</span><span class="s1">: </span><span class="s3">true </span><span class="s1">}));</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s2">cc </span><span class="s1">= </span><span class="s5">1</span><span class="s1">; </span><span class="s2">cc </span><span class="s1">&lt;= </span><span class="s2">clickCount</span><span class="s1">; ++</span><span class="s2">cc</span><span class="s1">) {</span>
+        <span class="s2">promises</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">down</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, { </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">clickCount</span><span class="s1">: </span><span class="s2">cc </span><span class="s1">}));</span>
+        <span class="s2">promises</span><span class="s1">.</span><span class="s2">push</span><span class="s1">(</span><span class="s3">this</span><span class="s1">.</span><span class="s2">up</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, { </span><span class="s2">...options</span><span class="s1">, </span><span class="s2">clickCount</span><span class="s1">: </span><span class="s2">cc </span><span class="s1">}));</span>
+      <span class="s1">}</span>
+      <span class="s3">await </span><span class="s2">Promise</span><span class="s1">.</span><span class="s2">all</span><span class="s1">(</span><span class="s2">promises</span><span class="s1">);</span>
+    <span class="s1">}</span>
+  <span class="s1">}</span>
+  <span class="s2">async wheel</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">deltaX</span><span class="s1">, </span><span class="s2">deltaY</span><span class="s1">) {</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">wheel</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_x</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_y</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_buttons</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_keyboard</span><span class="s1">.</span><span class="s2">_modifiers</span><span class="s1">(), </span><span class="s2">deltaX</span><span class="s1">, </span><span class="s2">deltaY</span><span class="s1">);</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s3">const </span><span class="s2">aliases </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">([</span>
+  <span class="s1">[</span><span class="s0">&quot;ShiftLeft&quot;</span><span class="s1">, [</span><span class="s0">&quot;Shift&quot;</span><span class="s1">]],</span>
+  <span class="s1">[</span><span class="s0">&quot;ControlLeft&quot;</span><span class="s1">, [</span><span class="s0">&quot;Control&quot;</span><span class="s1">]],</span>
+  <span class="s1">[</span><span class="s0">&quot;AltLeft&quot;</span><span class="s1">, [</span><span class="s0">&quot;Alt&quot;</span><span class="s1">]],</span>
+  <span class="s1">[</span><span class="s0">&quot;MetaLeft&quot;</span><span class="s1">, [</span><span class="s0">&quot;Meta&quot;</span><span class="s1">]],</span>
+  <span class="s1">[</span><span class="s0">&quot;Enter&quot;</span><span class="s1">, [</span><span class="s0">&quot;</span><span class="s3">\n</span><span class="s0">&quot;</span><span class="s1">, </span><span class="s0">&quot;</span><span class="s3">\r</span><span class="s0">&quot;</span><span class="s1">]]</span>
+<span class="s1">]);</span>
+<span class="s3">const </span><span class="s2">usKeyboardLayout </span><span class="s1">= </span><span class="s2">buildLayoutClosure</span><span class="s1">(</span><span class="s2">keyboardLayout</span><span class="s1">.</span><span class="s2">USKeyboardLayout</span><span class="s1">);</span>
+<span class="s3">function </span><span class="s2">buildLayoutClosure</span><span class="s1">(</span><span class="s2">layout</span><span class="s1">) {</span>
+  <span class="s3">const </span><span class="s2">result </span><span class="s1">= </span><span class="s4">/* @__PURE__ */ </span><span class="s3">new </span><span class="s2">Map</span><span class="s1">();</span>
+  <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">code </span><span class="s3">in </span><span class="s2">layout</span><span class="s1">) {</span>
+    <span class="s3">const </span><span class="s2">definition </span><span class="s1">= </span><span class="s2">layout</span><span class="s1">[</span><span class="s2">code</span><span class="s1">];</span>
+    <span class="s3">const </span><span class="s2">description </span><span class="s1">= {</span>
+      <span class="s2">key</span><span class="s1">: </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">key </span><span class="s1">|| </span><span class="s0">&quot;&quot;</span><span class="s1">,</span>
+      <span class="s2">keyCode</span><span class="s1">: </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">keyCode </span><span class="s1">|| </span><span class="s5">0</span><span class="s1">,</span>
+      <span class="s2">keyCodeWithoutLocation</span><span class="s1">: </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">keyCodeWithoutLocation </span><span class="s1">|| </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">keyCode </span><span class="s1">|| </span><span class="s5">0</span><span class="s1">,</span>
+      <span class="s2">code</span><span class="s1">,</span>
+      <span class="s2">text</span><span class="s1">: </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">text </span><span class="s1">|| </span><span class="s0">&quot;&quot;</span><span class="s1">,</span>
+      <span class="s2">location</span><span class="s1">: </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">location </span><span class="s1">|| </span><span class="s5">0</span>
+    <span class="s1">};</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">definition</span><span class="s1">.</span><span class="s2">key</span><span class="s1">.</span><span class="s2">length </span><span class="s1">=== </span><span class="s5">1</span><span class="s1">)</span>
+      <span class="s2">description</span><span class="s1">.</span><span class="s2">text </span><span class="s1">= </span><span class="s2">description</span><span class="s1">.</span><span class="s2">key</span><span class="s1">;</span>
+    <span class="s3">let </span><span class="s2">shiftedDescription</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">definition</span><span class="s1">.</span><span class="s2">shiftKey</span><span class="s1">) {</span>
+      <span class="s1">(</span><span class="s5">0</span><span class="s1">, </span><span class="s2">import_utils</span><span class="s1">.</span><span class="s2">assert</span><span class="s1">)(</span><span class="s2">definition</span><span class="s1">.</span><span class="s2">shiftKey</span><span class="s1">.</span><span class="s2">length </span><span class="s1">=== </span><span class="s5">1</span><span class="s1">);</span>
+      <span class="s2">shiftedDescription </span><span class="s1">= { </span><span class="s2">...description </span><span class="s1">};</span>
+      <span class="s2">shiftedDescription</span><span class="s1">.</span><span class="s2">key </span><span class="s1">= </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">shiftKey</span><span class="s1">;</span>
+      <span class="s2">shiftedDescription</span><span class="s1">.</span><span class="s2">text </span><span class="s1">= </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">shiftKey</span><span class="s1">;</span>
+      <span class="s3">if </span><span class="s1">(</span><span class="s2">definition</span><span class="s1">.</span><span class="s2">shiftKeyCode</span><span class="s1">)</span>
+        <span class="s2">shiftedDescription</span><span class="s1">.</span><span class="s2">keyCode </span><span class="s1">= </span><span class="s2">definition</span><span class="s1">.</span><span class="s2">shiftKeyCode</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s2">result</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">code</span><span class="s1">, { </span><span class="s2">...description</span><span class="s1">, </span><span class="s2">shifted</span><span class="s1">: </span><span class="s2">shiftedDescription </span><span class="s1">});</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">aliases</span><span class="s1">.</span><span class="s2">has</span><span class="s1">(</span><span class="s2">code</span><span class="s1">)) {</span>
+      <span class="s3">for </span><span class="s1">(</span><span class="s3">const </span><span class="s2">alias of aliases</span><span class="s1">.</span><span class="s2">get</span><span class="s1">(</span><span class="s2">code</span><span class="s1">))</span>
+        <span class="s2">result</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">alias</span><span class="s1">, </span><span class="s2">description</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">definition</span><span class="s1">.</span><span class="s2">location</span><span class="s1">)</span>
+      <span class="s3">continue</span><span class="s1">;</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">key</span><span class="s1">.</span><span class="s2">length </span><span class="s1">=== </span><span class="s5">1</span><span class="s1">)</span>
+      <span class="s2">result</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">description</span><span class="s1">.</span><span class="s2">key</span><span class="s1">, </span><span class="s2">description</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s2">shiftedDescription</span><span class="s1">)</span>
+      <span class="s2">result</span><span class="s1">.</span><span class="s2">set</span><span class="s1">(</span><span class="s2">shiftedDescription</span><span class="s1">.</span><span class="s2">key</span><span class="s1">, { </span><span class="s2">...shiftedDescription</span><span class="s1">, </span><span class="s2">shifted</span><span class="s1">: </span><span class="s3">void </span><span class="s5">0 </span><span class="s1">});</span>
+  <span class="s1">}</span>
+  <span class="s3">return </span><span class="s2">result</span><span class="s1">;</span>
+<span class="s1">}</span>
+<span class="s3">class </span><span class="s2">Touchscreen </span><span class="s1">{</span>
+  <span class="s2">constructor</span><span class="s1">(</span><span class="s2">raw</span><span class="s1">, </span><span class="s2">page</span><span class="s1">) {</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_raw </span><span class="s1">= </span><span class="s2">raw</span><span class="s1">;</span>
+    <span class="s3">this</span><span class="s1">.</span><span class="s2">_page </span><span class="s1">= </span><span class="s2">page</span><span class="s1">;</span>
+  <span class="s1">}</span>
+  <span class="s2">async tap</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">x</span><span class="s1">, </span><span class="s2">y</span><span class="s1">) {</span>
+    <span class="s3">if </span><span class="s1">(!</span><span class="s3">this</span><span class="s1">.</span><span class="s2">_page</span><span class="s1">.</span><span class="s2">browserContext</span><span class="s1">.</span><span class="s2">_options</span><span class="s1">.</span><span class="s2">hasTouch</span><span class="s1">)</span>
+      <span class="s3">throw new </span><span class="s2">Error</span><span class="s1">(</span><span class="s0">&quot;hasTouch must be enabled on the browser context before using the touchscreen.&quot;</span><span class="s1">);</span>
+    <span class="s3">await this</span><span class="s1">.</span><span class="s2">_raw</span><span class="s1">.</span><span class="s2">tap</span><span class="s1">(</span><span class="s2">progress</span><span class="s1">, </span><span class="s2">x</span><span class="s1">, </span><span class="s2">y</span><span class="s1">, </span><span class="s3">this</span><span class="s1">.</span><span class="s2">_page</span><span class="s1">.</span><span class="s2">keyboard</span><span class="s1">.</span><span class="s2">_modifiers</span><span class="s1">());</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s4">// Annotate the CommonJS export names for ESM import in node:</span>
+<span class="s5">0 </span><span class="s1">&amp;&amp; (</span><span class="s2">module</span><span class="s1">.</span><span class="s2">exports </span><span class="s1">= {</span>
+  <span class="s2">Keyboard</span><span class="s1">,</span>
+  <span class="s2">Mouse</span><span class="s1">,</span>
+  <span class="s2">Touchscreen</span><span class="s1">,</span>
+  <span class="s2">keypadLocation</span><span class="s1">,</span>
+  <span class="s2">resolveSmartModifier</span><span class="s1">,</span>
+  <span class="s2">resolveSmartModifierString</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>ResponsibleAssignmentPage.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ResponsibleAssignmentPage.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ </span><span class="s1">Page</span><span class="s2">, </span><span class="s1">Locator</span><span class="s2">, </span><span class="s1">expect </span><span class="s2">} </span><span class="s1">from </span><span class="s3">&quot;@playwright/test&quot;</span><span class="s2">;</span>
+
+<span class="s0">export class </span><span class="s1">ResponsibleAssignmentPage </span><span class="s2">{</span>
+  <span class="s0">private </span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">contractLink</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">operationsButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">assignResponsibleOption</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">executeButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">responsibleDropdown</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+  <span class="s0">private </span><span class="s1">confirmResponsibleButton</span><span class="s2">: </span><span class="s1">Locator</span><span class="s2">;</span>
+
+  <span class="s1">constructor</span><span class="s2">(</span><span class="s1">page</span><span class="s2">: </span><span class="s1">Page</span><span class="s2">) {</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">page </span><span class="s2">= </span><span class="s1">page</span><span class="s2">;</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">contractLink </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;link&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;АА&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">operationsButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Операции&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">assignResponsibleOption </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByText</span><span class="s2">(</span><span class="s3">&quot;Назначить ответственного&quot;</span><span class="s2">);</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">executeButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Выполнить&quot; </span><span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">responsibleDropdown </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;combobox&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Выберите ответственное лицо&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+    <span class="s0">this</span><span class="s2">.</span><span class="s1">confirmResponsibleButton </span><span class="s2">= </span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;button&quot;</span><span class="s2">, {</span>
+      <span class="s1">name</span><span class="s2">: </span><span class="s3">&quot;Указать ответственное лицо&quot;</span><span class="s2">,</span>
+    <span class="s2">});</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async assignResponsible</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`🔹 Переход в договор: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">}</span><span class="s3">`</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;link&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s1">contractNumber </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Открываем меню 'Операции'...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">operationsButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Выбираем 'Назначить ответственного'...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">assignResponsibleOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Подтверждаем выбор...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">executeButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Открываем выпадающий список ответственных лиц...&quot;</span><span class="s2">);</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">responsibleDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForTimeout</span><span class="s2">(</span><span class="s4">3000</span><span class="s2">);</span>
+
+    <span class="s0">const </span><span class="s1">visibleDropdown </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">page</span>
+      <span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;.el-select-dropdown&quot;</span><span class="s2">)</span>
+      <span class="s2">.</span><span class="s1">filter</span><span class="s2">({ </span><span class="s1">has</span><span class="s2">: </span><span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;:visible&quot;</span><span class="s2">) });</span>
+    <span class="s0">await </span><span class="s1">visibleDropdown</span><span class="s2">.</span><span class="s1">locator</span><span class="s2">(</span><span class="s3">&quot;.el-select-dropdown__item&quot;</span><span class="s2">).</span><span class="s1">first</span><span class="s2">().</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;🔹 Подтверждаем назначение ответственного...&quot;</span><span class="s2">);</span>
+    <span class="s0">await </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">all</span><span class="s2">([</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">confirmResponsibleButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">(),</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForResponse</span><span class="s2">(</span>
+        <span class="s2">(</span><span class="s1">response</span><span class="s2">) =&gt;</span>
+          <span class="s1">response</span><span class="s2">.</span><span class="s1">url</span><span class="s2">().</span><span class="s1">includes</span><span class="s2">(</span><span class="s3">&quot;/api/v1/contract/set_responsible&quot;</span><span class="s2">) &amp;&amp;</span>
+          <span class="s1">response</span><span class="s2">.</span><span class="s1">status</span><span class="s2">() === </span><span class="s4">200</span>
+      <span class="s2">),</span>
+    <span class="s2">]);</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">&quot;✅ Ответственный назначен.&quot;</span><span class="s2">);</span>
+  <span class="s2">}</span>
+
+  <span class="s1">async reassignResponsible</span><span class="s2">(</span><span class="s1">contractNumber</span><span class="s2">: </span><span class="s1">string</span><span class="s2">, </span><span class="s1">employeeName</span><span class="s2">: </span><span class="s1">string</span><span class="s2">) {</span>
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span>
+      <span class="s3">`🔹 Переназначаем ответственного для договора: </span><span class="s1">$</span><span class="s2">{</span><span class="s1">contractNumber</span><span class="s2">}</span><span class="s3">`</span>
+    <span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;link&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s1">contractNumber </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForLoadState</span><span class="s2">(</span><span class="s3">&quot;networkidle&quot;</span><span class="s2">);</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">operationsButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">assignResponsibleOption</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">executeButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">responsibleDropdown</span><span class="s2">.</span><span class="s1">click</span><span class="s2">();</span>
+    <span class="s0">await this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">getByRole</span><span class="s2">(</span><span class="s3">&quot;option&quot;</span><span class="s2">, { </span><span class="s1">name</span><span class="s2">: </span><span class="s1">employeeName </span><span class="s2">}).</span><span class="s1">click</span><span class="s2">();</span>
+
+    <span class="s0">await </span><span class="s1">Promise</span><span class="s2">.</span><span class="s1">all</span><span class="s2">([</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">confirmResponsibleButton</span><span class="s2">.</span><span class="s1">click</span><span class="s2">(),</span>
+      <span class="s0">this</span><span class="s2">.</span><span class="s1">page</span><span class="s2">.</span><span class="s1">waitForResponse</span><span class="s2">(</span>
+        <span class="s2">(</span><span class="s1">res</span><span class="s2">) =&gt;</span>
+          <span class="s1">res</span><span class="s2">.</span><span class="s1">url</span><span class="s2">().</span><span class="s1">includes</span><span class="s2">(</span><span class="s3">&quot;/api/v1/contract/set_responsible&quot;</span><span class="s2">) &amp;&amp;</span>
+          <span class="s1">res</span><span class="s2">.</span><span class="s1">status</span><span class="s2">() === </span><span class="s4">200</span>
+      <span class="s2">),</span>
+    <span class="s2">]);</span>
+
+    <span class="s1">console</span><span class="s2">.</span><span class="s1">log</span><span class="s2">(</span><span class="s3">`✅ Ответственный </span><span class="s0">\&quot;</span><span class="s1">$</span><span class="s2">{</span><span class="s1">employeeName</span><span class="s2">}</span><span class="s0">\&quot; </span><span class="s3">успешно назначен.`</span><span class="s2">);</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
